@@ -19,19 +19,19 @@ Help creators, founders, writers, and indie hackers get their websites and conte
 ## 📚 Guide Sections
 
 ### Core Concepts
-- [Core Concepts for Ranking in LLMs](docs/core-concepts.html)
-- [Schema & Structured Data](docs/structured-data.html)
-- [How to Get Cited in LLMs](docs/citation-strategy.html)
-- [Formatting & On-Page SEO for LLMs](docs/content-optimization.html)
+- [Core Concepts for Ranking in LLMs](https://llmguides.com/core-concepts)
+- [Schema & Structured Data](https://llmguides.com/structured-data)
+- [How to Get Cited in LLMs](https://llmguides.com/citation-strategy)
+- [Formatting & On-Page SEO for LLMs](https://llmguides.com/content-optimization)
 
 ### Tools & Testing
-- [Real-time Tools Guide](docs/real-time-tools.html)
-- [Testing Your LLM Presence](docs/testing.html)
-- [Tools for LLM Optimization](docs/tools.html)
+- [Real-time Tools Guide](https://llmguides.com/real-time-tools)
+- [Testing Your LLM Presence](https://llmguides.com/testing)
+- [Tools for LLM Optimization](https://llmguides.com/tools)
 
 ### Examples & Resources
-- [Examples of LLM-Friendly Content](docs/examples.html)
-- [How to Contribute](docs/contribute.html)
+- [Examples of LLM-Friendly Content](https://llmguides.com/examples)
+- [How to Contribute](https://llmguides.com/contribute)
 
 ## 🧱 Core Concepts Overview
 
@@ -39,16 +39,18 @@ Help creators, founders, writers, and indie hackers get their websites and conte
 - Use bullet points, numbered lists, and direct Q&A formats
 - Make your answers "copy-paste worthy"
 - Include summaries and headers for each section
+- [Read more about formatting →](https://llmguides.com/core-concepts#citable-formatting)
 
 ### 2. Topical Authority
 - Own your niche by clustering 10–20+ pages around a main topic
 - Interlink your content
 - Add case studies, tools, calculators — anything original and helpful
+- [Learn about authority building →](https://llmguides.com/core-concepts#topical-authority)
 
 ### 3. Structured Data (Schema)
 - Add FAQPage, HowTo, Article, Organization, Product, and other relevant schema.org tags
 - Helps AI models understand your page content semantically
-- [Full schema guide →](docs/structured-data.html)
+- [Full schema guide →](https://llmguides.com/structured-data)
 
 ### 4. Live Indexability
 Submit your site to:
@@ -56,6 +58,7 @@ Submit your site to:
 - Bing Webmaster Tools
 - Common Crawl (for future training data)
 - Ensure your robots.txt allows crawling
+- [Indexing guide →](https://llmguides.com/core-concepts#live-indexability)
 
 ### 5. Citation Sources
 Post on or get linked from:
@@ -65,7 +68,7 @@ Post on or get linked from:
 - Quora
 - Medium
 - Stack Overflow
-- [More examples →](docs/citation-strategy.html)
+- [More examples →](https://llmguides.com/citation-strategy)
 
 ## 🤝 Contributing
 
