@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your content's ranking in LLM responses. Free tool to analyze and improve your visibility in AI-generated content.">
+    <meta name="keywords" content="LLM rank tracker, AI ranking checker, content visibility, LLM optimization tool, AI response ranking">
+    <title>LLM Rank Tracker: Check Your Content's AI Visibility</title>
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="LLM Rank Tracker: Check Your Content's AI Visibility">
+    <meta property="og:description" content="Check your content's ranking in LLM responses. Free tool to analyze and improve your visibility in AI-generated content.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://llm-guides.com/rank-tracker">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Rank Tracker">
+    <meta name="twitter:description" content="Check your content's ranking in LLM responses. Free tool to analyze and improve your visibility.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "LLM Rank Tracker",
+        "description": "Tool to check and improve your content's ranking in LLM responses",
+        "url": "https://llm-guides.com/rank-tracker",
+        "applicationCategory": "SEO Tool",
+        "operatingSystem": "Web"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --border-color: #e5e7eb;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --error-color: #dc2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumbs a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .site-header {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .github-star {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .github-star iframe {
+            border: none;
+            height: 30px;
+        }
+
+        .github-star p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .github-star a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .github-star a:hover {
+            text-decoration: underline;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item p {
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .tracker-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .submit-button:hover {
+            opacity: 0.9;
+        }
+
+        .results {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .score-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .score-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background: var(--bg-color);
+        }
+
+        .score-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .recommendations {
+            margin-top: 2rem;
+        }
+
+        .recommendations h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style: none;
+        }
+
+        .recommendations li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .recommendations li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .score-card {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .github-star {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Guides</a>
+            <nav class="nav-links">
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/rank-tracker">Rank Tracker</a>
+                <a href="/guides/llm-optimization/examples">Examples</a>
+                <div class="github-star">
+                    <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large" 
+                            frameborder="0" 
+                            scrolling="0" 
+                            width="150" 
+                            height="30" 
+                            title="GitHub">
+                    </iframe>
+                    <p>Star us on <a href="https://github.com/mattmerrick/llmguides" target="_blank">GitHub</a></p>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> / Rank Tracker
+        </nav>
+
+        <header class="header">
+            <h1>🔍 LLM Rank Tracker</h1>
+            <p>Check how your content ranks in LLM responses and get actionable recommendations to improve your visibility.</p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <h3>🎯 Real-time Analysis</h3>
+                    <p>Get instant feedback on how your content performs in LLM responses</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📊 Detailed Metrics</h3>
+                    <p>Comprehensive scoring across multiple visibility factors</p>
+                </div>
+                <div class="feature-item">
+                    <h3>💡 Smart Recommendations</h3>
+                    <p>Actionable tips to improve your content's AI visibility</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔄 Continuous Updates</h3>
+                    <p>Stay current with the latest LLM optimization techniques</p>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <form class="tracker-form" id="rankTrackerForm">
+                <div class="form-group">
+                    <label for="url">Your Content URL</label>
+                    <input type="url" id="url" name="url" placeholder="https://your-content-url.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content to Analyze</label>
+                    <textarea id="content" name="content" placeholder="Paste your content here for analysis..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="keywords">Target Keywords (comma-separated)</label>
+                    <input type="text" id="keywords" name="keywords" placeholder="keyword1, keyword2, keyword3" required>
+                </div>
+
+                <button type="submit" class="submit-button">Analyze Content</button>
+            </form>
+
+            <div class="results" id="results" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <div class="score-card">
+                    <div class="score-item">
+                        <h3>LLM Visibility Score</h3>
+                        <div class="score-value">85/100</div>
+                    </div>
+                    <div class="score-item">
+                        <h3>Content Structure</h3>
+                        <div class="score-value">90/100</div>
+                    </div>
+                    <div class="score-item">
+                        <h3>Semantic Markup</h3>
+                        <div class="score-value">75/100</div>
+                    </div>
+                    <div class="score-item">
+                        <h3>Authority Signals</h3>
+                        <div class="score-value">80/100</div>
+                    </div>
+                </div>
+
+                <div class="recommendations">
+                    <h2>Recommendations</h2>
+                    <ul>
+                        <li>Improve semantic markup implementation</li>
+                        <li>Add more structured data elements</li>
+                        <li>Enhance content hierarchy</li>
+                        <li>Include more authoritative citations</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('rankTrackerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('results').style.display = 'block';
+            // Here you would typically make an API call to analyze the content
+            // For now, we're just showing the results section
+        });
+    </script>
+</body>
+</html> 

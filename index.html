@@ -3,142 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ultimate LLM Guide</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown.min.css">
+    <meta name="description" content="Master LLM optimization to increase your content visibility. Learn how to rank higher in AI responses and get more clicks with our comprehensive guide.">
+    <meta name="keywords" content="LLM optimization, AI ranking, content visibility, LLM guide, AI content strategy, get clicks with LLM">
+    <title>LLM Optimization Guide: Rank Higher in AI Responses</title>
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="LLM Optimization Guide: Rank Higher in AI Responses">
+    <meta property="og:description" content="Learn how to optimize your content for LLMs and increase visibility in AI responses. Complete guide to ranking higher and getting more clicks.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://llm-guides.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM Optimization Guide">
+    <meta name="twitter:description" content="Master LLM optimization and increase your content visibility. Complete guide to ranking higher in AI responses.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "LLM Optimization Guide",
+        "description": "Complete guide to optimizing content for LLMs and increasing visibility in AI responses",
+        "url": "https://llm-guides.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://llm-guides.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            background-color: #f6f8fa;
         }
-        .markdown-body {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .breadcrumbs {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
+        .breadcrumbs a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .badges {
-            margin: 1rem 0;
-            text-align: center;
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
-        .badges img {
-            margin: 0 0.5rem;
+
+        .badge {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: opacity 0.2s;
         }
+
+        .badge:hover {
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card ul {
+            list-style: none;
+        }
+
+        .card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
         .footer {
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eaecef;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Add these new styles */
+        .site-header {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .github-star {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .github-star iframe {
+            border: none;
+            height: 30px;
+        }
+
+        .github-star p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .github-star a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .github-star a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .github-star {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="markdown-body">
-        <div class="header">
-            <h1>🚀 The Ultimate LLM Guide</h1>
-            <p>Welcome to the most comprehensive resource for Large Language Models (LLMs)! This repository serves as a central hub for everything you need to know about LLMs, from basic concepts to advanced implementations.</p>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Guides</a>
+            <nav class="nav-links">
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/rank-tracker">Rank Tracker</a>
+                <a href="/guides/llm-optimization/examples">Examples</a>
+                <div class="github-star">
+                    <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large" 
+                            frameborder="0" 
+                            scrolling="0" 
+                            width="150" 
+                            height="30" 
+                            title="GitHub">
+                    </iframe>
+                    <p>Star us on <a href="https://github.com/mattmerrick/llmguides" target="_blank">GitHub</a></p>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+        </nav>
+
+        <header class="header">
+            <h1>🚀 Master LLM Optimization</h1>
+            <p>Learn how to optimize your content for Large Language Models and increase visibility in AI responses. Get more clicks and better rankings with our comprehensive guide.</p>
             
             <div class="badges">
-                <img src="https://img.shields.io/badge/LLM-Guide-blue" alt="LLM Guide">
-                <img src="https://img.shields.io/badge/Contributions-Welcome-brightgreen" alt="Contributions Welcome">
-                <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
+                <a href="/guides/llm-optimization/core-concepts" class="badge">Core Concepts</a>
+                <a href="/rank-tracker" class="badge">Rank Tracker</a>
+                <a href="/guides/llm-optimization/content-optimization" class="badge">Content Optimization</a>
+                <a href="/guides/llm-optimization/examples" class="badge">Real Examples</a>
             </div>
-        </div>
+        </header>
 
-        <h2>📚 Table of Contents</h2>
-        <ul>
-            <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#getting-started">Getting Started</a></li>
-            <li><a href="#core-concepts">Core Concepts</a></li>
-            <li><a href="#tools-resources">Tools & Resources</a></li>
-            <li><a href="#best-practices">Best Practices</a></li>
-            <li><a href="#contributing">Contributing</a></li>
-            <li><a href="#community">Community</a></li>
-            <li><a href="#license">License</a></li>
-        </ul>
+        <main class="content">
+            <section class="card">
+                <h2>📚 Core Concepts</h2>
+                <ul>
+                    <li><a href="/guides/llm-optimization/core-concepts.html">Understanding LLM Optimization</a></li>
+                    <li><a href="/guides/llm-optimization/structured-data.html">Structured Data Implementation</a></li>
+                    <li><a href="/guides/llm-optimization/citation-strategy.html">Citation Strategy</a></li>
+                </ul>
+            </section>
 
-        <h2>🌟 Introduction</h2>
-        <p>This guide is designed to be your go-to resource for understanding and working with Large Language Models. Whether you're a beginner or an experienced practitioner, you'll find valuable information to enhance your LLM journey.</p>
+            <section class="card">
+                <h2>🎯 Content Optimization</h2>
+                <ul>
+                    <li><a href="/guides/llm-optimization/content-optimization.html">Content Structure & Formatting</a></li>
+                    <li><a href="/guides/llm-optimization/real-time-tools.html">Real-time Tools & APIs</a></li>
+                    <li><a href="/guides/llm-optimization/testing.html">Testing & Validation</a></li>
+                </ul>
+            </section>
 
-        <h3>What You'll Find Here</h3>
-        <ul>
-            <li>Comprehensive tutorials and guides</li>
-            <li>Curated list of LLM tools and resources</li>
-            <li>Best practices and implementation patterns</li>
-            <li>Community-contributed content</li>
-            <li>Regular updates on the latest LLM developments</li>
-        </ul>
+            <section class="card">
+                <h2>🛠️ Tools & Resources</h2>
+                <ul>
+                    <li><a href="/rank-tracker">LLM Rank Tracker</a></li>
+                    <li><a href="/guides/llm-optimization/examples.html">Real Examples</a></li>
+                    <li><a href="/guides/llm-optimization/template.html">Template Library</a></li>
+                </ul>
+            </section>
 
-        <h2>🎯 Getting Started</h2>
-        <h3>Prerequisites</h3>
-        <ul>
-            <li>Basic understanding of programming concepts</li>
-            <li>Familiarity with Python (recommended)</li>
-            <li>Interest in AI and machine learning</li>
-        </ul>
+            <section class="card">
+                <h2>📈 Real Examples</h2>
+                <ul>
+                    <li><a href="/guides/llm-optimization/examples#case-studies">Successful case studies</a></li>
+                    <li><a href="/guides/llm-optimization/examples#implementation">Implementation guides</a></li>
+                    <li><a href="/guides/llm-optimization/examples#best-practices">Best practices</a></li>
+                    <li><a href="/guides/llm-optimization/examples#pitfalls">Common pitfalls to avoid</a></li>
+                </ul>
+            </section>
+        </main>
 
-        <h3>Quick Start</h3>
-        <ol>
-            <li>Clone this repository</li>
-            <li>Explore the documentation</li>
-            <li>Join our community</li>
-            <li>Start contributing!</li>
-        </ol>
-
-        <h2>🛠️ Tools & Resources</h2>
-        <h3>Essential Tools</h3>
-        <ul>
-            <li>[Tool 1] - Description</li>
-            <li>[Tool 2] - Description</li>
-            <li>[Tool 3] - Description</li>
-        </ul>
-
-        <h3>Learning Resources</h3>
-        <ul>
-            <li>[Resource 1] - Description</li>
-            <li>[Resource 2] - Description</li>
-            <li>[Resource 3] - Description</li>
-        </ul>
-
-        <h2>🤝 Contributing</h2>
-        <p>We welcome contributions from the community! Here's how you can help:</p>
-        <ol>
-            <li>Fork the repository</li>
-            <li>Create a new branch</li>
-            <li>Make your changes</li>
-            <li>Submit a pull request</li>
-        </ol>
-
-        <h3>Contribution Guidelines</h3>
-        <ul>
-            <li>Follow the existing documentation style</li>
-            <li>Add clear descriptions for your contributions</li>
-            <li>Include examples where appropriate</li>
-            <li>Test your changes before submitting</li>
-        </ul>
-
-        <h2>👥 Community</h2>
-        <p>Join our growing community:</p>
-        <ul>
-            <li>[Discord Server] - Coming soon</li>
-            <li>[Twitter] - Coming soon</li>
-            <li>[LinkedIn Group] - Coming soon</li>
-        </ul>
-
-        <h2>📝 License</h2>
-        <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
-
-        <div class="footer">
-            <h3>🌟 Star this repository if you find it helpful! 🌟</h3>
-            <p><em>This guide is continuously updated. Last updated: [Current Date]</em></p>
-        </div>
+        <footer class="footer">
+            <p>Ready to optimize your content for LLMs?</p>
+            <a href="/rank-tracker" class="cta-button">Check Your LLM Ranking</a>
+            <p><small>Last updated: March 2025</small></p>
+        </footer>
     </div>
 </body>
 </html> 
