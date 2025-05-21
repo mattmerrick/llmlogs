@@ -6,18 +6,18 @@
     <meta name="description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
     <meta name="keywords" content="structured data, schema markup, LLM optimization, JSON-LD, semantic HTML">
     <title>Structured Data - LLM Guides</title>
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Structured Data - LLM Guides">
     <meta property="og:description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://llm-guides.com/guides/llm-optimization/structured-data">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Structured Data">
     <meta name="twitter:description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
-    
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -33,95 +33,332 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
-    <!-- Consistent Header -->
+    <!-- Standard Header Component -->
     <header class="site-header">
         <div class="nav-container">
-            <a href="/" class="site-logo">LLM Guides</a>
-            <nav class="nav-links">
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/rank-tracker">Rank Tracker</a>
-                <a href="/guides/llm-optimization/examples">Examples</a>
-                <div class="github-star">
-                    <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large" 
-                            frameborder="0" 
-                            scrolling="0" 
-                            width="150" 
-                            height="30" 
-                            title="GitHub">
-                    </iframe>
-                    <p>Star us on <a href="https://github.com/mattmerrick/llmguides" target="_blank">GitHub</a></p>
-                </div>
-            </nav>
+            <a href="/" class="site-logo">LLM SEO Guide</a>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large"
+                        frameborder="0"
+                        scrolling="0"
+                        width="150"
+                        height="30"
+                        title="GitHub">
+                </iframe>
+            </div>
         </div>
     </header>
 
     <div class="container">
-        <!-- Breadcrumbs -->
         <nav class="breadcrumbs">
             <a href="/">Home</a> / <a href="/guides/llm-optimization">Guides</a> / Structured Data
         </nav>
 
-        <!-- Main Content -->
         <main class="content">
             <h1>Structured Data</h1>
-            <p>Learn how to implement structured data to improve your content's visibility in LLM responses.</p>
+            <p>This is the most advanced guide on using structured data to improve visibility and citation in LLMs. Learn practical examples, schema types, validation tools, and real-world use cases.</p>
 
             <section class="card">
                 <h2>What is Structured Data?</h2>
-                <p>Structured data is a standardized format for providing information about a page and classifying its content. It helps LLMs better understand your content by:</p>
+                <p>Structured data is a machine-readable format that defines content elements for search engines and AI models. It provides clarity about your content by:</p>
                 <ul>
-                    <li>Providing clear context about your content</li>
-                    <li>Defining relationships between different elements</li>
-                    <li>Specifying content types and attributes</li>
-                    <li>Making information more accessible to AI models</li>
+                    <li>Defining the purpose and type of content</li>
+                    <li>Improving citation and ranking in AI models</li>
+                    <li>Providing relationship context between entities</li>
+                    <li>Helping AI generate better answers using your data</li>
                 </ul>
             </section>
 
             <section class="card">
                 <h2>Implementation Methods</h2>
-                <p>There are several ways to implement structured data:</p>
+                <p>There are three main ways to implement structured data:</p>
                 <ul>
-                    <li>JSON-LD (Recommended)</li>
+                    <li><strong>JSON-LD</strong> (preferred by Google & LLMs)</li>
                     <li>Microdata</li>
                     <li>RDFa</li>
                 </ul>
                 <div class="note">
-                    <p>JSON-LD is the preferred format for LLM optimization as it's easier to maintain and less prone to errors.</p>
+                    <p><strong>Recommended:</strong> JSON-LD is clean, decoupled from your HTML, and easiest to maintain.</p>
                 </div>
             </section>
 
             <section class="card">
                 <h2>Common Schema Types</h2>
-                <p>Use these schema types to improve your content's visibility:</p>
+                <p>Most useful schema types for LLM visibility:</p>
                 <ul>
-                    <li>Article - For blog posts and articles</li>
-                    <li>HowTo - For step-by-step guides</li>
-                    <li>FAQPage - For question and answer content</li>
-                    <li>Product - For product information</li>
-                    <li>Organization - For company details</li>
+                    <li><code>Article</code> – For guides and blog posts</li>
+                    <li><code>FAQPage</code> – For question/answer sections</li>
+                    <li><code>HowTo</code> – For step-by-step instructions</li>
+                    <li><code>Product</code> – For tool and software listings</li>
+                    <li><code>Organization</code> – For establishing brand identity</li>
+                    <li><code>VideoObject</code> – For embedded YouTube/loom videos</li>
                 </ul>
             </section>
 
             <section class="card">
+                <h2>Live JSON-LD Example</h2>
+                <pre><code class="language-json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is structured data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Structured data is metadata added to content that helps LLMs and search engines better understand it."
+      }
+    }
+  ]
+}
+                </code></pre>
+            </section>
+
+            <section class="card">
                 <h2>Best Practices</h2>
-                <p>Follow these guidelines for effective structured data implementation:</p>
                 <ul>
                     <li>Use the most specific schema type possible</li>
-                    <li>Include all required properties</li>
-                    <li>Validate your markup before publishing</li>
-                    <li>Keep your structured data up to date</li>
-                    <li>Test with different LLM models</li>
+                    <li>Always include <code>author</code>, <code>headline</code>, and <code>datePublished</code></li>
+                    <li>Validate schema with Google and Bing tools</li>
+                    <li>Use canonical tags with consistent URLs</li>
+                    <li>Update structured data when content changes</li>
                 </ul>
+            </section>
+
+            <section class="card">
+                <h2>Test Your Structured Data</h2>
+                <ul>
+                    <li><a href="https://validator.schema.org/" target="_blank">Schema.org Validator</a></li>
+                    <li><a href="https://search.google.com/test/rich-results" target="_blank">Google Rich Results Test</a></li>
+                    <li><a href="https://www.bing.com/webmasters/markup-validator" target="_blank">Bing Validator</a></li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Pro Tip for LLM Optimization</h2>
+                <p>LLMs like ChatGPT, Perplexity, and Claude can parse schema markup in real-time. This improves your chances of:</p>
+                <ul>
+                    <li>Being cited as an answer source</li>
+                    <li>Appearing in Perplexity answer cards</li>
+                    <li>Being used as a fallback trusted source by AI models</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Track Performance</h2>
+                <ul>
+                    <li>Use Google Search Console → Enhancements tab</li>
+                    <li>Search your content on Perplexity to check visibility</li>
+                    <li>Compare with ChatGPT's browser mode</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>Advanced Implementation Patterns</h2>
+                <p>Complex scenarios often require combining multiple schema types. Here are some powerful patterns:</p>
+
+                <div class="example-block">
+                    <h3>1. Article with Author and Organization</h3>
+                    <pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Advanced LLM Optimization Techniques",
+  "author": {
+    "@type": "Person",
+    "name": "Jane Smith",
+    "jobTitle": "AI Research Director",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Tech University",
+      "url": "https://techuniversity.edu"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "LLM Guides",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://llm-guides.com/logo.png"
+    }
+  },
+  "datePublished": "2024-03-20",
+  "dateModified": "2024-03-21"
+}</code></pre>
+                </div>
+
+                <div class="example-block">
+                    <h3>2. HowTo with Video</h3>
+                    <pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Implementing Structured Data for LLMs",
+  "description": "Step-by-step guide to implementing structured data",
+  "video": {
+    "@type": "VideoObject",
+    "name": "Structured Data Tutorial",
+    "description": "Video tutorial on implementing structured data",
+    "thumbnailUrl": "https://llm-guides.com/thumb.jpg",
+    "uploadDate": "2024-03-20",
+    "duration": "PT10M30S"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Choose Schema Type",
+      "text": "Select the most specific schema type for your content"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Implement JSON-LD",
+      "text": "Add JSON-LD script to your page"
+    }
+  ]
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Real-World Use Cases</h2>
+                <div class="example-block">
+                    <h3>Technical Documentation</h3>
+                    <p>For API documentation and technical guides:</p>
+                    <pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "LLM API Integration Guide",
+  "author": {
+    "@type": "Person",
+    "name": "John Doe",
+    "jobTitle": "Senior Developer"
+  },
+  "keywords": "LLM, API, integration, documentation",
+  "articleSection": "API Documentation",
+  "inLanguage": "en",
+  "code": {
+    "@type": "SoftwareSourceCode",
+    "codeRepository": "https://github.com/example/llm-api",
+    "programmingLanguage": "Python"
+  }
+}</code></pre>
+                </div>
+
+                <div class="example-block">
+                    <h3>Product Documentation</h3>
+                    <p>For software and tool documentation:</p>
+                    <pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "LLM Optimization Tool",
+  "description": "Tool for optimizing content for LLMs",
+  "brand": {
+    "@type": "Brand",
+    "name": "LLM Guides"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "99.99",
+    "priceCurrency": "USD"
+  },
+  "documentation": {
+    "@type": "TechArticle",
+    "headline": "User Guide",
+    "url": "https://llm-guides.com/docs"
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Dynamic Implementation</h2>
+                <p>For content that changes frequently or is generated dynamically:</p>
+
+                <div class="example-block">
+                    <h3>JavaScript Implementation</h3>
+                    <pre><code class="language-javascript">function generateStructuredData(content) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": content.title,
+    "author": {
+      "@type": "Person",
+      "name": content.author
+    },
+    "datePublished": content.publishDate,
+    "dateModified": content.updateDate
+  };
+}
+
+// Add to page
+const script = document.createElement('script');
+script.type = 'application/ld+json';
+script.text = JSON.stringify(generateStructuredData(pageContent));
+document.head.appendChild(script);</code></pre>
+                </div>
+
+                <div class="example-block">
+                    <h3>Server-Side Implementation</h3>
+                    <pre><code class="language-python">def generate_structured_data(article):
+    return {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "author": {
+            "@type": "Person",
+            "name": article.author.name,
+            "jobTitle": article.author.title
+        },
+        "datePublished": article.publish_date.isoformat(),
+        "dateModified": article.update_date.isoformat()
+    }
+
+# In your template
+structured_data = generate_structured_data(article)
+script_tag = f'<script type="application/ld+json">{json.dumps(structured_data)}</script>'</code></pre>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Monitoring and Maintenance</h2>
+                <p>Keep your structured data effective with these practices:</p>
+                <ul>
+                    <li><strong>Regular Validation:</strong> Check your structured data monthly</li>
+                    <li><strong>Performance Tracking:</strong> Monitor rich results in Search Console</li>
+                    <li><strong>Content Updates:</strong> Update structured data when content changes</li>
+                    <li><strong>Error Monitoring:</strong> Set up alerts for validation errors</li>
+                </ul>
+
+                <div class="example-block">
+                    <h3>Automated Testing Script</h3>
+                    <pre><code class="language-python">import requests
+from bs4 import BeautifulSoup
+import json
+
+def validate_structured_data(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    scripts = soup.find_all('script', type='application/ld+json')
+    
+    for script in scripts:
+        try:
+            data = json.loads(script.string)
+            # Validate against schema.org
+            validation_url = f"https://validator.schema.org/validate?url={url}"
+            validation = requests.get(validation_url)
+            return validation.json()
+        except json.JSONDecodeError:
+            return {"error": "Invalid JSON-LD"}
+</code></pre>
+                </div>
             </section>
         </main>
     </div>
 
-    <!-- Scripts -->
     <script src="../../assets/js/main.js"></script>
 </body>
-</html> 
+</html>
