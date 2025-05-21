@@ -1,100 +1,70 @@
-# 🚀 LLM Guides: The Ultimate Guide to LLM Optimization
+# LLM SEO Guide
 
-A free, open-source guide to getting your content cited, ranked, and surfaced in AI models like ChatGPT, Perplexity, Claude, and more.
+Master LLM SEO to increase your content visibility in AI responses. Learn how to optimize for Large Language Models and get more clicks with our comprehensive guide.
 
-![LLM Guide](https://img.shields.io/badge/LLM-Guide-blue)
-![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+## 📚 Core Concepts
 
-## 🎯 Goal
+Understanding how Large Language Models work is crucial for effective SEO. This section covers the fundamental principles of LLM optimization, including how AI models process and rank content, the importance of structured data, and the role of citations in establishing authority.
 
-Help creators, founders, writers, and indie hackers get their websites and content ranked and referenced inside large language models (LLMs), where more and more users are searching for answers.
+- [Understanding LLM Optimization](https://llmseoguide.com/guides/llm-optimization/core-concepts)
+  - Learn the basics of how LLMs work and how to optimize your content for better visibility
+- [Structured Data Implementation](https://llmseoguide.com/guides/llm-optimization/structured-data)
+  - Master the implementation of structured data to help LLMs better understand your content
+- [Citation Strategy](https://llmseoguide.com/guides/llm-optimization/citation-strategy)
+  - Develop a robust citation strategy to build authority and improve content credibility
 
-## 🧠 Why LLM Rankings Matter
+## 🎯 Content Optimization
 
-- Over 1B+ prompts are generated daily with AI tools
-- Tools like Perplexity, Bing Copilot, and ChatGPT (with browsing) pull live data from websites
-- LLMs are becoming the new search engines — and most people aren't optimizing for them (yet)
+Learn how to structure and format your content for maximum impact in LLM responses. This section provides detailed guidance on content organization, formatting best practices, and technical implementation strategies to improve your content's visibility in AI-generated responses.
 
-## 📚 Guide Sections
+- [Content Structure & Formatting](https://llmseoguide.com/guides/llm-optimization/content-optimization)
+  - Optimize your content structure and formatting for better LLM comprehension
+- [Real-time Tools & APIs](https://llmseoguide.com/guides/llm-optimization/real-time-tools)
+  - Discover tools and APIs that help you optimize content in real-time
+- [Testing & Validation](https://llmseoguide.com/guides/llm-optimization/testing)
+  - Learn how to test and validate your LLM optimization efforts
 
-### Core Concepts
-- [Core Concepts for Ranking in LLMs](https://llmguides.com/core-concepts)
-- [Schema & Structured Data](https://llmguides.com/structured-data)
-- [How to Get Cited in LLMs](https://llmguides.com/citation-strategy)
-- [Formatting & On-Page SEO for LLMs](https://llmguides.com/content-optimization)
+## 🛠️ Tools & Resources
 
-### Tools & Testing
-- [Real-time Tools Guide](https://llmguides.com/real-time-tools)
-- [Testing Your LLM Presence](https://llmguides.com/testing)
-- [Tools for LLM Optimization](https://llmguides.com/tools)
+Access essential tools and resources to help you implement and track your LLM optimization strategy. From rank tracking tools to implementation templates, this section provides everything you need to succeed in LLM SEO.
 
-### Examples & Resources
-- [Examples of LLM-Friendly Content](https://llmguides.com/examples)
-- [How to Contribute](https://llmguides.com/contribute)
+- [LLM Rank Tracker](https://llmseoguide.com/rank-tracker)
+  - Track your content's performance in LLM responses and monitor optimization progress
+- [Real Examples](https://llmseoguide.com/guides/llm-optimization/examples)
+  - Study successful implementations and learn from real-world examples
+- [Template Library](https://llmseoguide.com/guides/llm-optimization/template)
+  - Access ready-to-use templates for implementing LLM optimization strategies
 
-## 🧱 Core Concepts Overview
+## 📈 Case Studies & Best Practices
 
-### 1. Citable Formatting
-- Use bullet points, numbered lists, and direct Q&A formats
-- Make your answers "copy-paste worthy"
-- Include summaries and headers for each section
-- [Read more about formatting →](https://llmguides.com/core-concepts#citable-formatting)
+Learn from successful implementations and avoid common pitfalls in LLM optimization. This section provides detailed case studies, implementation guides, and best practices to help you achieve better results with your content.
 
-### 2. Topical Authority
-- Own your niche by clustering 10–20+ pages around a main topic
-- Interlink your content
-- Add case studies, tools, calculators — anything original and helpful
-- [Learn about authority building →](https://llmguides.com/core-concepts#topical-authority)
+- [Successful Case Studies](https://llmseoguide.com/guides/llm-optimization/examples#case-studies)
+  - Explore real-world examples of successful LLM optimization strategies
+- [Implementation Guides](https://llmseoguide.com/guides/llm-optimization/examples#implementation)
+  - Step-by-step guides for implementing effective LLM optimization strategies
+- [Common Pitfalls](https://llmseoguide.com/guides/llm-optimization/examples#pitfalls)
+  - Learn about common mistakes to avoid in LLM optimization
 
-### 3. Structured Data (Schema)
-- Add FAQPage, HowTo, Article, Organization, Product, and other relevant schema.org tags
-- Helps AI models understand your page content semantically
-- [Full schema guide →](https://llmguides.com/structured-data)
+## Quick Links
 
-### 4. Live Indexability
-Submit your site to:
-- Perplexity.ai's source feedback form (if available)
-- Bing Webmaster Tools
-- Common Crawl (for future training data)
-- Ensure your robots.txt allows crawling
-- [Indexing guide →](https://llmguides.com/core-concepts#live-indexability)
+- [Guides](https://llmseoguide.com/guides/llm-optimization)
+- [Rank Tracker](https://llmseoguide.com/rank-tracker)
+- [Examples](https://llmseoguide.com/guides/llm-optimization/examples)
+- [Blog](https://llmseoguide.com/blog)
+- [Tools](https://llmseoguide.com/tools)
+- [Contact](https://llmseoguide.com/contact)
 
-### 5. Citation Sources
-Post on or get linked from:
-- Reddit
-- Wikipedia
-- GitHub
-- Quora
-- Medium
-- Stack Overflow
-- [More examples →](https://llmguides.com/citation-strategy)
+## Connect With Us
 
-## 🤝 Contributing
+- [GitHub](https://github.com/mattmerrick/llmguides)
+- [Twitter](https://twitter.com/llmseoguide)
+- [LinkedIn](https://linkedin.com/company/llmseoguide)
 
-We welcome contributions from the community! Here's how you can help:
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
-
-### Contribution Guidelines
-- Follow the existing documentation style
-- Add clear descriptions for your contributions
-- Include examples where appropriate
-- Test your changes before submitting
-
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+## Contributing
 
-<div align="center">
-  <h3>🌟 Star this repository if you find it helpful! 🌟</h3>
-</div>
-
----
-
-*This guide is continuously updated. Last updated: [Current Date]*
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more information.
