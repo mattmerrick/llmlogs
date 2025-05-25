@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Structure Analyzer - Free LLM SEO Tools</title>
+    <meta name="description" content="Analyze your content structure and get recommendations for better LLM optimization. Improve your content's visibility in AI responses.">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .analyzer-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .analyzer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .analyzer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .editor-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        .results-container {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .score-section {
+            margin-bottom: 2rem;
+        }
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .recommendations {
+            margin-top: 1rem;
+        }
+        .recommendation-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+        .recommendation-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+        .recommendation-item p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .button-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        .button-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+        .button:hover {
+            opacity: 0.9;
+        }
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .metric-card {
+            background: rgba(0,0,0,0.05);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">LLM SEO Guide</a>
+            <nav>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="/free-tools" class="active">Free Tools</a>
+                <a href="https://github.com/yourusername/llmseoguide" target="_blank" class="github-button">
+                    <img src="../assets/images/github.svg" alt="GitHub" width="20" height="20">
+                    Star
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="analyzer-container">
+        <h1>Content Structure Analyzer</h1>
+        <p class="lead">Analyze your content structure and get recommendations for better LLM optimization. Improve your content's visibility in AI responses.</p>
+
+        <div class="analyzer-grid">
+            <div class="editor-container">
+                <label class="editor-label" for="content-input">Your Content</label>
+                <textarea id="content-input" placeholder="Paste your content here..."></textarea>
+                <div class="button-group">
+                    <button class="button button-primary" onclick="analyzeContent()">Analyze Content</button>
+                    <button class="button button-secondary" onclick="clearContent()">Clear</button>
+                </div>
+            </div>
+            <div class="results-container">
+                <div class="score-section">
+                    <h3>Structure Score</h3>
+                    <div class="score">--</div>
+                    <div class="metrics">
+                        <div class="metric-card">
+                            <div class="metric-value" id="heading-score">--</div>
+                            <div class="metric-label">Heading Structure</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="paragraph-score">--</div>
+                            <div class="metric-label">Paragraph Length</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="list-score">--</div>
+                            <div class="metric-label">List Usage</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendations">
+                    <h3>Recommendations</h3>
+                    <div id="recommendations-list">
+                        <p>Analyze your content to see recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/guides">Guides</a>
+                    <a href="/blog">Blog</a>
+                    <a href="https://github.com/yourusername/llmseoguide" target="_blank">GitHub</a>
+                </div>
+                <p class="copyright">© 2024 LLM SEO Guide. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function analyzeContent() {
+            const content = document.getElementById('content-input').value;
+            if (!content.trim()) {
+                alert('Please enter some content to analyze');
+                return;
+            }
+
+            // Create a temporary div to parse HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+
+            // Analyze content structure
+            const analysis = analyzeStructure(tempDiv);
+
+            // Update scores
+            document.querySelector('.score').textContent = `${analysis.overallScore}/100`;
+            document.getElementById('heading-score').textContent = `${analysis.headingScore}/100`;
+            document.getElementById('paragraph-score').textContent = `${analysis.paragraphScore}/100`;
+            document.getElementById('list-score').textContent = `${analysis.listScore}/100`;
+
+            // Update recommendations
+            updateRecommendations(analysis.recommendations);
+        }
+
+        function analyzeStructure(element) {
+            const analysis = {
+                headingScore: 0,
+                paragraphScore: 0,
+                listScore: 0,
+                recommendations: []
+            };
+
+            // Analyze headings
+            const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            const headingLevels = new Set();
+            headings.forEach(h => headingLevels.add(h.tagName.toLowerCase()));
+            
+            // Heading structure score
+            if (headings.length > 0) {
+                analysis.headingScore = Math.min(100, Math.round((headingLevels.size / 6) * 100));
+            }
+            
+            if (analysis.headingScore < 60) {
+                analysis.recommendations.push({
+                    title: 'Improve Heading Structure',
+                    description: 'Use a clear hierarchy of headings (H1-H6) to improve content structure.'
+                });
+            }
+
+            // Analyze paragraphs
+            const paragraphs = element.querySelectorAll('p');
+            let goodParagraphs = 0;
+            paragraphs.forEach(p => {
+                const length = p.textContent.length;
+                if (length >= 50 && length <= 200) goodParagraphs++;
+            });
+            
+            analysis.paragraphScore = paragraphs.length > 0 
+                ? Math.round((goodParagraphs / paragraphs.length) * 100)
+                : 0;
+
+            if (analysis.paragraphScore < 70) {
+                analysis.recommendations.push({
+                    title: 'Optimize Paragraph Length',
+                    description: 'Aim for paragraphs between 50-200 characters for better readability.'
+                });
+            }
+
+            // Analyze lists
+            const lists = element.querySelectorAll('ul, ol');
+            analysis.listScore = Math.min(100, Math.round((lists.length / 3) * 100));
+
+            if (analysis.listScore < 50) {
+                analysis.recommendations.push({
+                    title: 'Add More Lists',
+                    description: 'Use bullet points and numbered lists to break up content and improve scannability.'
+                });
+            }
+
+            // Calculate overall score
+            analysis.overallScore = Math.round(
+                (analysis.headingScore + analysis.paragraphScore + analysis.listScore) / 3
+            );
+
+            return analysis;
+        }
+
+        function updateRecommendations(recommendations) {
+            const container = document.getElementById('recommendations-list');
+            if (recommendations.length === 0) {
+                container.innerHTML = '<p>Great job! Your content structure looks good.</p>';
+                return;
+            }
+
+            container.innerHTML = recommendations.map(rec => `
+                <div class="recommendation-item">
+                    <h4>${rec.title}</h4>
+                    <p>${rec.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function clearContent() {
+            document.getElementById('content-input').value = '';
+            document.querySelector('.score').textContent = '--';
+            document.getElementById('heading-score').textContent = '--';
+            document.getElementById('paragraph-score').textContent = '--';
+            document.getElementById('list-score').textContent = '--';
+            document.getElementById('recommendations-list').innerHTML = 
+                '<p>Analyze your content to see recommendations.</p>';
+        }
+    </script>
+</body>
+</html> 
