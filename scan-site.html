@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CDEBMDP5PL');
+    </script>
+    <!-- End Google tag (gtag.js) -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM SEO Analysis Tool - Free Website Scanner for AI Optimization | LLM SEO Guide</title>
+    <meta name="description" content="Analyze your website's LLM SEO performance with our free AI optimization scanner. Get detailed insights on sitemap structure, content quality, and LLM compatibility. Optimize your site for ChatGPT, Claude, and other AI language models.">
+    <meta name="keywords" content="LLM SEO analysis, AI optimization scanner, LLM compatibility checker, ChatGPT optimization, Claude optimization, AI language model optimization, LLM SEO tool, website AI analysis, content optimization for LLMs, AI search optimization">
+    <link rel="canonical" href="https://LLMSEOguide.com/scan-site" />
+
+    <!-- Analytics -->
+    <script
+        defer
+        data-website-id="682d6fb7b163eb08ed813a43"
+        data-domain="llmseoguide.com"
+        src="https://datafa.st/js/script.js">
+    </script>
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tools.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM SEO Guide</a>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0"
+                        scrolling="0"
+                        width="150"
+                        height="30"
+                        title="GitHub">
+                </iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <nav class="breadcrumbs">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <span>LLM SEO Analysis Tool</span>
+            </nav>
+
+            <main class="tool-container">
+                <h1>LLM SEO Analysis Tool</h1>
+                <p class="lead">Analyze your website's performance for AI language models and get detailed recommendations for LLM optimization.</p>
+
+                <div class="seo-content">
+                    <h2>Why Use Our LLM SEO Analysis Tool?</h2>
+                    <p>Our comprehensive LLM SEO analysis tool helps you optimize your website for AI language models and improve your visibility in AI-powered search results. Here's what you can expect:</p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <strong>Comprehensive AI Analysis</strong>
+                            <p>Get detailed insights into how well your content performs with Large Language Models like ChatGPT and Claude. Our tool analyzes your content structure, meta descriptions, and technical elements to ensure optimal AI compatibility.</p>
+                        </li>
+                        <li>
+                            <strong>LLM-Specific Recommendations</strong>
+                            <p>Receive targeted suggestions to improve your site's compatibility with AI language models. We provide actionable steps to enhance your content's visibility in AI responses and search results.</p>
+                        </li>
+                        <li>
+                            <strong>Content Optimization</strong>
+                            <p>Learn how to structure your content for better understanding by AI systems. Our analysis includes recommendations for heading hierarchy, content organization, and semantic markup.</p>
+                        </li>
+                        <li>
+                            <strong>Technical SEO for AI</strong>
+                            <p>Identify and fix technical issues that affect your site's performance with LLMs. We check for proper meta tags, structured data, and content accessibility.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="input-section">
+                    <h2>Enter Your Website URL</h2>
+                    <div class="url-input">
+                        <input type="url" id="siteUrl" placeholder="https://example.com" pattern="https?://.*">
+                        <button class="tool-button" onclick="scanSite()">Analyze LLM SEO</button>
+                    </div>
+                    <div id="statusMessage" class="status-message"></div>
+                </div>
+
+                <div class="results-section" style="display: none;">
+                    <h2>Analysis Results</h2>
+                    <div class="score-overview">
+                        <div class="overall-score">
+                            <h3>Overall LLM Score</h3>
+                            <div class="score" id="overallScore">--</div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value" id="sitemapScore">--</div>
+                                <div class="metric-label">Sitemap Structure</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="contentScore">--</div>
+                                <div class="metric-label">Content Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="structureScore">--</div>
+                                <div class="metric-label">Page Structure</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-details">
+                        <h3>Detailed Analysis</h3>
+                        <div id="analysisResults" class="analysis-list"></div>
+                    </div>
+
+                    <div class="recommendations">
+                        <h3>Recommendations</h3>
+                        <div id="recommendationsList" class="recommendations-list"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM SEO Guide. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/tools.js"></script>
+    <script>
+        async function scanSite() {
+            const urlInput = document.getElementById('siteUrl');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                showStatus('Please enter a valid URL', 'error');
+                return;
+            }
+
+            try {
+                showStatus('Scanning site...', 'info');
+                const results = await analyzeSite(url);
+                displayResults(results);
+                showStatus('Analysis complete!', 'success');
+            } catch (error) {
+                showStatus('Error analyzing site: ' + error.message, 'error');
+            }
+        }
+
+        async function analyzeSite(url) {
+            // Normalize URL
+            const baseUrl = url.endsWith('/') ? url.slice(0, -1) : url;
+            const sitemapUrl = `${baseUrl}/sitemap.xml`;
+            const llmsTxtUrl = `${baseUrl}/llms.txt`;
+
+            try {
+                // Check for llms.txt first
+                const llmsTxtResponse = await fetch(llmsTxtUrl);
+                const hasLlmsTxt = llmsTxtResponse.ok;
+
+                // Fetch sitemap
+                const response = await fetch(sitemapUrl);
+                if (!response.ok) {
+                    throw new Error('Sitemap not found');
+                }
+
+                const sitemapText = await response.text();
+                const parser = new DOMParser();
+                const sitemapDoc = parser.parseFromString(sitemapText, 'text/xml');
+
+                // Check for sitemap index
+                const isSitemapIndex = sitemapDoc.getElementsByTagName('sitemapindex').length > 0;
+                let urls = [];
+
+                if (isSitemapIndex) {
+                    // Handle sitemap index
+                    const sitemapUrls = Array.from(sitemapDoc.getElementsByTagName('loc'))
+                        .map(loc => loc.textContent);
+                    
+                    // Fetch all sitemaps
+                    for (const sitemapUrl of sitemapUrls) {
+                        const sitemapResponse = await fetch(sitemapUrl);
+                        const sitemapText = await sitemapResponse.text();
+                        const sitemapDoc = parser.parseFromString(sitemapText, 'text/xml');
+                        const pageUrls = Array.from(sitemapDoc.getElementsByTagName('loc'))
+                            .map(loc => loc.textContent);
+                        urls = urls.concat(pageUrls);
+                    }
+                } else {
+                    // Handle regular sitemap
+                    urls = Array.from(sitemapDoc.getElementsByTagName('loc'))
+                        .map(loc => loc.textContent);
+                }
+
+                // Analyze URLs
+                const analysis = await analyzeUrls(urls);
+                
+                // Add llms.txt status to analysis
+                analysis.hasLlmsTxt = hasLlmsTxt;
+                if (!hasLlmsTxt) {
+                    analysis.details.push({
+                        category: 'LLM Optimization',
+                        findings: ['Missing llms.txt file - This file helps optimize your site for Large Language Models']
+                    });
+                }
+
+                return analysis;
+            } catch (error) {
+                throw new Error('Failed to analyze site: ' + error.message);
+            }
+        }
+
+        async function analyzeUrls(urls) {
+            const analysis = {
+                sitemapScore: 0,
+                contentScore: 0,
+                structureScore: 0,
+                recommendations: [],
+                details: [],
+                totalPages: urls.length,
+                analyzedPages: 0
+            };
+
+            // Analyze sitemap structure
+            analysis.sitemapScore = calculateSitemapScore(urls);
+            analysis.details.push({
+                category: 'Sitemap',
+                score: analysis.sitemapScore,
+                findings: analyzeSitemapStructure(urls)
+            });
+
+            // Analyze more pages - up to 20 instead of just 5
+            const sampleUrls = urls.slice(0, 20);
+            analysis.analyzedPages = sampleUrls.length;
+
+            // Create progress indicator
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress-bar';
+            progressBar.innerHTML = `
+                <div class="progress-text">Analyzing pages: 0/${sampleUrls.length}</div>
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
+                </div>
+            `;
+            document.querySelector('.results-section').appendChild(progressBar);
+
+            for (let i = 0; i < sampleUrls.length; i++) {
+                try {
+                    const pageAnalysis = await analyzePage(sampleUrls[i]);
+                    analysis.contentScore += pageAnalysis.contentScore;
+                    analysis.structureScore += pageAnalysis.structureScore;
+                    analysis.details.push({
+                        url: sampleUrls[i],
+                        ...pageAnalysis
+                    });
+
+                    // Update progress
+                    progressBar.querySelector('.progress-text').textContent = 
+                        `Analyzing pages: ${i + 1}/${sampleUrls.length}`;
+                    progressBar.querySelector('.progress-fill').style.width = 
+                        `${((i + 1) / sampleUrls.length) * 100}%`;
+                } catch (error) {
+                    console.error(`Error analyzing ${sampleUrls[i]}:`, error);
+                }
+            }
+
+            // Remove progress bar
+            progressBar.remove();
+
+            // Calculate average scores
+            analysis.contentScore = Math.round(analysis.contentScore / sampleUrls.length);
+            analysis.structureScore = Math.round(analysis.structureScore / sampleUrls.length);
+            analysis.overallScore = Math.round(
+                (analysis.sitemapScore + analysis.contentScore + analysis.structureScore) / 3
+            );
+
+            // Generate recommendations with guide links
+            analysis.recommendations = generateRecommendations(analysis);
+
+            return analysis;
+        }
+
+        function calculateSitemapScore(urls) {
+            let score = 0;
+            
+            // Check number of URLs
+            if (urls.length > 100) score += 30;
+            else if (urls.length > 50) score += 20;
+            else if (urls.length > 10) score += 10;
+
+            // Check URL structure
+            const hasGoodStructure = urls.some(url => {
+                const path = new URL(url).pathname;
+                return path.length > 1 && !path.includes('?') && !path.includes('#');
+            });
+            if (hasGoodStructure) score += 20;
+
+            // Check for important pages
+            const importantPages = ['/about', '/contact', '/blog', '/products', '/services'];
+            const hasImportantPages = importantPages.some(page => 
+                urls.some(url => url.includes(page))
+            );
+            if (hasImportantPages) score += 20;
+
+            // Check for content depth
+            const hasDeepContent = urls.some(url => {
+                const path = new URL(url).pathname;
+                return path.split('/').length > 3;
+            });
+            if (hasDeepContent) score += 30;
+
+            return score;
+        }
+
+        function analyzeSitemapStructure(urls) {
+            const findings = [];
+            
+            // Check URL count
+            if (urls.length < 10) {
+                findings.push('Low number of URLs in sitemap');
+            } else if (urls.length > 100) {
+                findings.push('Good number of URLs in sitemap');
+            }
+
+            // Check for important pages
+            const importantPages = ['/about', '/contact', '/blog', '/products', '/services'];
+            const missingPages = importantPages.filter(page => 
+                !urls.some(url => url.includes(page))
+            );
+            if (missingPages.length > 0) {
+                findings.push(`Missing important pages: ${missingPages.join(', ')}`);
+            }
+
+            // Check URL structure
+            const hasQueryParams = urls.some(url => url.includes('?'));
+            if (hasQueryParams) {
+                findings.push('Sitemap contains URLs with query parameters');
+            }
+
+            return findings;
+        }
+
+        async function analyzePage(url) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                return {
+                    contentScore: analyzeContent(doc),
+                    structureScore: analyzeStructure(doc),
+                    findings: analyzePageDetails(doc)
+                };
+            } catch (error) {
+                console.error(`Error analyzing page ${url}:`, error);
+                return {
+                    contentScore: 0,
+                    structureScore: 0,
+                    findings: ['Error analyzing page']
+                };
+            }
+        }
+
+        function analyzeContent(doc) {
+            let score = 0;
+            
+            // Check for main content
+            const mainContent = doc.querySelector('main, article, .content, #content');
+            if (mainContent) {
+                const text = mainContent.textContent;
+                if (text.length > 1000) score += 30;
+                else if (text.length > 500) score += 20;
+                else if (text.length > 200) score += 10;
+            }
+
+            // Check for headings
+            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            if (headings.length > 5) score += 20;
+            else if (headings.length > 2) score += 10;
+
+            // Check for lists
+            const lists = doc.querySelectorAll('ul, ol');
+            if (lists.length > 3) score += 20;
+            else if (lists.length > 1) score += 10;
+
+            // Check for images with alt text
+            const images = doc.querySelectorAll('img');
+            const imagesWithAlt = Array.from(images).filter(img => img.alt);
+            if (imagesWithAlt.length > 0) {
+                score += (imagesWithAlt.length / images.length) * 30;
+            }
+
+            return score;
+        }
+
+        function analyzeStructure(doc) {
+            let score = 0;
+            
+            // Check for semantic HTML
+            const semanticElements = doc.querySelectorAll('header, nav, main, article, section, aside, footer');
+            if (semanticElements.length > 5) score += 30;
+            else if (semanticElements.length > 2) score += 20;
+
+            // Check for meta description
+            const metaDescription = doc.querySelector('meta[name="description"]');
+            if (metaDescription && metaDescription.content.length > 100) score += 20;
+
+            // Check for canonical URL
+            const canonical = doc.querySelector('link[rel="canonical"]');
+            if (canonical) score += 20;
+
+            // Check for structured data
+            const structuredData = doc.querySelector('script[type="application/ld+json"]');
+            if (structuredData) score += 30;
+
+            return score;
+        }
+
+        function analyzePageDetails(doc) {
+            const findings = [];
+            
+            // Check meta description
+            const metaDescription = doc.querySelector('meta[name="description"]');
+            if (!metaDescription) {
+                findings.push('Missing meta description');
+            } else if (metaDescription.content.length < 100) {
+                findings.push('Meta description is too short');
+            }
+
+            // Check headings
+            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            if (headings.length < 2) {
+                findings.push('Not enough headings for content structure');
+            }
+
+            // Check images
+            const images = doc.querySelectorAll('img');
+            const imagesWithoutAlt = Array.from(images).filter(img => !img.alt);
+            if (imagesWithoutAlt.length > 0) {
+                findings.push(`${imagesWithoutAlt.length} images missing alt text`);
+            }
+
+            // Check structured data
+            const structuredData = doc.querySelector('script[type="application/ld+json"]');
+            if (!structuredData) {
+                findings.push('No structured data found');
+            }
+
+            return findings;
+        }
+
+        function generateRecommendations(analysis) {
+            const recommendations = [];
+            const guideLinks = {
+                sitemap: '/guides/llm-optimization/sitemap-optimization',
+                content: '/guides/llm-optimization/content-optimization',
+                structure: '/guides/llm-optimization/structure-optimization',
+                meta: '/guides/llm-optimization/meta-optimization',
+                images: '/guides/llm-optimization/image-optimization',
+                semantic: '/guides/llm-optimization/semantic-html',
+                llmsTxt: '/blog/how-to-add-a-llms.txt-file-to-any-website-in-under-10-minutes'
+            };
+
+            // Check for llms.txt
+            if (!analysis.hasLlmsTxt) {
+                recommendations.push({
+                    title: 'Add llms.txt File',
+                    description: 'Create and implement a llms.txt file to optimize your site for Large Language Models.',
+                    guideLink: guideLinks.llmsTxt,
+                    guideText: 'Learn how to add llms.txt in under 10 minutes',
+                    priority: 'high'
+                });
+            }
+
+            // Sitemap recommendations
+            if (analysis.sitemapScore < 70) {
+                recommendations.push({
+                    title: 'Improve Sitemap Structure',
+                    description: 'Add more URLs to your sitemap and ensure it includes all important pages.',
+                    guideLink: guideLinks.sitemap,
+                    guideText: 'Learn more about sitemap optimization',
+                    priority: 'medium'
+                });
+            }
+
+            // Content recommendations
+            if (analysis.contentScore < 70) {
+                recommendations.push({
+                    title: 'Enhance Content Quality',
+                    description: 'Add more detailed content, proper headings, and ensure all images have alt text.',
+                    guideLink: guideLinks.content,
+                    guideText: 'Read our content optimization guide',
+                    priority: 'medium'
+                });
+            }
+
+            // Structure recommendations
+            if (analysis.structureScore < 70) {
+                recommendations.push({
+                    title: 'Improve Page Structure',
+                    description: 'Add structured data, meta descriptions, and use semantic HTML elements.',
+                    guideLink: guideLinks.structure,
+                    guideText: 'Learn about page structure optimization',
+                    priority: 'medium'
+                });
+            }
+
+            // Meta description recommendations
+            if (analysis.details.some(detail => 
+                detail.findings && detail.findings.includes('Missing meta description'))) {
+                recommendations.push({
+                    title: 'Add Meta Descriptions',
+                    description: 'Create unique, descriptive meta descriptions for all pages.',
+                    guideLink: guideLinks.meta,
+                    guideText: 'Read our meta description guide',
+                    priority: 'low'
+                });
+            }
+
+            // Image optimization recommendations
+            if (analysis.details.some(detail => 
+                detail.findings && detail.findings.some(f => f.includes('images missing alt text')))) {
+                recommendations.push({
+                    title: 'Optimize Images',
+                    description: 'Add descriptive alt text to all images for better accessibility and LLM understanding.',
+                    guideLink: guideLinks.images,
+                    guideText: 'Learn about image optimization',
+                    priority: 'low'
+                });
+            }
+
+            // Semantic HTML recommendations
+            if (analysis.details.some(detail => 
+                detail.findings && detail.findings.includes('Not enough headings for content structure'))) {
+                recommendations.push({
+                    title: 'Use Semantic HTML',
+                    description: 'Implement proper heading hierarchy and semantic HTML elements.',
+                    guideLink: guideLinks.semantic,
+                    guideText: 'Read our semantic HTML guide',
+                    priority: 'low'
+                });
+            }
+
+            // Sort recommendations by priority
+            recommendations.sort((a, b) => {
+                const priorityOrder = { high: 0, medium: 1, low: 2 };
+                return priorityOrder[a.priority] - priorityOrder[b.priority];
+            });
+
+            return recommendations;
+        }
+
+        function displayResults(results) {
+            // Show results section
+            document.querySelector('.results-section').style.display = 'block';
+
+            // Update scores
+            document.getElementById('overallScore').textContent = `${results.overallScore}/100`;
+            document.getElementById('sitemapScore').textContent = `${results.sitemapScore}/100`;
+            document.getElementById('contentScore').textContent = `${results.contentScore}/100`;
+            document.getElementById('structureScore').textContent = `${results.structureScore}/100`;
+
+            // Add analysis summary
+            const summaryHtml = `
+                <div class="analysis-summary">
+                    <h3>Analysis Summary</h3>
+                    <p>Analyzed ${results.analyzedPages} out of ${results.totalPages} pages</p>
+                    <p>Overall LLM Optimization Score: ${results.overallScore}/100</p>
+                </div>
+            `;
+            document.querySelector('.score-overview').insertAdjacentHTML('afterbegin', summaryHtml);
+
+            // Display analysis details
+            const analysisResults = document.getElementById('analysisResults');
+            analysisResults.innerHTML = results.details.map(detail => `
+                <div class="analysis-item">
+                    <h4>${detail.category || detail.url}</h4>
+                    ${detail.findings ? `
+                        <ul>
+                            ${detail.findings.map(finding => `<li>${finding}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+            `).join('');
+
+            // Display recommendations with guide links and priority indicators
+            const recommendationsList = document.getElementById('recommendationsList');
+            recommendationsList.innerHTML = results.recommendations.map(rec => `
+                <div class="recommendation-item ${rec.priority}">
+                    <div class="recommendation-header">
+                        <h4>${rec.title}</h4>
+                        ${rec.priority === 'high' ? '<span class="priority-badge">High Priority</span>' : ''}
+                    </div>
+                    <p>${rec.description}</p>
+                    <a href="${rec.guideLink}" class="guide-link">${rec.guideText} →</a>
+                </div>
+            `).join('');
+        }
+
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.textContent = message;
+            statusElement.className = 'status-message ' + type;
+            statusElement.style.display = 'block';
+        }
+    </script>
+
+    <style>
+        .url-input {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .url-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .score-overview {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .overall-score {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .overall-score .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: rgba(0,0,0,0.05);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .analysis-details, .recommendations {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analysis-item, .recommendation-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+
+        .analysis-item h4, .recommendation-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .analysis-item ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .analysis-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        .status-message {
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-message.info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .progress-bar {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .progress-track {
+            height: 4px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .analysis-summary {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+
+        .analysis-summary h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .analysis-summary p {
+            margin: 0.5rem 0;
+            color: var(--text-color);
+        }
+
+        .recommendation-item {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+            border-left: 4px solid var(--border-color);
+        }
+
+        .recommendation-item.high {
+            border-left-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .recommendation-item.medium {
+            border-left-color: #f59e0b;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .recommendation-item.low {
+            border-left-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .priority-badge {
+            background: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .guide-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .guide-link:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .seo-content {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .feature-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .feature-list strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-list p {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .tool-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tool-button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</body>
+</html>
