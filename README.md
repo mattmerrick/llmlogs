@@ -2,6 +2,17 @@
 
 Master LLM SEO to increase your content visibility in AI responses. Learn how to optimize for Large Language Models and get more clicks with our comprehensive guide.
 
+## 🔍 Analyze Your Website for LLM SEO
+
+Start by analyzing your website's LLM optimization with our free site scanner tool. Get detailed insights and actionable recommendations to improve your content's visibility in AI responses.
+
+- [Site Scanner Tool](https://llmseoguide.com/scan-site)
+  - Analyze your website's LLM optimization score
+  - Get detailed recommendations for improvement
+  - Check for llms.txt implementation
+  - Review structured data and content quality
+  - Monitor your progress over time
+
 ## 📚 Core Concepts
 
 Understanding how Large Language Models work is crucial for effective SEO. This section covers the fundamental principles of LLM optimization, including how AI models process and rank content, the importance of structured data, and the role of citations in establishing authority.
@@ -24,16 +35,16 @@ Learn how to structure and format your content for maximum impact in LLM respons
 - [Testing & Validation](https://llmseoguide.com/guides/llm-optimization/testing)
   - Learn how to test and validate your LLM optimization efforts
 
-## 🛠️ Tools & Resources
+## 🛠️ Free Tools & Resources
 
 Access essential tools and resources to help you implement and track your LLM optimization strategy. From rank tracking tools to implementation templates, this section provides everything you need to succeed in LLM SEO.
 
-- [LLM Rank Tracker](https://llmseoguide.com/rank-tracker)
-  - Track your content's performance in LLM responses and monitor optimization progress
-- [Real Examples](https://llmseoguide.com/guides/llm-optimization/examples)
-  - Study successful implementations and learn from real-world examples
-- [Template Library](https://llmseoguide.com/guides/llm-optimization/template)
-  - Access ready-to-use templates for implementing LLM optimization strategies
+- [LLM Citation Checker](https://llmseoguide.com/free-tools/llm-citation-checker)
+  - Validate your content's citations for LLM optimization
+- [Knowledge Graph Validator](https://llmseoguide.com/free-tools/knowledge-graph-validator)
+  - Check your structured data implementation
+- [Chrome Extension](https://llmseoguide.com/chrome-llm-seo-checker)
+  - Get real-time LLM optimization suggestions while browsing
 
 ## 📈 Case Studies & Best Practices
 
@@ -49,15 +60,14 @@ Learn from successful implementations and avoid common pitfalls in LLM optimizat
 ## Quick Links
 
 - [Guides](https://llmseoguide.com/guides/llm-optimization)
-- [Rank Tracker](https://llmseoguide.com/rank-tracker)
+- [Free Tools](https://llmseoguide.com/free-tools)
 - [Examples](https://llmseoguide.com/guides/llm-optimization/examples)
 - [Blog](https://llmseoguide.com/blog)
-- [Tools](https://llmseoguide.com/tools)
 - [Contact](https://llmseoguide.com/contact)
 
 ## Connect With Us
 
-- [GitHub](https://github.com/mattmerrick/llmguides)
+- [GitHub](https://github.com/mattmerrick/llmseoguide)
 - [Twitter](https://twitter.com/llmseoguide)
 - [LinkedIn](https://linkedin.com/company/llmseoguide)
 
