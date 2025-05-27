@@ -3,192 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Graph Validator - Free Schema.org Validation Tool | LLM SEO Guide</title>
-    <meta name="description" content="Validate your JSON-LD structured data for optimal LLM compatibility. Our free tool helps ensure your knowledge graph markup is properly formatted for AI systems.">
-    <link rel="canonical" href="https://LLMSEOguide.com/free-tools/knowledge-graph-validator" />
+    <title>Knowledge Graph Validator - Free LLM SEO Tools</title>
+    <meta name="description" content="Validate your structured data and ensure it's properly formatted for LLM knowledge graphs. Enhance your content's semantic understanding.">
+    <link rel="canonical" href="https://llm.surf/free-tools/knowledge-graph-validator" />
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/tools.css">
+    <style>
+        .validator-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .validator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .editor-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .editor {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .results-container {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1.5rem;
+        }
+        .results-section {
+            margin-bottom: 1.5rem;
+        }
+        .results-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .validation-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .validation-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+        .validation-item p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .validation-item .status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .status.valid {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button.secondary {
+            background: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .validator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM SEO Guide</a>
-            <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
-            </div>
-        </div>
-    </header>
+    <!-- Include Standard Header -->
+    <include src="../assets/components/standard-header.html"></include>
 
     <div class="container">
-        <div class="content">
-            <nav class="breadcrumbs">
-                <a href="/">Home</a>
-                <span class="separator">/</span>
-                <a href="/free-tools">Free Tools</a>
-                <span class="separator">/</span>
-                <span>Knowledge Graph Validator</span>
-            </nav>
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>Knowledge Graph Validator</span>
+        </nav>
 
-            <main class="tool-container">
-                <h1>Knowledge Graph Validator</h1>
-                <p class="lead">Validate your JSON-LD structured data for optimal LLM compatibility.</p>
+        <main class="validator-container">
+            <h1>Knowledge Graph Validator</h1>
+            <p class="lead">Validate your structured data and ensure it's properly formatted for LLM knowledge graphs. Enhance your content's semantic understanding.</p>
 
-                <div class="input-section">
-                    <h2>Input JSON-LD</h2>
-                    <textarea id="jsonInput" placeholder="Paste your JSON-LD here..."></textarea>
+            <div class="validator-grid">
+                <div class="editor-container">
+                    <label class="editor-label" for="json-input">JSON-LD Input</label>
+                    <textarea id="json-input" class="editor" placeholder="Paste your JSON-LD structured data here..."></textarea>
                     <div class="button-group">
-                        <button class="tool-button" onclick="validateGraph()">Validate Graph</button>
-                        <button class="tool-button secondary" onclick="clearInput()">Clear</button>
+                        <button id="validate-button" class="button">Validate</button>
+                        <button id="clear-button" class="button secondary">Clear</button>
                     </div>
                 </div>
 
-                <div class="output-section">
-                    <h2>Validation Results</h2>
-                    <div id="validationResults" class="validation-list"></div>
-                    <div id="statusMessage" class="status-message"></div>
+                <div class="results-container">
+                    <div class="results-section">
+                        <h3>Validation Results</h3>
+                        <div id="validation-results">
+                            <p>Enter your JSON-LD data and click "Validate" to see the results.</p>
+                        </div>
+                    </div>
+
+                    <div class="results-section">
+                        <h3>Recommendations</h3>
+                        <div id="recommendations">
+                            <p>Recommendations will appear here after validation.</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <section class="usage-guide">
-                    <h2>How to Use</h2>
-                    <ol>
-                        <li>Paste your JSON-LD structured data into the input field</li>
-                        <li>Click "Validate Graph" to analyze your markup</li>
-                        <li>Review the validation results</li>
-                        <li>Make necessary improvements based on the feedback</li>
-                    </ol>
-                </section>
-
-                <section class="seo-content">
-                    <h2>Why Validate Your Knowledge Graph?</h2>
-                    <p>Proper structured data is crucial for LLM optimization. Our tool helps you:</p>
-                    <ul>
-                        <li>Ensure your JSON-LD is properly formatted</li>
-                        <li>Verify required properties and relationships</li>
-                        <li>Improve content understanding for AI systems</li>
-                        <li>Enhance entity recognition in LLM responses</li>
-                    </ul>
-                </section>
-            </main>
-        </div>
+            <section class="tool-info">
+                <h2>About This Tool</h2>
+                <p>This Knowledge Graph Validator helps you ensure your structured data is properly formatted for LLM knowledge graphs. It validates:</p>
+                <ul>
+                    <li>JSON-LD syntax and structure</li>
+                    <li>Schema.org compliance</li>
+                    <li>Entity relationships and connections</li>
+                    <li>Property completeness and accuracy</li>
+                    <li>Semantic consistency and coherence</li>
+                </ul>
+            </section>
+        </main>
     </div>
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM SEO Guide. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Include Standard Footer -->
+    <include src="../assets/components/standard-footer.html"></include>
 
     <!-- Required Scripts -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/tools.js"></script>
-    <script>
-        function validateGraph() {
-            const jsonInput = document.getElementById('jsonInput').value;
-            if (!jsonInput.trim()) {
-                showStatus('Please enter some JSON-LD to validate.', 'error');
-                return;
-            }
-
-            try {
-                const graph = JSON.parse(jsonInput);
-                const validationResults = analyzeGraph(graph);
-                displayResults(validationResults);
-                showStatus('Validation completed!', 'success');
-            } catch (error) {
-                showStatus('Error validating JSON-LD. Please check your input.', 'error');
-            }
-        }
-
-        function analyzeGraph(graph) {
-            const checks = [];
-            
-            // Check for required properties
-            checks.push({
-                name: 'JSON-LD Structure',
-                valid: Array.isArray(graph) || typeof graph === 'object',
-                message: 'Must be a valid JSON-LD object or array'
-            });
-
-            if (Array.isArray(graph)) {
-                graph.forEach((item, index) => {
-                    checks.push({
-                        name: `Item ${index + 1} Type`,
-                        valid: item['@type'] !== undefined,
-                        message: 'Each item must have a @type property'
-                    });
-                });
-            } else {
-                checks.push({
-                    name: 'Root Type',
-                    valid: graph['@type'] !== undefined,
-                    message: 'Root object must have a @type property'
-                });
-            }
-
-            // Check for context
-            checks.push({
-                name: 'Context',
-                valid: graph['@context'] === 'https://schema.org',
-                message: 'Context must be set to https://schema.org'
-            });
-
-            // Check for relationships
-            const hasRelationships = graph['mainEntityOfPage'] || 
-                                   graph['author'] || 
-                                   graph['about'] ||
-                                   graph['mentions'];
-            checks.push({
-                name: 'Relationships',
-                valid: hasRelationships,
-                message: 'Should include at least one relationship property'
-            });
-
-            return checks;
-        }
-
-        function displayResults(checks) {
-            const resultsContainer = document.getElementById('validationResults');
-            resultsContainer.innerHTML = '';
-
-            checks.forEach(check => {
-                const checkElement = document.createElement('div');
-                checkElement.className = `validation-item ${check.valid ? 'valid' : 'invalid'}`;
-                checkElement.innerHTML = `
-                    <strong>${check.name}:</strong> ${check.valid ? 'Valid' : 'Invalid'}<br>
-                    <span>${check.message}</span>
-                `;
-                resultsContainer.appendChild(checkElement);
-            });
-        }
-
-        function clearInput() {
-            document.getElementById('jsonInput').value = '';
-            document.getElementById('validationResults').innerHTML = '';
-            showStatus('Input cleared.', 'success');
-        }
-
-        function showStatus(message, type) {
-            const statusElement = document.getElementById('statusMessage');
-            statusElement.textContent = message;
-            statusElement.className = 'status-message ' + type;
-            setTimeout(() => {
-                statusElement.style.display = 'none';
-            }, 3000);
-        }
-    </script>
+    <script src="../assets/js/knowledge-graph-validator.js"></script>
 </body>
 </html> 

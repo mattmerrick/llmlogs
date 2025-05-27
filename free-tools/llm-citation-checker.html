@@ -3,190 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM Citation Checker - Free AI Content Validation Tool | LLM SEO Guide</title>
-    <meta name="description" content="Validate your content's citations and references for LLM compatibility. Our free tool helps ensure your content is properly cited and optimized for AI systems.">
-    <link rel="canonical" href="https://LLMSEOguide.com/free-tools/llm-citation-checker" />
+    <title>LLM Citation Checker - Free LLM SEO Tools</title>
+    <meta name="description" content="Check if your content is properly structured for LLM citations and get optimization suggestions. Ensure your references are AI-friendly.">
+    <link rel="canonical" href="https://llm.surf/free-tools/llm-citation-checker" />
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/tools.css">
+    <style>
+        .checker-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .checker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .editor-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .editor {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .results-container {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1.5rem;
+        }
+        .results-section {
+            margin-bottom: 1.5rem;
+        }
+        .results-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .citation-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .citation-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+        .citation-item p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .citation-item .status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .status.valid {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .status.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button.secondary {
+            background: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .checker-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM SEO Guide</a>
-            <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
-            </div>
-        </div>
-    </header>
+    <!-- Include Standard Header -->
+    <include src="../assets/components/standard-header.html"></include>
 
     <div class="container">
-        <div class="content">
-            <nav class="breadcrumbs">
-                <a href="/">Home</a>
-                <span class="separator">/</span>
-                <a href="/free-tools">Free Tools</a>
-                <span class="separator">/</span>
-                <span>LLM Citation Checker</span>
-            </nav>
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>LLM Citation Checker</span>
+        </nav>
 
-            <main class="tool-container">
-                <h1>LLM Citation Checker</h1>
-                <p class="lead">Validate your content's citations and references for optimal LLM compatibility.</p>
+        <main class="checker-container">
+            <h1>LLM Citation Checker</h1>
+            <p class="lead">Check if your content is properly structured for LLM citations and get optimization suggestions. Ensure your references are AI-friendly.</p>
 
-                <div class="input-section">
-                    <h2>Input Content</h2>
-                    <textarea id="contentInput" placeholder="Paste your content here to check citations..."></textarea>
+            <div class="checker-grid">
+                <div class="editor-container">
+                    <label class="editor-label" for="content-input">Content Input</label>
+                    <textarea id="content-input" class="editor" placeholder="Paste your content here to check citations..."></textarea>
                     <div class="button-group">
-                        <button class="tool-button" onclick="checkCitations()">Check Citations</button>
-                        <button class="tool-button secondary" onclick="clearInput()">Clear</button>
+                        <button id="check-button" class="button">Check Citations</button>
+                        <button id="clear-button" class="button secondary">Clear</button>
                     </div>
                 </div>
 
-                <div class="output-section">
-                    <h2>Citation Analysis</h2>
-                    <div id="citationResults" class="citation-list"></div>
-                    <div id="statusMessage" class="status-message"></div>
+                <div class="results-container">
+                    <div class="results-section">
+                        <h3>Citation Analysis</h3>
+                        <div id="citation-results">
+                            <p>Enter your content and click "Check Citations" to see the results.</p>
+                        </div>
+                    </div>
+
+                    <div class="results-section">
+                        <h3>Recommendations</h3>
+                        <div id="recommendations">
+                            <p>Recommendations will appear here after analysis.</p>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <section class="usage-guide">
-                    <h2>How to Use</h2>
-                    <ol>
-                        <li>Paste your content into the input field</li>
-                        <li>Click "Check Citations" to analyze your content</li>
-                        <li>Review the citation analysis results</li>
-                        <li>Make necessary improvements based on the feedback</li>
-                    </ol>
-                </section>
-
-                <section class="seo-content">
-                    <h2>Why Check Citations?</h2>
-                    <p>Proper citations are crucial for LLM optimization. Our tool helps you:</p>
-                    <ul>
-                        <li>Ensure all claims are properly supported</li>
-                        <li>Verify reference formatting and completeness</li>
-                        <li>Improve content credibility for AI systems</li>
-                        <li>Enhance content discoverability in LLM responses</li>
-                    </ul>
-                </section>
-            </main>
-        </div>
+            <section class="tool-info">
+                <h2>About This Tool</h2>
+                <p>This LLM Citation Checker helps you ensure your content is properly structured for AI systems. It checks for:</p>
+                <ul>
+                    <li>Proper citation formatting and structure</li>
+                    <li>Reference completeness and accuracy</li>
+                    <li>Citation placement and context</li>
+                    <li>Source credibility indicators</li>
+                    <li>Citation consistency throughout content</li>
+                </ul>
+            </section>
+        </main>
     </div>
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM SEO Guide. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Include Standard Footer -->
+    <include src="../assets/components/standard-footer.html"></include>
 
     <!-- Required Scripts -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/tools.js"></script>
-    <script>
-        function checkCitations() {
-            const content = document.getElementById('contentInput').value;
-            if (!content.trim()) {
-                showStatus('Please enter some content to check.', 'error');
-                return;
-            }
-
-            try {
-                const citations = analyzeCitations(content);
-                displayResults(citations);
-                showStatus('Citation analysis completed!', 'success');
-            } catch (error) {
-                showStatus('Error analyzing citations. Please check your input.', 'error');
-            }
-        }
-
-        function analyzeCitations(content) {
-            const citations = [];
-            const citationPatterns = [
-                { pattern: /\[\d+\]/g, type: 'numeric' },
-                { pattern: /\[[A-Za-z]+\]/g, type: 'alpha' },
-                { pattern: /\(\d{4}\)/g, type: 'year' },
-                { pattern: /\[.*?\]\(.*?\)/g, type: 'markdown' }
-            ];
-
-            citationPatterns.forEach(({ pattern, type }) => {
-                const matches = content.match(pattern);
-                if (matches) {
-                    matches.forEach(match => {
-                        citations.push({
-                            citation: match,
-                            type: type,
-                            valid: validateCitation(match, type)
-                        });
-                    });
-                }
-            });
-
-            return citations;
-        }
-
-        function validateCitation(citation, type) {
-            switch (type) {
-                case 'numeric':
-                    return /^\[\d+\]$/.test(citation);
-                case 'alpha':
-                    return /^\[[A-Za-z]+\]$/.test(citation);
-                case 'year':
-                    return /^\(\d{4}\)$/.test(citation);
-                case 'markdown':
-                    return /^\[.*?\]\(https?:\/\/.*?\)$/.test(citation);
-                default:
-                    return false;
-            }
-        }
-
-        function displayResults(citations) {
-            const resultsContainer = document.getElementById('citationResults');
-            resultsContainer.innerHTML = '';
-
-            if (citations.length === 0) {
-                resultsContainer.innerHTML = '<p>No citations found in the content.</p>';
-                return;
-            }
-
-            citations.forEach(citation => {
-                const citationElement = document.createElement('div');
-                citationElement.className = `citation-item ${citation.valid ? 'valid' : 'invalid'}`;
-                citationElement.innerHTML = `
-                    <strong>Citation:</strong> ${citation.citation}<br>
-                    <strong>Type:</strong> ${citation.type}<br>
-                    <strong>Status:</strong> ${citation.valid ? 'Valid' : 'Invalid'}
-                `;
-                resultsContainer.appendChild(citationElement);
-            });
-        }
-
-        function clearInput() {
-            document.getElementById('contentInput').value = '';
-            document.getElementById('citationResults').innerHTML = '';
-            showStatus('Input cleared.', 'success');
-        }
-
-        function showStatus(message, type) {
-            const statusElement = document.getElementById('statusMessage');
-            statusElement.textContent = message;
-            statusElement.className = 'status-message ' + type;
-            setTimeout(() => {
-                statusElement.style.display = 'none';
-            }, 3000);
-        }
-    </script>
+    <script src="../assets/js/llm-citation-checker.js"></script>
 </body>
 </html> 
