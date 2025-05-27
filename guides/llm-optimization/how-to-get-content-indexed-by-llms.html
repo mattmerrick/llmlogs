@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to get your content indexed by LLMs using IndexNow and Bing's URL Submission API. A comprehensive guide to ensure your content is discoverable by AI models.">
+    <meta name="keywords" content="LLM indexing, Bing Webmaster Tools, IndexNow, URL submission, AI content discovery, LLM optimization, content indexing">
+    <title>How to Get Your Content Indexed by LLMs | LLM Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/main.js" defer></script>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large"
+                        frameborder="0"
+                        scrolling="0"
+                        width="150"
+                        height="30"
+                        title="GitHub">
+                </iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/guides">Guides</a> /
+            <a href="/guides/llm-optimization">LLM Optimization</a> /
+            <span>Getting Indexed by LLMs</span>
+        </nav>
+
+        <main class="content">
+            <article class="guide-content">
+                <h1>How to Get Your Content Indexed by LLMs</h1>
+                
+                <div class="intro-section">
+                    <p class="lead">Learn the most effective methods to ensure your content is discoverable by Large Language Models (LLMs) and AI-powered search engines. This guide covers both IndexNow and Bing's URL Submission API, helping you choose the best approach for your needs.</p>
+                </div>
+
+                <section class="guide-section">
+                    <h2>Why LLM Indexing Matters</h2>
+                    <p>Getting your content indexed by LLMs is crucial because:</p>
+                    <ul>
+                        <li>LLMs use search engine indexes to find and reference content</li>
+                        <li>Indexed content appears in AI-powered search results</li>
+                        <li>Your content can be cited by LLMs in their responses</li>
+                        <li>Faster indexing means quicker visibility in AI systems</li>
+                    </ul>
+                </section>
+
+                <section class="guide-section">
+                    <h2>IndexNow: The Modern Approach</h2>
+                    <p>IndexNow is a protocol supported by multiple search engines that allows instant URL submission:</p>
+                    
+                    <div class="method-container">
+                        <h3>Advantages</h3>
+                        <ul>
+                            <li>Supported by multiple search engines (Bing, Yandex, etc.)</li>
+                            <li>Simple implementation with a single API key</li>
+                            <li>Real-time URL submission</li>
+                            <li>Lower server load on search engines</li>
+                        </ul>
+
+                        <h3>Implementation Steps</h3>
+                        <ol>
+                            <li>Generate an API key from IndexNow</li>
+                            <li>Host the key file at your domain root</li>
+                            <li>Submit URLs when content changes</li>
+                            <li>Monitor indexing status</li>
+                        </ol>
+
+                        <pre><code>async function submitToIndexNow(urls) {
+    const response = await fetch('https://api.indexnow.org/v1.0/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            host: 'www.yourdomain.com',
+            key: 'your-api-key',
+            keyLocation: 'https://www.yourdomain.com/your-key.txt',
+            urlList: urls
+        })
+    });
+    return response.json();
+}</code></pre>
+                    </div>
+                </section>
+
+                <section class="guide-section">
+                    <h2>Bing URL Submission API: Direct Integration</h2>
+                    <p>Bing's URL Submission API provides direct control over URL submission to Bing's index:</p>
+
+                    <div class="method-container">
+                        <h3>Advantages</h3>
+                        <ul>
+                            <li>Direct integration with Bing's index</li>
+                            <li>Higher daily submission limits (up to 10,000 URLs)</li>
+                            <li>Detailed submission tracking</li>
+                            <li>Priority processing for important content</li>
+                        </ul>
+
+                        <h3>Implementation Steps</h3>
+                        <ol>
+                            <li>Get your API key from Bing Webmaster Tools</li>
+                            <li>Implement the API in your content management system</li>
+                            <li>Submit URLs in batches</li>
+                            <li>Monitor submission status</li>
+                        </ol>
+
+                        <pre><code>async function submitToBing(urls) {
+    const response = await fetch('https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            siteUrl: 'https://www.yourdomain.com',
+            urlList: urls
+        })
+    });
+    return response.json();
+}</code></pre>
+                    </div>
+                </section>
+
+                <section class="guide-section">
+                    <h2>Which Method Should You Choose?</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h3>Use IndexNow if:</h3>
+                            <ul>
+                                <li>You want to notify multiple search engines</li>
+                                <li>You have a smaller site with fewer updates</li>
+                                <li>You prefer a simpler implementation</li>
+                                <li>You want to reduce server load</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card">
+                            <h3>Use Bing URL Submission API if:</h3>
+                            <ul>
+                                <li>You need higher submission limits</li>
+                                <li>You want detailed submission tracking</li>
+                                <li>You have a large site with frequent updates</li>
+                                <li>You need priority processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section">
+                    <h2>Best Practices for LLM Indexing</h2>
+                    <ul>
+                        <li>Submit URLs immediately after content updates</li>
+                        <li>Focus on high-quality, structured content</li>
+                        <li>Include semantic markup in your pages</li>
+                        <li>Ensure mobile-friendly design</li>
+                        <li>Maintain consistent content structure</li>
+                        <li>Monitor indexing status regularly</li>
+                        <li>Implement both methods for maximum coverage</li>
+                    </ul>
+                </section>
+
+                <section class="guide-section">
+                    <h2>Implementation Tips</h2>
+                    <div class="tips-container">
+                        <div class="tip-card">
+                            <h3>Content Management Systems</h3>
+                            <ul>
+                                <li>WordPress: Use official IndexNow plugin</li>
+                                <li>Custom CMS: Implement both APIs</li>
+                                <li>Static Sites: Add to build process</li>
+                            </ul>
+                        </div>
+                        <div class="tip-card">
+                            <h3>Error Handling</h3>
+                            <ul>
+                                <li>Implement retry logic</li>
+                                <li>Log submission errors</li>
+                                <li>Monitor rate limits</li>
+                                <li>Verify API key validity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="guide-section">
+                    <h2>Additional Resources</h2>
+                    <ul>
+                        <li><a href="https://www.bing.com/indexnow/getstarted">Official IndexNow Documentation</a></li>
+                        <li><a href="https://www.bing.com/webmasters/url-submission-api">Bing URL Submission API Documentation</a></li>
+                        <li><a href="/guides/llm-optimization/content-optimization">Content Optimization Guide</a></li>
+                        <li><a href="/guides/llm-optimization/structured-data">Structured Data Implementation</a></li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmguides">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
