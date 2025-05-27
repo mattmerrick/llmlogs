@@ -15,30 +15,39 @@
     <style>
         /* Custom styles for LLM txt Generator */
         .tool-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
+            max-width: 800px;
+            margin: 2rem auto;
             background: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .tool-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .input-section, .output-section {
+        .section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
             background: #f8f9fa;
             border-radius: 8px;
-            padding: 1.5rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            color: #2d3748;
+            margin: 0 0 1.5rem 0;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.75rem;
         }
 
         .form-group {
             margin-bottom: 1.5rem;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
         }
 
         .form-group label {
@@ -105,11 +114,16 @@
             color: #4a5568;
         }
 
-        .output-container {
+        .output-section {
             background: #1a202c;
             border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .output-section h2 {
+            color: #fff;
+            border-bottom-color: #2d3748;
         }
 
         #generatedOutput {
@@ -290,9 +304,9 @@
                 </div>
 
                 <div class="tool-container">
-                    <div class="input-section">
-                        <h2>Enter Your Website Details</h2>
-                        <form id="llmTxtForm" class="tool-form">
+                    <form id="llmTxtForm" class="tool-form">
+                        <div class="section">
+                            <h2>Website Information</h2>
                             <div class="form-group">
                                 <label for="websiteUrl">Website URL:</label>
                                 <input type="url" id="websiteUrl" name="websiteUrl" placeholder="https://example.com" required>
@@ -302,9 +316,12 @@
                                 <label for="sitemapUrl">Sitemap URL (optional):</label>
                                 <input type="url" id="sitemapUrl" name="sitemapUrl" placeholder="https://example.com/sitemap.xml">
                             </div>
+                        </div>
 
+                        <div class="section">
+                            <h2>Content Types</h2>
                             <div class="form-group">
-                                <label>Content Types to Include:</label>
+                                <label>Select Content Types to Include:</label>
                                 <div class="checkbox-group">
                                     <label>
                                         <input type="checkbox" name="contentTypes" value="blog" checked> Blog Posts
@@ -320,9 +337,11 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="section">
+                            <h2>Priority Settings</h2>
                             <div class="form-group">
-                                <label>Priority Settings:</label>
                                 <div class="priority-settings">
                                     <div class="priority-item">
                                         <label for="highPriority">High Priority Paths:</label>
@@ -338,22 +357,29 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
+                        <div class="section">
+                            <h2>Restricted Areas</h2>
                             <div class="form-group">
-                                <label>Restricted Areas:</label>
-                                <textarea id="restrictedAreas" name="restrictedAreas" placeholder="/admin/, /private/, /temp/"></textarea>
+                                <label for="restrictedAreas">Paths to Restrict (one per line):</label>
+                                <textarea id="restrictedAreas" name="restrictedAreas" rows="4" placeholder="/admin/&#10;/private/&#10;/temp/"></textarea>
                             </div>
+                        </div>
 
+                        <div class="section">
                             <button type="submit" class="primary-button">Generate llms.txt</button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
 
                     <div class="output-section">
                         <h2>Generated llms.txt</h2>
                         <div class="output-container">
                             <pre id="generatedOutput"><code># Your generated llms.txt will appear here</code></pre>
-                            <button id="copyButton" class="secondary-button">Copy to Clipboard</button>
-                            <button id="downloadButton" class="secondary-button">Download File</button>
+                            <div class="button-group">
+                                <button id="copyButton" class="secondary-button">Copy to Clipboard</button>
+                                <button id="downloadButton" class="secondary-button">Download File</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -432,8 +458,10 @@
 
                 // Add restricted areas
                 if (restrictedAreas) {
-                    restrictedAreas.split(',').forEach(area => {
-                        llmsTxtContent += `Disallow: ${area.trim()}\n`;
+                    restrictedAreas.split('\n').forEach(area => {
+                        if (area.trim()) {
+                            llmsTxtContent += `Disallow: ${area.trim()}\n`;
+                        }
                     });
                     llmsTxtContent += '\n';
                 }
@@ -449,17 +477,23 @@
                 llmsTxtContent += `# Priority Settings\n`;
                 if (highPriority) {
                     highPriority.split(',').forEach(path => {
-                        llmsTxtContent += `Priority: high ${path.trim()}\n`;
+                        if (path.trim()) {
+                            llmsTxtContent += `Priority: high ${path.trim()}\n`;
+                        }
                     });
                 }
                 if (mediumPriority) {
                     mediumPriority.split(',').forEach(path => {
-                        llmsTxtContent += `Priority: medium ${path.trim()}\n`;
+                        if (path.trim()) {
+                            llmsTxtContent += `Priority: medium ${path.trim()}\n`;
+                        }
                     });
                 }
                 if (lowPriority) {
                     lowPriority.split(',').forEach(path => {
-                        llmsTxtContent += `Priority: low ${path.trim()}\n`;
+                        if (path.trim()) {
+                            llmsTxtContent += `Priority: low ${path.trim()}\n`;
+                        }
                     });
                 }
 
