@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate an optimized llms.txt file for your website. Our tool analyzes your sitemap and content to create the perfect configuration for LLM processing.">
+    <meta name="keywords" content="llms.txt generator, LLM optimization, website optimization, AI optimization, content optimization">
+    <title>LLM txt Generator - Free Tool | LLM Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <style>
+        /* Custom styles for LLM txt Generator */
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-section, .output-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .form-group input[type="url"],
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input[type="url"]:focus,
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .priority-settings {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .priority-item {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .priority-item label {
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .output-container {
+            background: #1a202c;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        #generatedOutput {
+            color: #e2e8f0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            margin: 0;
+            padding: 1rem;
+            background: #2d3748;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .primary-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .primary-button:hover {
+            background: #3182ce;
+        }
+
+        .secondary-button {
+            background: #e2e8f0;
+            color: #2d3748;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .secondary-button:hover {
+            background: #cbd5e0;
+        }
+
+        .info-section {
+            margin: 3rem 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .learn-more {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .learn-more-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #4299e1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .learn-more-link:hover {
+            color: #3182ce;
+            text-decoration: underline;
+        }
+
+        /* Loading state */
+        .loading {
+            position: relative;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            margin: -12px 0 0 -12px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #4299e1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success message */
+        .success-message {
+            background: #c6f6d5;
+            color: #2f855a;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large"
+                        frameborder="0"
+                        scrolling="0"
+                        width="150"
+                        height="30"
+                        title="GitHub">
+                </iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/free-tools">Free Tools</a> /
+            <span>LLM txt Generator</span>
+        </nav>
+
+        <main class="content">
+            <article class="tool-content">
+                <h1>LLM txt Generator</h1>
+                
+                <div class="intro-section">
+                    <p class="lead">Generate an optimized llms.txt file for your website. Our tool analyzes your sitemap and content structure to create the perfect configuration for LLM processing and SEO optimization.</p>
+                </div>
+
+                <div class="tool-container">
+                    <div class="input-section">
+                        <h2>Enter Your Website Details</h2>
+                        <form id="llmTxtForm" class="tool-form">
+                            <div class="form-group">
+                                <label for="websiteUrl">Website URL:</label>
+                                <input type="url" id="websiteUrl" name="websiteUrl" placeholder="https://example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="sitemapUrl">Sitemap URL (optional):</label>
+                                <input type="url" id="sitemapUrl" name="sitemapUrl" placeholder="https://example.com/sitemap.xml">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Content Types to Include:</label>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="contentTypes" value="blog" checked> Blog Posts
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="contentTypes" value="products" checked> Products
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="contentTypes" value="documentation" checked> Documentation
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="contentTypes" value="guides" checked> Guides
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Priority Settings:</label>
+                                <div class="priority-settings">
+                                    <div class="priority-item">
+                                        <label for="highPriority">High Priority Paths:</label>
+                                        <input type="text" id="highPriority" name="highPriority" placeholder="/blog/, /products/">
+                                    </div>
+                                    <div class="priority-item">
+                                        <label for="mediumPriority">Medium Priority Paths:</label>
+                                        <input type="text" id="mediumPriority" name="mediumPriority" placeholder="/docs/, /guides/">
+                                    </div>
+                                    <div class="priority-item">
+                                        <label for="lowPriority">Low Priority Paths:</label>
+                                        <input type="text" id="lowPriority" name="lowPriority" placeholder="/archive/, /temp/">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Restricted Areas:</label>
+                                <textarea id="restrictedAreas" name="restrictedAreas" placeholder="/admin/, /private/, /temp/"></textarea>
+                            </div>
+
+                            <button type="submit" class="primary-button">Generate llms.txt</button>
+                        </form>
+                    </div>
+
+                    <div class="output-section">
+                        <h2>Generated llms.txt</h2>
+                        <div class="output-container">
+                            <pre id="generatedOutput"><code># Your generated llms.txt will appear here</code></pre>
+                            <button id="copyButton" class="secondary-button">Copy to Clipboard</button>
+                            <button id="downloadButton" class="secondary-button">Download File</button>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="info-section">
+                    <h2>How It Works</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>1. Analysis</h3>
+                            <p>Our tool analyzes your website structure and sitemap to identify important content and patterns.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>2. Optimization</h3>
+                            <p>We optimize the configuration based on your content types and priorities.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>3. Generation</h3>
+                            <p>The tool generates a customized llms.txt file tailored to your website.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="learn-more">
+                    <h2>Learn More About llms.txt</h2>
+                    <p>Want to understand more about llms.txt and how it can benefit your website? Check out our comprehensive guide:</p>
+                    <a href="/blog/how-to-add-a-llms.txt-file-to-any-website-in-under-10-minutes" class="learn-more-link">How to Add a llms.txt File to Any Website in Under 10 Minutes</a>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmguides">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('llmTxtForm');
+            const output = document.getElementById('generatedOutput');
+            const copyButton = document.getElementById('copyButton');
+            const downloadButton = document.getElementById('downloadButton');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const websiteUrl = document.getElementById('websiteUrl').value;
+                const sitemapUrl = document.getElementById('sitemapUrl').value;
+                const contentTypes = Array.from(document.querySelectorAll('input[name="contentTypes"]:checked')).map(cb => cb.value);
+                const highPriority = document.getElementById('highPriority').value;
+                const mediumPriority = document.getElementById('mediumPriority').value;
+                const lowPriority = document.getElementById('lowPriority').value;
+                const restrictedAreas = document.getElementById('restrictedAreas').value;
+
+                // Generate llms.txt content
+                let llmsTxtContent = `# LLM Configuration for ${websiteUrl}\n\n`;
+                llmsTxtContent += `# Generated by LLM Logs llms.txt Generator\n`;
+                llmsTxtContent += `# Date: ${new Date().toISOString().split('T')[0]}\n\n`;
+
+                // Add User-agent
+                llmsTxtContent += `User-agent: *\n`;
+                llmsTxtContent += `Allow: /\n\n`;
+
+                // Add restricted areas
+                if (restrictedAreas) {
+                    restrictedAreas.split(',').forEach(area => {
+                        llmsTxtContent += `Disallow: ${area.trim()}\n`;
+                    });
+                    llmsTxtContent += '\n';
+                }
+
+                // Add content types
+                llmsTxtContent += `# Content Types\n`;
+                contentTypes.forEach(type => {
+                    llmsTxtContent += `Content-Type: ${type}\n`;
+                });
+                llmsTxtContent += '\n';
+
+                // Add priorities
+                llmsTxtContent += `# Priority Settings\n`;
+                if (highPriority) {
+                    highPriority.split(',').forEach(path => {
+                        llmsTxtContent += `Priority: high ${path.trim()}\n`;
+                    });
+                }
+                if (mediumPriority) {
+                    mediumPriority.split(',').forEach(path => {
+                        llmsTxtContent += `Priority: medium ${path.trim()}\n`;
+                    });
+                }
+                if (lowPriority) {
+                    lowPriority.split(',').forEach(path => {
+                        llmsTxtContent += `Priority: low ${path.trim()}\n`;
+                    });
+                }
+
+                // Update output
+                output.textContent = llmsTxtContent;
+            });
+
+            // Copy to clipboard functionality
+            copyButton.addEventListener('click', function() {
+                navigator.clipboard.writeText(output.textContent)
+                    .then(() => {
+                        copyButton.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyButton.textContent = 'Copy to Clipboard';
+                        }, 2000);
+                    });
+            });
+
+            // Download functionality
+            downloadButton.addEventListener('click', function() {
+                const blob = new Blob([output.textContent], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'llms.txt';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            });
+        });
+    </script>
+</body>
+</html> 
