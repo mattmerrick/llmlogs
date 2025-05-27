@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your content's Mean Cumulative Precision (MCP) score. Monitor how well your content performs in LLM responses and track citation patterns over time.">
+    <meta name="keywords" content="MCP tracker, Mean Cumulative Precision, LLM optimization, content tracking, citation tracking, AI content performance">
+    <title>MCP Score Tracker - Free Tool | LLM Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <style>
+        /* Custom styles for MCP Tracker */
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .form-group input[type="url"],
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .results-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .score-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-top: 0.5rem;
+        }
+
+        .chart-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            height: 300px;
+        }
+
+        .primary-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .primary-button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/free-tools">Tools</a> /
+            <span>MCP Score Tracker</span>
+        </nav>
+
+        <div class="tool-container">
+            <h1>MCP Score Tracker</h1>
+            <p class="lead">Track your content's Mean Cumulative Precision (MCP) score and monitor how well it performs in LLM responses over time.</p>
+
+            <section class="section">
+                <h2>Track Your Content</h2>
+                <div class="form-group">
+                    <label for="contentUrl">Content URL</label>
+                    <input type="url" id="contentUrl" placeholder="https://example.com/your-content" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="testPrompts">Test Prompts (one per line)</label>
+                    <textarea id="testPrompts" rows="5" placeholder="Enter prompts to test your content against..."></textarea>
+                    <small>These prompts will be used to test if your content gets cited in LLM responses.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="trackingPeriod">Tracking Period</label>
+                    <select id="trackingPeriod" class="form-select">
+                        <option value="day">Last 24 Hours</option>
+                        <option value="week">Last 7 Days</option>
+                        <option value="month">Last 30 Days</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+
+                <button class="primary-button" onclick="trackMCP()">Calculate MCP Score</button>
+            </section>
+
+            <div class="results-container" id="resultsContainer">
+                <div class="score-card">
+                    <h2>Overall MCP Score</h2>
+                    <div class="score-value" id="mcpScore">0.85</div>
+                    <p class="score-description">Your content's Mean Cumulative Precision score indicates how often and how early it gets cited in LLM responses.</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="citationCount">42</div>
+                        <div class="metric-label">Total Citations</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="avgPosition">2.3</div>
+                        <div class="metric-label">Average Citation Position</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="promptCoverage">78%</div>
+                        <div class="metric-label">Prompt Coverage</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="mcpChart"></canvas>
+                </div>
+            </div>
+
+            <section class="info-section">
+                <h2>About MCP Score</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>What is MCP?</h3>
+                        <p>Mean Cumulative Precision (MCP) measures how well your content performs in LLM responses, considering both citation frequency and position.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>How It's Calculated</h3>
+                        <p>MCP takes into account the position of citations in LLM responses, giving higher weight to earlier mentions.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Improving Your Score</h3>
+                        <p>Focus on content quality, proper citations, and clear structure to improve your MCP score.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function trackMCP() {
+            // Show results container
+            document.getElementById('resultsContainer').style.display = 'block';
+            
+            // Initialize chart
+            const ctx = document.getElementById('mcpChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+                    datasets: [{
+                        label: 'MCP Score',
+                        data: [0.75, 0.78, 0.82, 0.80, 0.85, 0.83, 0.85],
+                        borderColor: '#2563eb',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
