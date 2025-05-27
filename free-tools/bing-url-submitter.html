@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free tool to help you submit your sitemap URLs to Bing Webmaster Tools. Essential for LLM and ChatGPT indexing. Extract and format URLs from your sitemap.xml for easy submission.">
+    <meta name="keywords" content="bing url submitter, bing webmaster tools, sitemap submission, URL indexing, SEO tool, LLM indexing, ChatGPT indexing, AI search optimization">
+    <title>Bing URL Submitter - Free Tool | LLM Logs</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js" defer></script>
+    <style>
+        .tool-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: #2d3748;
+            margin: 0 0 1.5rem 0;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .form-group input[type="url"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input[type="url"]:focus,
+        .form-group textarea:focus {
+            border-color: #4299e1;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+        }
+
+        .url-list {
+            background: #1a202c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .url-list pre {
+            color: #e2e8f0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            margin: 0;
+            padding: 1rem;
+            background: #2d3748;
+            border-radius: 6px;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .primary-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .primary-button:hover {
+            background: #3182ce;
+        }
+
+        .secondary-button {
+            background: #e2e8f0;
+            color: #2d3748;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .secondary-button:hover {
+            background: #cbd5e0;
+        }
+
+        .info-section {
+            margin: 3rem 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #4299e1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            color: #e53e3e;
+            background: #fff5f5;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            color: #2f855a;
+            background: #f0fff4;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large"
+                        frameborder="0"
+                        scrolling="0"
+                        width="150"
+                        height="30"
+                        title="GitHub">
+                </iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> /
+            <a href="/free-tools">Free Tools</a> /
+            <span>Bing URL Submitter</span>
+        </nav>
+
+        <main class="content">
+            <article class="tool-content">
+                <h1>Bing URL Submitter</h1>
+                
+                <div class="intro-section">
+                    <p class="lead">Extract and format URLs from your sitemap.xml for easy submission to Bing Webmaster Tools. Submit up to 100 URLs per day to improve your site's indexing and ensure your content is discoverable by LLMs and ChatGPT.</p>
+                </div>
+
+                <div class="tool-container">
+                    <form id="sitemapForm" class="tool-form">
+                        <div class="section">
+                            <h2>Sitemap URL</h2>
+                            <div class="form-group">
+                                <label for="sitemapUrl">Enter your sitemap.xml URL:</label>
+                                <input type="url" id="sitemapUrl" name="sitemapUrl" placeholder="https://example.com/sitemap.xml" required>
+                            </div>
+                            <button type="submit" class="primary-button">Extract URLs</button>
+                        </div>
+                    </form>
+
+                    <div class="loading" id="loadingIndicator">Processing sitemap...</div>
+                    <div class="error-message" id="errorMessage"></div>
+                    <div class="success-message" id="successMessage"></div>
+
+                    <div class="section" id="resultsSection" style="display: none;">
+                        <h2>Extracted URLs</h2>
+                        <div class="url-list">
+                            <pre id="urlList"></pre>
+                        </div>
+                        <div class="button-group">
+                            <button id="copyButton" class="secondary-button">Copy URLs</button>
+                            <button id="downloadButton" class="secondary-button">Download URLs</button>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="info-section">
+                    <h2>How It Works</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>1. Submit Sitemap</h3>
+                            <p>Enter your sitemap.xml URL and our tool will extract all the URLs automatically.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>2. Format URLs</h3>
+                            <p>The tool formats the URLs in a way that's ready for Bing Webmaster Tools submission.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>3. Submit to Bing</h3>
+                            <p>Copy the formatted URLs and submit them to Bing Webmaster Tools (max 100 per day).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="info-section">
+                    <h2>Why Bing Indexing Matters for LLMs</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>LLM Training Data</h3>
+                            <p>Bing's search index is a crucial source of training data for many LLMs, including ChatGPT. Having your content indexed ensures it can be used to train and inform these AI models.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Real-time Knowledge</h3>
+                            <p>LLMs often use Bing's search results to provide up-to-date information. Indexed content is more likely to be referenced in AI responses.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>AI Visibility</h3>
+                            <p>When users ask AI assistants about topics you cover, indexed content increases the chances of your site being referenced in responses.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="info-section">
+                    <h2>Benefits of Bing Indexing</h2>
+                    <ul>
+                        <li>Improved visibility in AI-powered search results</li>
+                        <li>Better chances of being referenced by ChatGPT and other LLMs</li>
+                        <li>Enhanced content discovery through AI assistants</li>
+                        <li>Increased potential for AI-generated citations</li>
+                        <li>Better integration with Microsoft's AI ecosystem</li>
+                    </ul>
+                </section>
+
+                <section class="info-section">
+                    <h2>Tips for Better Indexing</h2>
+                    <ul>
+                        <li>Submit your most important URLs first</li>
+                        <li>Ensure your sitemap.xml is up to date</li>
+                        <li>Submit URLs in batches of 100 per day</li>
+                        <li>Focus on high-quality, unique content pages</li>
+                        <li>Make sure your pages are mobile-friendly</li>
+                        <li>Include structured data for better AI understanding</li>
+                        <li>Optimize content for both human and AI readers</li>
+                        <li>Regularly update and maintain your content</li>
+                    </ul>
+                </section>
+
+                <section class="info-section">
+                    <h2>Best Practices for LLM Optimization</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>Content Structure</h3>
+                            <p>Use clear headings, bullet points, and structured content to help LLMs better understand and process your information.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Semantic Markup</h3>
+                            <p>Implement schema.org markup to provide additional context about your content to search engines and LLMs.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Regular Updates</h3>
+                            <p>Keep your content fresh and up-to-date to maintain relevance in AI training data and search results.</p>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <!-- Simple Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmguides">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('sitemapForm');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const resultsSection = document.getElementById('resultsSection');
+            const urlList = document.getElementById('urlList');
+            const copyButton = document.getElementById('copyButton');
+            const downloadButton = document.getElementById('downloadButton');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const sitemapUrl = document.getElementById('sitemapUrl').value;
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+                resultsSection.style.display = 'none';
+
+                try {
+                    // Fetch the sitemap
+                    const response = await fetch(sitemapUrl);
+                    const xmlText = await response.text();
+                    
+                    // Parse the XML
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                    
+                    // Extract URLs
+                    const urls = Array.from(xmlDoc.getElementsByTagName('loc'))
+                        .map(loc => loc.textContent)
+                        .filter(url => url.trim());
+
+                    if (urls.length === 0) {
+                        throw new Error('No URLs found in the sitemap');
+                    }
+
+                    // Display URLs
+                    urlList.textContent = urls.join('\n');
+                    resultsSection.style.display = 'block';
+                    successMessage.textContent = `Successfully extracted ${urls.length} URLs from your sitemap.`;
+                    successMessage.style.display = 'block';
+
+                } catch (error) {
+                    errorMessage.textContent = `Error: ${error.message}`;
+                    errorMessage.style.display = 'block';
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                }
+            });
+
+            // Copy to clipboard functionality
+            copyButton.addEventListener('click', function() {
+                navigator.clipboard.writeText(urlList.textContent)
+                    .then(() => {
+                        copyButton.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyButton.textContent = 'Copy URLs';
+                        }, 2000);
+                    });
+            });
+
+            // Download functionality
+            downloadButton.addEventListener('click', function() {
+                const blob = new Blob([urlList.textContent], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'bing-urls.txt';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            });
+        });
+    </script>
+</body>
+</html> 
