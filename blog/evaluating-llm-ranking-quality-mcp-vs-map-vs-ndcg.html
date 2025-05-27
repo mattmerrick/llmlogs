@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluating LLM Ranking Quality: MCP vs MAP vs NDCG - LLM SEO Guide</title>
+    <meta name="description" content="Compare Mean Cumulative Precision (MCP), Mean Average Precision (MAP), and Normalized Discounted Cumulative Gain (NDCG) for evaluating LLM ranking quality. Learn which metric best suits your needs.">
+    <meta name="keywords" content="MCP, MAP, NDCG, LLM ranking metrics, ranking quality evaluation, AI SEO metrics, Mean Cumulative Precision, Mean Average Precision, Normalized Discounted Cumulative Gain">
+    <link rel="canonical" href="https://llmlogs.com/blog/evaluating-llm-ranking-quality-mcp-vs-map-vs-ndcg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <style>
+        :root {
+            --text-muted: #6b7280;
+            --accent-bg: #f3f4f6;
+            --header-bg: #ffffff;
+            --container-width: 1200px;
+        }
+
+        /* Blog post specific styles */
+        .blog-page {
+            background: var(--bg-color);
+            min-height: 100vh;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            margin-bottom: 2rem;
+        }
+
+        .post-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .post-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .content-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .post-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .post-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .post-content a:hover {
+            border-bottom-color: var(--primary-color);
+        }
+
+        .related-posts {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--accent-bg);
+            border-radius: 12px;
+        }
+
+        .related-posts h3 {
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .related-posts ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .related-posts li {
+            margin-bottom: 1rem;
+        }
+
+        .related-posts a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .related-posts a:hover {
+            color: #1d4ed8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .blog-post {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .post-header h1 {
+                font-size: 2rem;
+            }
+
+            .post-meta {
+                gap: 1rem;
+            }
+
+            .related-posts {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post {
+                padding: 1rem;
+            }
+
+            .post-header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="blog-page">
+    <!-- Include Standard Header -->
+    <include src="../assets/components/standard-header.html"></include>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <div class="content">
+            <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+                <ol class="breadcrumb-list">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Blog</a></li>
+                    <li aria-current="page">Evaluating LLM Ranking Quality</li>
+                </ol>
+            </nav>
+
+            <article class="blog-post">
+                <header class="post-header">
+                    <h1>Evaluating LLM Ranking Quality: MCP vs MAP vs NDCG</h1>
+                    <div class="post-meta">
+                        <time datetime="2024-03-27">March 27, 2024</time>
+                        <span class="category">AI SEO Metrics</span>
+                    </div>
+                </header>
+
+                <div class="post-content">
+                    <h2>Introduction</h2>
+                    <p>When it comes to evaluating how well Large Language Models (LLMs) rank and retrieve content, several metrics come into play. In this comprehensive guide, we'll compare three crucial metrics: Mean Cumulative Precision (MCP), Mean Average Precision (MAP), and Normalized Discounted Cumulative Gain (NDCG). Understanding these metrics is essential for content creators and SEO professionals working with LLMs.</p>
+
+                    <h2>Understanding the Metrics</h2>
+                    <h3>Mean Cumulative Precision (MCP)</h3>
+                    <p>MCP is specifically designed for evaluating LLM citation and content retrieval performance. It measures how accurately an LLM retrieves and cites relevant content over time, with a focus on early citations.</p>
+                    
+                    <h3>Mean Average Precision (MAP)</h3>
+                    <p>MAP is a traditional information retrieval metric that evaluates ranking quality by calculating the mean of average precision scores across multiple queries. It's particularly useful for binary relevance assessments.</p>
+
+                    <h3>Normalized Discounted Cumulative Gain (NDCG)</h3>
+                    <p>NDCG takes into account both the relevance and position of results, with a logarithmic reduction in importance as rank decreases. It's particularly useful for graded relevance assessments.</p>
+
+                    <h2>Key Differences</h2>
+                    <h3>Time Sensitivity</h3>
+                    <ul>
+                        <li>MCP: Focuses on early citations and temporal aspects</li>
+                        <li>MAP: Time-agnostic, focuses on overall precision</li>
+                        <li>NDCG: Time-agnostic, emphasizes position-based relevance</li>
+                    </ul>
+
+                    <h3>Use Cases</h3>
+                    <ul>
+                        <li>MCP: Best for LLM citation tracking and content visibility</li>
+                        <li>MAP: Ideal for binary relevance scenarios</li>
+                        <li>NDCG: Perfect for graded relevance and position-sensitive evaluation</li>
+                    </ul>
+
+                    <h2>When to Use Each Metric</h2>
+                    <h3>Choose MCP When:</h3>
+                    <ul>
+                        <li>Tracking LLM citations of your content</li>
+                        <li>Evaluating early content visibility</li>
+                        <li>Measuring temporal citation patterns</li>
+                    </ul>
+
+                    <h3>Choose MAP When:</h3>
+                    <ul>
+                        <li>Evaluating binary relevance scenarios</li>
+                        <li>Comparing different retrieval systems</li>
+                        <li>Needing a simple, interpretable metric</li>
+                    </ul>
+
+                    <h3>Choose NDCG When:</h3>
+                    <ul>
+                        <li>Dealing with graded relevance scores</li>
+                        <li>Position-sensitive evaluation is crucial</li>
+                        <li>Comparing systems with different result counts</li>
+                    </ul>
+
+                    <h2>Practical Implementation</h2>
+                    <p>When implementing these metrics in your LLM SEO strategy:</p>
+                    <ol>
+                        <li>Use MCP for tracking your content's citation performance in LLMs</li>
+                        <li>Implement MAP when you need to compare different content optimization strategies</li>
+                        <li>Apply NDCG when evaluating complex ranking scenarios with multiple relevance levels</li>
+                    </ol>
+
+                    <h2>Conclusion</h2>
+                    <p>While each metric has its strengths, MCP stands out for LLM-specific evaluations due to its focus on early citations and temporal patterns. However, combining multiple metrics can provide a more comprehensive understanding of your content's performance in LLM systems.</p>
+
+                    <div class="related-posts">
+                        <h3>Related Articles</h3>
+                        <ul>
+                            <li><a href="../what-is-mean-cumulative-precision-mcp-ai-seo.html">What Is Mean Cumulative Precision (MCP) and Why It Matters for AI SEO</a></li>
+                            <li><a href="../how-to-track-if-chatgpt-cites-your-blog-early-using-mcp.html">How to Track If ChatGPT Cites Your Blog Early — Using MCP</a></li>
+                            <li><a href="../../guides/llm-optimization/testing.html">LLM Optimization Testing Guide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <include src="../assets/components/standard-footer.html"></include>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+</body>
+</html> 

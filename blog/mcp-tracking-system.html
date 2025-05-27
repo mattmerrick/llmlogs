@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to set up and implement an MCP (Mean Cumulative Precision) tracking system for your content. Step-by-step guide with examples and boilerplate code.">
+    <meta name="keywords" content="MCP tracking, Mean Cumulative Precision, content tracking, LLM optimization, citation tracking">
+    <title>Setting Up Your MCP Tracking System - LLM SEO Guide</title>
+    
+    <!-- Required Assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        :root {
+            --text-muted: #6b7280;
+            --accent-bg: #f3f4f6;
+            --header-bg: #ffffff;
+            --container-width: 1200px;
+        }
+
+        /* Blog post specific styles */
+        .blog-page {
+            background: var(--bg-color);
+            min-height: 100vh;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            margin-bottom: 2rem;
+        }
+
+        .post-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .post-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .content-section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .post-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin: 1.25rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .post-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .post-content a:hover {
+            border-bottom-color: var(--primary-color);
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--code-color);
+        }
+
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--accent-bg);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .button.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .button.primary:hover {
+            background: #1d4ed8;
+        }
+
+        .button.secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .button.secondary:hover {
+            background: #f8fafc;
+        }
+
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .blog-post {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .post-header h1 {
+                font-size: 2rem;
+            }
+
+            .post-meta {
+                gap: 1rem;
+            }
+
+            pre {
+                padding: 1rem;
+            }
+
+            .cta-section {
+                padding: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .post-navigation {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post {
+                padding: 1rem;
+            }
+
+            .post-header h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Standard Header -->
+    <include src="../assets/components/standard-header.html"></include>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <div class="content">
+            <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+                <ol class="breadcrumb-list">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Blog</a></li>
+                    <li aria-current="page">Setting Up Your MCP Tracking System</li>
+                </ol>
+            </nav>
+
+            <article class="blog-post">
+                <header class="post-header">
+                    <h1>Setting Up Your MCP Tracking System: A Complete Guide</h1>
+                    
+                    <div class="post-meta">
+                        <time datetime="2024-03-21">March 21, 2024</time>
+                        <span class="reading-time">12 min read</span>
+                        <span class="post-category">Implementation Guide</span>
+                    </div>
+                </header>
+
+                <div class="post-content">
+                    <div class="content-section">
+                        <h2>Understanding MCP Tracking</h2>
+                        <p>Mean Cumulative Precision (MCP) tracking is essential for understanding how well your content performs in LLM responses. It helps measure both the frequency and position of your content citations, providing valuable insights into your content's effectiveness.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Implementation Options</h2>
+                        <p>There are two main ways to implement MCP tracking:</p>
+                        <ol>
+                            <li>Using our free <a href="../../free-tools/mcp-tracker.html">MCP Score Tracker</a> tool for basic tracking</li>
+                            <li>Setting up your own MCP tracking server using the MCP boilerplate</li>
+                        </ol>
+
+                        <h3>Option 1: Using the MCP Score Tracker</h3>
+                        <p>Our free MCP Score Tracker tool provides:</p>
+                        <ul>
+                            <li>Real-time MCP score calculation</li>
+                            <li>Citation position tracking</li>
+                            <li>Prompt coverage analysis</li>
+                            <li>Historical trend visualization</li>
+                        </ul>
+
+                        <p>To use the tracker:</p>
+                        <ol>
+                            <li>Enter your content URL</li>
+                            <li>Add test prompts that are relevant to your content</li>
+                            <li>Select your desired tracking period</li>
+                            <li>Click "Calculate MCP Score" to get your results</li>
+                        </ol>
+
+                        <h3>Option 2: Custom MCP Server Implementation</h3>
+                        <p>For more advanced tracking needs, you can set up your own MCP tracking server using the <a href="https://github.com/iannuttall/mcp-boilerplate" target="_blank">MCP Boilerplate</a>. This provides:</p>
+                        <ul>
+                            <li>Complete control over tracking implementation</li>
+                            <li>User authentication</li>
+                            <li>Optional paid tools integration</li>
+                            <li>Custom metrics and analytics</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Setting Up Your Own MCP Server</h2>
+                        
+                        <h3>Prerequisites</h3>
+                        <ul>
+                            <li>Node.js installed on your system</li>
+                            <li>A Cloudflare account</li>
+                            <li>Basic understanding of TypeScript</li>
+                            <li>(Optional) Stripe account for paid features</li>
+                        </ul>
+
+                        <h3>Step-by-Step Implementation</h3>
+                        <pre><code>
+# 1. Clone the boilerplate
+git clone https://github.com/iannuttall/mcp-boilerplate
+cd mcp-boilerplate
+
+# 2. Install dependencies
+npm install
+
+# 3. Set up environment variables
+cp .dev.vars.example .dev.vars
+# Edit .dev.vars with your configuration
+                        </code></pre>
+                    </div>
+
+                    <div class="content-section code-examples">
+                        <h2>Code Implementation</h2>
+                        <p>Here's an example of implementing a simple MCP tracking tool:</p>
+                        <pre><code>
+// src/tools/mcpTracker.ts
+import { z } from "zod";
+import { PaidMcpAgent } from "@stripe/agent-toolkit/cloudflare";
+
+export function mcpTracker(
+  agent: PaidMcpAgent<Env, any, any>,
+  env?: { BASE_URL: string }
+) {
+  agent.tool(
+    "track_mcp_score",
+    {
+      url: z.string().url(),
+      prompts: z.array(z.string()),
+      timeframe: z.number()
+    },
+    async ({ url, prompts, timeframe }) => {
+      // Implement your MCP tracking logic here
+      const mcpScore = await calculateMcpScore(url, prompts, timeframe);
+      
+      return {
+        content: [
+          { 
+            type: "text", 
+            text: `MCP Score: ${mcpScore.value}\n` +
+                  `Citations: ${mcpScore.citations}\n` +
+                  `Average Position: ${mcpScore.avgPosition}`
+          }
+        ]
+      };
+    }
+  );
+}
+                        </code></pre>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Best Practices for MCP Tracking</h2>
+                        <ul>
+                            <li>Track multiple URLs to compare performance</li>
+                            <li>Use diverse test prompts for better coverage</li>
+                            <li>Monitor trends over time, not just single scores</li>
+                            <li>Set up alerts for significant score changes</li>
+                            <li>Regularly update your test prompts to match current search patterns</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Interpreting MCP Results</h2>
+                        <p>Your MCP score typically ranges from 0 to 1, where:</p>
+                        <ul>
+                            <li>0.8 - 1.0: Excellent citation performance</li>
+                            <li>0.6 - 0.8: Good performance</li>
+                            <li>0.4 - 0.6: Average performance</li>
+                            <li>Below 0.4: Needs improvement</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Next Steps</h2>
+                        <p>After setting up your MCP tracking system:</p>
+                        <ol>
+                            <li>Regularly monitor your scores</li>
+                            <li>Analyze patterns in high-performing content</li>
+                            <li>Optimize content based on tracking insights</li>
+                            <li>Consider implementing A/B testing</li>
+                        </ol>
+                    </div>
+
+                    <aside class="cta-section">
+                        <div class="cta-content">
+                            <h3>Ready to Start Tracking?</h3>
+                            <p>Try our <a href="../../free-tools/mcp-tracker.html">free MCP Score Tracker</a> or set up your own tracking server using the <a href="https://github.com/iannuttall/mcp-boilerplate" target="_blank" rel="noopener">MCP Boilerplate</a>.</p>
+                            <div class="cta-buttons">
+                                <a href="../../free-tools/mcp-tracker.html" class="button primary">Try MCP Tracker</a>
+                                <a href="https://github.com/iannuttall/mcp-boilerplate" class="button secondary" target="_blank" rel="noopener">View Boilerplate</a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </article>
+
+            <nav class="post-navigation">
+                <div class="prev-post">
+                    <span class="nav-label">Previous</span>
+                    <a href="../llm-optimization-basics.html">LLM Optimization Basics</a>
+                </div>
+                <div class="next-post">
+                    <span class="nav-label">Next</span>
+                    <a href="../advanced-mcp-strategies.html">Advanced MCP Strategies</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <include src="../assets/components/standard-footer.html"></include>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/code-highlighting.js"></script>
+    <script>
+        // Initialize code highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            highlightCode();
+        });
+    </script>
+</body>
+</html>

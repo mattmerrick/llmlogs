@@ -19,6 +19,8 @@ Understanding how Large Language Models work is crucial for effective SEO. This 
 
 - [Understanding LLM Optimization](https://llmlogs.com/guides/llm-optimization/core-concepts)
   - Learn the basics of how LLMs work and how to optimize your content for better visibility
+- [Mean Cumulative Precision (MCP)](https://llmlogs.com/guides/llm-optimization/mean-cumulative-precision)
+  - Master MCP metrics to evaluate and improve your content's performance with AI models
 - [Structured Data Implementation](https://llmlogs.com/guides/llm-optimization/structured-data)
   - Master the implementation of structured data to help LLMs better understand your content
 - [Citation Strategy](https://llmlogs.com/guides/llm-optimization/citation-strategy)
@@ -33,7 +35,7 @@ Learn how to structure and format your content for maximum impact in LLM respons
 - [Real-time Tools & APIs](https://llmlogs.com/guides/llm-optimization/real-time-tools)
   - Discover tools and APIs that help you optimize content in real-time
 - [Testing & Validation](https://llmlogs.com/guides/llm-optimization/testing)
-  - Learn how to test and validate your LLM optimization efforts
+  - Learn how to test and validate your LLM optimization efforts using MCP and other metrics
 
 ## 🛠️ Free Tools & Resources
 
@@ -45,6 +47,14 @@ Access essential tools and resources to help you implement and track your LLM op
   - Check your structured data implementation
 - [Chrome Extension](https://llmlogs.com/chrome-llm-seo-checker)
   - Get real-time LLM optimization suggestions while browsing
+
+## 📝 Latest Blog Posts
+
+Stay up to date with the latest developments in LLM SEO:
+
+- [Evaluating LLM Ranking Quality: MCP vs MAP vs NDCG](https://llmlogs.com/blog/evaluating-llm-ranking-quality-mcp-vs-map-vs-ndcg)
+- [How to Track If ChatGPT Cites Your Blog Early — Using MCP](https://llmlogs.com/blog/how-to-track-if-chatgpt-cites-your-blog-early-using-mcp)
+- [What Is Mean Cumulative Precision (MCP) and Why It Matters for AI SEO](https://llmlogs.com/blog/what-is-mean-cumulative-precision-mcp-ai-seo)
 
 ## 📈 Case Studies & Best Practices
 
