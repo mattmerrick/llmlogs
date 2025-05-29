@@ -240,6 +240,134 @@
                 text-align: center;
             }
         }
+        
+        /* Scanner CTA Section */
+        .scanner-cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scanner-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/assets/images/grid-pattern.svg') center/cover;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255,255,255,0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        @media (max-width: 768px) {
+            .scanner-cta-section {
+                padding: 3rem 1rem;
+            }
+            
+            .scanner-cta-section h2 {
+                font-size: 1.75rem;
+            }
+            
+            .scanner-cta-section p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Guide List Styles */
+        .guide-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (min-width: 1200px) {
+            .guide-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .guide-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+        }
+        
+        .guide-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .guide-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .guide-item p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .guide-item .learn-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .guide-item .learn-more:hover {
+            transform: translateX(4px);
+        }
+        
+        @media (max-width: 768px) {
+            .guide-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .guide-item {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -283,7 +411,67 @@
     </section>
 
     <div class="container">
-        <!-- Featured Section -->
+        <!-- Learning Resources Section -->
+        <section class="section" id="guides">
+            <h2>📚 Learning Resources</h2>
+            <p>Comprehensive guides and tutorials to help you master LLM development and optimization.</p>
+            
+            <div class="guide-list">
+                <div class="guide-item">
+                    <h3>Core Concepts</h3>
+                    <p>Learn the fundamental principles of LLM optimization and AI model processing.</p>
+                    <a href="/guides/llm-optimization/core-concepts.html" class="learn-more">Start Learning →</a>
+                </div>
+                
+                <div class="guide-item">
+                    <h3>Implementation Guide</h3>
+                    <p>Step-by-step tutorials for implementing LLM optimization strategies.</p>
+                    <a href="/guides/llm-optimization/implementation.html" class="learn-more">View Guide →</a>
+                </div>
+                
+                <div class="guide-item">
+                    <h3>Best Practices</h3>
+                    <p>Discover proven strategies and avoid common pitfalls in LLM development.</p>
+                    <a href="/guides/llm-optimization/best-practices.html" class="learn-more">Learn More →</a>
+                </div>
+                
+                <div class="guide-item">
+                    <h3>Cost Optimization</h3>
+                    <p>Learn how to optimize costs and improve efficiency in your LLM applications.</p>
+                    <a href="/guides/llm-optimization/cost-optimization.html" class="learn-more">Optimize →</a>
+                </div>
+
+                <div class="guide-item">
+                    <h3>Implementing llms.txt</h3>
+                    <p>Complete guide to adding llms.txt files to optimize your website for AI search and LLM processing.</p>
+                    <a href="/blog/how-to-add-a-llms.txt-file-to-any-website-in-under-10-minutes.html" class="learn-more">Learn Implementation →</a>
+                </div>
+
+                <div class="guide-item">
+                    <h3>AI Content Strategy</h3>
+                    <p>Master the art of creating content that performs well in both traditional SEO and AI-powered search.</p>
+                    <a href="/guides/ai-content-strategy" class="learn-more">Explore Strategy →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Site Scanner CTA Section -->
+        <section class="scanner-cta-section" style="background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); padding: 4rem 2rem; border-radius: 1rem; text-align: center; margin: 3rem 0; color: white;">
+            <h2 style="color: white; margin-bottom: 1rem; font-size: 2rem;">Check Your AI Search Score</h2>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; opacity: 0.9;">
+                Discover how well your website performs in AI-powered search results. Our free scanner analyzes your site's LLM optimization and provides actionable recommendations.
+            </p>
+            <div class="scanner-cta-container" style="max-width: 500px; margin: 2rem auto;">
+                <a href="/tools/site-scanner" class="cta-button" style="display: inline-block; padding: 1rem 2rem; background: white; color: var(--primary-color); text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem; transition: transform 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    Scan Your Site for Free →
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                    No registration required. Get instant insights about your site's AI readiness.
+                </p>
+            </div>
+        </section>
+
+        <!-- Featured Tools Section -->
         <section class="featured-section">
             <h2>🌟 Featured Tools</h2>
             <p>Our most popular and newest tools to help you build better AI applications.</p>
@@ -312,7 +500,7 @@
             </div>
         </section>
 
-        <!-- Tools Section -->
+        <!-- All Tools Section -->
         <section class="section" id="tools">
             <h2>🛠️ Development Tools</h2>
             <p>A comprehensive suite of tools to help you build, optimize, and secure your LLM applications.</p>
@@ -361,54 +549,6 @@
                     <p>Verify citations and improve content trustworthiness.</p>
                     <a href="/free-tools/llm-citation-checker.html" class="learn-more">Check →</a>
                 </div>
-            </div>
-        </section>
-
-        <!-- Guides Section -->
-        <section class="section" id="guides">
-            <h2>📚 Learning Resources</h2>
-            <p>Comprehensive guides and tutorials to help you master LLM development and optimization.</p>
-            
-            <div class="guide-list">
-                <div class="guide-item">
-                    <h3>Core Concepts</h3>
-                    <p>Learn the fundamental principles of LLM optimization and AI model processing.</p>
-                    <a href="/guides/llm-optimization/core-concepts.html" class="learn-more">Start Learning →</a>
-                </div>
-                
-                <div class="guide-item">
-                    <h3>Implementation Guide</h3>
-                    <p>Step-by-step tutorials for implementing LLM optimization strategies.</p>
-                    <a href="/guides/llm-optimization/implementation.html" class="learn-more">View Guide →</a>
-                </div>
-                
-                <div class="guide-item">
-                    <h3>Best Practices</h3>
-                    <p>Discover proven strategies and avoid common pitfalls in LLM development.</p>
-                    <a href="/guides/llm-optimization/best-practices.html" class="learn-more">Learn More →</a>
-                </div>
-                
-                <div class="guide-item">
-                    <h3>Cost Optimization</h3>
-                    <p>Learn how to optimize costs and improve efficiency in your LLM applications.</p>
-                    <a href="/guides/llm-optimization/cost-optimization.html" class="learn-more">Optimize →</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="newsletter-section" style="background: #f8f9fa; padding: 3rem 2rem; border-radius: 1rem; text-align: center; margin: 3rem 0;">
-            <h2>Stay Updated</h2>
-            <p>Get the latest updates on LLM development, tools, and optimization strategies.</p>
-            <div class="newsletter-container" style="max-width: 500px; margin: 2rem auto;">
-                <iframe 
-                    src="https://embeds.beehiiv.com/b4b96891-f05c-480d-88cf-49cf869882a8?slim=true" 
-                    data-test-id="beehiiv-embed" 
-                    height="52" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    style="margin: 0; border-radius: 0px !important; background-color: transparent;">
-                </iframe>
             </div>
         </section>
     </div>
