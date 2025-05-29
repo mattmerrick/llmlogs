@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Health Analyzer - Free LLM Tool | LLM SEO Guide</title>
+    <meta name="description" content="Free tool to analyze your AI prompts for readability, token count, injection risks, and helpfulness score. Perfect for prompt engineers and developers working with ChatGPT and other LLMs.">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/prompt-health-analyzer" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="prompt_analyzer">
+    <meta name="llm:use_case" content="prompt_engineering">
+    <meta name="llm:target_audience" content="developers,prompt_engineers">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+    
+    <style>
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .input-section {
+            margin-bottom: 2rem;
+        }
+        .input-section textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-family);
+            margin: 1rem 0;
+            resize: vertical;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .metric {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .metric-label {
+            font-weight: 600;
+            color: var(--text-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .metric-value {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        .detailed-analysis {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .button:hover {
+            opacity: 0.9;
+        }
+        .button.secondary {
+            background: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/tools">Tools</a>
+                <a href="/blog">Blog</a>
+            </nav>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>Prompt Health Analyzer</span>
+        </nav>
+
+        <main class="tool-container">
+            <h1>Prompt Health Analyzer</h1>
+            <p class="lead">Analyze your prompts for readability, token count, injection risks, and get a helpfulness score - all in one place.</p>
+
+            <div class="input-section">
+                <label for="prompt-input">Paste your prompt here:</label>
+                <textarea id="prompt-input" placeholder="Enter your prompt text here..."></textarea>
+                <div class="button-group">
+                    <button id="analyze-btn" class="button">Analyze Prompt</button>
+                </div>
+            </div>
+
+            <div class="results-section" style="display: none;">
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <span class="metric-label">Readability Score</span>
+                        <span id="readability-score" class="metric-value">0</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Token Count</span>
+                        <span id="token-count" class="metric-value">0</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Injection Risk</span>
+                        <span id="injection-risk" class="metric-value">Low</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Helpfulness Score</span>
+                        <span id="helpfulness-score" class="metric-value">0</span>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button id="copy-results" class="button secondary">Copy Results</button>
+                    <button id="share-results" class="button secondary">Share Results</button>
+                </div>
+                <div class="detailed-analysis">
+                    <h3>Detailed Analysis</h3>
+                    <div id="analysis-details"></div>
+                </div>
+            </div>
+
+            <section class="tool-info">
+                <h2>About This Tool</h2>
+                <div class="feature-list">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Readability Analysis:</strong> Get a clear score of how easy your prompt is to understand</li>
+                        <li><strong>Token Counter:</strong> Know exactly how many tokens your prompt will use</li>
+                        <li><strong>Injection Risk Detection:</strong> Identify potential security risks in your prompts</li>
+                        <li><strong>Helpfulness Score:</strong> Measure how likely your prompt is to get useful responses</li>
+                    </ul>
+                </div>
+                <div class="use-cases">
+                    <h3>Perfect For</h3>
+                    <ul>
+                        <li>Prompt Engineers optimizing their prompts</li>
+                        <li>Developers working with ChatGPT and other LLMs</li>
+                        <li>Content creators crafting AI-assisted content</li>
+                        <li>Security professionals checking prompt safety</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.getElementById('analyze-btn').addEventListener('click', function() {
+            const promptText = document.getElementById('prompt-input').value;
+            if (!promptText.trim()) {
+                alert('Please enter a prompt to analyze');
+                return;
+            }
+            
+            // Show loading state
+            this.textContent = 'Analyzing...';
+            this.disabled = true;
+            
+            // TODO: Implement actual analysis logic
+            setTimeout(() => {
+                // Show results section
+                document.querySelector('.results-section').style.display = 'block';
+                
+                // Reset button
+                this.textContent = 'Analyze Prompt';
+                this.disabled = false;
+            }, 1000);
+        });
+
+        // Copy functionality
+        document.getElementById('copy-results').addEventListener('click', function() {
+            const results = document.querySelector('.metrics-grid').textContent;
+            navigator.clipboard.writeText(results).then(() => {
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                    this.textContent = 'Copy Results';
+                }, 2000);
+            });
+        });
+
+        // Share functionality
+        document.getElementById('share-results').addEventListener('click', function() {
+            if (navigator.share) {
+                const shareData = {
+                    title: 'Prompt Health Analysis Results',
+                    text: document.querySelector('.metrics-grid').textContent,
+                    url: window.location.href
+                };
+                navigator.share(shareData).catch(console.error);
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const results = document.querySelector('.metrics-grid').textContent;
+                navigator.clipboard.writeText(results).then(() => {
+                    alert('Results copied to clipboard!');
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

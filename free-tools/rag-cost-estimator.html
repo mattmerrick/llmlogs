@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Cost Estimator - Calculate Retrieval Augmented Generation Costs | LLM Logs</title>
+    <meta name="description" content="Calculate the total cost of your RAG system including vector embeddings, storage, and LLM API calls. Compare Pinecone, OpenAI, and other providers for optimal RAG deployment costs.">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/rag-cost-estimator" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="rag_cost_calculator">
+    <meta name="llm:use_case" content="rag_deployment,vector_storage,llm_api">
+    <meta name="llm:target_audience" content="developers,architects,mlops">
+    <meta name="keywords" content="RAG cost calculator, retrieval augmented generation pricing, Pinecone costs, OpenAI embedding price, vector database pricing, LLM API costs, RAG system budget">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+    
+    <style>
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .input-section {
+            background: white;
+            padding: 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .input-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .provider-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .provider-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .provider-card.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color-light);
+        }
+        .cost-breakdown {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 2px solid #eee;
+        }
+        .cost-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .optimization-tips {
+            background: #e8f5e9;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .optimization-tips h4 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+    </style>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/tools">Tools</a>
+                <a href="/blog">Blog</a>
+            </nav>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>RAG Cost Estimator</span>
+        </nav>
+
+        <main class="tool-container">
+            <h1>RAG Cost Estimator</h1>
+            <p class="lead">Calculate the total cost of your Retrieval Augmented Generation (RAG) system, including vector embeddings, storage, and LLM API calls. Compare providers like OpenAI and Pinecone to optimize your deployment costs.</p>
+
+            <div class="calculator-grid">
+                <div class="input-section">
+                    <h3>Document Processing</h3>
+                    <div class="input-group">
+                        <label for="doc-count">Number of Documents</label>
+                        <input type="number" id="doc-count" min="0" value="1000" placeholder="e.g., 1000">
+                    </div>
+                    <div class="input-group">
+                        <label for="avg-doc-length">Average Document Length (tokens)</label>
+                        <input type="number" id="avg-doc-length" min="0" value="500" placeholder="e.g., 500">
+                    </div>
+                    <div class="input-group">
+                        <label for="chunk-size">Chunk Size (tokens)</label>
+                        <input type="number" id="chunk-size" min="0" value="512" placeholder="e.g., 512">
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>Retrieval Settings</h3>
+                    <div class="input-group">
+                        <label for="monthly-queries">Monthly Queries</label>
+                        <input type="number" id="monthly-queries" min="0" value="10000" placeholder="e.g., 10000">
+                    </div>
+                    <div class="input-group">
+                        <label for="chunks-per-query">Chunks Retrieved per Query</label>
+                        <input type="number" id="chunks-per-query" min="0" value="3" placeholder="e.g., 3">
+                    </div>
+                    <div class="input-group">
+                        <label for="avg-query-length">Average Query Length (tokens)</label>
+                        <input type="number" id="avg-query-length" min="0" value="50" placeholder="e.g., 50">
+                    </div>
+                </div>
+
+                <div class="input-section">
+                    <h3>Provider Selection</h3>
+                    <div class="provider-card" data-provider="openai-ada2">
+                        <h4>OpenAI Ada 2 Embeddings</h4>
+                        <p>$0.0001 / 1K tokens</p>
+                    </div>
+                    <div class="provider-card" data-provider="openai-davinci">
+                        <h4>OpenAI Text Embedding V3</h4>
+                        <p>$0.00002 / 1K tokens</p>
+                    </div>
+                    <div class="provider-card selected" data-provider="pinecone">
+                        <h4>Pinecone Vector Storage</h4>
+                        <p>Starting at $0.0035 per 1000 vectors/month</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cost-breakdown">
+                <h3>Monthly Cost Breakdown</h3>
+                <div class="cost-item">
+                    <span>Embedding Generation:</span>
+                    <span id="embedding-cost">$0.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Vector Storage:</span>
+                    <span id="storage-cost">$0.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Query Costs:</span>
+                    <span id="query-cost">$0.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Total Monthly Cost:</span>
+                    <span id="total-cost">$0.00</span>
+                </div>
+            </div>
+
+            <div class="optimization-tips">
+                <h4>💡 RAG Cost Optimization Tips</h4>
+                <ul>
+                    <li>Optimize chunk size to balance retrieval quality and storage costs</li>
+                    <li>Use efficient embedding models to reduce API costs</li>
+                    <li>Implement caching for frequently accessed vectors</li>
+                    <li>Consider batch processing for document updates</li>
+                </ul>
+            </div>
+
+            <section class="tool-info">
+                <style>
+                    .tool-info {
+                        background: #f8f9fa;
+                        border-radius: 12px;
+                        padding: 2.5rem;
+                        margin: 3rem 0;
+                        border: 2px solid #ddd;
+                    }
+                    .tool-info h2 {
+                        color: var(--primary-color);
+                        margin-bottom: 2rem;
+                        font-size: 2rem;
+                        text-align: center;
+                    }
+                    .info-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 2rem;
+                        margin: 2rem 0;
+                    }
+                    .info-section {
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 12px;
+                        border: 2px solid #ddd;
+                        transition: transform 0.2s ease, box-shadow 0.2s ease;
+                    }
+                    .info-section:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    }
+                    .info-section h3 {
+                        color: #2c3e50;
+                        margin-bottom: 1.5rem;
+                        font-size: 1.5rem;
+                        border-bottom: 2px solid var(--primary-color);
+                        padding-bottom: 0.75rem;
+                        position: relative;
+                    }
+                    .info-section h3::before {
+                        content: "";
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 50px;
+                        height: 2px;
+                        background: var(--primary-color);
+                    }
+                    .info-section ul {
+                        list-style-type: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .info-section li {
+                        margin: 1.25rem 0;
+                        padding-left: 2rem;
+                        position: relative;
+                        line-height: 1.6;
+                    }
+                    .info-section li::before {
+                        content: "→";
+                        position: absolute;
+                        left: 0;
+                        color: var(--primary-color);
+                        font-weight: bold;
+                    }
+                    .info-section li strong {
+                        color: #2c3e50;
+                        display: block;
+                        margin-bottom: 0.25rem;
+                        font-size: 1.1rem;
+                    }
+                    .info-footer {
+                        background: #fff3cd;
+                        border: 2px solid #ffeeba;
+                        border-radius: 8px;
+                        padding: 1.5rem;
+                        margin-top: 2rem;
+                        text-align: center;
+                        font-size: 1.1rem;
+                    }
+                    .info-footer h4 {
+                        color: #856404;
+                        margin-bottom: 1rem;
+                        font-size: 1.2rem;
+                    }
+                    .info-highlight {
+                        background: #e8f5e9;
+                        border-radius: 6px;
+                        padding: 0.25rem 0.5rem;
+                        color: #2e7d32;
+                        font-weight: 500;
+                    }
+                    @media (max-width: 768px) {
+                        .tool-info {
+                            padding: 1.5rem;
+                        }
+                        .info-section {
+                            padding: 1.5rem;
+                        }
+                        .info-section li {
+                            padding-left: 1.5rem;
+                        }
+                    }
+                </style>
+
+                <h2>Understanding RAG Cost Estimation</h2>
+                <div class="info-grid">
+                    <div class="info-section">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>
+                                <strong>Complete RAG Cost Analysis</strong>
+                                Calculate all components of your RAG system including embeddings, storage, and API calls in one place
+                            </li>
+                            <li>
+                                <strong>Multi-Provider Support</strong>
+                                Compare pricing across major providers like OpenAI and Pinecone to find the most cost-effective solution
+                            </li>
+                            <li>
+                                <strong>Real-time Calculations</strong>
+                                See instant cost updates as you adjust parameters, helping you optimize your configuration
+                            </li>
+                            <li>
+                                <strong>Detailed Cost Breakdown</strong>
+                                Understand exactly where your costs come from with itemized calculations for each component
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Practical Applications</h3>
+                        <ul>
+                            <li>
+                                <strong>System Architecture Planning</strong>
+                                Make informed decisions about your RAG system design based on cost implications
+                            </li>
+                            <li>
+                                <strong>Budget Forecasting</strong>
+                                Project monthly costs and plan your budget with confidence using real provider pricing
+                            </li>
+                            <li>
+                                <strong>Scaling Analysis</strong>
+                                Understand how costs scale with document count, query volume, and chunk size
+                            </li>
+                            <li>
+                                <strong>Provider Evaluation</strong>
+                                Compare different providers and configurations to find the optimal setup for your needs
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Cost Components Explained</h3>
+                        <ul>
+                            <li>
+                                <strong>Embedding Generation <span class="info-highlight">$0.00002-0.0001/1K tokens</span></strong>
+                                The cost of converting your documents and queries into vector representations
+                            </li>
+                            <li>
+                                <strong>Vector Storage <span class="info-highlight">$0.0035/1K vectors</span></strong>
+                                Monthly costs for storing your document vectors in a database like Pinecone
+                            </li>
+                            <li>
+                                <strong>Query Processing</strong>
+                                Costs associated with similarity search and retrieving relevant chunks
+                            </li>
+                            <li>
+                                <strong>API Integration</strong>
+                                Additional costs for LLM API calls when generating responses with retrieved context
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-footer">
+                    <h4>📈 Cost Optimization Strategy</h4>
+                    <p>Start with smaller chunk sizes (256-512 tokens) and fewer retrieved chunks (2-3) per query. Monitor retrieval quality and gradually adjust these parameters to find the optimal balance between cost and performance for your specific use case.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Provider pricing data
+        const providerPricing = {
+            'openai-ada2': {
+                embedding: 0.0001,  // per 1K tokens
+                query: 0.0001      // per 1K tokens
+            },
+            'openai-davinci': {
+                embedding: 0.00002, // per 1K tokens
+                query: 0.00002     // per 1K tokens
+            },
+            'pinecone': {
+                storage: 0.0035    // per 1K vectors per month
+            }
+        };
+
+        let selectedProvider = 'pinecone';
+
+        // Provider selection
+        document.querySelectorAll('.provider-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.provider-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedProvider = card.dataset.provider;
+                calculateCosts();
+            });
+        });
+
+        // Input handling
+        ['doc-count', 'avg-doc-length', 'chunk-size', 'monthly-queries', 'chunks-per-query', 'avg-query-length']
+            .forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateCosts);
+            });
+
+        function calculateCosts() {
+            const docCount = parseFloat(document.getElementById('doc-count').value) || 0;
+            const avgDocLength = parseFloat(document.getElementById('avg-doc-length').value) || 0;
+            const chunkSize = parseFloat(document.getElementById('chunk-size').value) || 0;
+            const monthlyQueries = parseFloat(document.getElementById('monthly-queries').value) || 0;
+            const chunksPerQuery = parseFloat(document.getElementById('chunks-per-query').value) || 0;
+            const avgQueryLength = parseFloat(document.getElementById('avg-query-length').value) || 0;
+
+            // Calculate number of chunks
+            const chunksPerDoc = Math.ceil(avgDocLength / chunkSize);
+            const totalChunks = docCount * chunksPerDoc;
+
+            // Calculate embedding costs
+            const totalEmbeddingTokens = docCount * avgDocLength;
+            const embeddingCost = (totalEmbeddingTokens / 1000) * providerPricing[selectedProvider].embedding;
+
+            // Calculate storage costs
+            const storageCost = (totalChunks / 1000) * providerPricing['pinecone'].storage;
+
+            // Calculate query costs
+            const queryTokens = monthlyQueries * (avgQueryLength + (chunksPerQuery * chunkSize));
+            const queryCost = (queryTokens / 1000) * providerPricing[selectedProvider].query;
+
+            // Update UI
+            document.getElementById('embedding-cost').textContent = `$${embeddingCost.toFixed(2)}`;
+            document.getElementById('storage-cost').textContent = `$${storageCost.toFixed(2)}`;
+            document.getElementById('query-cost').textContent = `$${queryCost.toFixed(2)}`;
+            document.getElementById('total-cost').textContent = `$${(embeddingCost + storageCost + queryCost).toFixed(2)}`;
+        }
+
+        // Initialize calculation
+        calculateCosts();
+    </script>
+</body>
+</html> 

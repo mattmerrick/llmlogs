@@ -75,6 +75,172 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    
+    <style>
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 0 0 2rem 2rem;
+            margin-bottom: 3rem;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .quick-link {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 2px solid var(--primary-color);
+        }
+        .quick-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Featured Section */
+        .featured-section {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 1rem;
+        }
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .featured-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+        .featured-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .tool-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .tool-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .tool-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .tag-new {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .tag-popular {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        /* Category Filters */
+        .category-filters {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .category-filter {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .category-filter:hover,
+        .category-filter.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 1rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            .featured-grid,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .quick-link {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -82,7 +248,7 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <!-- Include standard header -->
+    <!-- Standard Header -->
     <header class="site-header">
         <div class="nav-container">
             <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
@@ -92,23 +258,149 @@
             <nav class="nav-links">
                 <a href="/start-here.html" class="start-here-link">Start Here</a>
                 <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
                 <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
             </nav>
         </div>
     </header>
 
-    <div class="container">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a>
-        </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Master LLM Development & Optimization</h1>
+        <p>Comprehensive tools, guides, and resources to help you build better AI applications. From cost optimization to security testing, we've got you covered.</p>
+        
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search tools, guides, and resources...">
+        </div>
+        
+        <div class="quick-links">
+            <a href="/start-here.html" class="quick-link">🚀 Start Here</a>
+            <a href="/free-tools" class="quick-link">🛠️ Free Tools</a>
+            <a href="/guides/llm-optimization" class="quick-link">📚 Guides</a>
+            <a href="/blog" class="quick-link">✍️ Blog</a>
+        </div>
+    </section>
 
-        <header class="main-header">
-            <h1>Master LLM SEO: The Complete Guide</h1>
-            <p>Learn how to optimize your content for Large Language Models and increase visibility in AI responses. Our comprehensive guide covers everything from core concepts to advanced implementation strategies.</p>
+    <div class="container">
+        <!-- Featured Section -->
+        <section class="featured-section">
+            <h2>🌟 Featured Tools</h2>
+            <p>Our most popular and newest tools to help you build better AI applications.</p>
             
-            <!-- Newsletter Signup -->
-            <div class="newsletter-container" style="margin: 2rem auto; text-align: center;">
-                <p style="margin-bottom: 1rem; font-weight: 500;">Stay updated with the latest LLM optimization strategies and news from LLMs</p>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <span class="tool-tag tag-new">New</span>
+                    <h3>Prompt Injection Tester</h3>
+                    <p>Test your LLM prompts for security vulnerabilities and get instant mitigation strategies.</p>
+                    <a href="/free-tools/prompt-injection-tester.html" class="learn-more">Try Now →</a>
+                </div>
+                
+                <div class="featured-card">
+                    <span class="tool-tag tag-new">New</span>
+                    <h3>OpenAI Token Counter</h3>
+                    <p>Calculate token usage and costs for GPT-4, GPT-3.5, and other OpenAI models.</p>
+                    <a href="/free-tools/openai-token-counter.html" class="learn-more">Count Tokens →</a>
+                </div>
+                
+                <div class="featured-card">
+                    <span class="tool-tag tag-popular">Popular</span>
+                    <h3>RAG Cost Estimator</h3>
+                    <p>Calculate and optimize costs for your Retrieval Augmented Generation system.</p>
+                    <a href="/free-tools/rag-cost-estimator.html" class="learn-more">Estimate Costs →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section class="section" id="tools">
+            <h2>🛠️ Development Tools</h2>
+            <p>A comprehensive suite of tools to help you build, optimize, and secure your LLM applications.</p>
+            
+            <div class="category-filters">
+                <button class="category-filter active">All Tools</button>
+                <button class="category-filter">Cost & Performance</button>
+                <button class="category-filter">Security</button>
+                <button class="category-filter">Development</button>
+                <button class="category-filter">Analysis</button>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h3>Token Cost Calculator</h3>
+                    <p>Estimate API costs across different LLM providers and optimize your budget.</p>
+                    <a href="/free-tools/llm-token-cost-calculator.html" class="learn-more">Calculate →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <h3>Prompt Health Analyzer</h3>
+                    <p>Analyze prompts for readability, efficiency, and potential risks.</p>
+                    <a href="/free-tools/prompt-health-analyzer.html" class="learn-more">Analyze →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <h3>LLM txt Generator</h3>
+                    <p>Generate optimized llms.txt files for better content discovery.</p>
+                    <a href="/free-tools/llm-txt-generator.html" class="learn-more">Generate →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <h3>Content Structure Analyzer</h3>
+                    <p>Analyze and optimize your content structure for LLM processing.</p>
+                    <a href="/free-tools/content-structure-analyzer.html" class="learn-more">Analyze →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <h3>Knowledge Graph Validator</h3>
+                    <p>Validate knowledge graph implementation and semantic relationships.</p>
+                    <a href="/free-tools/knowledge-graph-validator.html" class="learn-more">Validate →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <h3>LLM Citation Checker</h3>
+                    <p>Verify citations and improve content trustworthiness.</p>
+                    <a href="/free-tools/llm-citation-checker.html" class="learn-more">Check →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guides Section -->
+        <section class="section" id="guides">
+            <h2>📚 Learning Resources</h2>
+            <p>Comprehensive guides and tutorials to help you master LLM development and optimization.</p>
+            
+            <div class="guide-list">
+                <div class="guide-item">
+                    <h3>Core Concepts</h3>
+                    <p>Learn the fundamental principles of LLM optimization and AI model processing.</p>
+                    <a href="/guides/llm-optimization/core-concepts.html" class="learn-more">Start Learning →</a>
+                </div>
+                
+                <div class="guide-item">
+                    <h3>Implementation Guide</h3>
+                    <p>Step-by-step tutorials for implementing LLM optimization strategies.</p>
+                    <a href="/guides/llm-optimization/implementation.html" class="learn-more">View Guide →</a>
+                </div>
+                
+                <div class="guide-item">
+                    <h3>Best Practices</h3>
+                    <p>Discover proven strategies and avoid common pitfalls in LLM development.</p>
+                    <a href="/guides/llm-optimization/best-practices.html" class="learn-more">Learn More →</a>
+                </div>
+                
+                <div class="guide-item">
+                    <h3>Cost Optimization</h3>
+                    <p>Learn how to optimize costs and improve efficiency in your LLM applications.</p>
+                    <a href="/guides/llm-optimization/cost-optimization.html" class="learn-more">Optimize →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section" style="background: #f8f9fa; padding: 3rem 2rem; border-radius: 1rem; text-align: center; margin: 3rem 0;">
+            <h2>Stay Updated</h2>
+            <p>Get the latest updates on LLM development, tools, and optimization strategies.</p>
+            <div class="newsletter-container" style="max-width: 500px; margin: 2rem auto;">
                 <iframe 
                     src="https://embeds.beehiiv.com/b4b96891-f05c-480d-88cf-49cf869882a8?slim=true" 
                     data-test-id="beehiiv-embed" 
@@ -118,129 +410,71 @@
                     style="margin: 0; border-radius: 0px !important; background-color: transparent;">
                 </iframe>
             </div>
-        </header>
-
-        <main>
-            <section class="section" id="getting-started">
-                <h2>🚀 Getting Started</h2>
-                <p>New to LLM SEO? Start your journey with our comprehensive introduction and foundational resources.</p>
-                
-                <div class="guide-list">
-                    <div class="guide-item">
-                        <h3>Start Here Guide</h3>
-                        <p>Everything you need to know about Large Language Models and how they process content.</p>
-                        <a href="/start-here.html" class="learn-more">Get Started →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>MDC Standards</h3>
-                        <p>Learn our Markdown Component standards for creating LLM-optimized content.</p>
-                        <a href="/mdc.html" class="learn-more">View Standards →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>Testing Prompts</h3>
-                        <p>Collection of prompts to test and optimize your content for LLMs.</p>
-                        <a href="/prompts.html" class="learn-more">View Prompts →</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" style="background-color: #f8f9fa; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
-                <div style="text-align: center;">
-                    <h2>🎯 Want to Get Cited by AI Faster?</h2>
-                    <p style="font-size: 1.2rem; margin: 1rem 0;">Discover cite.sh - Your shortcut to getting noticed by AI language models.</p>
-                    <a href="https://cite.sh" class="cta-button" style="display: inline-block; margin-top: 1rem;" target="_blank" rel="noopener">Learn How to Get Cited →</a>
-                </div>
-            </section>
-
-            <section class="section" id="guides">
-                <h2>📚 LLM Optimization Guides</h2>
-                <p>Our comprehensive guides will help you understand and implement effective LLM optimization strategies. Each guide is designed to build your knowledge step by step.</p>
-                
-                <div class="guide-list">
-                    <div class="guide-item">
-                        <h3>Core Concepts</h3>
-                        <p>Learn the fundamental principles of LLM optimization and how AI models process content.</p>
-                        <a href="guides/llm-optimization/core-concepts.html" class="learn-more">Learn More →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>Structured Data</h3>
-                        <p>Master the implementation of structured data to help LLMs better understand your content.</p>
-                        <a href="guides/llm-optimization/structured-data.html" class="learn-more">Learn More →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>Content Optimization</h3>
-                        <p>Learn how to structure and format your content for maximum impact in LLM responses.</p>
-                        <a href="guides/llm-optimization/content-optimization.html" class="learn-more">Learn More →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>Citation Strategy</h3>
-                        <p>Develop a robust citation strategy to build authority and improve content credibility.</p>
-                        <a href="guides/llm-optimization/citation-strategy.html" class="learn-more">Learn More →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>Advanced Techniques</h3>
-                        <p>Explore cutting-edge strategies for maximizing your content's impact in AI responses.</p>
-                        <a href="guides/llm-optimization/advanced-techniques.html" class="learn-more">Learn More →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>Best Practices</h3>
-                        <p>Discover proven strategies and avoid common pitfalls in LLM optimization.</p>
-                        <a href="guides/llm-optimization/best-practices.html" class="learn-more">Learn More →</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" id="tools">
-                <h2>🛠️ Tools & Resources</h2>
-                <p>Practical tools and resources to help you implement LLM optimization strategies.</p>
-                
-                <div class="guide-list">
-                    <div class="guide-item">
-                        <h3>LLM SEO Analysis Tool</h3>
-                        <p>Analyze your content's LLM optimization and get actionable recommendations.</p>
-                        <a href="/scan-site.html" class="learn-more">Try Tool →</a>
-                    </div>
-
-                    <div class="guide-item">
-                        <h3>llms.txt Generator</h3>
-                        <p>Generate an optimized llms.txt file for your website.</p>
-                        <a href="/free-tools/llm-txt-generator.html" class="learn-more">Generate File →</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="cta-section">
-                <h2>Ready to Optimize Your Content for LLMs?</h2>
-                <p>Start with our comprehensive introduction and work your way through our optimization resources.</p>
-                <a href="/start-here.html" class="cta-button">Begin Your Journey</a>
-            </section>
-        </main>
+        </section>
     </div>
 
-    <!-- Simple Footer -->
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
                 <a href="/blog">Blog</a>
                 <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/share.js"></script>
+    <script>
+        // Search functionality
+        const searchBar = document.querySelector('.search-bar');
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const tools = document.querySelectorAll('.tool-card');
+            
+            tools.forEach(tool => {
+                const title = tool.querySelector('h3').textContent.toLowerCase();
+                const description = tool.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    tool.style.display = 'block';
+                } else {
+                    tool.style.display = 'none';
+                }
+            });
+        });
+
+        // Category filtering
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                categoryFilters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                
+                const category = filter.textContent.toLowerCase();
+                const tools = document.querySelectorAll('.tool-card');
+                
+                if (category === 'all tools') {
+                    tools.forEach(tool => tool.style.display = 'block');
+                    return;
+                }
+                
+                tools.forEach(tool => {
+                    const toolCategory = tool.dataset.category;
+                    if (toolCategory === category) {
+                        tool.style.display = 'block';
+                    } else {
+                        tool.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

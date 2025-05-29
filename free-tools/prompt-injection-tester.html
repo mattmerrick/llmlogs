@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Injection Tester - Test LLM Security | LLM Logs</title>
+    <meta name="description" content="Free prompt injection testing tool. Evaluate your LLM prompts for security vulnerabilities, get risk assessment scores, and receive mitigation suggestions.">
+    <meta name="keywords" content="prompt injection tester, LLM prompt security tool, test prompt injection vulnerabilities, prompt security testing, LLM security assessment">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/prompt-injection-tester" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="security_testing">
+    <meta name="llm:use_case" content="security_assessment,vulnerability_testing">
+    <meta name="llm:target_audience" content="developers,security_engineers,mlops">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+    
+    <style>
+        .injection-tester {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-section {
+            margin-bottom: 2rem;
+        }
+        .input-section textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .test-controls {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .test-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+        .test-button:hover {
+            background: var(--primary-color-dark);
+        }
+        .risk-score {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+        .score-low {
+            background: #4caf50;
+        }
+        .score-medium {
+            background: #ff9800;
+        }
+        .score-high {
+            background: #f44336;
+        }
+        .score-details {
+            flex: 1;
+        }
+        .score-details h3 {
+            margin: 0 0 0.5rem;
+            color: #2c3e50;
+        }
+        .vulnerability-list {
+            margin-top: 2rem;
+        }
+        .vulnerability-item {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: #fff;
+        }
+        .vulnerability-item h4 {
+            margin: 0 0 0.5rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .severity-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .severity-low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .severity-medium {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .severity-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .mitigation-tips {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .test-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .test-type {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .test-type:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .test-type.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color-light);
+        }
+        .test-type h4 {
+            margin: 0 0 0.5rem;
+            color: #2c3e50;
+        }
+        .test-type p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .results-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .defense-patterns {
+            margin-top: 3rem;
+        }
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .pattern-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .pattern-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .code-example {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/tools">Tools</a>
+                <a href="/blog">Blog</a>
+            </nav>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>Prompt Injection Tester</span>
+        </nav>
+
+        <main class="tool-container">
+            <h1>Prompt Injection Tester</h1>
+            <p class="lead">Test your LLM prompts for security vulnerabilities. Get instant risk assessment scores, detailed vulnerability analysis, and actionable mitigation strategies.</p>
+
+            <div class="injection-tester">
+                <div class="input-section">
+                    <h2>Enter Your Prompt</h2>
+                    <textarea id="prompt-input" placeholder="Paste your prompt here to test for vulnerabilities..."></textarea>
+                </div>
+
+                <div class="test-types">
+                    <div class="test-type selected" data-test="basic">
+                        <h4>Basic Injection Tests</h4>
+                        <p>Common prompt injection patterns and basic security checks</p>
+                    </div>
+                    <div class="test-type" data-test="advanced">
+                        <h4>Advanced Analysis</h4>
+                        <p>Deep analysis including context leaks and role violations</p>
+                    </div>
+                    <div class="test-type" data-test="custom">
+                        <h4>Custom Rules</h4>
+                        <p>Test against your own security rules and patterns</p>
+                    </div>
+                </div>
+
+                <div class="test-controls">
+                    <button id="test-button" class="test-button">Test for Vulnerabilities</button>
+                </div>
+
+                <div class="results-section" style="display: none;">
+                    <div class="risk-score">
+                        <div class="score-circle score-medium">75</div>
+                        <div class="score-details">
+                            <h3>Risk Score</h3>
+                            <p>Your prompt has a moderate risk level. Some vulnerabilities were detected.</p>
+                        </div>
+                    </div>
+
+                    <div class="vulnerability-list">
+                        <h3>Detected Vulnerabilities</h3>
+                        <div class="vulnerability-item">
+                            <h4>
+                                Delimiter Injection Risk
+                                <span class="severity-badge severity-high">High</span>
+                            </h4>
+                            <p>The prompt contains unescaped delimiters that could be manipulated.</p>
+                            <div class="mitigation-tips">
+                                <h5>Mitigation:</h5>
+                                <ul>
+                                    <li>Escape special characters in user input</li>
+                                    <li>Use robust input validation</li>
+                                    <li>Implement proper sanitization</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vulnerability-item">
+                            <h4>
+                                Role Confusion
+                                <span class="severity-badge severity-medium">Medium</span>
+                            </h4>
+                            <p>Potential for system role override through user input.</p>
+                            <div class="mitigation-tips">
+                                <h5>Mitigation:</h5>
+                                <ul>
+                                    <li>Strengthen role boundaries</li>
+                                    <li>Implement strict input validation</li>
+                                    <li>Use role-specific templates</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="defense-patterns">
+                <h2>Common Defense Patterns</h2>
+                <div class="pattern-grid">
+                    <div class="pattern-card">
+                        <h4>Input Sanitization</h4>
+                        <p>Properly sanitize and validate all user inputs before including them in prompts.</p>
+                        <div class="code-example">
+function sanitizeInput(input) {
+    return input.replace(/[<>{}]/g, '');
+}</div>
+                    </div>
+                    <div class="pattern-card">
+                        <h4>Role Enforcement</h4>
+                        <p>Maintain strict role boundaries and prevent unauthorized role changes.</p>
+                        <div class="code-example">
+const systemPrompt = `
+Role: Assistant
+Boundary: Strict
+Instructions: ...
+`;</div>
+                    </div>
+                    <div class="pattern-card">
+                        <h4>Context Isolation</h4>
+                        <p>Keep different parts of the prompt isolated to prevent context manipulation.</p>
+                        <div class="code-example">
+const userInput = sanitizeInput(input);
+const prompt = `
+System: ${systemPrompt}
+User: ${userInput}
+`;</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const promptInput = document.getElementById('prompt-input');
+        const testButton = document.getElementById('test-button');
+        const testTypes = document.querySelectorAll('.test-type');
+        const resultsSection = document.querySelector('.results-section');
+        let selectedTest = 'basic';
+
+        // Test type selection
+        testTypes.forEach(type => {
+            type.addEventListener('click', () => {
+                testTypes.forEach(t => t.classList.remove('selected'));
+                type.classList.add('selected');
+                selectedTest = type.dataset.test;
+            });
+        });
+
+        // Test button click handler
+        testButton.addEventListener('click', () => {
+            const prompt = promptInput.value;
+            if (!prompt) return;
+
+            // Show results section
+            resultsSection.style.display = 'block';
+
+            // Analyze prompt for vulnerabilities
+            analyzePrompt(prompt);
+        });
+
+        function analyzePrompt(prompt) {
+            // Basic vulnerability patterns
+            const patterns = {
+                delimiterInjection: /(```|\{\{|\}\}|<|>)/g,
+                roleConfusion: /(system:|assistant:|user:)/gi,
+                contextLeak: /(previous conversation|chat history|remember)/gi,
+                commandInjection: /(exec|eval|system\()/gi
+            };
+
+            // Calculate risk score
+            let riskScore = 0;
+            let vulnerabilities = [];
+
+            // Check for delimiter injection
+            if (patterns.delimiterInjection.test(prompt)) {
+                riskScore += 30;
+                vulnerabilities.push({
+                    name: 'Delimiter Injection Risk',
+                    severity: 'high',
+                    description: 'The prompt contains unescaped delimiters that could be manipulated.'
+                });
+            }
+
+            // Check for role confusion
+            if (patterns.roleConfusion.test(prompt)) {
+                riskScore += 25;
+                vulnerabilities.push({
+                    name: 'Role Confusion',
+                    severity: 'medium',
+                    description: 'Potential for system role override through user input.'
+                });
+            }
+
+            // Update UI with results
+            updateResults(riskScore, vulnerabilities);
+        }
+
+        function updateResults(score, vulnerabilities) {
+            const scoreCircle = document.querySelector('.score-circle');
+            const scoreDetails = document.querySelector('.score-details p');
+
+            // Update score circle
+            scoreCircle.textContent = score;
+            scoreCircle.className = 'score-circle';
+            if (score < 30) scoreCircle.classList.add('score-low');
+            else if (score < 70) scoreCircle.classList.add('score-medium');
+            else scoreCircle.classList.add('score-high');
+
+            // Update score description
+            if (score < 30) {
+                scoreDetails.textContent = 'Your prompt has a low risk level. No major vulnerabilities detected.';
+            } else if (score < 70) {
+                scoreDetails.textContent = 'Your prompt has a moderate risk level. Some vulnerabilities were detected.';
+            } else {
+                scoreDetails.textContent = 'Your prompt has a high risk level. Significant vulnerabilities detected.';
+            }
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Token Cost Calculator - Free LLM Tool | LLM Logs</title>
+    <meta name="description" content="Calculate token costs for different LLM models including GPT-4, GPT-3.5, Claude, and others. Get instant pricing for your AI API usage with our free calculator.">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/llm-token-cost-calculator" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="cost_calculator">
+    <meta name="llm:use_case" content="api_cost_estimation">
+    <meta name="llm:target_audience" content="developers,product_managers,business_analysts">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+    
+    <style>
+        .model-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .model-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .model-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .model-card.selected {
+            border-color: var(--primary-color);
+            border-width: 2px;
+            background: var(--primary-color-light);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .token-input {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        .token-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+        .token-input input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .token-input label {
+            font-weight: 600;
+            color: #333;
+        }
+        .cost-breakdown {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 2px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 2px solid #eee;
+        }
+        .cost-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+        }
+        .savings-tip {
+            background: var(--success-light);
+            border: 2px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+    </style>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/tools">Tools</a>
+                <a href="/blog">Blog</a>
+            </nav>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>LLM Token Cost Calculator</span>
+        </nav>
+
+        <main class="tool-container">
+            <h1>LLM Token Cost Calculator</h1>
+            <p class="lead">Calculate the cost of your LLM API usage across different models. Get instant pricing estimates and compare costs between providers.</p>
+
+            <div class="model-selector">
+                <div class="model-card" data-model="gpt4">
+                    <h3>GPT-4</h3>
+                    <p>Input: $0.03/1K tokens</p>
+                    <p>Output: $0.06/1K tokens</p>
+                </div>
+                <div class="model-card" data-model="gpt35">
+                    <h3>GPT-3.5 Turbo</h3>
+                    <p>Input: $0.0015/1K tokens</p>
+                    <p>Output: $0.002/1K tokens</p>
+                </div>
+                <div class="model-card" data-model="claude">
+                    <h3>Claude 2</h3>
+                    <p>Input: $0.008/1K tokens</p>
+                    <p>Output: $0.024/1K tokens</p>
+                </div>
+                <div class="model-card" data-model="palm">
+                    <h3>PaLM 2</h3>
+                    <p>Input: $0.0005/1K tokens</p>
+                    <p>Output: $0.0005/1K tokens</p>
+                </div>
+            </div>
+
+            <div class="token-input">
+                <div>
+                    <label for="input-tokens">Input Tokens:</label>
+                    <input type="number" id="input-tokens" min="0" value="0">
+                </div>
+                <div>
+                    <label for="output-tokens">Output Tokens:</label>
+                    <input type="number" id="output-tokens" min="0" value="0">
+                </div>
+                <div>
+                    <label for="requests">Monthly Requests:</label>
+                    <input type="number" id="requests" min="0" value="1">
+                </div>
+            </div>
+
+            <div class="cost-breakdown">
+                <h3>Cost Breakdown</h3>
+                <div class="cost-item">
+                    <span>Input Cost:</span>
+                    <span id="input-cost">$0.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Output Cost:</span>
+                    <span id="output-cost">$0.00</span>
+                </div>
+                <div class="cost-item">
+                    <span>Monthly Total:</span>
+                    <span id="total-cost">$0.00</span>
+                </div>
+            </div>
+
+            <div class="savings-tip">
+                <h4>💡 Cost Saving Tip</h4>
+                <p>Using shorter, more focused prompts can significantly reduce input token costs while maintaining output quality.</p>
+            </div>
+
+            <section class="tool-info">
+                <style>
+                    .tool-info {
+                        background: #f8f9fa;
+                        border-radius: 12px;
+                        padding: 2rem;
+                        margin: 3rem 0;
+                        border: 2px solid #ddd;
+                    }
+                    .tool-info h2 {
+                        color: var(--primary-color);
+                        margin-bottom: 1.5rem;
+                        font-size: 1.8rem;
+                    }
+                    .info-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 2rem;
+                        margin-bottom: 2rem;
+                    }
+                    .info-section {
+                        background: white;
+                        padding: 1.5rem;
+                        border-radius: 8px;
+                        border: 2px solid #ddd;
+                    }
+                    .info-section h3 {
+                        color: #2c3e50;
+                        margin-bottom: 1rem;
+                        font-size: 1.4rem;
+                        border-bottom: 2px solid #eee;
+                        padding-bottom: 0.5rem;
+                    }
+                    .info-section ul {
+                        list-style-type: none;
+                        padding: 0;
+                    }
+                    .info-section li {
+                        margin: 1rem 0;
+                        padding-left: 1.5rem;
+                        position: relative;
+                        line-height: 1.5;
+                    }
+                    .info-section li::before {
+                        content: "→";
+                        position: absolute;
+                        left: 0;
+                        color: var(--primary-color);
+                    }
+                    .pricing-note {
+                        background: #fff3cd;
+                        border: 2px solid #ffeeba;
+                        border-radius: 8px;
+                        padding: 1rem;
+                        margin-top: 1.5rem;
+                    }
+                </style>
+
+                <h2>About This Calculator</h2>
+                <div class="info-grid">
+                    <div class="info-section">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Real-time Calculations:</strong> Instantly see cost updates as you adjust token counts and requests</li>
+                            <li><strong>Multi-Model Support:</strong> Compare pricing across GPT-4, GPT-3.5, Claude 2, and PaLM 2</li>
+                            <li><strong>Separate Token Pricing:</strong> Accurate cost breakdown for both input and output tokens</li>
+                            <li><strong>Monthly Projections:</strong> Calculate costs based on expected monthly usage</li>
+                            <li><strong>Interactive Interface:</strong> Easy-to-use card selection and input fields</li>
+                            <li><strong>Detailed Breakdown:</strong> See input costs, output costs, and total expenses</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>How to Use</h3>
+                        <ul>
+                            <li><strong>Select Model:</strong> Click on any model card to choose your LLM provider</li>
+                            <li><strong>Input Tokens:</strong> Enter the number of prompt/input tokens you expect to use</li>
+                            <li><strong>Output Tokens:</strong> Specify expected completion/output tokens</li>
+                            <li><strong>Monthly Requests:</strong> Set your expected monthly API call volume</li>
+                            <li><strong>View Results:</strong> See the cost breakdown update automatically</li>
+                            <li><strong>Compare Models:</strong> Switch between models to find the most cost-effective option</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Perfect For</h3>
+                        <ul>
+                            <li><strong>Developers:</strong> Plan API costs for applications and estimate usage tiers</li>
+                            <li><strong>Product Managers:</strong> Compare provider costs and forecast budget requirements</li>
+                            <li><strong>Business Analysts:</strong> Calculate ROI and prepare cost-benefit analyses</li>
+                            <li><strong>Startups:</strong> Optimize LLM spending and choose the most cost-effective providers</li>
+                            <li><strong>Enterprise Teams:</strong> Project scaling costs and plan resource allocation</li>
+                            <li><strong>AI Researchers:</strong> Compare model costs for research projects and experiments</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Cost Optimization Tips</h3>
+                        <ul>
+                            <li><strong>Token Efficiency:</strong> Write concise prompts to minimize input token costs</li>
+                            <li><strong>Model Selection:</strong> Use GPT-3.5 for simpler tasks, reserve GPT-4 for complex ones</li>
+                            <li><strong>Batch Processing:</strong> Combine related requests to reduce API calls</li>
+                            <li><strong>Response Length:</strong> Set appropriate max_tokens to control output costs</li>
+                            <li><strong>Caching:</strong> Implement response caching for repeated queries</li>
+                            <li><strong>Request Optimization:</strong> Use efficient prompt engineering techniques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pricing-note">
+                    <h4>📝 Pricing Note</h4>
+                    <p>Prices shown are based on current public API rates as of March 2024. For the most up-to-date pricing, please refer to each provider's official pricing page. Enterprise pricing may vary based on volume and contract terms.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Model pricing data
+        const modelPricing = {
+            gpt4: { input: 0.03, output: 0.06 },
+            gpt35: { input: 0.0015, output: 0.002 },
+            claude: { input: 0.008, output: 0.024 },
+            palm: { input: 0.0005, output: 0.0005 }
+        };
+
+        let selectedModel = 'gpt4';
+
+        // Select model card functionality
+        document.querySelectorAll('.model-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.model-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedModel = card.dataset.model;
+                calculateCost();
+            });
+        });
+
+        // Select first model by default
+        document.querySelector('.model-card').classList.add('selected');
+
+        // Input handling
+        ['input-tokens', 'output-tokens', 'requests'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateCost);
+        });
+
+        function calculateCost() {
+            const inputTokens = parseFloat(document.getElementById('input-tokens').value) || 0;
+            const outputTokens = parseFloat(document.getElementById('output-tokens').value) || 0;
+            const requests = parseFloat(document.getElementById('requests').value) || 0;
+
+            const pricing = modelPricing[selectedModel];
+            const inputCost = (inputTokens / 1000) * pricing.input * requests;
+            const outputCost = (outputTokens / 1000) * pricing.output * requests;
+            const totalCost = inputCost + outputCost;
+
+            document.getElementById('input-cost').textContent = `$${inputCost.toFixed(4)}`;
+            document.getElementById('output-cost').textContent = `$${outputCost.toFixed(4)}`;
+            document.getElementById('total-cost').textContent = `$${totalCost.toFixed(4)}`;
+        }
+
+        // Initialize calculation
+        calculateCost();
+    </script>
+</body>
+</html> 

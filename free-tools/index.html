@@ -3,106 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free tools for LLM optimization and SEO. Analyze your content, validate knowledge graphs, and optimize for AI language models.">
-    <meta name="keywords" content="LLM tools, free SEO tools, content analysis, knowledge graph, LLM optimization">
-    <title>Free LLM Tools - LLM Logs</title>
+    <meta name="description" content="Free tools for LLM development, optimization, and cost estimation. Calculate RAG costs, analyze prompts, optimize tokens, and improve your LLM implementations.">
+    <meta name="keywords" content="LLM tools, RAG cost calculator, prompt analyzer, token calculator, LLM optimization, Pinecone costs, OpenAI pricing">
+    <title>Free LLM Development Tools - LLM Logs</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="../assets/js/main.js" defer></script>
+    
+    <style>
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .tool-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        .tool-card h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .tool-card p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+        .tool-link:hover {
+            background: var(--primary-color-dark);
+        }
+        .tool-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .tag-new {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        .tag-popular {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        .intro-section {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        .tool-categories {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .category-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .category-tag:hover, .category-tag.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
 </head>
 <body>
     <!-- Standard Header -->
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/tools">Tools</a>
+                <a href="/blog">Blog</a>
+            </nav>
             <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
             </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
         </div>
     </header>
 
     <div class="container">
         <nav class="breadcrumbs">
-            <a href="/">Home</a> /
+            <a href="/">Home</a>
+            <span class="separator">/</span>
             <span>Free Tools</span>
         </nav>
 
         <main class="content">
             <article class="tools-content">
-                <h1>Free LLM Tools</h1>
+                <h1>Free LLM Development Tools</h1>
                 
                 <div class="intro-section">
-                    <p class="lead">Enhance your website's performance with our suite of free tools designed for LLM optimization and SEO. These tools help you analyze, optimize, and improve your content for better visibility in AI-powered search results.</p>
+                    <p class="lead">A comprehensive suite of free tools for LLM development, optimization, and cost management. Build better AI applications with our professional-grade utilities designed for developers, architects, and product managers.</p>
+                </div>
+
+                <div class="tool-categories">
+                    <button class="category-tag active">All Tools</button>
+                    <button class="category-tag">Cost Estimation</button>
+                    <button class="category-tag">Development</button>
+                    <button class="category-tag">Optimization</button>
+                    <button class="category-tag">Analysis</button>
                 </div>
 
                 <div class="tools-grid">
                     <div class="tool-card">
+                        <span class="tool-tag tag-new">New</span>
+                        <h2>Prompt Injection Tester</h2>
+                        <p>Test your LLM prompts for security vulnerabilities. Get instant risk assessment scores and mitigation strategies.</p>
+                        <a href="prompt-injection-tester.html" class="tool-link">Test Security →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag tag-new">New</span>
+                        <h2>OpenAI Token Counter</h2>
+                        <p>Calculate token usage and costs for GPT-4, GPT-3.5, and other OpenAI models. Get instant token estimates and visual breakdowns.</p>
+                        <a href="openai-token-counter.html" class="tool-link">Count Tokens →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag tag-new">New</span>
+                        <h2>RAG Cost Estimator</h2>
+                        <p>Calculate and optimize costs for your Retrieval Augmented Generation system. Compare providers like OpenAI and Pinecone, estimate embedding and storage costs.</p>
+                        <a href="rag-cost-estimator.html" class="tool-link">Calculate RAG Costs →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag tag-new">New</span>
+                        <h2>Token Cost Calculator</h2>
+                        <p>Estimate API costs across different LLM providers. Calculate token usage, compare pricing, and optimize your budget for AI applications.</p>
+                        <a href="llm-token-cost-calculator.html" class="tool-link">Calculate Costs →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag tag-popular">Popular</span>
+                        <h2>Prompt Health Analyzer</h2>
+                        <p>Analyze your prompts for readability, token efficiency, and potential risks. Get optimization suggestions and best practices.</p>
+                        <a href="prompt-health-analyzer.html" class="tool-link">Analyze Prompt →</a>
+                    </div>
+
+                    <div class="tool-card">
                         <h2>LLM txt Generator</h2>
-                        <p>Generate an optimized llms.txt file for your website. Our tool analyzes your sitemap and content structure to create the perfect configuration for LLM processing.</p>
-                        <a href="llm-txt-generator.html" class="tool-link">Use Tool</a>
+                        <p>Generate an optimized llms.txt file for your website. Configure LLM crawling behavior and improve content discovery.</p>
+                        <a href="llm-txt-generator.html" class="tool-link">Generate File →</a>
                     </div>
 
                     <div class="tool-card">
                         <h2>Content Structure Analyzer</h2>
-                        <p>Analyze your content structure and get recommendations for better LLM optimization. Identify areas for improvement in your content organization.</p>
-                        <a href="content-structure-analyzer.html" class="tool-link">Use Tool</a>
+                        <p>Analyze your content structure for LLM optimization. Get recommendations for better organization and semantic markup.</p>
+                        <a href="content-structure-analyzer.html" class="tool-link">Analyze Structure →</a>
                     </div>
 
                     <div class="tool-card">
                         <h2>Knowledge Graph Validator</h2>
-                        <p>Validate your website's knowledge graph implementation and ensure it's properly structured for LLM processing.</p>
-                        <a href="knowledge-graph-validator.html" class="tool-link">Use Tool</a>
+                        <p>Validate your knowledge graph implementation for LLMs. Ensure proper semantic relationships and data structure.</p>
+                        <a href="knowledge-graph-validator.html" class="tool-link">Validate Graph →</a>
                     </div>
 
                     <div class="tool-card">
                         <h2>LLM Citation Checker</h2>
-                        <p>Check your content for proper citations and references that help LLMs understand and trust your content.</p>
-                        <a href="llm-citation-checker.html" class="tool-link">Use Tool</a>
+                        <p>Verify citations and references in your content. Improve trustworthiness and source attribution for LLMs.</p>
+                        <a href="llm-citation-checker.html" class="tool-link">Check Citations →</a>
                     </div>
 
                     <div class="tool-card">
-                        <h2>HTML to Markdown Converter</h2>
-                        <p>Convert your HTML content to Markdown format, which is often preferred by LLMs for better content processing.</p>
-                        <a href="html-to-markdown.html" class="tool-link">Use Tool</a>
+                        <h2>HTML to Markdown</h2>
+                        <p>Convert HTML content to Markdown format for better LLM processing. Clean and standardize your content structure.</p>
+                        <a href="html-to-markdown.html" class="tool-link">Convert Format →</a>
                     </div>
 
                     <div class="tool-card">
-                        <h3>MCP Score Tracker</h3>
-                        <p>Track your content's Mean Cumulative Precision score and monitor LLM citation performance over time.</p>
-                        <a href="mcp-tracker.html" class="tool-link">Track MCP Score →</a>
+                        <h2>MCP Score Tracker</h2>
+                        <p>Monitor your Mean Cumulative Precision score over time. Track and improve LLM citation performance.</p>
+                        <a href="mcp-tracker.html" class="tool-link">Track Score →</a>
                     </div>
                 </div>
 
                 <section class="learn-more">
                     <h2>Want to Learn More?</h2>
-                    <p>Check out our comprehensive guides on LLM optimization and SEO:</p>
+                    <p>Explore our comprehensive guides on LLM development and optimization:</p>
                     <ul class="guide-links">
-                        <li><a href="/guides/llm-optimization/core-concepts">Core Concepts</a> - Understanding LLM optimization</li>
-                        <li><a href="/guides/llm-optimization/implementation">Implementation Guide</a> - How to implement LLM optimization</li>
-                        <li><a href="/guides/llm-optimization/best-practices">Best Practices</a> - Proven strategies for success</li>
+                        <li><a href="/guides/llm-optimization/core-concepts">Core Concepts</a> - Understanding LLM systems and architecture</li>
+                        <li><a href="/guides/llm-optimization/implementation">Implementation Guide</a> - Step-by-step deployment tutorials</li>
+                        <li><a href="/guides/llm-optimization/best-practices">Best Practices</a> - Optimization strategies and tips</li>
+                        <li><a href="/guides/llm-optimization/cost-optimization">Cost Optimization</a> - Manage and reduce LLM costs</li>
                     </ul>
                 </section>
             </article>
         </main>
     </div>
 
-    <!-- Simple Footer -->
+    <!-- Standard Footer -->
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/guides">Guides</a>
                 <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmguides">GitHub</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 LLM Logs. All rights reserved.</p>
@@ -110,7 +249,16 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
+    <script>
+        // Category filtering
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                // TODO: Implement actual filtering
+            });
+        });
+    </script>
 </body>
 </html> 

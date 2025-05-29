@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Token Counter - Calculate GPT Token Usage | LLM Logs</title>
+    <meta name="description" content="Free OpenAI token counter tool. Calculate token usage and costs for GPT-4, GPT-3.5, and other models. Get instant token estimates and cost breakdowns for your prompts.">
+    <meta name="keywords" content="OpenAI token counter, GPT token calculator, ChatGPT token estimator, token cost calculator, GPT-4 tokens, GPT-3.5 tokens">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/openai-token-counter" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="token_counter">
+    <meta name="llm:use_case" content="cost_estimation,token_analysis">
+    <meta name="llm:target_audience" content="developers,content_creators,mlops">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+    
+    <style>
+        .token-counter {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-section {
+            margin-bottom: 2rem;
+        }
+        .input-section textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .model-selector {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .model-card {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .model-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .model-card.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color-light);
+        }
+        .results-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .result-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .result-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .token-breakdown {
+            margin-top: 2rem;
+        }
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+        }
+        .cost-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        .cost-low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .cost-medium {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .cost-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .visual-breakdown {
+            margin-top: 2rem;
+        }
+        .token-bar {
+            height: 24px;
+            background: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .token-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .tips-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .tip-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .tip-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/tools">Tools</a>
+                <a href="/blog">Blog</a>
+            </nav>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
+                        frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/free-tools">Free Tools</a>
+            <span class="separator">/</span>
+            <span>OpenAI Token Counter</span>
+        </nav>
+
+        <main class="tool-container">
+            <h1>OpenAI Token Counter</h1>
+            <p class="lead">Calculate token usage and costs for GPT-4, GPT-3.5, and other OpenAI models. Get instant token estimates and visual breakdowns to optimize your prompts and manage costs effectively.</p>
+
+            <div class="token-counter">
+                <div class="input-section">
+                    <h2>Enter Your Prompt</h2>
+                    <textarea id="prompt-input" placeholder="Paste your prompt here to calculate tokens..."></textarea>
+                </div>
+
+                <div class="model-selector">
+                    <div class="model-card selected" data-model="gpt-4">
+                        <h3>GPT-4</h3>
+                        <p>$0.03 / 1K tokens (prompt)</p>
+                        <p>$0.06 / 1K tokens (completion)</p>
+                    </div>
+                    <div class="model-card" data-model="gpt-35-turbo">
+                        <h3>GPT-3.5 Turbo</h3>
+                        <p>$0.0015 / 1K tokens (prompt)</p>
+                        <p>$0.002 / 1K tokens (completion)</p>
+                    </div>
+                    <div class="model-card" data-model="gpt-4-turbo">
+                        <h3>GPT-4 Turbo</h3>
+                        <p>$0.01 / 1K tokens (prompt)</p>
+                        <p>$0.03 / 1K tokens (completion)</p>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <div class="result-card">
+                        <h3>Total Tokens</h3>
+                        <div class="result-value" id="total-tokens">0</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Estimated Cost</h3>
+                        <div class="result-value" id="estimated-cost">$0.00</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Characters</h3>
+                        <div class="result-value" id="char-count">0</div>
+                    </div>
+                </div>
+
+                <div class="token-breakdown">
+                    <h3>Token Breakdown</h3>
+                    <div class="breakdown-item">
+                        <span>Words</span>
+                        <span id="word-count">0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Special Tokens</span>
+                        <span id="special-tokens">0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Token/Word Ratio</span>
+                        <span id="token-ratio">0</span>
+                    </div>
+                </div>
+
+                <div class="visual-breakdown">
+                    <h3>Token Usage Visualization</h3>
+                    <div class="token-bar">
+                        <div class="token-fill" id="token-visualization"></div>
+                    </div>
+                    <p>Using <span id="token-percentage">0%</span> of model's context window</p>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h2>Token Optimization Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>Reduce Token Usage</h4>
+                        <ul>
+                            <li>Use concise language</li>
+                            <li>Remove redundant information</li>
+                            <li>Optimize formatting</li>
+                            <li>Use shorter synonyms</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Cost Management</h4>
+                        <ul>
+                            <li>Choose appropriate models</li>
+                            <li>Implement caching</li>
+                            <li>Batch similar requests</li>
+                            <li>Monitor usage patterns</li>
+                        </ul>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Best Practices</h4>
+                        <ul>
+                            <li>Test with sample data</li>
+                            <li>Set token limits</li>
+                            <li>Use streaming for long outputs</li>
+                            <li>Implement rate limiting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tiktoken"></script>
+    <script>
+        // Token counting functionality
+        const promptInput = document.getElementById('prompt-input');
+        const modelCards = document.querySelectorAll('.model-card');
+        let selectedModel = 'gpt-4';
+
+        // Model selection
+        modelCards.forEach(card => {
+            card.addEventListener('click', () => {
+                modelCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedModel = card.dataset.model;
+                updateTokenCount();
+            });
+        });
+
+        // Token counting and visualization
+        promptInput.addEventListener('input', updateTokenCount);
+
+        function updateTokenCount() {
+            const text = promptInput.value;
+            
+            // Basic counting (replace with tiktoken when available)
+            const wordCount = text.trim().split(/\s+/).length;
+            const charCount = text.length;
+            const estimatedTokens = Math.ceil(charCount / 4); // Rough estimation
+            
+            // Update UI
+            document.getElementById('total-tokens').textContent = estimatedTokens;
+            document.getElementById('word-count').textContent = wordCount;
+            document.getElementById('char-count').textContent = charCount;
+            document.getElementById('token-ratio').textContent = (wordCount ? (estimatedTokens / wordCount).toFixed(2) : '0');
+            
+            // Calculate cost
+            let costPer1K;
+            switch(selectedModel) {
+                case 'gpt-4':
+                    costPer1K = 0.03;
+                    break;
+                case 'gpt-35-turbo':
+                    costPer1K = 0.0015;
+                    break;
+                case 'gpt-4-turbo':
+                    costPer1K = 0.01;
+                    break;
+            }
+            
+            const estimatedCost = (estimatedTokens / 1000) * costPer1K;
+            document.getElementById('estimated-cost').textContent = `$${estimatedCost.toFixed(4)}`;
+            
+            // Update visualization
+            const maxTokens = selectedModel === 'gpt-4' ? 8192 : 4096;
+            const percentage = (estimatedTokens / maxTokens) * 100;
+            document.getElementById('token-visualization').style.width = `${Math.min(percentage, 100)}%`;
+            document.getElementById('token-percentage').textContent = `${percentage.toFixed(1)}%`;
+        }
+    </script>
+</body>
+</html> 
