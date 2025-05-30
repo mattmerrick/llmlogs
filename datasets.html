@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Evaluation Datasets - Comprehensive Guide | LLM Logs</title>
+    <meta name="description" content="Complete directory of datasets used for evaluating Large Language Models (LLMs), including language understanding, reasoning, math, coding, and multimodal tasks.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Common Datasets for Evaluating LLMs">
+    <meta property="og:description" content="A comprehensive collection of datasets for evaluating Large Language Models (LLMs) across language understanding, reasoning, math, coding, and multimodal tasks.">
+    <meta property="og:image" content="https://llmlogs.com/dataset-infograph.png">
+    <meta property="og:url" content="https://llmlogs.com/datasets.html">
+    <meta property="og:site_name" content="LLM Logs">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Common Datasets for Evaluating LLMs">
+    <meta name="twitter:description" content="A comprehensive collection of datasets for evaluating Large Language Models (LLMs) across language understanding, reasoning, math, coding, and multimodal tasks.">
+    <meta name="twitter:image" content="https://llmlogs.com/dataset-infograph.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+    <style>
+        .hero-infographic {
+            margin: 2rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-infographic img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .share-infographic-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .share-infographic-btn:hover {
+            background: #f3f4f6;
+            transform: translateY(-1px);
+        }
+
+        .dataset-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .dataset-table th {
+            background: #f8fafc;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .dataset-table td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+
+        .dataset-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .source-links a {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #f3f4f6;
+            border-radius: 6px;
+            color: #2563eb;
+            text-decoration: none;
+            margin-right: 0.5rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .source-links a:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+
+        .dataTables_filter {
+            margin-bottom: 1rem;
+        }
+
+        .dataTables_filter input {
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            width: 300px;
+            margin-left: 0.5rem;
+        }
+
+        select {
+            padding: 0.3rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .dt-buttons {
+            margin-bottom: 1rem;
+        }
+
+        .dt-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: #ffffff;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dt-button:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .content-intro, .content-explanation {
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        .content-intro p, .content-explanation p {
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .content-explanation ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .content-explanation li {
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .featured-posts {
+            margin: 4rem 0;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .post-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .post-card h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .post-card p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .read-more {
+            color: #2563eb;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <div class="nav-links">
+                <a href="/guides/">Guides</a>
+                <a href="/blog/">Blog</a>
+                <a href="/tools/">Tools</a>
+                <a href="/datasets/" class="active">Datasets</a>
+                <a href="/start-here/" class="start-here-link">Start Here</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>LLM Evaluation Datasets</h1>
+        
+        <!-- SEO-friendly introduction -->
+        <div class="content-intro">
+            <p class="lead">A comprehensive collection of datasets used for evaluating Large Language Models (LLMs). This curated list includes benchmarks for language understanding, reasoning, mathematics, coding, and multimodal capabilities.</p>
+            
+            <p>Evaluating Large Language Models (LLMs) requires carefully selected datasets that can assess different aspects of model performance. Our comprehensive table below includes the most widely-used evaluation datasets, from fundamental language understanding benchmarks like GLUE and SuperGLUE to specialized assessments for mathematics (GSM8K), coding (HumanEval), and multimodal capabilities (VQAv2).</p>
+            
+            <p>Each dataset in this collection has been carefully selected based on its significance in the field, citation impact, and adoption by major language models like GPT-4, Claude, PaLM, and Gemini. The table provides essential information about each dataset, including its primary category, detailed description, source links, and which prominent models commonly use it for evaluation.</p>
+        </div>
+
+        <!-- Infographic Section -->
+        <div class="hero-infographic">
+            <img src="/dataset-infograph.png" alt="Common Datasets for Evaluating LLMs Infographic" width="1200" height="800">
+            <button class="share-infographic-btn" onclick="openInfographicModal()">
+                🔗 Share Infographic
+            </button>
+        </div>
+
+        <!-- Main Table -->
+        <table id="datasetsTable" class="dataset-table">
+            <thead>
+                <tr>
+                    <th>Dataset</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Source</th>
+                    <th>Common Models</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GLUE</td>
+                    <td>Language Understanding</td>
+                    <td>General Language Understanding Evaluation benchmark containing 9 tasks: CoLA, SST-2, MRPC, QQP, STS-B, MNLI, QNLI, RTE, and WNLI.</td>
+                    <td class="source-links"><a href="https://gluebenchmark.com/" target="_blank">Website</a> | <a href="https://arxiv.org/abs/1804.07461" target="_blank">Paper</a></td>
+                    <td>BERT, RoBERTa, T5, GPT variants</td>
+                </tr>
+                <tr>
+                    <td>SuperGLUE</td>
+                    <td>Language Understanding</td>
+                    <td>More challenging successor to GLUE with harder tasks requiring more sophisticated language understanding and reasoning.</td>
+                    <td class="source-links"><a href="https://super.gluebenchmark.com/" target="_blank">Website</a> | <a href="https://arxiv.org/abs/1905.00537" target="_blank">Paper</a></td>
+                    <td>T5, GPT-3, PaLM, Claude</td>
+                </tr>
+                <tr>
+                    <td>MMLU</td>
+                    <td>Language Understanding</td>
+                    <td>Massive Multitask Language Understanding - Tests knowledge across 57 subjects including STEM, humanities, and more. Multiple-choice format with expert-level questions.</td>
+                    <td class="source-links"><a href="https://github.com/hendrycks/test" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2009.03300" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2, Gemini</td>
+                </tr>
+                <tr>
+                    <td>BIG-bench</td>
+                    <td>Language Understanding</td>
+                    <td>Beyond the Imitation Game benchmark - Collection of 204 tasks testing capabilities like reasoning, knowledge, and social understanding.</td>
+                    <td class="source-links"><a href="https://github.com/google/BIG-bench" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2206.04615" target="_blank">Paper</a></td>
+                    <td>PaLM, GPT-4, Claude, Gemini</td>
+                </tr>
+                <tr>
+                    <td>HellaSwag</td>
+                    <td>Language Understanding</td>
+                    <td>Common sense inference dataset for testing grounded commonsense inference with 70K multiple choice questions about grounded situations.</td>
+                    <td class="source-links"><a href="https://github.com/rowanz/hellaswag" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/1905.07830" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>GSM8K</td>
+                    <td>Math & Reasoning</td>
+                    <td>Grade School Math 8K - Collection of 8.5K high-quality linguistically diverse grade school math word problems. Problems take between 2-8 steps to solve.</td>
+                    <td class="source-links"><a href="https://github.com/openai/grade-school-math" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2110.14168" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude, PaLM</td>
+                </tr>
+                <tr>
+                    <td>MATH</td>
+                    <td>Math & Reasoning</td>
+                    <td>Collection of 12K middle school and high school mathematics problems covering algebra, geometry, probability, and more.</td>
+                    <td class="source-links"><a href="https://github.com/hendrycks/math" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2103.03874" target="_blank">Paper</a></td>
+                    <td>GPT-4, Minerva, Claude</td>
+                </tr>
+                <tr>
+                    <td>MathQA</td>
+                    <td>Math & Reasoning</td>
+                    <td>Large-scale dataset containing 37K mathematics word problems with step-by-step solutions and multiple-choice answers.</td>
+                    <td class="source-links"><a href="https://math-qa.github.io/" target="_blank">Website</a> | <a href="https://arxiv.org/abs/1905.13319" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, Gemini Pro</td>
+                </tr>
+                <tr>
+                    <td>HumanEval</td>
+                    <td>Coding</td>
+                    <td>164 handwritten Python programming problems to evaluate code generation capabilities.</td>
+                    <td class="source-links"><a href="https://github.com/openai/human-eval" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2107.03374" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, Code Llama</td>
+                </tr>
+                <tr>
+                    <td>MBPP</td>
+                    <td>Coding</td>
+                    <td>Mostly Basic Programming Problems - 974 Python programming tasks with test cases.</td>
+                    <td class="source-links"><a href="https://github.com/google-research/google-research/tree/master/mbpp" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2108.07732" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude, StarCoder</td>
+                </tr>
+                <tr>
+                    <td>CodeContests</td>
+                    <td>Coding</td>
+                    <td>Collection of competitive programming problems from various online contests.</td>
+                    <td class="source-links"><a href="https://github.com/google-research/google-research/tree/master/code_contests" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2108.07732" target="_blank">Paper</a></td>
+                    <td>AlphaCode, GPT-4, Claude</td>
+                </tr>
+                <tr>
+                    <td>VQAv2</td>
+                    <td>Multimodal</td>
+                    <td>Visual Question Answering dataset with 265K images and 3M questions requiring understanding of vision, language, and commonsense knowledge.</td>
+                    <td class="source-links"><a href="https://visualqa.org/" target="_blank">Website</a> | <a href="https://arxiv.org/abs/1505.00468" target="_blank">Paper</a></td>
+                    <td>GPT-4V, Claude 3, Gemini</td>
+                </tr>
+                <tr>
+                    <td>MMMU</td>
+                    <td>Multimodal</td>
+                    <td>Massive Multi-discipline Multimodal Understanding benchmark covering 183 subjects across various disciplines including science, engineering, and humanities.</td>
+                    <td class="source-links"><a href="https://mmmu-benchmark.github.io/" target="_blank">Website</a> | <a href="https://arxiv.org/abs/2311.16502" target="_blank">Paper</a></td>
+                    <td>GPT-4V, Claude 3, Gemini</td>
+                </tr>
+                <tr>
+                    <td>MathVista</td>
+                    <td>Multimodal</td>
+                    <td>Visual mathematics reasoning dataset with diverse problem types including geometry, graphs, and scientific diagrams.</td>
+                    <td class="source-links"><a href="https://mathvista.github.io/" target="_blank">Website</a> | <a href="https://arxiv.org/abs/2310.02255" target="_blank">Paper</a></td>
+                    <td>GPT-4V, Claude 3, Gemini</td>
+                </tr>
+                <tr>
+                    <td>TruthfulQA</td>
+                    <td>Safety & Adversarial</td>
+                    <td>Tests models' ability to identify and avoid generating false or misleading information.</td>
+                    <td class="source-links"><a href="https://github.com/sylinrl/TruthfulQA" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2109.07958" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>Anthropic Red Team</td>
+                    <td>Safety & Adversarial</td>
+                    <td>Collection of adversarial prompts testing model safety and alignment.</td>
+                    <td class="source-links"><a href="https://github.com/anthropics/hh-rlhf" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2209.07858" target="_blank">Paper</a></td>
+                    <td>Claude, GPT-4, PaLM</td>
+                </tr>
+                <tr>
+                    <td>Toxigen</td>
+                    <td>Safety & Adversarial</td>
+                    <td>Dataset for testing and measuring implicit toxicity in language models, with human-validated examples.</td>
+                    <td class="source-links"><a href="https://github.com/microsoft/toxigen" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2203.09509" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>MT-Bench</td>
+                    <td>Dialogue</td>
+                    <td>Multi-turn dialogue benchmark with 80 challenging multi-turn conversations, designed to evaluate chat models.</td>
+                    <td class="source-links"><a href="https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2306.05685" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>Anthropic HH</td>
+                    <td>Dialogue</td>
+                    <td>Helpful and Harmless benchmark testing both beneficial behavior and safety constraints in dialogue.</td>
+                    <td class="source-links"><a href="https://github.com/anthropics/hh-rlhf" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2204.05862" target="_blank">Paper</a></td>
+                    <td>Claude, GPT-4, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>NaturalQuestions</td>
+                    <td>Knowledge-heavy</td>
+                    <td>Real Google search queries with answers from Wikipedia, testing both short and long-form question answering.</td>
+                    <td class="source-links"><a href="https://github.com/google-research-datasets/natural-questions" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/1901.08634" target="_blank">Paper</a></td>
+                    <td>GPT-4, PaLM 2, Claude</td>
+                </tr>
+                <tr>
+                    <td>TriviaQA</td>
+                    <td>Knowledge-heavy</td>
+                    <td>Large-scale dataset with over 650K question-answer-evidence triples from trivia questions.</td>
+                    <td class="source-links"><a href="https://github.com/mandarjoshi90/triviaqa" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/1705.03551" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>Self-Instruct</td>
+                    <td>Instruction Following</td>
+                    <td>52K instruction-following examples generated by GPT-3, covering diverse tasks and formats.</td>
+                    <td class="source-links"><a href="https://github.com/yizhongw/self-instruct" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2212.10560" target="_blank">Paper</a></td>
+                    <td>GPT-4, Claude 2, PaLM 2</td>
+                </tr>
+                <tr>
+                    <td>Alpaca</td>
+                    <td>Instruction Following</td>
+                    <td>52K instruction-following examples based on Self-Instruct, used for fine-tuning smaller models.</td>
+                    <td class="source-links"><a href="https://github.com/tatsu-lab/stanford_alpaca" target="_blank">GitHub</a></td>
+                    <td>LLaMA, Alpaca, GPT-4</td>
+                </tr>
+                <tr>
+                    <td>FLAN</td>
+                    <td>Instruction Following</td>
+                    <td>Large collection of tasks converted to instruction format, used for instruction tuning.</td>
+                    <td class="source-links"><a href="https://github.com/google-research/FLAN" target="_blank">GitHub</a> | <a href="https://arxiv.org/abs/2109.01652" target="_blank">Paper</a></td>
+                    <td>PaLM 2, FLAN-T5, GPT-4</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Post-table content -->
+        <div class="content-explanation">
+            <h2>Understanding LLM Evaluation Datasets</h2>
+            
+            <p>The datasets listed above serve different evaluation purposes:</p>
+            
+            <ul>
+                <li><strong>Language Understanding:</strong> Datasets like GLUE and SuperGLUE test fundamental language capabilities including grammar, sentiment analysis, and semantic similarity.</li>
+                <li><strong>Reasoning & Mathematics:</strong> GSM8K and MATH evaluate mathematical reasoning and problem-solving abilities.</li>
+                <li><strong>Coding:</strong> HumanEval and MBPP assess code generation and understanding capabilities.</li>
+                <li><strong>Multimodal:</strong> Datasets like VQAv2 and MMMU test the model's ability to understand and reason about both text and images.</li>
+                <li><strong>Safety:</strong> TruthfulQA and Anthropic Red Team evaluate model safety and alignment.</li>
+            </ul>
+
+            <p>When selecting evaluation datasets for your LLM application, consider factors such as task relevance, dataset size, quality of annotations, and coverage of edge cases. The right combination of evaluation datasets can provide a comprehensive assessment of your model's capabilities and limitations.</p>
+        </div>
+
+        <!-- Featured Blog Posts -->
+        <section class="featured-posts">
+            <h2>📚 Related Guides & Articles</h2>
+            <div class="post-grid">
+                <a href="blog/llm-evaluation-guide.html" class="post-card">
+                    <h3>Complete Guide to LLM Evaluation</h3>
+                    <p>Learn how to effectively evaluate LLMs using different datasets and metrics. Covers best practices, common pitfalls, and practical examples.</p>
+                    <span class="read-more">Read More →</span>
+                </a>
+                <a href="blog/benchmark-comparison.html" class="post-card">
+                    <h3>Comparing Popular LLM Benchmarks</h3>
+                    <p>Deep dive into MMLU, HELM, Big-Bench, and other major benchmarks. Understand their strengths, weaknesses, and when to use each.</p>
+                    <span class="read-more">Read More →</span>
+                </a>
+                <a href="blog/custom-evaluation-datasets.html" class="post-card">
+                    <h3>Creating Custom Evaluation Datasets</h3>
+                    <p>Step-by-step guide to creating domain-specific evaluation datasets for your LLM applications.</p>
+                    <span class="read-more">Read More →</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+                <a href="/privacy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 LLM SEO Guide. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datasetsTable').DataTable({
+                paging: false,
+                info: false,
+                dom: 'Bfrt',
+                buttons: ['copy', 'csv', 'excel'],
+                order: [[1, 'asc']],
+                language: {
+                    search: "Search datasets:",
+                    zeroRecords: "No matching datasets found"
+                }
+            });
+
+            // Style improvements
+            $('.dataTables_filter').css({
+                'float': 'none',
+                'text-align': 'left',
+                'margin-bottom': '1rem'
+            });
+        });
+    </script>
+</body>
+</html> 

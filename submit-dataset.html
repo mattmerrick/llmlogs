@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Dataset - LLM Evaluation Datasets | LLM Logs</title>
+    <meta name="description" content="Submit your LLM evaluation dataset to help the community discover and use high-quality benchmarks for testing language models.">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="/" class="site-logo">LLM Logs</a>
+            <div class="nav-links">
+                <a href="/guides/">Guides</a>
+                <a href="/blog/">Blog</a>
+                <a href="/tools/">Tools</a>
+                <a href="/datasets/" class="active">Datasets</a>
+                <a href="/start-here/" class="start-here-link">Start Here</a>
+            </div>
+            <div class="github-star">
+                <iframe src="https://ghbtns.com/github-btn.html?user=llmseoguide&repo=llmseoguide&type=star&count=true" frameborder="0" scrolling="0" width="150" height="20" title="GitHub"></iframe>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <div class="submission-header">
+                <h1>Submit a Dataset</h1>
+                <p class="subtitle">Help the LLM community discover valuable evaluation datasets by submitting yours for review.</p>
+            </div>
+
+            <div class="submission-form">
+                <form action="https://formspree.io/f/mldnrdwn" method="POST" class="dataset-submission-form">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h2>Basic Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="dataset-name">Dataset Name *</label>
+                            <input type="text" id="dataset-name" name="dataset-name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataset-repo">Repository/Website URL *</label>
+                            <input type="url" id="dataset-repo" name="dataset-repo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paper-url">Research Paper URL</label>
+                            <input type="url" id="paper-url" name="paper-url" 
+                                   placeholder="Link to arXiv or published paper if available">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataset-category">Category *</label>
+                            <select id="dataset-category" name="dataset-category" required>
+                                <option value="">Select a category</option>
+                                <option value="language">Language Understanding</option>
+                                <option value="reasoning">Reasoning</option>
+                                <option value="math">Math</option>
+                                <option value="coding">Coding</option>
+                                <option value="multimodal">Multimodal</option>
+                                <option value="dialogue">Dialogue</option>
+                                <option value="safety">Safety/Adversarial</option>
+                                <option value="knowledge">Knowledge-heavy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dataset Description -->
+                    <div class="form-section">
+                        <h2>Dataset Description</h2>
+                        
+                        <div class="form-group">
+                            <label for="dataset-summary">Brief Summary *</label>
+                            <textarea id="dataset-summary" name="dataset-summary" rows="3" required
+                                    placeholder="A concise description of what your dataset evaluates"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataset-size">Dataset Size & Structure *</label>
+                            <textarea id="dataset-size" name="dataset-size" rows="3" required
+                                    placeholder="Number of examples, format, data distribution"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="evaluation-metrics">Evaluation Metrics *</label>
+                            <textarea id="evaluation-metrics" name="evaluation-metrics" rows="3" required
+                                    placeholder="How performance is measured (e.g., accuracy, F1, custom metrics)"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Models & Results -->
+                    <div class="form-section">
+                        <h2>Models & Benchmarks</h2>
+                        
+                        <div class="form-group">
+                            <label for="tested-models">Models Tested *</label>
+                            <textarea id="tested-models" name="tested-models" rows="3" required
+                                    placeholder="List the main models that have been evaluated on this dataset"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="benchmark-results">Key Results</label>
+                            <textarea id="benchmark-results" name="benchmark-results" rows="4"
+                                    placeholder="Notable performance results and findings"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Usage Information -->
+                    <div class="form-section">
+                        <h2>Usage Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="license">License *</label>
+                            <input type="text" id="license" name="license" required
+                                   placeholder="e.g., MIT, Apache 2.0, CC BY-SA 4.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="usage-instructions">Usage Instructions</label>
+                            <textarea id="usage-instructions" name="usage-instructions" rows="4"
+                                    placeholder="Brief instructions on how to use the dataset"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="form-section">
+                        <h2>Contact Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="submitter-email">Your Email *</label>
+                            <input type="email" id="submitter-email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="submitter-affiliation">Affiliation *</label>
+                            <input type="text" id="submitter-affiliation" name="submitter-affiliation" required
+                                   placeholder="Organization/Institution">
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="additional-notes">Anything else you'd like us to know?</label>
+                            <textarea id="additional-notes" name="additional-notes" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="submit-button">Submit Dataset for Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+                <a href="/privacy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 LLM SEO Guide. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html> 
