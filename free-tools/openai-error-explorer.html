@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Error Code Explorer - LLM SEO Guide</title>
+    <meta name="description" content="Interactive tool to decode and troubleshoot OpenAI API error codes. Get detailed explanations, causes, and solutions for OpenAI API errors.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        .error-explorer {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .error-search {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        .error-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .error-code {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .solution-steps {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+        .copy-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        .error-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
+            background: var(--tag-bg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Standard Header -->
+    <include src="/assets/components/standard-header.html"></include>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <div class="content">
+            <div class="error-explorer">
+                <h1>OpenAI Error Code Explorer</h1>
+                <p class="tool-description">
+                    Quickly decode and troubleshoot OpenAI API errors. Enter your error code or search by description to get detailed explanations, common causes, and suggested solutions.
+                </p>
+
+                <div class="search-section">
+                    <input type="text" class="error-search" id="errorSearch" placeholder="Enter error code (e.g., 'rate_limit_exceeded') or search by description...">
+                </div>
+
+                <div id="errorResults">
+                    <!-- Error results will be dynamically populated here -->
+                </div>
+
+                <div class="common-errors">
+                    <h2>Common OpenAI API Errors</h2>
+                    <div class="error-card">
+                        <span class="error-code">rate_limit_exceeded</span>
+                        <span class="error-type">Rate Limit</span>
+                        <p>You have hit your rate limit. API requests are exceeding your current quota.</p>
+                        <div class="solution-steps">
+                            <h4>Solutions:</h4>
+                            <ul>
+                                <li>Implement exponential backoff in your requests</li>
+                                <li>Check your rate limits in the OpenAI dashboard</li>
+                                <li>Consider upgrading your API tier</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="error-code">invalid_request_error</span>
+                        <span class="error-type">Request Format</span>
+                        <p>The API request was malformed or contained invalid parameters.</p>
+                        <div class="solution-steps">
+                            <h4>Solutions:</h4>
+                            <ul>
+                                <li>Verify your API request format matches the documentation</li>
+                                <li>Check for missing or invalid parameters</li>
+                                <li>Ensure proper JSON formatting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="error-card">
+                        <span class="error-code">authentication_error</span>
+                        <span class="error-type">Auth</span>
+                        <p>Your API key is invalid, expired, or missing.</p>
+                        <div class="solution-steps">
+                            <h4>Solutions:</h4>
+                            <ul>
+                                <li>Verify your API key is correct</li>
+                                <li>Check if your API key has been rotated</li>
+                                <li>Ensure the API key has proper permissions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <include src="/assets/components/standard-footer.html"></include>
+
+    <!-- Required Scripts -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Error code database
+        const errorDatabase = {
+            'rate_limit_exceeded': {
+                type: 'Rate Limit',
+                description: 'You have hit your rate limit. API requests are exceeding your current quota.',
+                solutions: [
+                    'Implement exponential backoff in your requests',
+                    'Check your rate limits in the OpenAI dashboard',
+                    'Consider upgrading your API tier'
+                ]
+            },
+            'invalid_request_error': {
+                type: 'Request Format',
+                description: 'The API request was malformed or contained invalid parameters.',
+                solutions: [
+                    'Verify your API request format matches the documentation',
+                    'Check for missing or invalid parameters',
+                    'Ensure proper JSON formatting'
+                ]
+            },
+            'authentication_error': {
+                type: 'Auth',
+                description: 'Your API key is invalid, expired, or missing.',
+                solutions: [
+                    'Verify your API key is correct',
+                    'Check if your API key has been rotated',
+                    'Ensure the API key has proper permissions'
+                ]
+            },
+            // Add more error codes as needed
+        };
+
+        // Search functionality
+        document.getElementById('errorSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const resultsDiv = document.getElementById('errorResults');
+            resultsDiv.innerHTML = '';
+
+            if (!searchTerm) return;
+
+            for (const [code, data] of Object.entries(errorDatabase)) {
+                if (code.includes(searchTerm) || 
+                    data.description.toLowerCase().includes(searchTerm) ||
+                    data.type.toLowerCase().includes(searchTerm)) {
+                    
+                    const errorCard = document.createElement('div');
+                    errorCard.className = 'error-card';
+                    errorCard.innerHTML = `
+                        <span class="error-code">${code}</span>
+                        <span class="error-type">${data.type}</span>
+                        <p>${data.description}</p>
+                        <div class="solution-steps">
+                            <h4>Solutions:</h4>
+                            <ul>
+                                ${data.solutions.map(solution => `<li>${solution}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                    resultsDiv.appendChild(errorCard);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
