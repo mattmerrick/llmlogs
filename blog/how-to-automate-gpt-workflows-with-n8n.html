@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Automate GPT Workflows with n8n - LLM Logs</title>
+    <meta name="description" content="Learn how to automate GPT workflows using n8n. Step-by-step setup for building GPT-based automations—no coding needed.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="How to Automate GPT Workflows with n8n: A Step-by-Step Beginner's Guide">
+    <meta property="og:description" content="Learn how to automate GPT workflows using n8n. Step-by-step setup for building GPT-based automations—no coding needed.">
+    <meta property="og:image" content="https://llmlogs.com/blog/images/how-to-automate-gpt-workflow-with-n8n.png">
+    <meta property="og:url" content="https://llmlogs.com/blog/how-to-automate-gpt-workflows-with-n8n">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Automate GPT Workflows with n8n: A Step-by-Step Beginner's Guide">
+    <meta name="twitter:description" content="Learn how to automate GPT workflows using n8n. Step-by-step setup for building GPT-based automations—no coding needed.">
+    <meta name="twitter:image" content="https://llmlogs.com/blog/images/how-to-automate-gpt-workflow-with-n8n.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="/">Home</a> &raquo; 
+            <a href="/blog">Blog</a> &raquo; 
+            <span>How to Automate GPT Workflows with n8n</span>
+        </div>
+
+        <!-- Article Content -->
+        <article class="blog-post">
+            <h1>How to Automate GPT Workflows with n8n: A Step-by-Step Beginner's Guide</h1>
+            
+            <!-- Post Meta -->
+            <div class="post-meta">
+                <time datetime="2024-03-27">March 27, 2024</time>
+                <span class="category">Automation</span>
+            </div>
+
+            <!-- Article Header Image -->
+            <div class="article-header-image">
+                <img src="how-to-automate-gpt-workflow-with-n8n.png" alt="n8n GPT Workflow Automation Diagram showing webhook, text processing, GPT, and output nodes" class="full-width-image">
+            </div>
+
+            <p>Looking to streamline your AI tasks? Automating GPT workflows with <strong>n8n</strong> is one of the easiest ways to save time and scale your productivity. Whether you're generating blog posts, summarizing data, or automating customer replies, <strong>n8n + GPT</strong> is a no-code dream team. In this guide, we'll show you how to connect GPT to n8n and build your first automation—perfect for beginners and intermediate users.</p>
+
+            <h2>What is n8n?</h2>
+            <p><strong>n8n</strong> is an open-source workflow automation platform. It allows users to visually connect apps and APIs—like OpenAI's GPT models—without writing backend code.</p>
+            <p><em>Think of n8n as your digital assistant builder. You create workflows (called "nodes") that can pull data from one app, transform it, and send it somewhere else.</em></p>
+
+            <h2>Why Use n8n to Automate GPT Workflows?</h2>
+            <ul>
+                <li><strong>No-code interface</strong>: You don't need to be a developer.</li>
+                <li><strong>Flexible integrations</strong>: Connect GPT to Slack, Google Sheets, Airtable, and 300+ apps.</li>
+                <li><strong>Self-host or cloud</strong>: Choose between local control or hosted simplicity.</li>
+                <li><strong>Multi-step logic</strong>: Add filters, conditions, and loops for powerful workflows.</li>
+            </ul>
+
+            <h2>Step-by-Step: How to Build a GPT Workflow in n8n</h2>
+            <p>Let's walk through a basic example: Automatically summarize new Google Docs using GPT-4 and send the summary to Slack.</p>
+
+            <h3>✅ Prerequisites</h3>
+            <ul>
+                <li>An <a href="https://platform.openai.com/" target="_blank" rel="noopener">OpenAI API Key</a></li>
+                <li>A <a href="https://n8n.io/" target="_blank" rel="noopener">free n8n account</a> or local setup</li>
+                <li>Access to Google Docs and Slack (optional based on your workflow)</li>
+            </ul>
+
+            <h3>🔧 Step 1: Create a New Workflow in n8n</h3>
+            <ol>
+                <li>Log into your n8n dashboard.</li>
+                <li>Click "<strong>New Workflow</strong>" and name it something like "GPT Summary Bot".</li>
+            </ol>
+
+            <h3>🔄 Step 2: Add a Trigger</h3>
+            <p>Use a trigger node, such as:</p>
+            <ul>
+                <li><strong>Google Docs trigger</strong> – for new or updated docs</li>
+                <li><strong>Schedule trigger</strong> – to run the workflow every X minutes</li>
+            </ul>
+
+            <h3>🧠 Step 3: Add the GPT Node</h3>
+            <ol>
+                <li>Search for the <strong>OpenAI node</strong> and drag it in.</li>
+                <li>Choose the "<strong>Create Completion</strong>" action.</li>
+                <li>Paste your prompt like:<br>
+                    <code>Summarize the following text in 3 bullet points: {{ $json["content"] }}</code>
+                </li>
+                <li>Set the model (e.g., <code>gpt-4</code>, <code>gpt-3.5-turbo</code>) and parameters like temperature or max_tokens.</li>
+            </ol>
+
+            <h3>💬 Step 4: Send Output to Slack (or Any Other App)</h3>
+            <ol>
+                <li>Add a <strong>Slack node</strong>.</li>
+                <li>Choose "Send Message" and connect your Slack account.</li>
+                <li>Use the GPT output like:<br>
+                    <code>{{ $node["OpenAI"].json["choices"][0]["text"] }}</code>
+                </li>
+            </ol>
+
+            <h3>✅ Finalize & Activate</h3>
+            <ul>
+                <li>Click <strong>"Execute Node"</strong> to test each step.</li>
+                <li>Once tested, click <strong>"Activate"</strong> to go live.</li>
+            </ul>
+
+            <h2>Common GPT Workflows You Can Build with n8n</h2>
+            <table border="1" cellpadding="6" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Workflow Idea</th>
+                        <th>Trigger</th>
+                        <th>Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Blog draft generator</td>
+                        <td>Airtable record created</td>
+                        <td>GPT content saved to Google Docs</td>
+                    </tr>
+                    <tr>
+                        <td>Customer support summarizer</td>
+                        <td>New email in Gmail</td>
+                        <td>Slack summary of intent</td>
+                    </tr>
+                    <tr>
+                        <td>Tweet generator</td>
+                        <td>RSS feed update</td>
+                        <td>GPT writes tweet thread</td>
+                    </tr>
+                    <tr>
+                        <td>Idea generator</td>
+                        <td>Daily scheduler</td>
+                        <td>Sends 3 startup ideas to Notion</td>
+                    </tr>
+                    <tr>
+                        <td>Transcript summarizer</td>
+                        <td>New YouTube video upload</td>
+                        <td>Summary sent via email</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>How Does GPT Integration Work in n8n?</h2>
+            <p>n8n uses <strong>API calls</strong> to interact with OpenAI's GPT models. You pass a prompt (like "Summarize this article"), and GPT returns a completion. n8n captures that response and moves it to your next node.</p>
+
+            <h2>FAQs</h2>
+            <h3>1. Do I need to code to use GPT in n8n?</h3>
+            <p>No. n8n is no-code. You just configure nodes visually and use simple expressions.</p>
+
+            <h3>2. Is GPT free to use in n8n?</h3>
+            <p>No, you'll need an OpenAI API key, which charges per token usage. n8n itself can be free if self-hosted.</p>
+
+            <h3>3. Can I use GPT-4 with n8n?</h3>
+            <p>Yes. The OpenAI node supports GPT-4 and GPT-3.5, as long as your API key has access.</p>
+
+            <h3>4. What are tokens in GPT?</h3>
+            <p>Tokens are chunks of text GPT processes. Roughly, 1 token = ¾ of a word. Costs depend on the number of tokens used per request.</p>
+
+            <h3>5. Can I deploy n8n on my own server?</h3>
+            <p>Absolutely. n8n is open source and can run on Docker, Node.js, or via hosted platforms like Railway or Render.</p>
+
+            <h2>Helpful Resources</h2>
+            <ul>
+                <li><a href="https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.openai/" target="_blank" rel="noopener">n8n Docs – OpenAI Node</a></li>
+                <li><a href="https://openai.com/pricing" target="_blank" rel="noopener">OpenAI Pricing</a></li>
+                <li><a href="https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.slack/" target="_blank" rel="noopener">Slack Integration with n8n</a></li>
+                <li><a href="https://www.youtube.com/@n8n_io" target="_blank" rel="noopener">n8n YouTube Channel</a></li>
+            </ul>
+
+            <h2>Final Thoughts: Automate Smarter with GPT + n8n</h2>
+            <p>Automating GPT workflows with n8n unlocks massive productivity potential—from content creation to customer support. With just a few clicks, you can build custom bots that work 24/7—no code, no stress.</p>
+            <p><strong>Ready to go further?</strong> Check out our <a href="https://llmlogs.com/guides/n8n-beginner-workflows" target="_blank" rel="noopener">Beginner's Guide to n8n Workflows</a> or explore other AI automation tools in our <a href="https://llmlogs.com/tools" target="_blank" rel="noopener">LLM Tooling Directory</a>.</p>
+
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3>Share this Article</h3>
+                <div class="share-buttons">
+                    <button class="share-button" data-type="article" data-url="https://llmlogs.com/blog/how-to-automate-gpt-workflows-with-n8n">Copy Article Link</button>
+                    <button class="share-button" data-type="image" data-url="https://llmlogs.com/blog/images/how-to-automate-gpt-workflow-with-n8n.png">Copy Image Link</button>
+                    <button class="share-button" data-type="embed" data-url='<img src="https://llmlogs.com/blog/images/how-to-automate-gpt-workflow-with-n8n.png" alt="n8n GPT Workflow Automation Diagram" width="100%" />'>Copy Embed Code</button>
+                </div>
+                <div class="social-share-buttons">
+                    <a href="https://twitter.com/intent/tweet?url=https://llmlogs.com/blog/how-to-automate-gpt-workflows-with-n8n&text=How to Automate GPT Workflows with n8n: A Step-by-Step Guide" target="_blank" rel="noopener" class="social-share twitter">Share on Twitter</a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://llmlogs.com/blog/how-to-automate-gpt-workflows-with-n8n" target="_blank" rel="noopener" class="social-share linkedin">Share on LinkedIn</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>

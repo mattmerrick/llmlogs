@@ -555,7 +555,7 @@ body {
     margin-top: 1rem;
 }
 
-/* Share Section */
+/* Share Section Styles */
 .share-section {
     background: var(--note-bg);
     border-radius: 0.5rem;
@@ -573,6 +573,8 @@ body {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .share-button {
@@ -583,15 +585,62 @@ body {
     border-radius: 0.5rem;
     cursor: pointer;
     font-weight: 500;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
+    min-width: 160px;
 }
 
 .share-button:hover {
     background: #1d4ed8;
+    transform: translateY(-2px);
 }
 
 .share-button.copied {
     background: #059669;
+}
+
+.social-share-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.social-share {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 160px;
+    justify-content: center;
+}
+
+.social-share.twitter {
+    background: #1DA1F2;
+    color: white;
+}
+
+.social-share.linkedin {
+    background: #0A66C2;
+    color: white;
+}
+
+.social-share:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .share-buttons, .social-share-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .share-button, .social-share {
+        width: 100%;
+    }
 }
 
 /* Breadcrumbs */
@@ -1558,4 +1607,48 @@ pre[data-language]::before {
 
 .submission-cta .button:hover {
     background: #1d4ed8;
+}
+
+/* Article Header Image Styles */
+.article-header-image {
+    margin: 2rem -1.5rem;  /* Negative margin to break out of container on mobile */
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.article-header-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+    .article-header-image {
+        margin: 2rem 0;  /* Reset margin on desktop */
+        max-width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .article-header-image img {
+        max-height: 500px;  /* Maximum height on desktop */
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+/* Container adjustments for blog posts */
+.blog-post {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .blog-post {
+        padding: 0 2rem;
+    }
 } 

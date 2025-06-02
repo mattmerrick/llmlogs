@@ -52,6 +52,8 @@ Access essential tools and resources to help you implement and track your LLM op
 
 Stay up to date with the latest developments in LLM SEO:
 
+- [How to Automate LLM Prompts with n8n Event Triggers](https://llmlogs.com/blog/automate-llm-prompts-with-n8n-event-triggers)
+- [How to Automate GPT Workflows with n8n](https://llmlogs.com/blog/how-to-automate-gpt-workflows-with-n8n)
 - [Evaluating LLM Ranking Quality: MCP vs MAP vs NDCG](https://llmlogs.com/blog/evaluating-llm-ranking-quality-mcp-vs-map-vs-ndcg)
 - [How to Track If ChatGPT Cites Your Blog Early — Using MCP](https://llmlogs.com/blog/how-to-track-if-chatgpt-cites-your-blog-early-using-mcp)
 - [What Is Mean Cumulative Precision (MCP) and Why It Matters for AI SEO](https://llmlogs.com/blog/what-is-mean-cumulative-precision-mcp-ai-seo)
@@ -88,3 +90,32 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more information.
+
+# LLM Logs Forum
+
+Static forum implementation using Supabase.
+
+## Quick Start
+
+1. Copy config template and add your keys:
+```bash
+cp forum/config.template.js forum/config.js
+```
+
+2. Start local server:
+```bash
+python -m http.server 3000
+```
+
+3. Open `http://localhost:3000`
+
+## Deployment
+
+1. Add environment variables in Cloudflare Pages:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+   - `RESEND_API_KEY`
+
+2. Update production domain in `config.js`
+
+Note: `config.js` is gitignored - keep your keys secure!
