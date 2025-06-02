@@ -38,14 +38,167 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/tools.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/tools.css">
+    <style>
+        /* Popup Banner Styles */
+        .popup-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .popup-banner a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .popup-banner a:hover {
+            text-decoration: underline;
+        }
+
+        .popup-banner .close-button {
+            position: absolute;
+            right: 16px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        /* Adjust header position when banner is visible */
+        body.has-banner .site-header {
+            margin-top: 44px;
+        }
+
+        /* CodeFast Promo Section */
+        .codefast-promo {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .codefast-promo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .codefast-promo h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .codefast-promo .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .codefast-promo .cta-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Input Section Styles */
+        .input-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .url-input {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .url-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .tool-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tool-button:hover {
+            background: #1d4ed8;
+        }
+
+        .status-message {
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-message.info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Popup Banner -->
+    <div id="popupBanner" class="popup-banner">
+        <a href="https://codefa.st/?via=llmlogs" target="_blank" rel="noopener">
+            🚀 Learn how to build your SaaS in weeks, not months
+            <span style="margin-left: 8px;">→</span>
+        </a>
+        <button class="close-button" onclick="closeBanner()">×</button>
+    </div>
 
     <header class="site-header">
         <div class="nav-container">
@@ -73,6 +226,14 @@
             <main class="tool-container">
                 <h1>LLM SEO Analysis Tool</h1>
                 <p class="lead">Analyze your website's performance for AI language models and get detailed recommendations for LLM optimization.</p>
+
+                <!-- CodeFast Promotion Section -->
+                <div class="codefast-promo">
+                    <img src="codefast.jpg" alt="Build your SaaS faster with CodeFast" width="800" height="400">
+                    <h2>Want to Build Your Own SaaS?</h2>
+                    <p>Learn how to code and launch your SaaS product in weeks, not months. Perfect for entrepreneurs and indie hackers.</p>
+                    <a href="https://codefa.st/?via=llmlogs" target="_blank" rel="noopener" class="cta-button">Start Learning Now →</a>
+                </div>
 
                 <div class="seo-content">
                     <h2>Why Use Our LLM SEO Analysis Tool?</h2>
@@ -638,270 +799,24 @@
             statusElement.className = 'status-message ' + type;
             statusElement.style.display = 'block';
         }
+
+        // Popup Banner JavaScript
+        function closeBanner() {
+            const banner = document.getElementById('popupBanner');
+            banner.style.display = 'none';
+            document.body.classList.remove('has-banner');
+            localStorage.setItem('bannerClosed', 'true');
+        }
+
+        // Check if banner was previously closed
+        document.addEventListener('DOMContentLoaded', function() {
+            const bannerClosed = localStorage.getItem('bannerClosed');
+            if (!bannerClosed) {
+                document.body.classList.add('has-banner');
+            } else {
+                document.getElementById('popupBanner').style.display = 'none';
+            }
+        });
     </script>
-
-    <style>
-        .url-input {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .url-input input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .score-overview {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .overall-score {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .overall-score .score {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .metric-card {
-            background: rgba(0,0,0,0.05);
-            padding: 1rem;
-            border-radius: 4px;
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .metric-label {
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
-
-        .analysis-details, .recommendations {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .analysis-item, .recommendation-item {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: rgba(0,0,0,0.05);
-            border-radius: 4px;
-        }
-
-        .analysis-item h4, .recommendation-item h4 {
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-        }
-
-        .analysis-item ul {
-            margin: 0;
-            padding-left: 1.5rem;
-        }
-
-        .analysis-item li {
-            margin-bottom: 0.5rem;
-        }
-
-        .status-message {
-            padding: 0.75rem;
-            border-radius: 4px;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .status-message.success {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-message.error {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .status-message.info {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .progress-bar {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-
-        .progress-text {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
-
-        .progress-track {
-            height: 4px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-color);
-            width: 0;
-            transition: width 0.3s ease;
-        }
-
-        .analysis-summary {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: rgba(0,0,0,0.05);
-            border-radius: 4px;
-        }
-
-        .analysis-summary h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-        }
-
-        .analysis-summary p {
-            margin: 0.5rem 0;
-            color: var(--text-color);
-        }
-
-        .recommendation-item {
-            position: relative;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            background: rgba(0,0,0,0.05);
-            border-radius: 4px;
-            border-left: 4px solid var(--border-color);
-        }
-
-        .recommendation-item.high {
-            border-left-color: #ef4444;
-            background: rgba(239, 68, 68, 0.05);
-        }
-
-        .recommendation-item.medium {
-            border-left-color: #f59e0b;
-            background: rgba(245, 158, 11, 0.05);
-        }
-
-        .recommendation-item.low {
-            border-left-color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        .recommendation-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .priority-badge {
-            background: #ef4444;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .guide-link {
-            display: inline-block;
-            margin-top: 0.75rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .guide-link:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
-        }
-
-        .seo-content {
-            margin: 2rem 0;
-            padding: 2rem;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-        }
-
-        .feature-list li {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .feature-list li:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .feature-list strong {
-            display: block;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-list p {
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .tool-button {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .tool-button:hover {
-            background: #1d4ed8;
-        }
-    </style>
 </body>
 </html>

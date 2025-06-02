@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +77,52 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     
     <style>
+        /* Popup Banner Styles */
+        .popup-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .popup-banner a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .popup-banner a:hover {
+            text-decoration: underline;
+        }
+
+        .popup-banner .close-button {
+            position: absolute;
+            right: 16px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        /* Adjust header position when banner is visible */
+        body.has-banner .site-header {
+            margin-top: 44px;
+        }
+
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
@@ -376,7 +421,16 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    
+
+    <!-- Popup Banner -->
+    <div id="popupBanner" class="popup-banner">
+        <a href="https://codefa.st/?via=llmlogs" target="_blank" rel="noopener">
+            🚀 Learn how to build your SaaS in weeks, not months
+            <span style="margin-left: 8px;">→</span>
+        </a>
+        <button class="close-button" onclick="closeBanner()">×</button>
+    </div>
+
     <!-- Standard Header -->
     <header class="site-header">
         <div class="nav-container">
@@ -648,6 +702,24 @@
                     }
                 });
             });
+        });
+
+        // Popup Banner JavaScript
+        function closeBanner() {
+            const banner = document.getElementById('popupBanner');
+            banner.style.display = 'none';
+            document.body.classList.remove('has-banner');
+            localStorage.setItem('bannerClosed', 'true');
+        }
+
+        // Check if banner was previously closed
+        document.addEventListener('DOMContentLoaded', function() {
+            const bannerClosed = localStorage.getItem('bannerClosed');
+            if (!bannerClosed) {
+                document.body.classList.add('has-banner');
+            } else {
+                document.getElementById('popupBanner').style.display = 'none';
+            }
         });
     </script>
 </body>
