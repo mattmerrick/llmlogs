@@ -1,0 +1,20 @@
+# Redirect trailing slashes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Redirect specific duplicates to canonical URLs
+Redirect 301 /privacy-policy /privacy
+Redirect 301 /privacy/ /privacy
+Redirect 301 /about/ /about
+Redirect 301 /guides/ /guides
+Redirect 301 /tools/guides/llm-optimization/core-concepts.html /guides/llm-optimization/core-concepts
+
+# Redirect search with parameters
+RewriteCond %{QUERY_STRING} ^q=
+RewriteRule ^search$ /search? [L,R=301]
+
+# Handle other specific redirects
+Redirect 301 /tools/guides/* /guides/
+Redirect 301 /services /about#services
+Redirect 301 /products /tools 
