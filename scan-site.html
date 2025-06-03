@@ -89,39 +89,78 @@
 
         /* CodeFast Promo Section */
         .codefast-promo {
-            background: #f8f9fa;
+            background: white;
+            border: 1px solid #e5e7eb;
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             margin: 2rem 0;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
-        .codefast-promo img {
-            max-width: 100%;
-            height: auto;
+        .codefast-promo .promo-image {
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .codefast-promo .promo-content {
+            flex: 1;
         }
 
         .codefast-promo h2 {
-            color: var(--primary-color);
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .codefast-promo p {
+            color: #6b7280;
             margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .codefast-promo .cta-button {
-            display: inline-block;
-            background: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            background: #4F46E5;
             color: white;
-            padding: 12px 24px;
+            padding: 0.75rem 1.25rem;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
-            margin-top: 1rem;
-            transition: background-color 0.2s;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            gap: 0.5rem;
         }
 
         .codefast-promo .cta-button:hover {
-            background: #1d4ed8;
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .codefast-promo .cta-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .codefast-promo {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .codefast-promo .promo-image {
+                width: 140px;
+                height: 90px;
+                margin: 0 auto;
+            }
         }
 
         /* Input Section Styles */
@@ -183,6 +222,236 @@
             background: #dbeafe;
             color: #1e40af;
         }
+
+        .results-section {
+            display: none;
+            margin-top: 3rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .timestamp {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .analyzed-url {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .score-overview {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .overall-score {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #f3f4f6;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: #6b7280;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .analysis-category {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #f3f4f6;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-content h4 {
+            margin: 0;
+            color: #111827;
+            font-size: 1.25rem;
+        }
+
+        .score-pill {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .score-high {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .score-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .score-low {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .finding-content {
+            color: #4b5563;
+        }
+
+        .recommendation-item {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #f3f4f6;
+        }
+
+        .recommendation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .recommendation-header h4 {
+            margin: 0;
+            color: #111827;
+            font-size: 1.25rem;
+        }
+
+        .priority-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .priority-badge.high {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .priority-badge.medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .priority-badge.low {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .recommendation-steps {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: #4b5563;
+        }
+
+        .recommendation-steps li {
+            margin-bottom: 0.5rem;
+        }
+
+        .share-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .share-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #4F46E5;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .share-button:hover {
+            background: #4338ca;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            .site-header,
+            .site-footer {
+                display: none !important;
+            }
+
+            .container {
+                padding: 0;
+                margin: 0;
+            }
+
+            body {
+                background: white;
+            }
+        }
     </style>
 </head>
 <body>
@@ -229,10 +498,16 @@
 
                 <!-- CodeFast Promotion Section -->
                 <div class="codefast-promo">
-                    <img src="codefast.jpg" alt="Build your SaaS faster with CodeFast" width="800" height="400">
-                    <h2>Want to Build Your Own SaaS?</h2>
-                    <p>Learn how to code and launch your SaaS product in weeks, not months. Perfect for entrepreneurs and indie hackers.</p>
-                    <a href="https://codefa.st/?via=llmlogs" target="_blank" rel="noopener" class="cta-button">Start Learning Now →</a>
+                    <div class="promo-content">
+                        <h2>Build Your SaaS Faster</h2>
+                        <p>Learn to code and launch your product in weeks, not months. Perfect for entrepreneurs and indie hackers.</p>
+                        <a href="https://codefa.st/?via=llmlogs" target="_blank" rel="noopener" class="cta-button">
+                            Start Learning
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="seo-content">
@@ -269,13 +544,19 @@
                 </div>
 
                 <div class="results-section" style="display: none;">
-                    <h2>Analysis Results</h2>
+                    <div class="results-header">
+                        <h2>LLM SEO Analysis Results</h2>
+                        <div class="timestamp" id="analysisTimestamp"></div>
+                        <div class="analyzed-url" id="analyzedUrl"></div>
+                    </div>
+                    
                     <div class="score-overview">
                         <div class="overall-score">
-                            <h3>Overall LLM Score</h3>
+                            <div class="score-label">Overall LLM Optimization Score</div>
                             <div class="score" id="overallScore">--</div>
+                            <div id="scoreSummary" class="score-summary"></div>
                         </div>
-                        <div class="metrics-grid">
+                        <div class="metrics-grid" id="metricsGrid">
                             <div class="metric-card">
                                 <div class="metric-value" id="sitemapScore">--</div>
                                 <div class="metric-label">Sitemap Structure</div>
@@ -288,17 +569,45 @@
                                 <div class="metric-value" id="structureScore">--</div>
                                 <div class="metric-label">Page Structure</div>
                             </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="semanticScore">--</div>
+                                <div class="metric-label">Semantic Markup</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="accessibilityScore">--</div>
+                                <div class="metric-label">AI Accessibility</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value" id="citationScore">--</div>
+                                <div class="metric-label">Citation Potential</div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="analysis-details">
                         <h3>Detailed Analysis</h3>
-                        <div id="analysisResults" class="analysis-list"></div>
+                        <div id="analysisResults"></div>
                     </div>
 
                     <div class="recommendations">
-                        <h3>Recommendations</h3>
-                        <div id="recommendationsList" class="recommendations-list"></div>
+                        <h3>Action Plan</h3>
+                        <div id="recommendationsList"></div>
+                    </div>
+
+                    <div class="share-section no-print">
+                        <h3>Share Your Results</h3>
+                        <button class="share-button" onclick="window.print()">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                            </svg>
+                            Print Results
+                        </button>
+                        <button class="share-button" onclick="window.print()">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Download PDF
+                        </button>
                     </div>
                 </div>
             </main>
@@ -333,464 +642,843 @@
             }
 
             try {
-                showStatus('Scanning site...', 'info');
+                showStatus('Analyzing site...', 'info');
                 const results = await analyzeSite(url);
+                
+                // Display results directly on the page
                 displayResults(results);
-                showStatus('Analysis complete!', 'success');
+                
+                // Hide the status message
+                document.getElementById('statusMessage').style.display = 'none';
+                
+                // Scroll to results
+                document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
                 showStatus('Error analyzing site: ' + error.message, 'error');
             }
         }
 
         async function analyzeSite(url) {
-            // Normalize URL
             const baseUrl = url.endsWith('/') ? url.slice(0, -1) : url;
-            const sitemapUrl = `${baseUrl}/sitemap.xml`;
-            const llmsTxtUrl = `${baseUrl}/llms.txt`;
-
+            
             try {
-                // Check for llms.txt first
-                const llmsTxtResponse = await fetch(llmsTxtUrl);
-                const hasLlmsTxt = llmsTxtResponse.ok;
-
-                // Fetch sitemap
-                const response = await fetch(sitemapUrl);
-                if (!response.ok) {
-                    throw new Error('Sitemap not found');
-                }
-
-                const sitemapText = await response.text();
-                const parser = new DOMParser();
-                const sitemapDoc = parser.parseFromString(sitemapText, 'text/xml');
-
-                // Check for sitemap index
-                const isSitemapIndex = sitemapDoc.getElementsByTagName('sitemapindex').length > 0;
-                let urls = [];
-
-                if (isSitemapIndex) {
-                    // Handle sitemap index
-                    const sitemapUrls = Array.from(sitemapDoc.getElementsByTagName('loc'))
-                        .map(loc => loc.textContent);
-                    
-                    // Fetch all sitemaps
-                    for (const sitemapUrl of sitemapUrls) {
-                        const sitemapResponse = await fetch(sitemapUrl);
-                        const sitemapText = await sitemapResponse.text();
-                        const sitemapDoc = parser.parseFromString(sitemapText, 'text/xml');
-                        const pageUrls = Array.from(sitemapDoc.getElementsByTagName('loc'))
-                            .map(loc => loc.textContent);
-                        urls = urls.concat(pageUrls);
-                    }
-                } else {
-                    // Handle regular sitemap
-                    urls = Array.from(sitemapDoc.getElementsByTagName('loc'))
-                        .map(loc => loc.textContent);
-                }
-
-                // Analyze URLs
-                const analysis = await analyzeUrls(urls);
+                updateAnalysisStatus('Initializing comprehensive analysis...');
                 
-                // Add llms.txt status to analysis
-                analysis.hasLlmsTxt = hasLlmsTxt;
-                if (!hasLlmsTxt) {
-                    analysis.details.push({
-                        category: 'LLM Optimization',
-                        findings: ['Missing llms.txt file - This file helps optimize your site for Large Language Models']
-                    });
+                // Initialize analysis object with default scores
+                const analysis = {
+                    scores: {
+                        structure: 20,
+                        semantic: 10,
+                        llmReadiness: 10,
+                        citation: 0,
+                        accessibility: 10,
+                        contentQuality: 20,
+                        technicalSEO: 10
+                    },
+                    findings: [],
+                    recommendations: [],
+                    detailedAnalysis: {
+                        pageStructure: {},
+                        semanticElements: {},
+                        contentQuality: {},
+                        accessibility: {},
+                        citations: {},
+                        technical: {
+                            llmsTxt: false,
+                            sitemap: false,
+                            robotsTxt: false,
+                            schema: false
+                        }
+                    }
+                };
+
+                // Check for important files
+                updateAnalysisStatus('Checking LLM configuration files...');
+                
+                // Check llms.txt
+                try {
+                    const llmsTxtUrl = `${baseUrl}/llms.txt`;
+                    const llmsTxtResponse = await fetch(llmsTxtUrl);
+                    if (llmsTxtResponse.ok) {
+                        const llmsTxt = await llmsTxtResponse.text();
+                        analysis.detailedAnalysis.technical.llmsTxt = true;
+                        analysis.scores.llmReadiness += 20;
+                        analysis.findings.push({
+                            type: 'success',
+                            title: 'LLMs.txt Found',
+                            description: 'Your site includes LLMs.txt configuration, which helps AI systems understand how to interact with your content.'
+                        });
+                    } else {
+                        analysis.findings.push({
+                            type: 'warning',
+                            title: 'Missing LLMs.txt',
+                            description: 'Consider adding LLMs.txt to provide explicit instructions for AI crawlers and improve content understanding.'
+                        });
+                    }
+                } catch (error) {
+                    console.warn('Could not check llms.txt:', error);
                 }
+
+                // Check sitemap.xml
+                updateAnalysisStatus('Analyzing sitemap...');
+                try {
+                    const sitemapUrl = `${baseUrl}/sitemap.xml`;
+                    const sitemapResponse = await fetch(sitemapUrl);
+                    if (sitemapResponse.ok) {
+                        analysis.detailedAnalysis.technical.sitemap = true;
+                        analysis.scores.technicalSEO += 15;
+                        analysis.findings.push({
+                            type: 'success',
+                            title: 'Sitemap.xml Found',
+                            description: 'Your site includes a sitemap.xml file, helping AI systems discover and understand your content structure.'
+                        });
+                    } else {
+                        analysis.findings.push({
+                            type: 'warning',
+                            title: 'Missing Sitemap.xml',
+                            description: 'Add a sitemap.xml file to help AI systems discover and index your content more effectively.'
+                        });
+                    }
+                } catch (error) {
+                    console.warn('Could not check sitemap.xml:', error);
+                }
+
+                // Check robots.txt
+                updateAnalysisStatus('Checking robots.txt...');
+                try {
+                    const robotsUrl = `${baseUrl}/robots.txt`;
+                    const robotsResponse = await fetch(robotsUrl);
+                    if (robotsResponse.ok) {
+                        const robotsTxt = await robotsResponse.text();
+                        analysis.detailedAnalysis.technical.robotsTxt = true;
+                        analysis.scores.technicalSEO += 15;
+                        
+                        // Check for AI-specific directives
+                        const hasAiDirectives = /User-agent:\s*(GPTBot|ChatGPT-User|Google-Extended|Anthropic|Claude)/i.test(robotsTxt);
+                        if (hasAiDirectives) {
+                            analysis.scores.llmReadiness += 15;
+                            analysis.findings.push({
+                                type: 'success',
+                                title: 'AI-Friendly Robots.txt',
+                                description: 'Your robots.txt includes specific directives for AI crawlers.'
+                            });
+                        } else {
+                            analysis.findings.push({
+                                type: 'info',
+                                title: 'Robots.txt Found',
+                                description: 'Consider adding specific directives for AI crawlers (GPTBot, Claude, etc.) in your robots.txt.'
+                            });
+                        }
+                    } else {
+                        analysis.findings.push({
+                            type: 'warning',
+                            title: 'Missing Robots.txt',
+                            description: 'Add a robots.txt file with AI crawler directives to better control AI access to your content.'
+                        });
+                    }
+                } catch (error) {
+                    console.warn('Could not check robots.txt:', error);
+                }
+
+                // Analyze main page
+                updateAnalysisStatus('Performing deep content analysis...');
+                try {
+                    const response = await fetch(url);
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // Check schema markup
+                    const schemas = doc.querySelectorAll('script[type="application/ld+json"]');
+                    if (schemas.length > 0) {
+                        analysis.detailedAnalysis.technical.schema = true;
+                        analysis.scores.llmReadiness += 20;
+                        
+                        // Analyze schema types
+                        const schemaTypes = new Set();
+                        schemas.forEach(schema => {
+                            try {
+                                const data = JSON.parse(schema.textContent);
+                                if (data['@type']) schemaTypes.add(data['@type']);
+                            } catch (e) {}
+                        });
+
+                        analysis.findings.push({
+                            type: 'success',
+                            title: 'Schema Markup Found',
+                            description: `Found ${schemas.length} schema markup(s) including: ${Array.from(schemaTypes).join(', ')}`
+                        });
+                    } else {
+                        analysis.findings.push({
+                            type: 'warning',
+                            title: 'Missing Schema Markup',
+                            description: 'Add schema.org markup to help AI systems better understand your content structure and meaning.'
+                        });
+                    }
+
+                    // Check meta tags
+                    const metaTags = {
+                        description: doc.querySelector('meta[name="description"]'),
+                        keywords: doc.querySelector('meta[name="keywords"]'),
+                        author: doc.querySelector('meta[name="author"]'),
+                        viewport: doc.querySelector('meta[name="viewport"]'),
+                        robots: doc.querySelector('meta[name="robots"]'),
+                        aiDescription: doc.querySelector('meta[name="ai-description"]'),
+                        aiPurpose: doc.querySelector('meta[name="ai-purpose"]')
+                    };
+
+                    let metaScore = 0;
+                    if (metaTags.description && metaTags.description.content.length > 120) metaScore += 10;
+                    if (metaTags.keywords) metaScore += 5;
+                    if (metaTags.author) metaScore += 5;
+                    if (metaTags.viewport) metaScore += 5;
+                    if (metaTags.robots) metaScore += 5;
+                    if (metaTags.aiDescription) metaScore += 10;
+                    if (metaTags.aiPurpose) metaScore += 10;
+
+                    analysis.scores.technicalSEO += metaScore;
+                    
+                    if (metaScore >= 30) {
+                        analysis.findings.push({
+                            type: 'success',
+                            title: 'Good Meta Tag Implementation',
+                            description: 'Your page includes comprehensive meta tags including AI-specific metadata.'
+                        });
+                    } else {
+                        analysis.findings.push({
+                            type: 'warning',
+                            title: 'Incomplete Meta Tags',
+                            description: 'Add more meta tags, especially AI-specific ones like ai-description and ai-purpose.'
+                        });
+                    }
+
+                    // Continue with existing analysis functions...
+                    const headingAnalysis = analyzeHeadingStructure(doc);
+                    analysis.detailedAnalysis.pageStructure.headings = headingAnalysis;
+                    analysis.scores.structure += headingAnalysis.score;
+
+                    const semanticAnalysis = analyzeSemanticElements(doc);
+                    analysis.detailedAnalysis.semanticElements = semanticAnalysis;
+                    analysis.scores.semantic = semanticAnalysis.score;
+
+                    const contentAnalysis = analyzeContentQuality(doc);
+                    analysis.detailedAnalysis.contentQuality = contentAnalysis;
+                    analysis.scores.contentQuality = contentAnalysis.score;
+
+                    const accessibilityAnalysis = analyzeAccessibility(doc);
+                    analysis.detailedAnalysis.accessibility = accessibilityAnalysis;
+                    analysis.scores.accessibility = accessibilityAnalysis.score;
+
+                    const citationAnalysis = analyzeCitations(doc);
+                    analysis.detailedAnalysis.citations = citationAnalysis;
+                    analysis.scores.citation = citationAnalysis.score;
+
+                    // Add technical recommendations and generate comprehensive recommendations
+                    analysis.findings = [...analysis.findings, 
+                        ...headingAnalysis.findings,
+                        ...semanticAnalysis.findings,
+                        ...contentAnalysis.findings,
+                        ...accessibilityAnalysis.findings,
+                        ...citationAnalysis.findings
+                    ];
+
+                    // Generate all recommendations
+                    analysis.recommendations = [
+                        ...generateDetailedRecommendations(analysis),
+                        ...generateTechnicalRecommendations(analysis)
+                    ];
+
+                } catch (error) {
+                    console.error('Error analyzing page:', error);
+                    throw new Error('Could not analyze page. Please check if the URL is accessible.');
+                }
+
+                // Ensure minimum scores
+                Object.keys(analysis.scores).forEach(key => {
+                    if (analysis.scores[key] === 0) {
+                        analysis.scores[key] = 10;
+                        analysis.findings.push({
+                            type: 'warning',
+                            title: `Low ${key.charAt(0).toUpperCase() + key.slice(1)} Score`,
+                            description: `Your page needs improvement in ${key.split(/(?=[A-Z])/).join(' ').toLowerCase()} elements.`
+                        });
+                    }
+                });
+
+                // Calculate overall score with weighted categories
+                analysis.overallScore = calculateOverallScore(analysis.scores);
 
                 return analysis;
             } catch (error) {
+                console.error('Analysis error:', error);
                 throw new Error('Failed to analyze site: ' + error.message);
             }
         }
 
-        async function analyzeUrls(urls) {
+        function analyzeHeadingStructure(doc) {
             const analysis = {
-                sitemapScore: 0,
-                contentScore: 0,
-                structureScore: 0,
-                recommendations: [],
-                details: [],
-                totalPages: urls.length,
-                analyzedPages: 0
+                score: 0,
+                findings: [],
+                details: {
+                    h1Count: doc.querySelectorAll('h1').length,
+                    h2Count: doc.querySelectorAll('h2').length,
+                    h3Count: doc.querySelectorAll('h3').length,
+                    headingHierarchy: []
+                }
             };
 
-            // Analyze sitemap structure
-            analysis.sitemapScore = calculateSitemapScore(urls);
-            analysis.details.push({
-                category: 'Sitemap',
-                score: analysis.sitemapScore,
-                findings: analyzeSitemapStructure(urls)
-            });
-
-            // Analyze more pages - up to 20 instead of just 5
-            const sampleUrls = urls.slice(0, 20);
-            analysis.analyzedPages = sampleUrls.length;
-
-            // Create progress indicator
-            const progressBar = document.createElement('div');
-            progressBar.className = 'progress-bar';
-            progressBar.innerHTML = `
-                <div class="progress-text">Analyzing pages: 0/${sampleUrls.length}</div>
-                <div class="progress-track">
-                    <div class="progress-fill"></div>
-                </div>
-            `;
-            document.querySelector('.results-section').appendChild(progressBar);
-
-            for (let i = 0; i < sampleUrls.length; i++) {
-                try {
-                    const pageAnalysis = await analyzePage(sampleUrls[i]);
-                    analysis.contentScore += pageAnalysis.contentScore;
-                    analysis.structureScore += pageAnalysis.structureScore;
-                    analysis.details.push({
-                        url: sampleUrls[i],
-                        ...pageAnalysis
-                    });
-
-                    // Update progress
-                    progressBar.querySelector('.progress-text').textContent = 
-                        `Analyzing pages: ${i + 1}/${sampleUrls.length}`;
-                    progressBar.querySelector('.progress-fill').style.width = 
-                        `${((i + 1) / sampleUrls.length) * 100}%`;
-                } catch (error) {
-                    console.error(`Error analyzing ${sampleUrls[i]}:`, error);
-                }
+            // Check H1
+            if (analysis.details.h1Count === 1) {
+                analysis.score += 30;
+                analysis.findings.push({
+                    type: 'success',
+                    title: 'Proper H1 Usage',
+                    description: 'Page has exactly one H1 heading, which is optimal for AI understanding of main topic.'
+                });
+            } else {
+                analysis.findings.push({
+                    type: 'error',
+                    title: 'Incorrect H1 Usage',
+                    description: `Found ${analysis.details.h1Count} H1 tags. Each page should have exactly one H1 for clear topic hierarchy.`
+                });
             }
 
-            // Remove progress bar
-            progressBar.remove();
+            // Analyze heading hierarchy
+            const headings = Array.from(doc.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+            let lastLevel = 0;
+            let hierarchyScore = 0;
 
-            // Calculate average scores
-            analysis.contentScore = Math.round(analysis.contentScore / sampleUrls.length);
-            analysis.structureScore = Math.round(analysis.structureScore / sampleUrls.length);
-            analysis.overallScore = Math.round(
-                (analysis.sitemapScore + analysis.contentScore + analysis.structureScore) / 3
-            );
+            headings.forEach(heading => {
+                const level = parseInt(heading.tagName[1]);
+                if (level - lastLevel > 1) {
+                    analysis.findings.push({
+                        type: 'warning',
+                        title: 'Skipped Heading Level',
+                        description: `Heading hierarchy skips from H${lastLevel} to H${level}. This may confuse AI models.`
+                    });
+                } else {
+                    hierarchyScore += 10;
+                }
+                lastLevel = level;
+                analysis.details.headingHierarchy.push({
+                    level,
+                    text: heading.textContent.trim()
+                });
+            });
 
-            // Generate recommendations with guide links
-            analysis.recommendations = generateRecommendations(analysis);
+            analysis.score += Math.min(hierarchyScore, 70);
+            return analysis;
+        }
+
+        function analyzeSemanticElements(doc) {
+            const analysis = {
+                score: 0,
+                findings: [],
+                details: {
+                    elements: {}
+                }
+            };
+
+            const semanticElements = {
+                main: 'Main content wrapper',
+                article: 'Article content',
+                section: 'Content sections',
+                nav: 'Navigation',
+                header: 'Page header',
+                footer: 'Page footer',
+                aside: 'Complementary content',
+                figure: 'Figure content',
+                time: 'Temporal information'
+            };
+
+            Object.entries(semanticElements).forEach(([element, description]) => {
+                const count = doc.querySelectorAll(element).length;
+                analysis.details.elements[element] = count;
+                
+                if (count > 0) {
+                    analysis.score += 10;
+                    analysis.findings.push({
+                        type: 'success',
+                        title: `${element.charAt(0).toUpperCase() + element.slice(1)} Element Present`,
+                        description: `Found ${count} ${element} element(s) for ${description.toLowerCase()}.`
+                    });
+                }
+            });
+
+            // Check for ARIA roles
+            const ariaElements = doc.querySelectorAll('[role]');
+            if (ariaElements.length > 0) {
+                analysis.score += 10;
+                analysis.findings.push({
+                    type: 'success',
+                    title: 'ARIA Roles Found',
+                    description: `Found ${ariaElements.length} elements with ARIA roles for better accessibility.`
+                });
+            }
+
+            analysis.score = Math.min(analysis.score, 100);
+            return analysis;
+        }
+
+        function analyzeContentQuality(doc) {
+            const analysis = {
+                score: 20, // Base score for having content
+                findings: [],
+                details: {
+                    paragraphCount: 0,
+                    averageWordsPerParagraph: 0,
+                    listsCount: 0,
+                    imageCount: 0,
+                    hasCode: false
+                }
+            };
+
+            // Analyze paragraphs
+            const paragraphs = doc.querySelectorAll('p');
+            analysis.details.paragraphCount = paragraphs.length;
+            let totalWords = 0;
+
+            paragraphs.forEach(p => {
+                const words = p.textContent.trim().split(/\s+/).length;
+                totalWords += words;
+            });
+
+            analysis.details.averageWordsPerParagraph = 
+                analysis.details.paragraphCount > 0 ? 
+                Math.round(totalWords / analysis.details.paragraphCount) : 0;
+
+            // Check for lists
+            analysis.details.listsCount = doc.querySelectorAll('ul, ol').length;
+
+            // Check for images with alt text
+            const images = doc.querySelectorAll('img');
+            const imagesWithAlt = Array.from(images).filter(img => img.hasAttribute('alt'));
+            analysis.details.imageCount = images.length;
+
+            // Check for code blocks
+            analysis.details.hasCode = doc.querySelectorAll('code, pre').length > 0;
+
+            // Score calculation
+            if (analysis.details.paragraphCount >= 3) analysis.score += 20;
+            if (analysis.details.averageWordsPerParagraph >= 50) analysis.score += 20;
+            if (analysis.details.listsCount > 0) analysis.score += 20;
+            if (imagesWithAlt.length === images.length && images.length > 0) analysis.score += 20;
+            if (analysis.details.hasCode) analysis.score += 20;
+
+            // Add findings
+            analysis.findings.push({
+                type: analysis.score >= 60 ? 'success' : 'warning',
+                title: 'Content Structure Analysis',
+                description: `Found ${analysis.details.paragraphCount} paragraphs, ${analysis.details.listsCount} lists, and ${analysis.details.imageCount} images. Average paragraph length: ${analysis.details.averageWordsPerParagraph} words.`
+            });
 
             return analysis;
         }
 
-        function calculateSitemapScore(urls) {
-            let score = 0;
-            
-            // Check number of URLs
-            if (urls.length > 100) score += 30;
-            else if (urls.length > 50) score += 20;
-            else if (urls.length > 10) score += 10;
-
-            // Check URL structure
-            const hasGoodStructure = urls.some(url => {
-                const path = new URL(url).pathname;
-                return path.length > 1 && !path.includes('?') && !path.includes('#');
-            });
-            if (hasGoodStructure) score += 20;
-
-            // Check for important pages
-            const importantPages = ['/about', '/contact', '/blog', '/products', '/services'];
-            const hasImportantPages = importantPages.some(page => 
-                urls.some(url => url.includes(page))
-            );
-            if (hasImportantPages) score += 20;
-
-            // Check for content depth
-            const hasDeepContent = urls.some(url => {
-                const path = new URL(url).pathname;
-                return path.split('/').length > 3;
-            });
-            if (hasDeepContent) score += 30;
-
-            return score;
-        }
-
-        function analyzeSitemapStructure(urls) {
-            const findings = [];
-            
-            // Check URL count
-            if (urls.length < 10) {
-                findings.push('Low number of URLs in sitemap');
-            } else if (urls.length > 100) {
-                findings.push('Good number of URLs in sitemap');
-            }
-
-            // Check for important pages
-            const importantPages = ['/about', '/contact', '/blog', '/products', '/services'];
-            const missingPages = importantPages.filter(page => 
-                !urls.some(url => url.includes(page))
-            );
-            if (missingPages.length > 0) {
-                findings.push(`Missing important pages: ${missingPages.join(', ')}`);
-            }
-
-            // Check URL structure
-            const hasQueryParams = urls.some(url => url.includes('?'));
-            if (hasQueryParams) {
-                findings.push('Sitemap contains URLs with query parameters');
-            }
-
-            return findings;
-        }
-
-        async function analyzePage(url) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-
-                return {
-                    contentScore: analyzeContent(doc),
-                    structureScore: analyzeStructure(doc),
-                    findings: analyzePageDetails(doc)
-                };
-            } catch (error) {
-                console.error(`Error analyzing page ${url}:`, error);
-                return {
-                    contentScore: 0,
-                    structureScore: 0,
-                    findings: ['Error analyzing page']
-                };
-            }
-        }
-
-        function analyzeContent(doc) {
-            let score = 0;
-            
-            // Check for main content
-            const mainContent = doc.querySelector('main, article, .content, #content');
-            if (mainContent) {
-                const text = mainContent.textContent;
-                if (text.length > 1000) score += 30;
-                else if (text.length > 500) score += 20;
-                else if (text.length > 200) score += 10;
-            }
-
-            // Check for headings
-            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
-            if (headings.length > 5) score += 20;
-            else if (headings.length > 2) score += 10;
-
-            // Check for lists
-            const lists = doc.querySelectorAll('ul, ol');
-            if (lists.length > 3) score += 20;
-            else if (lists.length > 1) score += 10;
-
-            // Check for images with alt text
-            const images = doc.querySelectorAll('img');
-            const imagesWithAlt = Array.from(images).filter(img => img.alt);
-            if (imagesWithAlt.length > 0) {
-                score += (imagesWithAlt.length / images.length) * 30;
-            }
-
-            return score;
-        }
-
-        function analyzeStructure(doc) {
-            let score = 0;
-            
-            // Check for semantic HTML
-            const semanticElements = doc.querySelectorAll('header, nav, main, article, section, aside, footer');
-            if (semanticElements.length > 5) score += 30;
-            else if (semanticElements.length > 2) score += 20;
-
-            // Check for meta description
-            const metaDescription = doc.querySelector('meta[name="description"]');
-            if (metaDescription && metaDescription.content.length > 100) score += 20;
-
-            // Check for canonical URL
-            const canonical = doc.querySelector('link[rel="canonical"]');
-            if (canonical) score += 20;
-
-            // Check for structured data
-            const structuredData = doc.querySelector('script[type="application/ld+json"]');
-            if (structuredData) score += 30;
-
-            return score;
-        }
-
-        function analyzePageDetails(doc) {
-            const findings = [];
-            
-            // Check meta description
-            const metaDescription = doc.querySelector('meta[name="description"]');
-            if (!metaDescription) {
-                findings.push('Missing meta description');
-            } else if (metaDescription.content.length < 100) {
-                findings.push('Meta description is too short');
-            }
-
-            // Check headings
-            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
-            if (headings.length < 2) {
-                findings.push('Not enough headings for content structure');
-            }
-
-            // Check images
-            const images = doc.querySelectorAll('img');
-            const imagesWithoutAlt = Array.from(images).filter(img => !img.alt);
-            if (imagesWithoutAlt.length > 0) {
-                findings.push(`${imagesWithoutAlt.length} images missing alt text`);
-            }
-
-            // Check structured data
-            const structuredData = doc.querySelector('script[type="application/ld+json"]');
-            if (!structuredData) {
-                findings.push('No structured data found');
-            }
-
-            return findings;
-        }
-
-        function generateRecommendations(analysis) {
-            const recommendations = [];
-            const guideLinks = {
-                sitemap: '/guides/llm-optimization/sitemap-optimization',
-                content: '/guides/llm-optimization/content-optimization',
-                structure: '/guides/llm-optimization/structure-optimization',
-                meta: '/guides/llm-optimization/meta-optimization',
-                images: '/guides/llm-optimization/image-optimization',
-                semantic: '/guides/llm-optimization/semantic-html',
-                llmsTxt: '/blog/how-to-add-a-llms.txt-file-to-any-website-in-under-10-minutes'
+        function analyzeAccessibility(doc) {
+            const analysis = {
+                score: 10, // Base score for basic accessibility
+                findings: [],
+                details: {
+                    altText: 0,
+                    ariaLabels: 0,
+                    formLabels: 0,
+                    colorContrast: false
+                }
             };
 
-            // Check for llms.txt
-            if (!analysis.hasLlmsTxt) {
-                recommendations.push({
-                    title: 'Add llms.txt File',
-                    description: 'Create and implement a llms.txt file to optimize your site for Large Language Models.',
-                    guideLink: guideLinks.llmsTxt,
-                    guideText: 'Learn how to add llms.txt in under 10 minutes',
-                    priority: 'high'
+            // Check images for alt text
+            const images = doc.querySelectorAll('img');
+            const imagesWithAlt = Array.from(images).filter(img => img.hasAttribute('alt'));
+            analysis.details.altText = imagesWithAlt.length;
+
+            // Check for ARIA labels
+            analysis.details.ariaLabels = doc.querySelectorAll('[aria-label], [aria-labelledby]').length;
+
+            // Check form labels
+            const forms = doc.querySelectorAll('form');
+            forms.forEach(form => {
+                const inputs = form.querySelectorAll('input, select, textarea');
+                const labelsCount = form.querySelectorAll('label').length;
+                if (inputs.length === labelsCount) {
+                    analysis.details.formLabels++;
+                }
+            });
+
+            // Score calculation
+            if (images.length > 0 && imagesWithAlt.length === images.length) analysis.score += 30;
+            if (analysis.details.ariaLabels > 0) analysis.score += 35;
+            if (analysis.details.formLabels > 0) analysis.score += 35;
+
+            // Add findings
+            if (analysis.score >= 80) {
+                analysis.findings.push({
+                    type: 'success',
+                    title: 'Good Accessibility',
+                    description: 'Page has good accessibility features for AI understanding.'
+                });
+            } else {
+                analysis.findings.push({
+                    type: 'warning',
+                    title: 'Accessibility Improvements Needed',
+                    description: 'Consider adding more accessibility features for better AI comprehension.'
                 });
             }
 
-            // Sitemap recommendations
-            if (analysis.sitemapScore < 70) {
-                recommendations.push({
-                    title: 'Improve Sitemap Structure',
-                    description: 'Add more URLs to your sitemap and ensure it includes all important pages.',
-                    guideLink: guideLinks.sitemap,
-                    guideText: 'Learn more about sitemap optimization',
-                    priority: 'medium'
+            return analysis;
+        }
+
+        function analyzeCitations(doc) {
+            const analysis = {
+                score: 10, // Base score for potential citation
+                findings: [],
+                details: {
+                    authors: 0,
+                    dates: 0,
+                    references: 0,
+                    quotes: 0
+                }
+            };
+
+            // Check for author information
+            analysis.details.authors = doc.querySelectorAll('[rel="author"], .author, [itemprop="author"]').length;
+
+            // Check for dates
+            analysis.details.dates = doc.querySelectorAll('time, [datetime], [itemprop="datePublished"], [itemprop="dateModified"]').length;
+
+            // Check for references
+            analysis.details.references = doc.querySelectorAll('.references, .citation, [rel="cite"]').length;
+
+            // Check for quotes
+            analysis.details.quotes = doc.querySelectorAll('blockquote, q').length;
+
+            // Score calculation
+            if (analysis.details.authors > 0) analysis.score += 25;
+            if (analysis.details.dates > 0) analysis.score += 25;
+            if (analysis.details.references > 0) analysis.score += 25;
+            if (analysis.details.quotes > 0) analysis.score += 25;
+
+            // Add findings
+            if (analysis.score > 0) {
+                analysis.findings.push({
+                    type: analysis.score >= 75 ? 'success' : 'warning',
+                    title: 'Citation Elements',
+                    description: `Found ${analysis.details.authors} author(s), ${analysis.details.dates} date(s), ${analysis.details.references} reference(s), and ${analysis.details.quotes} quote(s).`
                 });
             }
 
-            // Content recommendations
-            if (analysis.contentScore < 70) {
-                recommendations.push({
-                    title: 'Enhance Content Quality',
-                    description: 'Add more detailed content, proper headings, and ensure all images have alt text.',
-                    guideLink: guideLinks.content,
-                    guideText: 'Read our content optimization guide',
-                    priority: 'medium'
-                });
-            }
+            return analysis;
+        }
+
+        function generateDetailedRecommendations(analysis) {
+            const recommendations = [];
 
             // Structure recommendations
-            if (analysis.structureScore < 70) {
+            if (analysis.scores.structure < 80) {
                 recommendations.push({
-                    title: 'Improve Page Structure',
-                    description: 'Add structured data, meta descriptions, and use semantic HTML elements.',
-                    guideLink: guideLinks.structure,
-                    guideText: 'Learn about page structure optimization',
-                    priority: 'medium'
+                    priority: 'high',
+                    title: 'Improve Content Structure',
+                    description: 'Enhance your content structure for better AI comprehension.',
+                    steps: [
+                        'Ensure exactly one H1 heading per page',
+                        'Maintain proper heading hierarchy (H1 → H2 → H3)',
+                        'Break content into logical sections',
+                        'Use descriptive heading text'
+                    ]
                 });
             }
 
-            // Meta description recommendations
-            if (analysis.details.some(detail => 
-                detail.findings && detail.findings.includes('Missing meta description'))) {
+            // Semantic recommendations
+            if (analysis.scores.semantic < 80) {
                 recommendations.push({
-                    title: 'Add Meta Descriptions',
-                    description: 'Create unique, descriptive meta descriptions for all pages.',
-                    guideLink: guideLinks.meta,
-                    guideText: 'Read our meta description guide',
-                    priority: 'low'
+                    priority: 'high',
+                    title: 'Enhance Semantic Markup',
+                    description: 'Use more semantic HTML elements to help AI understand your content structure.',
+                    steps: [
+                        'Wrap main content in <main> tags',
+                        'Use <article> for independent content',
+                        'Implement <section> for logical grouping',
+                        'Add <aside> for supplementary content',
+                        'Include proper <header> and <footer>'
+                    ]
                 });
             }
 
-            // Image optimization recommendations
-            if (analysis.details.some(detail => 
-                detail.findings && detail.findings.some(f => f.includes('images missing alt text')))) {
+            // Content quality recommendations
+            if (analysis.scores.contentQuality < 80) {
                 recommendations.push({
-                    title: 'Optimize Images',
-                    description: 'Add descriptive alt text to all images for better accessibility and LLM understanding.',
-                    guideLink: guideLinks.images,
-                    guideText: 'Learn about image optimization',
-                    priority: 'low'
+                    priority: 'medium',
+                    title: 'Improve Content Quality',
+                    description: 'Enhance your content for better AI understanding and citation potential.',
+                    steps: [
+                        'Write comprehensive paragraphs (aim for 50-100 words)',
+                        'Include relevant images with descriptive alt text',
+                        'Use lists to break down complex information',
+                        'Add code examples where relevant',
+                        'Maintain consistent formatting'
+                    ]
                 });
             }
 
-            // Semantic HTML recommendations
-            if (analysis.details.some(detail => 
-                detail.findings && detail.findings.includes('Not enough headings for content structure'))) {
+            // Accessibility recommendations
+            if (analysis.scores.accessibility < 80) {
                 recommendations.push({
-                    title: 'Use Semantic HTML',
-                    description: 'Implement proper heading hierarchy and semantic HTML elements.',
-                    guideLink: guideLinks.semantic,
-                    guideText: 'Read our semantic HTML guide',
-                    priority: 'low'
+                    priority: 'high',
+                    title: 'Enhance Accessibility',
+                    description: 'Improve accessibility to help AI better understand your content.',
+                    steps: [
+                        'Add alt text to all images',
+                        'Implement ARIA labels for interactive elements',
+                        'Ensure proper form labels',
+                        'Use semantic HTML elements',
+                        'Maintain good color contrast'
+                    ]
                 });
             }
 
-            // Sort recommendations by priority
-            recommendations.sort((a, b) => {
-                const priorityOrder = { high: 0, medium: 1, low: 2 };
-                return priorityOrder[a.priority] - priorityOrder[b.priority];
-            });
+            // Citation recommendations
+            if (analysis.scores.citation < 80) {
+                recommendations.push({
+                    priority: 'medium',
+                    title: 'Improve Citation Elements',
+                    description: 'Add more citation-friendly elements to increase AI reference potential.',
+                    steps: [
+                        'Include clear author information',
+                        'Add publication and update dates',
+                        'Implement proper citation markup',
+                        'Use blockquotes for quotable content',
+                        'Add reference lists where appropriate'
+                    ]
+                });
+            }
 
             return recommendations;
         }
 
+        function generateTechnicalRecommendations(analysis) {
+            const recommendations = [];
+
+            // LLMs.txt recommendations
+            if (!analysis.detailedAnalysis.technical.llmsTxt) {
+                recommendations.push({
+                    priority: 'high',
+                    title: 'Add LLMs.txt File',
+                    description: 'Create an LLMs.txt file to guide AI crawlers.',
+                    steps: [
+                        'Create llms.txt in your root directory',
+                        'Specify content types and preferred citation format',
+                        'Define crawling preferences for different LLMs',
+                        'Include content update frequency',
+                        'Add AI-specific indexing rules'
+                    ]
+                });
+            }
+
+            // Sitemap recommendations
+            if (!analysis.detailedAnalysis.technical.sitemap) {
+                recommendations.push({
+                    priority: 'high',
+                    title: 'Add Sitemap.xml',
+                    description: 'Create a sitemap.xml file for better content discovery.',
+                    steps: [
+                        'Generate a comprehensive sitemap.xml',
+                        'Include all important pages',
+                        'Add lastmod dates for content freshness',
+                        'Include priority and changefreq attributes',
+                        'Submit sitemap to search engines'
+                    ]
+                });
+            }
+
+            // Schema recommendations
+            if (!analysis.detailedAnalysis.technical.schema) {
+                recommendations.push({
+                    priority: 'high',
+                    title: 'Implement Schema Markup',
+                    description: 'Add schema.org markup for better AI understanding.',
+                    steps: [
+                        'Add appropriate schema types for your content',
+                        'Include author and publication information',
+                        'Mark up important page elements',
+                        'Add Article or WebPage schema',
+                        'Validate schema implementation'
+                    ]
+                });
+            }
+
+            // Meta tags recommendations
+            if (!analysis.detailedAnalysis.technical.hasAiMetaTags) {
+                recommendations.push({
+                    priority: 'medium',
+                    title: 'Add AI-Specific Meta Tags',
+                    description: 'Implement meta tags specifically for AI crawlers.',
+                    steps: [
+                        'Add ai-description meta tag',
+                        'Include ai-purpose meta tag',
+                        'Specify content-type for AI',
+                        'Add AI-specific robots directives',
+                        'Include comprehensive meta description'
+                    ]
+                });
+            }
+
+            return recommendations;
+        }
+
+        function calculateOverallScore(scores) {
+            const weights = {
+                structure: 0.20,
+                semantic: 0.15,
+                llmReadiness: 0.20,
+                contentQuality: 0.15,
+                accessibility: 0.10,
+                citation: 0.10,
+                technicalSEO: 0.10
+            };
+
+            return Math.round(
+                Object.entries(scores).reduce((total, [key, value]) => {
+                    return total + (value * (weights[key] || 0));
+                }, 0)
+            );
+        }
+
         function displayResults(results) {
             // Show results section
-            document.querySelector('.results-section').style.display = 'block';
+            const resultsSection = document.querySelector('.results-section');
+            resultsSection.style.display = 'block';
 
-            // Update scores
-            document.getElementById('overallScore').textContent = `${results.overallScore}/100`;
-            document.getElementById('sitemapScore').textContent = `${results.sitemapScore}/100`;
-            document.getElementById('contentScore').textContent = `${results.contentScore}/100`;
-            document.getElementById('structureScore').textContent = `${results.structureScore}/100`;
+            // Update timestamp and URL
+            document.getElementById('analysisTimestamp').textContent = new Date().toLocaleString();
+            document.getElementById('analyzedUrl').textContent = document.getElementById('siteUrl').value.trim();
 
-            // Add analysis summary
-            const summaryHtml = `
-                <div class="analysis-summary">
-                    <h3>Analysis Summary</h3>
-                    <p>Analyzed ${results.analyzedPages} out of ${results.totalPages} pages</p>
-                    <p>Overall LLM Optimization Score: ${results.overallScore}/100</p>
+            // Update overall score with animation
+            const overallScore = document.getElementById('overallScore');
+            const targetScore = Math.round(results.overallScore);
+            let currentScore = 0;
+            const duration = 1500; // Animation duration in ms
+            const interval = 20; // Update interval in ms
+            const steps = duration / interval;
+            const increment = targetScore / steps;
+
+            const scoreAnimation = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= targetScore) {
+                    currentScore = targetScore;
+                    clearInterval(scoreAnimation);
+                }
+                overallScore.textContent = Math.round(currentScore);
+                overallScore.style.color = getScoreColor(currentScore);
+            }, interval);
+
+            // Add score summary text
+            const scoreSummary = document.getElementById('scoreSummary');
+            scoreSummary.innerHTML = `
+                <div style="font-size: 1.1rem; color: ${getScoreColor(targetScore)}; margin-top: 1rem;">
+                    ${getSummaryText(targetScore)}
                 </div>
             `;
-            document.querySelector('.score-overview').insertAdjacentHTML('afterbegin', summaryHtml);
 
-            // Display analysis details
+            // Update individual scores with modern cards
+            const metricsGrid = document.getElementById('metricsGrid');
+            const metrics = [
+                { id: 'sitemapScore', label: 'Sitemap Structure', score: results.scores.structure || 0 },
+                { id: 'contentScore', label: 'Content Quality', score: results.scores.contentQuality || 0 },
+                { id: 'structureScore', label: 'Page Structure', score: results.scores.structure || 0 },
+                { id: 'semanticScore', label: 'Semantic Markup', score: results.scores.semantic || 0 },
+                { id: 'accessibilityScore', label: 'AI Accessibility', score: results.scores.accessibility || 0 },
+                { id: 'citationScore', label: 'Citation Potential', score: results.scores.citation || 0 }
+            ];
+
+            metrics.forEach(metric => {
+                const card = document.createElement('div');
+                card.className = 'metric-card';
+                card.innerHTML = `
+                    <div class="metric-value" style="color: ${getScoreColor(metric.score)}">${metric.score}</div>
+                    <div class="metric-label">${metric.label}</div>
+                `;
+                metricsGrid.appendChild(card);
+            });
+
+            // Display findings with improved styling
             const analysisResults = document.getElementById('analysisResults');
-            analysisResults.innerHTML = results.details.map(detail => `
-                <div class="analysis-item">
-                    <h4>${detail.category || detail.url}</h4>
-                    ${detail.findings ? `
-                        <ul>
-                            ${detail.findings.map(finding => `<li>${finding}</li>`).join('')}
+            analysisResults.innerHTML = results.findings.map(finding => `
+                <div class="analysis-category">
+                    <div class="category-header">
+                        <div class="header-content">
+                            ${getFindingIcon(finding.type)}
+                            <h4>${finding.title}</h4>
+                        </div>
+                        <span class="score-pill ${getScoreClass(finding.type)}">
+                            ${finding.type.charAt(0).toUpperCase() + finding.type.slice(1)}
+                        </span>
+                    </div>
+                    <div class="finding-content">
+                        ${finding.description}
+                    </div>
+                </div>
+            `).join('');
+
+            // Display recommendations
+            const recommendationsList = document.getElementById('recommendationsList');
+            recommendationsList.innerHTML = results.recommendations.map(rec => `
+                <div class="recommendation-item">
+                    <div class="recommendation-header">
+                        <h4>${rec.title}</h4>
+                        <span class="priority-badge ${rec.priority}">${rec.priority.toUpperCase()}</span>
+                    </div>
+                    <p>${rec.description}</p>
+                    ${rec.steps ? `
+                        <ul class="recommendation-steps">
+                            ${rec.steps.map(step => `<li>${step}</li>`).join('')}
                         </ul>
                     ` : ''}
                 </div>
             `).join('');
+        }
 
-            // Display recommendations with guide links and priority indicators
-            const recommendationsList = document.getElementById('recommendationsList');
-            recommendationsList.innerHTML = results.recommendations.map(rec => `
-                <div class="recommendation-item ${rec.priority}">
-                    <div class="recommendation-header">
-                        <h4>${rec.title}</h4>
-                        ${rec.priority === 'high' ? '<span class="priority-badge">High Priority</span>' : ''}
-                    </div>
-                    <p>${rec.description}</p>
-                    <a href="${rec.guideLink}" class="guide-link">${rec.guideText} →</a>
-                </div>
-            `).join('');
+        function getScoreColor(score) {
+            if (score >= 80) return '#059669'; // Green
+            if (score >= 60) return '#D97706'; // Orange
+            return '#DC2626'; // Red
+        }
+
+        function getScoreIcon(score) {
+            if (score >= 80) {
+                return '<svg style="width: 24px; height: 24px; color: #059669;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+            }
+            if (score >= 60) {
+                return '<svg style="width: 24px; height: 24px; color: #D97706;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>';
+            }
+            return '<svg style="width: 24px; height: 24px; color: #DC2626;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+        }
+
+        function getSummaryText(score) {
+            if (score >= 80) return 'Excellent! Your site is well-optimized for AI platforms.';
+            if (score >= 60) return 'Good progress, but there\'s room for improvement.';
+            return 'Your site needs optimization for better AI visibility.';
+        }
+
+        function getScoreClass(type) {
+            switch (type) {
+                case 'success': return 'score-high';
+                case 'warning': return 'score-medium';
+                case 'error': return 'score-low';
+                default: return 'score-medium';
+            }
+        }
+
+        function getFindingIcon(type) {
+            switch (type) {
+                case 'success':
+                    return '<svg viewBox="0 0 20 20" fill="currentColor" class="text-green-600"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>';
+                case 'warning':
+                    return '<svg viewBox="0 0 20 20" fill="currentColor" class="text-yellow-600"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>';
+                case 'error':
+                    return '<svg viewBox="0 0 20 20" fill="currentColor" class="text-red-600"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>';
+                default:
+                    return '<svg viewBox="0 0 20 20" fill="currentColor" class="text-blue-600"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>';
+            }
         }
 
         function showStatus(message, type) {
@@ -798,6 +1486,11 @@
             statusElement.textContent = message;
             statusElement.className = 'status-message ' + type;
             statusElement.style.display = 'block';
+        }
+
+        // Status update function for analysis progress
+        function updateAnalysisStatus(message) {
+            showStatus(message, 'info');
         }
 
         // Popup Banner JavaScript
