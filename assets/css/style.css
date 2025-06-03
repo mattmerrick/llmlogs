@@ -1,8 +1,11 @@
 :root {
-    --primary-color: #2563eb;
-    --text-color: #1f2937;
+    --primary-color: #0070f3;
+    --secondary-color: #0366d6;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --border-color: #e1e4e8;
+    --hover-color: #f6f8fa;
     --bg-color: #f9fafb;
-    --border-color: #e5e7eb;
     --card-bg: #ffffff;
     --heading-color: #1f2937;
     --code-bg: #1e1e1e;
@@ -38,30 +41,28 @@ body {
 
 /* Header Styles */
 .site-header {
-    background: var(--header-bg, white);
-    padding: 0.5rem 1rem;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    min-height: 56px;
 }
 
 .nav-container {
-    max-width: var(--container-width, 1200px);
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
-    flex-direction: row !important;
-    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    min-height: 40px;
+    align-items: center;
 }
 
 .site-logo {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
     text-decoration: none;
-    white-space: nowrap;
 }
 
 .mobile-menu-toggle {
@@ -102,18 +103,13 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+    gap: 2rem;
 }
 
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
-    font-size: 0.95rem;
 }
 
 .nav-links a:hover {
@@ -281,46 +277,37 @@ body {
 
 /* Footer Styles */
 .site-footer {
-    background-color: #1f2937;
-    color: #f9fafb;
-    padding: 1.5rem 0;
-    margin-top: 3rem;
+    background-color: var(--background-color);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: 4rem;
 }
 
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
+    padding: 0 1rem;
 }
 
 .footer-links {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 2rem;
     margin-bottom: 1rem;
 }
 
 .footer-links a {
-    color: #d1d5db;
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.2s;
-    font-size: 0.9rem;
 }
 
 .footer-links a:hover {
-    color: #ffffff;
+    color: var(--primary-color);
 }
 
 .footer-bottom {
-    border-top: 1px solid #374151;
-    padding-top: 1rem;
-}
-
-.footer-bottom p {
-    color: #9ca3af;
-    font-size: 0.85rem;
-    margin: 0;
+    text-align: center;
+    color: #666;
 }
 
 /* Breadcrumbs */
@@ -359,7 +346,7 @@ body {
         top: 60px;
         left: 0;
         right: 0;
-        background: var(--header-bg, white);
+        background: var(--background-color);
         padding: 1rem;
         flex-direction: column;
         align-items: flex-start;
@@ -1976,4 +1963,174 @@ pre[data-language]::before {
     .rule-card {
         margin-bottom: 1.5rem;
     }
+}
+
+/* Rules Builder Styles */
+.hero-content {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.rules-builder {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.builder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.framework-section {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.framework-section h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.framework-options {
+    display: grid;
+    gap: 1rem;
+}
+
+.framework-option {
+    display: block;
+    cursor: pointer;
+}
+
+.option-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.option-content:hover {
+    background-color: var(--hover-color);
+}
+
+.framework-option input[type="radio"] {
+    display: none;
+}
+
+.framework-option input[type="radio"]:checked + .option-content {
+    background-color: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+.option-content img {
+    width: 24px;
+    height: 24px;
+}
+
+.feature-options {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.feature-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.generate-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.generate-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.generate-button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Rules Preview Styles */
+.rules-preview {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.rules-preview pre {
+    background-color: var(--hover-color);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.download-options {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.download-button,
+.copy-button {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.download-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.copy-button {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.download-button:hover,
+.copy-button:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Utility Classes */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.content {
+    min-height: calc(100vh - 200px);
 } 
