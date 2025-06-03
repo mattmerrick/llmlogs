@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Guide to robots.txt for LLMs - AI Crawler Optimization | LLM Logs</title>
+    <meta name="description" content="Learn how to configure robots.txt for AI language models, including LLM directives, best practices, and examples for better AI crawler optimization.">
+    
+    <!-- Analytics -->
+    <script defer data-website-id="682d6fb7b163eb08ed813a43" data-domain="llmlogs.com" src="https://datafa.st/js/script.js"></script>
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog" class="active">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <nav class="breadcrumbs">
+                <a href="/">Home</a>
+                <span class="separator">/</span>
+                <a href="/blog">Blog</a>
+                <span class="separator">/</span>
+                <span>Complete Guide to robots.txt for LLMs</span>
+            </nav>
+
+            <article class="blog-post">
+                <h1>Complete Guide to robots.txt for LLMs: Optimizing for AI Crawlers</h1>
+                
+                <div class="post-meta">
+                    <time datetime="2025-03-20">March 20, 2025</time>
+                    <span class="category">AI SEO</span>
+                </div>
+
+                <div class="article-header-image">
+                    <img src="../images/robots-txt-llm.png" alt="robots.txt configuration diagram for LLM optimization" class="full-width-image">
+                </div>
+
+                <p>As AI language models become increasingly important for content discovery and citation, optimizing your robots.txt file for LLM crawlers is crucial. This guide covers everything you need to know about configuring robots.txt for AI models like ChatGPT, Claude, and other LLMs.</p>
+
+                <h2>What's New in robots.txt for LLMs?</h2>
+                <p>Traditional robots.txt files were designed for web crawlers like Googlebot. However, with the rise of AI language models, new directives have emerged:</p>
+
+                <div class="code-block">
+                    <pre><code># Standard directives
+User-agent: *
+Allow: /
+Disallow: /private/
+
+# LLM-specific directives
+User-agent: $llm
+Allow: /
+Disallow: /training/
+Training-Window: 30d
+Citation-Policy: allow-with-attribution</code></pre>
+                </div>
+
+                <h2>Key LLM Directives Explained</h2>
+                <ul>
+                    <li><strong>User-agent: $llm</strong> - Targets all AI language model crawlers</li>
+                    <li><strong>Training-Window</strong> - Specifies how long content can be used for training</li>
+                    <li><strong>Citation-Policy</strong> - Controls how LLMs can cite your content</li>
+                    <li><strong>Allow/Disallow</strong> - Standard directives that work with LLM crawlers</li>
+                </ul>
+
+                <h2>Best Practices for LLM robots.txt Configuration</h2>
+                <ol>
+                    <li>Always include the $llm User-agent</li>
+                    <li>Set clear citation policies</li>
+                    <li>Use training windows appropriately</li>
+                    <li>Protect sensitive content</li>
+                    <li>Regular updates and monitoring</li>
+                </ol>
+
+                <h2>Example Configurations</h2>
+                
+                <h3>Basic LLM Configuration</h3>
+                <div class="code-block">
+                    <pre><code>User-agent: $llm
+Allow: /
+Citation-Policy: allow-with-attribution
+Training-Window: 90d</code></pre>
+                </div>
+
+                <h3>Advanced Configuration with Multiple Policies</h3>
+                <div class="code-block">
+                    <pre><code>User-agent: $llm
+Allow: /blog/
+Allow: /guides/
+Disallow: /internal/
+Disallow: /drafts/
+Training-Window: 30d
+Citation-Policy: allow-with-attribution
+
+User-agent: GPTBot
+Allow: /public/
+Disallow: /premium/
+Citation-Policy: require-subscription
+
+User-agent: Claude-Web
+Allow: /
+Training-Window: 60d
+Citation-Policy: allow-commercial-use</code></pre>
+                </div>
+
+                <h2>Monitoring and Verification</h2>
+                <p>After implementing LLM directives in your robots.txt, it's important to:</p>
+                <ul>
+                    <li>Regularly check crawler logs for LLM bot activity</li>
+                    <li>Verify that your policies are being respected</li>
+                    <li>Monitor content citations in AI responses</li>
+                    <li>Update policies based on usage patterns</li>
+                </ul>
+
+                <h2>Common Issues and Solutions</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Issue</th>
+                                <th>Solution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LLMs ignoring directives</td>
+                                <td>Implement additional HTTP headers and meta tags</td>
+                            </tr>
+                            <tr>
+                                <td>Incorrect syntax</td>
+                                <td>Use standard formatting and validate your file</td>
+                            </tr>
+                            <tr>
+                                <td>Conflicting rules</td>
+                                <td>Order rules from most to least specific</td>
+                            </tr>
+                            <tr>
+                                <td>Missing policies</td>
+                                <td>Include all necessary directives for your use case</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Future of robots.txt and LLMs</h2>
+                <p>The landscape of AI crawler directives is evolving rapidly. Stay updated with:</p>
+                <ul>
+                    <li>New LLM-specific directives</li>
+                    <li>Changes in citation policies</li>
+                    <li>Training window standards</li>
+                    <li>Industry best practices</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>A well-configured robots.txt file is essential for controlling how AI language models interact with your content. By implementing the right directives and keeping up with evolving standards, you can ensure your content is properly indexed and cited by LLMs.</p>
+
+                <div class="share-section">
+                    <h3>Share this Guide</h3>
+                    <div class="share-buttons">
+                        <button class="share-button" data-url="https://llmlogs.com/blog/robots-txt-llm-optimization">Copy Link</button>
+                    </div>
+                </div>
+
+                
+            </article>
+        </div>
+    </div>
+
+    <!-- Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+</body>
+</html> 
