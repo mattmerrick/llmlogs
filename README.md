@@ -2,6 +2,23 @@
 
 Master LLM SEO to increase your content visibility in AI responses. Learn how to optimize for Large Language Models and get more clicks with our comprehensive guide.
 
+## 🚀 LLM API - All Language Models in One Place
+
+Access comprehensive information about all major language models through our simple JSON API. Get detailed specs, capabilities, and pricing for GPT-4, Claude, Gemini, and more.
+
+```bash
+curl https://llmlogs.com/api/llms.json
+```
+
+Features:
+- 📊 Detailed model specifications and capabilities
+- 💰 Up-to-date pricing information
+- 📈 Performance benchmarks and comparisons
+- 🔄 Daily updates with the latest models
+- 📚 Comprehensive documentation
+
+[Explore the API Documentation →](https://llmlogs.com/api)
+
 ## 🔍 Analyze Your Website for LLM SEO
 
 Start by analyzing your website's LLM optimization with our free site scanner tool. Get detailed insights and actionable recommendations to improve your content's visibility in AI responses.
