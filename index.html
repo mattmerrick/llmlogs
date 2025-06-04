@@ -542,7 +542,7 @@
                 <a href="/guides">Guides</a>
                 <a href="/free-tools">Tools</a>
                 <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://vibecoders.bio" target="_blank" rel="noopener">Vibe Coders</a>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 LLM Logs. All rights reserved.</p>
@@ -614,6 +614,24 @@
                 document.getElementById('popupBanner').style.display = 'none';
             }
         });
+
+        // Handle referral parameter
+        function handleRef() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get('ref');
+            
+            if (ref) {
+                // Store the referral source in localStorage
+                localStorage.setItem('referral_source', ref);
+                
+                // Remove the ref parameter from URL without reloading
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+            }
+        }
+
+        // Run when the page loads
+        window.addEventListener('load', handleRef);
     </script>
 </body>
 </html> 
