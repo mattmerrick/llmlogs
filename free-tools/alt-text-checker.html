@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alt Text Checker - LLM SEO Guide</title>
+    <meta name="description" content="Check HTML or webpage URLs for missing or ineffective image alt text to improve accessibility and SEO for LLMs.">
+    <meta name="keywords" content="alt text checker, image seo, accessibility tool, llm image optimization">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .checker-container {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .checker-container textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .checker-container button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .checker-container button:hover {
+            background-color: var(--secondary-color);
+        }
+        #resultsContainer {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+        #resultsContainer h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .result-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-item p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+        .result-item .src {
+            font-weight: bold;
+            word-break: break-all;
+        }
+        .result-item .alt-text {
+            font-style: italic;
+        }
+        .feedback.good {
+            color: #28a745;
+        }
+        .feedback.warning {
+            color: #ffc107;
+        }
+        .feedback.bad {
+            color: #dc3545;
+        }
+        .input-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .input-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-right: 10px;
+            font-size: 1em;
+            color: #666;
+        }
+        .input-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .input-section {
+            display: none;
+        }
+        .input-section.active {
+            display: block;
+        }
+        #urlInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.9em;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .loading::after {
+            content: "Loading...";
+            color: var(--primary-color);
+            font-style: italic;
+        }
+        .error-message {
+            color: #dc3545;
+            padding: 10px;
+            border: 1px solid #dc3545;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <div class="content">
+            <h1>Alt Text Checker</h1>
+            <p>Check your HTML code or webpage URL for missing or ineffective image alt text. Good alt text improves accessibility and SEO, especially for LLMs understanding image context.</p>
+
+            <div class="checker-container">
+                <div class="input-tabs">
+                    <button class="input-tab active" onclick="switchTab('html')">HTML Input</button>
+                    <button class="input-tab" onclick="switchTab('url')">URL Input</button>
+                </div>
+
+                <div id="htmlSection" class="input-section active">
+                    <label for="htmlInput">HTML Input:</label>
+                    <textarea id="htmlInput" placeholder="Paste your HTML code here..."></textarea>
+                </div>
+
+                <div id="urlSection" class="input-section">
+                    <label for="urlInput">Webpage URL:</label>
+                    <input type="url" id="urlInput" placeholder="Enter webpage URL (e.g., https://example.com)" />
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+                <button onclick="startCheck()">Check Alt Text</button>
+            </div>
+
+            <div id="resultsContainer" style="display: none;">
+                <h3>Results:</h3>
+                <div id="resultsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        let currentTab = 'html';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.input-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.input-section').forEach(s => s.classList.remove('active'));
+            
+            document.querySelector(`.input-tab:nth-child(${tab === 'html' ? '1' : '2'})`).classList.add('active');
+            document.getElementById(`${tab}Section`).classList.add('active');
+            
+            // Clear previous results and errors
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        async function startCheck() {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'none';
+
+            if (currentTab === 'html') {
+                checkAltText();
+            } else {
+                const urlInput = document.getElementById('urlInput').value.trim();
+                
+                if (!urlInput) {
+                    showError('Please enter a valid URL');
+                    return;
+                }
+
+                if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
+                    showError('Please enter a valid URL starting with http:// or https://');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(urlInput);
+                    if (!response.ok) throw new Error('Failed to fetch webpage');
+                    
+                    const html = await response.text();
+                    document.getElementById('htmlInput').value = html;
+                    checkAltText();
+                } catch (error) {
+                    showError('Failed to fetch webpage. Please check the URL and try again, or paste the HTML directly.');
+                }
+            }
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function checkAltText() {
+            const htmlInput = document.getElementById('htmlInput').value;
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsList = document.getElementById('resultsList');
+
+            resultsList.innerHTML = ''; // Clear previous results
+            resultsContainer.style.display = 'none';
+
+            if (!htmlInput.trim()) {
+                resultsList.innerHTML = '<p class="feedback bad">Please paste some HTML to check.</p>';
+                resultsContainer.style.display = 'block';
+                return;
+            }
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlInput, 'text/html');
+            const images = doc.getElementsByTagName('img');
+
+            if (images.length === 0) {
+                resultsList.innerHTML = '<p>No image (<code>&lt;img&gt;</code>) tags found in the provided HTML.</p>';
+                resultsContainer.style.display = 'block';
+                return;
+            }
+
+            resultsContainer.style.display = 'block';
+            let issueFound = false;
+
+            for (let i = 0; i < images.length; i++) {
+                const img = images[i];
+                const src = img.getAttribute('src') || 'Source not specified';
+                const alt = img.getAttribute('alt');
+
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+
+                let feedbackHTML = `Source: <span class="src">${src}</span><br>`;
+                
+                if (alt === null) {
+                    feedbackHTML += `Alt Text: <span class="alt-text">NOT FOUND</span> <span class="feedback bad">(Missing! Critical for accessibility & SEO)</span>`;
+                    issueFound = true;
+                } else if (alt.trim() === '') {
+                    feedbackHTML += `Alt Text: <span class="alt-text">EMPTY</span> <span class="feedback bad">(Empty! Provide a descriptive alt text.)</span>`;
+                    issueFound = true;
+                } else if (alt.length < 5) {
+                    feedbackHTML += `Alt Text: "<span class="alt-text">${alt}</span>" <span class="feedback warning">(Too short. Consider a more descriptive alt text.)</span>`;
+                    issueFound = true;
+                } else if (/(image|picture|photo|logo|icon)/i.test(alt) && alt.split(' ').length < 3) {
+                     feedbackHTML += `Alt Text: "<span class="alt-text">${alt}</span>" <span class="feedback warning">(May be too generic. Avoid phrases like 'image of' or 'picture of' unless critical for context.)</span>`;
+                    issueFound = true;
+                } else {
+                    feedbackHTML += `Alt Text: "<span class="alt-text">${alt}</span>" <span class="feedback good">(Looks good! Ensure it's descriptive and contextually relevant.)</span>`;
+                }
+                
+                resultItem.innerHTML = `<p>${feedbackHTML}</p>`;
+                resultsList.appendChild(resultItem);
+            }
+
+            if (!issueFound && images.length > 0) {
+                 const summary = document.createElement('p');
+                 summary.innerHTML = "<strong>All images seem to have alt text. Review them to ensure they are descriptive and contextually accurate.</strong>";
+                 summary.className = 'feedback good';
+                 resultsList.insertBefore(summary, resultsList.firstChild);
+            }
+        }
+    </script>
+</body>
+</html> 

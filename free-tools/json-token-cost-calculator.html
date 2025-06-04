@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Cost Calculator (JSON Output) - LLM SEO Guide</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .calculator-form {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .calculator-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .calculator-form input[type="number"],
+        .calculator-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .calculator-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .calculator-form button:hover {
+            background-color: var(--secondary-color);
+        }
+        #jsonOutput {
+            background-color: #272822; /* Monokai-like background */
+            color: #f8f8f2; /* Light text for dark background */
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: 'Courier New', Courier, monospace;
+            border: 1px solid #444;
+            min-height: 100px;
+        }
+        .output-container {
+            margin-top: 20px;
+        }
+        .output-container h3 {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <div class="content">
+            <h1>Token Cost Calculator (JSON Output)</h1>
+            <p>💰 Input model + prompt length → Returns cost breakdown in JSON</p>
+            <p>✅ Simple but helpful for budgeting API calls</p>
+
+            <div class="calculator-form">
+                <div>
+                    <label for="modelSelect">Select Model:</label>
+                    <select id="modelSelect">
+                        <option value="gpt-3.5-turbo">OpenAI: GPT-3.5-Turbo</option>
+                        <option value="gpt-4">OpenAI: GPT-4</option>
+                        <option value="gpt-4-turbo">OpenAI: GPT-4-Turbo</option>
+                        <option value="gpt-4o">OpenAI: GPT-4o</option>
+                        <option value="claude-3-opus">Anthropic: Claude 3 Opus</option>
+                        <option value="claude-3.5-sonnet">Anthropic: Claude 3.5 Sonnet</option>
+                        <option value="claude-3-haiku">Anthropic: Claude 3 Haiku</option>
+                        <option value="gemini-1.5-pro">Google: Gemini 1.5 Pro</option>
+                        <option value="gemini-1.5-flash">Google: Gemini 1.5 Flash</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="promptTokens">Prompt Tokens:</label>
+                    <input type="number" id="promptTokens" value="1000" min="0">
+                </div>
+                <div>
+                    <label for="completionTokens">Completion Tokens (Optional):</label>
+                    <input type="number" id="completionTokens" value="200" min="0">
+                </div>
+                <button onclick="calculateCost()">Calculate Cost</button>
+            </div>
+
+            <div class="output-container">
+                <h3>JSON Output:</h3>
+                <pre><code id="jsonOutput">{}</code></pre>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const modelPricing = {
+            // Prices per 1,000 tokens
+            "gpt-3.5-turbo": { input: 0.0005, output: 0.0015, provider: "OpenAI" },
+            "gpt-4": { input: 0.03, output: 0.06, provider: "OpenAI" },
+            "gpt-4-turbo": { input: 0.01, output: 0.03, provider: "OpenAI" },
+            "gpt-4o": { input: 0.005, output: 0.015, provider: "OpenAI" },
+            "claude-3-opus": { input: 0.015, output: 0.075, provider: "Anthropic" },
+            "claude-3.5-sonnet": { input: 0.003, output: 0.015, provider: "Anthropic" },
+            "claude-3-haiku": { input: 0.00025, output: 0.00125, provider: "Anthropic" },
+            "gemini-1.5-pro": { input: 0.00125, output: 0.005, provider: "Google" },
+            "gemini-1.5-flash": { input: 0.000075, output: 0.0003, provider: "Google" }
+        };
+
+        function calculateCost() {
+            const selectedModelValue = document.getElementById('modelSelect').value;
+            const promptTokens = parseInt(document.getElementById('promptTokens').value) || 0;
+            const completionTokens = parseInt(document.getElementById('completionTokens').value) || 0;
+
+            if (!modelPricing[selectedModelValue]) {
+                document.getElementById('jsonOutput').textContent = JSON.stringify({ error: "Selected model not found." }, null, 2);
+                return;
+            }
+
+            const modelInfo = modelPricing[selectedModelValue];
+            const promptCost = (promptTokens / 1000) * modelInfo.input;
+            const completionCost = (completionTokens / 1000) * modelInfo.output;
+            const totalCost = promptCost + completionCost;
+
+            const result = {
+                provider: modelInfo.provider,
+                model: selectedModelValue,
+                prompt_tokens: promptTokens,
+                completion_tokens: completionTokens,
+                costs_per_1k_tokens: {
+                    input: modelInfo.input,
+                    output: modelInfo.output
+                },
+                calculated_cost: {
+                    prompt_cost: parseFloat(promptCost.toFixed(6)),
+                    completion_cost: parseFloat(completionCost.toFixed(6)),
+                    total_cost: parseFloat(totalCost.toFixed(6))
+                }
+            };
+
+            document.getElementById('jsonOutput').textContent = JSON.stringify(result, null, 4);
+        }
+
+        // Initial calculation on load
+        document.addEventListener('DOMContentLoaded', calculateCost);
+    </script>
+</body>
+</html> 

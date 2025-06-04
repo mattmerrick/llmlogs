@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Prompt Starter Pack - LLM SEO Guide</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .prompt-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .prompt-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .prompt-card pre {
+            background-color: #f5f5f5;
+            color: #333333;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #e8e8e8;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin-top: 10px;
+        }
+        .copy-button:hover {
+            background-color: var(--secondary-color);
+        }
+         .copy-button.copied {
+            background-color: #28a745; /* Green color for success */
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <div class="content">
+            <h1>Copy/Paste JSON Prompt Starter Pack</h1>
+            <h2>📋 One-click to copy JSON-formatted prompt templates</h2>
+            <p>✅ Helps new devs get started without docs. Click the button below each template to copy it to your clipboard.</p>
+            <p>Format: <code>{ "model": "model-name", "messages": [{"role": "user", "content": "Your prompt here"}] }</code></p>
+
+            <div class="prompt-card">
+                <h3>Basic Question Answering</h3>
+                <pre><code id="prompt1">{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user",
+            "content": "What is the capital of France?"
+        }
+    ]
+}</code></pre>
+                <button class="copy-button" onclick="copyToClipboard('prompt1', this)">Copy JSON</button>
+            </div>
+
+            <div class="prompt-card">
+                <h3>Text Summarization</h3>
+                <pre><code id="prompt2">{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+        {
+            "role": "system",
+            "content": "Summarize the following text for me."
+        },
+        {
+            "role": "user",
+            "content": "Artificial intelligence (AI) is intelligence demonstrated by machines, unlike the natural intelligence displayed by humans and animals. Leading AI textbooks define the field as the study of \"intelligent agents\": any device that perceives its environment and takes actions that maximize its chance of successfully achieving its goals."
+        }
+    ]
+}</code></pre>
+                <button class="copy-button" onclick="copyToClipboard('prompt2', this)">Copy JSON</button>
+            </div>
+
+            <div class="prompt-card">
+                <h3>Code Generation (Python)</h3>
+                <pre><code id="prompt3">{
+    "model": "gpt-4",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a helpful coding assistant. Generate only code."
+        },
+        {
+            "role": "user",
+            "content": "Write a Python function that takes a list of numbers and returns the sum."
+        }
+    ]
+}</code></pre>
+                <button class="copy-button" onclick="copyToClipboard('prompt3', this)">Copy JSON</button>
+            </div>
+
+            <div class="prompt-card">
+                <h3>Creative Writing Starter</h3>
+                <pre><code id="prompt4">{
+    "model": "gpt-4",
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a creative writing assistant."
+        },
+        {
+            "role": "user",
+            "content": "Write the opening paragraph for a story about a detective who can talk to animals, set in a futuristic city."
+        }
+    ]
+}</code></pre>
+                <button class="copy-button" onclick="copyToClipboard('prompt4', this)">Copy JSON</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        function copyToClipboard(elementId, buttonElement) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                buttonElement.innerText = 'Copied!';
+                buttonElement.classList.add('copied');
+                setTimeout(() => {
+                    buttonElement.innerText = 'Copy JSON';
+                    buttonElement.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                buttonElement.innerText = 'Error Copying';
+                 setTimeout(() => {
+                    buttonElement.innerText = 'Copy JSON';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html> 

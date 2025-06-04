@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM API - Comprehensive Language Model Data</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+
+        .copy-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            margin: 0.5rem;
+        }
+
+        .copy-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .live-demo {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .model-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .model-card h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        .model-filters {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .model-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .model-card .capabilities {
+            display: flex;
+            gap: 0.25rem;
+            flex-wrap: wrap;
+        }
+        .model-card .capability-tag {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .model-card .provider-tag {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .price-tag {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .context-window {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 2rem;
+            color: #e53e3e;
+            background: #fff5f5;
+            border-radius: 8px;
+            border: 1px solid #feb2b2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start-here.html" class="start-here-link">Start Here</a>
+                <a href="/guides/llm-optimization">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>LLM API</h1>
+        <p>A comprehensive, up-to-date database of Language Models in a clean JSON format. Perfect for developers building LLM-powered applications.</p>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <h3>🚀 Easy Integration</h3>
+            <p>Simple REST API endpoint with clean JSON responses. No authentication required.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📊 Complete Data</h3>
+            <p>Detailed information about models, versions, pricing, and capabilities.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🔄 Always Current</h3>
+            <p>Regular updates with the latest models and pricing changes.</p>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <div class="demo-container">
+            <h2>Quick Start</h2>
+            <div class="code-block">
+                <button class="copy-button" onclick="copyCode('fetch-example')">Copy</button>
+                <pre id="fetch-example">
+fetch('https://llmlogs.com/api/llms.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Available models:', Object.keys(data.models));
+  });</pre>
+            </div>
+
+            <h2>Live Demo</h2>
+            <div class="live-demo">
+                <h3>Available Models</h3>
+                <div class="model-filters">
+                    <button class="filter-btn active" data-filter="all">All Models</button>
+                    <button class="filter-btn" data-filter="text">Text Models</button>
+                    <button class="filter-btn" data-filter="vision">Vision Models</button>
+                    <button class="filter-btn" data-filter="open-source">Open Source</button>
+                </div>
+                <div id="modelGrid" class="model-grid">
+                    <div class="loading">Loading models...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <div class="demo-container">
+            <h2>Example Applications</h2>
+            
+            <div class="feature-card">
+                <h3>💰 Cost Calculator</h3>
+                <p>Calculate and compare costs across different models:</p>
+                <div class="code-block">
+                    <button class="copy-button" onclick="copyCode('cost-calculator')">Copy</button>
+                    <pre id="cost-calculator">
+function calculateCost(model, inputTokens, outputTokens) {
+    const pricing = model.versions[0].pricing;
+    return (inputTokens * pricing.input + 
+            outputTokens * pricing.output) / 1000;
+}</pre>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <h3>🔍 Model Finder</h3>
+                <p>Find the best model for specific capabilities:</p>
+                <div class="code-block">
+                    <button class="copy-button" onclick="copyCode('model-finder')">Copy</button>
+                    <pre id="model-finder">
+function findModelsWithCapability(data, capability) {
+    return Object.entries(data.models)
+        .filter(([_, model]) => 
+            model.capabilities.includes(capability))
+        .map(([name, model]) => name);
+}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/free-tools">Tools</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to copy code examples
+        function copyCode(elementId) {
+            const codeBlock = document.getElementById(elementId);
+            navigator.clipboard.writeText(codeBlock.textContent.trim());
+            const button = codeBlock.previousElementSibling;
+            button.textContent = 'Copied!';
+            setTimeout(() => button.textContent = 'Copy', 2000);
+        }
+
+        // Model filtering
+        let currentFilter = 'all';
+        let modelData = null;
+
+        function filterModels(filter) {
+            currentFilter = filter;
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            displayModels(modelData);
+        }
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function displayModels(data) {
+            const modelGrid = document.getElementById('modelGrid');
+            modelGrid.innerHTML = '';
+
+            Object.entries(data.models).forEach(([key, model]) => {
+                // Apply filters
+                if (currentFilter !== 'all') {
+                    if (currentFilter === 'vision' && !model.capabilities.includes('vision')) return;
+                    if (currentFilter === 'open-source' && model.versions[0].pricing.input !== 0) return;
+                    if (currentFilter === 'text' && model.capabilities.includes('vision')) return;
+                }
+
+                const latestVersion = model.versions[0];
+                const card = document.createElement('div');
+                card.className = 'model-card';
+
+                const pricing = latestVersion.pricing;
+                const priceText = pricing.input === 0 ? 
+                    '✨ Open Source' : 
+                    `$${pricing.input}/1K tokens`;
+
+                const contextWindow = latestVersion.context_window ? 
+                    `Context: ${formatNumber(latestVersion.context_window)} tokens` : '';
+
+                card.innerHTML = `
+                    <h4>${model.name}</h4>
+                    <span class="provider-tag">by ${model.provider}</span>
+                    <div class="capabilities">
+                        ${model.capabilities.slice(0, 3).map(cap => 
+                            `<span class="capability-tag">${cap}</span>`
+                        ).join('')}
+                    </div>
+                    <span class="price-tag">${priceText}</span>
+                    <span class="context-window">${contextWindow}</span>
+                `;
+
+                modelGrid.appendChild(card);
+            });
+        }
+
+        // Fetch and display models
+        async function loadModels() {
+            try {
+                const response = await fetch('./llms.json');
+                modelData = await response.json();
+                
+                // Setup filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', () => filterModels(btn.dataset.filter));
+                });
+
+                displayModels(modelData);
+            } catch (error) {
+                console.error('Error loading models:', error);
+                document.getElementById('modelGrid').innerHTML = 
+                    '<div class="error">Failed to load models. Please try again later.</div>';
+            }
+        }
+
+        // Load models when page loads
+        window.addEventListener('load', loadModels);
+    </script>
+</body>
+</html> 
