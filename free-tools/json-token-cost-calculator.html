@@ -1,87 +1,159 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Token Cost Calculator (JSON Output) - LLM SEO Guide</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="description" content="">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    
     <style>
-        .calculator-form {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-        .calculator-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--text-color);
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-        .calculator-form input[type="number"],
-        .calculator-form select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
-        .calculator-form button {
-            background-color: var(--primary-color);
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
+        }
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .calculator-form button:hover {
-            background-color: var(--secondary-color);
+        .guide-card:hover {
+            transform: translateY(-5px);
         }
-        #jsonOutput {
-            background-color: #272822; /* Monokai-like background */
-            color: #f8f8f2; /* Light text for dark background */
-            padding: 15px;
-            border-radius: 4px;
-            overflow-x: auto;
-            white-space: pre;
-            font-family: 'Courier New', Courier, monospace;
-            border: 1px solid #444;
-            min-height: 100px;
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
         }
-        .output-container {
-            margin-top: 20px;
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
-        .output-container h3 {
-            color: var(--primary-color);
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+        }
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
     </style>
+
 </head>
 <body>
-    <!-- Include Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger"></span>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html" class="start-here-link">Start Here</a>
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
-            </nav>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <div class="content">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Token Cost Calculator (JSON Output)</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Token Cost Calculator (JSON Output)</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
             <h1>Token Cost Calculator (JSON Output)</h1>
             <p>💰 Input model + prompt length → Returns cost breakdown in JSON</p>
             <p>✅ Simple but helpful for budgeting API calls</p>
@@ -117,77 +189,36 @@
                 <pre><code id="jsonOutput">{}</code></pre>
             </div>
 
-        </div>
-    </div>
-
-    <!-- Include Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+        
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Required Scripts -->
-    <script src="../assets/js/main.js"></script>
-    <script>
-        const modelPricing = {
-            // Prices per 1,000 tokens
-            "gpt-3.5-turbo": { input: 0.0005, output: 0.0015, provider: "OpenAI" },
-            "gpt-4": { input: 0.03, output: 0.06, provider: "OpenAI" },
-            "gpt-4-turbo": { input: 0.01, output: 0.03, provider: "OpenAI" },
-            "gpt-4o": { input: 0.005, output: 0.015, provider: "OpenAI" },
-            "claude-3-opus": { input: 0.015, output: 0.075, provider: "Anthropic" },
-            "claude-3.5-sonnet": { input: 0.003, output: 0.015, provider: "Anthropic" },
-            "claude-3-haiku": { input: 0.00025, output: 0.00125, provider: "Anthropic" },
-            "gemini-1.5-pro": { input: 0.00125, output: 0.005, provider: "Google" },
-            "gemini-1.5-flash": { input: 0.000075, output: 0.0003, provider: "Google" }
-        };
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        function calculateCost() {
-            const selectedModelValue = document.getElementById('modelSelect').value;
-            const promptTokens = parseInt(document.getElementById('promptTokens').value) || 0;
-            const completionTokens = parseInt(document.getElementById('completionTokens').value) || 0;
-
-            if (!modelPricing[selectedModelValue]) {
-                document.getElementById('jsonOutput').textContent = JSON.stringify({ error: "Selected model not found." }, null, 2);
-                return;
-            }
-
-            const modelInfo = modelPricing[selectedModelValue];
-            const promptCost = (promptTokens / 1000) * modelInfo.input;
-            const completionCost = (completionTokens / 1000) * modelInfo.output;
-            const totalCost = promptCost + completionCost;
-
-            const result = {
-                provider: modelInfo.provider,
-                model: selectedModelValue,
-                prompt_tokens: promptTokens,
-                completion_tokens: completionTokens,
-                costs_per_1k_tokens: {
-                    input: modelInfo.input,
-                    output: modelInfo.output
-                },
-                calculated_cost: {
-                    prompt_cost: parseFloat(promptCost.toFixed(6)),
-                    completion_cost: parseFloat(completionCost.toFixed(6)),
-                    total_cost: parseFloat(totalCost.toFixed(6))
-                }
-            };
-
-            document.getElementById('jsonOutput').textContent = JSON.stringify(result, null, 4);
-        }
-
-        // Initial calculation on load
-        document.addEventListener('DOMContentLoaded', calculateCost);
-    </script>
 </body>
-</html> 
+</html>

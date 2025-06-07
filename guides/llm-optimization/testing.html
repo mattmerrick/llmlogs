@@ -1,103 +1,159 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://app.tinyadz.com https://datafa.st https://scripts.simpleanalyticscdn.com;
-        frame-src 'self' https://www.googletagmanager.com https://ghbtns.com;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
-        img-src 'self' data: https:;
-        connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://app.tinyadz.com https://datafa.st;
-    ">
-    <meta name="description" content="Learn about testing strategies for LLM optimization. Master techniques to validate and improve your content's performance in AI responses.">
-    <meta name="keywords" content="LLM testing, AI validation, content testing, performance testing, optimization testing, LLM prompts, citation tracking, content accuracy, user engagement, A/B testing for LLMs">
     <title>Testing - LLM Guides</title>
-
-    <meta property="og:title" content="Testing - LLM Guides">
-    <meta property="og:description" content="Learn about testing strategies for LLM optimization. Master techniques to validate and improve your content's performance in AI responses.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://llmlogs.com/guides/llm-optimization/testing">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Testing">
-    <meta name="twitter:description" content="Learn about testing strategies for LLM optimization. Master techniques to validate and improve your content's performance in AI responses.">
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Testing Strategies for LLM Optimization",
-        "description": "Learn about testing strategies for LLM optimization. Master techniques to validate and improve your content's performance in AI responses.",
-        "url": "https://llmlogs.com/guides/llm-optimization/testing",
-        "author": {
-            "@type": "Person",
-            "name": "Your Name/LLM Guides"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "LLM Guides",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://llmlogs.com/assets/images/logo.png"
-            }
-        },
-        "datePublished": "2025-05-21",
-        "dateModified": "2025-05-21"
-    }
-    </script>
-
+    <meta name="description" content="Learn about testing strategies for LLM optimization. Master techniques to validate and improve your content's performance in AI responses.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <script
-        defer
-        data-website-id="682d6fb7b163eb08ed813a43"
-        data-domain="llmlogs.com"
-        src="https://datafa.st/js/script.js">
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
-    <!-- End Google Tag Manager -->
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
+        }
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+        }
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+    </style>
+
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <script src="https://app.tinyadz.com/scripts/ads.js?siteId=682ded933f19f516dd80fdae" type="module" async></script>
     
-    <!-- Standard Header Component -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM SEO Guide</a>
-            <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a> / <a href="/guides/llm-optimization">Guides</a> / Testing
-        </nav>
 
-        <main class="content">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/guides/llm-optimization" class="text-white">LLM Optimization</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Testing</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Testing</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
             <div id="TA_AD_CONTAINER">
                 <!-- It will be replaced with an ad -->
             </div>
@@ -111,8 +167,8 @@
                     <li><a href="#testing-methods">1. Testing Methods: How to Evaluate LLM Performance</a>
                         <ul>
                             <li><a href="#direct-query">1.1. Direct LLM Query Testing (Qualitative)</a></li>
-                            <li><a href="#comparative-analysis">1.2. Comparative Analysis (Qualitative & Quantitative)</a></li>
-                            <li><a href="#performance-monitoring">1.3. Performance Monitoring & Analytics (Quantitative)</a></li>
+                            <li><a href="#comparative-analysis">1.2. Comparative Analysis (Qualitative &amp; Quantitative)</a></li>
+                            <li><a href="#performance-monitoring">1.3. Performance Monitoring &amp; Analytics (Quantitative)</a></li>
                             <li><a href="#user-feedback">1.4. User Feedback Collection (Qualitative)</a></li>
                             <li><a href="#ab-testing">1.5. A/B Testing for LLM Responses (Experimental)</a></li>
                         </ul>
@@ -120,41 +176,41 @@
                     <li><a href="#key-metrics">2. Key Test Metrics: What to Track for LLM Success</a>
                         <ul>
                             <li><a href="#mcp">2.1. Mean Cumulative Precision (MCP)</a></li>
-                            <li><a href="#response-accuracy">2.2. Response Accuracy & Relevance</a></li>
-                            <li><a href="#content-visibility">2.3. Content Visibility & Citation Frequency</a></li>
+                            <li><a href="#response-accuracy">2.2. Response Accuracy &amp; Relevance</a></li>
+                            <li><a href="#content-visibility">2.3. Content Visibility &amp; Citation Frequency</a></li>
                             <li><a href="#direct-answer">2.4. Direct Answer / Featured Snippet Appearance</a></li>
                             <li><a href="#user-engagement">2.5. User Engagement (AI-Referred Traffic)</a></li>
-                            <li><a href="#topical-coverage">2.6. Topical Coverage & Completeness</a></li>
-                            <li><a href="#bias-detection">2.7. Bias Detection & Fairness</a></li>
+                            <li><a href="#topical-coverage">2.6. Topical Coverage &amp; Completeness</a></li>
+                            <li><a href="#bias-detection">2.7. Bias Detection &amp; Fairness</a></li>
                         </ul>
                     </li>
                     <li><a href="#implementation">3. Implementation Steps: A Practical Testing Workflow</a>
                         <ul>
                             <li><a href="#test-objectives">3.1. Define Clear Test Objectives</a></li>
-                            <li><a href="#test-methods">3.2. Select Appropriate Test Methods & Tools</a></li>
-                            <li><a href="#monitoring">3.3. Set Up Monitoring & Data Collection</a></li>
+                            <li><a href="#test-methods">3.2. Select Appropriate Test Methods &amp; Tools</a></li>
+                            <li><a href="#monitoring">3.3. Set Up Monitoring &amp; Data Collection</a></li>
                             <li><a href="#execute-tests">3.4. Execute Tests Systematically</a></li>
-                            <li><a href="#analyze-results">3.5. Analyze Results & Identify Insights</a></li>
-                            <li><a href="#iterate">3.6. Iterate & Refine Content/Strategy</a></li>
+                            <li><a href="#analyze-results">3.5. Analyze Results &amp; Identify Insights</a></li>
+                            <li><a href="#iterate">3.6. Iterate &amp; Refine Content/Strategy</a></li>
                         </ul>
                     </li>
                     <li><a href="#best-practices">4. Best Practices for Effective LLM Testing</a>
                         <ul>
-                            <li><a href="#regular-testing">4.1. Test Regularly & Continuously</a></li>
-                            <li><a href="#mixed-methods">4.2. Use a Mix of Qualitative & Quantitative Methods</a></li>
+                            <li><a href="#regular-testing">4.1. Test Regularly &amp; Continuously</a></li>
+                            <li><a href="#mixed-methods">4.2. Use a Mix of Qualitative &amp; Quantitative Methods</a></li>
                             <li><a href="#documentation">4.3. Document Everything Meticulously</a></li>
                             <li><a href="#actionable-insights">4.4. Focus on Actionable Insights</a></li>
-                            <li><a href="#stay-updated">4.5. Stay Updated on LLM Changes & Capabilities</a></li>
+                            <li><a href="#stay-updated">4.5. Stay Updated on LLM Changes &amp; Capabilities</a></li>
                             <li><a href="#ethical-implications">4.6. Consider Ethical Implications in Testing</a></li>
                         </ul>
                     </li>
                     <li><a href="#specific-prompts">5. Specific Prompts for LLM Testing</a>
                         <ul>
-                            <li><a href="#summarization-prompts">5.1. Summarization & Overview Prompts</a></li>
-                            <li><a href="#direct-answer-prompts">5.2. Direct Answer & Fact Extraction Prompts</a></li>
-                            <li><a href="#comparison-prompts">5.3. Comparison & Relationship Prompts</a></li>
-                            <li><a href="#authority-prompts">5.4. Authoritative & E-A-T Prompts</a></li>
-                            <li><a href="#troubleshooting-prompts">5.5. Troubleshooting & Problem-Solving Prompts</a></li>
+                            <li><a href="#summarization-prompts">5.1. Summarization &amp; Overview Prompts</a></li>
+                            <li><a href="#direct-answer-prompts">5.2. Direct Answer &amp; Fact Extraction Prompts</a></li>
+                            <li><a href="#comparison-prompts">5.3. Comparison &amp; Relationship Prompts</a></li>
+                            <li><a href="#authority-prompts">5.4. Authoritative &amp; E-A-T Prompts</a></li>
+                            <li><a href="#troubleshooting-prompts">5.5. Troubleshooting &amp; Problem-Solving Prompts</a></li>
                         </ul>
                     </li>
                     <li><a href="#tools">6. Tools for LLM Optimization Testing</a></li>
@@ -193,7 +249,7 @@
                 </div>
 
                 <div id="comparative-analysis" class="example-block">
-                    <h3>1.2. Comparative Analysis (Qualitative & Quantitative)</h3>
+                    <h3>1.2. Comparative Analysis (Qualitative &amp; Quantitative)</h3>
                     <p><strong>Description:</strong> Compare your content's performance in LLM responses against competitors or previous versions of your own content (before optimization changes).</p>
                     <ul>
                         <li><strong>Action:</strong>
@@ -215,7 +271,7 @@
                 </div>
 
                 <div id="performance-monitoring" class="example-block">
-                    <h3>1.3. Performance Monitoring & Analytics (Quantitative)</h3>
+                    <h3>1.3. Performance Monitoring &amp; Analytics (Quantitative)</h3>
                     <p><strong>Description:</strong> Leverage your existing analytics tools to track metrics that can indirectly signal LLM visibility and impact.</p>
                     <ul>
                         <li><strong>Action:</strong>
@@ -286,7 +342,7 @@
                 </div>
 
                 <div id="response-accuracy" class="example-block">
-                    <h3>2.2. Response Accuracy & Relevance</h3>
+                    <h3>2.2. Response Accuracy &amp; Relevance</h3>
                     <p><strong>Metric:</strong> How accurately and completely the LLM's generated response reflects the information presented in your content for a given query.</p>
                     <ul>
                         <li><strong>Measurement:</strong> Manual review of LLM outputs. Consistency checks against your original content.</li>
@@ -295,7 +351,7 @@
                 </div>
 
                 <div id="content-visibility" class="example-block">
-                    <h3>2.3. Content Visibility & Citation Frequency</h3>
+                    <h3>2.3. Content Visibility &amp; Citation Frequency</h3>
                     <p><strong>Metric:</strong> How often your content (or fragments of it) is explicitly cited or referenced by LLMs in their responses.</p>
                     <ul>
                         <li><strong>Measurement:</strong> Direct observation of LLM outputs. Monitoring tools that track source citations in AI answers (if available). Referral traffic from AI interfaces.</li>
@@ -322,7 +378,7 @@
                 </div>
 
                 <div id="topical-coverage" class="example-block">
-                    <h3>2.6. Topical Coverage & Completeness (LLM Perception)</h3>
+                    <h3>2.6. Topical Coverage &amp; Completeness (LLM Perception)</h3>
                     <p><strong>Metric:</strong> How well LLMs perceive your site as a comprehensive and authoritative resource on a given topic.</p>
                     <ul>
                         <li><strong>Measurement:</strong> Ask LLMs to "summarize the topic of X from [Your Site]" or "list key concepts on X from [Your Site]". Observe if they grasp the full breadth of your content cluster.</li>
@@ -331,7 +387,7 @@
                 </div>
 
                 <div id="bias-detection" class="example-block">
-                    <h3>2.7. Bias Detection & Fairness</h3>
+                    <h3>2.7. Bias Detection &amp; Fairness</h3>
                     <p><strong>Metric:</strong> Identification of any unintended biases in LLM responses generated from your content.</p>
                     <ul>
                         <li><strong>Measurement:</strong> Careful review of LLM outputs for fairness, representativeness, and avoidance of stereotypes.</li>
@@ -351,13 +407,13 @@
                 </div>
 
                 <div id="test-methods" class="example-block">
-                    <h3>3.2. Select Appropriate Test Methods & Tools</h3>
+                    <h3>3.2. Select Appropriate Test Methods &amp; Tools</h3>
                     <p><strong>Action:</strong> Based on your objectives, choose the most suitable testing methods (e.g., direct queries for accuracy, analytics for traffic). Identify the LLMs and tools you'll use (ChatGPT, Perplexity, Google Analytics, Schema validators, etc.).</p>
                     <p class="example-note"><strong>Why it matters:</strong> Matching the right tools and methods to your goals ensures efficient and effective testing.</p>
                 </div>
 
                 <div id="monitoring" class="example-block">
-                    <h3>3.3. Set Up Monitoring & Data Collection</h3>
+                    <h3>3.3. Set Up Monitoring &amp; Data Collection</h3>
                     <p><strong>Action:</strong> Configure your analytics to track relevant metrics (e.g., custom segments for AI referral traffic). Establish a consistent logging system for qualitative observations from direct LLM queries (e.g., a spreadsheet to record prompts, LLM responses, and your content's citation status).</p>
                     <p class="example-note"><strong>Why it matters:</strong> Consistent data collection is vital for identifying trends and measuring impact over time.</p>
                 </div>
@@ -369,13 +425,13 @@
                 </div>
 
                 <div id="analyze-results" class="example-block">
-                    <h3>3.5. Analyze Results & Identify Insights</h3>
+                    <h3>3.5. Analyze Results &amp; Identify Insights</h3>
                     <p><strong>Action:</strong> Review your collected data (qualitative and quantitative). Look for patterns, correlations, and anomalies. Identify what content structures, phrasing, or schema implementations are performing well, and where LLMs are struggling.</p>
                     <p class="example-note"><strong>Why it matters:</strong> Raw data is just numbers; insights are what drive actionable improvements.</p>
                 </div>
 
                 <div id="iterate" class="example-block">
-                    <h3>3.6. Iterate & Refine Content/Strategy</h3>
+                    <h3>3.6. Iterate &amp; Refine Content/Strategy</h3>
                     <p><strong>Action:</strong> Based on your insights, make targeted adjustments to your content (e.g., clarify fact nuggets, update schema, improve E-A-T signals). Re-test after changes to confirm improvements. This creates a continuous feedback loop.</p>
                     <p class="example-note"><strong>Why it matters:</strong> LLM optimization is an ongoing process of refinement. Acting on insights is key to sustained performance.</p>
                 </div>
@@ -386,13 +442,13 @@
                 <p>Maximize the effectiveness of your testing efforts by adhering to these overarching guidelines.</p>
 
                 <div id="regular-testing" class="example-block">
-                    <h3>4.1. Test Regularly & Continuously</h3>
+                    <h3>4.1. Test Regularly &amp; Continuously</h3>
                     <p><strong>Guideline:</strong> LLMs are constantly evolving. What works today might be less effective tomorrow. Implement a continuous testing schedule rather than one-off audits.</p>
                     <p class="example-note"><strong>Action:</strong> Set calendar reminders for weekly or monthly LLM query tests and quarterly analytics reviews.</p>
                 </div>
 
                 <div id="mixed-methods" class="example-block">
-                    <h3>4.2. Use a Mix of Qualitative & Quantitative Methods</h3>
+                    <h3>4.2. Use a Mix of Qualitative &amp; Quantitative Methods</h3>
                     <p><strong>Guideline:</strong> Don't rely solely on one type of data. Qualitative observations from direct LLM interactions provide context, while quantitative analytics show scale and trends.</p>
                     <p class="example-note"><strong>Action:</strong> Combine manual LLM queries with automated analytics reporting and schema validation checks.</p>
                 </div>
@@ -410,7 +466,7 @@
                 </div>
 
                 <div id="stay-updated" class="example-block">
-                    <h3>4.5. Stay Updated on LLM Changes & Capabilities</h3>
+                    <h3>4.5. Stay Updated on LLM Changes &amp; Capabilities</h3>
                     <p><strong>Guideline:</strong> New LLM models, larger context windows, and improved reasoning capabilities can impact how your content is processed. Keep abreast of these developments.</p>
                     <p class="example-note"><strong>Action:</strong> Follow AI news, LLM provider blogs, and participate in relevant online communities.</p>
                 </div>
@@ -427,7 +483,7 @@
                 <p>Here are example prompts you can use with various LLMs to test your content's optimization. Remember to replace `[Your Content URL]` with the actual URL of the page you are testing.</p>
 
                 <div id="summarization-prompts" class="example-block">
-                    <h3>5.1. Summarization & Overview Prompts</h3>
+                    <h3>5.1. Summarization &amp; Overview Prompts</h3>
                     <ul>
                         <li>"Summarize the key points of this article: [Your Content URL]"</li>
                         <li>"Give me an executive summary of the content at: [Your Content URL]"</li>
@@ -438,7 +494,7 @@
                 </div>
 
                 <div id="direct-answer-prompts" class="example-block">
-                    <h3>5.2. Direct Answer & Fact Extraction Prompts</h3>
+                    <h3>5.2. Direct Answer &amp; Fact Extraction Prompts</h3>
                     <ul>
                         <li>"What are the [number] main steps to [process described on your page] from [Your Content URL]?"</li>
                         <li>"Define [specific term/concept] as explained on [Your Content URL]."</li>
@@ -450,7 +506,7 @@
                 </div>
 
                 <div id="comparison-prompts" class="example-block">
-                    <h3>5.3. Comparison & Relationship Prompts</h3>
+                    <h3>5.3. Comparison &amp; Relationship Prompts</h3>
                     <ul>
                         <li>"Compare [Concept A] and [Concept B] based on the information in [Your Content URL]."</li>
                         <li>"What is the relationship between [Entity X] and [Entity Y] as described on [Your Content URL]?"</li>
@@ -460,7 +516,7 @@
                 </div>
 
                 <div id="authority-prompts" class="example-block">
-                    <h3>5.4. Authoritative & E-A-T Prompts</h3>
+                    <h3>5.4. Authoritative &amp; E-A-T Prompts</h3>
                     <ul>
                         <li>"Who is the author of the article at [Your Content URL] and what are their credentials?"</li>
                         <li>"What organization published the content on [Your Content URL]?"</li>
@@ -470,7 +526,7 @@
                 </div>
 
                 <div id="troubleshooting-prompts" class="example-block">
-                    <h3>5.5. Troubleshooting & Problem-Solving Prompts</h3>
+                    <h3>5.5. Troubleshooting &amp; Problem-Solving Prompts</h3>
                     <ul>
                         <li>"I'm encountering [problem] when trying to [action described on your page]. Does [Your Content URL] offer any solutions?"</li>
                         <li>"What are the common pitfalls to avoid when [performing an action] according to [Your Content URL]?"</li>
@@ -490,14 +546,14 @@
                             <li>Schema.org Markup Validator: <a href="https://validator.schema.org/" target="_blank">https://validator.schema.org/</a></li>
                         </ul>
                     </li>
-                    <li><strong>SEO & Analytics Platforms:</strong>
+                    <li><strong>SEO &amp; Analytics Platforms:</strong>
                         <ul>
                             <li>Google Search Console: For performance reports, indexing status, and rich result monitoring.</li>
                             <li>Google Analytics 4: For detailed traffic analysis, including referral sources and user engagement.</li>
                             <li>Semrush / Ahrefs / Moz: For keyword tracking, competitor analysis, and identifying SERP features (like Featured Snippets).</li>
                         </ul>
                     </li>
-                    <li><strong>Content Quality & Readability Tools:</strong>
+                    <li><strong>Content Quality &amp; Readability Tools:</strong>
                         <ul>
                             <li>Hemingway Editor: For improving clarity and conciseness.</li>
                             <li>Grammarly / ProWritingAid: For grammar, spelling, and overall writing quality.</li>
@@ -522,34 +578,36 @@
                 <p>Testing is not merely a final step in LLM optimization; it's an integral, ongoing process that fuels continuous improvement. By systematically evaluating how Large Language Models interact with your content, you gain invaluable insights into their understanding, preferences, and citation behaviors.</p>
                 <p>Embrace a rigorous testing methodology that combines qualitative observations with quantitative data. Use the insights gained to refine your content structure, writing style, technical implementation, and overall strategy. This continuous feedback loop will ensure your content remains highly visible, accurately represented, and consistently cited by LLMs in the ever-evolving AI-driven information landscape, solidifying your position as a trusted and authoritative source.</p>
             </section>
-        </main>
-    </div>
+        
+                </div>
+            </div>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <!-- Include Standard Footer -->
-    <div id="footer-placeholder"></div>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Scripts -->
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/share.js"></script>
-    <!-- 100% privacy-first analytics -->
-    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-    <script>
-        // Load header and footer components
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load header
-            fetch('/assets/components/standard-header.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('header-placeholder').innerHTML = data;
-                });
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-            // Load footer
-            fetch('/assets/components/standard-footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer-placeholder').innerHTML = data;
-                });
-        });
-    </script>
 </body>
 </html>

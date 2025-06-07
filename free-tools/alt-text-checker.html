@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,154 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alt Text Checker - LLM SEO Guide</title>
     <meta name="description" content="Check HTML or webpage URLs for missing or ineffective image alt text to improve accessibility and SEO for LLMs.">
-    <meta name="keywords" content="alt text checker, image seo, accessibility tool, llm image optimization">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    
     <style>
-        .checker-container {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-        .checker-container textarea {
-            width: 100%;
-            min-height: 200px;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-family: monospace;
-            font-size: 0.9em;
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-        .checker-container button {
-            background-color: var(--primary-color);
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
+        }
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .checker-container button:hover {
-            background-color: var(--secondary-color);
+        .guide-card:hover {
+            transform: translateY(-5px);
         }
-        #resultsContainer {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-        }
-        #resultsContainer h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-        .result-item {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-        .result-item:last-child {
-            border-bottom: none;
-        }
-        .result-item p {
-            margin: 5px 0;
-            font-size: 0.95em;
-        }
-        .result-item .src {
-            font-weight: bold;
-            word-break: break-all;
-        }
-        .result-item .alt-text {
-            font-style: italic;
-        }
-        .feedback.good {
-            color: #28a745;
-        }
-        .feedback.warning {
-            color: #ffc107;
-        }
-        .feedback.bad {
-            color: #dc3545;
-        }
-        .input-tabs {
-            display: flex;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        .input-tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            background: none;
+        .feature-card {
             border: none;
-            border-bottom: 2px solid transparent;
-            margin-right: 10px;
-            font-size: 1em;
-            color: #666;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
         }
-        .input-tab.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
-        .input-section {
-            display: none;
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
         }
-        .input-section.active {
-            display: block;
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
-        #urlInput {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 0.9em;
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        .loading::after {
-            content: "Loading...";
-            color: var(--primary-color);
-            font-style: italic;
-        }
-        .error-message {
-            color: #dc3545;
-            padding: 10px;
-            border: 1px solid #dc3545;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            display: none;
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
     </style>
+
 </head>
 <body>
-    <!-- Include Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger"></span>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html" class="start-here-link">Start Here</a>
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
-            </nav>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <div class="content">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Alt Text Checker</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Alt Text Checker</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
             <h1>Alt Text Checker</h1>
             <p>Check your HTML code or webpage URL for missing or ineffective image alt text. Good alt text improves accessibility and SEO, especially for LLMs understanding image context.</p>
 
@@ -169,7 +170,7 @@
 
                 <div id="urlSection" class="input-section">
                     <label for="urlInput">Webpage URL:</label>
-                    <input type="url" id="urlInput" placeholder="Enter webpage URL (e.g., https://example.com)" />
+                    <input type="url" id="urlInput" placeholder="Enter webpage URL (e.g., https://example.com)">
                 </div>
 
                 <div class="error-message" id="errorMessage"></div>
@@ -180,145 +181,36 @@
                 <h3>Results:</h3>
                 <div id="resultsList"></div>
             </div>
-        </div>
-    </div>
-
-    <!-- Include Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+        
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Required Scripts -->
-    <script src="../assets/js/main.js"></script>
-    <script>
-        let currentTab = 'html';
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        function switchTab(tab) {
-            currentTab = tab;
-            document.querySelectorAll('.input-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.input-section').forEach(s => s.classList.remove('active'));
-            
-            document.querySelector(`.input-tab:nth-child(${tab === 'html' ? '1' : '2'})`).classList.add('active');
-            document.getElementById(`${tab}Section`).classList.add('active');
-            
-            // Clear previous results and errors
-            document.getElementById('resultsContainer').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'none';
-        }
-
-        async function startCheck() {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.style.display = 'none';
-
-            if (currentTab === 'html') {
-                checkAltText();
-            } else {
-                const urlInput = document.getElementById('urlInput').value.trim();
-                
-                if (!urlInput) {
-                    showError('Please enter a valid URL');
-                    return;
-                }
-
-                if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
-                    showError('Please enter a valid URL starting with http:// or https://');
-                    return;
-                }
-
-                try {
-                    const response = await fetch(urlInput);
-                    if (!response.ok) throw new Error('Failed to fetch webpage');
-                    
-                    const html = await response.text();
-                    document.getElementById('htmlInput').value = html;
-                    checkAltText();
-                } catch (error) {
-                    showError('Failed to fetch webpage. Please check the URL and try again, or paste the HTML directly.');
-                }
-            }
-        }
-
-        function showError(message) {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-        }
-
-        function checkAltText() {
-            const htmlInput = document.getElementById('htmlInput').value;
-            const resultsContainer = document.getElementById('resultsContainer');
-            const resultsList = document.getElementById('resultsList');
-
-            resultsList.innerHTML = ''; // Clear previous results
-            resultsContainer.style.display = 'none';
-
-            if (!htmlInput.trim()) {
-                resultsList.innerHTML = '<p class="feedback bad">Please paste some HTML to check.</p>';
-                resultsContainer.style.display = 'block';
-                return;
-            }
-
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlInput, 'text/html');
-            const images = doc.getElementsByTagName('img');
-
-            if (images.length === 0) {
-                resultsList.innerHTML = '<p>No image (<code>&lt;img&gt;</code>) tags found in the provided HTML.</p>';
-                resultsContainer.style.display = 'block';
-                return;
-            }
-
-            resultsContainer.style.display = 'block';
-            let issueFound = false;
-
-            for (let i = 0; i < images.length; i++) {
-                const img = images[i];
-                const src = img.getAttribute('src') || 'Source not specified';
-                const alt = img.getAttribute('alt');
-
-                const resultItem = document.createElement('div');
-                resultItem.className = 'result-item';
-
-                let feedbackHTML = `Source: <span class="src">${src}</span><br>`;
-                
-                if (alt === null) {
-                    feedbackHTML += `Alt Text: <span class="alt-text">NOT FOUND</span> <span class="feedback bad">(Missing! Critical for accessibility & SEO)</span>`;
-                    issueFound = true;
-                } else if (alt.trim() === '') {
-                    feedbackHTML += `Alt Text: <span class="alt-text">EMPTY</span> <span class="feedback bad">(Empty! Provide a descriptive alt text.)</span>`;
-                    issueFound = true;
-                } else if (alt.length < 5) {
-                    feedbackHTML += `Alt Text: "<span class="alt-text">${alt}</span>" <span class="feedback warning">(Too short. Consider a more descriptive alt text.)</span>`;
-                    issueFound = true;
-                } else if (/(image|picture|photo|logo|icon)/i.test(alt) && alt.split(' ').length < 3) {
-                     feedbackHTML += `Alt Text: "<span class="alt-text">${alt}</span>" <span class="feedback warning">(May be too generic. Avoid phrases like 'image of' or 'picture of' unless critical for context.)</span>`;
-                    issueFound = true;
-                } else {
-                    feedbackHTML += `Alt Text: "<span class="alt-text">${alt}</span>" <span class="feedback good">(Looks good! Ensure it's descriptive and contextually relevant.)</span>`;
-                }
-                
-                resultItem.innerHTML = `<p>${feedbackHTML}</p>`;
-                resultsList.appendChild(resultItem);
-            }
-
-            if (!issueFound && images.length > 0) {
-                 const summary = document.createElement('p');
-                 summary.innerHTML = "<strong>All images seem to have alt text. Review them to ensure they are descriptive and contextually accurate.</strong>";
-                 summary.className = 'feedback good';
-                 resultsList.insertBefore(summary, resultsList.firstChild);
-            }
-        }
-    </script>
 </body>
-</html> 
+</html>

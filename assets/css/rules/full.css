@@ -1,0 +1,211 @@
+/* Rule Full Page Styles */
+.rule-full {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* Top Actions */
+.top-actions {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Header Styles */
+.rule-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.rule-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.rule-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Content Styles */
+.rule-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.markdown-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: var(--text-color);
+}
+
+.markdown-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-color);
+}
+
+.markdown-content ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.markdown-content ul ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    list-style-type: circle;
+}
+
+.markdown-content li {
+    margin-bottom: 0.5rem;
+}
+
+.markdown-content p {
+    margin-bottom: 1rem;
+}
+
+/* Action Buttons */
+.rule-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.download-button,
+.back-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.download-button {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.download-button:hover {
+    background: color-mix(in srgb, var(--primary-color) 80%, black);
+}
+
+.back-button {
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.back-button:hover {
+    background: color-mix(in srgb, var(--background-color) 90%, black);
+}
+
+/* Code Blocks */
+.markdown-content pre {
+    background: var(--background-color);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.markdown-content code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+    background: var(--background-color);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-sm);
+}
+
+/* Tables */
+.markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.markdown-content th {
+    background: var(--background-color);
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rule-full {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .rule-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .rule-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rule-actions {
+        flex-direction: column;
+    }
+
+    .download-button,
+    .back-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .rule-full {
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .rule-actions,
+    .site-header,
+    .site-footer {
+        display: none;
+    }
+
+    .markdown-content {
+        font-size: 12pt;
+    }
+
+    .markdown-content a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .markdown-content pre,
+    .markdown-content code {
+        background: none;
+        border: 1px solid #ddd;
+    }
+} 
