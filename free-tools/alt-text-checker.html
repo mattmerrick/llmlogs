@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,6 +95,63 @@
             font-size: 1.25rem;
             opacity: 0.9;
         }
+        
+        /* Add custom styles for input tabs */
+        .input-tabs {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--bs-gray-300);
+            padding-bottom: 1rem;
+        }
+        
+        .input-tab {
+            margin-right: 0.5rem;
+        }
+        
+        .input-tab.active {
+            background-color: var(--bs-primary) !important;
+            color: white !important;
+            border-color: var(--bs-primary) !important;
+        }
+        
+        .input-section {
+            display: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-section.active {
+            display: block;
+        }
+        
+        .checker-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        #htmlInput {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.375rem;
+        }
+        
+        #urlInput {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.375rem;
+        }
+        
+        .error-message {
+            color: var(--bs-danger);
+            margin-bottom: 1rem;
+            display: none;
+        }
     </style>
 
 </head>
@@ -159,22 +215,22 @@
 
             <div class="checker-container">
                 <div class="input-tabs">
-                    <button class="input-tab active" onclick="switchTab('html')">HTML Input</button>
-                    <button class="input-tab" onclick="switchTab('url')">URL Input</button>
+                    <button class="btn btn-outline-primary input-tab active" onclick="switchTab('html')">HTML Input</button>
+                    <button class="btn btn-outline-primary input-tab" onclick="switchTab('url')">URL Input</button>
                 </div>
 
                 <div id="htmlSection" class="input-section active">
-                    <label for="htmlInput">HTML Input:</label>
-                    <textarea id="htmlInput" placeholder="Paste your HTML code here..."></textarea>
+                    <label for="htmlInput" class="form-label">HTML Input:</label>
+                    <textarea id="htmlInput" class="form-control" placeholder="Paste your HTML code here..."></textarea>
                 </div>
 
                 <div id="urlSection" class="input-section">
-                    <label for="urlInput">Webpage URL:</label>
-                    <input type="url" id="urlInput" placeholder="Enter webpage URL (e.g., https://example.com)">
+                    <label for="urlInput" class="form-label">Webpage URL:</label>
+                    <input type="url" id="urlInput" class="form-control" placeholder="Enter webpage URL (e.g., https://example.com)">
                 </div>
 
                 <div class="error-message" id="errorMessage"></div>
-                <button onclick="startCheck()">Check Alt Text</button>
+                <button class="btn btn-primary" onclick="startCheck()">Check Alt Text</button>
             </div>
 
             <div id="resultsContainer" style="display: none;">
@@ -212,5 +268,119 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Page Specific JavaScript -->
+    <script>
+        // Initialize the tool with HTML input tab active
+        document.addEventListener('DOMContentLoaded', function() {
+            switchTab('html');
+        });
+
+        function switchTab(tab) {
+            // Remove active class from all tabs and sections
+            document.querySelectorAll('.input-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelectorAll('.input-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Add active class to selected tab and section
+            document.querySelector(`.input-tab[onclick*="${tab}"]`).classList.add('active');
+            document.getElementById(`${tab}Section`).classList.add('active');
+        }
+
+        function startCheck() {
+            const htmlSection = document.getElementById('htmlSection');
+            const urlSection = document.getElementById('urlSection');
+            const errorMessage = document.getElementById('errorMessage');
+            const resultsList = document.getElementById('resultsList');
+            const resultsContainer = document.getElementById('resultsContainer');
+
+            // Clear previous results and errors
+            errorMessage.style.display = 'none';
+            errorMessage.textContent = '';
+            resultsList.innerHTML = '';
+            resultsContainer.style.display = 'none';
+
+            // Get input based on active section
+            let input = '';
+            let isUrl = false;
+
+            if (htmlSection.classList.contains('active')) {
+                input = document.getElementById('htmlInput').value.trim();
+            } else {
+                input = document.getElementById('urlInput').value.trim();
+                isUrl = true;
+            }
+
+            // Validate input
+            if (!input) {
+                errorMessage.textContent = isUrl ? 'Please enter a URL' : 'Please enter HTML code';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (isUrl && !isValidUrl(input)) {
+                errorMessage.textContent = 'Please enter a valid URL';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            resultsList.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+            resultsContainer.style.display = 'block';
+
+            // TODO: Implement actual alt text checking logic here
+            // For now, just show a sample result
+            setTimeout(() => {
+                const sampleResults = [
+                    {
+                        image: 'header-logo.png',
+                        hasAlt: true,
+                        altText: 'Company Logo',
+                        suggestion: 'Consider adding more descriptive alt text'
+                    },
+                    {
+                        image: 'hero-image.jpg',
+                        hasAlt: false,
+                        altText: '',
+                        suggestion: 'Missing alt text - add descriptive alt text'
+                    }
+                ];
+
+                displayResults(sampleResults);
+            }, 1000);
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function displayResults(results) {
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'card mb-3';
+                resultItem.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${result.image}</h5>
+                        <p class="card-text">
+                            <strong>Has Alt Text:</strong> ${result.hasAlt ? '<span class="text-success">Yes</span>' : '<span class="text-danger">No</span>'}<br>
+                            <strong>Current Alt Text:</strong> ${result.altText || '<em>None</em>'}<br>
+                            <strong>Suggestion:</strong> ${result.suggestion}
+                        </p>
+                    </div>
+                `;
+                resultsList.appendChild(resultItem);
+            });
+        }
+    </script>
 </body>
 </html>

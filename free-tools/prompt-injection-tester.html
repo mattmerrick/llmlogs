@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,6 +94,175 @@
         .home-hero p {
             font-size: 1.25rem;
             opacity: 0.9;
+        }
+        
+        /* Test Types */
+        .test-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .test-type {
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .test-type.selected {
+            border-color: var(--bs-primary);
+            background-color: var(--bs-primary-bg-subtle);
+        }
+        
+        .test-type:hover {
+            border-color: var(--bs-primary);
+            transform: translateY(-2px);
+        }
+        
+        .test-type h4 {
+            margin-bottom: 0.75rem;
+            color: var(--bs-gray-900);
+        }
+        
+        .test-type p {
+            margin-bottom: 0;
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        
+        /* Input Section */
+        .input-section {
+            margin-bottom: 2rem;
+        }
+        
+        #prompt-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+        
+        #prompt-input:focus {
+            outline: none;
+            border-color: var(--bs-primary);
+            box-shadow: 0 0 0 2px rgba(var(--bs-primary-rgb), 0.25);
+        }
+        
+        /* Test Controls */
+        .test-controls {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .test-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background-color: var(--bs-primary);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .test-button:hover {
+            background-color: var(--bs-primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .test-button:active {
+            transform: translateY(0);
+        }
+        
+        .test-button.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .test-button.loading .spinner-border {
+            margin-right: 0.75rem;
+        }
+        
+        /* Results Section */
+        .results-section {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .risk-score {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-right: 1.5rem;
+        }
+        
+        .score-low {
+            background-color: var(--bs-success);
+        }
+        
+        .score-medium {
+            background-color: var(--bs-warning);
+        }
+        
+        .score-high {
+            background-color: var(--bs-danger);
+        }
+        
+        .vulnerability-item {
+            background: var(--bs-gray-100);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .severity-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .severity-high {
+            background-color: var(--bs-danger-bg-subtle);
+            color: var(--bs-danger);
+        }
+        
+        .severity-medium {
+            background-color: var(--bs-warning-bg-subtle);
+            color: var(--bs-warning);
+        }
+        
+        .severity-low {
+            background-color: var(--bs-success-bg-subtle);
+            color: var(--bs-success);
         }
     </style>
 
@@ -290,6 +458,63 @@ User: ${userInput}
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Page Specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize test types
+            document.querySelectorAll('.test-type').forEach(type => {
+                type.addEventListener('click', function() {
+                    // Remove selected class from all types
+                    document.querySelectorAll('.test-type').forEach(t => {
+                        t.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked type
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Initialize test button
+            const testButton = document.getElementById('test-button');
+            testButton.addEventListener('click', runTest);
+        });
+        
+        function runTest() {
+            const promptInput = document.getElementById('prompt-input').value.trim();
+            const selectedTest = document.querySelector('.test-type.selected').dataset.test;
+            const resultsSection = document.querySelector('.results-section');
+            const testButton = document.getElementById('test-button');
+            
+            // Validate input
+            if (!promptInput) {
+                alert('Please enter a prompt to test');
+                return;
+            }
+            
+            // Show loading state
+            testButton.classList.add('loading');
+            testButton.innerHTML = `
+                <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                Testing...
+            `;
+            
+            // Simulate test (replace with actual API call)
+            setTimeout(() => {
+                // Show results
+                resultsSection.style.display = 'block';
+                
+                // Reset button
+                testButton.classList.remove('loading');
+                testButton.textContent = 'Test for Vulnerabilities';
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        }
+    </script>
 
 </body>
 </html>

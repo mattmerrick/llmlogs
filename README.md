@@ -2,33 +2,33 @@
 
 Master LLM SEO to increase your content visibility in AI responses. Learn how to optimize for Large Language Models and get more clicks with our comprehensive guide.
 
-## 🚀 LLM API - All Language Models in One Place
+## 🛠️ Free Tools
 
-Access comprehensive information about all major language models through our simple JSON API. Get detailed specs, capabilities, and pricing for GPT-4, Claude, Gemini, and more.
+Access our suite of tools designed to help you optimize your content for AI understanding and visibility:
 
-```bash
-curl https://llmlogs.com/api/llms.json
-```
+### Alt Text Checker
+- Analyze images and their alt text for AI readability
+- Get recommendations for improving alt text descriptions
+- Check for missing or ineffective alt text
+- Support for both direct HTML input and URL scanning
 
-Features:
-- 📊 Detailed model specifications and capabilities
-- 💰 Up-to-date pricing information
-- 📈 Performance benchmarks and comparisons
-- 🔄 Daily updates with the latest models
-- 📚 Comprehensive documentation
+### Prompt Injection Tester
+- Test prompts for potential security vulnerabilities
+- Get detailed vulnerability reports and risk scores
+- Receive mitigation recommendations
+- Support for basic and advanced testing patterns
 
-[Explore the API Documentation →](https://llmlogs.com/api)
+### AI Content Scanner
+- Analyze content structure and readability
+- Check semantic clarity and context completeness
+- Evaluate citation potential and authority signals
+- Get actionable recommendations for improvement
 
-## 🔍 Analyze Your Website for LLM SEO
-
-Start by analyzing your website's LLM optimization with our free site scanner tool. Get detailed insights and actionable recommendations to improve your content's visibility in AI responses.
-
-- [Site Scanner Tool](https://llmlogs.com/scan-site)
-  - Analyze your website's LLM optimization score
-  - Get detailed recommendations for improvement
-  - Check for llms.txt implementation
-  - Review structured data and content quality
-  - Monitor your progress over time
+### llms.txt Generator
+- Create optimized llms.txt files for AI crawlers
+- Configure access for multiple AI bots (GPT, Claude, Cohere, Google)
+- Manage allowed and disallowed paths
+- Get instant preview and easy download options
 
 ## 📚 Core Concepts
 
@@ -49,21 +49,8 @@ Learn how to structure and format your content for maximum impact in LLM respons
 
 - [Content Structure & Formatting](https://llmlogs.com/guides/llm-optimization/content-optimization)
   - Optimize your content structure and formatting for better LLM comprehension
-- [Real-time Tools & APIs](https://llmlogs.com/guides/llm-optimization/real-time-tools)
-  - Discover tools and APIs that help you optimize content in real-time
 - [Testing & Validation](https://llmlogs.com/guides/llm-optimization/testing)
   - Learn how to test and validate your LLM optimization efforts using MCP and other metrics
-
-## 🛠️ Free Tools & Resources
-
-Access essential tools and resources to help you implement and track your LLM optimization strategy. From rank tracking tools to implementation templates, this section provides everything you need to succeed in LLM SEO.
-
-- [LLM Citation Checker](https://llmlogs.com/free-tools/llm-citation-checker)
-  - Validate your content's citations for LLM optimization
-- [Knowledge Graph Validator](https://llmlogs.com/free-tools/knowledge-graph-validator)
-  - Check your structured data implementation
-- [Chrome Extension](https://llmlogs.com/chrome-llm-seo-checker)
-  - Get real-time LLM optimization suggestions while browsing
 
 ## 📝 Latest Blog Posts
 
@@ -74,17 +61,6 @@ Stay up to date with the latest developments in LLM SEO:
 - [Evaluating LLM Ranking Quality: MCP vs MAP vs NDCG](https://llmlogs.com/blog/evaluating-llm-ranking-quality-mcp-vs-map-vs-ndcg)
 - [How to Track If ChatGPT Cites Your Blog Early — Using MCP](https://llmlogs.com/blog/how-to-track-if-chatgpt-cites-your-blog-early-using-mcp)
 - [What Is Mean Cumulative Precision (MCP) and Why It Matters for AI SEO](https://llmlogs.com/blog/what-is-mean-cumulative-precision-mcp-ai-seo)
-
-## 📈 Case Studies & Best Practices
-
-Learn from successful implementations and avoid common pitfalls in LLM optimization. This section provides detailed case studies, implementation guides, and best practices to help you achieve better results with your content.
-
-- [Successful Case Studies](https://llmlogs.com/guides/llm-optimization/examples#case-studies)
-  - Explore real-world examples of successful LLM optimization strategies
-- [Implementation Guides](https://llmlogs.com/guides/llm-optimization/examples#implementation)
-  - Step-by-step guides for implementing effective LLM optimization strategies
-- [Common Pitfalls](https://llmlogs.com/guides/llm-optimization/examples#pitfalls)
-  - Learn about common mistakes to avoid in LLM optimization
 
 ## Quick Links
 

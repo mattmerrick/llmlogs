@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +60,112 @@
             padding-left: 1rem;
             margin-left: 0;
             color: var(--bs-gray-700);
+        }
+        
+        /* Download Section */
+        .download-section {
+            margin: 2rem 0;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .download-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: white;
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .download-card:hover {
+            border-color: var(--bs-primary);
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .download-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .download-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .download-card p {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: var(--bs-primary);
+            color: white;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .download-card:hover .download-button {
+            background-color: var(--bs-primary-dark);
+        }
+        
+        /* Share Section */
+        .share-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--bs-gray-100);
+            border-radius: 0.5rem;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .share-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.375rem;
+            font-weight: 500;
+            color: var(--bs-gray-700);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .share-button:hover {
+            border-color: var(--bs-primary);
+            color: var(--bs-primary);
+            transform: translateY(-2px);
+        }
+        
+        .share-button:active {
+            transform: translateY(0);
+        }
+        
+        .share-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
         }
     </style>
 
@@ -273,6 +378,30 @@ Allow: /
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Page Specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize share buttons
+            document.querySelectorAll('.share-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const url = this.dataset.url;
+                    navigator.clipboard.writeText(url).then(() => {
+                        // Show copied state
+                        this.classList.add('copied');
+                        const originalText = this.textContent;
+                        this.textContent = 'Copied!';
+                        
+                        // Reset after 2 seconds
+                        setTimeout(() => {
+                            this.classList.remove('copied');
+                            this.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
