@@ -1,121 +1,159 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
-    <meta name="keywords" content="structured data, schema markup, LLM optimization, JSON-LD, semantic HTML">
     <title>Structured Data - LLM Guides</title>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-CDEBMDP5PL');
-    </script>
-
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Structured Data - LLM Guides">
-    <meta property="og:description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://llmlogs.com/guides/llm-optimization/structured-data">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Structured Data">
-    <meta name="twitter:description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Structured Data for LLM Optimization",
-        "description": "Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.",
-        "url": "https://llmlogs.com/guides/llm-optimization/structured-data",
-        "author": {
-            "@type": "Person",
-            "name": "Matt Merrick"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "LLM SEO Guide",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://llmlogs.com/logo.png"
-            }
-        },
-        "datePublished": "2024-03-20",
-        "dateModified": "2024-03-21",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://llmlogs.com/guides/llm-optimization/structured-data"
-        }
-    }
-    </script>
-
+    <meta name="description" content="Learn how to implement structured data for better LLM optimization. Master schema markup and improve your content's visibility in AI responses.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <script
-        defer
-        data-website-id="682d6fb7b163eb08ed813a43"
-        data-domain="llmlogs.com"
-        src="https://datafa.st/js/script.js">
-    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
+        }
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+        }
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+    </style>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Analytics -->
-    <script
-        defer
-        data-website-id="682d6fb7b163eb08ed813a43"
-        data-domain="llmlogs.com"
-        src="https://datafa.st/js/script.js">
-    </script>
-    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <script src="https://app.tinyadz.com/scripts/ads.js?siteId=682ded933f19f516dd80fdae" type="module" async></script>
     
-    <!-- Standard Header Component -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM SEO Guide</a>
-            <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a> / <a href="/guides/llm-optimization">Guides</a> / Structured Data
-        </nav>
 
-        <main class="content">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/guides/llm-optimization" class="text-white">LLM Optimization</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Structured Data</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Structured Data</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
             <div id="TA_AD_CONTAINER">
                 <!-- It will be replaced with an ad -->
             </div>
@@ -138,7 +176,7 @@
                 <h2>Implementation Methods</h2>
                 <p>There are three main ways to implement structured data:</p>
                 <ul>
-                    <li><strong>JSON-LD</strong> (preferred by Google & LLMs)</li>
+                    <li><strong>JSON-LD</strong> (preferred by Google &amp; LLMs)</li>
                     <li>Microdata</li>
                     <li>RDFa</li>
                 </ul>
@@ -475,10 +513,36 @@ def validate_structured_data(url):
 </code></pre>
                 </div>
             </section>
-        </main>
-    </div>
+        
+                </div>
+            </div>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
 
-    <script src="/assets/js/main.js" defer></script>
-    <script src="/assets/js/share.js" defer></script>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

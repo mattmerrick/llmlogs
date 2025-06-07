@@ -1,114 +1,126 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-CDEBMDP5PL');
-    </script>
-    <!-- End Google tag (gtag.js) -->
-
-    <!-- Analytics -->
-    <script
-        defer
-        data-website-id="682d6fb7b163eb08ed813a43"
-        data-domain="llmlogs.com"
-        src="https://datafa.st/js/script.js">
-    </script>
-    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
-    <meta name="description" content="Learn practical strategies for fine-tuning large language models to improve AI performance, from data preparation to model optimization.">
-    <meta name="keywords" content="fine-tuning LLMs, large language models, AI training, model optimization, transfer learning, parameter adjustment">
     <title>Fine Tuning LLMs: Practical Strategies for Improved AI Performance - LLM Logs</title>
-
-    <meta property="og:title" content="Fine Tuning LLMs: Practical Strategies for Improved AI Performance">
-    <meta property="og:description" content="Learn practical strategies for fine-tuning large language models to improve AI performance, from data preparation to model optimization.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://llmlogs.com/blog/fine-tuning-llms">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Fine Tuning LLMs: Practical Strategies">
-    <meta name="twitter:description" content="Learn practical strategies for fine-tuning large language models to improve AI performance.">
+    <meta name="description" content="Learn practical strategies for fine-tuning large language models to improve AI performance, from data preparation to model optimization.">
     
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Fine Tuning LLMs: Practical Strategies for Improved AI Performance",
-        "description": "Learn practical strategies for fine-tuning large language models to improve AI performance, from data preparation to model optimization.",
-        "url": "https://llmlogs.com/blog/fine-tuning-llms",
-        "author": {
-            "@type": "Person",
-            "name": "LLM Guides Team"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "LLM Logs",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://llmlogs.com/assets/images/logo.png"
-            }
-        },
-        "datePublished": "2025-03-21",
-        "dateModified": "2025-03-21"
-    }
-    </script>
-
-    <!-- Required Assets -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="../assets/js/main.js" defer></script>
+
     
-    <!-- Required Ad Script -->
-    <script src="https://app.tinyadz.com/scripts/ads.js?siteId=682ded933f19f516dd80fdae" type="module" async></script>
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+    </style>
+
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     
-    <!-- Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM Logs</a>
-            <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmseoguide&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a> /
-            <a href="/blog">Blog</a> /
-            <span>Fine Tuning LLMs</span>
-        </nav>
 
-        <main class="content">
-            <div id="TA_AD_CONTAINER">
-                <!-- It will be replaced with an ad -->
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/blog" class="text-white">Blog</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Fine Tuning LLMs: Practical Strategies for Improved AI Performance</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Fine Tuning LLMs: Practical Strategies for Improved AI Performance</h1>
+            <div class="blog-meta text-white-50">
+                <time datetime="2025-05-23">May 23, 2025</time>
+                <span class="mx-2">•</span>
+                <span class="category">AI</span>
             </div>
-            
-            <article class="blog-post">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    
                 <div class="hero-image">
                     <div class="hero-content">
                         <h1>Fine-Tuning LLMs</h1>
@@ -264,12 +276,12 @@
 <tbody>
 <tr>
 <td>Learning Rate</td>
-                    <td>Speed & stability</td>
+                    <td>Speed &amp; stability</td>
 <td>1e-6 to 1e-4</td>
 </tr>
 <tr>
 <td>Batch Size</td>
-                    <td>Memory use & speed</td>
+                    <td>Memory use &amp; speed</td>
 <td>8 to 128</td>
 </tr>
 <tr>
@@ -298,27 +310,32 @@
 
                     <!-- Continue with other FAQ cards -->
                 </section>
-            </article>
-        </main>
-    </div>
-
-    <!-- Simple Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            
+                </article>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+        </div>
+    </main>
+
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
-</div>
 
-<script src="../assets/js/main.js" defer></script>
-<script src="../assets/js/share.js" defer></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

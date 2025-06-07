@@ -1,217 +1,159 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free tool to help you submit your sitemap URLs to Bing Webmaster Tools. Essential for LLM and ChatGPT indexing. Extract and format URLs from your sitemap.xml for easy submission.">
-    <meta name="keywords" content="bing url submitter, bing webmaster tools, sitemap submission, URL indexing, SEO tool, LLM indexing, ChatGPT indexing, AI search optimization">
     <title>Bing URL Submitter - Free Tool | LLM Logs</title>
-
+    <meta name="description" content="Free tool to help you submit your sitemap URLs to Bing Webmaster Tools. Essential for LLM and ChatGPT indexing. Extract and format URLs from your sitemap.xml for easy submission.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="../assets/js/main.js" defer></script>
+
+    
     <style>
-        .tool-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-
-        .section {
-            margin-bottom: 2.5rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .section h2 {
-            color: #2d3748;
-            margin: 0 0 1.5rem 0;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.75rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #2d3748;
-        }
-
-        .form-group input[type="url"],
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input[type="url"]:focus,
-        .form-group textarea:focus {
-            border-color: #4299e1;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-        }
-
-        .url-list {
-            background: #1a202c;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .url-list pre {
-            color: #e2e8f0;
+        pre, code {
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            white-space: pre-wrap;
-            margin: 0;
-            padding: 1rem;
-            background: #2d3748;
-            border-radius: 6px;
-            overflow-x: auto;
-            max-height: 300px;
-            overflow-y: auto;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
-
-        .primary-button {
-            background: #4299e1;
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
         }
-
-        .primary-button:hover {
-            background: #3182ce;
-        }
-
-        .secondary-button {
-            background: #e2e8f0;
-            color: #2d3748;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .secondary-button:hover {
-            background: #cbd5e0;
-        }
-
-        .info-section {
-            margin: 3rem 0;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        .content h2 {
             margin-top: 2rem;
-        }
-
-        .info-card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-card h3 {
-            color: #2d3748;
             margin-bottom: 1rem;
         }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 1rem 0;
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
         }
-
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid #e2e8f0;
-            border-top-color: #4299e1;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
         }
-
-        .error-message {
-            color: #e53e3e;
-            background: #fff5f5;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            display: none;
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
         }
-
-        .success-message {
-            color: #2f855a;
-            background: #f0fff4;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            display: none;
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+        }
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
     </style>
+
 </head>
 <body>
-    <!-- Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM Logs</a>
-            <div class="github-star">
-                <iframe src="https://ghbtns.com/github-btn.html?user=mattmerrick&repo=llmguides&type=star&count=true&size=large"
-                        frameborder="0"
-                        scrolling="0"
-                        width="150"
-                        height="30"
-                        title="GitHub">
-                </iframe>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a> /
-            <a href="/free-tools">Free Tools</a> /
-            <span>Bing URL Submitter</span>
-        </nav>
 
-        <main class="content">
-            <article class="tool-content">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Bing URL Submitter</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Bing URL Submitter</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
                 <h1>Bing URL Submitter</h1>
                 
                 <div class="intro-section">
@@ -224,7 +166,7 @@
                             <h2>Sitemap URL</h2>
                             <div class="form-group">
                                 <label for="sitemapUrl">Enter your sitemap.xml URL:</label>
-                                <input type="url" id="sitemapUrl" name="sitemapUrl" placeholder="https://example.com/sitemap.xml" required>
+                                <input type="url" id="sitemapUrl" name="sitemapUrl" placeholder="https://example.com/sitemap.xml" required="">
                             </div>
                             <button type="submit" class="primary-button">Extract URLs</button>
                         </div>
@@ -324,103 +266,36 @@
                         </div>
                     </div>
                 </section>
-            </article>
-        </main>
-    </div>
-
-    <!-- Simple Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmguides">GitHub</a>
+            
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('sitemapForm');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            const resultsSection = document.getElementById('resultsSection');
-            const urlList = document.getElementById('urlList');
-            const copyButton = document.getElementById('copyButton');
-            const downloadButton = document.getElementById('downloadButton');
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const sitemapUrl = document.getElementById('sitemapUrl').value;
-                
-                // Show loading indicator
-                loadingIndicator.style.display = 'block';
-                errorMessage.style.display = 'none';
-                successMessage.style.display = 'none';
-                resultsSection.style.display = 'none';
-
-                try {
-                    // Fetch the sitemap
-                    const response = await fetch(sitemapUrl);
-                    const xmlText = await response.text();
-                    
-                    // Parse the XML
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
-                    
-                    // Extract URLs
-                    const urls = Array.from(xmlDoc.getElementsByTagName('loc'))
-                        .map(loc => loc.textContent)
-                        .filter(url => url.trim());
-
-                    if (urls.length === 0) {
-                        throw new Error('No URLs found in the sitemap');
-                    }
-
-                    // Display URLs
-                    urlList.textContent = urls.join('\n');
-                    resultsSection.style.display = 'block';
-                    successMessage.textContent = `Successfully extracted ${urls.length} URLs from your sitemap.`;
-                    successMessage.style.display = 'block';
-
-                } catch (error) {
-                    errorMessage.textContent = `Error: ${error.message}`;
-                    errorMessage.style.display = 'block';
-                } finally {
-                    loadingIndicator.style.display = 'none';
-                }
-            });
-
-            // Copy to clipboard functionality
-            copyButton.addEventListener('click', function() {
-                navigator.clipboard.writeText(urlList.textContent)
-                    .then(() => {
-                        copyButton.textContent = 'Copied!';
-                        setTimeout(() => {
-                            copyButton.textContent = 'Copy URLs';
-                        }, 2000);
-                    });
-            });
-
-            // Download functionality
-            downloadButton.addEventListener('click', function() {
-                const blob = new Blob([urlList.textContent], { type: 'text/plain' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'bing-urls.txt';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-            });
-        });
-    </script>
 </body>
-</html> 
+</html>

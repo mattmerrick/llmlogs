@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,200 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Rate Limit Simulator - Test API Throttling | LLM Logs</title>
     <meta name="description" content="Test how your applications handle API rate limits. Simulate throttling scenarios, analyze responses, and improve your API integration robustness.">
-    <meta name="keywords" content="API rate limit tester, simulate API rate limiting, test API throttling behavior, API throttling simulator, rate limit testing tool">
-    <link rel="canonical" href="https://llmlogs.com/free-tools/api-rate-limit-simulator" />
     
-    <!-- LLM-Specific Meta Tags -->
-    <meta name="llm:tool_type" content="api_testing">
-    <meta name="llm:use_case" content="rate_limit_testing,api_robustness,throttling_simulation">
-    <meta name="llm:target_audience" content="developers,api_engineers,backend_developers">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Standard Assets -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/tools.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     
     <style>
-        .simulator-container {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-        .config-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-        .config-item {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
-        .config-item label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-        .config-item input, .config-item select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.2s ease;
-        }
-        .config-item input:focus, .config-item select:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-        .test-controls {
-            display: flex;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        .test-button {
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-color);
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s ease;
-        }
-        .test-button:hover {
-            background: var(--primary-color-dark);
-        }
-        .test-button.stop {
-            background: #dc3545;
-        }
-        .test-button.stop:hover {
-            background: #c82333;
-        }
-        .results-section {
-            margin-top: 2rem;
-        }
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            padding: 4rem 0;
             margin-bottom: 2rem;
         }
-        .metric-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin: 0.5rem 0;
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
         }
-        .metric-label {
-            color: #6c757d;
-            font-size: 0.9rem;
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
         }
-        .response-log {
-            background: #2c3e50;
-            color: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            font-family: monospace;
-            max-height: 300px;
-            overflow-y: auto;
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
         }
-        .log-entry {
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 4px;
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
         }
-        .log-success {
-            color: #28a745;
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
         }
-        .log-error {
-            color: #dc3545;
+        .tool-card:hover {
+            transform: translateY(-5px);
         }
-        .log-warning {
-            color: #ffc107;
+        .guide-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .visualization {
-            margin: 2rem 0;
-            height: 300px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1rem;
+        .guide-card:hover {
+            transform: translateY(-5px);
         }
-        .preset-scenarios {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 2rem 0;
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
         }
-        .scenario-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 2px solid #eee;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
-        .scenario-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
         }
-        .scenario-card h4 {
-            margin: 0 0 0.5rem;
-            color: #2c3e50;
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
-        .scenario-card p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        @media (max-width: 768px) {
-            .config-section {
-                grid-template-columns: 1fr;
-            }
-            .test-controls {
-                flex-direction: column;
-            }
-            .test-button {
-                width: 100%;
-            }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
     </style>
+
 </head>
 <body>
-    <!-- Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html" class="start-here-link">Start Here</a>
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-            </nav>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="container">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a>
-            <span class="separator">/</span>
-            <a href="/free-tools">Free Tools</a>
-            <span class="separator">/</span>
-            <span>API Rate Limit Simulator</span>
-        </nav>
 
-        <main class="tool-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">API Rate Limit Simulator</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">API Rate Limit Simulator</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
             <h1>API Rate Limit Simulator</h1>
             <p class="lead">Test how your applications handle API rate limits in a controlled environment. Simulate various throttling scenarios and analyze response patterns.</p>
 
@@ -245,8 +200,8 @@
 
                 <div class="test-controls">
                     <button id="start-test" class="test-button">Start Test</button>
-                    <button id="stop-test" class="test-button stop" disabled>Stop Test</button>
-                    <button id="export-results" class="test-button" disabled>Export Results</button>
+                    <button id="stop-test" class="test-button stop" disabled="">Stop Test</button>
+                    <button id="export-results" class="test-button" disabled="">Export Results</button>
                 </div>
 
                 <div class="results-section">
@@ -299,235 +254,36 @@
                     <li><strong>Token Bucket:</strong> Allows for burst traffic while maintaining average rates</li>
                 </ul>
             </section>
-        </main>
-    </div>
-
-    <!-- Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
+        
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 LLM Logs. All rights reserved.</p>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Required Scripts -->
-    <script src="../assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Initialize Chart.js
-        const ctx = document.getElementById('rate-chart').getContext('2d');
-        const rateChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Requests/Second',
-                    data: [],
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        // Simulator State
-        let isRunning = false;
-        let testInterval;
-        let results = {
-            successCount: 0,
-            throttledCount: 0,
-            totalRequests: 0,
-            latencies: []
-        };
-
-        // UI Elements
-        const startButton = document.getElementById('start-test');
-        const stopButton = document.getElementById('stop-test');
-        const exportButton = document.getElementById('export-results');
-        const responseLog = document.getElementById('response-log');
-
-        // Event Listeners
-        startButton.addEventListener('click', startTest);
-        stopButton.addEventListener('click', stopTest);
-        exportButton.addEventListener('click', exportResults);
-
-        // Preset Scenarios
-        document.querySelectorAll('.scenario-card').forEach(card => {
-            card.addEventListener('click', () => loadPreset(card.dataset.scenario));
-        });
-
-        function loadPreset(scenario) {
-            const presets = {
-                basic: {
-                    rps: 10,
-                    burstSize: 5,
-                    duration: 60,
-                    limitType: 'fixed'
-                },
-                token: {
-                    rps: 20,
-                    burstSize: 10,
-                    duration: 120,
-                    limitType: 'token'
-                },
-                adaptive: {
-                    rps: 15,
-                    burstSize: 8,
-                    duration: 90,
-                    limitType: 'sliding'
-                }
-            };
-
-            const config = presets[scenario];
-            document.getElementById('requests-per-second').value = config.rps;
-            document.getElementById('burst-size').value = config.burstSize;
-            document.getElementById('test-duration').value = config.duration;
-            document.getElementById('limit-type').value = config.limitType;
-        }
-
-        function startTest() {
-            isRunning = true;
-            startButton.disabled = true;
-            stopButton.disabled = false;
-            
-            // Reset results
-            results = {
-                successCount: 0,
-                throttledCount: 0,
-                totalRequests: 0,
-                latencies: []
-            };
-
-            // Clear previous log entries
-            responseLog.innerHTML = '';
-
-            // Start the test loop
-            const rps = parseInt(document.getElementById('requests-per-second').value);
-            const interval = 1000 / rps;
-
-            testInterval = setInterval(() => {
-                simulateRequest();
-            }, interval);
-
-            // Update UI
-            updateMetrics();
-        }
-
-        function stopTest() {
-            isRunning = false;
-            clearInterval(testInterval);
-            startButton.disabled = false;
-            stopButton.disabled = true;
-            exportButton.disabled = false;
-        }
-
-        function simulateRequest() {
-            const startTime = performance.now();
-            
-            // Simulate API call with random response
-            const random = Math.random();
-            const response = random > 0.2 ? {
-                status: 200,
-                message: 'Success'
-            } : {
-                status: 429,
-                message: 'Too Many Requests'
-            };
-
-            const endTime = performance.now();
-            const latency = endTime - startTime;
-
-            // Update results
-            results.totalRequests++;
-            if (response.status === 200) {
-                results.successCount++;
-            } else {
-                results.throttledCount++;
-            }
-            results.latencies.push(latency);
-
-            // Log response
-            logResponse(response, latency);
-
-            // Update metrics
-            updateMetrics();
-
-            // Update chart
-            updateChart();
-        }
-
-        function logResponse(response, latency) {
-            const entry = document.createElement('div');
-            entry.className = `log-entry log-${response.status === 200 ? 'success' : 'error'}`;
-            entry.textContent = `[${new Date().toISOString()}] Status: ${response.status}, Latency: ${latency.toFixed(2)}ms`;
-            responseLog.prepend(entry);
-        }
-
-        function updateMetrics() {
-            document.getElementById('success-rate').textContent = 
-                `${((results.successCount / results.totalRequests) * 100 || 0).toFixed(1)}%`;
-            document.getElementById('throttled-requests').textContent = results.throttledCount;
-            document.getElementById('avg-latency').textContent = 
-                `${(results.latencies.reduce((a, b) => a + b, 0) / results.latencies.length || 0).toFixed(0)}ms`;
-            document.getElementById('total-requests').textContent = results.totalRequests;
-        }
-
-        function updateChart() {
-            const timestamp = new Date().toLocaleTimeString();
-            rateChart.data.labels.push(timestamp);
-            rateChart.data.datasets[0].data.push(results.successCount);
-
-            // Keep only last 30 data points
-            if (rateChart.data.labels.length > 30) {
-                rateChart.data.labels.shift();
-                rateChart.data.datasets[0].data.shift();
-            }
-
-            rateChart.update();
-        }
-
-        function exportResults() {
-            const data = {
-                timestamp: new Date().toISOString(),
-                configuration: {
-                    requestsPerSecond: document.getElementById('requests-per-second').value,
-                    burstSize: document.getElementById('burst-size').value,
-                    duration: document.getElementById('test-duration').value,
-                    limitType: document.getElementById('limit-type').value
-                },
-                results: {
-                    totalRequests: results.totalRequests,
-                    successCount: results.successCount,
-                    throttledCount: results.throttledCount,
-                    averageLatency: results.latencies.reduce((a, b) => a + b, 0) / results.latencies.length
-                }
-            };
-
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `rate-limit-test-${new Date().toISOString()}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-    </script>
 </body>
-</html> 
+</html>

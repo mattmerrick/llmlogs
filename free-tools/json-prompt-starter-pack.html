@@ -1,74 +1,159 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSON Prompt Starter Pack - LLM SEO Guide</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="description" content="">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    
     <style>
-        .prompt-card {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-        .prompt-card h3 {
-            margin-top: 0;
-            color: var(--primary-color);
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-        .prompt-card pre {
-            background-color: #f5f5f5;
-            color: #333333;
-            padding: 15px;
-            border-radius: 4px;
-            border: 1px solid #e8e8e8;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
-        .copy-button {
-            background-color: var(--primary-color);
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
+        }
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-            display: block;
-            margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .copy-button:hover {
-            background-color: var(--secondary-color);
+        .guide-card:hover {
+            transform: translateY(-5px);
         }
-         .copy-button.copied {
-            background-color: #28a745; /* Green color for success */
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+        }
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
     </style>
+
 </head>
 <body>
-    <!-- Include Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger"></span>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html" class="start-here-link">Start Here</a>
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
-            </nav>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <div class="content">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item "><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">JSON Prompt Starter Pack</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">JSON Prompt Starter Pack</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
             <h1>Copy/Paste JSON Prompt Starter Pack</h1>
             <h2>📋 One-click to copy JSON-formatted prompt templates</h2>
             <p>✅ Helps new devs get started without docs. Click the button below each template to copy it to your clipboard.</p>
@@ -146,45 +231,36 @@
                 <button class="copy-button" onclick="copyToClipboard('prompt4', this)">Copy JSON</button>
             </div>
 
-        </div>
-    </div>
-
-    <!-- Include Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+        
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Required Scripts -->
-    <script src="../assets/js/main.js"></script>
-    <script>
-        function copyToClipboard(elementId, buttonElement) {
-            const textToCopy = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                buttonElement.innerText = 'Copied!';
-                buttonElement.classList.add('copied');
-                setTimeout(() => {
-                    buttonElement.innerText = 'Copy JSON';
-                    buttonElement.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                buttonElement.innerText = 'Error Copying';
-                 setTimeout(() => {
-                    buttonElement.innerText = 'Copy JSON';
-                }, 2000);
-            });
-        }
-    </script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-</html> 
+</html>

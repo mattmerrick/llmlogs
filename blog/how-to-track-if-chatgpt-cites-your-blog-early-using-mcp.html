@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,63 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Track If ChatGPT Cites Your Blog Early — Using MCP - LLM SEO Guide</title>
     <meta name="description" content="Learn how to use Mean Cumulative Precision (MCP) to track and predict when ChatGPT will cite your blog. Early detection strategies for AI content visibility.">
-    <meta name="keywords" content="ChatGPT citations, MCP tracking, AI content visibility, blog citations, Mean Cumulative Precision, LLM SEO, content tracking">
-    <link rel="canonical" href="https://llmlogs.com/blog/how-to-track-if-chatgpt-cites-your-blog-early-using-mcp">
-    <link rel="stylesheet" href="../assets/css/style.css">
     
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Schema.org markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "How to Track If ChatGPT Cites Your Blog Early — Using MCP",
-        "description": "Learn how to use Mean Cumulative Precision (MCP) to track and predict when ChatGPT will cite your blog. Early detection strategies for AI content visibility.",
-        "author": {
-            "@type": "Organization",
-            "name": "LLM Logs"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "LLM Logs",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://llmlogs.com/assets/images/logo.png"
-            }
-        },
-        "datePublished": "2025-03-26",
-        "dateModified": "2025-03-26"
-    }
-    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+    </style>
+
 </head>
-<body class="blog-page">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Include Standard Header -->
-    <include src="../assets/components/standard-header.html"></include>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <div class="content">
-            <nav class="breadcrumbs">
-                <ol class="breadcrumb-list">
-                    <li><a href="../../">Home</a></li>
-                    <li><a href="../">Blog</a></li>
-                    <li aria-current="page">How to Track ChatGPT Citations Using MCP</li>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/blog" class="text-white">Blog</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">How to Track If ChatGPT Cites Your Blog Early — Using MCP</li>
                 </ol>
             </nav>
+            <h1 class="display-4 mb-3">How to Track If ChatGPT Cites Your Blog Early — Using MCP</h1>
+            <div class="blog-meta text-white-50">
+                <time datetime="2025-03-26">March 26, 2025</time>
+                <span class="mx-2">•</span>
+                <span class="category">AI SEO</span>
+            </div>
+        </div>
+    </div>
 
-            <article class="blog-post">
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    
                 <header class="post-header">
                     <h1>How to Track If ChatGPT Cites Your Blog Early — Using MCP</h1>
                     
@@ -201,13 +260,13 @@
                         </ul>
 
                         <p>Key changes that led to improvement:
-                            <ul>
+                            </p><ul>
                                 <li>Restructured content with clear semantic HTML</li>
                                 <li>Added explicit "fact nuggets" for easy citation</li>
                                 <li>Implemented comprehensive schema markup</li>
                                 <li>Created clear, authoritative statements</li>
                             </ul>
-                        </p>
+                        <p></p>
                     </div>
                 </section>
 
@@ -234,14 +293,32 @@
                         <li><a href="/guides/llm-optimization/testing">Testing Guide for LLM Optimization</a></li>
                     </ul>
                 </section>
-            </article>
+            
+                </article>
+            </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Include Standard Footer -->
-    <include src="../assets/components/standard-footer.html"></include>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Required Scripts -->
-    <script src="../assets/js/main.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-</html> 
+</html>

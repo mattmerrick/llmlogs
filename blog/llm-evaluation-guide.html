@@ -1,223 +1,151 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Comprehensive guide to evaluating LLM performance and output quality. Learn best practices, metrics, and tools for assessing AI language models.">
-    <meta name="keywords" content="LLM evaluation, AI testing, language model assessment, performance metrics, quality evaluation">
     <title>LLM Evaluation Guide: Best Practices for Testing AI Models - LLM Logs</title>
-    <link rel="canonical" href="https://llmlogs.com/blog/llm-evaluation-guide.html" />
+    <meta name="description" content="Comprehensive guide to evaluating LLM performance and output quality. Learn best practices, metrics, and tools for assessing AI language models.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <meta property="og:title" content="LLM Evaluation Guide: Best Practices for Testing AI Models">
-    <meta property="og:description" content="Comprehensive guide to evaluating LLM performance and output quality. Learn best practices, metrics, and tools for assessing AI language models.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://llmlogs.com/blog/llm-evaluation-guide.html">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="LLM Evaluation Guide: Best Practices for Testing AI Models">
-    <meta name="twitter:description" content="Comprehensive guide to evaluating LLM performance and output quality. Learn best practices, metrics, and tools for assessing AI language models.">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "LLM Evaluation Guide: Best Practices for Testing AI Models",
-        "description": "Comprehensive guide to evaluating LLM performance and output quality. Learn best practices, metrics, and tools for assessing AI language models.",
-        "image": "https://llmlogs.com/assets/images/llm-evaluation.jpg",
-        "datePublished": "2025-06-02",
-        "dateModified": "2025-06-02",
-        "author": {
-            "@type": "Organization",
-            "name": "LLM Logs",
-            "url": "https://llmlogs.com"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "LLM Logs",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://llmlogs.com/assets/images/logo.png"
-            }
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://llmlogs.com/blog/llm-evaluation-guide.html"
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-    }
-    </script>
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+    </style>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <!-- Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html">Start Here</a>
-                <a href="/guides">Guides</a>
-                <a href="/tools">Tools</a>
-                <a href="/blog" class="active">Blog</a>
-                <a href="/contact">Contact</a>
-            </nav>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="content">
-        <nav class="breadcrumbs">
-            <a href="/">Home</a> /
-            <a href="/blog">Blog</a> /
-            <span>LLM Evaluation Guide</span>
-        </nav>
 
-        <article class="guide-content">
-            <h1>LLM Evaluation Guide: Best Practices for Testing AI Models</h1>
-            
-            <div class="intro-section">
-                <p class="lead">Evaluating Large Language Models (LLMs) requires a systematic approach that considers multiple aspects of performance, from basic accuracy to nuanced understanding. This comprehensive guide covers essential methods, metrics, and tools for assessing LLM capabilities and output quality.</p>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/blog" class="text-white">Blog</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">LLM Evaluation Guide: Best Practices for Testing AI Models</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">LLM Evaluation Guide: Best Practices for Testing AI Models</h1>
+            <div class="blog-meta text-white-50">
+                <time datetime="undefined"></time>
+                <span class="mx-2">•</span>
+                <span class="category"></span>
             </div>
+        </div>
+    </div>
 
-            <section class="guide-section">
-                <h2>Key Evaluation Metrics</h2>
-                <div class="metrics-list">
-                    <div class="metric-card">
-                        <h3>Accuracy and Precision</h3>
-                        <ul>
-                            <li>Response correctness</li>
-                            <li>Factual consistency</li>
-                            <li>Context relevance</li>
-                            <li>Output coherence</li>
-                        </ul>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Performance Metrics</h3>
-                        <ul>
-                            <li>Response time</li>
-                            <li>Token efficiency</li>
-                            <li>Resource utilization</li>
-                            <li>Scalability factors</li>
-                        </ul>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Quality Indicators</h3>
-                        <ul>
-                            <li>Output fluency</li>
-                            <li>Contextual understanding</li>
-                            <li>Task completion rate</li>
-                            <li>Error handling</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="guide-section">
-                <h2>Evaluation Methods</h2>
-                <div class="methods-content">
-                    <h3>1. Automated Testing</h3>
-                    <ul>
-                        <li>Unit tests for specific capabilities</li>
-                        <li>Integration testing with other systems</li>
-                        <li>Performance benchmarking</li>
-                        <li>Continuous monitoring</li>
-                    </ul>
-
-                    <h3>2. Manual Assessment</h3>
-                    <ul>
-                        <li>Expert review of outputs</li>
-                        <li>User feedback collection</li>
-                        <li>Quality assurance checks</li>
-                        <li>Edge case testing</li>
-                    </ul>
-
-                    <h3>3. Comparative Analysis</h3>
-                    <ul>
-                        <li>Benchmark against other models</li>
-                        <li>Historical performance tracking</li>
-                        <li>Cross-validation</li>
-                        <li>A/B testing</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="guide-section">
-                <h2>Tools and Resources</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <h3>Evaluation Frameworks</h3>
-                        <ul>
-                            <li>Language Model Evaluation Harness</li>
-                            <li>HuggingFace Evaluate</li>
-                            <li>Stanford NLP Metrics</li>
-                            <li>Custom testing frameworks</li>
-                        </ul>
-                    </div>
-                    <div class="tool-card">
-                        <h3>Monitoring Tools</h3>
-                        <ul>
-                            <li>Weights & Biases</li>
-                            <li>TensorBoard</li>
-                            <li>MLflow</li>
-                            <li>Custom dashboards</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="guide-section">
-                <h2>Best Practices</h2>
-                <div class="best-practices">
-                    <ul>
-                        <li>Establish clear evaluation criteria before testing</li>
-                        <li>Use diverse test datasets</li>
-                        <li>Implement continuous monitoring</li>
-                        <li>Document all test results and observations</li>
-                        <li>Regular performance reviews and updates</li>
-                        <li>Maintain version control for test cases</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="guide-section">
-                <h2>Common Challenges</h2>
-                <div class="challenges-content">
-                    <ul>
-                        <li>Handling model bias and fairness</li>
-                        <li>Measuring contextual understanding</li>
-                        <li>Evaluating creative outputs</li>
-                        <li>Balancing automation and human review</li>
-                        <li>Maintaining test case relevance</li>
-                    </ul>
-                </div>
-            </section>
-
-            <div class="cta-section">
-                <h2>Next Steps</h2>
-                <p>Ready to implement these evaluation practices? Check out our related resources:</p>
-                <div class="cta-buttons">
-                    <a href="/tools/llm-evaluation-toolkit" class="primary-button">Evaluation Toolkit</a>
-                    <a href="/blog/automated-llm-testing" class="secondary-button">Automated Testing Guide</a>
-                </div>
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    null
+                </article>
             </div>
-        </article>
+        </div>
     </main>
 
-    <!-- Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="/contact">Contact</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="../assets/js/main.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-</html> 
+</html>

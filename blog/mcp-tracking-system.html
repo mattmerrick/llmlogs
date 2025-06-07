@@ -1,265 +1,126 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn how to set up and implement an MCP (Mean Cumulative Precision) tracking system for your content. Step-by-step guide with examples and boilerplate code.">
-    <meta name="keywords" content="MCP tracking, Mean Cumulative Precision, content tracking, LLM optimization, citation tracking">
     <title>Setting Up Your MCP Tracking System - LLM SEO Guide</title>
+    <meta name="description" content="Learn how to set up and implement an MCP (Mean Cumulative Precision) tracking system for your content. Step-by-step guide with examples and boilerplate code.">
     
-    <!-- Required Assets -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
+
     
     <style>
-        :root {
-            --text-muted: #6b7280;
-            --accent-bg: #f3f4f6;
-            --header-bg: #ffffff;
-            --container-width: 1200px;
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-
-        /* Blog post specific styles */
-        .blog-page {
-            background: var(--bg-color);
-            min-height: 100vh;
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-
-        .main-content {
-            padding: 2rem 0;
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
-
-        .blog-post {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .post-header {
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
             margin-bottom: 2rem;
         }
-
-        .post-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--heading-color);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .post-meta {
-            display: flex;
-            gap: 1.5rem;
-            color: var(--text-muted);
+        .blog-meta {
+            color: var(--bs-gray-600);
             font-size: 0.9rem;
-            align-items: center;
-            flex-wrap: wrap;
         }
-
-        .post-category {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
-
-        .content-section {
-            margin-bottom: 3rem;
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
         }
-
-        .content-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .content-section h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--heading-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .content-section h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--heading-color);
-            margin: 1.5rem 0 1rem;
-        }
-
-        .post-content p {
+        .blog-content p {
             margin-bottom: 1.25rem;
             line-height: 1.7;
-            color: var(--text-color);
         }
-
-        .post-content ul,
-        .post-content ol {
-            margin: 1.25rem 0;
-            padding-left: 1.5rem;
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
         }
-
-        .post-content li {
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
-        }
-
-        .post-content a {
-            color: var(--primary-color);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s;
-        }
-
-        .post-content a:hover {
-            border-bottom-color: var(--primary-color);
-        }
-
-        pre {
-            background: var(--code-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-        }
-
-        code {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: var(--code-color);
-        }
-
-        .cta-section {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: var(--accent-bg);
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .cta-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .button.primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .button.primary:hover {
-            background: #1d4ed8;
-        }
-
-        .button.secondary {
-            background: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .button.secondary:hover {
-            background: #f8fafc;
-        }
-
-        .post-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .nav-label {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .blog-post {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-
-            .post-header h1 {
-                font-size: 2rem;
-            }
-
-            .post-meta {
-                gap: 1rem;
-            }
-
-            pre {
-                padding: 1rem;
-            }
-
-            .cta-section {
-                padding: 1.5rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .post-navigation {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .blog-post {
-                padding: 1rem;
-            }
-
-            .post-header h1 {
-                font-size: 1.75rem;
-            }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
         }
     </style>
+
 </head>
 <body>
-    <!-- Include Standard Header -->
-    <include src="../assets/components/standard-header.html"></include>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <div class="content">
-            <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
-                <ol class="breadcrumb-list">
-                    <li><a href="../../">Home</a></li>
-                    <li><a href="../">Blog</a></li>
-                    <li aria-current="page">Setting Up Your MCP Tracking System</li>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/blog" class="text-white">Blog</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Setting Up Your MCP Tracking System</li>
                 </ol>
             </nav>
+            <h1 class="display-4 mb-3">Setting Up Your MCP Tracking System</h1>
+            <div class="blog-meta text-white-50">
+                <time datetime="2025-03-21">March 21, 2025</time>
+                <span class="mx-2">•</span>
+                <span class="category"></span>
+            </div>
+        </div>
+    </div>
 
-            <article class="blog-post">
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    
                 <header class="post-header">
                     <h1>Setting Up Your MCP Tracking System: A Complete Guide</h1>
                     
@@ -346,7 +207,7 @@ import { z } from "zod";
 import { PaidMcpAgent } from "@stripe/agent-toolkit/cloudflare";
 
 export function mcpTracker(
-  agent: PaidMcpAgent<Env, any, any>,
+  agent: PaidMcpAgent<env, any,="" any="">,
   env?: { BASE_URL: string }
 ) {
   agent.tool(
@@ -356,7 +217,7 @@ export function mcpTracker(
       prompts: z.array(z.string()),
       timeframe: z.number()
     },
-    async ({ url, prompts, timeframe }) => {
+    async ({ url, prompts, timeframe }) =&gt; {
       // Implement your MCP tracking logic here
       const mcpScore = await calculateMcpScore(url, prompts, timeframe);
       
@@ -373,7 +234,7 @@ export function mcpTracker(
     }
   );
 }
-                        </code></pre>
+                        </env,></code></pre>
                     </div>
 
                     <div class="content-section">
@@ -420,32 +281,32 @@ export function mcpTracker(
                         </div>
                     </aside>
                 </div>
-            </article>
-
-            <nav class="post-navigation">
-                <div class="prev-post">
-                    <span class="nav-label">Previous</span>
-                    <a href="../llm-optimization-basics.html">LLM Optimization Basics</a>
-                </div>
-                <div class="next-post">
-                    <span class="nav-label">Next</span>
-                    <a href="../advanced-mcp-strategies.html">Advanced MCP Strategies</a>
-                </div>
-            </nav>
+            
+                </article>
+            </div>
         </div>
-    </div>
+    </main>
 
-    <!-- Include Standard Footer -->
-    <include src="../assets/components/standard-footer.html"></include>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Required Scripts -->
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/code-highlighting.js"></script>
-    <script>
-        // Initialize code highlighting
-        document.addEventListener('DOMContentLoaded', function() {
-            highlightCode();
-        });
-    </script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -1,169 +1,126 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Are AI Crawlers? How They Work and Why They Matter - LLM Logs</title>
     <meta name="description" content="Learn about AI crawlers like GPTBot, ClaudeBot, and others. Discover how they work, why they matter, and how to optimize your site for AI visibility with our free robots.txt generator.">
     
-    <!-- Schema.org JSON-LD markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "What Are AI Crawlers? How They Work and Why They Matter",
-      "description": "Learn about AI crawlers like GPTBot, ClaudeBot, and others. Discover how they work, why they matter, and how to optimize your site for AI visibility with our free robots.txt generator.",
-      "author": {
-        "@type": "Person",
-        "name": "Matt Merrick",
-        "url": "https://llmlogs.com/about/team/matt-merrick"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "LLM Logs",
-        "url": "https://llmlogs.com"
-      },
-      "datePublished": "2025-03-20T00:00:00+00:00",
-      "dateModified": "2025-03-20T00:00:00+00:00",
-      "image": "https://llmlogs.com/blog/images/ai-crawlers.png",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://llmlogs.com/blog/ai-crawlers"
-      },
-      "keywords": ["AI crawlers", "GPTBot", "ClaudeBot", "robots.txt", "AI SEO", "LLM optimization"],
-      "articleSection": "AI SEO",
-      "about": {
-        "@type": "Thing",
-        "name": "AI Web Crawlers",
-        "description": "Software agents used by AI companies to collect training data and provide real-time information"
-      }
-    }
-    </script>
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="What Are AI Crawlers? How They Work and Why They Matter">
-    <meta property="og:description" content="Learn about AI crawlers like GPTBot, ClaudeBot, and others. Discover how they work, why they matter, and how to optimize your site for AI visibility with our free robots.txt generator.">
-    <meta property="og:image" content="https://llmlogs.com/blog/images/ai-crawlers.png">
-    <meta property="og:url" content="https://llmlogs.com/blog/ai-crawlers">
-    <meta property="og:type" content="article">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="What Are AI Crawlers? How They Work and Why They Matter">
-    <meta name="twitter:description" content="Learn about AI crawlers like GPTBot, ClaudeBot, and others. Discover how they work, why they matter, and how to optimize your site for AI visibility with our free robots.txt generator.">
-    <meta name="twitter:image" content="https://llmlogs.com/blog/images/ai-crawlers.png">
-
-    <title>What Are AI Crawlers? How They Work and Why They Matter - LLM Logs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
+
+    
     <style>
-        /* Robots.txt Generator Styles */
-        .robots-generator {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-
-        .robots-generator h3 {
-            margin-top: 0;
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-
-        .crawler-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+        pre code {
+            padding: 0;
+            background-color: transparent;
         }
-
-        .crawler-option {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .crawler-option label {
-            font-size: 0.95rem;
-            color: #374151;
-        }
-
-        .robots-output {
-            background: #1a1a1a;
-            color: #e5e7eb;
-            padding: 1.5rem;
-            border-radius: 8px;
-            font-family: monospace;
-            white-space: pre;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        .copy-button {
-            background: #4F46E5;
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
         }
-
-        .copy-button:hover {
-            background: #4338ca;
-        }
-
-        .copy-button svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .success-message {
-            color: #059669;
+        .blog-meta {
+            color: var(--bs-gray-600);
             font-size: 0.9rem;
-            margin-left: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
-
-        .success-message.show {
-            opacity: 1;
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
         }
     </style>
+
 </head>
 <body>
-    <!-- Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-                <span class="hamburger"></span>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html" class="start-here-link">Start Here</a>
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/blog" class="text-white">Blog</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">What Are AI Crawlers? How They Work and Why They Matter</li>
+                </ol>
             </nav>
+            <h1 class="display-4 mb-3">What Are AI Crawlers? How They Work and Why They Matter</h1>
+            <div class="blog-meta text-white-50">
+                <time datetime="2025-03-20">March 20, 2025</time>
+                <span class="mx-2">•</span>
+                <span class="category">AI SEO</span>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <main class="content">
-        <!-- Breadcrumbs -->
-        <div class="breadcrumbs">
-            <a href="/">Home</a> &raquo; 
-            <a href="/blog">Blog</a> &raquo; 
-            <span>What Are AI Crawlers?</span>
-        </div>
-
-        <!-- Article Content -->
-        <article class="blog-post">
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    
             <h1>What Are AI Crawlers? How They Work and Why They Matter</h1>
             
             <!-- Post Meta -->
@@ -228,7 +185,7 @@
                             <tr>
                                 <td><strong>OpenAI</strong></td>
                                 <td>ChatGPT-User</td>
-                                <td><code>ChatGPT-User/1.0 & 2.0</code></td>
+                                <td><code>ChatGPT-User/1.0 &amp; 2.0</code></td>
                                 <td>Loads shared URLs</td>
                             </tr>
                             <tr>
@@ -381,97 +338,32 @@
             </div>
 
         
-        </article>
+        
+                </article>
+            </div>
+        </div>
     </main>
 
-    <!-- Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Required Scripts -->
-    <script src="/assets/js/main.js"></script>
-    <script>
-        // Robots.txt Generator Code
-        const crawlers = [
-            { id: 'gptbot', name: 'GPTBot (ChatGPT)', userAgent: 'GPTBot' },
-            { id: 'claudebot', name: 'ClaudeBot (Anthropic)', userAgent: 'ClaudeBot' },
-            { id: 'perplexitybot', name: 'PerplexityBot', userAgent: 'PerplexityBot' },
-            { id: 'chatgpt-user', name: 'ChatGPT-User', userAgent: 'ChatGPT-User' },
-            { id: 'google-extended', name: 'Google-Extended (Gemini)', userAgent: 'Google-Extended' },
-            { id: 'claude-web', name: 'Claude-Web', userAgent: 'claude-web' },
-            { id: 'cohere-ai', name: 'Cohere AI', userAgent: 'cohere-ai' },
-            { id: 'anthropic-ai', name: 'Anthropic AI', userAgent: 'anthropic-ai' },
-            { id: 'oai-searchbot', name: 'OAI-SearchBot', userAgent: 'OAI-SearchBot' },
-            { id: 'mistralai', name: 'MistralAI', userAgent: 'MistralAI-User' }
-        ];
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        // Initialize the options
-        const optionsContainer = document.getElementById('crawlerOptions');
-        crawlers.forEach(crawler => {
-            const option = document.createElement('div');
-            option.className = 'crawler-option';
-            option.innerHTML = `
-                <input type="checkbox" id="${crawler.id}" checked>
-                <label for="${crawler.id}">${crawler.name}</label>
-            `;
-            optionsContainer.appendChild(option);
-            
-            // Add change event listener
-            option.querySelector('input').addEventListener('change', generateRobotsText);
-        });
-
-        function generateRobotsText() {
-            const selectedCrawlers = crawlers.filter(crawler => 
-                document.getElementById(crawler.id).checked
-            );
-
-            let robotsText = '# AI Crawler Configuration\n';
-            robotsText += '# Generated by LLM Logs - https://llmlogs.com\n\n';
-            
-            selectedCrawlers.forEach(crawler => {
-                robotsText += `User-agent: ${crawler.userAgent}\n`;
-                robotsText += 'Allow: /\n\n';
-            });
-
-            robotsText += '# Standard Configuration\n';
-            robotsText += 'User-agent: *\n';
-            robotsText += 'Allow: /\n';
-
-            document.getElementById('robotsOutput').textContent = robotsText;
-        }
-
-        function copyRobotsText() {
-            const robotsText = document.getElementById('robotsOutput').textContent;
-            navigator.clipboard.writeText(robotsText).then(() => {
-                const successMsg = document.getElementById('copySuccess');
-                successMsg.classList.add('show');
-                setTimeout(() => successMsg.classList.remove('show'), 2000);
-            });
-        }
-
-        // Generate initial robots.txt
-        generateRobotsText();
-
-        // Share button functionality
-        document.querySelector('.share-button').addEventListener('click', function() {
-            const url = this.dataset.url;
-            navigator.clipboard.writeText(url).then(() => {
-                this.textContent = 'Copied!';
-                setTimeout(() => this.textContent = 'Copy Link', 2000);
-            });
-        });
-    </script>
 </body>
-</html> 
+</html>

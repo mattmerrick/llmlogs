@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Rules and Guidelines - LLM Logs</title>
+    <meta name="description" content="Comprehensive programming rules and best practices for various technologies, frameworks, and languages.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+            background-color: #f8f9fa;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .tech-card {
+            height: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card-link:hover {
+            color: inherit;
+        }
+        .tag {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            background-color: var(--bs-gray-200);
+            border-radius: 0.25rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .count-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+        }
+        .category-title {
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--bs-gray-200);
+        }
+        .filter-buttons {
+            margin-bottom: 2rem;
+        }
+        .filter-btn {
+            margin: 0.25rem;
+            border: none;
+            background: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Programming Rules</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Programming Rules and Guidelines</h1>
+            <p class="lead">Discover best practices and conventions for modern development technologies.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control border-start-0" id="searchInput" placeholder="Search technologies, frameworks, or languages...">
+            </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="text-center filter-buttons">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="languages">Languages</button>
+            <button class="filter-btn" data-category="frameworks">Frameworks</button>
+            <button class="filter-btn" data-category="tools">Tools</button>
+            <button class="filter-btn" data-category="platforms">Platforms</button>
+        </div>
+
+        <!-- Technology Cards -->
+        <div class="row g-4" id="techGrid">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Technology Data and Functionality -->
+    <script>
+        const technologies = [
+            { name: "TypeScript", count: 22, category: "languages", icon: "code-slash" },
+            { name: "Python", count: 15, category: "languages", icon: "filetype-py" },
+            { name: "Next.js", count: 12, category: "frameworks", icon: "box-arrow-up-right" },
+            { name: "React", count: 12, category: "frameworks", icon: "box-arrow-up-right" },
+            { name: "PHP", count: 8, category: "languages", icon: "filetype-php" },
+            { name: "JavaScript", count: 5, category: "languages", icon: "filetype-js" },
+            { name: "TailwindCSS", count: 5, category: "frameworks", icon: "palette" },
+            { name: "Laravel", count: 5, category: "frameworks", icon: "box-arrow-up-right" },
+            { name: "C#", count: 4, category: "languages", icon: "hash" },
+            { name: "Game Development", count: 4, category: "platforms", icon: "controller" },
+            { name: "Expo", count: 4, category: "frameworks", icon: "phone" },
+            { name: "React Native", count: 4, category: "frameworks", icon: "phone" },
+            { name: "Flutter", count: 4, category: "frameworks", icon: "phone" },
+            { name: "Testing", count: 4, category: "tools", icon: "bug" },
+            { name: "Vite", count: 4, category: "tools", icon: "lightning" },
+            { name: "Supabase", count: 4, category: "platforms", icon: "database" },
+            // Add all other technologies here...
+        ];
+
+        function createTechCard(tech) {
+            return `
+                <div class="col-md-6 col-lg-4 tech-item" data-category="${tech.category}">
+                    <a href="/rules/${tech.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.html" class="card-link">
+                        <div class="card tech-card">
+                            <div class="card-body text-center">
+                                <span class="count-badge">${tech.count}</span>
+                                <i class="bi bi-${tech.icon} card-icon text-primary"></i>
+                                <h3 class="card-title h5">${tech.name}</h3>
+                                <div class="mt-3">
+                                    <span class="tag">${tech.category}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `;
+        }
+
+        function filterTechnologies(category = 'all', searchTerm = '') {
+            const techGrid = document.getElementById('techGrid');
+            const filteredTech = technologies.filter(tech => {
+                const matchesCategory = category === 'all' || tech.category === category;
+                const matchesSearch = tech.name.toLowerCase().includes(searchTerm.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            techGrid.innerHTML = filteredTech.map(createTechCard).join('');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial render
+            filterTechnologies();
+
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+                filterTechnologies(activeCategory, e.target.value);
+            });
+
+            // Category filter functionality
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const searchTerm = document.getElementById('searchInput').value;
+                    filterTechnologies(btn.dataset.category, searchTerm);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

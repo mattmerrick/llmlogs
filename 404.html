@@ -1,137 +1,155 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Page not found - LLM Logs">
     <title>404 - Page Not Found | LLM Logs</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <meta name="description" content="Page not found - LLM Logs">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     
     <style>
-        .error-container {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 2rem;
-            text-align: center;
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
         }
-        
-        .error-code {
-            font-size: 6rem;
-            font-weight: bold;
-            color: #4F46E5;
-            margin: 0;
-            line-height: 1;
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
         }
-        
-        .error-message {
-            font-size: 1.5rem;
-            margin: 1rem 0 2rem;
-            color: #4B5563;
-        }
-        
-        .comic-container {
-            margin: 2rem auto;
-            max-width: 600px;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .comic-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .helpful-links {
-            margin-top: 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            text-align: left;
-        }
-        
-        .link-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .link-section h3 {
-            margin-top: 0;
-            color: #4F46E5;
-        }
-        
-        .link-section ul {
-            list-style: none;
+        pre code {
             padding: 0;
-            margin: 1rem 0 0;
+            background-color: transparent;
         }
-        
-        .link-section li {
-            margin: 0.5rem 0;
-        }
-        
-        .link-section a {
-            color: #4B5563;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .link-section a:hover {
-            color: #4F46E5;
-        }
-        
-        .search-box {
-            margin: 2rem 0;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-        
-        .search-box input {
-            padding: 0.75rem 1rem;
-            border: 2px solid #E5E7EB;
-            border-radius: 0.5rem;
-            width: 100%;
-            max-width: 400px;
-            font-size: 1rem;
-        }
-        
-        .search-box button {
-            padding: 0.75rem 1.5rem;
-            background: #4F46E5;
+        .hero-section {
+            background-color: var(--bs-primary);
             color: white;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-weight: 500;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
         }
-        
-        .search-box button:hover {
-            background: #4338CA;
+        .content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .content ul, .content ol {
+            margin-bottom: 1.25rem;
+        }
+        .content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        .tool-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .guide-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .guide-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .home-hero {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2563eb 100%);
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+        }
+        .home-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .home-hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
     </style>
+
 </head>
 <body>
-    <!-- Standard Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="/" class="site-logo">LLM Logs</a>
-            <nav class="nav-links">
-                <a href="/start-here.html">Start Here</a>
-                <a href="/guides/llm-optimization">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://vibecoders.bio" target="_blank" rel="noopener">Vibe Coders</a>
-            </nav>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="content">
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    
+                    <li class="breadcrumb-item active text-white" aria-current="page">404</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">404</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="content">
+                    
         <div class="error-container">
             <h1 class="error-code">404</h1>
             <p class="error-message">Oops! This page seems to have wandered off into the AI void...</p>
@@ -174,41 +192,32 @@
                 </div>
             </div>
         </div>
+    
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- Standard Footer -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/guides">Guides</a>
-                <a href="/free-tools">Tools</a>
-                <a href="/blog">Blog</a>
-                <a href="https://vibecoders.bio" target="_blank" rel="noopener">Vibe Coders</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+    
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/free-tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="/assets/js/main.js"></script>
-    <script>
-        // Simple search functionality
-        const searchButton = document.querySelector('.search-box button');
-        const searchInput = document.querySelector('.search-box input');
-        
-        searchButton.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') performSearch();
-        });
-        
-        function performSearch() {
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `/search?q=${encodeURIComponent(query)}`;
-            }
-        }
-    </script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-</html> 
+</html>
