@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMs.txt Generator - Free Tool for LLM Crawling Configuration</title>
+    <meta name="description" content="Generate optimized LLMs.txt files to control how AI language models crawl and use your content. Configure training windows, citation policies, and content priorities.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CDEBMDP5PL');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- DataFa.st Analytics -->
+<script
+    defer
+    data-website-id="682d6fb7b163eb08ed813a43"
+    data-domain="llmlogs.com"
+    src="https://datafa.st/js/script.js">
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- End DataFa.st Analytics -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start">Start Here</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-container">
+            <h1>LLMs.txt Generator</h1>
+            <p class="tool-description">Create an optimized LLMs.txt file to control how AI language models interact with your content. Configure training windows, citation policies, and content priorities.</p>
+            
+            <div class="form-section">
+                <h2>Website Configuration</h2>
+                
+                <div class="form-group">
+                    <label for="domain">Website Domain:</label>
+                    <input type="text" id="domain" placeholder="example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="trainingWindow">Training Window:</label>
+                    <select id="trainingWindow">
+                        <option value="30d">30 days</option>
+                        <option value="60d">60 days</option>
+                        <option value="90d" selected>90 days</option>
+                        <option value="180d">180 days</option>
+                        <option value="365d">365 days</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="citationPolicy">Citation Policy:</label>
+                    <select id="citationPolicy">
+                        <option value="allow-with-attribution">Allow with Attribution</option>
+                        <option value="allow-without-attribution">Allow without Attribution</option>
+                        <option value="no-citation">No Citation Allowed</option>
+                    </select>
+                </div>
+
+                <h3>Content Types</h3>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="textHtml" checked>
+                        text/html
+                    </label>
+                    <label>
+                        <input type="checkbox" id="textMarkdown" checked>
+                        text/markdown
+                    </label>
+                    <label>
+                        <input type="checkbox" id="applicationJson">
+                        application/json
+                    </label>
+                </div>
+
+                <h3>Priority Settings</h3>
+                <div id="prioritySettings">
+                    <div class="priority-group">
+                        <input type="text" placeholder="Path (e.g., /blog/)" class="path-input">
+                        <select class="priority-select">
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <button type="button" class="remove-priority">×</button>
+                    </div>
+                </div>
+                <button type="button" id="addPriority" class="secondary-button">Add Priority Path</button>
+
+                <h3>Content Freshness</h3>
+                <div id="freshnessSettings">
+                    <div class="freshness-group">
+                        <input type="text" placeholder="Path (e.g., /blog/)" class="path-input">
+                        <select class="freshness-select">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                        <button type="button" class="remove-freshness">×</button>
+                    </div>
+                </div>
+                <button type="button" id="addFreshness" class="secondary-button">Add Freshness Rule</button>
+
+                <button type="button" id="generate" class="primary-button">Generate LLMs.txt</button>
+            </div>
+            
+            <div class="output-section" style="display: none;">
+                <h2>Generated LLMs.txt</h2>
+                <pre id="output"></pre>
+                <button type="button" id="copy" class="secondary-button">Copy to Clipboard</button>
+                <div class="implementation-guide">
+                    <h3>Implementation Guide</h3>
+                    <ol>
+                        <li>Copy the generated LLMs.txt content</li>
+                        <li>Create a new file named "llms.txt" in your website's root directory</li>
+                        <li>Paste the content into the file</li>
+                        <li>Ensure the file is accessible at yourdomain.com/llms.txt</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Add priority path
+        document.getElementById('addPriority').addEventListener('click', function() {
+            const prioritySettings = document.getElementById('prioritySettings');
+            const priorityGroup = document.createElement('div');
+            priorityGroup.className = 'priority-group';
+            priorityGroup.innerHTML = `
+                <input type="text" placeholder="Path (e.g., /blog/)" class="path-input">
+                <select class="priority-select">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <button type="button" class="remove-priority">×</button>
+            `;
+            prioritySettings.appendChild(priorityGroup);
+        });
+
+        // Add freshness rule
+        document.getElementById('addFreshness').addEventListener('click', function() {
+            const freshnessSettings = document.getElementById('freshnessSettings');
+            const freshnessGroup = document.createElement('div');
+            freshnessGroup.className = 'freshness-group';
+            freshnessGroup.innerHTML = `
+                <input type="text" placeholder="Path (e.g., /blog/)" class="path-input">
+                <select class="freshness-select">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+                <button type="button" class="remove-freshness">×</button>
+            `;
+            freshnessSettings.appendChild(freshnessGroup);
+        });
+
+        // Remove buttons functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-priority')) {
+                e.target.parentElement.remove();
+            }
+            if (e.target.classList.contains('remove-freshness')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        // Generate LLMs.txt
+        document.getElementById('generate').addEventListener('click', function() {
+            const domain = document.getElementById('domain').value;
+            const trainingWindow = document.getElementById('trainingWindow').value;
+            const citationPolicy = document.getElementById('citationPolicy').value;
+            
+            let llmsTxt = `# LLM Configuration\n`;
+            llmsTxt += `# Generated by LLM Logs - https://llmlogs.com\n\n`;
+            
+            // Global directives
+            llmsTxt += `# Global directives for all LLM agents\n`;
+            llmsTxt += `User-agent: $llm\n`;
+            llmsTxt += `Allow: /\n`;
+            llmsTxt += `Disallow: /private/\n`;
+            llmsTxt += `Disallow: /admin/\n\n`;
+            
+            // Training window and citation policy
+            llmsTxt += `# Training Window and Citation Policy\n`;
+            llmsTxt += `Training-Window: ${trainingWindow}\n`;
+            llmsTxt += `Citation-Policy: ${citationPolicy}\n\n`;
+            
+            // Content types
+            llmsTxt += `# Content Type Directives\n`;
+            if (document.getElementById('textHtml').checked) {
+                llmsTxt += `Content-Type: text/html\n`;
+            }
+            if (document.getElementById('textMarkdown').checked) {
+                llmsTxt += `Content-Type: text/markdown\n`;
+            }
+            if (document.getElementById('applicationJson').checked) {
+                llmsTxt += `Content-Type: application/json\n`;
+            }
+            llmsTxt += '\n';
+            
+            // Priority settings
+            llmsTxt += `# Priority Settings\n`;
+            document.querySelectorAll('.priority-group').forEach(group => {
+                const path = group.querySelector('.path-input').value;
+                const priority = group.querySelector('.priority-select').value;
+                if (path) {
+                    llmsTxt += `Priority: ${priority} ${path}\n`;
+                }
+            });
+            llmsTxt += '\n';
+            
+            // Content freshness
+            llmsTxt += `# Content Freshness\n`;
+            document.querySelectorAll('.freshness-group').forEach(group => {
+                const path = group.querySelector('.path-input').value;
+                const freshness = group.querySelector('.freshness-select').value;
+                if (path) {
+                    llmsTxt += `Content-Freshness: ${path} ${freshness}\n`;
+                }
+            });
+            
+            // Display output
+            const output = document.getElementById('output');
+            output.textContent = llmsTxt;
+            document.querySelector('.output-section').style.display = 'block';
+        });
+
+        // Copy to clipboard
+        document.getElementById('copy').addEventListener('click', function() {
+            const output = document.getElementById('output');
+            navigator.clipboard.writeText(output.textContent);
+            this.textContent = 'Copied!';
+            setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+        });
+    </script>
+</body>
+</html> 
+

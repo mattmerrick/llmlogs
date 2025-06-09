@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Relationship Visualizer - Free Tool for Content Analysis</title>
+    <meta name="description" content="Visualize semantic relationships in your content. Analyze concept connections, topic clusters, and content structure for better LLM optimization.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CDEBMDP5PL');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- DataFa.st Analytics -->
+<script
+    defer
+    data-website-id="682d6fb7b163eb08ed813a43"
+    data-domain="llmlogs.com"
+    src="https://datafa.st/js/script.js">
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- End DataFa.st Analytics -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start">Start Here</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-container">
+            <h1>Semantic Relationship Visualizer</h1>
+            <p class="tool-description">Analyze and visualize semantic relationships in your content. Understand concept connections, identify topic clusters, and optimize content structure for better LLM understanding.</p>
+            
+            <div class="form-section">
+                <h2>Content Input</h2>
+                
+                <div class="form-group">
+                    <label for="contentInput">Input Content:</label>
+                    <textarea id="contentInput" rows="10" placeholder="Paste your content here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="analysisType">Analysis Type:</label>
+                    <select id="analysisType">
+                        <option value="concepts">Concept Map</option>
+                        <option value="topics">Topic Clusters</option>
+                        <option value="hierarchy">Content Hierarchy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="minRelationStrength">Minimum Relationship Strength:</label>
+                    <input type="range" id="minRelationStrength" min="0" max="100" value="30">
+                    <span id="strengthValue">30%</span>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="showLabels" checked>
+                        Show Relationship Labels
+                    </label>
+                </div>
+
+                <button type="button" id="analyze" class="primary-button">Analyze Content</button>
+            </div>
+            
+            <div class="output-section" style="display: none;">
+                <h2>Visualization</h2>
+                <div class="visualization-container">
+                    <div id="visualization"></div>
+                    <div class="visualization-controls">
+                        <button type="button" id="zoomIn">+</button>
+                        <button type="button" id="zoomOut">-</button>
+                        <button type="button" id="resetView">Reset</button>
+                    </div>
+                </div>
+
+                <div class="analysis-stats">
+                    <h3>Analysis Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Concepts:</span>
+                            <span id="totalConcepts" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Relationship Density:</span>
+                            <span id="relationshipDensity" class="stat-value">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Central Concepts:</span>
+                            <span id="centralConcepts" class="stat-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-options">
+                    <button type="button" id="exportSvg" class="secondary-button">Export as SVG</button>
+                    <button type="button" id="exportJson" class="secondary-button">Export Data as JSON</button>
+                </div>
+
+                <div class="optimization-suggestions">
+                    <h3>Content Optimization Suggestions</h3>
+                    <ul id="suggestions"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Update strength value display
+        document.getElementById('minRelationStrength').addEventListener('input', function() {
+            document.getElementById('strengthValue').textContent = this.value + '%';
+        });
+
+        // Initialize visualization
+        let svg, simulation;
+        const width = 800;
+        const height = 600;
+
+        function initializeVisualization() {
+            // Clear previous visualization
+            d3.select('#visualization').html('');
+
+            // Create SVG
+            svg = d3.select('#visualization')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    svg.selectAll('g').attr('transform', event.transform);
+                });
+
+            svg.call(zoom);
+        }
+
+        // Analyze content
+        document.getElementById('analyze').addEventListener('click', function() {
+            const content = document.getElementById('contentInput').value;
+            const analysisType = document.getElementById('analysisType').value;
+            const minStrength = document.getElementById('minRelationStrength').value;
+            const showLabels = document.getElementById('showLabels').checked;
+
+            if (!content.trim()) {
+                alert('Please enter some content to analyze.');
+                return;
+            }
+
+            // Process content based on analysis type
+            let graphData;
+            if (analysisType === 'concepts') {
+                graphData = analyzeConceptMap(content, minStrength);
+            } else if (analysisType === 'topics') {
+                graphData = analyzeTopicClusters(content, minStrength);
+            } else {
+                graphData = analyzeContentHierarchy(content);
+            }
+
+            // Initialize and render visualization
+            initializeVisualization();
+            renderGraph(graphData, showLabels);
+            updateStats(graphData);
+            generateSuggestions(graphData);
+
+            // Show output section
+            document.querySelector('.output-section').style.display = 'block';
+        });
+
+        function analyzeConceptMap(content, minStrength) {
+            // Simplified concept analysis
+            const concepts = extractConcepts(content);
+            const relationships = findRelationships(concepts, content, minStrength);
+
+            return {
+                nodes: concepts.map(c => ({ id: c, group: 1 })),
+                links: relationships
+            };
+        }
+
+        function analyzeTopicClusters(content, minStrength) {
+            // Simplified topic clustering
+            const topics = extractTopics(content);
+            const clusters = clusterTopics(topics, content, minStrength);
+
+            return {
+                nodes: topics.map(t => ({ id: t, group: clusters[t] || 1 })),
+                links: findTopicRelationships(topics, content, minStrength)
+            };
+        }
+
+        function analyzeContentHierarchy(content) {
+            // Extract hierarchical structure
+            const structure = extractHierarchy(content);
+            return convertHierarchyToGraph(structure);
+        }
+
+        function extractConcepts(text) {
+            // Simplified concept extraction
+            const words = text.toLowerCase().split(/\W+/);
+            const frequency = {};
+            words.forEach(word => {
+                if (word.length > 3) {
+                    frequency[word] = (frequency[word] || 0) + 1;
+                }
+            });
+
+            return Object.entries(frequency)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10)
+                .map(([word]) => word);
+        }
+
+        function findRelationships(concepts, text, minStrength) {
+            const relationships = [];
+            const windowSize = 50; // Words to check for co-occurrence
+
+            concepts.forEach((concept1, i) => {
+                concepts.slice(i + 1).forEach(concept2 => {
+                    const strength = calculateRelationshipStrength(concept1, concept2, text, windowSize);
+                    if (strength >= minStrength) {
+                        relationships.push({
+                            source: concept1,
+                            target: concept2,
+                            value: strength
+                        });
+                    }
+                });
+            });
+
+            return relationships;
+        }
+
+        function calculateRelationshipStrength(concept1, concept2, text, windowSize) {
+            // Simplified co-occurrence calculation
+            const words = text.toLowerCase().split(/\W+/);
+            let coOccurrences = 0;
+
+            words.forEach((word, index) => {
+                if (word === concept1) {
+                    const window = words.slice(Math.max(0, index - windowSize/2), 
+                                            Math.min(words.length, index + windowSize/2));
+                    if (window.includes(concept2)) {
+                        coOccurrences++;
+                    }
+                }
+            });
+
+            return Math.min(100, Math.round(coOccurrences * 20));
+        }
+
+        function renderGraph(data, showLabels) {
+            // Create force simulation
+            simulation = d3.forceSimulation(data.nodes)
+                .force('link', d3.forceLink(data.links).id(d => d.id))
+                .force('charge', d3.forceManyBody().strength(-100))
+                .force('center', d3.forceCenter(width / 2, height / 2));
+
+            // Create links
+            const links = svg.append('g')
+                .selectAll('line')
+                .data(data.links)
+                .enter().append('line')
+                .attr('stroke', '#999')
+                .attr('stroke-opacity', 0.6)
+                .attr('stroke-width', d => Math.sqrt(d.value));
+
+            // Create nodes
+            const nodes = svg.append('g')
+                .selectAll('circle')
+                .data(data.nodes)
+                .enter().append('circle')
+                .attr('r', 5)
+                .attr('fill', d => d3.schemeCategory10[d.group])
+                .call(drag(simulation));
+
+            // Add labels if enabled
+            if (showLabels) {
+                const labels = svg.append('g')
+                    .selectAll('text')
+                    .data(data.nodes)
+                    .enter().append('text')
+                    .text(d => d.id)
+                    .attr('font-size', '10px')
+                    .attr('dx', 8)
+                    .attr('dy', 3);
+
+                simulation.on('tick', () => {
+                    links
+                        .attr('x1', d => d.source.x)
+                        .attr('y1', d => d.source.y)
+                        .attr('x2', d => d.target.x)
+                        .attr('y2', d => d.target.y);
+
+                    nodes
+                        .attr('cx', d => d.x)
+                        .attr('cy', d => d.y);
+
+                    labels
+                        .attr('x', d => d.x)
+                        .attr('y', d => d.y);
+                });
+            } else {
+                simulation.on('tick', () => {
+                    links
+                        .attr('x1', d => d.source.x)
+                        .attr('y1', d => d.source.y)
+                        .attr('x2', d => d.target.x)
+                        .attr('y2', d => d.target.y);
+
+                    nodes
+                        .attr('cx', d => d.x)
+                        .attr('cy', d => d.y);
+                });
+            }
+        }
+
+        function drag(simulation) {
+            function dragstarted(event) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                event.subject.fx = event.subject.x;
+                event.subject.fy = event.subject.y;
+            }
+
+            function dragged(event) {
+                event.subject.fx = event.x;
+                event.subject.fy = event.y;
+            }
+
+            function dragended(event) {
+                if (!event.active) simulation.alphaTarget(0);
+                event.subject.fx = null;
+                event.subject.fy = null;
+            }
+
+            return d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended);
+        }
+
+        function updateStats(data) {
+            document.getElementById('totalConcepts').textContent = data.nodes.length;
+            
+            const density = (2 * data.links.length) / (data.nodes.length * (data.nodes.length - 1));
+            document.getElementById('relationshipDensity').textContent = 
+                Math.round(density * 100) + '%';
+
+            const centralNodes = findCentralNodes(data);
+            document.getElementById('centralConcepts').textContent = 
+                centralNodes.slice(0, 3).join(', ');
+        }
+
+        function findCentralNodes(data) {
+            const degree = {};
+            data.nodes.forEach(node => degree[node.id] = 0);
+            
+            data.links.forEach(link => {
+                degree[link.source.id]++;
+                degree[link.target.id]++;
+            });
+
+            return Object.entries(degree)
+                .sort((a, b) => b[1] - a[1])
+                .map(([node]) => node);
+        }
+
+        function generateSuggestions(data) {
+            const suggestions = [];
+            const density = (2 * data.links.length) / (data.nodes.length * (data.nodes.length - 1));
+
+            if (density < 0.2) {
+                suggestions.push('Consider strengthening relationships between concepts');
+            }
+            if (data.nodes.length < 5) {
+                suggestions.push('Content might benefit from more diverse concepts');
+            }
+            if (data.links.some(link => link.value < 30)) {
+                suggestions.push('Some concept relationships could be strengthened');
+            }
+
+            document.getElementById('suggestions').innerHTML = 
+                suggestions.map(s => `<li>${s}</li>`).join('');
+        }
+
+        // Export functionality
+        document.getElementById('exportSvg').addEventListener('click', function() {
+            const svgData = document.querySelector('#visualization svg').outerHTML;
+            const blob = new Blob([svgData], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'semantic-visualization.svg';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('exportJson').addEventListener('click', function() {
+            const data = {
+                nodes: simulation.nodes(),
+                links: simulation.force('link').links()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'semantic-data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Zoom controls
+        document.getElementById('zoomIn').addEventListener('click', () => {
+            const zoom = d3.zoom().on('zoom', event => {
+                svg.selectAll('g').attr('transform', event.transform);
+            });
+            svg.transition().call(zoom.scaleBy, 1.2);
+        });
+
+        document.getElementById('zoomOut').addEventListener('click', () => {
+            const zoom = d3.zoom().on('zoom', event => {
+                svg.selectAll('g').attr('transform', event.transform);
+            });
+            svg.transition().call(zoom.scaleBy, 0.8);
+        });
+
+        document.getElementById('resetView').addEventListener('click', () => {
+            const zoom = d3.zoom().on('zoom', event => {
+                svg.selectAll('g').attr('transform', event.transform);
+            });
+            svg.transition().call(zoom.transform, d3.zoomIdentity);
+        });
+    </script>
+</body>
+</html> 
+
