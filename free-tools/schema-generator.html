@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schema.org Generator for LLM Content - Free Tool</title>
+    <meta name="description" content="Generate optimized Schema.org markup for your content. Improve how LLMs understand and cite your content with proper structured data.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CDEBMDP5PL');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- DataFa.st Analytics -->
+<script
+    defer
+    data-website-id="682d6fb7b163eb08ed813a43"
+    data-domain="llmlogs.com"
+    src="https://datafa.st/js/script.js">
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- End DataFa.st Analytics -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start">Start Here</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-container">
+            <h1>Schema.org Generator for LLM Content</h1>
+            <p class="tool-description">Generate optimized Schema.org markup for your content. This tool helps create structured data that makes your content more understandable to LLMs.</p>
+            
+            <div class="form-section">
+                <h2>Content Information</h2>
+                
+                <div class="form-group">
+                    <label for="contentType">Content Type:</label>
+                    <select id="contentType">
+                        <option value="Article">Article</option>
+                        <option value="BlogPosting">Blog Post</option>
+                        <option value="TechArticle">Technical Article</option>
+                        <option value="HowTo">How-To Guide</option>
+                        <option value="FAQPage">FAQ Page</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" placeholder="Enter content title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" rows="3" placeholder="Enter content description"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="author">Author Name:</label>
+                    <input type="text" id="author" placeholder="Enter author name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="datePublished">Publication Date:</label>
+                    <input type="date" id="datePublished">
+                </div>
+                
+                <div id="howToFields" style="display: none;">
+                    <h3>How-To Steps</h3>
+                    <div id="steps">
+                        <div class="step-group">
+                            <input type="text" placeholder="Step 1" class="step-input">
+                        </div>
+                    </div>
+                    <button type="button" id="addStep" class="secondary-button">Add Step</button>
+                </div>
+                
+                <div id="faqFields" style="display: none;">
+                    <h3>FAQ Questions</h3>
+                    <div id="questions">
+                        <div class="qa-group">
+                            <input type="text" placeholder="Question" class="question-input">
+                            <textarea placeholder="Answer" class="answer-input" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <button type="button" id="addQuestion" class="secondary-button">Add Question</button>
+                </div>
+                
+                <button type="button" id="generate" class="primary-button">Generate Schema</button>
+            </div>
+            
+            <div class="output-section" style="display: none;">
+                <h2>Generated Schema</h2>
+                <pre id="output"></pre>
+                <button type="button" id="copy" class="secondary-button">Copy to Clipboard</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Show/hide fields based on content type
+        document.getElementById('contentType').addEventListener('change', function() {
+            document.getElementById('howToFields').style.display = 
+                this.value === 'HowTo' ? 'block' : 'none';
+            document.getElementById('faqFields').style.display = 
+                this.value === 'FAQPage' ? 'block' : 'none';
+        });
+
+        // Add step button
+        document.getElementById('addStep').addEventListener('click', function() {
+            const steps = document.getElementById('steps');
+            const stepCount = steps.children.length + 1;
+            const stepGroup = document.createElement('div');
+            stepGroup.className = 'step-group';
+            stepGroup.innerHTML = `<input type="text" placeholder="Step ${stepCount}" class="step-input">`;
+            steps.appendChild(stepGroup);
+        });
+
+        // Add question button
+        document.getElementById('addQuestion').addEventListener('click', function() {
+            const questions = document.getElementById('questions');
+            const qaGroup = document.createElement('div');
+            qaGroup.className = 'qa-group';
+            qaGroup.innerHTML = `
+                <input type="text" placeholder="Question" class="question-input">
+                <textarea placeholder="Answer" class="answer-input" rows="2"></textarea>
+            `;
+            questions.appendChild(qaGroup);
+        });
+
+        // Generate schema
+        document.getElementById('generate').addEventListener('click', function() {
+            const type = document.getElementById('contentType').value;
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const author = document.getElementById('author').value;
+            const datePublished = document.getElementById('datePublished').value;
+            
+            let schema = {
+                "@context": "https://schema.org",
+                "@type": type,
+                "headline": title,
+                "description": description,
+                "author": {
+                    "@type": "Person",
+                    "name": author
+                },
+                "datePublished": datePublished
+            };
+            
+            // Add type-specific properties
+            if (type === 'HowTo') {
+                const steps = Array.from(document.querySelectorAll('.step-input'))
+                    .map((input, index) => ({
+                        "@type": "HowToStep",
+                        "position": index + 1,
+                        "text": input.value
+                    }));
+                
+                schema.step = steps;
+            }
+            
+            if (type === 'FAQPage') {
+                const questions = document.querySelectorAll('.qa-group');
+                schema.mainEntity = Array.from(questions).map(group => ({
+                    "@type": "Question",
+                    "name": group.querySelector('.question-input').value,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": group.querySelector('.answer-input').value
+                    }
+                }));
+            }
+            
+            // Display output
+            const output = document.getElementById('output');
+            output.textContent = JSON.stringify(schema, null, 2);
+            document.querySelector('.output-section').style.display = 'block';
+        });
+
+        // Copy to clipboard
+        document.getElementById('copy').addEventListener('click', function() {
+            const output = document.getElementById('output');
+            navigator.clipboard.writeText(output.textContent);
+            this.textContent = 'Copied!';
+            setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+        });
+    </script>
+</body>
+</html> 
+

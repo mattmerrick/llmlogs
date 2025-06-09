@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMs.txt Generator - Free Tool for AI Search Optimization</title>
+    <meta name="description" content="Generate your LLMs.txt file in seconds. Our free tool helps you create and validate LLMs.txt files for better AI search optimization.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CDEBMDP5PL');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- DataFa.st Analytics -->
+<script
+    defer
+    data-website-id="682d6fb7b163eb08ed813a43"
+    data-domain="llmlogs.com"
+    src="https://datafa.st/js/script.js">
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- End DataFa.st Analytics -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start">Start Here</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-container">
+            <h1>LLMs.txt Generator</h1>
+            <p class="tool-description">Generate your LLMs.txt file in seconds. This tool helps you create a properly formatted LLMs.txt file for your website.</p>
+            
+            <div class="generator-form">
+                <div class="form-group">
+                    <label for="domain">Website Domain:</label>
+                    <input type="text" id="domain" placeholder="example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="allowAll">Allow All LLMs:</label>
+                    <select id="allowAll">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="specificLLMs" style="display: none;">
+                    <label>Select Specific LLMs:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="chatgpt"> ChatGPT</label>
+                        <label><input type="checkbox" value="claude"> Claude</label>
+                        <label><input type="checkbox" value="bard"> Bard</label>
+                        <label><input type="checkbox" value="llama"> LLaMA</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="crawlDelay">Crawl Delay (optional):</label>
+                    <input type="number" id="crawlDelay" min="0" placeholder="1">
+                </div>
+                
+                <button type="button" id="generate" class="primary-button">Generate LLMs.txt</button>
+            </div>
+            
+            <div class="output-container" style="display: none;">
+                <h2>Your LLMs.txt</h2>
+                <pre id="output"></pre>
+                <button type="button" id="copy" class="secondary-button">Copy to Clipboard</button>
+                <button type="button" id="download" class="secondary-button">Download LLMs.txt</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Tool-specific JavaScript
+        document.getElementById('allowAll').addEventListener('change', function() {
+            document.getElementById('specificLLMs').style.display = 
+                this.value === 'true' ? 'none' : 'block';
+        });
+
+        document.getElementById('generate').addEventListener('click', function() {
+            const domain = document.getElementById('domain').value;
+            const allowAll = document.getElementById('allowAll').value === 'true';
+            const crawlDelay = document.getElementById('crawlDelay').value;
+            
+            let llmsTxt = `# LLMs.txt for ${domain}\n`;
+            llmsTxt += `# Generated by LLM Logs LLMs.txt Generator\n\n`;
+            
+            if (allowAll) {
+                llmsTxt += `User-agent: *\nAllow: /\n`;
+            } else {
+                const selectedLLMs = Array.from(document.querySelectorAll('#specificLLMs input:checked'))
+                    .map(cb => cb.value);
+                
+                selectedLLMs.forEach(llm => {
+                    llmsTxt += `User-agent: ${llm}\nAllow: /\n\n`;
+                });
+            }
+            
+            if (crawlDelay) {
+                llmsTxt += `\nCrawl-delay: ${crawlDelay}\n`;
+            }
+            
+            document.getElementById('output').textContent = llmsTxt;
+            document.querySelector('.output-container').style.display = 'block';
+        });
+
+        document.getElementById('copy').addEventListener('click', function() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output);
+            this.textContent = 'Copied!';
+            setTimeout(() => this.textContent = 'Copy to Clipboard', 2000);
+        });
+
+        document.getElementById('download').addEventListener('click', function() {
+            const output = document.getElementById('output').textContent;
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'llms.txt';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html> 
+

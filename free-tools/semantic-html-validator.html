@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic HTML Validator for LLMs - Free Tool</title>
+    <meta name="description" content="Validate your HTML structure for optimal LLM understanding. Check semantic elements, heading hierarchy, and content organization.">
+    <link rel="stylesheet" href="/assets/css/style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CDEBMDP5PL');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- DataFa.st Analytics -->
+<script
+    defer
+    data-website-id="682d6fb7b163eb08ed813a43"
+    data-domain="llmlogs.com"
+    src="https://datafa.st/js/script.js">
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- End DataFa.st Analytics -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Include Standard Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger"></span>
+            </button>
+            <a href="/" class="site-logo">LLM Logs</a>
+            <nav class="nav-links">
+                <a href="/start">Start Here</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tool-container">
+            <h1>Semantic HTML Validator for LLMs</h1>
+            <p class="tool-description">Check if your HTML structure is optimized for LLM understanding. This tool analyzes semantic elements, heading hierarchy, and content organization.</p>
+            
+            <div class="input-section">
+                <h2>Input Your HTML</h2>
+                <div class="form-group">
+                    <label for="htmlInput">Enter HTML code or URL:</label>
+                    <textarea id="htmlInput" rows="10" placeholder="Paste your HTML here or enter a URL"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="isUrl"> This is a URL
+                    </label>
+                </div>
+                
+                <button type="button" id="analyze" class="primary-button">Analyze HTML</button>
+            </div>
+            
+            <div class="results-section" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <div class="score-card">
+                    <div class="overall-score">
+                        <h3>Overall Score</h3>
+                        <div id="scoreValue" class="score">0</div>
+                    </div>
+                    
+                    <div class="score-breakdown">
+                        <h3>Score Breakdown</h3>
+                        <ul id="scoreBreakdown"></ul>
+                    </div>
+                </div>
+                
+                <div class="detailed-results">
+                    <h3>Detailed Analysis</h3>
+                    <div class="result-category">
+                        <h4>Semantic Elements</h4>
+                        <ul id="semanticResults"></ul>
+                    </div>
+                    
+                    <div class="result-category">
+                        <h4>Heading Structure</h4>
+                        <ul id="headingResults"></ul>
+                    </div>
+                    
+                    <div class="result-category">
+                        <h4>Content Organization</h4>
+                        <ul id="contentResults"></ul>
+                    </div>
+                    
+                    <div class="result-category">
+                        <h4>Recommendations</h4>
+                        <ul id="recommendations"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Standard Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/guides">Guides</a>
+                <a href="/tool-reviews">Tool Reviews</a>
+                <a href="/blog">Blog</a>
+                <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LLM Logs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        document.getElementById('analyze').addEventListener('click', async function() {
+            const input = document.getElementById('htmlInput').value;
+            const isUrl = document.getElementById('isUrl').checked;
+            
+            // Show loading state
+            this.textContent = 'Analyzing...';
+            this.disabled = true;
+            
+            try {
+                let html = input;
+                if (isUrl) {
+                    // Fetch HTML from URL
+                    const response = await fetch(input);
+                    html = await response.text();
+                }
+                
+                // Parse HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Analyze semantic elements
+                const semanticElements = analyzeSemanticElements(doc);
+                
+                // Analyze heading structure
+                const headingStructure = analyzeHeadingStructure(doc);
+                
+                // Analyze content organization
+                const contentOrganization = analyzeContentOrganization(doc);
+                
+                // Calculate overall score
+                const score = calculateScore(semanticElements, headingStructure, contentOrganization);
+                
+                // Display results
+                displayResults(semanticElements, headingStructure, contentOrganization, score);
+                
+                // Show results section
+                document.querySelector('.results-section').style.display = 'block';
+            } catch (error) {
+                alert('Error analyzing HTML: ' + error.message);
+            } finally {
+                // Reset button
+                this.textContent = 'Analyze HTML';
+                this.disabled = false;
+            }
+        });
+
+        function analyzeSemanticElements(doc) {
+            const results = [];
+            const semanticTags = ['article', 'section', 'nav', 'aside', 'header', 'footer', 'main', 'figure', 'figcaption'];
+            
+            semanticTags.forEach(tag => {
+                const elements = doc.getElementsByTagName(tag);
+                results.push({
+                    tag,
+                    count: elements.length,
+                    isPresent: elements.length > 0
+                });
+            });
+            
+            return results;
+        }
+
+        function analyzeHeadingStructure(doc) {
+            const headings = {
+                h1: doc.getElementsByTagName('h1').length,
+                h2: doc.getElementsByTagName('h2').length,
+                h3: doc.getElementsByTagName('h3').length,
+                h4: doc.getElementsByTagName('h4').length,
+                h5: doc.getElementsByTagName('h5').length,
+                h6: doc.getElementsByTagName('h6').length
+            };
+            
+            return {
+                headings,
+                hasOneH1: headings.h1 === 1,
+                hasProperHierarchy: checkHeadingHierarchy(doc)
+            };
+        }
+
+        function analyzeContentOrganization(doc) {
+            return {
+                hasSections: doc.getElementsByTagName('section').length > 0,
+                hasArticles: doc.getElementsByTagName('article').length > 0,
+                hasNav: doc.getElementsByTagName('nav').length > 0,
+                hasLists: doc.getElementsByTagName('ul').length + doc.getElementsByTagName('ol').length > 0
+            };
+        }
+
+        function checkHeadingHierarchy(doc) {
+            const headings = Array.from(doc.querySelectorAll('h1, h2, h3, h4, h5, h6'));
+            let lastLevel = 0;
+            
+            for (const heading of headings) {
+                const level = parseInt(heading.tagName[1]);
+                if (level - lastLevel > 1) return false;
+                lastLevel = level;
+            }
+            
+            return true;
+        }
+
+        function calculateScore(semanticElements, headingStructure, contentOrganization) {
+            let score = 0;
+            
+            // Score semantic elements
+            score += semanticElements.filter(el => el.isPresent).length * 10;
+            
+            // Score heading structure
+            if (headingStructure.hasOneH1) score += 20;
+            if (headingStructure.hasProperHierarchy) score += 20;
+            
+            // Score content organization
+            if (contentOrganization.hasSections) score += 10;
+            if (contentOrganization.hasArticles) score += 10;
+            if (contentOrganization.hasNav) score += 10;
+            if (contentOrganization.hasLists) score += 10;
+            
+            return Math.min(100, score);
+        }
+
+        function displayResults(semanticElements, headingStructure, contentOrganization, score) {
+            // Display score
+            document.getElementById('scoreValue').textContent = score;
+            
+            // Display semantic results
+            const semanticList = document.getElementById('semanticResults');
+            semanticList.innerHTML = semanticElements.map(el => 
+                `<li class="${el.isPresent ? 'success' : 'warning'}">
+                    ${el.tag}: ${el.count} ${el.count === 1 ? 'element' : 'elements'}
+                </li>`
+            ).join('');
+            
+            // Display heading results
+            const headingList = document.getElementById('headingResults');
+            headingList.innerHTML = `
+                <li class="${headingStructure.hasOneH1 ? 'success' : 'error'}">
+                    H1 tags: ${headingStructure.headings.h1} (should be exactly 1)
+                </li>
+                <li class="${headingStructure.hasProperHierarchy ? 'success' : 'error'}">
+                    Heading hierarchy: ${headingStructure.hasProperHierarchy ? 'Correct' : 'Needs improvement'}
+                </li>
+            `;
+            
+            // Display content results
+            const contentList = document.getElementById('contentResults');
+            contentList.innerHTML = Object.entries(contentOrganization).map(([key, value]) =>
+                `<li class="${value ? 'success' : 'warning'}">
+                    ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}: ${value ? 'Yes' : 'No'}
+                </li>`
+            ).join('');
+            
+            // Generate recommendations
+            const recommendations = document.getElementById('recommendations');
+            recommendations.innerHTML = generateRecommendations(semanticElements, headingStructure, contentOrganization);
+        }
+
+        function generateRecommendations(semanticElements, headingStructure, contentOrganization) {
+            const recs = [];
+            
+            if (!headingStructure.hasOneH1) {
+                recs.push('Ensure there is exactly one H1 tag on the page');
+            }
+            
+            if (!headingStructure.hasProperHierarchy) {
+                recs.push('Fix heading hierarchy - don\'t skip heading levels');
+            }
+            
+            semanticElements.forEach(el => {
+                if (!el.isPresent) {
+                    recs.push(`Consider using the <${el.tag}> element where appropriate`);
+                }
+            });
+            
+            if (!contentOrganization.hasSections) {
+                recs.push('Use <section> elements to group related content');
+            }
+            
+            if (!contentOrganization.hasArticles) {
+                recs.push('Use <article> elements for self-contained content');
+            }
+            
+            return recs.map(rec => `<li>${rec}</li>`).join('');
+        }
+    </script>
+</body>
+</html> 
+
