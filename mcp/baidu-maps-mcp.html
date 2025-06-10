@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="百度地图 MCP Server - MCP Directory">
+    <meta property="og:description" content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。">
+    <meta property="og:url" content="https://llmlogs.com/mcp/baidu-maps-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="百度地图 MCP Server - MCP Directory">
+    <meta name="twitter:description" content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。">
+    
+    <title>百度地图 MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">百度地图 MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">百度地图 MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 272</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span>
+                        </div>
+                        <a href="https://github.com/baidu-maps/mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="百度地图 MCP Server - MCP Directory" property="og:title"/>
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/baidu-maps-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="百度地图 MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" name="twitter:description"/>
+<title>百度地图 MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">百度地图 MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">百度地图 MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 272</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/baidu-maps/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="百度地图 MCP Server - MCP Directory" property="og:title">
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" property="og:description">
+<meta content="https://llmlogs.com/mcp/baidu-maps-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="百度地图 MCP Server - MCP Directory" name="twitter:title">
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" name="twitter:description">
+<title>百度地图 MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>百度地图 MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 272</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/baidu-maps/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="百度地图 MCP Server - MCP Directory" property="og:title"/>
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/baidu-maps-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="百度地图 MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="百度地图API现已全面兼容MCP协议，是国内首家兼容MCP协议的地图服务商。" name="twitter:description"/>
+<title>百度地图 MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>百度地图 MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 272</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/baidu-maps/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ 百度地图 MCP Server
+</h1>
+<h2 class="heading">
+ 概述
+</h2>
+<p>
+ 百度地图API现已全面兼容
+ <a href="https://modelcontextprotocol.io/">
+  MCP协议
+ </a>
+ ，是国内首家兼容MCP协议的地图服务商。
+</p>
+<p>
+ 百度地图提供的MCP Server，包含10个符合MCP协议标准的API接口，涵盖逆地理编码、地点检索、路线规划等。
+</p>
+<p>
+ 依赖
+ <code class="code">
+  MCP Python SDK
+ </code>
+ 和
+ <code class="code">
+  MCP Typescript SDK
+ </code>
+ 开发，任意支持MCP协议的智能体助手（如
+ <code class="code">
+  Claude
+ </code>
+ 、
+ <code class="code">
+  Cursor
+ </code>
+ 以及
+ <code class="code">
+  千帆AppBuilder
+ </code>
+ 等）都可以快速接入。
+</p>
+<p>
+<strong>
+  强烈推荐通过
+  <a href="https://lbsyun.baidu.com/faq/api?title=mcpserver/quickstart">
+   SSE
+  </a>
+  接入百度地图MCP Server, 以获得更低的延迟和更高的稳定性。请不要忘记在
+  <a href="https://lbsyun.baidu.com/apiconsole/key">
+   控制台
+  </a>
+  为你的AK勾选上
+  <code class="code">
+   MCP(SSE)
+  </code>
+  服务。
+ </strong>
+</p>
+<h2 class="heading">
+ 工具
+</h2>
+<ol>
+<li>
+<p>
+   地理编码
+   <code class="code">
+    map_geocode
+   </code>
+</p>
+<ul>
+<li>
+    描述: 将地址解析为对应的位置坐标, 地址结构越完整, 地址内容越准确, 解析的坐标精度越高
+   </li>
+<li>
+    参数:
+    <code class="code">
+     address
+    </code>
+    地址信息
+   </li>
+<li>
+    输出:
+    <code class="code">
+     location
+    </code>
+    纬经度坐标
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   逆地理编码
+   <code class="code">
+    map_reverse_geocode
+   </code>
+</p>
+<ul>
+<li>
+    描述: 根据纬经度坐标, 获取对应位置的地址描述, 所在行政区划, 道路以及相关POI等信息
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     latitude
+    </code>
+    纬度坐标
+   </li>
+<li>
+<code class="code">
+     longitude
+    </code>
+    经度坐标
+   </li>
+<li>
+    输出:
+    <code class="code">
+     formatted_address
+    </code>
+    ,
+    <code class="code">
+     uid
+    </code>
+    ,
+    <code class="code">
+     addressComponent
+    </code>
+    等语义化地址信息
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   地点检索
+   <code class="code">
+    map_search_places
+   </code>
+</p>
+<ul>
+<li>
+    描述: 支持检索城市内的地点信息(最小到
+    <code class="code">
+     city
+    </code>
+    级别), 也可支持圆形区域内的周边地点信息检索
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     query
+    </code>
+    检索关键词, 可用名称或类型, 多关键字使用英文逗号隔开, 如:
+    <code class="code">
+     query=天安门,美食
+    </code>
+</li>
+<li>
+<code class="code">
+     tag
+    </code>
+    检索的类型偏好, 格式为
+    <code class="code">
+     tag=美食
+    </code>
+    或者
+    <code class="code">
+     tag=美食,酒店
+    </code>
+</li>
+<li>
+<code class="code">
+     region
+    </code>
+    检索的行政区划, 格式为
+    <code class="code">
+     region=cityname
+    </code>
+    或
+    <code class="code">
+     region=citycode
+    </code>
+</li>
+<li>
+<code class="code">
+     location
+    </code>
+    圆形检索中心点纬经度坐标, 格式为
+    <code class="code">
+     location=lat,lng
+    </code>
+</li>
+<li>
+<code class="code">
+     radius
+    </code>
+    圆形检索的半径
+   </li>
+<li>
+    输出: POI列表, 包含
+    <code class="code">
+     name
+    </code>
+    ,
+    <code class="code">
+     location
+    </code>
+    ,
+    <code class="code">
+     address
+    </code>
+    等
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   地点详情检索
+   <code class="code">
+    map_place_details
+   </code>
+</p>
+<ul>
+<li>
+    描述: 根据POI的uid，检索其相关的详情信息, 如评分、营业时间等（不同类型POI对应不同类别详情数据）
+   </li>
+<li>
+    参数:
+    <code class="code">
+     uid
+    </code>
+    POI的唯一标识
+   </li>
+<li>
+    输出: POI详情, 包含
+    <code class="code">
+     name
+    </code>
+    ,
+    <code class="code">
+     location
+    </code>
+    ,
+    <code class="code">
+     address
+    </code>
+    ,
+    <code class="code">
+     brand
+    </code>
+    ,
+    <code class="code">
+     price
+    </code>
+    等
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   批量算路
+   <code class="code">
+    map_directions_matrix
+   </code>
+</p>
+<ul>
+<li>
+    描述: 根据起点和终点坐标计算路线规划距离和行驶时间，支持驾车、骑行、步行。步行时任意起终点之间的距离不得超过200KM，驾车批量算路一次最多计算100条路线，起终点个数之积不能超过100。
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     origins
+    </code>
+    起点纬经度列表, 格式为
+    <code class="code">
+     origins=lat,lng
+    </code>
+    ，多个起点用
+    <code class="code">
+     |
+    </code>
+    分隔
+   </li>
+<li>
+<code class="code">
+     destinations
+    </code>
+    终点纬经度列表, 格式为
+    <code class="code">
+     destinations=lat,lng
+    </code>
+    ，多个终点用
+    <code class="code">
+     |
+    </code>
+    分隔
+   </li>
+<li>
+<code class="code">
+     model
+    </code>
+    算路类型，可选取值包括
+    <code class="code">
+     driving
+    </code>
+    ,
+    <code class="code">
+     walking
+    </code>
+    ,
+    <code class="code">
+     riding
+    </code>
+    ，默认使用
+    <code class="code">
+     driving
+    </code>
+</li>
+<li>
+    输出: 每条路线的耗时和距离, 包含
+    <code class="code">
+     distance
+    </code>
+    ,
+    <code class="code">
+     duration
+    </code>
+    等
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   路线规划
+   <code class="code">
+    map_directions
+   </code>
+</p>
+<ul>
+<li>
+    描述: 根据起终点位置名称或经纬度坐标规划出行路线和耗时, 可指定驾车、步行、骑行、公交等出行方式
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     origin
+    </code>
+    起点位置名称或纬经度, 格式为
+    <code class="code">
+     origin=lat,lng
+    </code>
+</li>
+<li>
+<code class="code">
+     destination
+    </code>
+    终点位置名称或纬经度, 格式为
+    <code class="code">
+     destination=lat,lng
+    </code>
+</li>
+<li>
+<code class="code">
+     model
+    </code>
+    出行类型, 可选取值包括
+    <code class="code">
+     driving
+    </code>
+    ,
+    <code class="code">
+     walking
+    </code>
+    ,
+    <code class="code">
+     riding
+    </code>
+    ,
+    <code class="code">
+     transit
+    </code>
+    , 默认使用
+    <code class="code">
+     driving
+    </code>
+</li>
+<li>
+    输出: 路线详情,包含
+    <code class="code">
+     steps
+    </code>
+    ,
+    <code class="code">
+     distance
+    </code>
+    ,
+    <code class="code">
+     duration
+    </code>
+    等
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   天气查询
+   <code class="code">
+    map_weather
+   </code>
+</p>
+<ul>
+<li>
+    描述: 通过行政区划或是经纬度坐标查询实时天气信息及未来5天天气预报
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     district_id
+    </code>
+    行政区划编码
+   </li>
+<li>
+<code class="code">
+     location
+    </code>
+    经纬度坐标, 格式为
+    <code class="code">
+     location=lng, lat
+    </code>
+</li>
+<li>
+    输出: 天气信息, 包含
+    <code class="code">
+     temperature
+    </code>
+    ,
+    <code class="code">
+     weather
+    </code>
+    ,
+    <code class="code">
+     wind
+    </code>
+    等
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   IP定位
+   <code class="code">
+    map_ip_location
+   </code>
+</p>
+<ul>
+<li>
+    描述: 通过所给IP获取具体位置信息和城市名称, 可用于定位IP或用户当前位置。可选参数
+    <code class="code">
+     ip
+    </code>
+    ，如果为空则获取本机IP地址（支持IPv4和IPv6）。
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     ip
+    </code>
+    （可选）需要定位的IP地址
+   </li>
+<li>
+    输出: 当前所在城市和城市中点
+    <code class="code">
+     location
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+   实时路况查询
+   <code class="code">
+    map_road_traffic
+   </code>
+</p>
+<ul>
+<li>
+    描述: 查询实时交通拥堵情况, 可通过指定道路名和区域形状(矩形, 多边形, 圆形)进行实时路况查询。
+   </li>
+<li>
+    参数:
+   </li>
+<li>
+<code class="code">
+     model
+    </code>
+    路况查询类型 (可选值包括
+    <code class="code">
+     road
+    </code>
+    ,
+    <code class="code">
+     bound
+    </code>
+    ,
+    <code class="code">
+     polygon
+    </code>
+    ,
+    <code class="code">
+     around
+    </code>
+    , 默认使用
+    <code class="code">
+     road
+    </code>
+    )
+   </li>
+<li>
+<code class="code">
+     road_name
+    </code>
+    道路名称和道路方向,
+    <code class="code">
+     model=road
+    </code>
+    时必传 (如:
+    <code class="code">
+     朝阳路南向北
+    </code>
+    )
+   </li>
+<li>
+<code class="code">
+     city
+    </code>
+    城市名称或城市adcode,
+    <code class="code">
+     model=road
+    </code>
+    时必传 (如:
+    <code class="code">
+     北京市
+    </code>
+    )
+   </li>
+<li>
+<code class="code">
+     bounds
+    </code>
+    区域左下角和右上角的纬经度坐标,
+    <code class="code">
+     model=bound
+    </code>
+    时必传 (如:
+    <code class="code">
+     39.9,116.4;39.9,116.4
+    </code>
+    )
+   </li>
+<li>
+<code class="code">
+     vertexes
+    </code>
+    多边形区域的顶点纬经度坐标,
+    <code class="code">
+     model=polygon
+    </code>
+    时必传 (如:
+    <code class="code">
+     39.9,116.4;39.9,116.4;39.9,116.4;39.9,116.4
+    </code>
+    )
+   </li>
+<li>
+<code class="code">
+     center
+    </code>
+    圆形区域的中心点纬经度坐标,
+    <code class="code">
+     model=around
+    </code>
+    时必传 (如:
+    <code class="code">
+     39.912078,116.464303
+    </code>
+    )
+   </li>
+<li>
+<code class="code">
+     radius
+    </code>
+    圆形区域的半径(米), 取值
+    <code class="code">
+     [1,1000]
+    </code>
+    ,
+    <code class="code">
+     model=around
+    </code>
+    时必传 (如:
+    <code class="code">
+     200
+    </code>
+    )
+   </li>
+<li>
+    输出: 路况信息, 包含
+    <code class="code">
+     road_name
+    </code>
+    ,
+    <code class="code">
+     traffic_condition
+    </code>
+    等
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   POI智能提取
+   <code class="code">
+    map_poi_extract
+   </code>
+</p>
+<ul>
+<li>
+    描述: 当所给的
+    <code class="code">
+     API_KEY
+    </code>
+    带有
+    <strong>
+     高级权限
+    </strong>
+    才可使用, 根据所给文本内容提取其中的相关POI信息。
+   </li>
+<li>
+    参数:
+    <code class="code">
+     text_content
+    </code>
+    用于提取POI的文本描述信息 (完整的旅游路线，行程规划，景点推荐描述等文本内容, 例如: 新疆独库公路和塔里木湖太美了, 从独山子大峡谷到天山神秘大峡谷也是很不错的体验)
+   </li>
+<li>
+    输出：相关的POI信息，包含
+    <code class="code">
+     name
+    </code>
+    ,
+    <code class="code">
+     location
+    </code>
+    等
+   </li>
+</ul>
+</li>
+</ol>
+<h2 class="heading">
+ 开始
+</h2>
+<p>
+ 使用百度地图MCP Server主要通过两种形式，分别是
+ <code class="code">
+  Python
+ </code>
+ 和
+ <code class="code">
+  Typescript
+ </code>
+ ，下面分别介绍。
+</p>
+<h3 class="heading">
+ 获取AK
+</h3>
+<p>
+ 在选择两种方法之前，你需要在
+ <a href="https://lbsyun.baidu.com/apiconsole/key">
+  百度地图开放平台
+ </a>
+ 的控制台中创建一个服务端AK，通过AK你才能够调用百度地图API能力。
+</p>
+<h3 class="heading">
+ Python接入
+</h3>
+<p>
+ 如果你希望自定义百度地图MCP Server的能力，可以通过
+ <a href="./src/baidu-map/python/src/mcp_server_baidu_maps/map.py">
+  源码
+ </a>
+ 接入，方式详见
+ <a href="./src/baidu-map/python/README.md">
+  Python接入文档
+ </a>
+ 。
+</p>
+<p>
+ 在v1.1版本更新中，我们通过pypi发布了百度地图MCP Server：
+ <em>
+  mcp-server-baidu-maps
+ </em>
+ ，你可以使用任意Python包管理工具轻松获取并快速配置使用。
+</p>
+<h4 class="heading">
+ 安装
+</h4>
+<h5 class="heading">
+ 使用uv（推荐）
+</h5>
+<p>
+ 使用
+ <a href="https://docs.astral.sh/uv/">
+<code class="code">
+   uv
+  </code>
+</a>
+ 时不需要特殊安装，我们将使用
+ <a href="https://docs.astral.sh/uv/guides/tools/">
+<code class="code">
+   uvx
+  </code>
+</a>
+ 直接运行
+ <em>
+  mcp-server-baidu-maps
+ </em>
+</p>
+<h5 class="heading">
+ 使用pip
+</h5>
+<p>
+ 或者你可以通过pip来安装
+ <em>
+  mcp-server-baidu-maps
+ </em>
+</p>
+<pre class="pre"><code class="language-bash code">pip install mcp-server-baidu-maps
+</code></pre>
+<p>
+ 安装后，我们可以使用以下命令将其作为脚本运行：
+</p>
+<pre class="pre"><code class="language-bash code">python -m mcp_server_baidu_maps
+</code></pre>
+<h4 class="heading">
+ 配置
+</h4>
+<p>
+ 在任意MCP客户端（如Claude.app）中添加如下配置，部分客户端下可能需要做一些格式化调整。
+</p>
+<p>
+ 其中
+ <em>
+  BAIDU_MAPS_API_KEY
+ </em>
+ 对应的值需要替换为你自己的AK。
+</p>
+<details>
+<summary>
+  Using uvx
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "baidu-maps": {
+      "command": "uvx",
+      "args": ["mcp-server-baidu-maps"],
+      "env": {
+        "BAIDU_MAPS_API_KEY": "&lt;YOUR_API_KEY&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+</details>
+<details>
+<summary>
+  Using pip installation
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "baidu-maps": {
+      "command": "python",
+      "args": ["-m", "mcp_server_baidu_maps"],
+      "env": {
+          "BAIDU_MAPS_API_KEY": "&lt;YOUR_API_KEY&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+</details>
+<p>
+ 保存配置后，重启你的MCP客户端，即可使用百度地图MCP Server。
+</p>
+<h3 class="heading">
+ Typescript接入
+</h3>
+<h4 class="heading">
+ nodejs安装
+</h4>
+<p>
+ 通过Typescript接入，你只需要安装
+ <a href="https://nodejs.org/en/download">
+  node.js
+ </a>
+ 。
+</p>
+<p>
+ 当你在终端可以运行
+</p>
+<pre class="pre"><code class="language-bash code">node -v
+</code></pre>
+<p>
+ 则说明你的
+ <code class="code">
+  node.js
+ </code>
+ 已经安装成功。
+</p>
+<h4 class="heading">
+ 配置
+</h4>
+<p>
+ 打开
+ <code class="code">
+  Claude for Desktop
+ </code>
+ 的
+ <code class="code">
+  Setting
+ </code>
+ ，切换到
+ <code class="code">
+  Developer
+ </code>
+ ，点击
+ <code class="code">
+  Edit Config
+ </code>
+ ，用任意的IDE打开配置文件。
+</p>
+<p>
+<img alt="" src="./img/claude_setting.png"/>
+</p>
+<p>
+<img alt="" src="./img/claude_setting_developer.png"/>
+</p>
+<p>
+ 将以下配置添加到配置文件中，BAIDU_MAP_API_KEY 是访问百度地图开放平台API的AK，在
+ <a href="https://lbs.baidu.com/faq/search?id=299&amp;title=677">
+  此页面
+ </a>
+ 中申请获取：
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "baidu-map": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@baidumap/mcp-server-baidu-map"
+            ],
+            "env": {
+                "BAIDU_MAP_API_KEY": "xxx"
+            }
+        }
+    }
+}
+</code></pre>
+<p>
+ 如果是window 系统, json 需要添加单独的配置：
+</p>
+<pre class="pre"><code class="language-json code">"mcpServers": {
+ "baidu-map": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@baidumap/mcp-server-baidu-map"
+      ],
+      "env": {
+        "BAIDU_MAP_API_KEY": "xxx"
+      },
+    }
+}
+</code></pre>
+<p>
+ 重启Claude，此时设置面板已经成功加载了百度地图MCP Server。在软件主界面对话框处可以看到有8个可用的MCP工具，点击可以查看详情。
+</p>
+<p>
+<img alt="" src="./img/claude_setting_result.png"/>
+</p>
+<p>
+<img alt="" src="./img/claude_result.png"/>
+</p>
+<h4 class="heading">
+ 效果
+</h4>
+<p>
+ 接下来就可以进行提问，验证出行规划小助手的能力了。
+ <img alt="" src="./img/claude_final_result.png"/>
+</p>
+<h3 class="heading">
+ 通过千帆AppBuilder平台接入
+</h3>
+<p>
+ 千帆平台接入，目前支持SDK接入或是API接入，通过AppBuilder构建一个应用，每个应用拥有一个独立的app_id，在python文件中调用对应的app_id，再调用百度地图 Python MCP Tool即可。
+</p>
+<p>
+ 模板代码可向下跳转，通过SDK Agent &amp;&amp;地图MCP Server，拿到导航路线及路线信息，并给出出行建议。
+</p>
+<h4 class="heading">
+ Agent配置
+</h4>
+<p>
+ 前往
+ <a href="https://console.bce.baidu.com/ai_apaas/personalSpace/app">
+  千帆平台
+ </a>
+ ，新建一个应用，并发布。
+</p>
+<p>
+<img alt="" src="./img/appbuilder.png"/>
+</p>
+<p>
+ 将Agent的思考轮数调到6。发布应用。
+</p>
+<h4 class="heading">
+ 调用
+</h4>
+<p>
+ 此代码可以当作模板，以SDK的形式调用千帆平台上已经构建好且已发布的App，再将MCP Server下载至本地，将文件相对路径写入代码即可。
+</p>
+<p>
+<strong>
+<em>
+   （注意：使用实际的app_id、token、query、mcp文件）
+  </em>
+</strong>
+</p>
+<pre class="pre"><code class="language-python code">import os
+import asyncio
+import appbuilder
+from appbuilder.core.console.appbuilder_client.async_event_handler import (
+    AsyncAppBuilderEventHandler,
+)
+from appbuilder.mcp_server.client import MCPClient
+class MyEventHandler(AsyncAppBuilderEventHandler):
+    def __init__(self, mcp_client):
+        super().__init__()
+        self.mcp_client = mcp_client
+    def get_current_weather(self, location=None, unit="摄氏度"):
+        return "{} 的温度是 {} {}".format(location, 20, unit)
+    async def interrupt(self, run_context, run_response):
+        thought = run_context.current_thought
+        # 绿色打印
+        print("\033[1;31m", "-&gt; Agent 中间思考: ", thought, "\033[0m")
+        tool_output = []
+        for tool_call in run_context.current_tool_calls:
+            tool_res = ""
+            if tool_call.function.name == "get_current_weather":
+                tool_res = self.get_current_weather(**tool_call.function.arguments)
+            else:
+                print(
+                    "\033[1;32m",
+                    "MCP工具名称: {}, MCP参数:{}\n".format(tool_call.function.name, tool_call.function.arguments),
+                    "\033[0m",
+                )
+                mcp_server_result = await self.mcp_client.call_tool(
+                    tool_call.function.name, tool_call.function.arguments
+                )
+                print("\033[1;33m", "MCP结果: {}\n\033[0m".format(mcp_server_result))
+                for i, content in enumerate(mcp_server_result.content):
+                    if content.type == "text":
+                        tool_res += mcp_server_result.content[i].text
+            tool_output.append(
+                {
+                    "tool_call_id": tool_call.id,
+                    "output": tool_res,
+                }
+            )
+        return tool_output
+    async def success(self, run_context, run_response):
+        print("\n\033[1;34m", "-&gt; Agent 非流式回答: ", run_response.answer, "\033[0m")
+async def agent_run(client, mcp_client, query):
+    tools = mcp_client.tools
+    conversation_id = await client.create_conversation()
+    with await client.run_with_handler(
+        conversation_id=conversation_id,
+        query=query,
+        tools=tools,
+        event_handler=MyEventHandler(mcp_client),
+    ) as run:
+        await run.until_done()
+### 用户Token
+os.environ["APPBUILDER_TOKEN"] = (
+    ""
+)
+async def main():
+    appbuilder.logger.setLoglevel("DEBUG")
+    ### 发布的应用ID
+    app_id = ""
+    appbuilder_client = appbuilder.AsyncAppBuilderClient(app_id)
+    mcp_client = MCPClient()
+
+    ### 注意这里的路径为MCP Server文件在本地的相对路径
+    await mcp_client.connect_to_server("./&lt;YOUR_FILE_PATH&gt;/map.py")
+    print(mcp_client.tools)
+    await agent_run(
+        appbuilder_client,
+        mcp_client,
+        '开车导航从北京到上海',
+    )
+    await appbuilder_client.http_client.session.close()
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
+</code></pre>
+<h4 class="heading">
+ 效果
+</h4>
+<p>
+ 经过Agent自己的思考，通过调用MCPServer 地点检索、地理编码服务、路线规划服务等多个tool，拿到导航路线及路线信息，并给出出行建议。
+</p>
+<p>
+ 实际用户请求：
+ <strong>
+<em>
+   “请为我计划一次北京赏花一日游。尽量给出更舒适的出行安排，当然，也要注意天气状况。”
+  </em>
+</strong>
+</p>
+<h4 class="heading">
+ 思考过程
+</h4>
+<p>
+<img alt="" src="./img/thinking_progress.png"/>
+</p>
+<h4 class="heading">
+ Agent结果
+</h4>
+<p>
+<img alt="" src="./img/agent_result.png"/>
+</p>
+<h2 class="heading">
+ 说明
+</h2>
+<p>
+ 在百度地图MCP Server中传入的部分参数规格:
+</p>
+<p>
+ 行政区划编码均采用
+ <a href="https://lbsyun.baidu.com/faq/api?title=webapi/download">
+  百度adcode映射表
+ </a>
+ 。
+</p>
+<p>
+ 经纬度坐标均采用国测局经纬度坐标
+ <code class="code">
+  bd09ll
+ </code>
+ ，详见
+ <a href="https://lbsyun.baidu.com/index.php?title=coordinate">
+  百度坐标系
+ </a>
+ 。
+</p>
+<p>
+ 类型等中文字符串参数应符合
+ <a href="https://lbs.baidu.com/index.php?title=open/poitags">
+  百度POI类型
+ </a>
+ 标准。
+</p>
+<h2 class="heading">
+ 许可
+</h2>
+<p>
+<a href="./LICENSE">
+  MIT
+ </a>
+ © baidu-maps
+</p>
+<h2 class="heading">
+ 授权
+</h2>
+<p>
+ 百度地图MCP Server中的部分高级能力需要申请
+ <strong>
+  高级权限
+ </strong>
+ 才可使用。如有需要的话，请
+ <a href="https://lbsyun.baidu.com/apiconsole/fankui?typeOne=%E4%BA%A7%E5%93%81%E9%9C%80%E6%B1%82&amp;typeTwo=%E9%AB%98%E7%BA%A7%E6%9C%8D%E5%8A%A1">
+  联系
+ </a>
+ 我们。
+</p>
+<h2 class="heading">
+ 反馈
+</h2>
+<p>
+ 在使用百度地图MCP Server时遇到的任何问题，欢迎通过
+ <code class="code">
+  issue
+ </code>
+ 或是
+ <a href="https://lbsyun.baidu.com/apiconsole/fankui?typeOne=30046&amp;typeTwo=53524&amp;typeThree=1032776">
+  百度地图开放平台
+ </a>
+ 反馈给我们，我们也欢迎每一个积极的
+ <code class="code">
+  PR
+ </code>
+ ，非常感谢各位的支持与贡献❤️
+</p>
+<h2 class="heading">
+ 更新
+</h2>
+<p>
+ 团队目前主要关注Remote形式的服务供应，对于开源部分的更新会相对较少，请谅解。
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    版本
+   </th>
+<th>
+    功能说明
+   </th>
+<th>
+    更新日期
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    V1.0
+   </td>
+<td>
+    百度地图MCP Server正式上线
+   </td>
+<td>
+    2025-03-21
+   </td>
+</tr>
+<tr>
+<td>
+    V1.1
+   </td>
+<td>
+    补充
+    <code class="code">
+     uvx
+    </code>
+    、
+    <code class="code">
+     pip
+    </code>
+    形式的快速接入
+   </td>
+<td>
+    2025-03-28
+   </td>
+</tr>
+<tr>
+<td>
+    V1.2
+   </td>
+<td>
+    补充
+    <code class="code">
+     千帆AppBuilder
+    </code>
+    接入方式
+   </td>
+<td>
+    2025-04-05
+   </td>
+</tr>
+<tr>
+<td>
+    V2.0
+   </td>
+<td>
+    支持MCP
+    <code class="code">
+     1.9.0
+    </code>
+    版协议
+   </td>
+<td>
+    2025-05-16
+   </td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/baidu-maps-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/baidu-maps-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/baidu-maps-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/baidu-maps-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

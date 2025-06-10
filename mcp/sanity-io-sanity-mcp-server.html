@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sanity MCP Server - MCP Directory">
+    <meta property="og:description" content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo">
+    <meta property="og:url" content="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sanity MCP Server - MCP Directory">
+    <meta name="twitter:description" content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo">
+    
+    <title>Sanity MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Sanity MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Sanity MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 55</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">cms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+                        </div>
+                        <a href="https://github.com/sanity-io/sanity-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Sanity MCP Server - MCP Directory" property="og:title"/>
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Sanity MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" name="twitter:description"/>
+<title>Sanity MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Sanity MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Sanity MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 55</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">cms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/sanity-io/sanity-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Sanity MCP Server - MCP Directory" property="og:title">
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" property="og:description">
+<meta content="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Sanity MCP Server - MCP Directory" name="twitter:title">
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" name="twitter:description">
+<title>Sanity MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Sanity MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 55</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">cms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/sanity-io/sanity-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Sanity MCP Server - MCP Directory" property="og:title"/>
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Sanity MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favo" name="twitter:description"/>
+<title>Sanity MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Sanity MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 55</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">cms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/sanity-io/sanity-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Sanity MCP Server
+ <!-- omit in toc -->
+</h1>
+<blockquote>
+<p>
+  Transform your content operations with AI-powered tools for Sanity. Create, manage, and explore your content through natural language conversations in your favorite AI-enabled editor.
+ </p>
+</blockquote>
+<p>
+ Sanity MCP Server implements the
+ <a href="https://modelcontextprotocol.ai">
+  Model Context Protocol
+ </a>
+ to connect your Sanity projects with AI tools like Claude, Cursor, and VS Code. It enables AI models to understand your content structure and perform operations through natural language instructions.
+</p>
+<h2 class="heading">
+ ✨ Key Features
+ <!-- omit in toc -->
+</h2>
+<ul>
+<li>
+  🤖
+  <strong>
+   Content Intelligence
+  </strong>
+  : Let AI explore and understand your content library
+ </li>
+<li>
+  🔄
+  <strong>
+   Content Operations
+  </strong>
+  : Automate tasks through natural language instructions
+ </li>
+<li>
+  📊
+  <strong>
+   Schema-Aware
+  </strong>
+  : AI respects your content structure and validation rules
+ </li>
+<li>
+  🚀
+  <strong>
+   Release Management
+  </strong>
+  : Plan and organize content releases effortlessly
+ </li>
+<li>
+  🔍
+  <strong>
+   Semantic Search
+  </strong>
+  : Find content based on meaning, not just keywords
+ </li>
+</ul>
+<h2 class="heading">
+ Table of Contents
+ <!-- omit in toc -->
+</h2>
+<ul>
+<li>
+<a href="#-quickstart">
+   🔌 Quickstart
+  </a>
+</li>
+<li>
+<a href="#prerequisites">
+   Prerequisites
+  </a>
+</li>
+<li>
+<a href="#add-configuration-for-the-sanity-mcp-server">
+   Add configuration for the Sanity MCP server
+  </a>
+</li>
+<li>
+<a href="#️-available-tools">
+   🛠️ Available Tools
+  </a>
+</li>
+<li>
+<a href="#️-configuration">
+   ⚙️ Configuration
+  </a>
+</li>
+<li>
+<a href="#-api-tokens-and-permissions">
+   🔑 API Tokens and Permissions
+  </a>
+</li>
+<li>
+<a href="#-user-roles">
+   👥 User Roles
+  </a>
+</li>
+<li>
+<a href="#-nodejs-environment-setup">
+   📦 Node.js Environment Setup
+  </a>
+</li>
+<li>
+<a href="#-quick-setup-for-node-version-manager-users">
+   🛠 Quick Setup for Node Version Manager Users
+  </a>
+</li>
+<li>
+<a href="#-why-is-this-needed">
+   🤔 Why Is This Needed?
+  </a>
+</li>
+<li>
+<a href="#-troubleshooting">
+   🔍 Troubleshooting
+  </a>
+</li>
+<li>
+<a href="#-development">
+   💻 Development
+  </a>
+</li>
+<li>
+<a href="#debugging">
+   Debugging
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 🔌 Quickstart
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<p>
+ Before you can use the MCP server, you need to:
+</p>
+<ol>
+<li>
+<strong>
+   Deploy your Sanity Studio with schema manifest
+  </strong>
+</li>
+</ol>
+<p>
+ The MCP server needs access to your content structure to work effectively. Deploy your schema manifest using one of these approaches:
+</p>
+<p>
+ ```bash
+   # Option A: If you have the CLI installed globally
+   npm install -g sanity
+   cd /path/to/studio
+   sanity schema deploy
+</p>
+<p>
+ # Option B: Update your Studio
+   cd /path/to/studio
+   npm update sanity
+   npx sanity schema deploy
+   ```
+</p>
+<p>
+ When running in CI environments without Sanity login, you'll need to provide an auth token:
+</p>
+<p>
+<code class="code">
+  bash
+   SANITY_AUTH_TOKEN=&lt;token&gt; sanity schema deploy
+ </code>
+</p>
+<blockquote>
+<p>
+  [!NOTE]
+Schema deployment requires Sanity CLI version 3.88.1 or newer.
+ </p>
+</blockquote>
+<ol>
+<li>
+<strong>
+   Get your API credentials
+  </strong>
+</li>
+<li>
+  Project ID
+ </li>
+<li>
+  Dataset name
+ </li>
+<li>
+  API token with appropriate permissions
+ </li>
+</ol>
+<p>
+ This MCP server can be used with any application that supports the Model Context Protocol. Here are some popular examples:
+</p>
+<ul>
+<li>
+<a href="https://modelcontextprotocol.io/quickstart/user">
+   Claude Desktop
+  </a>
+</li>
+<li>
+<a href="https://docs.cursor.com/context/model-context-protocol">
+   Cursor IDE
+  </a>
+</li>
+<li>
+<a href="https://code.visualstudio.com/docs/copilot/chat/mcp-servers">
+   Visual Studio Code
+  </a>
+</li>
+<li>
+  Custom MCP-compatible applications
+ </li>
+</ul>
+<h3 class="heading">
+ Add configuration for the Sanity MCP server
+</h3>
+<p>
+ To use the Sanity MCP server, add the following configuration to your application's MCP settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "sanity": {
+      "command": "npx",
+      "args": ["-y", "@sanity/mcp-server@latest"],
+      "env": {
+        "SANITY_PROJECT_ID": "your-project-id",
+        "SANITY_DATASET": "production",
+        "SANITY_API_TOKEN": "your-sanity-api-token",
+        "MCP_USER_ROLE": "developer"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ For a complete list of all required and optional environment variables, see the
+ <a href="#️-configuration">
+  Configuration section
+ </a>
+ .
+</p>
+<p>
+ The exact location of this configuration will depend on your application:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Application
+   </th>
+<th>
+    Configuration Location
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    Claude Desktop
+   </td>
+<td>
+    Claude Desktop configuration file
+   </td>
+</tr>
+<tr>
+<td>
+    Cursor
+   </td>
+<td>
+    Workspace or global settings
+   </td>
+</tr>
+<tr>
+<td>
+    VS Code
+   </td>
+<td>
+    Workspace or user settings (depends on extension)
+   </td>
+</tr>
+<tr>
+<td>
+    Custom Apps
+   </td>
+<td>
+    Refer to your app's MCP integration docs
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ You don't get it to work? See the section on
+ <a href="#-nodejs-environment-setup">
+  Node.js configuration
+ </a>
+ .
+</p>
+<h2 class="heading">
+ 🛠️ Available Tools
+</h2>
+<h3 class="heading">
+ Context &amp; Setup
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   get_initial_context
+  </strong>
+  – IMPORTANT: Must be called before using any other tools to initialize context and get usage instructions.
+ </li>
+<li>
+<strong>
+   get_sanity_config
+  </strong>
+  – Retrieves current Sanity configuration (projectId, dataset, apiVersion, etc.)
+ </li>
+</ul>
+<h3 class="heading">
+ Document Operations
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   create_document
+  </strong>
+  – Create a new document with AI-generated content based on instructions
+ </li>
+<li>
+<strong>
+   update_document
+  </strong>
+  – Update an existing document with AI-generated content based on instructions
+ </li>
+<li>
+<strong>
+   patch_document
+  </strong>
+  - Apply direct patch operations to modify specific parts of a document without using AI generation
+ </li>
+<li>
+<strong>
+   transform_document
+  </strong>
+  – Transform document content while preserving formatting and structure, ideal for text replacements and style corrections
+ </li>
+<li>
+<strong>
+   translate_document
+  </strong>
+  – Translate document content to another language while preserving formatting and structure
+ </li>
+<li>
+<strong>
+   query_documents
+  </strong>
+  – Execute GROQ queries to search for and retrieve content
+ </li>
+<li>
+<strong>
+   document_action
+  </strong>
+  – Perform document actions like publishing, unpublishing, or deleting documents
+ </li>
+</ul>
+<h3 class="heading">
+ Release Management
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   list_releases
+  </strong>
+  – List content releases, optionally filtered by state
+ </li>
+<li>
+<strong>
+   create_release
+  </strong>
+  – Create a new content release
+ </li>
+<li>
+<strong>
+   edit_release
+  </strong>
+  – Update metadata for an existing release
+ </li>
+<li>
+<strong>
+   schedule_release
+  </strong>
+  – Schedule a release to publish at a specific time
+ </li>
+<li>
+<strong>
+   release_action
+  </strong>
+  – Perform actions on releases (publish, archive, unarchive, unschedule, delete)
+ </li>
+</ul>
+<h3 class="heading">
+ Version Management
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   create_version
+  </strong>
+  – Create a version of a document for a specific release
+ </li>
+<li>
+<strong>
+   discard_version
+  </strong>
+  – Delete a specific version document from a release
+ </li>
+<li>
+<strong>
+   mark_for_unpublish
+  </strong>
+  – Mark a document to be unpublished when a specific release is published
+ </li>
+</ul>
+<h3 class="heading">
+ Dataset Management
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   list_datasets
+  </strong>
+  – List all datasets in the project
+ </li>
+<li>
+<strong>
+   create_dataset
+  </strong>
+  – Create a new dataset
+ </li>
+<li>
+<strong>
+   update_dataset
+  </strong>
+  – Modify dataset settings
+ </li>
+</ul>
+<h3 class="heading">
+ Schema Information
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   get_schema
+  </strong>
+  – Get schema details, either full schema or for a specific type
+ </li>
+<li>
+<strong>
+   list_workspace_schemas
+  </strong>
+  – Get a list of all available workspace schema names
+ </li>
+</ul>
+<h3 class="heading">
+ GROQ Support
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   get_groq_specification
+  </strong>
+  – Get the GROQ language specification summary
+ </li>
+</ul>
+<h3 class="heading">
+ Embeddings &amp; Semantic Search
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   list_embeddings_indices
+  </strong>
+  – List all available embeddings indices
+ </li>
+<li>
+<strong>
+   semantic_search
+  </strong>
+  – Perform semantic search on an embeddings index
+ </li>
+</ul>
+<h3 class="heading">
+ Project Information
+ <!-- omit in toc -->
+</h3>
+<ul>
+<li>
+<strong>
+   list_projects
+  </strong>
+  – List all Sanity projects associated with your account
+ </li>
+<li>
+<strong>
+   get_project_studios
+  </strong>
+  – Get studio applications linked to a specific project
+ </li>
+</ul>
+<h2 class="heading">
+ ⚙️ Configuration
+</h2>
+<p>
+ The server takes the following environment variables:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Variable
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Required
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     SANITY_API_TOKEN
+    </code>
+</td>
+<td>
+    Your Sanity API token
+   </td>
+<td>
+    ✅
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SANITY_PROJECT_ID
+    </code>
+</td>
+<td>
+    Your Sanity project ID
+   </td>
+<td>
+    ✅
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SANITY_DATASET
+    </code>
+</td>
+<td>
+    The dataset to use
+   </td>
+<td>
+    ✅
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     MCP_USER_ROLE
+    </code>
+</td>
+<td>
+    Determines tool access level (developer or editor)
+   </td>
+<td>
+    ✅
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SANITY_API_HOST
+    </code>
+</td>
+<td>
+    API host (defaults to https://api.sanity.io)
+   </td>
+<td>
+    ❌
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     MAX_TOOL_TOKEN_OUTPUT
+    </code>
+</td>
+<td>
+    Maximum token output for tool responses (defaults to 50000). Adjust based on your model's context limits. Higher limits may pollute the conversation context with excessive data
+   </td>
+<td>
+    ❌
+   </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>
+  [!WARNING] &gt;
+  <strong>
+   Using AI with Production Datasets
+  </strong>
+  When configuring the MCP server with a token that has write access to a production dataset, please be aware that the AI can perform destructive actions like creating, updating, or deleting content. This is not a concern if you're using a read-only token. While we are actively developing guardrails, you should exercise caution and consider using a development/staging dataset for testing AI operations that require write access.
+ </p>
+</blockquote>
+<h3 class="heading">
+ 🔑 API Tokens and Permissions
+</h3>
+<p>
+ The MCP server requires appropriate API tokens and permissions to function correctly. Here's what you need to know:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Generate a Robot Token
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<p>
+   Go to your project's management console: Settings &gt; API &gt; Tokens
+  </p>
+</li>
+<li>
+  Click "Add new token"
+ </li>
+<li>
+  Create a dedicated token for your MCP server usage
+ </li>
+<li>
+<p>
+   Store the token securely - it's only shown once!
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Required Permissions
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<p>
+   The token needs appropriate permissions based on your usage
+  </p>
+</li>
+<li>
+  For basic read operations:
+  <code class="code">
+   viewer
+  </code>
+  role is sufficient
+ </li>
+<li>
+  For content management:
+  <code class="code">
+   editor
+  </code>
+  or
+  <code class="code">
+   developer
+  </code>
+  role recommended
+ </li>
+<li>
+<p>
+   For advanced operations (like managing datasets):
+   <code class="code">
+    administrator
+   </code>
+   role may be needed
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Dataset Access
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<p>
+   Public datasets: Content is readable by unauthenticated users
+  </p>
+</li>
+<li>
+  Private datasets: Require proper token authentication
+ </li>
+<li>
+<p>
+   Draft and versioned content: Only accessible to authenticated users with appropriate permissions
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Security Best Practices
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Use separate tokens for different environments (development, staging, production)
+ </li>
+<li>
+  Never commit tokens to version control
+ </li>
+<li>
+  Consider using environment variables for token management
+ </li>
+<li>
+  Regularly rotate tokens for security
+ </li>
+</ol>
+<h3 class="heading">
+ 👥 User Roles
+</h3>
+<p>
+ The server supports two user roles:
+</p>
+<ul>
+<li>
+<strong>
+   developer
+  </strong>
+  : Access to all tools
+ </li>
+<li>
+<strong>
+   editor
+  </strong>
+  : Content-focused tools without project administration
+ </li>
+</ul>
+<h2 class="heading">
+ 📦 Node.js Environment Setup
+</h2>
+<blockquote>
+<p>
+<strong>
+   Important for Node Version Manager Users
+  </strong>
+  : If you use
+  <code class="code">
+   nvm
+  </code>
+  ,
+  <code class="code">
+   mise
+  </code>
+  ,
+  <code class="code">
+   fnm
+  </code>
+  ,
+  <code class="code">
+   nvm-windows
+  </code>
+  or similar tools, you'll need to follow the setup steps below to ensure MCP servers can access Node.js. This is a one-time setup that will save you troubleshooting time later. This is
+  <a href="https://github.com/modelcontextprotocol/servers/issues/64">
+   an ongoing issue
+  </a>
+  with MCP servers.
+ </p>
+</blockquote>
+<h3 class="heading">
+ 🛠 Quick Setup for Node Version Manager Users
+</h3>
+<ol>
+<li>
+  First, activate your preferred Node.js version:
+ </li>
+</ol>
+<p>
+ ```bash
+   # Using nvm
+   nvm use 20   # or your preferred version
+</p>
+<p>
+ # Using mise
+   mise use node@20
+</p>
+<p>
+ # Using fnm
+   fnm use 20
+   ```
+</p>
+<ol>
+<li>
+  Then, create the necessary symlinks (choose your OS):
+ </li>
+</ol>
+<p>
+<strong>
+  On macOS/Linux:
+ </strong>
+</p>
+<p>
+<code class="code">
+  bash
+   sudo ln -sf "$(which node)" /usr/local/bin/node &amp;&amp; sudo ln -sf "$(which npx)" /usr/local/bin/npx
+ </code>
+</p>
+<blockquote>
+<p>
+  [!NOTE]
+While using
+  <code class="code">
+   sudo
+  </code>
+  generally requires caution, it's safe in this context because:
+ </p>
+<ul>
+<li>
+   We're only creating symlinks to your existing Node.js binaries
+  </li>
+<li>
+   The target directory (
+   <code class="code">
+    /usr/local/bin
+   </code>
+   ) is a standard system location for user-installed programs
+  </li>
+<li>
+   The symlinks only point to binaries you've already installed and trust
+  </li>
+<li>
+   You can easily remove these symlinks later with
+   <code class="code">
+    sudo rm
+   </code>
+</li>
+</ul>
+</blockquote>
+<p>
+<strong>
+  On Windows (PowerShell as Administrator):
+ </strong>
+</p>
+<p>
+<code class="code">
+  powershell
+   New-Item -ItemType SymbolicLink -Path "C:\Program Files\nodejs\node.exe" -Target (Get-Command node).Source -Force
+   New-Item -ItemType SymbolicLink -Path "C:\Program Files\nodejs\npx.cmd" -Target (Get-Command npx).Source -Force
+ </code>
+</p>
+<ol>
+<li>
+  Verify the setup:
+  <code class="code">
+   bash
+   # Should show your chosen Node version
+   /usr/local/bin/node --version  # macOS/Linux
+   "C:\Program Files\nodejs\node.exe" --version  # Windows
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ 🤔 Why Is This Needed?
+</h3>
+<p>
+ MCP servers are launched by calling
+ <code class="code">
+  node
+ </code>
+ and
+ <code class="code">
+  npx
+ </code>
+ binaries directly. When using Node version managers, these binaries are managed in isolated environments that aren't automatically accessible to system applications. The symlinks above create a bridge between your version manager and the system paths that MCP servers use.
+</p>
+<h3 class="heading">
+ 🔍 Troubleshooting
+</h3>
+<p>
+ If you switch Node versions often:
+</p>
+<ul>
+<li>
+  Remember to update your symlinks when changing Node versions
+ </li>
+<li>
+  You can create a shell alias or script to automate this:
+  <code class="code">
+   bash
+  # Example alias for your .bashrc or .zshrc
+  alias update-node-symlinks='sudo ln -sf "$(which node)" /usr/local/bin/node &amp;&amp; sudo ln -sf "$(which npx)" /usr/local/bin/npx'
+  </code>
+</li>
+</ul>
+<p>
+ To remove the symlinks later:
+</p>
+<pre class="pre"><code class="language-bash code"># macOS/Linux
+sudo rm /usr/local/bin/node /usr/local/bin/npx
+
+# Windows (PowerShell as Admin)
+Remove-Item "C:\Program Files\nodejs\node.exe", "C:\Program Files\nodejs\npx.cmd"
+</code></pre>
+<h2 class="heading">
+ 💻 Development
+</h2>
+<p>
+ Install dependencies:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm install
+</code></pre>
+<p>
+ Build and run in development mode:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm run dev
+</code></pre>
+<p>
+ Build the server:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm run build
+</code></pre>
+<p>
+ Run the built server:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm start
+</code></pre>
+<h3 class="heading">
+ Debugging
+</h3>
+<p>
+ For debugging, you can use the MCP inspector:
+</p>
+<pre class="pre"><code class="language-bash code">npx @modelcontextprotocol/inspector -e SANITY_API_TOKEN=&lt;token&gt; -e SANITY_PROJECT_ID=&lt;project_id&gt; -e SANITY_DATASET=&lt;ds&gt; -e MCP_USER_ROLE=developer node path/to/build/index.js
+</code></pre>
+<p>
+ This will provide a web interface for inspecting and testing the available tools.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/sanity-io-sanity-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

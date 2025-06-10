@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This repo is part of thePanaversity Certified Agentic & Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory">
+    <meta property="og:description" content="This repo is part of thePanaversity Certified Agentic & Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory">
+    <meta name="twitter:description" content="This repo is part of thePanaversity Certified Agentic & Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses.">
+    
+    <title>Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 2790</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Jupyter Notebook</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agentic-ai</span><span class="topic-tag"> langmem</span><span class="topic-tag"> mcp</span><span class="topic-tag"> openai-api</span><span class="topic-tag"> openai</span><span class="topic-tag"> docker</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> dapr</span><span class="topic-tag"> a2a</span><span class="topic-tag"> dapr-pub-sub</span><span class="topic-tag"> dapr-service-invocation</span><span class="topic-tag"> dapr-sidecar</span><span class="topic-tag"> dapr-workflow</span><span class="topic-tag"> kafka</span><span class="topic-tag"> openai-agents-sdk</span><span class="topic-tag"> postgresql-database</span><span class="topic-tag"> rabbitmq</span><span class="topic-tag"> rancher-desktop</span><span class="topic-tag"> redis</span><span class="topic-tag"> serverless-containers</span>
+                        </div>
+                        <a href="https://github.com/panaversity/learn-agentic-ai" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory" property="og:title"/>
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory" name="twitter:title"/>
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." name="twitter:description"/>
+<title>Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2790</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Jupyter Notebook</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-ai</span><span class="topic-tag"> langmem</span><span class="topic-tag"> mcp</span><span class="topic-tag"> openai-api</span><span class="topic-tag"> openai</span><span class="topic-tag"> docker</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> dapr</span><span class="topic-tag"> a2a</span><span class="topic-tag"> dapr-pub-sub</span><span class="topic-tag"> dapr-service-invocation</span><span class="topic-tag"> dapr-sidecar</span><span class="topic-tag"> dapr-workflow</span><span class="topic-tag"> kafka</span><span class="topic-tag"> openai-agents-sdk</span><span class="topic-tag"> postgresql-database</span><span class="topic-tag"> rabbitmq</span><span class="topic-tag"> rancher-desktop</span><span class="topic-tag"> redis</span><span class="topic-tag"> serverless-containers</span>
+</div>
+<a class="github-link" href="https://github.com/panaversity/learn-agentic-ai" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory" property="og:title">
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." property="og:description">
+<meta content="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory" name="twitter:title">
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." name="twitter:description">
+<title>Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2790</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Jupyter Notebook</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-ai</span><span class="topic-tag"> langmem</span><span class="topic-tag"> mcp</span><span class="topic-tag"> openai-api</span><span class="topic-tag"> openai</span><span class="topic-tag"> docker</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> dapr</span><span class="topic-tag"> a2a</span><span class="topic-tag"> dapr-pub-sub</span><span class="topic-tag"> dapr-service-invocation</span><span class="topic-tag"> dapr-sidecar</span><span class="topic-tag"> dapr-workflow</span><span class="topic-tag"> kafka</span><span class="topic-tag"> openai-agents-sdk</span><span class="topic-tag"> postgresql-database</span><span class="topic-tag"> rabbitmq</span><span class="topic-tag"> rancher-desktop</span><span class="topic-tag"> redis</span><span class="topic-tag"> serverless-containers</span>
+</div>
+<a class="github-link" href="https://github.com/panaversity/learn-agentic-ai" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory" property="og:title"/>
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory" name="twitter:title"/>
+<meta content="This repo is part of thePanaversity Certified Agentic &amp; Robotic AI Engineerprogram. It covers AI-201, AI-202 and AI-301 courses." name="twitter:description"/>
+<title>Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2790</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Jupyter Notebook</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-ai</span><span class="topic-tag"> langmem</span><span class="topic-tag"> mcp</span><span class="topic-tag"> openai-api</span><span class="topic-tag"> openai</span><span class="topic-tag"> docker</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> dapr</span><span class="topic-tag"> a2a</span><span class="topic-tag"> dapr-pub-sub</span><span class="topic-tag"> dapr-service-invocation</span><span class="topic-tag"> dapr-sidecar</span><span class="topic-tag"> dapr-workflow</span><span class="topic-tag"> kafka</span><span class="topic-tag"> openai-agents-sdk</span><span class="topic-tag"> postgresql-database</span><span class="topic-tag"> rabbitmq</span><span class="topic-tag"> rancher-desktop</span><span class="topic-tag"> redis</span><span class="topic-tag"> serverless-containers</span>
+</div>
+<a class="github-link" href="https://github.com/panaversity/learn-agentic-ai" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Learn Agentic AI using Dapr Agentic Cloud Ascent (DACA) Design Pattern: From Start to Scale
+</h1>
+<p>
+ This repo is part of the
+ <a href="https://docs.google.com/document/d/15usu1hkrrRLRjcq_3nCTT-0ljEcgiC44iSdvdqrCprk/edit?usp=sharing">
+  Panaversity Certified Agentic &amp; Robotic AI Engineer
+ </a>
+ program. It covers AI-201, AI-202 and AI-301 courses.
+</p>
+<p>
+ We have Two Hunches, the future of Pakistan depends on it, let's make sure that we are not wrong:
+</p>
+<p>
+ It is very important for Pakistan that we bet on the right horses for the upcoming age of Agentic AI. We will be training millions of Agentic AI Developers all over Pakistan and online around the world and building startups, we cant afford to be wrong.
+</p>
+<p>
+ Hunch #1: Dapr
+We feel Dapr, Dapr Actors, Dapr Workflows, and Dapr Agents will be the core technology in building the next generation multi ai agentic systems, is my hunch correct?
+</p>
+<p>
+ Hunch #2: OpenAI Agents SDK
+We also have a hunch that OpenAI Agents SDK will be the go to framework for beginners to start learning Agentic AI?
+</p>
+<p>
+ Let us see what the best AI has to say about our hunches:
+</p>
+<p>
+ https://chatgpt.com/share/6811b893-82cc-8001-9037-e45bcd91cc64
+</p>
+<p>
+ https://g.co/gemini/share/1f31c876520b
+</p>
+<p>
+ https://grok.com/share/bGVnYWN5_4343d342-c7df-4b06-9174-487a64f59d53
+</p>
+<h2 class="heading">
+ This Panaversity Initiative Tackles the Critical Challenge:
+</h2>
+<p>
+<strong>
+  “How do we design AI Agents that can handle 10 million concurrent AI Agents without failing?”
+ </strong>
+</p>
+<p>
+ Note: The challenge is intensified as we must guide our students to solve this issue with minimal financial resources available during training.
+</p>
+<p align="center">
+<img src="./img/cover.png" width="600"/>
+</p>
+<p>
+ Kubernetes with Dapr can theoretically handle 10 million concurrent agents in an agentic AI system without failing, but achieving this requires extensive optimization, significant infrastructure, and careful engineering. While direct evidence at this scale is limited, logical extrapolation from existing benchmarks, Kubernetes’ scalability, and Dapr’s actor model supports feasibility, especially with rigorous tuning and resource allocation.
+</p>
+<p>
+<strong>
+  Condensed Argument with Proof and Logic
+ </strong>
+ :
+</p>
+<ol>
+<li>
+<strong>
+   Kubernetes Scalability
+  </strong>
+  :
+ </li>
+<li>
+<strong>
+   Evidence
+  </strong>
+  : Kubernetes supports up to 5,000 nodes and 150,000 pods per cluster (Kubernetes docs), with real-world examples like PayPal scaling to 4,000 nodes and 200,000 pods (InfoQ, 2023) and KubeEdge managing 100,000 edge nodes and 1 million pods (KubeEdge case studies). OpenAI’s 2,500-node cluster for AI workloads (OpenAI blog, 2022) shows Kubernetes can handle compute-intensive tasks.
+ </li>
+<li>
+<p>
+<strong>
+    Logic
+   </strong>
+   : For 10 million users, a cluster of 5,000–10,000 nodes (e.g., AWS g5 instances with GPUs) can distribute workloads. Each node can run hundreds of pods, and Kubernetes’ horizontal pod autoscaling (HPA) dynamically adjusts to demand. Bottlenecks (e.g., API server, networking) can be mitigated by tuning etcd, using high-performance CNIs like Cilium, and optimizing DNS.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Dapr’s Efficiency for Agentic AI
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<strong>
+   Evidence
+  </strong>
+  : Dapr’s actor model supports thousands of virtual actors per CPU core with double-digit millisecond latency (Dapr docs, 2024). Case studies show Dapr handling millions of events, e.g., Tempestive’s IoT platform processing billions of messages (Dapr blog, 2023) and DeFacto’s system managing 3,700 events/second (320 million daily) on Kubernetes with Kafka (Microsoft case study, 2022).
+ </li>
+<li>
+<p>
+<strong>
+    Logic
+   </strong>
+   : Agentic AI relies on stateful, low-latency agents. Dapr Agents, built on the actor model, can represent 10 million users as actors, distributed across a Kubernetes cluster. Dapr’s state management (e.g., Redis) and pub/sub messaging (e.g., Kafka) ensure efficient coordination and resilience, with automatic retries preventing failures. Sharding state stores and message brokers scales to millions of operations/second.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Handling AI Workloads
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<strong>
+   Evidence
+  </strong>
+  : LLM inference frameworks like vLLM and TGI serve thousands of requests/second per GPU (vLLM benchmarks, 2024). Kubernetes orchestrates GPU workloads effectively, as seen  Kubernetes manages GPU workloads, as seen in NVIDIA’s AI platform scaling to thousands of GPUs (NVIDIA case study, 2023).
+ </li>
+<li>
+<p>
+<strong>
+    Logic
+   </strong>
+   : Assuming each user generates 1 request/second requiring 0.01 GPU, 10 million users need ~100,000 GPUs. Batching, caching, and model parallelism reduce this to a feasible ~10,000–20,000 GPUs, achievable in hyperscale clouds (e.g., AWS). Kubernetes’ resource scheduling ensures optimal GPU utilization.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Networking and Storage
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<strong>
+   Evidence
+  </strong>
+  : EMQX on Kubernetes handled 1 million concurrent connections with tuning (EMQX blog, 2024). C10M benchmarks (2013) achieved 10 million connections using optimized stacks. Dapr’s state stores (e.g., Redis) support millions of operations/second (Redis benchmarks, 2024).
+ </li>
+<li>
+<p>
+<strong>
+    Logic
+   </strong>
+   : 10 million connections require ~100–1,000 Gbps bandwidth, supported by modern clouds. High-throughput databases (e.g., CockroachDB) and caching (e.g., Redis Cluster) handle 10 TB of state data for 10 million users (1 KB/user). Kernel bypass (e.g., DPDK) and eBPF-based CNIs (e.g., Cilium) minimize networking latency.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Resilience and Monitoring
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<strong>
+   Evidence
+  </strong>
+  : Dapr’s resiliency policies (retries, circuit breakers) and Kubernetes’ self-healing (pod restarts) ensure reliability (Dapr docs, 2024). Dapr’s OpenTelemetry integration scales monitoring for millions of agents (Prometheus case studies, 2023).
+ </li>
+<li>
+<strong>
+   Logic
+  </strong>
+  : Real-time metrics (e.g., latency, error rates) and distributed tracing prevent cascading failures. Kubernetes’ liveness probes and Dapr’s workflow engine recover from crashes, ensuring 99.999% uptime.
+ </li>
+</ol>
+<p>
+<strong>
+  Feasibility with Constraints
+ </strong>
+ :
+-
+ <strong>
+  Challenge
+ </strong>
+ : No direct benchmark exists for 10 million concurrent users with Dapr/Kubernetes in an agentic AI context. Infrastructure costs (e.g., $10M–$100M for 10,000 nodes) are prohibitive for low-budget scenarios.
+-
+ <strong>
+  Solution
+ </strong>
+ : Use open-source tools (e.g., Minikube, kind) for local testing and cloud credits (e.g., AWS Educate) for students. Simulate 10 million users with tools like Locust on smaller clusters (e.g., 100 nodes), extrapolating results. Optimize Dapr’s actor placement and Kubernetes’ resource quotas to maximize efficiency on limited hardware. Leverage free-tier databases (e.g., MongoDB Atlas) and message brokers (e.g., RabbitMQ).
+</p>
+<p>
+<strong>
+  Conclusion
+ </strong>
+ : Kubernetes with Dapr can handle 10 million concurrent users in an agentic AI system, supported by their proven scalability, real-world case studies, and logical extrapolation. For students with minimal budgets, small-scale simulations, open-source tools, and cloud credits make the problem tractable, though production-scale deployment requires hyperscale resources and expertise.
+</p>
+<p>
+<strong>
+  Agentic AI Top Trend of 2025
+ </strong>
+</p>
+<p align="center">
+<img src="./img/toptrend.webp" width="200"/>
+</p>
+<h2 class="heading">
+ The Dapr Agentic Cloud Ascent (DACA) Design Pattern Addresses 10 Million AI Agents Challenge
+</h2>
+<p>
+ Let's understand and learn about "Dapr Agentic Cloud Ascent (DACA)", our winning design pattern for developing and deploying planet scale multi-agent systems.
+</p>
+<h3 class="heading">
+ Executive Summary: Dapr Agentic Cloud Ascent (DACA)
+</h3>
+<p>
+ The Dapr Agentic Cloud Ascent (DACA) guide introduces a strategic design pattern for building and deploying sophisticated, scalable, and resilient agentic AI systems. Addressing the complexities of modern AI development, DACA integrates the OpenAI Agents SDK for core agent logic with the Model Context Protocol (MCP) for standardized tool use and the Agent2Agent (A2A) protocol for seamless inter-agent communication, all underpinned by the distributed capabilities of Dapr.
+ <strong>
+  Grounded in AI-first and cloud-first principles
+ </strong>
+ , DACA promotes the use of stateless, containerized applications deployed on platforms like Azure Container Apps (Serverless Containers) or Kubernetes, enabling efficient scaling from local development to planetary-scale production, potentially leveraging free-tier cloud services and self-hosted LLMs for cost optimization. The pattern emphasizes modularity, context-awareness, and standardized communication, envisioning an
+ <strong>
+  Agentia World
+ </strong>
+ where diverse AI agents collaborate intelligently. Ultimately, DACA offers a robust, flexible, and cost-effective framework for developers and architects aiming to create complex, cloud-native agentic AI applications that are built for scalability and resilience from the ground up.
+</p>
+<p>
+<strong>
+<a href="https://github.com/panaversity/learn-agentic-ai/blob/main/comprehensive_guide_daca.md">
+   Comprehensive Guide to Dapr Agentic Cloud Ascent (DACA) Design Pattern
+  </a>
+</strong>
+</p>
+<p align="center">
+<img src="./img/ascent.png" width="500"/>
+</p>
+<p align="center">
+<img src="./img/architecture1.png" width="400"/>
+</p>
+<h3 class="heading">
+ Target User
+</h3>
+<ul>
+<li>
+<strong>
+   Agentic AI Developer and AgentOps Professionals
+  </strong>
+</li>
+</ul>
+<h3 class="heading">
+ Why OpenAI Agents SDK should be the main framework for agentic development for most use cases?
+</h3>
+<p>
+<strong>
+  Table 1: Comparison of Abstraction Levels in AI Agent Frameworks
+ </strong>
+</p>
+<table>
+<thead>
+<tr>
+<th>
+<strong>
+     Framework
+    </strong>
+</th>
+<th>
+<strong>
+     Abstraction Level
+    </strong>
+</th>
+<th>
+<strong>
+     Key Characteristics
+    </strong>
+</th>
+<th>
+<strong>
+     Learning Curve
+    </strong>
+</th>
+<th>
+<strong>
+     Control Level
+    </strong>
+</th>
+<th>
+<strong>
+     Simplicity
+    </strong>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+     OpenAI Agents SDK
+    </strong>
+</td>
+<td>
+    Minimal
+   </td>
+<td>
+    Python-first, core primitives (Agents, Handoffs, Guardrails), direct control
+   </td>
+<td>
+    Low
+   </td>
+<td>
+    High
+   </td>
+<td>
+    High
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     CrewAI
+    </strong>
+</td>
+<td>
+    Moderate
+   </td>
+<td>
+    Role-based agents, crews, tasks, focus on collaboration
+   </td>
+<td>
+    Low-Medium
+   </td>
+<td>
+    Medium
+   </td>
+<td>
+    Medium
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     AutoGen
+    </strong>
+</td>
+<td>
+    High
+   </td>
+<td>
+    Conversational agents, flexible conversation patterns, human-in-the-loop support
+   </td>
+<td>
+    Medium
+   </td>
+<td>
+    Medium
+   </td>
+<td>
+    Medium
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Google ADK
+    </strong>
+</td>
+<td>
+    Moderate
+   </td>
+<td>
+    Multi-agent hierarchies, Google Cloud integration (Gemini, Vertex AI), rich tool ecosystem, bidirectional streaming
+   </td>
+<td>
+    Medium
+   </td>
+<td>
+    Medium-High
+   </td>
+<td>
+    Medium
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     LangGraph
+    </strong>
+</td>
+<td>
+    Low-Moderate
+   </td>
+<td>
+    Graph-based workflows, nodes, edges, explicit state management
+   </td>
+<td>
+    Very High
+   </td>
+<td>
+    Very High
+   </td>
+<td>
+    Low
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Dapr Agents
+    </strong>
+</td>
+<td>
+    Moderate
+   </td>
+<td>
+    Stateful virtual actors, event-driven multi-agent workflows, Kubernetes integration, 50+ data connectors, built-in resiliency
+   </td>
+<td>
+    Medium
+   </td>
+<td>
+    Medium-High
+   </td>
+<td>
+    Medium
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ The table clearly identifies why OpenAI Agents SDK should be the main framework for agentic development for most use cases:
+- It excels in
+ <strong>
+  simplicity
+ </strong>
+ and
+ <strong>
+  ease of use
+ </strong>
+ , making it the best choice for rapid development and broad accessibility.
+- It offers
+ <strong>
+  high control
+ </strong>
+ with
+ <strong>
+  minimal abstraction
+ </strong>
+ , providing the flexibility needed for agentic development without the complexity of frameworks like LangGraph.
+- It outperforms most alternatives (CrewAI, AutoGen, Google ADK, Dapr Agents) in balancing usability and power, and while LangGraph offers more control, its complexity makes it less practical for general use.
+</p>
+<p>
+ If your priority is ease of use, flexibility, and quick iteration in agentic development, OpenAI Agents SDK is the clear winner based on the table. However, if your project requires enterprise-scale features (e.g., Dapr Agents) or maximum control for complex workflows (e.g., LangGraph), you might consider those alternatives despite their added complexity.
+</p>
+<h2 class="heading">
+ Core DACA Agentic AI Courses:
+</h2>
+<h3 class="heading">
+ AI-201:  Fundamentals of Agentic AI and DACA AI-First Development (14 weeks)
+</h3>
+<ul>
+<li>
+  ⁠Agentic &amp; DACA Theory - 1 week
+ </li>
+<li>
+  UV &amp; ⁠OpenAI Agents SDK - 5 weeks
+ </li>
+<li>
+  ⁠Agentic Design Patterns - 2 weeks
+ </li>
+<li>
+  ⁠Memory [LangMem &amp; mem0] 1 week
+ </li>
+<li>
+  Postgres/Redis (Managed Cloud) - 1 week
+ </li>
+<li>
+  FastAPI (Basic)  - 2 weeks
+ </li>
+<li>
+  ⁠Containerization (Rancher Desktop) - 1 week
+ </li>
+<li>
+  Hugging Face Docker Spaces - 1 week
+ </li>
+</ul>
+<p>
+<strong>
+<a href="https://www.youtube.com/playlist?list=PL0vKVrkG4hWovpr0FX6Gs-06hfsPDEUe6">
+   AI-201 Video Playlist
+  </a>
+</strong>
+</p>
+<p>
+ Note: These videos are for additional learning, and do not cover all the material taught in the onsite classes.
+</p>
+<p>
+ Prerequisite: Successful completion of
+ <a href="https://github.com/panaversity/learn-modern-ai-python">
+  AI-101: Modern AI Python Programming - Your Launchpad into Intelligent Systems
+ </a>
+</p>
+<h3 class="heading">
+ AI-202: DACA Cloud-First Agentic AI Development (14 weeks)
+</h3>
+<ul>
+<li>
+  Rancher Desktop with Local Kubernetes - 4 weeks
+ </li>
+<li>
+  Advanced FastAPI with Kubernetes - 2 weeks
+ </li>
+<li>
+  Dapr [workflows, state, pubsub, secrets] - 3 Week
+ </li>
+<li>
+  CockRoachdb &amp; RabbitMQ Managed Services - 2 weeks
+ </li>
+<li>
+  ⁠Model Context Protocol -  2 weeks
+ </li>
+<li>
+  ⁠Serverless Containers Deployment (ACA) - 2 weeks
+ </li>
+</ul>
+<p>
+ Prerequisite: Successful completion of AI-201
+</p>
+<h3 class="heading">
+ AI-301 DACA Planet-Scale Distributed AI Agents (14 Weeks)
+</h3>
+<ul>
+<li>
+  ⁠Certified Kubernetes Application Developer (CKAD) - 4 weeks
+ </li>
+<li>
+  ⁠A2A Protocol - 2 weeks
+ </li>
+<li>
+  ⁠Voice Agents - 2 weeks
+ </li>
+<li>
+  ⁠Dapr Agents/Google ADK - 2 weeks
+ </li>
+<li>
+  ⁠Self-LLMs Hosting - 1 week
+ </li>
+<li>
+  Finetuning LLMs - 3 weeks
+ </li>
+</ul>
+<p>
+ Prerequisite: Successful completion of AI-201 &amp; AI-202
+</p>
+<h2 class="heading">
+ Evaluations
+</h2>
+<p>
+ Quizzes + Hackathons (Everything is Onsite)
+</p>
+<ol>
+<li>
+  Advanced Modern Python (including asyncio) [Q1]
+ </li>
+<li>
+  OpenAI Agents SDK (48 MCQ in 2 hour) [01_ai_agents_first]
+ </li>
+<li>
+  Protocols &amp; Design Patterns (A2A and MCP) [05_ai_protocols]
+ </li>
+<li>
+  Hackathon1 - 8 Hours (Using Above Quiz Stack)
+ </li>
+<li>
+  Containerization + FastAPI [05_daca_agent_native_dev = 01 + 02 ]
+ </li>
+<li>
+  Kubernetes (Rancher Desktop) [Stimulations] [05_daca_agent_native_dev = 02 ]
+ </li>
+<li>
+  Dapr-1 - State, PubSub, Bindings, Invocation [05_daca_agent_native_dev = 03 ]
+ </li>
+<li>
+  Dapr-2 - Workflows, Virtual Actors [04_agent_native = 04, 05, 06]
+ </li>
+<li>
+  Hackathon2 - 8 Hours (Agent Native Startup)
+ </li>
+<li>
+  CKAD + DAPR + ArgoCD (Simulations) [06_daca_deployment_guide + 07_ckad]
+ </li>
+</ol>
+<h2 class="heading">
+ Quiz Details
+</h2>
+<h3 class="heading">
+ Fundamentals of Agentic AI Quiz
+</h3>
+<p>
+ Total Questions: 48 MCQs
+</p>
+<p>
+ Duration: 120 Minutes
+</p>
+<p>
+ Difficulty Level: Intermediate or Advanced (NOT beginner-level)
+</p>
+<p>
+<a href="https://www.youtube.com/playlist?list=PL0vKVrkG4hWr4V2I4P6GaDzMG_LijlGTm">
+  Quiz Preparation Playlist
+ </a>
+</p>
+<p>
+ This is a well-constructed, comprehensive quiz that accurately tests deep knowledge of the OpenAI Agents SDK. However, it's significantly more challenging than typical beginner-level assessments.
+</p>
+<p>
+<strong>
+  Difficulty Level for Beginners
+ </strong>
+</p>
+<p>
+ The quiz is challenging for beginners due to the following factors:
+</p>
+<ul>
+<li>
+<p>
+<strong>
+    Technical Depth
+   </strong>
+   : Questions require understanding the OpenAI Agents SDK’s architecture (e.g., Agents, Tools, Handoffs, Runner), Pydantic models, async programming, and prompt engineering. These are advanced topics for someone new to AI or Python.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Conceptual Complexity
+   </strong>
+   : Topics like dynamic instructions, context management, error handling, and Chain-of-Thought prompting require familiarity with both theoretical and practical aspects of agentic AI.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Code Analysis
+   </strong>
+   : Many questions involve analyzing code snippets, understanding execution paths, and predicting outcomes, which demand strong Python and debugging skills.
+Domain Knowledge: Questions on Markdown are simpler, but the majority focus on niche SDK features, making the quiz specialized.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Beginner Challenges
+   </strong>
+   : Beginners (e.g., those with basic Python knowledge and minimal AI experience) would struggle with SDK-specific concepts like Runner.run_sync, tool_choice, and Pydantic validation, as well as async programming and multi-agent workflows.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Difficulty Rating
+   </strong>
+   : Advanced (not beginner-friendly). Beginners would need foundational knowledge in Python, async programming, and LLMs, plus specific training on the OpenAI Agents SDK to perform well.
+  </p>
+</li>
+</ul>
+<p>
+ To excel in this quiz, focus on understanding the core components and philosophy of the OpenAI Agents SDK, such as its "Python-first" design for orchestration, the roles of Agents and Tools, and how primitives like "Handoffs" facilitate multi-agent collaboration. Pay close attention to how the SDK manages the agent loop, handles tool calls and Pydantic models for typed inputs/outputs, and uses context objects. Review concepts like dynamic instructions, agent cloning, error handling during tool execution, and the nuances of Runner.run_sync() versus streaming. Additionally, refresh your knowledge of prompt engineering techniques, including crafting clear instructions, guiding the agent's reasoning (e.g., Chain-of-Thought), and managing sensitive data through persona and careful prompting. Finally, ensure you're comfortable with basic Markdown syntax for links and images.
+</p>
+<p>
+<strong>
+  Preparation Guide for Beginner Students
+ </strong>
+</p>
+<p>
+ This OpenAI Agents SDK quiz is designed for intermediate to advanced learners and requires substantial preparation to succeed. Before attempting this assessment, ensure you have a solid foundation in Python programming, including object-oriented concepts, async/await patterns, decorators, and error handling. You'll need to thoroughly study Pydantic models for data validation, understanding field definitions, default values, and validation behavior. Dedicate significant time to the OpenAI Agents SDK documentation (https://openai.github.io/openai-agents-python/), focusing on core concepts like Agents, Tools, Handoffs, context management, and the agent execution loop. Practice writing and analyzing code that uses the @function_tool decorator, Runner.run_sync(), agent cloning, and multi-agent orchestration patterns. Review prompt engineering techniques from the OpenAI cookbook, particularly Chain-of-Thought prompting, system message design, and handling sensitive data. Finally, familiarize yourself with basic Markdown syntax for links and images. Plan to spend at least 2-3 weeks studying these materials, complete hands-on coding exercises with the SDK. Consider this quiz a capstone assessment that requires comprehensive understanding rather than a beginner-level introduction to the concepts.
+</p>
+<p>
+<strong>
+  Quiz Covers
+ </strong>
+ :
+</p>
+<p>
+ https://openai.github.io/openai-agents-python/
+</p>
+<p>
+ https://cookbook.openai.com/examples/gpt4-1_prompting_guide
+</p>
+<p>
+ https://www.markdownguide.org/basic-syntax/
+</p>
+<p>
+ https://www.markdownguide.org/cheat-sheet/
+</p>
+<p>
+ https://github.com/panaversity/learn-agentic-ai/tree/main/01_ai_agents_first
+</p>
+<p>
+<strong>
+  You Can Generate Mock Quizzes for Practice using LLMs from this Prompt:
+ </strong>
+</p>
+<p>
+ Create a comprehensive quiz covering OpenAI Agents SDK. It should include as many MCQ Quiz Questions as required to test the material, the questions should be difficult and at the graduate level and should test both concepts and include code were required. From the following following documentation:
+</p>
+<p>
+ https://openai.github.io/openai-agents-python/
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/panaversity-learn-agentic-ai.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

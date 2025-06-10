@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/gannonh-memento-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Memento MCP: A Knowledge Graph Memory System for LLMs</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Memento MCP: A Knowledge Graph Memory System for LLMs</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 103</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">claude-desktop</span><span class="topic-tag"> cursor</span><span class="topic-tag"> knowledge-graph</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> neo4j</span><span class="topic-tag"> vector-database</span>
+                        </div>
+                        <a href="https://github.com/gannonh/memento-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/gannonh-memento-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Memento MCP: A Knowledge Graph Memory System for LLMs</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Memento MCP: A Knowledge Graph Memory System for LLMs</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 103</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">claude-desktop</span><span class="topic-tag"> cursor</span><span class="topic-tag"> knowledge-graph</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> neo4j</span><span class="topic-tag"> vector-database</span>
+</div>
+<a class="github-link" href="https://github.com/gannonh/memento-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/gannonh-memento-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Memento MCP: A Knowledge Graph Memory System for LLMs</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 103</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">claude-desktop</span><span class="topic-tag"> cursor</span><span class="topic-tag"> knowledge-graph</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> neo4j</span><span class="topic-tag"> vector-database</span>
+</div>
+<a class="github-link" href="https://github.com/gannonh/memento-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/gannonh-memento-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Memento MCP: A Knowledge Graph Memory System for LLMs - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Memento MCP: A Knowledge Graph Memory System for LLMs</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 103</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">claude-desktop</span><span class="topic-tag"> cursor</span><span class="topic-tag"> knowledge-graph</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> neo4j</span><span class="topic-tag"> vector-database</span>
+</div>
+<a class="github-link" href="https://github.com/gannonh/memento-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Memento MCP: A Knowledge Graph Memory System for LLMs
+</h1>
+<p>
+<img alt="Memento MCP Logo" src="assets/memento-logo-gray.svg"/>
+</p>
+<p>
+ Scalable, high performance knowledge graph memory system with semantic retrieval, contextual recall, and temporal awareness. Provides any LLM client that supports the model context protocol (e.g., Claude Desktop, Cursor, Github Copilot) with resilient, adaptive, and persistent long-term ontological memory.
+</p>
+<p>
+<a href="https://github.com/gannonh/memento-mcp/actions/workflows/memento-mcp.yml">
+<img alt="Memento MCP Tests" src="https://github.com/gannonh/memento-mcp/actions/workflows/memento-mcp.yml/badge.svg"/>
+</a>
+<a href="https://smithery.ai/server/@gannonh/memento-mcp">
+<img alt="smithery badge" src="https://smithery.ai/badge/@gannonh/memento-mcp"/>
+</a>
+</p>
+<h2 class="heading">
+ Core Concepts
+</h2>
+<h3 class="heading">
+ Entities
+</h3>
+<p>
+ Entities are the primary nodes in the knowledge graph. Each entity has:
+</p>
+<ul>
+<li>
+  A unique name (identifier)
+ </li>
+<li>
+  An entity type (e.g., "person", "organization", "event")
+ </li>
+<li>
+  A list of observations
+ </li>
+<li>
+  Vector embeddings (for semantic search)
+ </li>
+<li>
+  Complete version history
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "name": "John_Smith",
+  "entityType": "person",
+  "observations": ["Speaks fluent Spanish"]
+}
+</code></pre>
+<h3 class="heading">
+ Relations
+</h3>
+<p>
+ Relations define directed connections between entities with enhanced properties:
+</p>
+<ul>
+<li>
+  Strength indicators (0.0-1.0)
+ </li>
+<li>
+  Confidence levels (0.0-1.0)
+ </li>
+<li>
+  Rich metadata (source, timestamps, tags)
+ </li>
+<li>
+  Temporal awareness with version history
+ </li>
+<li>
+  Time-based confidence decay
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "from": "John_Smith",
+  "to": "Anthropic",
+  "relationType": "works_at",
+  "strength": 0.9,
+  "confidence": 0.95,
+  "metadata": {
+    "source": "linkedin_profile",
+    "last_verified": "2025-03-21"
+  }
+}
+</code></pre>
+<h2 class="heading">
+ Storage Backend
+</h2>
+<p>
+ Memento MCP uses Neo4j as its storage backend, providing a unified solution for both graph storage and vector search capabilities.
+</p>
+<h3 class="heading">
+ Why Neo4j?
+</h3>
+<ul>
+<li>
+<strong>
+   Unified Storage
+  </strong>
+  : Consolidates both graph and vector storage into a single database
+ </li>
+<li>
+<strong>
+   Native Graph Operations
+  </strong>
+  : Built specifically for graph traversal and queries
+ </li>
+<li>
+<strong>
+   Integrated Vector Search
+  </strong>
+  : Vector similarity search for embeddings built directly into Neo4j
+ </li>
+<li>
+<strong>
+   Scalability
+  </strong>
+  : Better performance with large knowledge graphs
+ </li>
+<li>
+<strong>
+   Simplified Architecture
+  </strong>
+  : Clean design with a single database for all operations
+ </li>
+</ul>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ul>
+<li>
+  Neo4j 5.13+ (required for vector search capabilities)
+ </li>
+</ul>
+<h3 class="heading">
+ Neo4j Desktop Setup (Recommended)
+</h3>
+<p>
+ The easiest way to get started with Neo4j is to use
+ <a href="https://neo4j.com/download/">
+  Neo4j Desktop
+ </a>
+ :
+</p>
+<ol>
+<li>
+  Download and install Neo4j Desktop from
+  <a href="https://neo4j.com/download/">
+   https://neo4j.com/download/
+  </a>
+</li>
+<li>
+  Create a new project
+ </li>
+<li>
+  Add a new database
+ </li>
+<li>
+  Set password to
+  <code class="code">
+   memento_password
+  </code>
+  (or your preferred password)
+ </li>
+<li>
+  Start the database
+ </li>
+</ol>
+<p>
+ The Neo4j database will be available at:
+</p>
+<ul>
+<li>
+<strong>
+   Bolt URI
+  </strong>
+  :
+  <code class="code">
+   bolt://127.0.0.1:7687
+  </code>
+  (for driver connections)
+ </li>
+<li>
+<strong>
+   HTTP
+  </strong>
+  :
+  <code class="code">
+   http://127.0.0.1:7474
+  </code>
+  (for Neo4j Browser UI)
+ </li>
+<li>
+<strong>
+   Default credentials
+  </strong>
+  : username:
+  <code class="code">
+   neo4j
+  </code>
+  , password:
+  <code class="code">
+   memento_password
+  </code>
+  (or whatever you configured)
+ </li>
+</ul>
+<h3 class="heading">
+ Neo4j Setup with Docker (Alternative)
+</h3>
+<p>
+ Alternatively, you can use Docker Compose to run Neo4j:
+</p>
+<pre class="pre"><code class="language-bash code"># Start Neo4j container
+docker-compose up -d neo4j
+
+# Stop Neo4j container
+docker-compose stop neo4j
+
+# Remove Neo4j container (preserves data)
+docker-compose rm neo4j
+</code></pre>
+<p>
+ When using Docker, the Neo4j database will be available at:
+</p>
+<ul>
+<li>
+<strong>
+   Bolt URI
+  </strong>
+  :
+  <code class="code">
+   bolt://127.0.0.1:7687
+  </code>
+  (for driver connections)
+ </li>
+<li>
+<strong>
+   HTTP
+  </strong>
+  :
+  <code class="code">
+   http://127.0.0.1:7474
+  </code>
+  (for Neo4j Browser UI)
+ </li>
+<li>
+<strong>
+   Default credentials
+  </strong>
+  : username:
+  <code class="code">
+   neo4j
+  </code>
+  , password:
+  <code class="code">
+   memento_password
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+ Data Persistence and Management
+</h4>
+<p>
+ Neo4j data persists across container restarts and even version upgrades due to the Docker volume configuration in the
+ <code class="code">
+  docker-compose.yml
+ </code>
+ file:
+</p>
+<pre class="pre"><code class="language-yaml code">volumes:
+  - ./neo4j-data:/data
+  - ./neo4j-logs:/logs
+  - ./neo4j-import:/import
+</code></pre>
+<p>
+ These mappings ensure that:
+</p>
+<ul>
+<li>
+<code class="code">
+   /data
+  </code>
+  directory (contains all database files) persists on your host at
+  <code class="code">
+   ./neo4j-data
+  </code>
+</li>
+<li>
+<code class="code">
+   /logs
+  </code>
+  directory persists on your host at
+  <code class="code">
+   ./neo4j-logs
+  </code>
+</li>
+<li>
+<code class="code">
+   /import
+  </code>
+  directory (for importing data files) persists at
+  <code class="code">
+   ./neo4j-import
+  </code>
+</li>
+</ul>
+<p>
+ You can modify these paths in your
+ <code class="code">
+  docker-compose.yml
+ </code>
+ file to store data in different locations if needed.
+</p>
+<h5 class="heading">
+ Upgrading Neo4j Version
+</h5>
+<p>
+ You can change Neo4j editions and versions without losing data:
+</p>
+<ol>
+<li>
+  Update the Neo4j image version in
+  <code class="code">
+   docker-compose.yml
+  </code>
+</li>
+<li>
+  Restart the container with
+  <code class="code">
+   docker-compose down &amp;&amp; docker-compose up -d neo4j
+  </code>
+</li>
+<li>
+  Reinitialize the schema with
+  <code class="code">
+   npm run neo4j:init
+  </code>
+</li>
+</ol>
+<p>
+ The data will persist through this process as long as the volume mappings remain the same.
+</p>
+<h5 class="heading">
+ Complete Database Reset
+</h5>
+<p>
+ If you need to completely reset your Neo4j database:
+</p>
+<pre class="pre"><code class="language-bash code"># Stop the container
+docker-compose stop neo4j
+
+# Remove the container
+docker-compose rm -f neo4j
+
+# Delete the data directory contents
+rm -rf ./neo4j-data/*
+
+# Restart the container
+docker-compose up -d neo4j
+
+# Reinitialize the schema
+npm run neo4j:init
+</code></pre>
+<h5 class="heading">
+ Backing Up Data
+</h5>
+<p>
+ To back up your Neo4j data, you can simply copy the data directory:
+</p>
+<pre class="pre"><code class="language-bash code"># Make a backup of the Neo4j data
+cp -r ./neo4j-data ./neo4j-data-backup-$(date +%Y%m%d)
+</code></pre>
+<h3 class="heading">
+ Neo4j CLI Utilities
+</h3>
+<p>
+ Memento MCP includes command-line utilities for managing Neo4j operations:
+</p>
+<h4 class="heading">
+ Testing Connection
+</h4>
+<p>
+ Test the connection to your Neo4j database:
+</p>
+<pre class="pre"><code class="language-bash code"># Test with default settings
+npm run neo4j:test
+
+# Test with custom settings
+npm run neo4j:test -- --uri bolt://127.0.0.1:7687 --username myuser --password mypass --database neo4j
+</code></pre>
+<h4 class="heading">
+ Initializing Schema
+</h4>
+<p>
+ For normal operation, Neo4j schema initialization happens automatically when Memento MCP connects to the database. You don't need to run any manual commands for regular usage.
+</p>
+<p>
+ The following commands are only necessary for development, testing, or advanced customization scenarios:
+</p>
+<pre class="pre"><code class="language-bash code"># Initialize with default settings (only needed for development or troubleshooting)
+npm run neo4j:init
+
+# Initialize with custom vector dimensions
+npm run neo4j:init -- --dimensions 768 --similarity euclidean
+
+# Force recreation of all constraints and indexes
+npm run neo4j:init -- --recreate
+
+# Combine multiple options
+npm run neo4j:init -- --vector-index custom_index --dimensions 384 --recreate
+</code></pre>
+<h2 class="heading">
+ Advanced Features
+</h2>
+<h3 class="heading">
+ Semantic Search
+</h3>
+<p>
+ Find semantically related entities based on meaning rather than just keywords:
+</p>
+<ul>
+<li>
+<strong>
+   Vector Embeddings
+  </strong>
+  : Entities are automatically encoded into high-dimensional vector space using OpenAI's embedding models
+ </li>
+<li>
+<strong>
+   Cosine Similarity
+  </strong>
+  : Find related concepts even when they use different terminology
+ </li>
+<li>
+<strong>
+   Configurable Thresholds
+  </strong>
+  : Set minimum similarity scores to control result relevance
+ </li>
+<li>
+<strong>
+   Cross-Modal Search
+  </strong>
+  : Query with text to find relevant entities regardless of how they were described
+ </li>
+<li>
+<strong>
+   Multi-Model Support
+  </strong>
+  : Compatible with multiple embedding models (OpenAI text-embedding-3-small/large)
+ </li>
+<li>
+<strong>
+   Contextual Retrieval
+  </strong>
+  : Retrieve information based on semantic meaning rather than exact keyword matches
+ </li>
+<li>
+<strong>
+   Optimized Defaults
+  </strong>
+  : Tuned parameters for balance between precision and recall (0.6 similarity threshold, hybrid search enabled)
+ </li>
+<li>
+<strong>
+   Hybrid Search
+  </strong>
+  : Combines semantic and keyword search for more comprehensive results
+ </li>
+<li>
+<strong>
+   Adaptive Search
+  </strong>
+  : System intelligently chooses between vector-only, keyword-only, or hybrid search based on query characteristics and available data
+ </li>
+<li>
+<strong>
+   Performance Optimization
+  </strong>
+  : Prioritizes vector search for semantic understanding while maintaining fallback mechanisms for resilience
+ </li>
+<li>
+<strong>
+   Query-Aware Processing
+  </strong>
+  : Adjusts search strategy based on query complexity and available entity embeddings
+ </li>
+</ul>
+<h3 class="heading">
+ Temporal Awareness
+</h3>
+<p>
+ Track complete history of entities and relations with point-in-time graph retrieval:
+</p>
+<ul>
+<li>
+<strong>
+   Full Version History
+  </strong>
+  : Every change to an entity or relation is preserved with timestamps
+ </li>
+<li>
+<strong>
+   Point-in-Time Queries
+  </strong>
+  : Retrieve the exact state of the knowledge graph at any moment in the past
+ </li>
+<li>
+<strong>
+   Change Tracking
+  </strong>
+  : Automatically records createdAt, updatedAt, validFrom, and validTo timestamps
+ </li>
+<li>
+<strong>
+   Temporal Consistency
+  </strong>
+  : Maintain a historically accurate view of how knowledge evolved
+ </li>
+<li>
+<strong>
+   Non-Destructive Updates
+  </strong>
+  : Updates create new versions rather than overwriting existing data
+ </li>
+<li>
+<strong>
+   Time-Based Filtering
+  </strong>
+  : Filter graph elements based on temporal criteria
+ </li>
+<li>
+<strong>
+   History Exploration
+  </strong>
+  : Investigate how specific information changed over time
+ </li>
+</ul>
+<h3 class="heading">
+ Confidence Decay
+</h3>
+<p>
+ Relations automatically decay in confidence over time based on configurable half-life:
+</p>
+<ul>
+<li>
+<strong>
+   Time-Based Decay
+  </strong>
+  : Confidence in relations naturally decreases over time if not reinforced
+ </li>
+<li>
+<strong>
+   Configurable Half-Life
+  </strong>
+  : Define how quickly information becomes less certain (default: 30 days)
+ </li>
+<li>
+<strong>
+   Minimum Confidence Floors
+  </strong>
+  : Set thresholds to prevent over-decay of important information
+ </li>
+<li>
+<strong>
+   Decay Metadata
+  </strong>
+  : Each relation includes detailed decay calculation information
+ </li>
+<li>
+<strong>
+   Non-Destructive
+  </strong>
+  : Original confidence values are preserved alongside decayed values
+ </li>
+<li>
+<strong>
+   Reinforcement Learning
+  </strong>
+  : Relations regain confidence when reinforced by new observations
+ </li>
+<li>
+<strong>
+   Reference Time Flexibility
+  </strong>
+  : Calculate decay based on arbitrary reference times for historical analysis
+ </li>
+</ul>
+<h3 class="heading">
+ Advanced Metadata
+</h3>
+<p>
+ Rich metadata support for both entities and relations with custom fields:
+</p>
+<ul>
+<li>
+<strong>
+   Source Tracking
+  </strong>
+  : Record where information originated (user input, analysis, external sources)
+ </li>
+<li>
+<strong>
+   Confidence Levels
+  </strong>
+  : Assign confidence scores (0.0-1.0) to relations based on certainty
+ </li>
+<li>
+<strong>
+   Relation Strength
+  </strong>
+  : Indicate importance or strength of relationships (0.0-1.0)
+ </li>
+<li>
+<strong>
+   Temporal Metadata
+  </strong>
+  : Track when information was added, modified, or verified
+ </li>
+<li>
+<strong>
+   Custom Tags
+  </strong>
+  : Add arbitrary tags for classification and filtering
+ </li>
+<li>
+<strong>
+   Structured Data
+  </strong>
+  : Store complex structured data within metadata fields
+ </li>
+<li>
+<strong>
+   Query Support
+  </strong>
+  : Search and filter based on metadata properties
+ </li>
+<li>
+<strong>
+   Extensible Schema
+  </strong>
+  : Add custom fields as needed without modifying the core data model
+ </li>
+</ul>
+<h2 class="heading">
+ MCP API Tools
+</h2>
+<p>
+ The following tools are available to LLM client hosts through the Model Context Protocol:
+</p>
+<h3 class="heading">
+ Entity Management
+</h3>
+<ul>
+<li>
+<p>
+<strong>
+    create_entities
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Create multiple new entities in the knowledge graph
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    entities
+   </code>
+   (array of objects)
+  </p>
+<ul>
+<li>
+    Each object contains:
+   </li>
+<li>
+<code class="code">
+     name
+    </code>
+    (string): Entity identifier
+   </li>
+<li>
+<code class="code">
+     entityType
+    </code>
+    (string): Type classification
+   </li>
+<li>
+<code class="code">
+     observations
+    </code>
+    (string[]): Associated observations
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    add_observations
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Add new observations to existing entities
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    observations
+   </code>
+   (array of objects)
+  </p>
+<ul>
+<li>
+    Each object contains:
+   </li>
+<li>
+<code class="code">
+     entityName
+    </code>
+    (string): Target entity
+   </li>
+<li>
+<code class="code">
+     contents
+    </code>
+    (string[]): New observations to add
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    delete_entities
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Remove entities and their relations
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    entityNames
+   </code>
+   (string[])
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    delete_observations
+   </strong>
+</p>
+</li>
+<li>
+  Remove specific observations from entities
+ </li>
+<li>
+  Input:
+  <code class="code">
+   deletions
+  </code>
+  (array of objects)
+  <ul>
+<li>
+    Each object contains:
+   </li>
+<li>
+<code class="code">
+     entityName
+    </code>
+    (string): Target entity
+   </li>
+<li>
+<code class="code">
+     observations
+    </code>
+    (string[]): Observations to remove
+   </li>
+</ul>
+</li>
+</ul>
+<h3 class="heading">
+ Relation Management
+</h3>
+<ul>
+<li>
+<p>
+<strong>
+    create_relations
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Create multiple new relations between entities with enhanced properties
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    relations
+   </code>
+   (array of objects)
+  </p>
+<ul>
+<li>
+    Each object contains:
+   </li>
+<li>
+<code class="code">
+     from
+    </code>
+    (string): Source entity name
+   </li>
+<li>
+<code class="code">
+     to
+    </code>
+    (string): Target entity name
+   </li>
+<li>
+<code class="code">
+     relationType
+    </code>
+    (string): Relationship type
+   </li>
+<li>
+<code class="code">
+     strength
+    </code>
+    (number, optional): Relation strength (0.0-1.0)
+   </li>
+<li>
+<code class="code">
+     confidence
+    </code>
+    (number, optional): Confidence level (0.0-1.0)
+   </li>
+<li>
+<code class="code">
+     metadata
+    </code>
+    (object, optional): Custom metadata fields
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    get_relation
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Get a specific relation with its enhanced properties
+  </p>
+</li>
+<li>
+<p>
+   Input:
+  </p>
+<ul>
+<li>
+<code class="code">
+     from
+    </code>
+    (string): Source entity name
+   </li>
+<li>
+<code class="code">
+     to
+    </code>
+    (string): Target entity name
+   </li>
+<li>
+<code class="code">
+     relationType
+    </code>
+    (string): Relationship type
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    update_relation
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Update an existing relation with enhanced properties
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    relation
+   </code>
+   (object):
+  </p>
+<ul>
+<li>
+    Contains:
+   </li>
+<li>
+<code class="code">
+     from
+    </code>
+    (string): Source entity name
+   </li>
+<li>
+<code class="code">
+     to
+    </code>
+    (string): Target entity name
+   </li>
+<li>
+<code class="code">
+     relationType
+    </code>
+    (string): Relationship type
+   </li>
+<li>
+<code class="code">
+     strength
+    </code>
+    (number, optional): Relation strength (0.0-1.0)
+   </li>
+<li>
+<code class="code">
+     confidence
+    </code>
+    (number, optional): Confidence level (0.0-1.0)
+   </li>
+<li>
+<code class="code">
+     metadata
+    </code>
+    (object, optional): Custom metadata fields
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    delete_relations
+   </strong>
+</p>
+</li>
+<li>
+  Remove specific relations from the graph
+ </li>
+<li>
+  Input:
+  <code class="code">
+   relations
+  </code>
+  (array of objects)
+  <ul>
+<li>
+    Each object contains:
+   </li>
+<li>
+<code class="code">
+     from
+    </code>
+    (string): Source entity name
+   </li>
+<li>
+<code class="code">
+     to
+    </code>
+    (string): Target entity name
+   </li>
+<li>
+<code class="code">
+     relationType
+    </code>
+    (string): Relationship type
+   </li>
+</ul>
+</li>
+</ul>
+<h3 class="heading">
+ Graph Operations
+</h3>
+<ul>
+<li>
+<p>
+<strong>
+    read_graph
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Read the entire knowledge graph
+  </p>
+</li>
+<li>
+<p>
+   No input required
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    search_nodes
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Search for nodes based on query
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    query
+   </code>
+   (string)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    open_nodes
+   </strong>
+</p>
+</li>
+<li>
+  Retrieve specific nodes by name
+ </li>
+<li>
+  Input:
+  <code class="code">
+   names
+  </code>
+  (string[])
+ </li>
+</ul>
+<h3 class="heading">
+ Semantic Search
+</h3>
+<ul>
+<li>
+<p>
+<strong>
+    semantic_search
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Search for entities semantically using vector embeddings and similarity
+  </p>
+</li>
+<li>
+  Input:
+  <ul>
+<li>
+<code class="code">
+     query
+    </code>
+    (string): The text query to search for semantically
+   </li>
+<li>
+<code class="code">
+     limit
+    </code>
+    (number, optional): Maximum results to return (default: 10)
+   </li>
+<li>
+<code class="code">
+     min_similarity
+    </code>
+    (number, optional): Minimum similarity threshold (0.0-1.0, default: 0.6)
+   </li>
+<li>
+<code class="code">
+     entity_types
+    </code>
+    (string[], optional): Filter results by entity types
+   </li>
+<li>
+<code class="code">
+     hybrid_search
+    </code>
+    (boolean, optional): Combine keyword and semantic search (default: true)
+   </li>
+<li>
+<code class="code">
+     semantic_weight
+    </code>
+    (number, optional): Weight of semantic results in hybrid search (0.0-1.0, default: 0.6)
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   Features:
+  </p>
+<ul>
+<li>
+    Intelligently selects optimal search method (vector, keyword, or hybrid) based on query context
+   </li>
+<li>
+    Gracefully handles queries with no semantic matches through fallback mechanisms
+   </li>
+<li>
+    Maintains high performance with automatic optimization decisions
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    get_entity_embedding
+   </strong>
+</p>
+</li>
+<li>
+  Get the vector embedding for a specific entity
+ </li>
+<li>
+  Input:
+  <ul>
+<li>
+<code class="code">
+     entity_name
+    </code>
+    (string): The name of the entity to get the embedding for
+   </li>
+</ul>
+</li>
+</ul>
+<h3 class="heading">
+ Temporal Features
+</h3>
+<ul>
+<li>
+<p>
+<strong>
+    get_entity_history
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Get complete version history of an entity
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    entityName
+   </code>
+   (string)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    get_relation_history
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Get complete version history of a relation
+  </p>
+</li>
+<li>
+<p>
+   Input:
+  </p>
+<ul>
+<li>
+<code class="code">
+     from
+    </code>
+    (string): Source entity name
+   </li>
+<li>
+<code class="code">
+     to
+    </code>
+    (string): Target entity name
+   </li>
+<li>
+<code class="code">
+     relationType
+    </code>
+    (string): Relationship type
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    get_graph_at_time
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Get the state of the graph at a specific timestamp
+  </p>
+</li>
+<li>
+<p>
+   Input:
+   <code class="code">
+    timestamp
+   </code>
+   (number): Unix timestamp (milliseconds since epoch)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    get_decayed_graph
+   </strong>
+</p>
+</li>
+<li>
+  Get graph with time-decayed confidence values
+ </li>
+<li>
+  Input:
+  <code class="code">
+   options
+  </code>
+  (object, optional):
+  <ul>
+<li>
+<code class="code">
+     reference_time
+    </code>
+    (number): Reference timestamp for decay calculation (milliseconds since epoch)
+   </li>
+<li>
+<code class="code">
+     decay_factor
+    </code>
+    (number): Optional decay factor override
+   </li>
+</ul>
+</li>
+</ul>
+<h2 class="heading">
+ Configuration
+</h2>
+<h3 class="heading">
+ Environment Variables
+</h3>
+<p>
+ Configure Memento MCP with these environment variables:
+</p>
+<pre class="pre"><code class="language-bash code"># Neo4j Connection Settings
+NEO4J_URI=bolt://127.0.0.1:7687
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=memento_password
+NEO4J_DATABASE=neo4j
+
+# Vector Search Configuration
+NEO4J_VECTOR_INDEX=entity_embeddings
+NEO4J_VECTOR_DIMENSIONS=1536
+NEO4J_SIMILARITY_FUNCTION=cosine
+
+# Embedding Service Configuration
+MEMORY_STORAGE_TYPE=neo4j
+OPENAI_API_KEY=your-openai-api-key
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+
+# Debug Settings
+DEBUG=true
+</code></pre>
+<h3 class="heading">
+ Command Line Options
+</h3>
+<p>
+ The Neo4j CLI tools support the following options:
+</p>
+<pre class="pre"><code class="code">--uri &lt;uri&gt;              Neo4j server URI (default: bolt://127.0.0.1:7687)
+--username &lt;username&gt;    Neo4j username (default: neo4j)
+--password &lt;password&gt;    Neo4j password (default: memento_password)
+--database &lt;n&gt;           Neo4j database name (default: neo4j)
+--vector-index &lt;n&gt;       Vector index name (default: entity_embeddings)
+--dimensions &lt;number&gt;    Vector dimensions (default: 1536)
+--similarity &lt;function&gt;  Similarity function (cosine|euclidean) (default: cosine)
+--recreate               Force recreation of constraints and indexes
+--no-debug               Disable detailed output (debug is ON by default)
+</code></pre>
+<h3 class="heading">
+ Embedding Models
+</h3>
+<p>
+ Available OpenAI embedding models:
+</p>
+<ul>
+<li>
+<code class="code">
+   text-embedding-3-small
+  </code>
+  : Efficient, cost-effective (1536 dimensions)
+ </li>
+<li>
+<code class="code">
+   text-embedding-3-large
+  </code>
+  : Higher accuracy, more expensive (3072 dimensions)
+ </li>
+<li>
+<code class="code">
+   text-embedding-ada-002
+  </code>
+  : Legacy model (1536 dimensions)
+ </li>
+</ul>
+<h4 class="heading">
+ OpenAI API Configuration
+</h4>
+<p>
+ To use semantic search, you'll need to configure OpenAI API credentials:
+</p>
+<ol>
+<li>
+  Obtain an API key from
+  <a href="https://platform.openai.com/api-keys">
+   OpenAI
+  </a>
+</li>
+<li>
+  Configure your environment with:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># OpenAI API Key for embeddings
+OPENAI_API_KEY=your-openai-api-key
+# Default embedding model
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   Note
+  </strong>
+  : For testing environments, the system will mock embedding generation if no API key is provided. However, using real embeddings is recommended for integration testing.
+ </p>
+</blockquote>
+<h2 class="heading">
+ Integration with Claude Desktop
+</h2>
+<h3 class="heading">
+ Configuration
+</h3>
+<p>
+ Add this to your
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "memento": {
+      "command": "npx",
+      "args": ["-y", "@gannonh/memento-mcp"],
+      "env": {
+        "MEMORY_STORAGE_TYPE": "neo4j",
+        "NEO4J_URI": "bolt://127.0.0.1:7687",
+        "NEO4J_USERNAME": "neo4j",
+        "NEO4J_PASSWORD": "memento_password",
+        "NEO4J_DATABASE": "neo4j",
+        "NEO4J_VECTOR_INDEX": "entity_embeddings",
+        "NEO4J_VECTOR_DIMENSIONS": "1536",
+        "NEO4J_SIMILARITY_FUNCTION": "cosine",
+        "OPENAI_API_KEY": "your-openai-api-key",
+        "OPENAI_EMBEDDING_MODEL": "text-embedding-3-small",
+        "DEBUG": "true"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ Alternatively, for local development, you can use:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "memento": {
+      "command": "/path/to/node",
+      "args": ["/path/to/memento-mcp/dist/index.js"],
+      "env": {
+        "MEMORY_STORAGE_TYPE": "neo4j",
+        "NEO4J_URI": "bolt://127.0.0.1:7687",
+        "NEO4J_USERNAME": "neo4j",
+        "NEO4J_PASSWORD": "memento_password",
+        "NEO4J_DATABASE": "neo4j",
+        "NEO4J_VECTOR_INDEX": "entity_embeddings",
+        "NEO4J_VECTOR_DIMENSIONS": "1536",
+        "NEO4J_SIMILARITY_FUNCTION": "cosine",
+        "OPENAI_API_KEY": "your-openai-api-key",
+        "OPENAI_EMBEDDING_MODEL": "text-embedding-3-small",
+        "DEBUG": "true"
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   Important
+  </strong>
+  : Always explicitly specify the embedding model in your Claude Desktop configuration to ensure consistent behavior.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Recommended System Prompts
+</h3>
+<p>
+ For optimal integration with Claude, add these statements to your system prompt:
+</p>
+<pre class="pre"><code class="code">You have access to the Memento MCP knowledge graph memory system, which provides you with persistent memory capabilities.
+Your memory tools are provided by Memento MCP, a sophisticated knowledge graph implementation.
+When asked about past conversations or user information, always check the Memento MCP knowledge graph first.
+You should use semantic_search to find relevant information in your memory when answering questions.
+</code></pre>
+<h3 class="heading">
+ Testing Semantic Search
+</h3>
+<p>
+ Once configured, Claude can access the semantic search capabilities through natural language:
+</p>
+<ol>
+<li>
+  To create entities with semantic embeddings:
+ </li>
+</ol>
+<p>
+<code class="code">
+  User: "Remember that Python is a high-level programming language known for its readability and JavaScript is primarily used for web development."
+ </code>
+</p>
+<ol>
+<li>
+  To search semantically:
+ </li>
+</ol>
+<p>
+<code class="code">
+  User: "What programming languages do you know about that are good for web development?"
+ </code>
+</p>
+<ol>
+<li>
+  To retrieve specific information:
+ </li>
+</ol>
+<p>
+<code class="code">
+  User: "Tell me everything you know about Python."
+ </code>
+</p>
+<p>
+ The power of this approach is that users can interact naturally, while the LLM handles the complexity of selecting and using the appropriate memory tools.
+</p>
+<h3 class="heading">
+ Real-World Applications
+</h3>
+<p>
+ Memento's adaptive search capabilities provide practical benefits:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Query Versatility
+   </strong>
+   : Users don't need to worry about how to phrase questions - the system adapts to different query types automatically
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Failure Resilience
+   </strong>
+   : Even when semantic matches aren't available, the system can fall back to alternative methods without user intervention
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Performance Efficiency
+   </strong>
+   : By intelligently selecting the optimal search method, the system balances performance and relevance for each query
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Improved Context Retrieval
+   </strong>
+   : LLM conversations benefit from better context retrieval as the system can find relevant information across complex knowledge graphs
+  </p>
+</li>
+</ol>
+<p>
+ For example, when a user asks "What do you know about machine learning?", the system can retrieve conceptually related entities even if they don't explicitly mention "machine learning" - perhaps entities about neural networks, data science, or specific algorithms. But if semantic search yields insufficient results, the system automatically adjusts its approach to ensure useful information is still returned.
+</p>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ Vector Search Diagnostics
+</h3>
+<p>
+ Memento MCP includes built-in diagnostic capabilities to help troubleshoot vector search issues:
+</p>
+<ul>
+<li>
+<strong>
+   Embedding Verification
+  </strong>
+  : The system checks if entities have valid embeddings and automatically generates them if missing
+ </li>
+<li>
+<strong>
+   Vector Index Status
+  </strong>
+  : Verifies that the vector index exists and is in the ONLINE state
+ </li>
+<li>
+<strong>
+   Fallback Search
+  </strong>
+  : If vector search fails, the system falls back to text-based search
+ </li>
+<li>
+<strong>
+   Detailed Logging
+  </strong>
+  : Comprehensive logging of vector search operations for troubleshooting
+ </li>
+</ul>
+<h3 class="heading">
+ Debug Tools (when DEBUG=true)
+</h3>
+<p>
+ Additional diagnostic tools become available when debug mode is enabled:
+</p>
+<ul>
+<li>
+<strong>
+   diagnose_vector_search
+  </strong>
+  : Information about the Neo4j vector index, embedding counts, and search functionality
+ </li>
+<li>
+<strong>
+   force_generate_embedding
+  </strong>
+  : Forces the generation of an embedding for a specific entity
+ </li>
+<li>
+<strong>
+   debug_embedding_config
+  </strong>
+  : Information about the current embedding service configuration
+ </li>
+</ul>
+<h3 class="heading">
+ Developer Reset
+</h3>
+<p>
+ To completely reset your Neo4j database during development:
+</p>
+<pre class="pre"><code class="language-bash code"># Stop the container (if using Docker)
+docker-compose stop neo4j
+
+# Remove the container (if using Docker)
+docker-compose rm -f neo4j
+
+# Delete the data directory (if using Docker)
+rm -rf ./neo4j-data/*
+
+# For Neo4j Desktop, right-click your database and select "Drop database"
+
+# Restart the database
+# For Docker:
+docker-compose up -d neo4j
+
+# For Neo4j Desktop:
+# Click the "Start" button for your database
+
+# Reinitialize the schema
+npm run neo4j:init
+</code></pre>
+<h2 class="heading">
+ Building and Development
+</h2>
+<pre class="pre"><code class="language-bash code"># Clone the repository
+git clone https://github.com/gannonh/memento-mcp.git
+cd memento-mcp
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Run tests
+npm test
+
+# Check test coverage
+npm run test:coverage
+</code></pre>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Installing via Smithery
+</h3>
+<p>
+ To install memento-mcp for Claude Desktop automatically via
+ <a href="https://smithery.ai/server/@gannonh/memento-mcp">
+  Smithery
+ </a>
+ :
+</p>
+<pre class="pre"><code class="language-bash code">npx -y @smithery/cli install @gannonh/memento-mcp --client claude
+</code></pre>
+<h3 class="heading">
+ Global Installation with npx
+</h3>
+<p>
+ You can run Memento MCP directly using npx without installing it globally:
+</p>
+<pre class="pre"><code class="language-bash code">npx -y @gannonh/memento-mcp
+</code></pre>
+<p>
+ This method is recommended for use with Claude Desktop and other MCP-compatible clients.
+</p>
+<h3 class="heading">
+ Local Installation
+</h3>
+<p>
+ For development or contributing to the project:
+</p>
+<pre class="pre"><code class="language-bash code"># Install locally
+npm install @gannonh/memento-mcp
+
+# Or clone the repository
+git clone https://github.com/gannonh/memento-mcp.git
+cd memento-mcp
+npm install
+</code></pre>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/gannonh-memento-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/gannonh-memento-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/gannonh-memento-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/gannonh-memento-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

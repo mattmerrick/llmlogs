@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Model Context Protocol Server for Home Assistant - MCP Directory">
+    <meta property="og:description" content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Context Protocol Server for Home Assistant - MCP Directory">
+    <meta name="twitter:description" content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application.">
+    
+    <title>Model Context Protocol Server for Home Assistant - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Model Context Protocol Server for Home Assistant</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Model Context Protocol Server for Home Assistant</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 312</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/tevonsb/homeassistant-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Model Context Protocol Server for Home Assistant - MCP Directory" property="og:title"/>
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Model Context Protocol Server for Home Assistant - MCP Directory" name="twitter:title"/>
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." name="twitter:description"/>
+<title>Model Context Protocol Server for Home Assistant - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Model Context Protocol Server for Home Assistant</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Model Context Protocol Server for Home Assistant</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 312</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/tevonsb/homeassistant-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Model Context Protocol Server for Home Assistant - MCP Directory" property="og:title">
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." property="og:description">
+<meta content="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Model Context Protocol Server for Home Assistant - MCP Directory" name="twitter:title">
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." name="twitter:description">
+<title>Model Context Protocol Server for Home Assistant - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Model Context Protocol Server for Home Assistant</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 312</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/tevonsb/homeassistant-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Model Context Protocol Server for Home Assistant - MCP Directory" property="og:title"/>
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Model Context Protocol Server for Home Assistant - MCP Directory" name="twitter:title"/>
+<meta content="The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application." name="twitter:description"/>
+<title>Model Context Protocol Server for Home Assistant - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Model Context Protocol Server for Home Assistant</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 312</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/tevonsb/homeassistant-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Model Context Protocol Server for Home Assistant
+</h1>
+<p>
+ The server uses the MCP protocol to share access to a local Home Assistant instance with an LLM application.
+</p>
+<p>
+ A powerful bridge between your Home Assistant instance and Language Learning Models (LLMs), enabling natural language control and monitoring of your smart home devices through the Model Context Protocol (MCP). This server provides a comprehensive API for managing your entire Home Assistant ecosystem, from device control to system administration.
+</p>
+<p>
+<img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg"/>
+<img alt="Node.js" src="https://img.shields.io/badge/node-%3E%3D20.10.0-green.svg"/>
+<img alt="Docker Compose" src="https://img.shields.io/badge/docker-compose-%3E%3D1.27.0-blue.svg"/>
+<img alt="NPM" src="https://img.shields.io/badge/npm-%3E%3D7.0.0-orange.svg"/>
+<img alt="TypeScript" src="https://img.shields.io/badge/typescript-%5E5.0.0-blue.svg"/>
+<img alt="Test Coverage" src="https://img.shields.io/badge/coverage-95%25-brightgreen.svg"/>
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  🎮
+  <strong>
+   Device Control
+  </strong>
+  : Control any Home Assistant device through natural language
+ </li>
+<li>
+  🔄
+  <strong>
+   Real-time Updates
+  </strong>
+  : Get instant updates through Server-Sent Events (SSE)
+ </li>
+<li>
+  🤖
+  <strong>
+   Automation Management
+  </strong>
+  : Create, update, and manage automations
+ </li>
+<li>
+  📊
+  <strong>
+   State Monitoring
+  </strong>
+  : Track and query device states
+ </li>
+<li>
+  🔐
+  <strong>
+   Secure
+  </strong>
+  : Token-based authentication and rate limiting
+ </li>
+<li>
+  📱
+  <strong>
+   Mobile Ready
+  </strong>
+  : Works with any HTTP-capable client
+ </li>
+</ul>
+<h2 class="heading">
+ Real-time Updates with SSE
+</h2>
+<p>
+ The server includes a powerful Server-Sent Events (SSE) system that provides real-time updates from your Home Assistant instance. This allows you to:
+</p>
+<ul>
+<li>
+  🔄 Get instant state changes for any device
+ </li>
+<li>
+  📡 Monitor automation triggers and executions
+ </li>
+<li>
+  🎯 Subscribe to specific domains or entities
+ </li>
+<li>
+  📊 Track service calls and script executions
+ </li>
+</ul>
+<h3 class="heading">
+ Quick SSE Example
+</h3>
+<pre class="pre"><code class="language-javascript code">const eventSource = new EventSource(
+  'http://localhost:3000/subscribe_events?token=YOUR_TOKEN&amp;domain=light'
+);
+
+eventSource.onmessage = (event) =&gt; {
+  const data = JSON.parse(event.data);
+  console.log('Update received:', data);
+};
+</code></pre>
+<p>
+ See
+ <a href="docs/SSE_API.md">
+  SSE_API.md
+ </a>
+ for complete documentation of the SSE system.
+</p>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#key-features">
+   Key Features
+  </a>
+</li>
+<li>
+<a href="#prerequisites">
+   Prerequisites
+  </a>
+</li>
+<li>
+<a href="#installation">
+   Installation
+  </a>
+</li>
+<li>
+<a href="#basic-setup">
+   Basic Setup
+  </a>
+</li>
+<li>
+<a href="#docker-setup-recommended">
+   Docker Setup (Recommended)
+  </a>
+</li>
+<li>
+<a href="#configuration">
+   Configuration
+  </a>
+</li>
+<li>
+<a href="#development">
+   Development
+  </a>
+</li>
+<li>
+<a href="#api-reference">
+   API Reference
+  </a>
+</li>
+<li>
+<a href="#device-control">
+   Device Control
+  </a>
+</li>
+<li>
+<a href="#add-on-management">
+   Add-on Management
+  </a>
+</li>
+<li>
+<a href="#package-management">
+   Package Management
+  </a>
+</li>
+<li>
+<a href="#automation-management">
+   Automation Management
+  </a>
+</li>
+<li>
+<a href="#natural-language-integration">
+   Natural Language Integration
+  </a>
+</li>
+<li>
+<a href="#troubleshooting">
+   Troubleshooting
+  </a>
+</li>
+<li>
+<a href="#project-status">
+   Project Status
+  </a>
+</li>
+<li>
+<a href="#contributing">
+   Contributing
+  </a>
+</li>
+<li>
+<a href="#resources">
+   Resources
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Key Features
+</h2>
+<h3 class="heading">
+ Core Functionality 🎮
+</h3>
+<ul>
+<li>
+<strong>
+   Smart Device Control
+  </strong>
+</li>
+<li>
+  💡
+  <strong>
+   Lights
+  </strong>
+  : Brightness, color temperature, RGB color
+ </li>
+<li>
+  🌡️
+  <strong>
+   Climate
+  </strong>
+  : Temperature, HVAC modes, fan modes, humidity
+ </li>
+<li>
+  🚪
+  <strong>
+   Covers
+  </strong>
+  : Position and tilt control
+ </li>
+<li>
+  🔌
+  <strong>
+   Switches
+  </strong>
+  : On/off control
+ </li>
+<li>
+  🚨
+  <strong>
+   Sensors &amp; Contacts
+  </strong>
+  : State monitoring
+ </li>
+<li>
+  🎵
+  <strong>
+   Media Players
+  </strong>
+  : Playback control, volume, source selection
+ </li>
+<li>
+  🌪️
+  <strong>
+   Fans
+  </strong>
+  : Speed, oscillation, direction
+ </li>
+<li>
+  🔒
+  <strong>
+   Locks
+  </strong>
+  : Lock/unlock control
+ </li>
+<li>
+  🧹
+  <strong>
+   Vacuums
+  </strong>
+  : Start, stop, return to base
+ </li>
+<li>
+  📹
+  <strong>
+   Cameras
+  </strong>
+  : Motion detection, snapshots
+ </li>
+</ul>
+<h3 class="heading">
+ System Management 🛠️
+</h3>
+<ul>
+<li>
+<strong>
+   Add-on Management
+  </strong>
+</li>
+<li>
+  Browse available add-ons
+ </li>
+<li>
+  Install/uninstall add-ons
+ </li>
+<li>
+  Start/stop/restart add-ons
+ </li>
+<li>
+  Version management
+ </li>
+<li>
+<p>
+   Configuration access
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Package Management (HACS)
+   </strong>
+</p>
+</li>
+<li>
+  Integration with Home Assistant Community Store
+ </li>
+<li>
+  Multiple package types support:
+  <ul>
+<li>
+    Custom integrations
+   </li>
+<li>
+    Frontend themes
+   </li>
+<li>
+    Python scripts
+   </li>
+<li>
+    AppDaemon apps
+   </li>
+<li>
+    NetDaemon apps
+   </li>
+</ul>
+</li>
+<li>
+  Version control and updates
+ </li>
+<li>
+<p>
+   Repository management
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Automation Management
+   </strong>
+</p>
+</li>
+<li>
+  Create and edit automations
+ </li>
+<li>
+  Advanced configuration options:
+  <ul>
+<li>
+    Multiple trigger types
+   </li>
+<li>
+    Complex conditions
+   </li>
+<li>
+    Action sequences
+   </li>
+<li>
+    Execution modes
+   </li>
+</ul>
+</li>
+<li>
+  Duplicate and modify existing automations
+ </li>
+<li>
+  Enable/disable automation rules
+ </li>
+<li>
+  Trigger automation manually
+ </li>
+</ul>
+<h3 class="heading">
+ Architecture Features 🏗️
+</h3>
+<ul>
+<li>
+<strong>
+   Intelligent Organization
+  </strong>
+</li>
+<li>
+  Area and floor-based device grouping
+ </li>
+<li>
+  State monitoring and querying
+ </li>
+<li>
+  Smart context awareness
+ </li>
+<li>
+<p>
+   Historical data access
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Robust Architecture
+   </strong>
+</p>
+</li>
+<li>
+  Comprehensive error handling
+ </li>
+<li>
+  State validation
+ </li>
+<li>
+  Secure API integration
+ </li>
+<li>
+  TypeScript type safety
+ </li>
+<li>
+  Extensive test coverage
+ </li>
+</ul>
+<h2 class="heading">
+ Prerequisites
+</h2>
+<ul>
+<li>
+<strong>
+   Node.js
+  </strong>
+  20.10.0 or higher
+ </li>
+<li>
+<strong>
+   NPM
+  </strong>
+  package manager
+ </li>
+<li>
+<strong>
+   Docker Compose
+  </strong>
+  for containerization
+ </li>
+<li>
+  Running
+  <strong>
+   Home Assistant
+  </strong>
+  instance
+ </li>
+<li>
+  Home Assistant long-lived access token (
+  <a href="https://community.home-assistant.io/t/how-to-get-long-lived-access-token/162159">
+   How to get token
+  </a>
+  )
+ </li>
+<li>
+<strong>
+   HACS
+  </strong>
+  installed for package management features
+ </li>
+<li>
+<strong>
+   Supervisor
+  </strong>
+  access for add-on management
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Basic Setup
+</h3>
+<pre class="pre"><code class="language-bash code"># Clone the repository
+git clone https://github.com/jango-blockchained/homeassistant-mcp.git
+cd homeassistant-mcp
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+</code></pre>
+<h3 class="heading">
+ Docker Setup (Recommended)
+</h3>
+<p>
+ The project includes Docker support for easy deployment and consistent environments across different platforms.
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Clone the repository:
+   </strong>
+<code class="code">
+    bash
+    git clone https://github.com/jango-blockchained/homeassistant-mcp.git
+    cd homeassistant-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Configure environment:
+   </strong>
+<code class="code">
+    bash
+    cp .env.example .env
+   </code>
+   Edit the
+   <code class="code">
+    .env
+   </code>
+   file with your Home Assistant configuration:
+    ```env
+    # Home Assistant Configuration
+    HASS_HOST=http://homeassistant.local:8123
+    HASS_TOKEN=your_home_assistant_token
+    HASS_SOCKET_URL=ws://homeassistant.local:8123/api/websocket
+  </p>
+<h1 class="heading">
+   Server Configuration
+  </h1>
+<p>
+   PORT=3000
+NODE_ENV=production
+DEBUG=false
+```
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Build and run with Docker Compose:
+   </strong>
+   ```bash
+    # Build and start the containers
+    docker compose up -d
+  </p>
+<h1 class="heading">
+   View logs
+  </h1>
+<p>
+   docker compose logs -f
+  </p>
+<h1 class="heading">
+   Stop the service
+  </h1>
+<p>
+   docker compose down
+```
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Verify the installation:
+   </strong>
+   The server should now be running at
+   <code class="code">
+    http://localhost:3000
+   </code>
+   . You can check the health endpoint at
+   <code class="code">
+    http://localhost:3000/health
+   </code>
+   .
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Update the application:
+   </strong>
+   ```bash
+    # Pull the latest changes
+    git pull
+  </p>
+<h1 class="heading">
+   Rebuild and restart the containers
+  </h1>
+<p>
+   docker compose up -d --build
+```
+  </p>
+</li>
+</ol>
+<h4 class="heading">
+ Docker Configuration
+</h4>
+<p>
+ The Docker setup includes:
+- Multi-stage build for optimal image size
+- Health checks for container monitoring
+- Volume mounting for environment configuration
+- Automatic container restart on failure
+- Exposed port 3000 for API access
+</p>
+<h4 class="heading">
+ Docker Compose Environment Variables
+</h4>
+<p>
+ All environment variables can be configured in the
+ <code class="code">
+  .env
+ </code>
+ file. The following variables are supported:
+-
+ <code class="code">
+  HASS_HOST
+ </code>
+ : Your Home Assistant instance URL
+-
+ <code class="code">
+  HASS_TOKEN
+ </code>
+ : Long-lived access token for Home Assistant
+-
+ <code class="code">
+  HASS_SOCKET_URL
+ </code>
+ : WebSocket URL for Home Assistant
+-
+ <code class="code">
+  PORT
+ </code>
+ : Server port (default: 3000)
+-
+ <code class="code">
+  NODE_ENV
+ </code>
+ : Environment (production/development)
+-
+ <code class="code">
+  DEBUG
+ </code>
+ : Enable debug mode (true/false)
+</p>
+<h2 class="heading">
+ Configuration
+</h2>
+<h3 class="heading">
+ Environment Variables
+</h3>
+<pre class="pre"><code class="language-env code"># Home Assistant Configuration
+HASS_HOST=http://homeassistant.local:8123  # Your Home Assistant instance URL
+HASS_TOKEN=your_home_assistant_token       # Long-lived access token
+HASS_SOCKET_URL=ws://homeassistant.local:8123/api/websocket  # WebSocket URL
+
+# Server Configuration
+PORT=3000                # Server port (default: 3000)
+NODE_ENV=production     # Environment (production/development)
+DEBUG=false            # Enable debug mode
+
+# Test Configuration
+TEST_HASS_HOST=http://localhost:8123  # Test instance URL
+TEST_HASS_TOKEN=test_token           # Test token
+</code></pre>
+<h3 class="heading">
+ Configuration Files
+</h3>
+<ol>
+<li>
+<strong>
+   Development
+  </strong>
+  : Copy
+  <code class="code">
+   .env.example
+  </code>
+  to
+  <code class="code">
+   .env.development
+  </code>
+</li>
+<li>
+<strong>
+   Production
+  </strong>
+  : Copy
+  <code class="code">
+   .env.example
+  </code>
+  to
+  <code class="code">
+   .env.production
+  </code>
+</li>
+<li>
+<strong>
+   Testing
+  </strong>
+  : Copy
+  <code class="code">
+   .env.example
+  </code>
+  to
+  <code class="code">
+   .env.test
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ Adding to Claude Desktop (or other clients)
+</h3>
+<p>
+ To use your new Home Assistant MCP server, you can add Claude Desktop as a client. Add the following to the configuration. Note this will run the MCP within claude and does not work with the Docker method.
+</p>
+<pre class="pre"><code class="code">{
+  "homeassistant": {
+    "command": "node",
+    "args": [&lt;path/to/your/dist/folder&gt;]
+    "env": {
+      NODE_ENV=development
+      HASS_HOST=http://homeassistant.local:8123
+      HASS_TOKEN=your_home_assistant_token
+      PORT=3000
+      HASS_SOCKET_URL=ws://homeassistant.local:8123/api/websocket
+      LOG_LEVEL=debug
+    }
+  }
+}
+
+</code></pre>
+<h2 class="heading">
+ API Reference
+</h2>
+<h3 class="heading">
+ Device Control
+</h3>
+<h4 class="heading">
+ Common Entity Controls
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "control",
+  "command": "turn_on",  // or "turn_off", "toggle"
+  "entity_id": "light.living_room"
+}
+</code></pre>
+<h4 class="heading">
+ Light Control
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "control",
+  "command": "turn_on",
+  "entity_id": "light.living_room",
+  "brightness": 128,
+  "color_temp": 4000,
+  "rgb_color": [255, 0, 0]
+}
+</code></pre>
+<h3 class="heading">
+ Add-on Management
+</h3>
+<h4 class="heading">
+ List Available Add-ons
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "addon",
+  "action": "list"
+}
+</code></pre>
+<h4 class="heading">
+ Install Add-on
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "addon",
+  "action": "install",
+  "slug": "core_configurator",
+  "version": "5.6.0"
+}
+</code></pre>
+<h4 class="heading">
+ Manage Add-on State
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "addon",
+  "action": "start",  // or "stop", "restart"
+  "slug": "core_configurator"
+}
+</code></pre>
+<h3 class="heading">
+ Package Management
+</h3>
+<h4 class="heading">
+ List HACS Packages
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "package",
+  "action": "list",
+  "category": "integration"  // or "plugin", "theme", "python_script", "appdaemon", "netdaemon"
+}
+</code></pre>
+<h4 class="heading">
+ Install Package
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "package",
+  "action": "install",
+  "category": "integration",
+  "repository": "hacs/integration",
+  "version": "1.32.0"
+}
+</code></pre>
+<h3 class="heading">
+ Automation Management
+</h3>
+<h4 class="heading">
+ Create Automation
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "automation_config",
+  "action": "create",
+  "config": {
+    "alias": "Motion Light",
+    "description": "Turn on light when motion detected",
+    "mode": "single",
+    "trigger": [
+      {
+        "platform": "state",
+        "entity_id": "binary_sensor.motion",
+        "to": "on"
+      }
+    ],
+    "action": [
+      {
+        "service": "light.turn_on",
+        "target": {
+          "entity_id": "light.living_room"
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<h4 class="heading">
+ Duplicate Automation
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "tool": "automation_config",
+  "action": "duplicate",
+  "automation_id": "automation.motion_light"
+}
+</code></pre>
+<h3 class="heading">
+ Core Functions
+</h3>
+<h4 class="heading">
+ State Management
+</h4>
+<pre class="pre"><code class="language-http code">GET /api/state
+POST /api/state
+</code></pre>
+<p>
+ Manages the current state of the system.
+</p>
+<p>
+<strong>
+  Example Request:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">POST /api/state
+{
+  "context": "living_room",
+  "state": {
+    "lights": "on",
+    "temperature": 22
+  }
+}
+</code></pre>
+<h4 class="heading">
+ Context Updates
+</h4>
+<pre class="pre"><code class="language-http code">POST /api/context
+</code></pre>
+<p>
+ Updates the current context with new information.
+</p>
+<p>
+<strong>
+  Example Request:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">POST /api/context
+{
+  "user": "john",
+  "location": "kitchen",
+  "time": "morning",
+  "activity": "cooking"
+}
+</code></pre>
+<h3 class="heading">
+ Action Endpoints
+</h3>
+<h4 class="heading">
+ Execute Action
+</h4>
+<pre class="pre"><code class="language-http code">POST /api/action
+</code></pre>
+<p>
+ Executes a specified action with given parameters.
+</p>
+<p>
+<strong>
+  Example Request:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">POST /api/action
+{
+  "action": "turn_on_lights",
+  "parameters": {
+    "room": "living_room",
+    "brightness": 80
+  }
+}
+</code></pre>
+<h4 class="heading">
+ Batch Actions
+</h4>
+<pre class="pre"><code class="language-http code">POST /api/actions/batch
+</code></pre>
+<p>
+ Executes multiple actions in sequence.
+</p>
+<p>
+<strong>
+  Example Request:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">POST /api/actions/batch
+{
+  "actions": [
+    {
+      "action": "turn_on_lights",
+      "parameters": {
+        "room": "living_room"
+      }
+    },
+    {
+      "action": "set_temperature",
+      "parameters": {
+        "temperature": 22
+      }
+    }
+  ]
+}
+</code></pre>
+<h3 class="heading">
+ Query Functions
+</h3>
+<h4 class="heading">
+ Get Available Actions
+</h4>
+<pre class="pre"><code class="language-http code">GET /api/actions
+</code></pre>
+<p>
+ Returns a list of all available actions.
+</p>
+<p>
+<strong>
+  Example Response:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "actions": [
+    {
+      "name": "turn_on_lights",
+      "parameters": ["room", "brightness"],
+      "description": "Turns on lights in specified room"
+    },
+    {
+      "name": "set_temperature",
+      "parameters": ["temperature"],
+      "description": "Sets temperature in current context"
+    }
+  ]
+}
+</code></pre>
+<h4 class="heading">
+ Context Query
+</h4>
+<pre class="pre"><code class="language-http code">GET /api/context?type=current
+</code></pre>
+<p>
+ Retrieves context information.
+</p>
+<p>
+<strong>
+  Example Response:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "current_context": {
+    "user": "john",
+    "location": "kitchen",
+    "time": "morning",
+    "activity": "cooking"
+  }
+}
+</code></pre>
+<h3 class="heading">
+ WebSocket Events
+</h3>
+<p>
+ The server supports real-time updates via WebSocket connections.
+</p>
+<pre class="pre"><code class="language-javascript code">// Client-side connection example
+const ws = new WebSocket('ws://localhost:3000/ws');
+
+ws.onmessage = (event) =&gt; {
+  const data = JSON.parse(event.data);
+  console.log('Received update:', data);
+};
+</code></pre>
+<h4 class="heading">
+ Supported Events
+</h4>
+<ul>
+<li>
+<code class="code">
+   state_change
+  </code>
+  : Emitted when system state changes
+ </li>
+<li>
+<code class="code">
+   context_update
+  </code>
+  : Emitted when context is updated
+ </li>
+<li>
+<code class="code">
+   action_executed
+  </code>
+  : Emitted when an action is completed
+ </li>
+<li>
+<code class="code">
+   error
+  </code>
+  : Emitted when an error occurs
+ </li>
+</ul>
+<p>
+<strong>
+  Example Event Data:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "event": "state_change",
+  "data": {
+    "previous_state": {
+      "lights": "off"
+    },
+    "current_state": {
+      "lights": "on"
+    },
+    "timestamp": "2024-03-20T10:30:00Z"
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Error Handling
+</h3>
+<p>
+ All endpoints return standard HTTP status codes:
+</p>
+<ul>
+<li>
+  200: Success
+ </li>
+<li>
+  400: Bad Request
+ </li>
+<li>
+  401: Unauthorized
+ </li>
+<li>
+  403: Forbidden
+ </li>
+<li>
+  404: Not Found
+ </li>
+<li>
+  500: Internal Server Error
+ </li>
+</ul>
+<p>
+<strong>
+  Error Response Format:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "error": {
+    "code": "INVALID_PARAMETERS",
+    "message": "Missing required parameter: room",
+    "details": {
+      "missing_fields": ["room"]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Rate Limiting
+</h3>
+<p>
+ The API implements rate limiting to prevent abuse:
+</p>
+<ul>
+<li>
+  100 requests per minute per IP for regular endpoints
+ </li>
+<li>
+  1000 requests per minute per IP for WebSocket connections
+ </li>
+</ul>
+<p>
+ When rate limit is exceeded, the server returns:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Too many requests",
+    "reset_time": "2024-03-20T10:31:00Z"
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Example Usage
+</h3>
+<h4 class="heading">
+ Using curl
+</h4>
+<pre class="pre"><code class="language-bash code"># Get current state
+curl -X GET \
+  http://localhost:3000/api/state \
+  -H 'Authorization: ApiKey your_api_key_here'
+
+# Execute action
+curl -X POST \
+  http://localhost:3000/api/action \
+  -H 'Authorization: ApiKey your_api_key_here' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "action": "turn_on_lights",
+    "parameters": {
+      "room": "living_room",
+      "brightness": 80
+    }
+  }'
+</code></pre>
+<h4 class="heading">
+ Using JavaScript
+</h4>
+<pre class="pre"><code class="language-javascript code">// Execute action
+async function executeAction() {
+  const response = await fetch('http://localhost:3000/api/action', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'ApiKey your_api_key_here',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      action: 'turn_on_lights',
+      parameters: {
+        room: 'living_room',
+        brightness: 80
+      }
+    })
+  });
+
+  const data = await response.json();
+  console.log('Action result:', data);
+}
+</code></pre>
+<h2 class="heading">
+ Development
+</h2>
+<pre class="pre"><code class="language-bash code"># Development mode with hot reload
+npm run dev
+
+# Build project
+npm run build
+
+# Production mode
+npm run start
+
+# Run tests
+npx jest --config=jest.config.cjs
+
+# Run tests with coverage
+npx jest --coverage
+
+# Lint code
+npm run lint
+
+# Format code
+npm run format
+</code></pre>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ Common Issues
+</h3>
+<ol>
+<li>
+<strong>
+   Node.js Version (
+   <code class="code">
+    toSorted is not a function
+   </code>
+   )
+  </strong>
+</li>
+<li>
+<p>
+<strong>
+    Solution:
+   </strong>
+   Update to Node.js 20.10.0+
+   <code class="code">
+    bash
+   nvm install 20.10.0
+   nvm use 20.10.0
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Connection Issues
+   </strong>
+</p>
+</li>
+<li>
+  Verify Home Assistant is running
+ </li>
+<li>
+  Check
+  <code class="code">
+   HASS_HOST
+  </code>
+  accessibility
+ </li>
+<li>
+  Validate token permissions
+ </li>
+<li>
+<p>
+   Ensure WebSocket connection for real-time updates
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Add-on Management Issues
+   </strong>
+</p>
+</li>
+<li>
+  Verify Supervisor access
+ </li>
+<li>
+  Check add-on compatibility
+ </li>
+<li>
+<p>
+   Validate system resources
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    HACS Integration Issues
+   </strong>
+</p>
+</li>
+<li>
+  Verify HACS installation
+ </li>
+<li>
+  Check HACS integration status
+ </li>
+<li>
+<p>
+   Validate repository access
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Automation Issues
+   </strong>
+</p>
+</li>
+<li>
+  Verify entity availability
+ </li>
+<li>
+  Check trigger conditions
+ </li>
+<li>
+  Validate service calls
+ </li>
+<li>
+  Monitor execution logs
+ </li>
+</ol>
+<h2 class="heading">
+ Project Status
+</h2>
+<p>
+ ✅
+ <strong>
+  Complete
+ </strong>
+ - Entity, Floor, and Area access
+- Device control (Lights, Climate, Covers, Switches, Contacts)
+- Add-on management system
+- Package management through HACS
+- Advanced automation configuration
+- Basic state management
+- Error handling and validation
+- Docker containerization
+- Jest testing setup
+- TypeScript integration
+- Environment variable management
+- Home Assistant API integration
+- Project documentation
+</p>
+<p>
+ 🚧
+ <strong>
+  In Progress
+ </strong>
+ - WebSocket implementation for real-time updates
+- Enhanced security features
+- Tool organization optimization
+- Performance optimization
+- Resource context integration
+- API documentation generation
+- Multi-platform desktop integration
+- Advanced error recovery
+- Custom prompt testing
+- Enhanced macOS integration
+- Type safety improvements
+- Testing coverage expansion
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create a feature branch
+ </li>
+<li>
+  Implement your changes
+ </li>
+<li>
+  Add tests for new functionality
+ </li>
+<li>
+  Ensure all tests pass
+ </li>
+<li>
+  Submit a pull request
+ </li>
+</ol>
+<h2 class="heading">
+ Resources
+</h2>
+<ul>
+<li>
+<a href="https://modelcontextprotocol.io/introduction">
+   MCP Documentation
+  </a>
+</li>
+<li>
+<a href="https://www.home-assistant.io">
+   Home Assistant Docs
+  </a>
+</li>
+<li>
+<a href="https://developers.home-assistant.io/docs/api/rest">
+   HA REST API
+  </a>
+</li>
+<li>
+<a href="https://hacs.xyz">
+   HACS Documentation
+  </a>
+</li>
+<li>
+<a href="https://www.typescriptlang.org/docs">
+   TypeScript Documentation
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT License - See
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/tevonsb-homeassistant-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

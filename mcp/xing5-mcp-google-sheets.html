@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your AI Assistant's Gateway to Google Sheets!📊">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="xing5/mcp-google-sheets - MCP Directory">
+    <meta property="og:description" content="Your AI Assistant's Gateway to Google Sheets!📊">
+    <meta property="og:url" content="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="xing5/mcp-google-sheets - MCP Directory">
+    <meta name="twitter:description" content="Your AI Assistant's Gateway to Google Sheets!📊">
+    
+    <title>xing5/mcp-google-sheets - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">xing5/mcp-google-sheets</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">xing5/mcp-google-sheets</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 153</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">google</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> spreadsheet</span>
+                        </div>
+                        <a href="https://github.com/xing5/mcp-google-sheets" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="xing5/mcp-google-sheets - MCP Directory" property="og:title"/>
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="xing5/mcp-google-sheets - MCP Directory" name="twitter:title"/>
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" name="twitter:description"/>
+<title>xing5/mcp-google-sheets - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">xing5/mcp-google-sheets</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">xing5/mcp-google-sheets</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 153</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">google</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> spreadsheet</span>
+</div>
+<a class="github-link" href="https://github.com/xing5/mcp-google-sheets" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="xing5/mcp-google-sheets - MCP Directory" property="og:title">
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" property="og:description">
+<meta content="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="xing5/mcp-google-sheets - MCP Directory" name="twitter:title">
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" name="twitter:description">
+<title>xing5/mcp-google-sheets - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>xing5/mcp-google-sheets</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 153</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">google</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> spreadsheet</span>
+</div>
+<a class="github-link" href="https://github.com/xing5/mcp-google-sheets" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="xing5/mcp-google-sheets - MCP Directory" property="og:title"/>
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="xing5/mcp-google-sheets - MCP Directory" name="twitter:title"/>
+<meta content="Your AI Assistant's Gateway to Google Sheets!📊" name="twitter:description"/>
+<title>xing5/mcp-google-sheets - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>xing5/mcp-google-sheets</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 153</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">google</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> spreadsheet</span>
+</div>
+<a class="github-link" href="https://github.com/xing5/mcp-google-sheets" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<div align="center">
+<!-- Main Title Link -->
+<b>
+  mcp-google-sheets
+ </b>
+<!-- Description Paragraph -->
+<p align="center">
+<i>
+   Your AI Assistant's Gateway to Google Sheets!
+  </i>
+  📊
+ </p>
+ [![PyPI - Version](https://img.shields.io/pypi/v/mcp-google-sheets)](https://pypi.org/project/mcp-google-sheets/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/mcp-google-sheets)](https://pypi.org/project/mcp-google-sheets/)
+![GitHub License](https://img.shields.io/github/license/xing5/mcp-google-sheets)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xing5/mcp-google-sheets/release.yml)
+</div>
+<hr/>
+<h2 class="heading">
+ 🤔 What is this?
+</h2>
+<p>
+<code class="code">
+  mcp-google-sheets
+ </code>
+ is a Python-based MCP server that acts as a bridge between any MCP-compatible client (like Claude Desktop) and the Google Sheets API. It allows you to interact with your Google Spreadsheets using a defined set of tools, enabling powerful automation and data manipulation workflows driven by AI.
+</p>
+<h2 class="heading">
+ 🚀 Quick Start (Using
+ <code class="code">
+  uvx
+ </code>
+ )
+</h2>
+<p>
+ Essentially the server runs in one line:
+ <code class="code">
+  uvx mcp-google-sheets@latest
+ </code>
+ .
+</p>
+<p>
+ This cmd will automatically download the latest code and run it.
+ <strong>
+  We recommend always using
+  <code class="code">
+   @latest
+  </code>
+</strong>
+ to ensure you have the newest version with the latest features and bug fixes.
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    ☁️ Prerequisite: Google Cloud Setup
+   </strong>
+</p>
+<ul>
+<li>
+    You
+    <strong>
+     must
+    </strong>
+    configure Google Cloud Platform credentials and enable the necessary APIs first. We strongly recommend using a
+    <strong>
+     Service Account
+    </strong>
+    .
+   </li>
+<li>
+    ➡️ Jump to the
+    <a href="#-google-cloud-platform-setup-detailed">
+<strong>
+      Detailed Google Cloud Platform Setup
+     </strong>
+</a>
+    guide below.
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    🐍 Install
+    <code class="code">
+     uv
+    </code>
+</strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     uvx
+    </code>
+    is part of
+    <code class="code">
+     uv
+    </code>
+    , a fast Python package installer and resolver. Install it if you haven't already:
+    <code class="code">
+     bash
+    # macOS / Linux
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    # Windows
+    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+    # Or using pip:
+    # pip install uv
+    </code>
+<em>
+     Follow instructions in the installer output to add
+     <code class="code">
+      uv
+     </code>
+     to your PATH if needed.
+    </em>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    🔑 Set Essential Environment Variables (Service Account Recommended)
+   </strong>
+</p>
+<ul>
+<li>
+    You need to tell the server how to authenticate. Set these variables in your terminal:
+   </li>
+<li>
+<strong>
+     (Linux/macOS)
+    </strong>
+<code class="code">
+     bash
+    # Replace with YOUR actual path and folder ID from the Google Setup step
+    export SERVICE_ACCOUNT_PATH="/path/to/your/service-account-key.json"
+    export DRIVE_FOLDER_ID="YOUR_DRIVE_FOLDER_ID"
+    </code>
+</li>
+<li>
+<strong>
+     (Windows CMD)
+    </strong>
+<code class="code">
+     cmd
+    set SERVICE_ACCOUNT_PATH="C:\path\to\your\service-account-key.json"
+    set DRIVE_FOLDER_ID="YOUR_DRIVE_FOLDER_ID"
+    </code>
+</li>
+<li>
+<strong>
+     (Windows PowerShell)
+    </strong>
+<code class="code">
+     powershell
+    $env:SERVICE_ACCOUNT_PATH = "C:\path\to\your\service-account-key.json"
+    $env:DRIVE_FOLDER_ID = "YOUR_DRIVE_FOLDER_ID"
+    </code>
+</li>
+<li>
+    ➡️ See
+    <a href="#-authentication--environment-variables-detailed">
+<strong>
+      Detailed Authentication &amp; Environment Variables
+     </strong>
+</a>
+    for other options (OAuth,
+    <code class="code">
+     CREDENTIALS_CONFIG
+    </code>
+    ).
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    🏃 Run the Server!
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     uvx
+    </code>
+    will automatically download and run the latest version of
+    <code class="code">
+     mcp-google-sheets
+    </code>
+    :
+    <code class="code">
+     bash
+    uvx mcp-google-sheets@latest
+    </code>
+</li>
+<li>
+    The server will start and print logs indicating it's ready.
+   </li>
+<li>
+</li>
+<li>
+<blockquote>
+<p>
+<strong>
+       💡 Pro Tip:
+      </strong>
+      Always use
+      <code class="code">
+       @latest
+      </code>
+      to ensure you get the newest version with bug fixes and features. Without
+      <code class="code">
+       @latest
+      </code>
+      ,
+      <code class="code">
+       uvx
+      </code>
+      may use a cached older version.
+     </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    🔌 Connect your MCP Client
+   </strong>
+</p>
+<ul>
+<li>
+    Configure your client (e.g., Claude Desktop) to connect to the running server.
+   </li>
+<li>
+    Depending on the client you use, you might not need step 4 because the client can launch the server for you. But it's a good practice to test run step 4 anyway to make sure things are set up properly.
+   </li>
+<li>
+    ➡️ See
+    <a href="#-usage-with-claude-desktop">
+<strong>
+      Usage with Claude Desktop
+     </strong>
+</a>
+    for examples.
+   </li>
+</ul>
+</li>
+</ol>
+<p>
+ You're ready! Start issuing commands via your MCP client.
+</p>
+<hr/>
+<h2 class="heading">
+ ✨ Key Features
+</h2>
+<ul>
+<li>
+<strong>
+   Seamless Integration:
+  </strong>
+  Connects directly to Google Drive &amp; Google Sheets APIs.
+ </li>
+<li>
+<strong>
+   Comprehensive Tools:
+  </strong>
+  Offers a wide range of operations (CRUD, listing, batching, sharing, formatting, etc.).
+ </li>
+<li>
+<strong>
+   Flexible Authentication:
+  </strong>
+  Supports
+  <strong>
+   Service Accounts (recommended)
+  </strong>
+  , OAuth 2.0, and direct credential injection via environment variables.
+ </li>
+<li>
+<strong>
+   Easy Deployment:
+  </strong>
+  Run instantly with
+  <code class="code">
+   uvx
+  </code>
+  (zero-install feel) or clone for development using
+  <code class="code">
+   uv
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   AI-Ready:
+  </strong>
+  Designed for use with MCP-compatible clients, enabling natural language spreadsheet interaction.
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 🛠️ Available Tools &amp; Resources
+</h2>
+<p>
+ This server exposes the following tools for interacting with Google Sheets:
+</p>
+<p>
+<em>
+  (Input parameters are typically strings unless otherwise specified)
+ </em>
+</p>
+<ul>
+<li>
+<strong>
+<code class="code">
+    list_spreadsheets
+   </code>
+</strong>
+  : Lists spreadsheets in the configured Drive folder (Service Account) or accessible by the user (OAuth).
+  <ul>
+<li>
+<em>
+     Returns:
+    </em>
+    List of objects
+    <code class="code">
+     [{id: string, title: string}]
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    create_spreadsheet
+   </code>
+</strong>
+  : Creates a new spreadsheet.
+  <ul>
+<li>
+<code class="code">
+     title
+    </code>
+    (string): The desired title.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    Object with spreadsheet info, including
+    <code class="code">
+     spreadsheetId
+    </code>
+    .
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    get_sheet_data
+   </code>
+</strong>
+  : Reads data from a range in a sheet.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     sheet
+    </code>
+    (string): Name of the sheet.
+   </li>
+<li>
+<code class="code">
+     range
+    </code>
+    (optional string): A1 notation (e.g.,
+    <code class="code">
+     'A1:C10'
+    </code>
+    ,
+    <code class="code">
+     'Sheet1!B2:D'
+    </code>
+    ). If omitted, reads the whole sheet.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    Full grid data structure from Google Sheets API with all metadata preserved.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    get_sheet_formulas
+   </code>
+</strong>
+  : Reads formulas from a range in a sheet.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     sheet
+    </code>
+    (string): Name of the sheet.
+   </li>
+<li>
+<code class="code">
+     range
+    </code>
+    (optional string): A1 notation (e.g.,
+    <code class="code">
+     'A1:C10'
+    </code>
+    ,
+    <code class="code">
+     'Sheet1!B2:D'
+    </code>
+    ). If omitted, reads the whole sheet.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    2D array of cell formulas.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    update_cells
+   </code>
+</strong>
+  : Writes data to a specific range. Overwrites existing data.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     sheet
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     range
+    </code>
+    (string): A1 notation.
+   </li>
+<li>
+<code class="code">
+     data
+    </code>
+    (2D array): Values to write.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    Update result object.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    batch_update_cells
+   </code>
+</strong>
+  : Updates multiple ranges in one API call.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     sheet
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     ranges
+    </code>
+    (object): Dictionary mapping range strings (A1 notation) to 2D arrays of values
+    <code class="code">
+     { "A1:B2": [[1, 2], [3, 4]], "D5": [["Hello"]] }
+    </code>
+    .
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    Batch update result object.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    add_rows
+   </code>
+</strong>
+  : Appends rows to the end of a sheet (after the last row with data).
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     sheet
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     data
+    </code>
+    (2D array): Rows to append.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    Update result object.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    list_sheets
+   </code>
+</strong>
+  : Lists all sheet names within a spreadsheet.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    List of sheet name strings
+    <code class="code">
+     ["Sheet1", "Sheet2"]
+    </code>
+    .
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    create_sheet
+   </code>
+</strong>
+  : Adds a new sheet (tab) to a spreadsheet.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     title
+    </code>
+    (string): Name for the new sheet.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    New sheet properties object.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    get_multiple_sheet_data
+   </code>
+</strong>
+  : Fetches data from multiple ranges across potentially different spreadsheets in one call.
+  <ul>
+<li>
+<code class="code">
+     queries
+    </code>
+    (array of objects): Each object needs
+    <code class="code">
+     spreadsheet_id
+    </code>
+    ,
+    <code class="code">
+     sheet
+    </code>
+    , and
+    <code class="code">
+     range
+    </code>
+    .
+    <code class="code">
+     [{spreadsheet_id: 'abc', sheet: 'Sheet1', range: 'A1:B2'}, ...]
+    </code>
+    .
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    List of objects, each containing the query params and fetched
+    <code class="code">
+     data
+    </code>
+    or an
+    <code class="code">
+     error
+    </code>
+    .
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    get_multiple_spreadsheet_summary
+   </code>
+</strong>
+  : Gets titles, sheet names, headers, and first few rows for multiple spreadsheets.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_ids
+    </code>
+    (array of strings)
+   </li>
+<li>
+<code class="code">
+     rows_to_fetch
+    </code>
+    (optional integer, default 5): How many rows (including header) to preview.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    List of summary objects for each spreadsheet.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    share_spreadsheet
+   </code>
+</strong>
+  : Shares a spreadsheet with specified users/emails and roles.
+  <ul>
+<li>
+<code class="code">
+     spreadsheet_id
+    </code>
+    (string)
+   </li>
+<li>
+<code class="code">
+     recipients
+    </code>
+    (array of objects):
+    <code class="code">
+     [{email_address: 'user@example.com', role: 'writer'}, ...]
+    </code>
+    . Roles:
+    <code class="code">
+     reader
+    </code>
+    ,
+    <code class="code">
+     commenter
+    </code>
+    ,
+    <code class="code">
+     writer
+    </code>
+    .
+   </li>
+<li>
+<code class="code">
+     send_notification
+    </code>
+    (optional boolean, default True): Send email notifications.
+   </li>
+<li>
+<em>
+     Returns:
+    </em>
+    Dictionary with
+    <code class="code">
+     successes
+    </code>
+    and
+    <code class="code">
+     failures
+    </code>
+    lists.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+<code class="code">
+    add_columns
+   </code>
+</strong>
+  : Adds columns to a sheet.
+  <em>
+   (Verify parameters if implemented)
+  </em>
+</li>
+<li>
+<strong>
+<code class="code">
+    copy_sheet
+   </code>
+</strong>
+  : Duplicates a sheet within a spreadsheet.
+  <em>
+   (Verify parameters if implemented)
+  </em>
+</li>
+<li>
+<strong>
+<code class="code">
+    rename_sheet
+   </code>
+</strong>
+  : Renames an existing sheet.
+  <em>
+   (Verify parameters if implemented)
+  </em>
+</li>
+</ul>
+<p>
+<strong>
+  MCP Resources:
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+<code class="code">
+    spreadsheet://{spreadsheet_id}/info
+   </code>
+</strong>
+  : Get basic metadata about a Google Spreadsheet.
+  <ul>
+<li>
+<em>
+     Returns:
+    </em>
+    JSON string with spreadsheet information.
+   </li>
+</ul>
+</li>
+</ul>
+<hr/>
+<h2 class="heading">
+ ☁️ Google Cloud Platform Setup (Detailed)
+</h2>
+<p>
+ This setup is
+ <strong>
+  required
+ </strong>
+ before running the server.
+</p>
+<ol>
+<li>
+<strong>
+   Create/Select a GCP Project:
+  </strong>
+  Go to the
+  <a href="https://console.cloud.google.com/">
+   Google Cloud Console
+  </a>
+  .
+ </li>
+<li>
+<strong>
+   Enable APIs:
+  </strong>
+  Navigate to "APIs &amp; Services" -&gt; "Library". Search for and enable:
+  <ul>
+<li>
+<code class="code">
+     Google Sheets API
+    </code>
+</li>
+<li>
+<code class="code">
+     Google Drive API
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<strong>
+   Configure Credentials:
+  </strong>
+  You need to choose
+  <em>
+   one
+  </em>
+  authentication method below (Service Account is recommended).
+ </li>
+</ol>
+<hr/>
+<h2 class="heading">
+ 🔑 Authentication &amp; Environment Variables (Detailed)
+</h2>
+<p>
+ The server needs credentials to access Google APIs. Choose one method:
+</p>
+<h3 class="heading">
+ Method A: Service Account (Recommended for Servers/Automation) ✅
+</h3>
+<ul>
+<li>
+<strong>
+   Why?
+  </strong>
+  Headless (no browser needed), secure, ideal for server environments. Doesn't expire easily.
+ </li>
+<li>
+<strong>
+   Steps:
+  </strong>
+<ol>
+<li>
+<strong>
+     Create Service Account:
+    </strong>
+    In GCP Console -&gt; "IAM &amp; Admin" -&gt; "Service Accounts".
+    <ul>
+<li>
+      Click "+ CREATE SERVICE ACCOUNT". Name it (e.g.,
+      <code class="code">
+       mcp-sheets-service
+      </code>
+      ).
+     </li>
+<li>
+      Grant Roles: Add
+      <code class="code">
+       Editor
+      </code>
+      role for broad access, or more granular roles (like
+      <code class="code">
+       roles/drive.file
+      </code>
+      and specific Sheets roles) for stricter permissions.
+     </li>
+<li>
+      Click "Done". Find the account, click Actions (⋮) -&gt; "Manage keys".
+     </li>
+<li>
+      Click "ADD KEY" -&gt; "Create new key" -&gt;
+      <strong>
+       JSON
+      </strong>
+      -&gt; "CREATE".
+     </li>
+<li>
+<strong>
+       Download and securely store
+      </strong>
+      the JSON key file.
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Create &amp; Share Google Drive Folder:
+    </strong>
+<ul>
+<li>
+      In
+      <a href="https://drive.google.com/">
+       Google Drive
+      </a>
+      , create a folder (e.g., "AI Managed Sheets").
+     </li>
+<li>
+      Note the
+      <strong>
+       Folder ID
+      </strong>
+      from the URL:
+      <code class="code">
+       https://drive.google.com/drive/folders/THIS_IS_THE_FOLDER_ID
+      </code>
+      .
+     </li>
+<li>
+      Right-click the folder -&gt; "Share" -&gt; "Share".
+     </li>
+<li>
+      Enter the Service Account's email (from the JSON file
+      <code class="code">
+       client_email
+      </code>
+      ).
+     </li>
+<li>
+      Grant
+      <strong>
+       Editor
+      </strong>
+      access. Uncheck "Notify people". Click "Share".
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Set Environment Variables:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       SERVICE_ACCOUNT_PATH
+      </code>
+      : Full path to the downloaded JSON key file.
+     </li>
+<li>
+<code class="code">
+       DRIVE_FOLDER_ID
+      </code>
+      : The ID of the shared Google Drive folder.
+      <em>
+       (See
+       <a href="#-ultra-quick-start-using-uvx">
+        Ultra Quick Start
+       </a>
+       for OS-specific examples)
+      </em>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 class="heading">
+ Method B: OAuth 2.0 (Interactive / Personal Use) 🧑‍💻
+</h3>
+<ul>
+<li>
+<strong>
+   Why?
+  </strong>
+  For personal use or local development where interactive browser login is okay.
+ </li>
+<li>
+<strong>
+   Steps:
+  </strong>
+<ol>
+<li>
+<strong>
+     Configure OAuth Consent Screen:
+    </strong>
+    In GCP Console -&gt; "APIs &amp; Services" -&gt; "OAuth consent screen". Select "External", fill required info, add scopes (
+    <code class="code">
+     .../auth/spreadsheets
+    </code>
+    ,
+    <code class="code">
+     .../auth/drive
+    </code>
+    ), add test users if needed.
+   </li>
+<li>
+<strong>
+     Create OAuth Client ID:
+    </strong>
+    In GCP Console -&gt; "APIs &amp; Services" -&gt; "Credentials". "+ CREATE CREDENTIALS" -&gt; "OAuth client ID" -&gt; Type:
+    <strong>
+     Desktop app
+    </strong>
+    . Name it. "CREATE".
+    <strong>
+     Download JSON
+    </strong>
+    .
+   </li>
+<li>
+<strong>
+     Set Environment Variables:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       CREDENTIALS_PATH
+      </code>
+      : Path to the downloaded OAuth credentials JSON file (default:
+      <code class="code">
+       credentials.json
+      </code>
+      ).
+     </li>
+<li>
+<code class="code">
+       TOKEN_PATH
+      </code>
+      : Path to store the user's refresh token after first login (default:
+      <code class="code">
+       token.json
+      </code>
+      ). Must be writable.
+     </li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 class="heading">
+ Method C: Direct Credential Injection (Advanced) 🔒
+</h3>
+<ul>
+<li>
+<strong>
+   Why?
+  </strong>
+  Useful in environments like Docker, Kubernetes, or CI/CD where managing files is hard, but environment variables are easy/secure. Avoids file system access.
+ </li>
+<li>
+<strong>
+   How?
+  </strong>
+  Instead of providing a
+  <em>
+   path
+  </em>
+  to the credentials file, you provide the
+  <em>
+   content
+  </em>
+  of the file, encoded in Base64, directly in an environment variable.
+ </li>
+<li>
+<strong>
+   Steps:
+  </strong>
+<ol>
+<li>
+<strong>
+     Get your credentials JSON file
+    </strong>
+    (either Service Account key or OAuth Client ID file). Let's call it
+    <code class="code">
+     your_credentials.json
+    </code>
+    .
+   </li>
+<li>
+<strong>
+     Generate the Base64 string:
+    </strong>
+<ul>
+<li>
+<strong>
+       (Linux/macOS):
+      </strong>
+<code class="code">
+       base64 -w 0 your_credentials.json
+      </code>
+</li>
+<li>
+<strong>
+       (Windows PowerShell):
+      </strong>
+<code class="code">
+       powershell
+    $filePath = "C:\path\to\your_credentials.json"; # Use actual path
+    $bytes = [System.IO.File]::ReadAllBytes($filePath);
+    $base64 = [System.Convert]::ToBase64String($bytes);
+    $base64 # Copy this output
+      </code>
+</li>
+<li>
+<strong>
+       (Caution):
+      </strong>
+      Avoid pasting sensitive credentials into untrusted online encoders.
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Set the Environment Variable:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       CREDENTIALS_CONFIG
+      </code>
+      : Set this variable to the
+      <strong>
+       full Base64 string
+      </strong>
+      you just generated.
+      <code class="code">
+       bash
+    # Example (Linux/macOS) - Use the actual string generated
+    export CREDENTIALS_CONFIG="ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb..."
+      </code>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 class="heading">
+ Method D: Application Default Credentials (ADC) 🌐
+</h3>
+<ul>
+<li>
+<strong>
+   Why?
+  </strong>
+  Ideal for Google Cloud environments (GKE, Compute Engine, Cloud Run) and local development with
+  <code class="code">
+   gcloud auth application-default login
+  </code>
+  . No explicit credential files needed.
+ </li>
+<li>
+<strong>
+   How?
+  </strong>
+  Uses Google's Application Default Credentials chain to automatically discover credentials from multiple sources.
+ </li>
+<li>
+<strong>
+   ADC Search Order:
+  </strong>
+<ol>
+<li>
+<code class="code">
+     GOOGLE_APPLICATION_CREDENTIALS
+    </code>
+    environment variable (path to service account key) -
+    <strong>
+     Google's standard variable
+    </strong>
+</li>
+<li>
+<code class="code">
+     gcloud auth application-default login
+    </code>
+    credentials (local development)
+   </li>
+<li>
+    Attached service account from metadata server (GKE, Compute Engine, etc.)
+   </li>
+</ol>
+</li>
+<li>
+<strong>
+   Setup:
+  </strong>
+<ul>
+<li>
+<strong>
+     Local Development:
+    </strong>
+    Run
+    <code class="code">
+     gcloud auth application-default login
+    </code>
+    once
+   </li>
+<li>
+<strong>
+     Google Cloud:
+    </strong>
+    Attach a service account to your compute resource
+   </li>
+<li>
+<strong>
+     Environment Variable:
+    </strong>
+    Set
+    <code class="code">
+     GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
+    </code>
+    (Google's standard)
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   No additional environment variables needed
+  </strong>
+  - ADC is used automatically as a fallback when other methods fail.
+ </li>
+</ul>
+<p>
+<strong>
+  Note:
+ </strong>
+<code class="code">
+  GOOGLE_APPLICATION_CREDENTIALS
+ </code>
+ is Google's official standard environment variable, while
+ <code class="code">
+  SERVICE_ACCOUNT_PATH
+ </code>
+ is specific to this MCP server. If you set
+ <code class="code">
+  GOOGLE_APPLICATION_CREDENTIALS
+ </code>
+ , ADC will find it automatically.
+</p>
+<h3 class="heading">
+ Authentication Priority &amp; Summary
+</h3>
+<p>
+ The server checks for credentials in this order:
+</p>
+<ol>
+<li>
+<code class="code">
+   CREDENTIALS_CONFIG
+  </code>
+  (Base64 content)
+ </li>
+<li>
+<code class="code">
+   SERVICE_ACCOUNT_PATH
+  </code>
+  (Path to Service Account JSON)
+ </li>
+<li>
+<code class="code">
+   CREDENTIALS_PATH
+  </code>
+  (Path to OAuth JSON) - triggers interactive flow if token is missing/expired
+ </li>
+<li>
+<strong>
+   Application Default Credentials (ADC)
+  </strong>
+  - automatic fallback
+ </li>
+</ol>
+<p>
+<strong>
+  Environment Variable Summary:
+ </strong>
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">
+    Variable
+   </th>
+<th style="text-align: left;">
+    Method(s)
+   </th>
+<th style="text-align: left;">
+    Description
+   </th>
+<th style="text-align: left;">
+    Default
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     SERVICE_ACCOUNT_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    Service Account
+   </td>
+<td style="text-align: left;">
+    Path to the Service Account JSON key file (MCP server specific).
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     GOOGLE_APPLICATION_CREDENTIALS
+    </code>
+</td>
+<td style="text-align: left;">
+    ADC
+   </td>
+<td style="text-align: left;">
+    Path to service account key (Google's standard variable).
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     DRIVE_FOLDER_ID
+    </code>
+</td>
+<td style="text-align: left;">
+    Service Account
+   </td>
+<td style="text-align: left;">
+    ID of the Google Drive folder shared with the Service Account.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     CREDENTIALS_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    OAuth 2.0
+   </td>
+<td style="text-align: left;">
+    Path to the OAuth 2.0 Client ID JSON file.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     credentials.json
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     TOKEN_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    OAuth 2.0
+   </td>
+<td style="text-align: left;">
+    Path to store the generated OAuth token.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     token.json
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     CREDENTIALS_CONFIG
+    </code>
+</td>
+<td style="text-align: left;">
+    Service Account / OAuth 2.0
+   </td>
+<td style="text-align: left;">
+    Base64 encoded JSON string of credentials content.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 class="heading">
+ ⚙️ Running the Server (Detailed)
+</h2>
+<h3 class="heading">
+ Method 1: Using
+ <code class="code">
+  uvx
+ </code>
+ (Recommended for Users)
+</h3>
+<p>
+ As shown in the
+ <a href="#-ultra-quick-start-using-uvx">
+  Ultra Quick Start
+ </a>
+ , this is the easiest way. Set environment variables, then run:
+</p>
+<pre class="pre"><code class="language-bash code">uvx mcp-google-sheets@latest
+</code></pre>
+<p>
+<code class="code">
+  uvx
+ </code>
+ handles fetching and running the package temporarily.
+</p>
+<h3 class="heading">
+ Method 2: For Development (Cloning the Repo)
+</h3>
+<p>
+ If you want to modify the code:
+</p>
+<ol>
+<li>
+<strong>
+   Clone:
+  </strong>
+<code class="code">
+   git clone https://github.com/yourusername/mcp-google-sheets.git &amp;&amp; cd mcp-google-sheets
+  </code>
+  (Use actual URL)
+ </li>
+<li>
+<strong>
+   Set Environment Variables:
+  </strong>
+  As described above.
+ </li>
+<li>
+<strong>
+   Run using
+   <code class="code">
+    uv
+   </code>
+   :
+  </strong>
+  (Uses the local code)
+  <code class="code">
+   bash
+    uv run mcp-google-sheets
+    # Or via the script name if defined in pyproject.toml, e.g.:
+    # uv run start
+  </code>
+</li>
+</ol>
+<hr/>
+<h2 class="heading">
+ 🔌 Usage with Claude Desktop
+</h2>
+<p>
+ Add the server config to
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+ under
+ <code class="code">
+  mcpServers
+ </code>
+ . Choose the block matching your setup:
+</p>
+<details>
+<summary>
+  🔵 Config: uvx + Service Account (Recommended)
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "google-sheets": {
+      "command": "uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        // Use ABSOLUTE paths here
+        "SERVICE_ACCOUNT_PATH": "/full/path/to/your/service-account-key.json",
+        "DRIVE_FOLDER_ID": "your_shared_folder_id_here"
+      },
+      "healthcheck_url": "http://localhost:8000/health" // Adjust host/port if needed
+    }
+  }
+}
+</code></pre>
+</details>
+<details>
+<summary>
+  🔵 Config: uvx + OAuth 2.0
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "google-sheets": {
+      "command": "uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        // Use ABSOLUTE paths here
+        "CREDENTIALS_PATH": "/full/path/to/your/credentials.json",
+        "TOKEN_PATH": "/full/path/to/your/token.json" // Ensure this path is writable
+      },
+      "healthcheck_url": "http://localhost:8000/health"
+    }
+  }
+}
+</code></pre>
+ *(A browser may open for Google login on first use)*
+</details>
+<details>
+<summary>
+  🔵 Config: uvx + CREDENTIALS_CONFIG (Service Account Example)
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "google-sheets": {
+      "command": "uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        // Paste the full Base64 string here
+        "CREDENTIALS_CONFIG": "ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsCiAgInByb2plY3RfaWQiOiAi...",
+        "DRIVE_FOLDER_ID": "your_shared_folder_id_here" // Still needed for Service Account folder context
+      },
+      "healthcheck_url": "http://localhost:8000/health"
+    }
+  }
+}
+</code></pre>
+</details>
+<details>
+<summary>
+  🔵 Config: uvx + Application Default Credentials (ADC)
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "google-sheets": {
+      "command": "uvx",
+      "args": ["mcp-google-sheets@latest"],
+      "env": {
+        // Option 1: Use Google's standard environment variable
+        // "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/service-account.json"
+
+        // Option 2: No env vars needed if using `gcloud auth application-default login`
+      },
+      "healthcheck_url": "http://localhost:8000/health"
+    }
+  }
+}
+</code></pre>
+ *Prerequisites: Either set `GOOGLE_APPLICATION_CREDENTIALS` OR run `gcloud auth application-default login`*
+</details>
+<details>
+<summary>
+  🟡 Config: Development (Running from cloned repo)
+ </summary>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "mcp-google-sheets-local": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/path/to/your/mcp-google-sheets",
+        "mcp-google-sheets"
+      ],
+      "env": {
+        "SERVICE_ACCOUNT_PATH": "/path/to/your/mcp-google-sheets/service_account.json",
+        "DRIVE_FOLDER_ID": "your_drive_folder_id_here"
+      }
+    }
+  }
+}
+</code></pre>
+ *Note: Use `--directory` flag to specify the project path, and adjust paths to match your actual workspace location.*
+</details>
+<hr/>
+<h2 class="heading">
+ 💬 Example Prompts for Claude
+</h2>
+<p>
+ Once connected, try prompts like:
+</p>
+<ul>
+<li>
+  "List all spreadsheets I have access to." (or "in my AI Managed Sheets folder")
+ </li>
+<li>
+  "Create a new spreadsheet titled 'Quarterly Sales Report Q3 2024'."
+ </li>
+<li>
+  "In the 'Quarterly Sales Report' spreadsheet, get the data from Sheet1 range A1 to E10."
+ </li>
+<li>
+  "Add a new sheet named 'Summary' to the spreadsheet with ID
+  <code class="code">
+   1aBcDeFgHiJkLmNoPqRsTuVwXyZ
+  </code>
+  ."
+ </li>
+<li>
+  "In my 'Project Tasks' spreadsheet, Sheet 'Tasks', update cell B2 to 'In Progress'."
+ </li>
+<li>
+  "Append these rows to the 'Log' sheet in spreadsheet
+  <code class="code">
+   XYZ
+  </code>
+  :
+  <code class="code">
+   [['2024-07-31', 'Task A Completed'], ['2024-08-01', 'Task B Started']]
+  </code>
+  "
+ </li>
+<li>
+  "Get a summary of the spreadsheets 'Sales Data' and 'Inventory Count'."
+ </li>
+<li>
+  "Share the 'Team Vacation Schedule' spreadsheet with
+  <code class="code">
+   team@example.com
+  </code>
+  as a reader and
+  <code class="code">
+   manager@example.com
+  </code>
+  as a writer. Don't send notifications."
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 🤝 Contributing
+</h2>
+<p>
+ Contributions are welcome! Please open an issue to discuss bugs or feature requests. Pull requests are appreciated.
+</p>
+<hr/>
+<h2 class="heading">
+ 📄 License
+</h2>
+<p>
+ This project is licensed under the MIT License - see the
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+<hr/>
+<h2 class="heading">
+ 🙏 Credits
+</h2>
+<ul>
+<li>
+  Built with
+  <a href="https://github.com/cognitiveapis/fastmcp">
+   FastMCP
+  </a>
+  .
+ </li>
+<li>
+  Inspired by
+  <a href="https://github.com/kazz187/mcp-google-spreadsheet">
+   kazz187/mcp-google-spreadsheet
+  </a>
+  .
+ </li>
+<li>
+  Uses Google API Python Client libraries.
+ </li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/xing5-mcp-google-sheets.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

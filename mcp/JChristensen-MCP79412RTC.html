@@ -1,0 +1,2624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Arduino MCP79412 RTC Library - MCP Directory">
+    <meta property="og:description" content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025">
+    <meta property="og:url" content="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arduino MCP79412 RTC Library - MCP Directory">
+    <meta name="twitter:description" content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025">
+    
+    <title>Arduino MCP79412 RTC Library - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Arduino MCP79412 RTC Library</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Arduino MCP79412 RTC Library</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 24</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: C++</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">arduino-library</span><span class="topic-tag"> rtc</span><span class="topic-tag"> real-time-clock</span><span class="topic-tag"> mcp79411</span><span class="topic-tag"> mcp79412</span>
+                        </div>
+                        <a href="https://github.com/JChristensen/MCP79412RTC" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Arduino MCP79412 RTC Library - MCP Directory" property="og:title"/>
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Arduino MCP79412 RTC Library - MCP Directory" name="twitter:title"/>
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" name="twitter:description"/>
+<title>Arduino MCP79412 RTC Library - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Arduino MCP79412 RTC Library</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Arduino MCP79412 RTC Library</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 24</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: C++</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">arduino-library</span><span class="topic-tag"> rtc</span><span class="topic-tag"> real-time-clock</span><span class="topic-tag"> mcp79411</span><span class="topic-tag"> mcp79412</span>
+</div>
+<a class="github-link" href="https://github.com/JChristensen/MCP79412RTC" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Arduino MCP79412 RTC Library - MCP Directory" property="og:title">
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" property="og:description">
+<meta content="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Arduino MCP79412 RTC Library - MCP Directory" name="twitter:title">
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" name="twitter:description">
+<title>Arduino MCP79412 RTC Library - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Arduino MCP79412 RTC Library</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 24</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: C++</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">arduino-library</span><span class="topic-tag"> rtc</span><span class="topic-tag"> real-time-clock</span><span class="topic-tag"> mcp79411</span><span class="topic-tag"> mcp79412</span>
+</div>
+<a class="github-link" href="https://github.com/JChristensen/MCP79412RTC" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Arduino MCP79412 RTC Library - MCP Directory" property="og:title"/>
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Arduino MCP79412 RTC Library - MCP Directory" name="twitter:title"/>
+<meta content="https://github.com/JChristensen/MCP79412RTCREADME fileJack ChristensenMay 2025" name="twitter:description"/>
+<title>Arduino MCP79412 RTC Library - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Arduino MCP79412 RTC Library</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 24</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: C++</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">arduino-library</span><span class="topic-tag"> rtc</span><span class="topic-tag"> real-time-clock</span><span class="topic-tag"> mcp79411</span><span class="topic-tag"> mcp79412</span>
+</div>
+<a class="github-link" href="https://github.com/JChristensen/MCP79412RTC" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Arduino MCP79412 RTC Library
+</h1>
+<p>
+ https://github.com/JChristensen/MCP79412RTC
+ <br/>
+ README file
+ <br/>
+ Jack Christensen
+ <br/>
+ May 2025
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ Arduino MCP79412 RTC Library Copyright (C) 2012-2025 byJack Christensen GNU GPL v3.0
+</p>
+<p>
+ This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License v3.0 as published by the Free Software Foundation.
+</p>
+<p>
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+</p>
+<p>
+ You should have received a copy of the GNU General Public License along with this program. If not, see
+ <a href="https://www.gnu.org/licenses/gpl.html">
+  https://www.gnu.org/licenses/gpl.html
+ </a>
+</p>
+<h2 class="heading">
+ Important note: Library v2.0.0
+</h2>
+<p>
+ The 2.0.0 version of the library has some significant changes and is not completely backwards compatible with earlier versions. These changes provide a more consistent API and reduce the possibility of name collisions. While sketches using this library will likely require changes as a result, these should be mostly straightforward.
+</p>
+<ul>
+<li>
+  The library no longer defines an
+  <code class="code">
+   MCP79412RTC
+  </code>
+  object, therefore each sketch needs to define  one. (Previous versions of the library defined an
+  <code class="code">
+   MCP79412RTC
+  </code>
+  object named
+  <code class="code">
+   RTC
+  </code>
+  , although only for AVR architecture. Consider using a name other than
+  <code class="code">
+   RTC
+  </code>
+  as this can cause a name collision on some architectures.)
+ </li>
+<li>
+  The constructor no longer has the capability to initialize the I2C bus and no longer accepts an optional parameter. Therefore, the sketch needs to call
+  <code class="code">
+   MCP79412RTC::begin()
+  </code>
+  in the
+  <code class="code">
+   setup()
+  </code>
+  function or elsewhere as appropriate.
+ </li>
+<li>
+  To reduce the possibility of name collisions, the enumerations as well as register addresses, etc. are now defined in the header file within the
+  <code class="code">
+   MCP79412RTC
+  </code>
+  class. Therefore, when using any of these names, it will be necessary to include the
+  <code class="code">
+   MCP79412RTC
+  </code>
+  scope, e.g.
+  <code class="code">
+   myRTC.alarm(MCP79412RTC::ALARM_1);
+  </code>
+</li>
+<li>
+  The example sketches and documentation have been updated to reflect these changes.
+ </li>
+</ul>
+<h2 class="heading">
+ Introduction
+</h2>
+<p>
+<strong>
+  MCP79412RTC
+ </strong>
+ is an Arduino library that supports the Microchip MCP7941x Real-Time Clock/Calendar chips. This library is intended to be used with
+ <a href="https://github.com/PaulStoffregen/Time">
+  PJRC's Arduino Time library
+ </a>
+ .
+</p>
+<p>
+<strong>
+  For more information on the MCP79412, see:
+ </strong>
+<br/>
+ The
+ <a href="https://www.microchip.com/en-us/product/MCP79412">
+  Microchip MCP79412 Product Page
+ </a>
+ for specs, datasheet, etc.
+ <br/>
+<a href="http://goo.gl/MkBnjR">
+  My Blog Post
+ </a>
+ , summarizing the features and advantages of the MCP79412
+ <br/>
+<a href="http://goo.gl/RfM5os">
+  My Power Outage Logger Project
+ </a>
+ , an Arduino-based project featuring the MCP79412
+</p>
+<h2 class="heading">
+ Examples
+</h2>
+<p>
+ The following example sketches are included with the
+ <strong>
+  MCP79412RTC
+ </strong>
+ library:
+</p>
+<ul>
+<li>
+<strong>
+   rtcSet1:
+  </strong>
+  Set the RTC date and time using a hard-coded value in the sketch.
+ </li>
+<li>
+<strong>
+   rtcSet2:
+  </strong>
+  Similar to
+  <strong>
+   rtcSet1
+  </strong>
+  , a different way to hard-code the date and time.
+ </li>
+<li>
+<strong>
+   rtcSet3:
+  </strong>
+  Set the RTC to the sketch compile date and time.
+ </li>
+<li>
+<strong>
+   SetSerial:
+  </strong>
+  Set the RTC's date, time, and calibration register from the Arduino serial monitor.
+ </li>
+<li>
+<strong>
+   TimeRTC:
+  </strong>
+  Similar to the example of the same name provided with the
+  <strong>
+   Time
+  </strong>
+  library.
+ </li>
+<li>
+<strong>
+   PowerOutageLogger:
+  </strong>
+  A comprehensive example that implements a power failure logger using the MCP79412's ability to capture power down and power up times.  Power failure events are logged to the MCP79412's SRAM.  Output is to the Arduino serial monitor.
+ </li>
+<li>
+<strong>
+   tiny79412_KnockBang:
+  </strong>
+  Demonstrates interfacing an ATtiny45/85 to the MCP79412.
+ </li>
+</ul>
+<h2 class="heading">
+ Enumerations
+</h2>
+<h3 class="heading">
+ ALARM_TYPES_t
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Symbolic names used with the
+ <code class="code">
+  enableAlarm()
+ </code>
+ function described below.
+</p>
+<h5 class="heading">
+ Values
+</h5>
+<ul>
+<li>
+  ALM_MATCH_SECONDS -- Triggers alarm when the seconds in the RTC time keeping register match the seconds in the alarm register.
+ </li>
+<li>
+  ALM_MATCH_MINUTES -- Triggers when RTC time minutes match alarm minutes.
+ </li>
+<li>
+  ALM_MATCH_HOURS -- Triggers when RTC time hours match alarm hours.
+ </li>
+<li>
+  ALM_MATCH_DAY -- Triggers when day of the week matches. (Triggers at midnight.)
+ </li>
+<li>
+  ALM_MATCH_DATE -- Triggers when date matches. (Triggers at midnight.)
+ </li>
+<li>
+  ALM_MATCH_DATETIME -- Triggers when seconds, minutes, hours, day of week, date and month all match.
+ </li>
+<li>
+  ALM_DISABLE -- Disables the alarm.
+ </li>
+</ul>
+<h3 class="heading">
+ ALARM_NBR_t
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Symbolic names used with alarm functions.
+</p>
+<h5 class="heading">
+ Values
+</h5>
+<ul>
+<li>
+  ALARM_0
+ </li>
+<li>
+  ALARM_1
+ </li>
+</ul>
+<h3 class="heading">
+ SQWAVE_FREQS_t
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Symbolic names used with the squareWave() function (described below).
+</p>
+<h5 class="heading">
+ Values
+</h5>
+<ul>
+<li>
+  SQWAVE_1_HZ,
+ </li>
+<li>
+  SQWAVE_4096_HZ,
+ </li>
+<li>
+  SQWAVE_8192_HZ,
+ </li>
+<li>
+  SQWAVE_32768_HZ,
+ </li>
+<li>
+  SQWAVE_NONE
+ </li>
+</ul>
+<h2 class="heading">
+ Constructor
+</h2>
+<h3 class="heading">
+ MCP79412RTC()
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Instantiates an
+ <code class="code">
+  MCP79412RTC
+ </code>
+ object.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  MCP79412RTC myRTC;
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">MCP79412RTC myRTC;
+</code></pre>
+<h2 class="heading">
+ Initialization function
+</h2>
+<h3 class="heading">
+ begin()
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Initializes the I2C bus. Calls
+ <code class="code">
+  Wire.begin()
+ </code>
+ .
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  begin();
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">MCP79412RTC myRTC;
+void setup() {
+    myRTC.begin();
+}
+</code></pre>
+<h2 class="heading">
+ Functions for setting and reading the time
+</h2>
+<h3 class="heading">
+ get()
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads the current date and time from the RTC and returns it as a
+ <em>
+  time_t
+ </em>
+ value. Returns zero if an I2C error occurs (RTC not present, etc.).
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.get();
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ Current date and time
+ <em>
+  (time_t)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">time_t myTime;
+myTime = RTC.get();
+</code></pre>
+<h3 class="heading">
+ set(time_t t)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Sets the RTC date and time to the given
+ <em>
+  time_t
+ </em>
+ value.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.set(t);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  t:
+ </strong>
+ The date and time to set the RTC to
+ <em>
+  (time_t)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//this example first sets the system time (maintained by the Time library) to
+//a hard-coded date and time, and then sets the RTC from the system time.
+//the setTime() function is part of the Time library.
+setTime(23, 31, 30, 13, 2, 2009);   //set the system time to 23h31m30s on 13Feb2009
+RTC.set(now());                     //set the RTC from the system time
+</code></pre>
+<h3 class="heading">
+ read(tmElements_t &amp;tm)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads the current date and time from the RTC and returns it as a
+ <em>
+  tmElements_t
+ </em>
+ structure. Returns
+ <em>
+  false
+ </em>
+ if an I2C error occurs (RTC not present, etc.).  See the
+ <a href="https://www.arduino.cc/playground/Code/Time">
+  Arduino Time library
+ </a>
+ for details on the
+ <em>
+  tmElements_t
+ </em>
+ structure.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.read(tm);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  tm:
+ </strong>
+ Address of a
+ <em>
+  tmElements_t
+ </em>
+ structure to which the date and time are returned.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ False if an I2C error occurred, else true.  The date and time read from the RTC are returned to the
+ <strong>
+  tm
+ </strong>
+ parameter.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">tmElements_t tm;
+RTC.read(tm);
+Serial.print(tm.Hour, DEC);
+Serial.print(':');
+Serial.print(tm.Minute,DEC);
+Serial.print(':');
+Serial.println(tm.Second,DEC);
+</code></pre>
+<h3 class="heading">
+ write(tmElements_t &amp;tm)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Sets the RTC to the date and time given by a
+ <em>
+  tmElements_t
+ </em>
+ structure.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.write(tm);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  tm:
+ </strong>
+ Address of a
+ <em>
+  tmElements_t
+ </em>
+ structure used to set the date and time.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">tmElements_t tm;
+tm.Hour = 23;             //set the tm structure to 23h31m30s on 13Feb2009
+tm.Minute = 31;
+tm.Minute = 30;
+tm.Day = 13;
+tm.Month = 2;
+tm.Year = 2009 - 1970;    //tmElements_t.Year is the offset from 1970
+RTC.write(tm);            //set the RTC from the tm structure
+</code></pre>
+<h3 class="heading">
+ isRunning()
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Returns a boolean value indicating whether the RTC's oscillator is running.  When there is no backup battery present, the RTC will reset when it is next powered up, and the oscillator will not be running.  Setting the time with
+ <code class="code">
+  RTC.set()
+ </code>
+ or
+ <code class="code">
+  RTC.write()
+ </code>
+ starts the oscillator.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.isRunning();
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ True if the RTC's oscillator is running, else false
+ <em>
+  (boolean)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">if ( RTC.isRunning() )
+    //do something
+else
+    //do something else
+</code></pre>
+<h2 class="heading">
+ Alarm functions
+</h2>
+<p>
+ The MCP79412 RTC has two alarms (Alarm-0 and Alarm-1) that can be used separately or simultaneously.  When an alarm is triggered, a flag is set in the RTC that can be detected with the
+ <code class="code">
+  alarm()
+ </code>
+ function below.  Optionally, the RTC's Multi-Function Pin (MFP) can be driven to either a low or high logic level when an alarm is triggered.  When using the MFP with both alarms, be sure to read the comments on the
+ <code class="code">
+  alarmPolarity()
+ </code>
+ function below.
+</p>
+<h3 class="heading">
+ setAlarm(byte alarmNumber, time_t alarmTime)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Sets an alarm date and time.  This
+ <em>
+  sets
+ </em>
+ the alarm registers only, it does not
+ <em>
+  enable
+ </em>
+ the alarm, this is done using the
+ <code class="code">
+  enableAlarm()
+ </code>
+ function.
+ <em>
+  alarmNumber
+ </em>
+ is 0 or 1, but is ruthlessly masked to ensure a valid value.  Note that depending on the alarm type chosen (see
+ <code class="code">
+  enableAlarm()
+ </code>
+ below), only selected date or time parts may act as alarm critera.  Nevertheless, valid values should be specified in the
+ <em>
+  alarmTime
+ </em>
+ parameter.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.setAlarm(alarmNumber, alarmTime);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  alarmNumber:
+ </strong>
+ ALARM_0 or ALARM_1
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  alarmTime:
+ </strong>
+ Date and time to set the alarm to
+ <em>
+  (time_t)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//set alarm-1 for 30 seconds after midnight on 21Dec2012
+tmElements_t tm;
+tm.Hour = 0;
+tm.Minute = 0;
+tm.Second = 30;
+tm.Year = CalendarYrToTm(2012);
+tm.Month = 12;
+tm.Day = 21;
+RTC.setAlarm(ALARM_1, makeTime(tm));
+</code></pre>
+<h3 class="heading">
+ enableAlarm(byte alarmNumber, byte alarmType)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Enable or disable the given alarm.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.enableAlarm(alarmNumber, alarmType);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  alarmNumber:
+ </strong>
+ ALARM_0 or ALARM_1
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  alarmType:
+ </strong>
+ One of the following: ALM_MATCH_SECONDS, ALM_MATCH_MINUTES, ALM_MATCH_HOURS, ALM_MATCH_DAY, ALM_MATCH_DATE, ALM_MATCH_DATETIME, ALM_DISABLE.  (ALM_MATCH_DATETIME triggers the alarm when seconds, minutes, hours, day, date and month
+ <em>
+  all
+ </em>
+ match.)
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//disable alarm-0
+RTC.enableAlarm(ALARM_0, ALM_DISABLE);
+
+//enable alarm-1 to trigger when the minutes match.
+//assuming alarm-1 is set as in the example above, this will trigger the
+//alarm every hour, on the hour (minutes=0).
+RTC.enableAlarm(ALARM_1, ALM_MATCH_MINUTES);
+
+//enable alarm-1 to trigger when the seconds match.
+//assuming alarm-1 is set as in the example above, this will trigger the
+//alarm once a minute, at 30 seconds past the minute.
+RTC.enableAlarm(ALARM_1, ALM_MATCH_SECONDS);
+</code></pre>
+<h3 class="heading">
+ alarm(byte alarmNumber)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Tests whether the given alarm has been triggered, and returns a corresponding boolean value.  Clears the alarm flag to ensure that the next trigger event can be trapped.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.alarm(byte alarmNumber);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  alarmNumber:
+ </strong>
+ ALARM_0 or ALARM_1
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ True if the alarm was triggered, else false
+ <em>
+  (boolean)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">if ( RTC.alarm(ALARM_0) )
+    //alarm-0 has triggered
+else
+    //alarm-0 has not triggered
+</code></pre>
+<h3 class="heading">
+ alarmPolarity(boolean polarity)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Specifies the logic level on the Multi-Function Pin (MFP) when an alarm is triggered.  The default is LOW.  When both alarms are active, the two are ORed together to determine the level of the MFP.  With alarm polarity set to LOW (the default), this causes the MFP to go low only when BOTH alarms are triggered.  With alarm polarity set to HIGH, the MFP will go high when EITHER alarm is triggered.  Note that the state of the MFP is independent of the RTC's (so-called) alarm "interrupt" flags, and that the
+ <code class="code">
+  alarm()
+ </code>
+ function will indicate when an alarm is triggered regardless of the polarity.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.alarmPolarity(boolean polarity);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  polarity:
+ </strong>
+ HIGH or LOW
+ <em>
+  (boolean)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.alarmPolarity(HIGH);    //drives MFP high when an alarm is triggered
+</code></pre>
+<h2 class="heading">
+ Functions for reading and writing static RAM (SRAM)
+</h2>
+<p>
+ The MCP79412 RTC has 64 bytes of battery-backed SRAM that can be read and written with the following functions using addresses between 0 and 63.  Addresses passed to these functions are constrained to the valid range by an AND function.
+</p>
+<h3 class="heading">
+ sramWrite(byte addr, byte value)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Writes a single byte to the SRAM.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.sramWrite(addr, value);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ SRAM address to write
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  value:
+ </strong>
+ Value to write
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.sramWrite(3, 14);   //write the value 14 to SRAM address 3
+</code></pre>
+<h3 class="heading">
+ sramWrite(byte addr, byte *values, byte nBytes)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Writes multiple bytes to consecutive SRAM locations.
+ <em>
+  nBytes
+ </em>
+ must be between 1 and 31.  Invalid values of
+ <em>
+  nBytes
+ </em>
+ , or combinations of
+ <em>
+  addr
+ </em>
+ and
+ <em>
+  nBytes
+ </em>
+ that would result in addressing past the last byte of SRAM will result in no action.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.sramWrite(addr, values, nBytes);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ First SRAM address to write
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  value:
+ </strong>
+ An array of values to write _(
+ <em>
+  byte)_
+  <br/>
+</em>
+<em>
+  nBytes:
+ </em>
+<em>
+  Number of bytes to write
+ </em>
+ (byte)*
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//write 1, 2, ..., 8 to the first eight SRAM locations
+byte buf[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+RTC.sramWrite(0, buf, 8);
+</code></pre>
+<h3 class="heading">
+ sramRead(byte addr)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads a single byte from SRAM.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.sramRead(addr);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ SRAM address to read
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ The value read
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">byte val;
+val = RTC.sramRead(3);  //read the value from SRAM location 3
+</code></pre>
+<h3 class="heading">
+ sramRead(byte addr, byte *values, byte nBytes)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads multiple bytes from consecutive SRAM locations.  nBytes must be between 1 and 32.  Invalid values of
+ <em>
+  nBytes
+ </em>
+ , or combinations of
+ <em>
+  addr
+ </em>
+ and
+ <em>
+  nBytes
+ </em>
+ that would result in addressing past the last byte of SRAM will result in no action.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.sramRead(addr, values, nBytes);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ First SRAM address to read
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  values:
+ </strong>
+ An array to receive the read values _(
+ <em>
+  byte)_
+  <br/>
+</em>
+<em>
+  nBytes:
+ </em>
+<em>
+  Number of bytes to read
+ </em>
+ (byte)*
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ No function value returned.  Bytes read from SRAM are returned to the
+ <strong>
+  values
+ </strong>
+ array.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//read the last eight locations of SRAM into buf
+byte buf[8];
+RTC.sramRead(56, buf, 8);
+</code></pre>
+<h2 class="heading">
+ Functions for Reading and writing EEPROM
+</h2>
+<p>
+ The MCP79412 RTC has 128 bytes of non-volatile EEPROM that can be read and written with the following functions using addresses between 0 and 127.  Addresses passed to these functions are constrained to the valid range by an AND function.
+</p>
+<p>
+ EEPROM is paged memory with a page size of 8 bytes; when writing multiple bytes, this this limits the number of bytes that can be written at one time to 8.  Page writes must start on a page boundary.
+</p>
+<h3 class="heading">
+ eepromWrite(byte addr, byte value)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Writes a single byte to EEPROM.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.eepromWrite(addr, value);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ EEPROM address to write
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  value:
+ </strong>
+ Value to write
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.eepromWrite(42, 55);   //write the value 55 to EEPROM address 42
+</code></pre>
+<h3 class="heading">
+ eepromWrite(byte addr, byte *values, byte nBytes)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Writes a page (8 bytes) or less to EEPROM.
+ <em>
+  addr
+ </em>
+ should be a page start address (0, 8, ..., 120), but if not, is ruthlessly coerced into a valid value with an AND function.
+ <em>
+  nBytes
+ </em>
+ must be between 1 and 8, other values result in no action.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.eepromWrite(addr, values, nBytes);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ First EEPROM address to write
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  value:
+ </strong>
+ An array of values to write _(
+ <em>
+  byte)_
+  <br/>
+</em>
+<em>
+  nBytes:
+ </em>
+<em>
+  Number of bytes to write
+ </em>
+ (byte)*
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//write 1, 2, ..., 8 to the first eight EEPROM locations
+byte buf[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+RTC.eepromWrite(0, buf, 8);
+</code></pre>
+<h3 class="heading">
+ eepromRead(byte addr)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads a single byte from EEPROM and returns the value.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.eepromRead(byte addr);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ EEPROM address to read
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ The value read
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">byte val;
+val = RTC.eepromRead(42);  //read the value from EEPROM location 42
+</code></pre>
+<h3 class="heading">
+ eepromRead(byte addr, byte *values, byte nBytes)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads multiple bytes from consecutive EEPROM locations.
+ <em>
+  nBytes
+ </em>
+ must be between 1 and 32. Invalid values of
+ <em>
+  nBytes
+ </em>
+ , or combinations of
+ <em>
+  addr
+ </em>
+ and
+ <em>
+  nBytes
+ </em>
+ that would result in addressing past the last byte of EEPROM will result in no action.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.eepromRead(addr, values, nBytes);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  addr:
+ </strong>
+ First EEPROM address to read
+ <em>
+  (byte)
+ </em>
+<br/>
+<strong>
+  values:
+ </strong>
+ An array to receive the read values _(
+ <em>
+  byte)_
+  <br/>
+</em>
+<em>
+  nBytes:
+ </em>
+<em>
+  Number of bytes to read
+ </em>
+ (byte)*
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ No function value returned.  The bytes read from EEPROM are returned to the
+ <strong>
+  values
+ </strong>
+ array.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">//read the last eight locations of EEPROM into buf
+byte buf[8];
+RTC.eepromRead(120, buf, 8);
+</code></pre>
+<h2 class="heading">
+ Calibration, power failure, and other functions
+</h2>
+<h3 class="heading">
+ calibWrite(int value)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Writes the given value to the RTC calibration register.  This is an adjustment factor in PPM (approximately), and must be between -127 and 127.  Negative numbers cause the RTC to run faster, positive numbers cause it to run slower.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.calibWrite(int value);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  value:
+ </strong>
+ The calibration value to set, between -127 and 127
+ <em>
+  (int)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.calibWrite(13);     //makes the RTC run slower by 13 parts per million.
+RTC.calibWrite(-42);    //makes the RTC run faster by 42 parts per million.
+</code></pre>
+<h3 class="heading">
+ calibRead()
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads the RTC calibration register.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.calibRead();
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ RTC calibration register value
+ <em>
+  (int)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">int value;
+value = RTC.calibRead();
+</code></pre>
+<h3 class="heading">
+ powerFail(time_t
+ <em>
+  powerDown, time_t
+ </em>
+ powerUp)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Returns a boolean value (true or false) to indicate whether a power failure has occurred. If a power failure occurred, the power down and power up timestamps are returned in the variables given by the caller, the RTC's power fail flag is reset and the power up/down timestamps are cleared.
+</p>
+<p>
+ Note that the power down and power up timestamp registers do not contain values for seconds or for the year. The returned time stamps will therefore contain the current year from the RTC. However, there is the possibility that a power outage spans from one year to the next. If this occurs, the power down timestamp would appear to be at a later time than the power up timestamp; if this is encountered,
+ <code class="code">
+  powerFail()
+ </code>
+ will subtract one year from the power down timestamp before returning it.
+</p>
+<p>
+ Still, there is an assumption that the timestamps are being read in the same year as that when the power up occurred.  If this is not the case the year in the returned timestamp will be invalid.
+</p>
+<p>
+ Finally, note that once the RTC records a power outage, it must be cleared before another can be recorded. If two power outages occur before
+ <code class="code">
+  powerFail()
+ </code>
+ is called again, the time stamps for the earlier outage will be returned and the timestamps for the second outage will be lost.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.powerFail(powerDown, powerUp);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  powerDown:
+ </strong>
+ Pointer to a
+ <em>
+  time_t
+ </em>
+ variable to hold the returned power down timestamp.
+ <br/>
+<strong>
+  powerUp:
+ </strong>
+ Pointer to a
+ <em>
+  time_t
+ </em>
+ variable to hold the returned power up timestamp.
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ True if a power failure occurred, else false
+ <em>
+  (boolean)
+ </em>
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">time_t powerDown, powerUp;    //power outage timestamps
+if ( RTC.powerFail(&amp;powerDown, &amp;powerUp) ) {
+    //do something
+else
+    //do something else
+</code></pre>
+<h3 class="heading">
+ squareWave(byte freq)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Enables or disables the square wave output on the multi-function pin (MFP).
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.squareWave(byte freq);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  freq:
+ </strong>
+ One of the following: SQWAVE_1_HZ, SQWAVE_4096_HZ, SQWAVE_8192_HZ, SQWAVE_32768_HZ, SQWAVE_NONE
+ <em>
+  (byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.squareWave(SQWAVE_1_HZ);    //output a 1Hz square wave on the MFP
+</code></pre>
+<hr/>
+<h3 class="heading">
+ out(boolean level)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Sets the logic level on the MFP when it's not being used as a square wave or alarm output.  The default value after the RTC chip is reset is HIGH.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.out(boolean level);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  level
+ </strong>
+ : HIGH or LOW
+ <em>
+  (boolean)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.out(LOW);   //set the MFP to a low logic level
+</code></pre>
+<hr/>
+<h3 class="heading">
+ idRead(byte *uniqueID)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Reads the 64-bit unique ID from the RTC.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.idRead(byte *uniqueID);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  uniqueID:
+ </strong>
+ An 8-byte array to receive the unique ID
+ <em>
+  (*byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ No function value returned.  The RTC's ID is returned to the
+ <strong>
+  uniqueID
+ </strong>
+ array.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">byte buf[8];
+RTC.idRead(buf);
+</code></pre>
+<hr/>
+<h3 class="heading">
+ vbaten(boolean enable)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Set or clear the VBATEN bit. Setting the bit powers the clock and SRAM from the backup battery when Vcc falls. Note that setting the time via set() or write() sets the VBATEN bit.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.vbaten(boolean enable);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  enable:
+ </strong>
+ true or false
+ <em>
+  (boolean)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ None.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">RTC.vbaten(false);
+</code></pre>
+<hr/>
+<h3 class="heading">
+ getEUI64(byte *uniqueID)
+</h3>
+<h5 class="heading">
+ Description
+</h5>
+<p>
+ Returns an EUI-64 ID. For an MCP79412, calling this function is equivalent to calling
+ <code class="code">
+  idRead()
+ </code>
+ . For an MCP79411, the EUI-48 ID is converted to EUI-64. Caller must provide an 8-byte array to contain the results.
+</p>
+<h5 class="heading">
+ Syntax
+</h5>
+<p>
+<code class="code">
+  RTC.getEUI64(byte *uniqueID);
+ </code>
+</p>
+<h5 class="heading">
+ Parameters
+</h5>
+<p>
+<strong>
+  uniqueID:
+ </strong>
+ An 8-byte array to receive the EUI-64 unique ID
+ <em>
+  (*byte)
+ </em>
+</p>
+<h5 class="heading">
+ Returns
+</h5>
+<p>
+ No function value returned.  The EUI-64 ID is returned to the
+ <strong>
+  uniqueID
+ </strong>
+ array.
+</p>
+<h5 class="heading">
+ Example
+</h5>
+<pre class="pre"><code class="language-c++ code">byte buf[8];
+RTC.getEUI64(buf);
+</code></pre>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/JChristensen-MCP79412RTC.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

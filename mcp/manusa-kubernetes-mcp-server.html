@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Kubernetes MCP Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kubernetes MCP Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Kubernetes MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Kubernetes MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Kubernetes MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 252</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Go</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">containers</span><span class="topic-tag"> context</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model</span><span class="topic-tag"> openshift</span><span class="topic-tag"> protocol</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> kubernetes-mcp</span>
+                        </div>
+                        <a href="https://github.com/manusa/kubernetes-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Kubernetes MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Kubernetes MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Kubernetes MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Kubernetes MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Kubernetes MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 252</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">containers</span><span class="topic-tag"> context</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model</span><span class="topic-tag"> openshift</span><span class="topic-tag"> protocol</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> kubernetes-mcp</span>
+</div>
+<a class="github-link" href="https://github.com/manusa/kubernetes-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Kubernetes MCP Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Kubernetes MCP Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Kubernetes MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Kubernetes MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 252</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">containers</span><span class="topic-tag"> context</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model</span><span class="topic-tag"> openshift</span><span class="topic-tag"> protocol</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> kubernetes-mcp</span>
+</div>
+<a class="github-link" href="https://github.com/manusa/kubernetes-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Kubernetes MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Kubernetes MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Kubernetes MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Kubernetes MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 252</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">containers</span><span class="topic-tag"> context</span><span class="topic-tag"> kubernetes</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model</span><span class="topic-tag"> openshift</span><span class="topic-tag"> protocol</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> kubernetes-mcp</span>
+</div>
+<a class="github-link" href="https://github.com/manusa/kubernetes-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Kubernetes MCP Server
+</h1>
+<p>
+<a href="https://github.com/manusa/kubernetes-mcp-server/blob/main/LICENSE">
+<img alt="GitHub License" src="https://img.shields.io/github/license/manusa/kubernetes-mcp-server"/>
+</a>
+<a href="https://www.npmjs.com/package/kubernetes-mcp-server">
+<img alt="npm" src="https://img.shields.io/npm/v/kubernetes-mcp-server"/>
+</a>
+<a href="https://pypi.org/project/kubernetes-mcp-server/">
+<img alt="PyPI - Version" src="https://img.shields.io/pypi/v/kubernetes-mcp-server"/>
+</a>
+<a href="https://github.com/manusa/kubernetes-mcp-server/releases/latest">
+<img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/manusa/kubernetes-mcp-server?sort=semver"/>
+</a>
+<a href="https://github.com/manusa/kubernetes-mcp-server/actions/workflows/build.yaml">
+<img alt="Build" src="https://github.com/manusa/kubernetes-mcp-server/actions/workflows/build.yaml/badge.svg"/>
+</a>
+</p>
+<p>
+<a href="#features">
+  ✨ Features
+ </a>
+ |
+ <a href="#getting-started">
+  🚀 Getting Started
+ </a>
+ |
+ <a href="#demos">
+  🎥 Demos
+ </a>
+ |
+ <a href="#configuration">
+  ⚙️ Configuration
+ </a>
+ |
+ <a href="#tools">
+  🛠️ Tools
+ </a>
+ |
+ <a href="#development">
+  🧑‍💻 Development
+ </a>
+</p>
+<p>
+ https://github.com/user-attachments/assets/be2b67b3-fc1c-4d11-ae46-93deba8ed98e
+</p>
+<h2 class="heading">
+ ✨ Features
+ <a id="features">
+</a>
+</h2>
+<p>
+ A powerful and flexible Kubernetes
+ <a href="https://blog.marcnuri.com/model-context-protocol-mcp-introduction">
+  Model Context Protocol (MCP)
+ </a>
+ server implementation with support for
+ <strong>
+  Kubernetes
+ </strong>
+ and
+ <strong>
+  OpenShift
+ </strong>
+ .
+</p>
+<ul>
+<li>
+<strong>
+   ✅ Configuration
+  </strong>
+  :
+ </li>
+<li>
+  Automatically detect changes in the Kubernetes configuration and update the MCP server.
+ </li>
+<li>
+<strong>
+   View
+  </strong>
+  and manage the current
+  <a href="https://blog.marcnuri.com/where-is-my-default-kubeconfig-file">
+   Kubernetes
+   <code class="code">
+    .kube/config
+   </code>
+</a>
+  or in-cluster configuration.
+ </li>
+<li>
+<strong>
+   ✅ Generic Kubernetes Resources
+  </strong>
+  : Perform operations on
+  <strong>
+   any
+  </strong>
+  Kubernetes or OpenShift resource.
+ </li>
+<li>
+  Any CRUD operation (Create or Update, Get, List, Delete).
+ </li>
+<li>
+<strong>
+   ✅ Pods
+  </strong>
+  : Perform Pod-specific operations.
+ </li>
+<li>
+<strong>
+   List
+  </strong>
+  pods in all namespaces or in a specific namespace.
+ </li>
+<li>
+<strong>
+   Get
+  </strong>
+  a pod by name from the specified namespace.
+ </li>
+<li>
+<strong>
+   Delete
+  </strong>
+  a pod by name from the specified namespace.
+ </li>
+<li>
+<strong>
+   Show logs
+  </strong>
+  for a pod by name from the specified namespace.
+ </li>
+<li>
+<strong>
+   Exec
+  </strong>
+  into a pod and run a command.
+ </li>
+<li>
+<strong>
+   Run
+  </strong>
+  a container image in a pod and optionally expose it.
+ </li>
+<li>
+<strong>
+   ✅ Namespaces
+  </strong>
+  : List Kubernetes Namespaces.
+ </li>
+<li>
+<strong>
+   ✅ Events
+  </strong>
+  : View Kubernetes events in all namespaces or in a specific namespace.
+ </li>
+<li>
+<strong>
+   ✅ Projects
+  </strong>
+  : List OpenShift Projects.
+ </li>
+<li>
+<strong>
+   ☸️ Helm
+  </strong>
+  :
+ </li>
+<li>
+<strong>
+   Install
+  </strong>
+  a Helm chart in the current or provided namespace.
+ </li>
+<li>
+<strong>
+   List
+  </strong>
+  Helm releases in all namespaces or in a specific namespace.
+ </li>
+<li>
+<strong>
+   Uninstall
+  </strong>
+  a Helm release in the current or provided namespace.
+ </li>
+</ul>
+<p>
+ Unlike other Kubernetes MCP server implementations, this
+ <strong>
+  IS NOT
+ </strong>
+ just a wrapper around
+ <code class="code">
+  kubectl
+ </code>
+ or
+ <code class="code">
+  helm
+ </code>
+ command-line tools.
+It is a
+ <strong>
+  Go-based native implementation
+ </strong>
+ that interacts directly with the Kubernetes API server.
+</p>
+<p>
+ There is
+ <strong>
+  NO NEED
+ </strong>
+ for external dependencies or tools to be installed on the system.
+If you're using the native binaries you don't need to have Node or Python installed on your system.
+</p>
+<ul>
+<li>
+<strong>
+   ✅ Lightweight
+  </strong>
+  : The server is distributed as a single native binary for Linux, macOS, and Windows.
+ </li>
+<li>
+<strong>
+   ✅ High-Performance / Low-Latency
+  </strong>
+  : Directly interacts with the Kubernetes API server without the overhead of calling and waiting for external commands.
+ </li>
+<li>
+<strong>
+   ✅ Cross-Platform
+  </strong>
+  : Available as a native binary for Linux, macOS, and Windows, as well as an npm package, a Python package, and container/Docker image.
+ </li>
+<li>
+<strong>
+   ✅ Configurable
+  </strong>
+  : Supports
+  <a href="#configuration">
+   command-line arguments
+  </a>
+  to configure the server behavior.
+ </li>
+<li>
+<strong>
+   ✅ Well tested
+  </strong>
+  : The server has an extensive test suite to ensure its reliability and correctness across different Kubernetes environments.
+ </li>
+</ul>
+<h2 class="heading">
+ 🚀 Getting Started
+ <a id="getting-started">
+</a>
+</h2>
+<h3 class="heading">
+ Requirements
+</h3>
+<ul>
+<li>
+  Access to a Kubernetes cluster.
+ </li>
+</ul>
+<h3 class="heading">
+ Claude Desktop
+</h3>
+<h4 class="heading">
+ Using npx
+</h4>
+<p>
+ If you have npm installed, this is the fastest way to get started with
+ <code class="code">
+  kubernetes-mcp-server
+ </code>
+ on Claude Desktop.
+</p>
+<p>
+ Open your
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+ and add the mcp server to the list of
+ <code class="code">
+  mcpServers
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "kubernetes": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "kubernetes-mcp-server@latest"
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ VS Code / VS Code Insiders
+</h3>
+<p>
+ Install the Kubernetes MCP server extension in VS Code Insiders by pressing the following link:
+</p>
+<p>
+<a href="https://insiders.vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522kubernetes%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522-y%2522%252C%2522kubernetes-mcp-server%2540latest%2522%255D%257D">
+<img alt="Install in VS Code" src="https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&amp;label=Install%20Server&amp;color=0098FF"/>
+</a>
+<a href="https://insiders.vscode.dev/redirect?url=vscode-insiders%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522kubernetes%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522-y%2522%252C%2522kubernetes-mcp-server%2540latest%2522%255D%257D">
+<img alt="Install in VS Code Insiders" src="https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&amp;label=Install%20Server&amp;color=24bfa5"/>
+</a>
+</p>
+<p>
+ Alternatively, you can install the extension manually by running the following command:
+</p>
+<pre class="pre"><code class="language-shell code"># For VS Code
+code --add-mcp '{"name":"kubernetes","command":"npx","args":["kubernetes-mcp-server@latest"]}'
+# For VS Code Insiders
+code-insiders --add-mcp '{"name":"kubernetes","command":"npx","args":["kubernetes-mcp-server@latest"]}'
+</code></pre>
+<h3 class="heading">
+ Goose CLI
+</h3>
+<p>
+<a href="https://blog.marcnuri.com/goose-on-machine-ai-agent-cli-introduction">
+  Goose CLI
+ </a>
+ is the easiest (and cheapest) way to get rolling with artificial intelligence (AI) agents.
+</p>
+<h4 class="heading">
+ Using npm
+</h4>
+<p>
+ If you have npm installed, this is the fastest way to get started with
+ <code class="code">
+  kubernetes-mcp-server
+ </code>
+ .
+</p>
+<p>
+ Open your goose
+ <code class="code">
+  config.yaml
+ </code>
+ and add the mcp server to the list of
+ <code class="code">
+  mcpServers
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-yaml code">extensions:
+  kubernetes:
+    command: npx
+    args:
+      - -y
+      - kubernetes-mcp-server@latest
+
+</code></pre>
+<h2 class="heading">
+ 🎥 Demos
+ <a id="demos">
+</a>
+</h2>
+<h3 class="heading">
+ Diagnosing and automatically fixing an OpenShift Deployment
+</h3>
+<p>
+ Demo showcasing how Kubernetes MCP server is leveraged by Claude Desktop to automatically diagnose and fix a deployment in OpenShift without any user assistance.
+</p>
+<p>
+ https://github.com/user-attachments/assets/a576176d-a142-4c19-b9aa-a83dc4b8d941
+</p>
+<h3 class="heading">
+<em>
+  Vibe Coding
+ </em>
+ a simple game and deploying it to OpenShift
+</h3>
+<p>
+ In this demo, I walk you through the process of
+ <em>
+  Vibe Coding
+ </em>
+ a simple game using VS Code and how to leverage
+ <a href="https://github.com/manusa/podman-mcp-server">
+  Podman MCP server
+ </a>
+ and Kubernetes MCP server to deploy it to OpenShift.
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=l05jQDSrzVI" target="_blank">
+<img alt="Vibe Coding: Build &amp; Deploy a Game on Kubernetes" src="docs/images/vibe-coding.jpg" width="240"/>
+</a>
+</p>
+<h3 class="heading">
+ Supercharge GitHub Copilot with Kubernetes MCP Server in VS Code - One-Click Setup!
+</h3>
+<p>
+ In this demo, I'll show you how to set up Kubernetes MCP server in VS code just by clicking a link.
+</p>
+<p>
+<a href="https://youtu.be/AI4ljYMkgtA" target="_blank">
+<img alt="Supercharge GitHub Copilot with Kubernetes MCP Server in VS Code - One-Click Setup!" src="docs/images/kubernetes-mcp-server-github-copilot.jpg" width="240"/>
+</a>
+</p>
+<h2 class="heading">
+ ⚙️ Configuration
+ <a id="configuration">
+</a>
+</h2>
+<p>
+ The Kubernetes MCP server can be configured using command line (CLI) arguments.
+</p>
+<p>
+ You can run the CLI executable either by using
+ <code class="code">
+  npx
+ </code>
+ ,
+ <code class="code">
+  uvx
+ </code>
+ , or by downloading the
+ <a href="https://github.com/manusa/kubernetes-mcp-server/releases/latest">
+  latest release binary
+ </a>
+ .
+</p>
+<pre class="pre"><code class="language-shell code"># Run the Kubernetes MCP server using npx (in case you have npm and node installed)
+npx kubernetes-mcp-server@latest --help
+</code></pre>
+<pre class="pre"><code class="language-shell code"># Run the Kubernetes MCP server using uvx (in case you have uv and python installed)
+uvx kubernetes-mcp-server@latest --help
+</code></pre>
+<pre class="pre"><code class="language-shell code"># Run the Kubernetes MCP server using the latest release binary
+./kubernetes-mcp-server --help
+</code></pre>
+<h3 class="heading">
+ Configuration Options
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Option
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     --sse-port
+    </code>
+</td>
+<td>
+    Starts the MCP server in Server-Sent Event (SSE) mode and listens on the specified port.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     --log-level
+    </code>
+</td>
+<td>
+    Sets the logging level (values
+    <a href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-instrumentation/logging.md">
+     from 0-9
+    </a>
+    ). Similar to
+    <a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/#kubectl-output-verbosity-and-debugging">
+     kubectl logging levels
+    </a>
+    .
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     --kubeconfig
+    </code>
+</td>
+<td>
+    Path to the Kubernetes configuration file. If not provided, it will try to resolve the configuration (in-cluster, default location, etc.).
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     --read-only
+    </code>
+</td>
+<td>
+    If set, the MCP server will run in read-only mode, meaning it will not allow any write operations (create, update, delete) on the Kubernetes cluster. This is useful for debugging or inspecting the cluster without making changes.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     --disable-destructive
+    </code>
+</td>
+<td>
+    If set, the MCP server will disable all destructive operations (delete, update, etc.) on the Kubernetes cluster. This is useful for debugging or inspecting the cluster without accidentally making changes. This option has no effect when
+    <code class="code">
+     --read-only
+    </code>
+    is used.
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ 🛠️ Tools
+ <a id="tools">
+</a>
+</h2>
+<h3 class="heading">
+<code class="code">
+  configuration_view
+ </code>
+</h3>
+<p>
+ Get the current Kubernetes configuration content as a kubeconfig YAML
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  minified
+ </code>
+ (
+ <code class="code">
+  boolean
+ </code>
+ , optional, default:
+ <code class="code">
+  true
+ </code>
+ )
+  - Return a minified version of the configuration
+  - If
+ <code class="code">
+  true
+ </code>
+ , keeps only the current-context and relevant configuration pieces
+  - If
+ <code class="code">
+  false
+ </code>
+ , returns all contexts, clusters, auth-infos, and users
+</p>
+<h3 class="heading">
+<code class="code">
+  events_list
+ </code>
+</h3>
+<p>
+ List all the Kubernetes events in the current cluster from all namespaces
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to retrieve the events from. If not provided, will list events from all namespaces
+</p>
+<h3 class="heading">
+<code class="code">
+  helm_install
+ </code>
+</h3>
+<p>
+ Install a Helm chart in the current or provided namespace with the provided name and chart
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  chart
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the Helm chart to install
+  - Can be a local path or a remote URL
+  - Example:
+ <code class="code">
+  ./my-chart.tgz
+ </code>
+ or
+ <code class="code">
+  https://example.com/my-chart.tgz
+ </code>
+ -
+ <code class="code">
+  values
+ </code>
+ (
+ <code class="code">
+  object
+ </code>
+ , optional)
+  - Values to pass to the Helm chart
+  - Example:
+ <code class="code">
+  {"key": "value"}
+ </code>
+ -
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Name of the Helm release
+  - Random name if not provided
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to install the Helm chart in
+  - If not provided, will use the configured namespace
+</p>
+<h3 class="heading">
+<code class="code">
+  helm_list
+ </code>
+</h3>
+<p>
+ List all the Helm releases in the current or provided namespace (or in all namespaces if specified)
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to list the Helm releases from
+  - If not provided, will use the configured namespace
+-
+ <code class="code">
+  all_namespaces
+ </code>
+ (
+ <code class="code">
+  boolean
+ </code>
+ , optional)
+  - If
+ <code class="code">
+  true
+ </code>
+ , will list Helm releases from all namespaces
+  - If
+ <code class="code">
+  false
+ </code>
+ , will list Helm releases from the specified namespace
+</p>
+<h3 class="heading">
+<code class="code">
+  helm_uninstall
+ </code>
+</h3>
+<p>
+ Uninstall a Helm release in the current or provided namespace with the provided name
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the Helm release to uninstall
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to uninstall the Helm release from
+  - If not provided, will use the configured namespace
+</p>
+<h3 class="heading">
+<code class="code">
+  namespaces_list
+ </code>
+</h3>
+<p>
+ List all the Kubernetes namespaces in the current cluster
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ None
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_delete
+ </code>
+</h3>
+<p>
+ Delete a Kubernetes Pod in the current or provided namespace with the provided name
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the Pod to delete
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Namespace to delete the Pod from
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_exec
+ </code>
+</h3>
+<p>
+ Execute a command in a Kubernetes Pod in the current or provided namespace with the provided name and command
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  command
+ </code>
+ (
+ <code class="code">
+  string[]
+ </code>
+ , required)
+  - Command to execute in the Pod container
+  - First item is the command, rest are arguments
+  - Example:
+ <code class="code">
+  ["ls", "-l", "/tmp"]
+ </code>
+ -
+ <code class="code">
+  name
+ </code>
+ (string, required)
+  - Name of the Pod
+-
+ <code class="code">
+  namespace
+ </code>
+ (string, required)
+  - Namespace of the Pod
+-
+ <code class="code">
+  container
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Name of the Pod container to get logs from
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_get
+ </code>
+</h3>
+<p>
+ Get a Kubernetes Pod in the current or provided namespace with the provided name
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the Pod
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Namespace to get the Pod from
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_list
+ </code>
+</h3>
+<p>
+ List all the Kubernetes pods in the current cluster from all namespaces
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  labelSelector
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Kubernetes label selector (e.g., 'app=myapp,env=prod' or 'app in (myapp,yourapp)'). Use this option to filter the pods by label
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_list_in_namespace
+ </code>
+</h3>
+<p>
+ List all the Kubernetes pods in the specified namespace in the current cluster
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Namespace to list pods from
+-
+ <code class="code">
+  labelSelector
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Kubernetes label selector (e.g., 'app=myapp,env=prod' or 'app in (myapp,yourapp)'). Use this option to filter the pods by label
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_log
+ </code>
+</h3>
+<p>
+ Get the logs of a Kubernetes Pod in the current or provided namespace with the provided name
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the Pod to get logs from
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Namespace to get the Pod logs from
+-
+ <code class="code">
+  container
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Name of the Pod container to get logs from
+</p>
+<h3 class="heading">
+<code class="code">
+  pods_run
+ </code>
+</h3>
+<p>
+ Run a Kubernetes Pod in the current or provided namespace with the provided container image and optional name
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  image
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Container Image to run in the Pod
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Namespace to run the Pod in
+-
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Name of the Pod (random name if not provided)
+-
+ <code class="code">
+  port
+ </code>
+ (
+ <code class="code">
+  number
+ </code>
+ , optional)
+  - TCP/IP port to expose from the Pod container
+  - No port exposed if not provided
+</p>
+<h3 class="heading">
+<code class="code">
+  projects_list
+ </code>
+</h3>
+<p>
+ List all the OpenShift projects in the current cluster
+</p>
+<h3 class="heading">
+<code class="code">
+  resources_create_or_update
+ </code>
+</h3>
+<p>
+ Create or update a Kubernetes resource in the current cluster by providing a YAML or JSON representation of the resource
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  resource
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - A JSON or YAML containing a representation of the Kubernetes resource
+  - Should include top-level fields such as apiVersion, kind, metadata, and spec
+</p>
+<p>
+<strong>
+  Common apiVersion and kind include:
+ </strong>
+ - v1 Pod
+- v1 Service
+- v1 Node
+- apps/v1 Deployment
+- networking.k8s.io/v1 Ingress
+</p>
+<h3 class="heading">
+<code class="code">
+  resources_delete
+ </code>
+</h3>
+<p>
+ Delete a Kubernetes resource in the current cluster
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  apiVersion
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - apiVersion of the resource (e.g.,
+ <code class="code">
+  v1
+ </code>
+ ,
+ <code class="code">
+  apps/v1
+ </code>
+ ,
+ <code class="code">
+  networking.k8s.io/v1
+ </code>
+ )
+-
+ <code class="code">
+  kind
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - kind of the resource (e.g.,
+ <code class="code">
+  Pod
+ </code>
+ ,
+ <code class="code">
+  Service
+ </code>
+ ,
+ <code class="code">
+  Deployment
+ </code>
+ ,
+ <code class="code">
+  Ingress
+ </code>
+ )
+-
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the resource
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to delete the namespaced resource from
+  - Ignored for cluster-scoped resources
+  - Uses configured namespace if not provided
+</p>
+<h3 class="heading">
+<code class="code">
+  resources_get
+ </code>
+</h3>
+<p>
+ Get a Kubernetes resource in the current cluster
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  apiVersion
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - apiVersion of the resource (e.g.,
+ <code class="code">
+  v1
+ </code>
+ ,
+ <code class="code">
+  apps/v1
+ </code>
+ ,
+ <code class="code">
+  networking.k8s.io/v1
+ </code>
+ )
+-
+ <code class="code">
+  kind
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - kind of the resource (e.g.,
+ <code class="code">
+  Pod
+ </code>
+ ,
+ <code class="code">
+  Service
+ </code>
+ ,
+ <code class="code">
+  Deployment
+ </code>
+ ,
+ <code class="code">
+  Ingress
+ </code>
+ )
+-
+ <code class="code">
+  name
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - Name of the resource
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to retrieve the namespaced resource from
+  - Ignored for cluster-scoped resources
+  - Uses configured namespace if not provided
+</p>
+<h3 class="heading">
+<code class="code">
+  resources_list
+ </code>
+</h3>
+<p>
+ List Kubernetes resources and objects in the current cluster
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ -
+ <code class="code">
+  apiVersion
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - apiVersion of the resources (e.g.,
+ <code class="code">
+  v1
+ </code>
+ ,
+ <code class="code">
+  apps/v1
+ </code>
+ ,
+ <code class="code">
+  networking.k8s.io/v1
+ </code>
+ )
+-
+ <code class="code">
+  kind
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , required)
+  - kind of the resources (e.g.,
+ <code class="code">
+  Pod
+ </code>
+ ,
+ <code class="code">
+  Service
+ </code>
+ ,
+ <code class="code">
+  Deployment
+ </code>
+ ,
+ <code class="code">
+  Ingress
+ </code>
+ )
+-
+ <code class="code">
+  namespace
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Namespace to retrieve the namespaced resources from
+  - Ignored for cluster-scoped resources
+  - Lists resources from all namespaces if not provided
+-
+ <code class="code">
+  labelSelector
+ </code>
+ (
+ <code class="code">
+  string
+ </code>
+ , optional)
+  - Kubernetes label selector (e.g., 'app=myapp,env=prod' or 'app in (myapp,yourapp)'). Use this option to filter the pods by label.
+</p>
+<h2 class="heading">
+ 🧑‍💻 Development
+ <a id="development">
+</a>
+</h2>
+<h3 class="heading">
+ Running with mcp-inspector
+</h3>
+<p>
+ Compile the project and run the Kubernetes MCP server with
+ <a href="https://modelcontextprotocol.io/docs/tools/inspector">
+  mcp-inspector
+ </a>
+ to inspect the MCP server.
+</p>
+<pre class="pre"><code class="language-shell code"># Compile the project
+make build
+# Run the Kubernetes MCP server with mcp-inspector
+npx @modelcontextprotocol/inspector@latest $(pwd)/kubernetes-mcp-server
+</code></pre>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/manusa-kubernetes-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

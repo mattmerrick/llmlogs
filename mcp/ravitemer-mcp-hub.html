@@ -1,0 +1,2692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP Hub - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/ravitemer-mcp-hub.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP Hub - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>MCP Hub - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP Hub</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP Hub</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 130</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: JavaScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">ai</span><span class="topic-tag"> chatgpt</span><span class="topic-tag"> claude-ai</span><span class="topic-tag"> llms</span><span class="topic-tag"> local-development</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> nodejs</span><span class="topic-tag"> process-management-server</span><span class="topic-tag"> server</span><span class="topic-tag"> smithery</span><span class="topic-tag"> mcp-hub</span>
+                        </div>
+                        <a href="https://github.com/ravitemer/mcp-hub" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Hub - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/ravitemer-mcp-hub.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Hub - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MCP Hub - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP Hub</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP Hub</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 130</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: JavaScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> chatgpt</span><span class="topic-tag"> claude-ai</span><span class="topic-tag"> llms</span><span class="topic-tag"> local-development</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> nodejs</span><span class="topic-tag"> process-management-server</span><span class="topic-tag"> server</span><span class="topic-tag"> smithery</span><span class="topic-tag"> mcp-hub</span>
+</div>
+<a class="github-link" href="https://github.com/ravitemer/mcp-hub" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Hub - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/ravitemer-mcp-hub.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP Hub - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>MCP Hub - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Hub</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 130</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: JavaScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> chatgpt</span><span class="topic-tag"> claude-ai</span><span class="topic-tag"> llms</span><span class="topic-tag"> local-development</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> nodejs</span><span class="topic-tag"> process-management-server</span><span class="topic-tag"> server</span><span class="topic-tag"> smithery</span><span class="topic-tag"> mcp-hub</span>
+</div>
+<a class="github-link" href="https://github.com/ravitemer/mcp-hub" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Hub - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/ravitemer-mcp-hub.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Hub - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MCP Hub - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Hub</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 130</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: JavaScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> chatgpt</span><span class="topic-tag"> claude-ai</span><span class="topic-tag"> llms</span><span class="topic-tag"> local-development</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> nodejs</span><span class="topic-tag"> process-management-server</span><span class="topic-tag"> server</span><span class="topic-tag"> smithery</span><span class="topic-tag"> mcp-hub</span>
+</div>
+<a class="github-link" href="https://github.com/ravitemer/mcp-hub" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ MCP Hub
+</h1>
+<p>
+<a href="https://www.npmjs.com/package/mcp-hub">
+<img alt="npm version" src="https://badge.fury.io/js/mcp-hub.svg"/>
+</a>
+<a href="https://opensource.org/licenses/MIT">
+<img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
+</a>
+<a href="./CONTRIBUTING.md">
+<img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"/>
+</a>
+</p>
+<p>
+ MCP Hub acts as a central coordinator between clients and multiple MCP servers, making it easy to utilize capabilities from multiple servers through a single interface. Implements
+ <a href="https://modelcontextprotocol.io/specification/2025-03-26">
+  MCP 2025-03-26
+ </a>
+ specification.
+</p>
+<h2 class="heading">
+ Feature Support
+</h2>
+<table>
+<thead>
+<tr>
+<th>
+    Category
+   </th>
+<th>
+    Feature
+   </th>
+<th>
+    Support
+   </th>
+<th>
+    Notes
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+     Transport
+    </strong>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    streamable-http
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Primary transport protocol for remote servers
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    SSE
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Fallback transport for remote servers
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    STDIO
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    For running local servers
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Authentication
+    </strong>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    OAuth 2.0
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    With PKCE flow
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Headers
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    For API keys/tokens
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Capabilities
+    </strong>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Tools
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    List tools
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    🔔 Tool List Changed
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Real-time updates
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Resources
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Full support
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    🔔 Resource List Changed
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Real-time updates
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Resource Templates
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    URI templates
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Prompts
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Full support
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    🔔 Prompts List Changed
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Real-time updates
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Roots
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    Not supported
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Sampling
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    Not supported
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Completion
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    Not supported
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Marketplace
+    </strong>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Server Discovery
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Browse available servers
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Installation
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Auto configuration
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Real-time
+    </strong>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Status Updates
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Server &amp; connection state
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Capability Updates
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Automatic refresh
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Event Streaming to clients
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    SSE-based
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Auto Reconnection
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    With backoff
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Development
+    </strong>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    Hot Reload
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    Auto restart a MCP server on file changes with
+    <code class="code">
+     dev
+    </code>
+    mode
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Key Features
+</h2>
+<ul>
+<li>
+<strong>
+   Dynamic Server Management
+  </strong>
+  :
+ </li>
+<li>
+  Start, stop, enable/disable servers on demand
+ </li>
+<li>
+  Real-time configuration updates with automatic server reconnection
+ </li>
+<li>
+  Support for local (STDIO) and remote (streamable-http/SSE) MCP servers
+ </li>
+<li>
+  Health monitoring and automatic recovery
+ </li>
+<li>
+  OAuth authentication with PKCE flow
+ </li>
+<li>
+<p>
+   Header-based token authentication
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Unified REST API
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Execute tools from any connected server
+ </li>
+<li>
+  Access resources and resource templates
+ </li>
+<li>
+  Real-time status updates via Server-Sent Events (SSE)
+ </li>
+<li>
+<p>
+   Full CRUD operations for server management
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Real-time Events &amp; Monitoring
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Live server status and capability updates
+ </li>
+<li>
+  Client connection tracking
+ </li>
+<li>
+  Tool and resource list change notifications
+ </li>
+<li>
+<p>
+   Structured JSON logging with file output
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Client Connection Management
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Simple SSE-based client connections via /api/events
+ </li>
+<li>
+  Automatic connection cleanup on disconnect
+ </li>
+<li>
+  Optional auto-shutdown when no clients connected
+ </li>
+<li>
+<p>
+   Real-time connection state monitoring
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Process Lifecycle Management
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Graceful startup and shutdown handling
+ </li>
+<li>
+  Proper cleanup of server connections
+ </li>
+<li>
+  Error recovery and reconnection
+ </li>
+</ul>
+<h3 class="heading">
+ Components
+</h3>
+<h4 class="heading">
+ Hub Server
+</h4>
+<p>
+ The main management server that:
+- Maintains connections to multiple MCP servers
+- Provides unified API access to server capabilities
+- Handles server lifecycle and health monitoring
+- Manages SSE client connections and events
+- Processes configuration updates and server reconnection
+</p>
+<h4 class="heading">
+ MCP Servers
+</h4>
+<p>
+ Connected services that:
+- Provide tools, resources, templates, and prompts
+- Support two connectivity modes:
+  - Script-based STDIO servers for local operations
+  - Remote servers (streamable-http/SSE) with OAuth support
+- Implement real-time capability updates
+- Support automatic status recovery
+- Maintain consistent interface across transport types
+</p>
+<h2 class="heading">
+ Installation
+</h2>
+<pre class="pre"><code class="language-bash code">npm install -g mcp-hub
+</code></pre>
+<h2 class="heading">
+ Basic Usage
+</h2>
+<p>
+ Start the hub server:
+</p>
+<pre class="pre"><code class="language-bash code">mcp-hub --port 3000 --config path/to/config.json
+</code></pre>
+<h3 class="heading">
+ CLI Options
+</h3>
+<pre class="pre"><code class="language-bash code">Options:
+  --port            Port to run the server on (required)
+  --config          Path to config file (required)
+  --watch           Watch config file for changes, only updates affected servers (default: false)
+  --auto-shutdown   Whether to automatically shutdown when no clients are connected (default: false)
+  --shutdown-delay  Delay in milliseconds before shutting down when auto-shutdown is enabled (default: 0)
+  -h, --help       Show help information
+</code></pre>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ MCP Hub uses a JSON configuration file to define managed servers:
+</p>
+<pre class="pre"><code class="language-js code">{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["arg1", "$ACCESS_TOKEN"], //$ACCESS_TOKEN is replaced with ACCESS_TOKEN from env field
+      "env": {
+        "ACCESS_TOKEN": null, // Fallback to process.env.ACCESS_TOKEN for null or ""
+        "OP_KEY": "$: cmd:op read read op://example/secret", // use $: at the beginning to indicate that this is a command
+        "AUTH_HEADER": "Bearer ${ACCESS_TOKEN}", // Placeholders will be replaced with values from the env object itself and falling back to process.env
+        "SECRET": "secret" // Uses "secret"
+      },
+      "dev": {
+        "enabled": true,
+        "watch": ["src/**/*.js", "**/*.json"],
+        "cwd": "/absolute/path/to/server/directory"
+      }
+    },
+    "remote-server": {
+      "url": "https://api.example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${EXAMPLE_API_KEY}" // Replaced with env value
+      },
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Configuration Options
+</h3>
+<p>
+ MCP Hub supports both STDIO servers and remote servers (streamable-http/SSE). The server type is automatically detected from the configuration.
+</p>
+<h4 class="heading">
+ STDIO Server Options
+</h4>
+<p>
+ For running script-based MCP servers locally:
+</p>
+<ul>
+<li>
+<strong>
+   command
+  </strong>
+  : Command to start the MCP server executable
+ </li>
+<li>
+<strong>
+   args
+  </strong>
+  : Array of command line arguments (arguments starting with
+  <code class="code">
+   $
+  </code>
+  will be replaced with env values if available)
+ </li>
+<li>
+<strong>
+   env
+  </strong>
+  : Environment variables with system fallback if value is empty/null
+ </li>
+<li>
+<strong>
+   dev
+  </strong>
+  : Development mode configuration (optional)
+ </li>
+<li>
+<strong>
+   enabled
+  </strong>
+  : Enable/disable dev mode (default: true)
+ </li>
+<li>
+<strong>
+   watch
+  </strong>
+  : Array of glob patterns to watch for changes (default: ["
+  <strong>
+   /*.js", "
+  </strong>
+  /
+  <em>
+   .ts", "
+  </em>
+<em>
+   /
+  </em>
+  .json"])
+ </li>
+<li>
+<strong>
+   cwd
+  </strong>
+  :
+  <strong>
+   Required
+  </strong>
+  absolute path to the server's working directory for file watching
+ </li>
+</ul>
+<h4 class="heading">
+ Remote Server Options
+</h4>
+<p>
+ For connecting to remote MCP servers:
+</p>
+<ul>
+<li>
+<strong>
+   url
+  </strong>
+  : Server endpoint URL
+ </li>
+<li>
+<strong>
+   headers
+  </strong>
+  : Optional headers for authentication
+ </li>
+</ul>
+<p>
+ The server type is determined by:
+- STDIO server → Has
+ <code class="code">
+  command
+ </code>
+ field
+- Remote server → Has
+ <code class="code">
+  url
+ </code>
+ field
+</p>
+<p>
+ Note: A server configuration cannot mix STDIO and remote server fields.
+</p>
+<h2 class="heading">
+ Nix
+</h2>
+<h3 class="heading">
+ Nixpkgs install
+</h3>
+<blockquote>
+<p>
+  coming...
+ </p>
+</blockquote>
+<h3 class="heading">
+ Flake install
+</h3>
+<p>
+ Just add it to your NixOS flake.nix or home-manager:
+</p>
+<pre class="pre"><code class="language-nix code">inputs = {
+  mcp-hub.url = "github:ravitemer/mcp-hub";
+  ...
+}
+</code></pre>
+<p>
+ To integrate mcp-hub to your NixOS/Home Manager configuration, add the following to your environment.systemPackages or home.packages respectively:
+</p>
+<pre class="pre"><code class="language-nix code">inputs.mcp-hub.packages."${system}".default
+</code></pre>
+<h3 class="heading">
+ Usage without install
+</h3>
+<p>
+ If you want to use mcphub.nvim without having mcp-hub server in your PATH you can link the server under the hood adding
+the mcp-hub nix store path to the
+ <code class="code">
+  cmd
+ </code>
+ command in the plugin config like
+</p>
+<p>
+<a href="https://github.com/nix-community/nixvim">
+  Nixvim
+ </a>
+ example:
+</p>
+<pre class="pre"><code class="language-nix code">{ mcphub-nvim, mcp-hub, ... }:
+{
+  extraPlugins = [mcphub-nvim];
+  extraConfigLua = ''
+    require("mcphub").setup({
+        port = 3000,
+        config = vim.fn.expand("~/mcp-hub/mcp-servers.json"),
+        cmd = "${mcp-hub}/bin/mcp-hub"
+    })
+  '';
+}
+
+# where
+{
+  # For nixpkgs (not available yet)
+  mcp-hub = pkgs.mcp-hub;
+
+  # For flakes
+  mcp-hub = inputs.mcp-hub.packages."${system}".default;
+}
+</code></pre>
+<h2 class="heading">
+ Example Integrations
+</h2>
+<h3 class="heading">
+ Neovim Integration
+</h3>
+<p>
+ The
+ <a href="https://github.com/ravitemer/mcphub.nvim">
+  ravitemer/mcphub.nvim
+ </a>
+ plugin provides seamless integration with Neovim, allowing direct interaction with MCP Hub from your editor:
+</p>
+<ul>
+<li>
+  Execute MCP tools directly from Neovim
+ </li>
+<li>
+  Access MCP resources within your editing workflow
+ </li>
+<li>
+  Real-time status updates in Neovim
+ </li>
+<li>
+  Auto install mcp servers with marketplace addition
+ </li>
+</ul>
+<h2 class="heading">
+ REST API
+</h2>
+<h3 class="heading">
+ Health and Status
+</h3>
+<h4 class="heading">
+ Health Check
+</h4>
+<pre class="pre"><code class="language-bash code">GET /api/health
+</code></pre>
+<p>
+ The health endpoint provides comprehensive status information including:
+- Current hub state (starting, ready, restarting, restarted, stopping, stopped, error)
+- Connected server statuses and capabilities
+- Active SSE connection details
+- Detailed connection metrics
+- Error state details if applicable
+</p>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "status": "ok",
+  "state": "ready",
+  "server_id": "mcp-hub",
+  "activeClients": 2,
+  "timestamp": "2024-02-20T05:55:00.000Z",
+  "servers": [],
+  "connections": {
+    "totalConnections": 2,
+    "connections": [
+      {
+        "id": "client-uuid",
+        "state": "connected",
+        "connectedAt": "2024-02-20T05:50:00.000Z",
+        "lastEventAt": "2024-02-20T05:55:00.000Z"
+      }
+    ]
+  }
+}
+</code></pre>
+<h4 class="heading">
+ List MCP Servers
+</h4>
+<pre class="pre"><code class="language-bash code">GET /api/servers
+</code></pre>
+<h4 class="heading">
+ Get Server Info
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/info
+Content-Type: application/json
+
+{
+  "server_name": "example-server"
+}
+</code></pre>
+<h4 class="heading">
+ Refresh Server Capabilities
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/refresh
+Content-Type: application/json
+
+{
+  "server_name": "example-server"
+}
+</code></pre>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "status": "ok",
+  "server": {
+    "name": "example-server",
+    "capabilities": {
+      "tools": ["tool1", "tool2"],
+      "resources": ["resource1", "resource2"],
+      "resourceTemplates": []
+    }
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h4 class="heading">
+ Refresh All Servers
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/refresh
+</code></pre>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "status": "ok",
+  "servers": [
+    {
+      "name": "example-server",
+      "capabilities": {
+        "tools": ["tool1", "tool2"],
+        "resources": ["resource1", "resource2"],
+        "resourceTemplates": []
+      }
+    }
+  ],
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h4 class="heading">
+ Start Server
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/start
+Content-Type: application/json
+
+{
+  "server_name": "example-server"
+}
+</code></pre>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "status": "ok",
+  "server": {
+    "name": "example-server",
+    "status": "connected",
+    "uptime": 123
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h4 class="heading">
+ Stop Server
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/stop?disable=true|false
+Content-Type: application/json
+
+{
+  "server_name": "example-server"
+}
+</code></pre>
+<p>
+ The optional
+ <code class="code">
+  disable
+ </code>
+ query parameter can be set to
+ <code class="code">
+  true
+ </code>
+ to disable the server in the configuration.
+</p>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "status": "ok",
+  "server": {
+    "name": "example-server",
+    "status": "disconnected",
+    "uptime": 0
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h3 class="heading">
+ Marketplace Integration
+</h3>
+<h4 class="heading">
+ List Available Servers
+</h4>
+<pre class="pre"><code class="language-bash code">GET /api/marketplace
+</code></pre>
+<p>
+ Query Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   search
+  </code>
+  : Filter by name, description, or tags
+ </li>
+<li>
+<code class="code">
+   category
+  </code>
+  : Filter by category
+ </li>
+<li>
+<code class="code">
+   tags
+  </code>
+  : Filter by comma-separated tags
+ </li>
+<li>
+<code class="code">
+   sort
+  </code>
+  : Sort by "newest", "stars", or "name"
+ </li>
+</ul>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "items": [
+    {
+      "mcpId": "github.com/user/repo/server",
+      "name": "Example Server",
+      "description": "Description here",
+      "category": "search",
+      "tags": ["search", "ai"],
+      "githubStars": 100,
+      "isRecommended": true,
+      "createdAt": "2024-02-20T05:55:00.000Z"
+    }
+  ],
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h4 class="heading">
+ Get Server Details
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/marketplace/details
+Content-Type: application/json
+
+{
+  "mcpId": "github.com/user/repo/server"
+}
+</code></pre>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "server": {
+    "mcpId": "github.com/user/repo/server",
+    "name": "Example Server",
+    "description": "Description here",
+    "githubUrl": "https://github.com/user/repo",
+    "readmeContent": "# Server Documentation...",
+    "llmsInstallationContent": "Installation guide..."
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h3 class="heading">
+ MCP Server Operations
+</h3>
+<h4 class="heading">
+ Execute Tool
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/tools
+Content-Type: application/json
+
+{
+  "server_name": "example-server",
+  "tool": "tool_name",
+  "arguments": {},
+  "request_options" : {}
+}
+</code></pre>
+<h4 class="heading">
+ Access Resource
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/resources
+Content-Type: application/json
+
+{
+  "server_name": "example-server",
+  "uri": "resource://uri",
+  "request_options" : {}
+}
+</code></pre>
+<h4 class="heading">
+ Get Prompt
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/servers/prompts
+Content-Type: application/json
+
+{
+  "server_name": "example-server",
+  "prompt": "prompt_name",
+  "arguments": {},
+  "request_options" : {}
+}
+</code></pre>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "result": {
+    "messages": [
+      {
+        "role": "assistant",
+        "content": {
+          "type": "text",
+          "text": "Text response example"
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "type": "image",
+          "data": "base64_encoded_image_data",
+          "mimeType": "image/png"
+        }
+      }
+    ]
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h4 class="heading">
+ Restart Hub
+</h4>
+<pre class="pre"><code class="language-bash code">POST /api/restart
+</code></pre>
+<p>
+ Reloads the configuration file and restarts all MCP servers.
+</p>
+<p>
+ Response:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "status": "ok",
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h2 class="heading">
+ Real-time Events System
+</h2>
+<p>
+ MCP Hub implements a comprehensive real-time events system using Server-Sent Events (SSE) at
+ <code class="code">
+  /api/events
+ </code>
+ . This endpoint provides live updates about server status, configuration changes, capability updates, and more.
+</p>
+<h3 class="heading">
+ Hub States
+</h3>
+<p>
+ The hub server transitions through several states during its lifecycle:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    State
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     starting
+    </code>
+</td>
+<td>
+    Initial startup, loading configuration
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     ready
+    </code>
+</td>
+<td>
+    Server is running and ready to handle requests
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     restarting
+    </code>
+</td>
+<td>
+    Reloading configuration/reconnecting servers
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     restarted
+    </code>
+</td>
+<td>
+    Configuration reload complete
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     stopping
+    </code>
+</td>
+<td>
+    Graceful shutdown in progress
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     stopped
+    </code>
+</td>
+<td>
+    Server has fully stopped
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     error
+    </code>
+</td>
+<td>
+    Error state (includes error details)
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ You can monitor these states through the
+ <code class="code">
+  /health
+ </code>
+ endpoint or SSE events.
+</p>
+<h3 class="heading">
+ Event Types
+</h3>
+<p>
+ MCP Hub emits several types of events:
+</p>
+<h4 class="heading">
+ Core Events
+</h4>
+<ol>
+<li>
+<strong>
+   heartbeat
+  </strong>
+  - Periodic connection health check
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "connections": 2,
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   hub_state
+  </strong>
+  - Hub server state changes
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "state": "ready",
+  "server_id": "mcp-hub",
+  "version": "1.0.0",
+  "pid": 12345,
+  "port": 3000,
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   log
+  </strong>
+  - Server log messages
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "info",
+  "message": "Server started",
+  "data": {},
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h4 class="heading">
+ Subscription Events
+</h4>
+<ol>
+<li>
+<strong>
+   config_changed
+  </strong>
+  - Configuration file changes detected
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "config_changed",
+  "newConfig": {},
+  "isSignificant": true,
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   servers_updating
+  </strong>
+  - Server updates in progress
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "servers_updating",
+  "changes": {
+    "added": ["server1"],
+    "removed": [],
+    "modified": ["server2"],
+    "unchanged": ["server3"]
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   servers_updated
+  </strong>
+  - Server updates completed
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "servers_updated",
+  "changes": {
+    "added": ["server1"],
+    "removed": [],
+    "modified": ["server2"],
+    "unchanged": ["server3"]
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   tool_list_changed
+  </strong>
+  - Server's tools list updated
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "tool_list_changed",
+  "server": "example-server",
+  "tools": ["tool1", "tool2"],
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   resource_list_changed
+  </strong>
+  - Server's resources/templates updated
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "resource_list_changed",
+  "server": "example-server",
+  "resources": ["resource1", "resource2"],
+  "resourceTemplates": [],
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<ol>
+<li>
+<strong>
+   prompt_list_changed
+  </strong>
+  - Server's prompts list updated
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "type": "prompt_list_changed",
+  "server": "example-server",
+  "prompts": ["prompt1", "prompt2"],
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h3 class="heading">
+ Connection Management
+</h3>
+<ul>
+<li>
+  Each SSE connection is assigned a unique ID
+ </li>
+<li>
+  Connections are automatically cleaned up on client disconnect
+ </li>
+<li>
+  Connection statistics available via
+  <code class="code">
+   /health
+  </code>
+  endpoint
+ </li>
+<li>
+  Optional auto-shutdown when no clients are connected
+ </li>
+</ul>
+<h2 class="heading">
+ Logging
+</h2>
+<p>
+ MCP Hub uses structured JSON logging for all events. Logs are written to both console and file at
+ <code class="code">
+  ~/.mcp-hub/logs/mcp-hub.log
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-json code">{
+  "type": "error",
+    "code": "TOOL_ERROR",
+    "message": "Failed to execute tool",
+    "data": {
+      "server": "example-server",
+      "tool": "example-tool",
+      "error": "Invalid parameters"
+    },
+    "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<p>
+ Log levels include:
+</p>
+<ul>
+<li>
+<code class="code">
+   info
+  </code>
+  : Normal operational messages
+ </li>
+<li>
+<code class="code">
+   warn
+  </code>
+  : Warning conditions
+ </li>
+<li>
+<code class="code">
+   debug
+  </code>
+  : Detailed debug information (includes configuration changes)
+ </li>
+<li>
+<code class="code">
+   error
+  </code>
+  : Error conditions (includes error code and stack trace)
+ </li>
+</ul>
+<p>
+ Logs are rotated daily and kept for 30 days by default.
+</p>
+<h2 class="heading">
+ Error Handling
+</h2>
+<p>
+ MCP Hub implements a comprehensive error handling system with custom error classes for different types of errors:
+</p>
+<h3 class="heading">
+ Error Classes
+</h3>
+<ul>
+<li>
+<strong>
+   ConfigError
+  </strong>
+  : Configuration-related errors (invalid config, missing fields)
+ </li>
+<li>
+<strong>
+   ConnectionError
+  </strong>
+  : Server connection issues (failed connections, transport errors)
+ </li>
+<li>
+<strong>
+   ServerError
+  </strong>
+  : Server startup/initialization problems
+ </li>
+<li>
+<strong>
+   ToolError
+  </strong>
+  : Tool execution failures
+ </li>
+<li>
+<strong>
+   ResourceError
+  </strong>
+  : Resource access issues
+ </li>
+<li>
+<strong>
+   ValidationError
+  </strong>
+  : Request validation errors
+ </li>
+</ul>
+<p>
+ Each error includes:
+</p>
+<ul>
+<li>
+  Error code for easy identification
+ </li>
+<li>
+  Detailed error message
+ </li>
+<li>
+  Additional context in the details object
+ </li>
+<li>
+  Stack trace for debugging
+ </li>
+</ul>
+<p>
+ Example error structure:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "code": "CONNECTION_ERROR",
+  "message": "Failed to communicate with server",
+  "details": {
+    "server": "example-server",
+    "error": "connection timeout"
+  },
+  "timestamp": "2024-02-20T05:55:00.000Z"
+}
+</code></pre>
+<h2 class="heading">
+ Architecture
+</h2>
+<h3 class="heading">
+ Hub Server Lifecycle
+</h3>
+<pre class="pre"><code class="language-mermaid code">sequenceDiagram
+    participant C as Client
+    participant H as Hub Server
+    participant M1 as MCP Server 1
+    participant M2 as MCP Server 2
+
+    Note over H: Server Start (state: starting)
+    activate H
+
+    Note over H: Config Loading
+    H-&gt;&gt;H: Load &amp; Validate Config
+    H-&gt;&gt;H: Watch Config File
+    H-&gt;&gt;H: Initialize SSE Manager
+
+    Note over H: Server Connections (state: ready)
+    H-&gt;&gt;+M1: Connect
+    M1--&gt;&gt;-H: Connected + Capabilities
+    H-&gt;&gt;+M2: Connect
+    M2--&gt;&gt;-H: Connected + Capabilities
+    H--&gt;&gt;C: hub_state (ready)
+
+    Note over C,H: Client Setup
+    C-&gt;&gt;H: Connect to /api/events (SSE)
+    H--&gt;&gt;C: connection_opened
+
+    Note over C,H: Client Operations
+    C-&gt;&gt;H: Execute Tool (HTTP)
+    H-&gt;&gt;M1: Execute Tool
+    M1--&gt;&gt;H: Tool Result
+    H--&gt;&gt;C: HTTP Response
+
+    Note over H,C: Real-time Updates
+    H-&gt;&gt;H: Detect Config Change
+    H--&gt;&gt;C: servers_updating (SSE)
+    H-&gt;&gt;M1: Reconnect with New Config
+    M1--&gt;&gt;H: Updated Capabilities
+    H--&gt;&gt;C: servers_updated (SSE)
+
+    Note over H,C: Server Events
+    M2-&gt;&gt;H: Tool List Changed
+    H--&gt;&gt;C: tool_list_changed (SSE)
+
+    Note over H: Shutdown Process
+    Note over C,H: Client Disconnects
+    H--&gt;&gt;C: hub_state (stopping) (SSE)
+    H-&gt;&gt;M1: Disconnect
+    H-&gt;&gt;M2: Disconnect
+    H--&gt;&gt;C: hub_state (stopped) (SSE)
+    deactivate H
+</code></pre>
+<p>
+ The Hub Server coordinates communication between clients and MCP servers:
+</p>
+<ol>
+<li>
+  Starts and connects to configured MCP servers
+ </li>
+<li>
+  Handles SSE client connections and events
+ </li>
+<li>
+  Routes tool and resource requests to appropriate servers
+ </li>
+<li>
+  Monitors server health and maintains capabilities
+ </li>
+<li>
+  Manages graceful startup/shutdown processes
+ </li>
+</ol>
+<h3 class="heading">
+ MCP Server Management
+</h3>
+<pre class="pre"><code class="language-mermaid code">flowchart TB
+    A[Hub Server Start] --&gt; B{Config Available?}
+    B --&gt;|Yes| C[Load Server Configs]
+    B --&gt;|No| D[Use Default Settings]
+
+    C --&gt; E[Initialize Connections]
+    D --&gt; E
+
+    E --&gt; F{For Each MCP Server}
+    F --&gt;|Enabled| G[Attempt Connection]
+    F --&gt;|Disabled| H[Skip Server]
+
+    G --&gt; I{Connection Status}
+    I --&gt;|Success| J[Fetch Capabilities]
+    I --&gt;|Failure| K[Log Error]
+
+    J --&gt; L[Store Server Info]
+    K --&gt; M[Mark Server Unavailable]
+
+    L --&gt; N[Monitor Health]
+    M --&gt; N
+
+    N --&gt; O{Health Check}
+    O --&gt;|Healthy| P[Update Capabilities]
+    O --&gt;|Unhealthy| Q[Attempt Reconnect]
+
+    Q --&gt;|Success| P
+    Q --&gt;|Failure| R[Update Status]
+
+    P --&gt; N
+    R --&gt; N
+</code></pre>
+<p>
+ The Hub Server actively manages MCP servers through:
+</p>
+<ol>
+<li>
+  Configuration-based server initialization
+ </li>
+<li>
+  Connection and capability discovery
+ </li>
+<li>
+  Health monitoring and status tracking
+ </li>
+<li>
+  Automatic reconnection attempts
+ </li>
+<li>
+  Server state management
+ </li>
+</ol>
+<h3 class="heading">
+ Request Handling
+</h3>
+<pre class="pre"><code class="language-mermaid code">sequenceDiagram
+    participant C as Client
+    participant H as Hub Server
+    participant M as MCP Server
+
+    Note over C,H: Tool Execution
+    C-&gt;&gt;H: POST /api/servers/tools (HTTP)
+    H-&gt;&gt;H: Validate Request &amp; Server
+
+    alt Server Not Connected
+        H--&gt;&gt;C: 503 Server Unavailable (HTTP)
+    else Server Connected
+        H-&gt;&gt;M: Execute Tool
+
+        alt Success
+            M--&gt;&gt;H: Tool Result
+            H--&gt;&gt;C: Result Response (HTTP)
+        else Error
+            M--&gt;&gt;H: Error Details
+            H--&gt;&gt;C: Error Response (HTTP)
+            H--&gt;&gt;C: log (SSE Event)
+        end
+    end
+
+    Note over C,H: Resource Access
+    C-&gt;&gt;H: POST /api/servers/resources (HTTP)
+    H-&gt;&gt;H: Validate URI &amp; Template
+
+    alt Invalid Resource
+        H--&gt;&gt;C: 404 Not Found (HTTP)
+    else Server Not Connected
+        H--&gt;&gt;C: 503 Unavailable (HTTP)
+    else Valid Request
+        H-&gt;&gt;M: Request Resource
+
+        alt Success
+            M--&gt;&gt;H: Resource Data
+            H--&gt;&gt;C: Resource Content (HTTP)
+        else Error
+            M--&gt;&gt;H: Error Details
+            H--&gt;&gt;C: Error Response (HTTP)
+            H--&gt;&gt;C: log (SSE Event)
+        end
+    end
+
+    Note over C,H: Prompt Execution
+    C-&gt;&gt;H: POST /api/servers/prompts (HTTP)
+    H-&gt;&gt;H: Validate Prompt &amp; Args
+
+    alt Invalid Prompt
+        H--&gt;&gt;C: 404 Not Found (HTTP)
+    else Server Not Connected
+        H--&gt;&gt;C: 503 Unavailable (HTTP)
+    else Valid Request
+        H-&gt;&gt;M: Execute Prompt
+
+        alt Success
+            M--&gt;&gt;H: Messages Array
+            H--&gt;&gt;C: Messages Response (HTTP)
+        else Error
+            M--&gt;&gt;H: Error Details
+            H--&gt;&gt;C: Error Response (HTTP)
+            H--&gt;&gt;C: log (SSE Event)
+        end
+    end
+</code></pre>
+<p>
+ All client requests follow a standardized flow:
+</p>
+<ol>
+<li>
+  Request validation
+ </li>
+<li>
+  Server status verification
+ </li>
+<li>
+  Request routing to appropriate MCP server
+ </li>
+<li>
+  Response handling and error management
+ </li>
+</ol>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+  Node.js &gt;= 18.0.0
+ </li>
+</ul>
+<h2 class="heading">
+ Todo
+</h2>
+<ul>
+<li>
+  [ ] Implement custom marketplace rather than depending on mcp-marketplace
+ </li>
+</ul>
+<h2 class="heading">
+ Acknowledgements
+</h2>
+<ul>
+<li>
+<a href="https://github.com/cline/mcp-marketplace">
+   Cline mcp-marketplace
+  </a>
+  - For providing the MCP server marketplace endpoints that power MCP Hub's marketplace integration
+ </li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/ravitemer-mcp-hub.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/ravitemer-mcp-hub.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/ravitemer-mcp-hub.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/ravitemer-mcp-hub.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

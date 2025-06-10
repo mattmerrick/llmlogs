@@ -1,0 +1,2634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Query | MCP server for Supabase - MCP Directory">
+    <meta property="og:description" content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th">
+    <meta property="og:url" content="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Query | MCP server for Supabase - MCP Directory">
+    <meta name="twitter:description" content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th">
+    
+    <title>Query | MCP server for Supabase - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Query | MCP server for Supabase</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Query | MCP server for Supabase</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 715</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">model-context-protocol</span><span class="topic-tag"> supabase</span><span class="topic-tag"> cursor</span><span class="topic-tag"> windsurf</span>
+                        </div>
+                        <a href="https://github.com/alexander-zuev/supabase-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Query | MCP server for Supabase - MCP Directory" property="og:title"/>
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Query | MCP server for Supabase - MCP Directory" name="twitter:title"/>
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" name="twitter:description"/>
+<title>Query | MCP server for Supabase - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Query | MCP server for Supabase</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Query | MCP server for Supabase</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 715</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">model-context-protocol</span><span class="topic-tag"> supabase</span><span class="topic-tag"> cursor</span><span class="topic-tag"> windsurf</span>
+</div>
+<a class="github-link" href="https://github.com/alexander-zuev/supabase-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Query | MCP server for Supabase - MCP Directory" property="og:title">
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" property="og:description">
+<meta content="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Query | MCP server for Supabase - MCP Directory" name="twitter:title">
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" name="twitter:description">
+<title>Query | MCP server for Supabase - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Query | MCP server for Supabase</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 715</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">model-context-protocol</span><span class="topic-tag"> supabase</span><span class="topic-tag"> cursor</span><span class="topic-tag"> windsurf</span>
+</div>
+<a class="github-link" href="https://github.com/alexander-zuev/supabase-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Query | MCP server for Supabase - MCP Directory" property="og:title"/>
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Query | MCP server for Supabase - MCP Directory" name="twitter:title"/>
+<meta content="🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for th" name="twitter:description"/>
+<title>Query | MCP server for Supabase - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Query | MCP server for Supabase</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 715</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">model-context-protocol</span><span class="topic-tag"> supabase</span><span class="topic-tag"> cursor</span><span class="topic-tag"> windsurf</span>
+</div>
+<a class="github-link" href="https://github.com/alexander-zuev/supabase-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Query | MCP server for Supabase
+</h1>
+<blockquote>
+<p>
+  🌅 More than 17k installs via pypi and close to 30k downloads on Smithery.ai — in short, this was fun! 🥳
+Thanks to everyone who has been using this server for the past few months, and I hope it was useful for you.
+Since Supabase has released their own
+  <a href="https://github.com/supabase-community/supabase-mcp">
+   official MCP server
+  </a>
+  ,
+I've decided to no longer actively maintain this one. The official MCP server is as feature-rich, and many more
+features will be added in the future. Check it out!
+ </p>
+</blockquote>
+<p class="center-text">
+<strong>
+  Query MCP is an open-source MCP server that lets your IDE safely run SQL, manage schema changes, call the Supabase Management API, and use Auth Admin SDK — all with built-in safety controls.
+ </strong>
+</p>
+<p class="center-text">
+<a href="https://pypi.org/project/supabase-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/supabase-mcp-server.svg"/>
+</a>
+<a href="https://github.com/alexander-zuev/supabase-mcp-server/actions">
+<img alt="CI Status" src="https://github.com/alexander-zuev/supabase-mcp-server/workflows/CI/badge.svg"/>
+</a>
+<a href="https://codecov.io/gh/alexander-zuev/supabase-mcp-server">
+<img alt="Code Coverage" src="https://codecov.io/gh/alexander-zuev/supabase-mcp-server/branch/main/graph/badge.svg"/>
+</a>
+<a href="https://www.python.org/downloads/">
+<img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12%2B-blue.svg"/>
+</a>
+<a href="https://github.com/astral-sh/uv">
+<img alt="uv package manager" src="https://img.shields.io/badge/uv-package%20manager-blueviolet"/>
+</a>
+<a href="https://pepy.tech/project/supabase-mcp-server">
+<img alt="PyPI Downloads" src="https://static.pepy.tech/badge/supabase-mcp-server"/>
+</a>
+<a href="https://smithery.ai/server/@alexander-zuev/supabase-mcp-server">
+<img alt="Smithery.ai Downloads" src="https://smithery.ai/badge/@alexander-zuev/supabase-mcp-server"/>
+</a>
+<a href="https://modelcontextprotocol.io/introduction">
+<img alt="MCP Server" src="https://img.shields.io/badge/MCP-Server-orange"/>
+</a>
+<a href="LICENSE">
+<img alt="License" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg"/>
+</a>
+</p>
+<pre class="pre"><code class="code">
+</code></pre>
+<h2 class="heading">
+ Table of contents
+</h2>
+<p class="center-text">
+<a href="#getting-started">
+  Getting started
+ </a>
+ •
+ <a href="#feature-overview">
+  Feature overview
+ </a>
+ •
+ <a href="#troubleshooting">
+  Troubleshooting
+ </a>
+ •
+ <a href="#changelog">
+  Changelog
+ </a>
+</p>
+<h2 class="heading">
+ ✨ Key features
+</h2>
+<ul>
+<li>
+  💻 Compatible with Cursor, Windsurf, Cline and other MCP clients supporting
+  <code class="code">
+   stdio
+  </code>
+  protocol
+ </li>
+<li>
+  🔐 Control read-only and read-write modes of SQL query execution
+ </li>
+<li>
+  🔍 Runtime SQL query validation with risk level assessment
+ </li>
+<li>
+  🛡️ Three-tier safety system for SQL operations: safe, write, and destructive
+ </li>
+<li>
+  🔄 Robust transaction handling for both direct and pooled database connections
+ </li>
+<li>
+  📝 Automatic versioning of database schema changes
+ </li>
+<li>
+  💻 Manage your Supabase projects with Supabase Management API
+ </li>
+<li>
+  🧑‍💻 Manage users with Supabase Auth Admin methods via Python SDK
+ </li>
+<li>
+  🔨 Pre-built tools to help Cursor &amp; Windsurf work with MCP more effectively
+ </li>
+<li>
+  📦 Dead-simple install &amp; setup via package manager (uv, pipx, etc.)
+ </li>
+</ul>
+<h2 class="heading">
+ Getting Started
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<p>
+ Installing the server requires the following on your system:
+- Python 3.12+
+</p>
+<p>
+ If you plan to install via
+ <code class="code">
+  uv
+ </code>
+ , ensure it's
+ <a href="https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_1">
+  installed
+ </a>
+ .
+</p>
+<h3 class="heading">
+ PostgreSQL Installation
+</h3>
+<p>
+ PostgreSQL installation is no longer required for the MCP server itself, as it now uses asyncpg which doesn't depend on PostgreSQL development libraries.
+</p>
+<p>
+ However, you'll still need PostgreSQL if you're running a local Supabase instance:
+</p>
+<p>
+<strong>
+  MacOS
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code">brew install postgresql@16
+</code></pre>
+<p>
+<strong>
+  Windows
+ </strong>
+ - Download and install PostgreSQL 16+ from https://www.postgresql.org/download/windows/
+  - Ensure "PostgreSQL Server" and "Command Line Tools" are selected during installation
+</p>
+<h3 class="heading">
+ Step 1. Installation
+</h3>
+<p>
+ Since v0.2.0 I introduced support for package installation. You can use your favorite Python package manager to install the server via:
+</p>
+<pre class="pre"><code class="language-bash code"># if pipx is installed (recommended)
+pipx install supabase-mcp-server
+
+# if uv is installed
+uv pip install supabase-mcp-server
+</code></pre>
+<p>
+<code class="code">
+  pipx
+ </code>
+ is recommended because it creates isolated environments for each package.
+</p>
+<p>
+ You can also install the server manually by cloning the repository and running
+ <code class="code">
+  pipx install -e .
+ </code>
+ from the root directory.
+</p>
+<h4 class="heading">
+ Installing from source
+</h4>
+<p>
+ If you would like to install from source, for example for local development:
+</p>
+<pre class="pre"><code class="language-bash code">uv venv
+# On Mac
+source .venv/bin/activate
+# On Windows
+.venv\Scripts\activate
+# Install package in editable mode
+uv pip install -e .
+</code></pre>
+<h4 class="heading">
+ Installing via Smithery.ai
+</h4>
+<p>
+ You can find the full instructions on how to use Smithery.ai to connect to this MCP server
+ <a href="https://smithery.ai/server/@alexander-zuev/supabase-mcp-server">
+  here
+ </a>
+ .
+</p>
+<h3 class="heading">
+ Step 2. Configuration
+</h3>
+<p>
+ The Supabase MCP server requires configuration to connect to your Supabase database, access the Management API, and use the Auth Admin SDK. This section explains all available configuration options and how to set them up.
+</p>
+<blockquote>
+<p>
+  🔑
+  <strong>
+   Important
+  </strong>
+  : Since v0.4 MCP server requires an API key which you can get for free at
+  <a href="https://thequery.dev">
+   thequery.dev
+  </a>
+  to use this MCP server.
+ </p>
+</blockquote>
+<h4 class="heading">
+ Environment Variables
+</h4>
+<p>
+ The server uses the following environment variables:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Variable
+   </th>
+<th>
+    Required
+   </th>
+<th>
+    Default
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     SUPABASE_PROJECT_REF
+    </code>
+</td>
+<td>
+    Yes
+   </td>
+<td>
+<code class="code">
+     127.0.0.1:54322
+    </code>
+</td>
+<td>
+    Your Supabase project reference ID (or local host:port)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SUPABASE_DB_PASSWORD
+    </code>
+</td>
+<td>
+    Yes
+   </td>
+<td>
+<code class="code">
+     postgres
+    </code>
+</td>
+<td>
+    Your database password
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SUPABASE_REGION
+    </code>
+</td>
+<td>
+    Yes*
+   </td>
+<td>
+<code class="code">
+     us-east-1
+    </code>
+</td>
+<td>
+    AWS region where your Supabase project is hosted
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SUPABASE_ACCESS_TOKEN
+    </code>
+</td>
+<td>
+    No
+   </td>
+<td>
+    None
+   </td>
+<td>
+    Personal access token for Supabase Management API
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     SUPABASE_SERVICE_ROLE_KEY
+    </code>
+</td>
+<td>
+    No
+   </td>
+<td>
+    None
+   </td>
+<td>
+    Service role key for Auth Admin SDK
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     QUERY_API_KEY
+    </code>
+</td>
+<td>
+    Yes
+   </td>
+<td>
+    None
+   </td>
+<td>
+    API key from thequery.dev (required for all operations)
+   </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>
+<strong>
+   Note
+  </strong>
+  : The default values are configured for local Supabase development. For remote Supabase projects, you must provide your own values for
+  <code class="code">
+   SUPABASE_PROJECT_REF
+  </code>
+  and
+  <code class="code">
+   SUPABASE_DB_PASSWORD
+  </code>
+  .
+ </p>
+<p>
+  🚨
+  <strong>
+   CRITICAL CONFIGURATION NOTE
+  </strong>
+  : For remote Supabase projects, you MUST specify the correct region where your project is hosted using
+  <code class="code">
+   SUPABASE_REGION
+  </code>
+  . If you encounter a "Tenant or user not found" error, this is almost certainly because your region setting doesn't match your project's actual region. You can find your project's region in the Supabase dashboard under Project Settings.
+ </p>
+</blockquote>
+<h4 class="heading">
+ Connection Types
+</h4>
+<h5 class="heading">
+ Database Connection
+</h5>
+<ul>
+<li>
+  The server connects to your Supabase PostgreSQL database using the transaction pooler endpoint
+ </li>
+<li>
+  Local development uses a direct connection to
+  <code class="code">
+   127.0.0.1:54322
+  </code>
+</li>
+<li>
+  Remote projects use the format:
+  <code class="code">
+   postgresql://postgres.[project_ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres
+  </code>
+</li>
+</ul>
+<blockquote>
+<p>
+  ⚠️
+  <strong>
+   Important
+  </strong>
+  : Session pooling connections are not supported. The server exclusively uses transaction pooling for better compatibility with the MCP server architecture.
+ </p>
+</blockquote>
+<h5 class="heading">
+ Management API Connection
+</h5>
+<ul>
+<li>
+  Requires
+  <code class="code">
+   SUPABASE_ACCESS_TOKEN
+  </code>
+  to be set
+ </li>
+<li>
+  Connects to the Supabase Management API at
+  <code class="code">
+   https://api.supabase.com
+  </code>
+</li>
+<li>
+  Only works with remote Supabase projects (not local development)
+ </li>
+</ul>
+<h5 class="heading">
+ Auth Admin SDK Connection
+</h5>
+<ul>
+<li>
+  Requires
+  <code class="code">
+   SUPABASE_SERVICE_ROLE_KEY
+  </code>
+  to be set
+ </li>
+<li>
+  For local development, connects to
+  <code class="code">
+   http://127.0.0.1:54321
+  </code>
+</li>
+<li>
+  For remote projects, connects to
+  <code class="code">
+   https://[project_ref].supabase.co
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+ Configuration Methods
+</h4>
+<p>
+ The server looks for configuration in this order (highest to lowest priority):
+</p>
+<ol>
+<li>
+<strong>
+   Environment Variables
+  </strong>
+  : Values set directly in your environment
+ </li>
+<li>
+<strong>
+   Local
+   <code class="code">
+    .env
+   </code>
+   File
+  </strong>
+  : A
+  <code class="code">
+   .env
+  </code>
+  file in your current working directory (only works when running from source)
+ </li>
+<li>
+<strong>
+   Global Config File
+  </strong>
+  :
+ </li>
+<li>
+  Windows:
+  <code class="code">
+   %APPDATA%\supabase-mcp\.env
+  </code>
+</li>
+<li>
+  macOS/Linux:
+  <code class="code">
+   ~/.config/supabase-mcp/.env
+  </code>
+</li>
+<li>
+<strong>
+   Default Settings
+  </strong>
+  : Local development defaults (if no other config is found)
+ </li>
+</ol>
+<blockquote>
+<p>
+  ⚠️
+  <strong>
+   Important
+  </strong>
+  : When using the package installed via pipx or uv, local
+  <code class="code">
+   .env
+  </code>
+  files in your project directory are
+  <strong>
+   not
+  </strong>
+  detected. You must use either environment variables or the global config file.
+ </p>
+</blockquote>
+<h4 class="heading">
+ Setting Up Configuration
+</h4>
+<h5 class="heading">
+ Option 1: Client-Specific Configuration (Recommended)
+</h5>
+<p>
+ Set environment variables directly in your MCP client configuration (see client-specific setup instructions in Step 3). Most MCP clients support this approach, which keeps your configuration with your client settings.
+</p>
+<h5 class="heading">
+ Option 2: Global Configuration
+</h5>
+<p>
+ Create a global
+ <code class="code">
+  .env
+ </code>
+ configuration file that will be used for all MCP server instances:
+</p>
+<pre class="pre"><code class="language-bash code"># Create config directory
+# On macOS/Linux
+mkdir -p ~/.config/supabase-mcp
+# On Windows (PowerShell)
+mkdir -Force "$env:APPDATA\supabase-mcp"
+
+# Create and edit .env file
+# On macOS/Linux
+nano ~/.config/supabase-mcp/.env
+# On Windows (PowerShell)
+notepad "$env:APPDATA\supabase-mcp\.env"
+</code></pre>
+<p>
+ Add your configuration values to the file:
+</p>
+<pre class="pre"><code class="code">QUERY_API_KEY=your-api-key
+SUPABASE_PROJECT_REF=your-project-ref
+SUPABASE_DB_PASSWORD=your-db-password
+SUPABASE_REGION=us-east-1
+SUPABASE_ACCESS_TOKEN=your-access-token
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+</code></pre>
+<h5 class="heading">
+ Option 3: Project-Specific Configuration (Source Installation Only)
+</h5>
+<p>
+ If you're running the server from source (not via package), you can create a
+ <code class="code">
+  .env
+ </code>
+ file in your project directory with the same format as above.
+</p>
+<h4 class="heading">
+ Finding Your Supabase Project Information
+</h4>
+<ul>
+<li>
+<strong>
+   Project Reference
+  </strong>
+  : Found in your Supabase project URL:
+  <code class="code">
+   https://supabase.com/dashboard/project/&lt;project-ref&gt;
+  </code>
+</li>
+<li>
+<strong>
+   Database Password
+  </strong>
+  : Set during project creation or found in Project Settings → Database
+ </li>
+<li>
+<strong>
+   Access Token
+  </strong>
+  : Generate at https://supabase.com/dashboard/account/tokens
+ </li>
+<li>
+<strong>
+   Service Role Key
+  </strong>
+  : Found in Project Settings → API → Project API keys
+ </li>
+</ul>
+<h4 class="heading">
+ Supported Regions
+</h4>
+<p>
+ The server supports all Supabase regions:
+</p>
+<ul>
+<li>
+<code class="code">
+   us-west-1
+  </code>
+  - West US (North California)
+ </li>
+<li>
+<code class="code">
+   us-east-1
+  </code>
+  - East US (North Virginia) - default
+ </li>
+<li>
+<code class="code">
+   us-east-2
+  </code>
+  - East US (Ohio)
+ </li>
+<li>
+<code class="code">
+   ca-central-1
+  </code>
+  - Canada (Central)
+ </li>
+<li>
+<code class="code">
+   eu-west-1
+  </code>
+  - West EU (Ireland)
+ </li>
+<li>
+<code class="code">
+   eu-west-2
+  </code>
+  - West Europe (London)
+ </li>
+<li>
+<code class="code">
+   eu-west-3
+  </code>
+  - West EU (Paris)
+ </li>
+<li>
+<code class="code">
+   eu-central-1
+  </code>
+  - Central EU (Frankfurt)
+ </li>
+<li>
+<code class="code">
+   eu-central-2
+  </code>
+  - Central Europe (Zurich)
+ </li>
+<li>
+<code class="code">
+   eu-north-1
+  </code>
+  - North EU (Stockholm)
+ </li>
+<li>
+<code class="code">
+   ap-south-1
+  </code>
+  - South Asia (Mumbai)
+ </li>
+<li>
+<code class="code">
+   ap-southeast-1
+  </code>
+  - Southeast Asia (Singapore)
+ </li>
+<li>
+<code class="code">
+   ap-northeast-1
+  </code>
+  - Northeast Asia (Tokyo)
+ </li>
+<li>
+<code class="code">
+   ap-northeast-2
+  </code>
+  - Northeast Asia (Seoul)
+ </li>
+<li>
+<code class="code">
+   ap-southeast-2
+  </code>
+  - Oceania (Sydney)
+ </li>
+<li>
+<code class="code">
+   sa-east-1
+  </code>
+  - South America (São Paulo)
+ </li>
+</ul>
+<h4 class="heading">
+ Limitations
+</h4>
+<ul>
+<li>
+<strong>
+   No Self-Hosted Support
+  </strong>
+  : The server only supports official Supabase.com hosted projects and local development
+ </li>
+<li>
+<strong>
+   No Connection String Support
+  </strong>
+  : Custom connection strings are not supported
+ </li>
+<li>
+<strong>
+   No Session Pooling
+  </strong>
+  : Only transaction pooling is supported for database connections
+ </li>
+<li>
+<strong>
+   API and SDK Features
+  </strong>
+  : Management API and Auth Admin SDK features only work with remote Supabase projects, not local development
+ </li>
+</ul>
+<h3 class="heading">
+ Step 3. Usage
+</h3>
+<p>
+ In general, any MCP client that supports
+ <code class="code">
+  stdio
+ </code>
+ protocol should work with this MCP server. This server was explicitly tested to work with:
+- Cursor
+- Windsurf
+- Cline
+- Claude Desktop
+</p>
+<p>
+ Additionally, you can also use smithery.ai to install this server a number of clients, including the ones above.
+</p>
+<p>
+ Follow the guides below to install this MCP server in your client.
+</p>
+<h4 class="heading">
+ Cursor
+</h4>
+<p>
+ Go to Settings -&gt; Features -&gt; MCP Servers and add a new server with this configuration:
+</p>
+<pre class="pre"><code class="language-bash code"># can be set to any name
+name: supabase
+type: command
+# if you installed with pipx
+command: supabase-mcp-server
+# if you installed with uv
+command: uv run supabase-mcp-server
+# if the above doesn't work, use the full path (recommended)
+command: /full/path/to/supabase-mcp-server  # Find with 'which supabase-mcp-server' (macOS/Linux) or 'where supabase-mcp-server' (Windows)
+</code></pre>
+<p>
+ If configuration is correct, you should see a green dot indicator and the number of tools exposed by the server.
+ <img alt="How successful Cursor config looks like" src="https://github.com/user-attachments/assets/45df080a-8199-4aca-b59c-a84dc7fe2c09"/>
+</p>
+<h4 class="heading">
+ Windsurf
+</h4>
+<p>
+ Go to Cascade -&gt; Click on the hammer icon -&gt; Configure -&gt; Fill in the configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+      "supabase": {
+        "command": "/Users/username/.local/bin/supabase-mcp-server",  // update path
+        "env": {
+          "QUERY_API_KEY": "your-api-key",  // Required - get your API key at thequery.dev
+          "SUPABASE_PROJECT_REF": "your-project-ref",
+          "SUPABASE_DB_PASSWORD": "your-db-password",
+          "SUPABASE_REGION": "us-east-1",  // optional, defaults to us-east-1
+          "SUPABASE_ACCESS_TOKEN": "your-access-token",  // optional, for management API
+          "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key"  // optional, for Auth Admin SDK
+        }
+      }
+    }
+}
+</code></pre>
+<p>
+ If configuration is correct, you should see green dot indicator and clickable supabase server in the list of available servers.
+</p>
+<p>
+<img alt="How successful Windsurf config looks like" src="https://github.com/user-attachments/assets/322b7423-8c71-410b-bcab-aff1b143faa4"/>
+</p>
+<h4 class="heading">
+ Claude Desktop
+</h4>
+<p>
+ Claude Desktop also supports MCP servers through a JSON configuration. Follow these steps to set up the Supabase MCP server:
+</p>
+<ol>
+<li>
+<strong>
+   Find the full path to the executable
+  </strong>
+  (this step is critical):
+   ```bash
+   # On macOS/Linux
+   which supabase-mcp-server
+ </li>
+</ol>
+<p>
+ # On Windows
+   where supabase-mcp-server
+ <code class="code">
+  ``
+   Copy the full path that is returned (e.g.,
+ </code>
+ /Users/username/.local/bin/supabase-mcp-server`).
+</p>
+<ol>
+<li>
+<strong>
+   Configure the MCP server
+  </strong>
+  in Claude Desktop:
+ </li>
+<li>
+  Open Claude Desktop
+ </li>
+<li>
+  Go to Settings → Developer -&gt; Edit Config MCP Servers
+ </li>
+<li>
+  Add a new configuration with the following JSON:
+ </li>
+</ol>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "supabase": {
+         "command": "/full/path/to/supabase-mcp-server",  // Replace with the actual path from step 1
+         "env": {
+           "QUERY_API_KEY": "your-api-key",  // Required - get your API key at thequery.dev
+           "SUPABASE_PROJECT_REF": "your-project-ref",
+           "SUPABASE_DB_PASSWORD": "your-db-password",
+           "SUPABASE_REGION": "us-east-1",  // optional, defaults to us-east-1
+           "SUPABASE_ACCESS_TOKEN": "your-access-token",  // optional, for management API
+           "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key"  // optional, for Auth Admin SDK
+         }
+       }
+     }
+   }
+ </code>
+</p>
+<blockquote>
+<p>
+  ⚠️
+  <strong>
+   Important
+  </strong>
+  : Unlike Windsurf and Cursor, Claude Desktop requires the
+  <strong>
+   full absolute path
+  </strong>
+  to the executable. Using just the command name (
+  <code class="code">
+   supabase-mcp-server
+  </code>
+  ) will result in a "spawn ENOENT" error.
+ </p>
+</blockquote>
+<p>
+ If configuration is correct, you should see the Supabase MCP server listed as available in Claude Desktop.
+</p>
+<p>
+<img alt="How successful Windsurf config looks like" src="https://github.com/user-attachments/assets/500bcd40-6245-40a7-b23b-189827ed2923"/>
+</p>
+<h4 class="heading">
+ Cline
+</h4>
+<p>
+ Cline also supports MCP servers through a similar JSON configuration. Follow these steps to set up the Supabase MCP server:
+</p>
+<ol>
+<li>
+<strong>
+   Find the full path to the executable
+  </strong>
+  (this step is critical):
+   ```bash
+   # On macOS/Linux
+   which supabase-mcp-server
+ </li>
+</ol>
+<p>
+ # On Windows
+   where supabase-mcp-server
+ <code class="code">
+  ``
+   Copy the full path that is returned (e.g.,
+ </code>
+ /Users/username/.local/bin/supabase-mcp-server`).
+</p>
+<ol>
+<li>
+<strong>
+   Configure the MCP server
+  </strong>
+  in Cline:
+ </li>
+<li>
+  Open Cline in VS Code
+ </li>
+<li>
+  Click on the "MCP Servers" tab in the Cline sidebar
+ </li>
+<li>
+  Click "Configure MCP Servers"
+ </li>
+<li>
+  This will open the
+  <code class="code">
+   cline_mcp_settings.json
+  </code>
+  file
+ </li>
+<li>
+  Add the following configuration:
+ </li>
+</ol>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "supabase": {
+         "command": "/full/path/to/supabase-mcp-server",  // Replace with the actual path from step 1
+         "env": {
+           "QUERY_API_KEY": "your-api-key",  // Required - get your API key at thequery.dev
+           "SUPABASE_PROJECT_REF": "your-project-ref",
+           "SUPABASE_DB_PASSWORD": "your-db-password",
+           "SUPABASE_REGION": "us-east-1",  // optional, defaults to us-east-1
+           "SUPABASE_ACCESS_TOKEN": "your-access-token",  // optional, for management API
+           "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key"  // optional, for Auth Admin SDK
+         }
+       }
+     }
+   }
+ </code>
+</p>
+<p>
+ If configuration is correct, you should see a green indicator next to the Supabase MCP server in the Cline MCP Servers list, and a message confirming "supabase MCP server connected" at the bottom of the panel.
+</p>
+<p>
+<img alt="How successful configuration in Cline looks like" src="https://github.com/user-attachments/assets/6c4446ad-7a58-44c6-bf12-6c82222bbe59"/>
+</p>
+<h3 class="heading">
+ Troubleshooting
+</h3>
+<p>
+ Here are some tips &amp; tricks that might help you:
+-
+ <strong>
+  Debug installation
+ </strong>
+ - run
+ <code class="code">
+  supabase-mcp-server
+ </code>
+ directly from the terminal to see if it works. If it doesn't, there might be an issue with the installation.
+-
+ <strong>
+  MCP Server configuration
+ </strong>
+ - if the above step works, it means the server is installed and configured correctly. As long as you provided the right command, IDE should be able to connect. Make sure to provide the right path to the server executable.
+-
+ <strong>
+  "No tools found" error
+ </strong>
+ - If you see "Client closed - no tools available" in Cursor despite the package being installed:
+  - Find the full path to the executable by running
+ <code class="code">
+  which supabase-mcp-server
+ </code>
+ (macOS/Linux) or
+ <code class="code">
+  where supabase-mcp-server
+ </code>
+ (Windows)
+  - Use the full path in your MCP server configuration instead of just
+ <code class="code">
+  supabase-mcp-server
+ </code>
+ - For example:
+ <code class="code">
+  /Users/username/.local/bin/supabase-mcp-server
+ </code>
+ or
+ <code class="code">
+  C:\Users\username\.local\bin\supabase-mcp-server.exe
+ </code>
+ -
+ <strong>
+  Environment variables
+ </strong>
+ - to connect to the right database, make sure you either set env variables in
+ <code class="code">
+  mcp_config.json
+ </code>
+ or in
+ <code class="code">
+  .env
+ </code>
+ file placed in a global config directory (
+ <code class="code">
+  ~/.config/supabase-mcp/.env
+ </code>
+ on macOS/Linux or
+ <code class="code">
+  %APPDATA%\supabase-mcp\.env
+ </code>
+ on Windows).
+-
+ <strong>
+  Accessing logs
+ </strong>
+ - The MCP server writes detailed logs to a file:
+  - Log file location:
+    - macOS/Linux:
+ <code class="code">
+  ~/.local/share/supabase-mcp/mcp_server.log
+ </code>
+ - Windows:
+ <code class="code">
+  %USERPROFILE%\.local\share\supabase-mcp\mcp_server.log
+ </code>
+ - Logs include connection status, configuration details, and operation results
+  - View logs using any text editor or terminal commands:
+    ```bash
+    # On macOS/Linux
+    cat ~/.local/share/supabase-mcp/mcp_server.log
+</p>
+<pre class="pre"><code class="code"># On Windows (PowerShell)
+Get-Content "$env:USERPROFILE\.local\share\supabase-mcp\mcp_server.log"
+```
+</code></pre>
+<p>
+ If you are stuck or any of the instructions above are incorrect, please raise an issue.
+</p>
+<h3 class="heading">
+ MCP Inspector
+</h3>
+<p>
+ A super useful tool to help debug MCP server issues is MCP Inspector. If you installed from source, you can run
+ <code class="code">
+  supabase-mcp-inspector
+ </code>
+ from the project repo and it will run the inspector instance. Coupled with logs this will give you complete overview over what's happening in the server.
+</p>
+<blockquote>
+<p>
+  📝 Running
+  <code class="code">
+   supabase-mcp-inspector
+  </code>
+  , if installed from package, doesn't work properly - I will validate and fix in the coming release.
+ </p>
+</blockquote>
+<h2 class="heading">
+ Feature Overview
+</h2>
+<h3 class="heading">
+ Database query tools
+</h3>
+<p>
+ Since v0.3+ server provides comprehensive database management capabilities with built-in safety controls:
+</p>
+<ul>
+<li>
+<strong>
+   SQL Query Execution
+  </strong>
+  : Execute PostgreSQL queries with risk assessment
+ </li>
+<li>
+<p>
+<strong>
+    Three-tier safety system
+   </strong>
+   :
+  </p>
+<ul>
+<li>
+<code class="code">
+     safe
+    </code>
+    : Read-only operations (SELECT) - always allowed
+   </li>
+<li>
+<code class="code">
+     write
+    </code>
+    : Data modifications (INSERT, UPDATE, DELETE) - require unsafe mode
+   </li>
+<li>
+<code class="code">
+     destructive
+    </code>
+    : Schema changes (DROP, CREATE) - require unsafe mode + confirmation
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    SQL Parsing and Validation
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<p>
+   Uses PostgreSQL's parser (pglast) for accurate analysis and provides clear feedback on safety requirements
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Automatic Migration Versioning
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Database-altering operations operations are automatically versioned
+ </li>
+<li>
+<p>
+   Generates descriptive names based on operation type and target
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Safety Controls
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Default SAFE mode allows only read-only operations
+ </li>
+<li>
+  All statements run in transaction mode via
+  <code class="code">
+   asyncpg
+  </code>
+</li>
+<li>
+<p>
+   2-step confirmation for high-risk operations
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Available Tools
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<code class="code">
+   get_schemas
+  </code>
+  : Lists schemas with sizes and table counts
+ </li>
+<li>
+<code class="code">
+   get_tables
+  </code>
+  : Lists tables, foreign tables, and views with metadata
+ </li>
+<li>
+<code class="code">
+   get_table_schema
+  </code>
+  : Gets detailed table structure (columns, keys, relationships)
+ </li>
+<li>
+<code class="code">
+   execute_postgresql
+  </code>
+  : Executes SQL statements against your database
+ </li>
+<li>
+<code class="code">
+   confirm_destructive_operation
+  </code>
+  : Executes high-risk operations after confirmation
+ </li>
+<li>
+<code class="code">
+   retrieve_migrations
+  </code>
+  : Gets migrations with filtering and pagination options
+ </li>
+<li>
+<code class="code">
+   live_dangerously
+  </code>
+  : Toggles between safe and unsafe modes
+ </li>
+</ul>
+<h3 class="heading">
+ Management API tools
+</h3>
+<p>
+ Since v0.3.0 server provides secure access to the Supabase Management API with built-in safety controls:
+</p>
+<ul>
+<li>
+<strong>
+   Available Tools
+  </strong>
+  :
+ </li>
+<li>
+<code class="code">
+   send_management_api_request
+  </code>
+  : Sends arbitrary requests to Supabase Management API with auto-injection of project ref
+ </li>
+<li>
+<code class="code">
+   get_management_api_spec
+  </code>
+  : Gets the enriched API specification with safety information
+  <ul>
+<li>
+    Supports multiple query modes: by domain, by specific path/method, or all paths
+   </li>
+<li>
+    Includes risk assessment information for each endpoint
+   </li>
+<li>
+    Provides detailed parameter requirements and response formats
+   </li>
+<li>
+    Helps LLMs understand the full capabilities of the Supabase Management API
+   </li>
+</ul>
+</li>
+<li>
+<code class="code">
+   get_management_api_safety_rules
+  </code>
+  : Gets all safety rules with human-readable explanations
+ </li>
+<li>
+<p>
+<code class="code">
+    live_dangerously
+   </code>
+   : Toggles between safe and unsafe operation modes
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Safety Controls
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Uses the same safety manager as database operations for consistent risk management
+ </li>
+<li>
+  Operations categorized by risk level:
+  <ul>
+<li>
+<code class="code">
+     safe
+    </code>
+    : Read-only operations (GET) - always allowed
+   </li>
+<li>
+<code class="code">
+     unsafe
+    </code>
+    : State-changing operations (POST, PUT, PATCH, DELETE) - require unsafe mode
+   </li>
+<li>
+<code class="code">
+     blocked
+    </code>
+    : Destructive operations (delete project, etc.) - never allowed
+   </li>
+</ul>
+</li>
+<li>
+  Default safe mode prevents accidental state changes
+ </li>
+<li>
+  Path-based pattern matching for precise safety rules
+ </li>
+</ul>
+<p>
+<strong>
+  Note
+ </strong>
+ : Management API tools only work with remote Supabase instances and are not compatible with local Supabase development setups.
+</p>
+<h3 class="heading">
+ Auth Admin tools
+</h3>
+<p>
+ I was planning to add support for Python SDK methods to the MCP server. Upon consideration I decided to only add support for Auth admin methods as I often found myself manually creating test users which was prone to errors and time consuming. Now I can just ask Cursor to create a test user and it will be done seamlessly. Check out the full Auth Admin SDK method docs to know what it can do.
+</p>
+<p>
+ Since v0.3.6 server supports direct access to Supabase Auth Admin methods via Python SDK:
+  - Includes the following tools:
+    -
+ <code class="code">
+  get_auth_admin_methods_spec
+ </code>
+ to retrieve documentation for all available Auth Admin methods
+    -
+ <code class="code">
+  call_auth_admin_method
+ </code>
+ to directly invoke Auth Admin methods with proper parameter handling
+  - Supported methods:
+    -
+ <code class="code">
+  get_user_by_id
+ </code>
+ : Retrieve a user by their ID
+    -
+ <code class="code">
+  list_users
+ </code>
+ : List all users with pagination
+    -
+ <code class="code">
+  create_user
+ </code>
+ : Create a new user
+    -
+ <code class="code">
+  delete_user
+ </code>
+ : Delete a user by their ID
+    -
+ <code class="code">
+  invite_user_by_email
+ </code>
+ : Send an invite link to a user's email
+    -
+ <code class="code">
+  generate_link
+ </code>
+ : Generate an email link for various authentication purposes
+    -
+ <code class="code">
+  update_user_by_id
+ </code>
+ : Update user attributes by ID
+    -
+ <code class="code">
+  delete_factor
+ </code>
+ : Delete a factor on a user (currently not implemented in SDK)
+</p>
+<h4 class="heading">
+ Why use Auth Admin SDK instead of raw SQL queries?
+</h4>
+<p>
+ The Auth Admin SDK provides several key advantages over direct SQL manipulation:
+-
+ <strong>
+  Functionality
+ </strong>
+ : Enables operations not possible with SQL alone (invites, magic links, MFA)
+-
+ <strong>
+  Accuracy
+ </strong>
+ : More reliable then creating and executing raw SQL queries on auth schemas
+-
+ <strong>
+  Simplicity
+ </strong>
+ : Offers clear methods with proper validation and error handling
+</p>
+<ul>
+<li>
+  Response format:
+  <ul>
+<li>
+    All methods return structured Python objects instead of raw dictionaries
+   </li>
+<li>
+    Object attributes can be accessed using dot notation (e.g.,
+    <code class="code">
+     user.id
+    </code>
+    instead of
+    <code class="code">
+     user["id"]
+    </code>
+    )
+   </li>
+</ul>
+</li>
+<li>
+  Edge cases and limitations:
+  <ul>
+<li>
+    UUID validation: Many methods require valid UUID format for user IDs and will return specific validation errors
+   </li>
+<li>
+    Email configuration: Methods like
+    <code class="code">
+     invite_user_by_email
+    </code>
+    and
+    <code class="code">
+     generate_link
+    </code>
+    require email sending to be configured in your Supabase project
+   </li>
+<li>
+    Link types: When generating links, different link types have different requirements:
+   </li>
+<li>
+<code class="code">
+     signup
+    </code>
+    links don't require the user to exist
+   </li>
+<li>
+<code class="code">
+     magiclink
+    </code>
+    and
+    <code class="code">
+     recovery
+    </code>
+    links require the user to already exist in the system
+   </li>
+<li>
+    Error handling: The server provides detailed error messages from the Supabase API, which may differ from the dashboard interface
+   </li>
+<li>
+    Method availability: Some methods like
+    <code class="code">
+     delete_factor
+    </code>
+    are exposed in the API but not fully implemented in the SDK
+   </li>
+</ul>
+</li>
+</ul>
+<h3 class="heading">
+ Logs &amp; Analytics
+</h3>
+<p>
+ The server provides access to Supabase logs and analytics data, making it easier to monitor and troubleshoot your applications:
+</p>
+<ul>
+<li>
+<p>
+<strong>
+    Available Tool
+   </strong>
+   :
+   <code class="code">
+    retrieve_logs
+   </code>
+   - Access logs from any Supabase service
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Log Collections
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<code class="code">
+   postgres
+  </code>
+  : Database server logs
+ </li>
+<li>
+<code class="code">
+   api_gateway
+  </code>
+  : API gateway requests
+ </li>
+<li>
+<code class="code">
+   auth
+  </code>
+  : Authentication events
+ </li>
+<li>
+<code class="code">
+   postgrest
+  </code>
+  : RESTful API service logs
+ </li>
+<li>
+<code class="code">
+   pooler
+  </code>
+  : Connection pooling logs
+ </li>
+<li>
+<code class="code">
+   storage
+  </code>
+  : Object storage operations
+ </li>
+<li>
+<code class="code">
+   realtime
+  </code>
+  : WebSocket subscription logs
+ </li>
+<li>
+<code class="code">
+   edge_functions
+  </code>
+  : Serverless function executions
+ </li>
+<li>
+<code class="code">
+   cron
+  </code>
+  : Scheduled job logs
+ </li>
+<li>
+<p>
+<code class="code">
+    pgbouncer
+   </code>
+   : Connection pooler logs
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Features
+   </strong>
+   : Filter by time, search text, apply field filters, or use custom SQL queries
+  </p>
+</li>
+</ul>
+<p>
+ Simplifies debugging across your Supabase stack without switching between interfaces or writing complex queries.
+</p>
+<h3 class="heading">
+ Automatic Versioning of Database Changes
+</h3>
+<p>
+ "With great power comes great responsibility." While
+ <code class="code">
+  execute_postgresql
+ </code>
+ tool coupled with aptly named
+ <code class="code">
+  live_dangerously
+ </code>
+ tool provide a powerful and simple way to manage your Supabase database, it also means that dropping a table or modifying one is one chat message away. In order to reduce the risk of irreversible changes, since v0.3.8 the server supports:
+- automatic creation of migration scripts for all write &amp; destructive sql operations executed on the database
+- improved safety mode of query execution, in which all queries are categorized in:
+  -
+ <code class="code">
+  safe
+ </code>
+ type: always allowed. Includes all read-only ops.
+  -
+ <code class="code">
+  write
+ </code>
+ type: requires
+ <code class="code">
+  write
+ </code>
+ mode to be enabled by the user.
+  -
+ <code class="code">
+  destructive
+ </code>
+ type: requires
+ <code class="code">
+  write
+ </code>
+ mode to be enabled by the user AND a 2-step confirmation of query execution for clients that do not execute tools automatically.
+</p>
+<h3 class="heading">
+ Universal Safety Mode
+</h3>
+<p>
+ Since v0.3.8 Safety Mode has been standardized across all services (database, API, SDK) using a universal safety manager. This provides consistent risk management and a unified interface for controlling safety settings across the entire MCP server.
+</p>
+<p>
+ All operations (SQL queries, API requests, SDK methods) are categorized into risk levels:
+-
+ <code class="code">
+  Low
+ </code>
+ risk: Read-only operations that don't modify data or structure (SELECT queries, GET API requests)
+-
+ <code class="code">
+  Medium
+ </code>
+ risk: Write operations that modify data but not structure (INSERT/UPDATE/DELETE, most POST/PUT API requests)
+-
+ <code class="code">
+  High
+ </code>
+ risk: Destructive operations that modify database structure or could cause data loss (DROP/TRUNCATE, DELETE API endpoints)
+-
+ <code class="code">
+  Extreme
+ </code>
+ risk: Operations with severe consequences that are blocked entirely (deleting projects)
+</p>
+<p>
+ Safety controls are applied based on risk level:
+- Low risk operations are always allowed
+- Medium risk operations require unsafe mode to be enabled
+- High risk operations require unsafe mode AND explicit confirmation
+- Extreme risk operations are never allowed
+</p>
+<h4 class="heading">
+ How confirmation flow works
+</h4>
+<p>
+ Any high-risk operations (be it a postgresql or api request) will be blocked even in
+ <code class="code">
+  unsafe
+ </code>
+ mode.
+ <img alt="Every high-risk operation is blocked" src="https://github.com/user-attachments/assets/c0df79c2-a879-4b1f-a39d-250f9965c36a"/>
+ You will have to confirm and approve every high-risk operation explicitly in order for it to be executed.
+ <img alt="Explicit approval is always required" src="https://github.com/user-attachments/assets/5cd7a308-ec2a-414e-abe2-ff2f3836dd8b"/>
+</p>
+<h2 class="heading">
+ Changelog
+</h2>
+<ul>
+<li>
+  📦 Simplified installation via package manager - ✅ (v0.2.0)
+ </li>
+<li>
+  🌎 Support for different Supabase regions - ✅ (v0.2.2)
+ </li>
+<li>
+  🎮 Programmatic access to Supabase management API with safety controls - ✅ (v0.3.0)
+ </li>
+<li>
+  👷‍♂️ Read and read-write database SQL queries with safety controls - ✅ (v0.3.0)
+ </li>
+<li>
+  🔄 Robust transaction handling for both direct and pooled connections - ✅ (v0.3.2)
+ </li>
+<li>
+  🐍 Support methods and objects available in native Python SDK - ✅ (v0.3.6)
+ </li>
+<li>
+  🔍 Stronger SQL query validation ✅ (v0.3.8)
+ </li>
+<li>
+  📝 Automatic versioning of database changes ✅ (v0.3.8)
+ </li>
+<li>
+  📖 Radically improved knowledge and tools of api spec ✅ (v0.3.8)
+ </li>
+<li>
+  ✍️ Improved consistency of migration-related tools for a more organized database vcs ✅ (v0.3.10)
+ </li>
+<li>
+  🥳 Query MCP is released (v0.4.0)
+ </li>
+</ul>
+<p>
+ For a more detailed roadmap, please see this
+ <a href="https://github.com/alexander-zuev/supabase-mcp-server/discussions/46">
+  discussion
+ </a>
+ on GitHub.
+</p>
+<h2 class="heading">
+ Star History
+</h2>
+<p>
+<a href="https://star-history.com/#alexander-zuev/supabase-mcp-server&amp;Date">
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=alexander-zuev/supabase-mcp-server&amp;type=Date"/>
+</a>
+</p>
+<hr/>
+<p>
+ Enjoy! ☺️
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/alexander-zuev-supabase-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

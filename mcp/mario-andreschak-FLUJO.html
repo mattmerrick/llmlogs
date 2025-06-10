@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLUJO is still an early preview! Here's a 30 second video to show it off:">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="DISCLAIMER - MCP Directory">
+    <meta property="og:description" content="FLUJO is still an early preview! Here's a 30 second video to show it off:">
+    <meta property="og:url" content="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DISCLAIMER - MCP Directory">
+    <meta name="twitter:description" content="FLUJO is still an early preview! Here's a 30 second video to show it off:">
+    
+    <title>DISCLAIMER - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">DISCLAIMER</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">DISCLAIMER</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 463</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/mario-andreschak/FLUJO" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="DISCLAIMER - MCP Directory" property="og:title"/>
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="DISCLAIMER - MCP Directory" name="twitter:title"/>
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" name="twitter:description"/>
+<title>DISCLAIMER - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">DISCLAIMER</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">DISCLAIMER</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 463</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/mario-andreschak/FLUJO" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="DISCLAIMER - MCP Directory" property="og:title">
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" property="og:description">
+<meta content="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="DISCLAIMER - MCP Directory" name="twitter:title">
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" name="twitter:description">
+<title>DISCLAIMER - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>DISCLAIMER</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 463</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/mario-andreschak/FLUJO" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="DISCLAIMER - MCP Directory" property="og:title"/>
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="DISCLAIMER - MCP Directory" name="twitter:title"/>
+<meta content="FLUJO is still an early preview! Here's a 30 second video to show it off:" name="twitter:description"/>
+<title>DISCLAIMER - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>DISCLAIMER</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 463</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/mario-andreschak/FLUJO" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ DISCLAIMER
+</h1>
+<p>
+ FLUJO is still an early preview! Here's a 30 second video to show it off:
+ <a href="https://www.youtube.com/watch?v=D63e1XUGbi4">
+<img alt="image" src="https://github.com/user-attachments/assets/8d71d291-74a3-486d-a8f5-c8976aedba0f"/>
+</a>
+</p>
+<p>
+ For
+ <em>
+  anything
+ </em>
+ that you struggle with (MCP Installation, Application Issues, Usability Issues, Feedback):
+ <strong>
+  PLEASE LET ME KNOW!
+ </strong>
+ -&gt; Create a Github Issue or write on Discord (https://discord.gg/KPyrjTSSat) and I will look into it! Maybe a response will take a day, but I will try to get back to each and every one of you.
+</p>
+<p>
+ Here's a video guiding you through the whole thing - from installation to output! (15min)
+Sorry for the bad audio, a new Video is coming soon!
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=YIREFCAAdxg">
+<img alt="How to install &amp; Run your first Flow" src="https://img.youtube.com/vi/YIREFCAAdxg/0.jpg"/>
+</a>
+</p>
+<p>
+ FLUJO animated Short #1 - "A sad song about MCP"
+ <a href="https://www.youtube.com/watch?v=boOS9XHQdZc">
+<img alt="image" src="https://github.com/user-attachments/assets/e83cf81d-e5db-451c-9599-77dcdbe4ba2c"/>
+</a>
+</p>
+<h1 class="heading">
+ IMPORTANT SECURITY NOTE
+</h1>
+<p>
+ FLUJO has currently EXTENSIVE logging enabled by default! This
+ <strong>
+  may expose your encrypted API-Keys to the terminal output!
+ </strong>
+ . Be VERY careful when grabbing videos or streaming and showing the terminal output!
+</p>
+<p>
+<img alt="FLUJO Logo" src="https://github.com/user-attachments/assets/881ad34c-73fa-4b71-ba47-123b5da8e05e"/>
+</p>
+<h1 class="heading">
+ FLUJO
+</h1>
+<p>
+<a href="LICENSE">
+<img alt="MIT License" src="https://img.shields.io/badge/License-MIT-blue.svg"/>
+</a>
+<a href="package.json">
+<img alt="Version" src="https://img.shields.io/badge/version-0.1.0-green.svg"/>
+</a>
+</p>
+<p>
+ FLUJO is an open-source platform that bridges the gap between
+ <strong>
+  workflow orchestration
+ </strong>
+ ,
+ <strong>
+  Model-Context-Protocol (MCP)
+ </strong>
+ , and
+ <strong>
+  AI tool integration
+ </strong>
+ . It provides a unified interface for managing AI models, MCP servers, and complex workflows - all locally and open-source.
+</p>
+<p>
+<img alt="FLUJO Overview" src="https://github.com/user-attachments/assets/397ef3a5-e4c1-4667-ac74-6fe96f854ff1"/>
+</p>
+<p>
+ FLUJO is powered by the
+ <a href="https://the-pocket-world.github.io/Pocket-Flow-Framework/">
+  PocketFlowFramework
+ </a>
+ and built with
+ <a href="https://github.com/cline/cline">
+  CLine
+ </a>
+ and a lot of LOVE.
+</p>
+<h2 class="heading">
+ 🌟 Key Features
+</h2>
+<h3 class="heading">
+ 🔑 Environment &amp; API Key Management
+</h3>
+<ul>
+<li>
+<strong>
+   Secure Storage
+  </strong>
+  : Store environment variables and API keys with encryption
+ </li>
+<li>
+<strong>
+   Global Access
+  </strong>
+  : Use your stored keys across the entire application
+ </li>
+<li>
+<strong>
+   Centralized Management
+  </strong>
+  : Keep all your credentials in one secure place
+ </li>
+</ul>
+<p>
+<img alt="API Keys Management" src="https://github.com/user-attachments/assets/f5acd60f-129d-4e0c-8bc1-b5410d3c8d1d"/>
+</p>
+<h3 class="heading">
+ 🤖 Model Management
+</h3>
+<ul>
+<li>
+<strong>
+   Multiple Models
+  </strong>
+  : Configure and use different AI models simultaneously
+ </li>
+<li>
+<strong>
+   Pre-defined Prompts
+  </strong>
+  : Create custom system instructions for each model
+ </li>
+<li>
+<strong>
+   Provider Flexibility
+  </strong>
+  : Connect to various API providers (OpenAI, Anthropic, etc.)
+ </li>
+<li>
+<strong>
+   Local Models
+  </strong>
+  : Integrate with Ollama for local model execution
+ </li>
+</ul>
+<p>
+<img alt="Model Configuration" src="https://github.com/user-attachments/assets/06036daa-c576-4483-b13e-47ef21a82395"/>
+<img alt="Model Settings" src="https://github.com/user-attachments/assets/4e6f8390-eaab-448a-9a38-bbbd64fd3de8"/>
+<img alt="Ollama Integration" src="https://github.com/user-attachments/assets/8a04632a-4cc2-4738-ac9b-e856170a9e7c"/>
+</p>
+<h3 class="heading">
+ 🔌 MCP Server Integration
+</h3>
+<ul>
+<li>
+<strong>
+   Easy Installation
+  </strong>
+  : Install MCP servers from GitHub or local filesystem
+ </li>
+<li>
+<strong>
+   Server Management
+  </strong>
+  : Comprehensive interface for managing MCP servers
+ </li>
+<li>
+<strong>
+   Tool Inspection
+  </strong>
+  : View and manage available tools from MCP servers
+ </li>
+<li>
+<strong>
+   Environment Binding
+  </strong>
+  : Connect server environment variables to global storage
+ </li>
+<li>
+<strong>
+   Docker Support
+  </strong>
+  : Run Docker-based MCP servers within Flujo
+ </li>
+</ul>
+<p>
+<img alt="MCP Server Installation" src="https://github.com/user-attachments/assets/4c4055fd-c769-4155-b48f-1350b689545f"/>
+<img alt="MCP Server Management" src="https://github.com/user-attachments/assets/bd10b76f-aeb0-48c2-98e3-313e35ace50f"/>
+<img alt="MCP Server Tools" src="https://github.com/user-attachments/assets/a29effb6-07d4-42e2-886f-6cf7c96fe4a6"/>
+<img alt="MCP Environment Variables" src="https://github.com/user-attachments/assets/27b257bf-a6ad-42bf-9ccf-4178c454c7ce"/>
+</p>
+<h3 class="heading">
+ 🔄 Workflow Orchestration
+</h3>
+<ul>
+<li>
+<strong>
+   Visual Flow Builder
+  </strong>
+  : Create and design complex workflows
+ </li>
+<li>
+<strong>
+   Model Integration
+  </strong>
+  : Connect different models in your workflow
+ </li>
+<li>
+<strong>
+   Tool Management
+  </strong>
+  : Allow or restrict specific tools for each model
+ </li>
+<li>
+<strong>
+   Prompt Design
+  </strong>
+  : Configure system prompts at multiple levels (Model, Flow, Node)
+  <img alt="image" src="https://github.com/user-attachments/assets/36d417ca-a0e6-4f87-90cb-b17a70641372"/>
+<img alt="Flow Design" src="https://github.com/user-attachments/assets/30fc4c8f-78fe-4a44-9fe7-d7837d7359d2"/>
+<img alt="Flow Configuration" src="https://github.com/user-attachments/assets/6b84025f-5240-4277-87e9-02e0f5aac867"/>
+<img alt="System Prompts" src="https://github.com/user-attachments/assets/b1725c4d-2b0f-420d-92cc-3eba13a5a7de"/>
+<img alt="Tool References" src="https://github.com/user-attachments/assets/8bc8ee61-2f21-42ef-b1df-9c88a4ad13a6"/>
+<img alt="Screenshot 2025-03-08 223218" src="https://github.com/user-attachments/assets/922b9368-c0b6-4a06-b500-c8d71506173a"/>
+</li>
+</ul>
+<h3 class="heading">
+ 💬 Chat Interface
+</h3>
+<ul>
+<li>
+<strong>
+   Flow Interaction
+  </strong>
+  : Interact with your flows through a chat interface
+ </li>
+<li>
+<strong>
+   Message Management
+  </strong>
+  : Edit or disable messages or split conversations to reduce context size
+ </li>
+<li>
+<strong>
+   File Attachments
+  </strong>
+  : Attach documents or audio for LLM processing (really bad atm, because for this you should use mcp!)
+ </li>
+<li>
+<strong>
+   Transcription
+  </strong>
+  : Process audio inputs with automatic transcription (really bad atm, see roadmap)
+ </li>
+</ul>
+<p>
+<img alt="Screenshot 2025-04-05 210835" src="https://github.com/user-attachments/assets/c9738f5b-01c7-4b18-b816-2323ebc2a94a"/>
+</p>
+<h3 class="heading">
+ 🔄 External Tool Integration
+</h3>
+<ul>
+<li>
+<strong>
+   OpenAI Compatible Endpoint
+  </strong>
+  : Integrate with tools like CLine or Roo
+ </li>
+<li>
+<strong>
+   Seamless Connection
+  </strong>
+  : Use FLUJO as a backend for other AI applications
+ </li>
+</ul>
+<p>
+<img alt="Screenshot 2025-03-27 130144" src="https://github.com/user-attachments/assets/7ba68655-2a38-48b1-8d52-c0e2c217e506"/>
+<img alt="Screenshot 2025-03-26 213657" src="https://github.com/user-attachments/assets/43add66a-ba69-4651-9722-f920c4ef746b"/>
+</p>
+<h2 class="heading">
+ 🚀 Getting Started
+</h2>
+<h3 class="heading">
+ Manual installation:
+</h3>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ul>
+<li>
+  Node.js (v18 or higher)
+ </li>
+<li>
+  npm or yarn
+ </li>
+</ul>
+<h3 class="heading">
+ Installation
+</h3>
+<ol>
+<li>
+<p>
+   Clone the repository:
+   <code class="code">
+    bash
+   git clone https://github.com/mario-andreschak/FLUJO.git
+   cd FLUJO
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Install dependencies:
+   <code class="code">
+    bash
+   npm install
+   # or
+   yarn install
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Start the development server:
+   <code class="code">
+    bash
+   npm run dev
+   # or
+   yarn dev
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Open your browser and navigate to:
+   <code class="code">
+    http://localhost:4200
+   </code>
+</p>
+</li>
+<li>
+<p>
+   FLUJO feels and works best if you run it compiled:
+   <code class="code">
+    bash
+   npm run build
+   npm start
+   </code>
+</p>
+</li>
+<li>
+<p>
+   To run as a desktop application:
+   <code class="code">
+    bash
+   npm run electron-dev    # Development mode
+   # or
+   npm run electron-dist   # Build and package for your platform
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ 📖 Usage
+</h2>
+<h3 class="heading">
+ Setting up often used API keys
+</h3>
+<ol>
+<li>
+  Navigate to Settings
+ </li>
+<li>
+  Save your API Keys globally to secure them
+ </li>
+</ol>
+<h3 class="heading">
+ Setting Up Models
+</h3>
+<ol>
+<li>
+  Navigate to the Models page
+ </li>
+<li>
+  Click "Add Model" to create a new model configuration
+ </li>
+<li>
+  Configure your model with name, provider, API key, and system prompt
+ </li>
+<li>
+  Save your configuration
+ </li>
+</ol>
+<h3 class="heading">
+ Managing MCP Servers
+</h3>
+<ol>
+<li>
+  Go to the MCP page
+ </li>
+<li>
+  Click "Add Server" to install a new MCP server
+ </li>
+<li>
+  Choose from GitHub repository or local filesystem
+ </li>
+<li>
+  Configure server settings and environment variables
+ </li>
+<li>
+  Start and manage your server
+ </li>
+</ol>
+<h3 class="heading">
+ Using SSE MCP-Servers
+</h3>
+<ol>
+<li>
+  Got to the MCP Page
+ </li>
+<li>
+  Click "Add Server" to install a new MCP server
+ </li>
+<li>
+  Select "Local Server"
+ </li>
+<li>
+  Enter a Server Name, enter "/" as Server Root Path
+ </li>
+<li>
+  Leave Build Command and Install Command empty
+ </li>
+<li>
+  Enter "npx" as Run Command
+ </li>
+<li>
+  Add 1. Argument "mcp-remote"
+ </li>
+<li>
+  Add 2. Argument "(your MCP SSE-Url here)"
+  <img alt="image" src="https://github.com/user-attachments/assets/f5c97c26-72c6-4ba9-a9d2-a34e3f34ec19"/>
+</li>
+</ol>
+<h3 class="heading">
+ Using official Reference servers
+</h3>
+<ol>
+<li>
+  Go to the MCP page
+ </li>
+<li>
+  Click "Add Server" to install a new MCP server
+ </li>
+<li>
+  Go to the "Reference Servers" Tab
+ </li>
+<li>
+  (First time executing:) Click "Refresh" and waaaaaaait.
+ </li>
+<li>
+  Click a server of your choice, wait for the screen to change, click "Save" / "Update Server" at the bottom.
+ </li>
+</ol>
+<h3 class="heading">
+ Using Docker-based MCP Servers
+</h3>
+<p>
+ When running FLUJO in Docker, you can use Docker-based MCP servers:
+</p>
+<ol>
+<li>
+  Go to the MCP page
+ </li>
+<li>
+  Click "Add Server" to install a new MCP server
+ </li>
+<li>
+  Choose "Docker" as the installation method
+ </li>
+<li>
+  Provide the Docker image name and any required environment variables
+ </li>
+<li>
+  Start and manage your server
+ </li>
+</ol>
+<h3 class="heading">
+ Creating Workflows
+</h3>
+<ol>
+<li>
+  Visit the Flows page
+ </li>
+<li>
+  Click "Create Flow" to start a new workflow
+ </li>
+<li>
+  Add processing nodes and connect them
+ </li>
+<li>
+  Configure each node with models and tools
+ </li>
+<li>
+  Save your flow
+ </li>
+</ol>
+<p>
+<img alt="Screenshot 2025-04-12 123657" src="https://github.com/user-attachments/assets/06b40a36-a906-44d5-b53a-9eaa125acb74"/>
+</p>
+<h3 class="heading">
+ Branching
+</h3>
+<ol>
+<li>
+  Connect one MCP node to multiple subsequent ones
+  <img alt="Screenshot 2025-04-07 094237" src="https://github.com/user-attachments/assets/73be3153-5dea-4729-bf10-40657b2a12c4"/>
+</li>
+<li>
+  Define the branching in the prompt, using the handoff-tools on the "Agent Tools" tab
+  <img alt="Screenshot 2025-04-07 095433" src="https://github.com/user-attachments/assets/d3bc188f-8a7a-4fb0-830c-e4d85a9a37bf"/>
+</li>
+</ol>
+<h3 class="heading">
+ Loops
+</h3>
+<ol>
+<li>
+  Same as branching, but connect back to a previous node
+  <img alt="Screenshot 2025-04-08 165640" src="https://github.com/user-attachments/assets/3c026812-a895-4c3a-a37d-fe51550b273b"/>
+</li>
+</ol>
+<h3 class="heading">
+ Orchestration
+</h3>
+<ol>
+<li>
+  Same as loops but with multiple ones
+  <img alt="Screenshot 2025-04-08 180631" src="https://github.com/user-attachments/assets/0a3abfe9-8e83-49ea-a8da-bede3bed31e3"/>
+</li>
+</ol>
+<h3 class="heading">
+ Using the Chat Interface
+</h3>
+<ol>
+<li>
+  Go to the Chat page
+ </li>
+<li>
+  Select a flow to interact with
+ </li>
+<li>
+  Start chatting with your configured workflow
+  <img alt="Screenshot 2025-04-07 095653" src="https://github.com/user-attachments/assets/efcb78ba-9a85-401e-a4c7-df5ec7458b26"/>
+</li>
+</ol>
+<h2 class="heading">
+ 🔄 MCP Integration
+</h2>
+<p>
+ FLUJO provides comprehensive support for the Model Context Protocol (MCP), allowing you to:
+</p>
+<ul>
+<li>
+  Install and manage MCP servers
+ </li>
+<li>
+  Inspect server tools
+ </li>
+<li>
+  Connect MCP servers to your workflows
+ </li>
+<li>
+  Reference tools directly in prompts
+ </li>
+<li>
+  Bind environment variables to your global encrypted storage
+  <img alt="image" src="https://github.com/user-attachments/assets/4c638f0d-a6cb-4f4f-a3c0-cc1e3a369297"/>
+</li>
+</ul>
+<h3 class="heading">
+ Docker Installation
+</h3>
+<p>
+ The easiest way to run FLUJO is using Docker, which provides a consistent environment and supports running Docker-based MCP servers.
+</p>
+<h4 class="heading">
+ Prerequisites
+</h4>
+<ul>
+<li>
+  Docker and Docker Compose installed on your system
+ </li>
+</ul>
+<h4 class="heading">
+ Using Docker Compose
+</h4>
+<ol>
+<li>
+<p>
+   Clone the repository:
+   <code class="code">
+    bash
+   git clone https://github.com/mario-andreschak/FLUJO.git
+   cd FLUJO
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Build and start the container:
+   <code class="code">
+    bash
+   docker-compose up -d
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Access FLUJO in your browser:
+   <code class="code">
+    http://localhost:4200
+   </code>
+</p>
+</li>
+</ol>
+<h4 class="heading">
+ Using Docker Scripts
+</h4>
+<p>
+ For more control over the Docker build and run process, you can use the provided scripts:
+</p>
+<ol>
+<li>
+<p>
+   Build the Docker image:
+   <code class="code">
+    bash
+   ./scripts/build-docker.sh
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Run the Docker container:
+   <code class="code">
+    bash
+   ./scripts/run-docker.sh
+   </code>
+</p>
+</li>
+</ol>
+<p>
+ Options for run-docker.sh:
+-
+ <code class="code">
+  --tag=&lt;tag&gt;
+ </code>
+ : Specify the image tag (default: latest)
+-
+ <code class="code">
+  --detached
+ </code>
+ : Run in detached mode
+-
+ <code class="code">
+  --no-privileged
+ </code>
+ : Run without privileged mode (not recommended)
+-
+ <code class="code">
+  --port=&lt;port&gt;
+ </code>
+ : Specify the host port (default: 4200)
+</p>
+<p>
+ For more detailed information about Docker support, including Docker-in-Docker capabilities, persistent storage, and troubleshooting, see
+ <a href="DOCKER.md">
+  DOCKER.md
+ </a>
+ .
+</p>
+<h2 class="heading">
+ 📄 License
+</h2>
+<p>
+ FLUJO is licensed under the
+ <a href="LICENSE">
+  MIT License
+ </a>
+ .
+</p>
+<h2 class="heading">
+ 🚀 Roadmap
+</h2>
+<p>
+ Here's a roadmap of upcoming features and improvements:
+</p>
+<ul>
+<li>
+  Real-time Voice Feature: Adding support for Whisper.js or OpenWhisper to enable real-time voice capabilities.
+ </li>
+<li>
+  Visual Debugger: Introducing a visual tool to help debug and troubleshoot more effectively.
+ </li>
+<li>
+  MCP Roots Support: Implementing Checkpoints and Restore features within MCP Roots for better control and recovery options.
+ </li>
+<li>
+  MCP Prompts: Enabling users to build custom prompts that fully leverage the capabilities of the MCP server.
+ </li>
+<li>
+  MCP Proxying STDIO&lt;&gt;SSE: Likely utilizing SuperGateway to proxy standard input/output with Server-Sent Events for enhanced communication: Use MCP Servers managed in FLUJo in any other MCP client.
+ </li>
+<li>
+  Enhanced Integrations: Improving compatibility and functionality with tools like Windsurf, Cursor, and Cline.
+ </li>
+<li>
+  Advanced Orchestration: Adding agent-driven orchestration, batch processing, and incorporating features inspired by Pocketflow.
+ </li>
+<li>
+  Online Template Repository: Creating a platform for sharing models, flows, or complete "packages," making it easy to distribute FLUJO flows to others.
+ </li>
+<li>
+  Edge Device Optimization: Enhancing performance and usability for edge devices.
+ </li>
+</ul>
+<h2 class="heading">
+ 🤝 Contributing
+</h2>
+<p>
+ Contributions are welcome! Feel free to open issues or submit pull requests.
+</p>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create your feature branch (
+  <code class="code">
+   git checkout -b feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Commit your changes (
+  <code class="code">
+   git commit -m 'Add some amazing feature'
+  </code>
+  )
+ </li>
+<li>
+  Push to the branch (
+  <code class="code">
+   git push origin feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Open a Pull Request
+ </li>
+</ol>
+<h2 class="heading">
+ 📬 Contact
+</h2>
+<ul>
+<li>
+  GitHub:
+  <a href="https://github.com/mario-andreschak">
+   mario-andreschak
+  </a>
+</li>
+<li>
+  LinkedIn: https://www.linkedin.com/in/mario-andreschak-674033299/
+ </li>
+</ul>
+<h2 class="heading">
+ Notes:
+</h2>
+<ul>
+<li>
+  You can add ~FLUJO=HTML, ~FLUJO=MARKDOWN, ~FLUJO=JSON, ~FLUJO=TEXT in your message to format the response, this will give varying results in different tools where you integrate FLUJO.
+ </li>
+<li>
+  You can add ~FLUJOEXPAND=1 or ~FLUJODEBUG=1 somewhere in your message to show more details
+ </li>
+<li>
+  in config/features.ts you can change the Logging-level for the whole application
+ </li>
+<li>
+  in config/features.ts you can enable SSE support which is currently disabled by default
+ </li>
+</ul>
+<hr/>
+<p>
+ FLUJO - Empowering your AI workflows with open-source orchestration.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/mario-andreschak-FLUJO.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

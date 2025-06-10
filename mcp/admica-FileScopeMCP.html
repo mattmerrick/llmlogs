@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="✨ Instantly understand and visualize your codebase structure & dependencies! ✨">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="FileScopeMCP (Model Context Protocol) Server - MCP Directory">
+    <meta property="og:description" content="✨ Instantly understand and visualize your codebase structure & dependencies! ✨">
+    <meta property="og:url" content="https://llmlogs.com/mcp/admica-FileScopeMCP.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FileScopeMCP (Model Context Protocol) Server - MCP Directory">
+    <meta name="twitter:description" content="✨ Instantly understand and visualize your codebase structure & dependencies! ✨">
+    
+    <title>FileScopeMCP (Model Context Protocol) Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">FileScopeMCP (Model Context Protocol) Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">FileScopeMCP (Model Context Protocol) Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 141</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/admica/FileScopeMCP" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="FileScopeMCP (Model Context Protocol) Server - MCP Directory" property="og:title"/>
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/admica-FileScopeMCP.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="FileScopeMCP (Model Context Protocol) Server - MCP Directory" name="twitter:title"/>
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" name="twitter:description"/>
+<title>FileScopeMCP (Model Context Protocol) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">FileScopeMCP (Model Context Protocol) Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">FileScopeMCP (Model Context Protocol) Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 141</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/admica/FileScopeMCP" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="FileScopeMCP (Model Context Protocol) Server - MCP Directory" property="og:title">
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" property="og:description">
+<meta content="https://llmlogs.com/mcp/admica-FileScopeMCP.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="FileScopeMCP (Model Context Protocol) Server - MCP Directory" name="twitter:title">
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" name="twitter:description">
+<title>FileScopeMCP (Model Context Protocol) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>FileScopeMCP (Model Context Protocol) Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 141</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/admica/FileScopeMCP" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="FileScopeMCP (Model Context Protocol) Server - MCP Directory" property="og:title"/>
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/admica-FileScopeMCP.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="FileScopeMCP (Model Context Protocol) Server - MCP Directory" name="twitter:title"/>
+<meta content="✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨" name="twitter:description"/>
+<title>FileScopeMCP (Model Context Protocol) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>FileScopeMCP (Model Context Protocol) Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 141</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/admica/FileScopeMCP" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ FileScopeMCP (Model Context Protocol) Server
+</h1>
+<p>
+<strong>
+  ✨ Instantly understand and visualize your codebase structure &amp; dependencies! ✨
+ </strong>
+</p>
+<!-- Add Badges Here (e.g., License, Version, Build Status) -->
+<p>
+<a href="https://github.com/admica/FileScopeMCP/actions">
+<img alt="Build Status" src="https://github.com/admica/FileScopeMCP/actions/workflows/build.yml/badge.svg"/>
+</a>
+<a href="https://nodejs.org/">
+<img alt="Node.js" src="https://img.shields.io/badge/node-%3E%3D18.x-green"/>
+</a>
+<a href="https://www.gnu.org/licenses/gpl-3.0">
+<img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPLv3-blue.svg"/>
+</a>
+</p>
+<!-- Add other badges -->
+<p>
+ A TypeScript-based tool for ranking files in your codebase by importance, tracking dependencies, and providing summaries to help understand code structure.
+</p>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ This MCP server analyzes your codebase to identify the most important files based on dependency relationships. It generates importance scores (0-10) for each file, tracks bidirectional dependencies, and allows you to add custom summaries for files. All this information is made available to AI tools through Cursor's Model Context Protocol.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<p>
+ 🚀
+ <strong>
+  Supercharge your Code Understanding!
+ </strong>
+ FileScopeMCP provides insights directly to your AI assistant:
+</p>
+<ul>
+<li>
+<strong>
+   🎯 File Importance Analysis
+  </strong>
+</li>
+<li>
+  Rank files on a 0-10 scale based on their role in the codebase.
+ </li>
+<li>
+  Calculate importance using incoming/outgoing dependencies.
+ </li>
+<li>
+  Instantly pinpoint the most critical files in your project.
+ </li>
+<li>
+<p>
+   Smart calculation considers file type, location, and name significance.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    🔗 Dependency Tracking
+   </strong>
+</p>
+</li>
+<li>
+  Map bidirectional dependency relationships between files.
+ </li>
+<li>
+  Identify which files import a given file (dependents).
+ </li>
+<li>
+  See which files are imported by a given file (dependencies).
+ </li>
+<li>
+  Distinguish between local and package dependencies.
+ </li>
+<li>
+<p>
+   Multi-language support: Python, JavaScript, TypeScript, C/C++, Rust, Lua, Zig.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    📊 Visualization
+   </strong>
+</p>
+</li>
+<li>
+  Generate Mermaid diagrams to visualize file relationships.
+ </li>
+<li>
+  Color-coded visualization based on importance scores.
+ </li>
+<li>
+  Support for dependency graphs, directory trees, or hybrid views.
+ </li>
+<li>
+  HTML output with embedded rendering including theme toggle and responsive design.
+ </li>
+<li>
+<p>
+   Customize diagram depth, filter by importance, and adjust layout options.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    📝 File Summaries
+   </strong>
+</p>
+</li>
+<li>
+  Add human or AI-generated summaries to any file.
+ </li>
+<li>
+  Retrieve stored summaries to quickly grasp file purpose.
+ </li>
+<li>
+<p>
+   Summaries persist across server restarts.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    📚 Multiple Project Support
+   </strong>
+</p>
+</li>
+<li>
+  Create and manage multiple file trees for different project areas.
+ </li>
+<li>
+  Configure separate trees with distinct base directories.
+ </li>
+<li>
+  Switch between different file trees effortlessly.
+ </li>
+<li>
+<p>
+   Cached trees for faster subsequent operations.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    💾 Persistent Storage
+   </strong>
+</p>
+</li>
+<li>
+  All data automatically saved to disk in JSON format.
+ </li>
+<li>
+  Load existing file trees without rescanning the filesystem.
+ </li>
+<li>
+  Track when file trees were last updated.
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<ol>
+<li>
+  Clone this repository
+ </li>
+<li>
+  Build the project:
+ </li>
+</ol>
+<p>
+ The build script will install all node dependencies and generate mcp.json for you.
+</p>
+<p>
+ Windows:
+ <code class="code">
+  bash
+   build.bat
+ </code>
+</p>
+<p>
+ Copy the generated mcp.json configuration to your project's
+ <code class="code">
+  .cursor
+ </code>
+ directory:
+</p>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "FileScopeMCP": {
+         "command": "node",
+         "args": ["&lt;build script sets this&gt;/mcp-server.js","--base-dir=C:/Users/admica/my/project/base"],
+         "transport": "stdio",
+         "disabled": false,
+         "alwaysAllow": []
+       }
+     }
+   }
+ </code>
+</p>
+<p>
+ Linux: (Cursor in Windows, but your project is in Linux WSL, then put the MCP in Linux and build)
+ <code class="code">
+  bash
+   build.sh
+ </code>
+</p>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "FileScopeMCP": {
+       "command": "wsl",
+       "args": ["-d", "Ubuntu-24.04", "/home/admica/FileScopeMCP/run.sh"],
+       "transport": "stdio",
+       "disabled": false,
+       "alwaysAllow": []
+       }
+     }
+    }
+ </code>
+ 4. Update the arg path --base-dir to your project's base path.
+</p>
+<h2 class="heading">
+ How It Works
+</h2>
+<h3 class="heading">
+ Dependency Detection
+</h3>
+<p>
+ The tool scans source code for import statements and other language-specific patterns:
+- Python:
+ <code class="code">
+  import
+ </code>
+ and
+ <code class="code">
+  from ... import
+ </code>
+ statements
+- JavaScript/TypeScript:
+ <code class="code">
+  import
+ </code>
+ statements and
+ <code class="code">
+  require()
+ </code>
+ calls
+- C/C++:
+ <code class="code">
+  #include
+ </code>
+ directives
+- Rust:
+ <code class="code">
+  use
+ </code>
+ and
+ <code class="code">
+  mod
+ </code>
+ statements
+- Lua:
+ <code class="code">
+  require
+ </code>
+ statements
+- Zig:
+ <code class="code">
+  @import
+ </code>
+ directives
+</p>
+<h3 class="heading">
+ Importance Calculation
+</h3>
+<p>
+ Files are assigned importance scores (0-10) based on a weighted formula that considers:
+- Number of files that import this file (dependents)
+- Number of files this file imports (dependencies)
+- File type and extension (with TypeScript/JavaScript files getting higher base scores)
+- Location in the project structure (files in
+ <code class="code">
+  src/
+ </code>
+ are weighted higher)
+- File naming (files like 'index', 'main', 'server', etc. get additional points)
+</p>
+<p>
+ A file that is central to the codebase (imported by many files) will have a higher score.
+</p>
+<h3 class="heading">
+ Diagram Generation
+</h3>
+<p>
+ The system uses a three-phase approach to generate valid Mermaid syntax:
+1. Collection Phase: Register all nodes and relationships
+2. Node Definition Phase: Generate definitions for all nodes before any references
+3. Edge Generation Phase: Create edges between defined nodes
+</p>
+<p>
+ This ensures all diagrams have valid syntax and render correctly. HTML output includes:
+- Responsive design that works on any device
+- Light/dark theme toggle with system preference detection
+- Client-side Mermaid rendering for optimal performance
+- Timestamp of generation
+</p>
+<h3 class="heading">
+ Path Normalization
+</h3>
+<p>
+ The system handles various path formats to ensure consistent file identification:
+- Windows and Unix path formats
+- Absolute and relative paths
+- URL-encoded paths
+- Cross-platform compatibility
+</p>
+<h3 class="heading">
+ File Storage
+</h3>
+<p>
+ All file tree data is stored in JSON files with the following structure:
+- Configuration metadata (filename, base directory, last updated timestamp)
+- Complete file tree with dependencies, dependents, importance scores, and summaries
+</p>
+<h2 class="heading">
+ Technical Details
+</h2>
+<ul>
+<li>
+<strong>
+   TypeScript/Node.js
+  </strong>
+  : Built with TypeScript for type safety and modern JavaScript features
+ </li>
+<li>
+<strong>
+   Model Context Protocol
+  </strong>
+  : Implements the MCP specification for integration with Cursor
+ </li>
+<li>
+<strong>
+   Mermaid.js
+  </strong>
+  : Uses Mermaid syntax for diagram generation
+ </li>
+<li>
+<strong>
+   JSON Storage
+  </strong>
+  : Uses simple JSON files for persistence
+ </li>
+<li>
+<strong>
+   Path Normalization
+  </strong>
+  : Cross-platform path handling to support Windows and Unix
+ </li>
+<li>
+<strong>
+   Caching
+  </strong>
+  : Implements caching for faster repeated operations
+ </li>
+</ul>
+<h2 class="heading">
+ Available Tools
+</h2>
+<p>
+ The MCP server exposes the following tools:
+</p>
+<h3 class="heading">
+ File Tree Management
+</h3>
+<ul>
+<li>
+<strong>
+   list_saved_trees
+  </strong>
+  : List all saved file trees
+ </li>
+<li>
+<strong>
+   create_file_tree
+  </strong>
+  : Create a new file tree configuration for a specific directory
+ </li>
+<li>
+<strong>
+   select_file_tree
+  </strong>
+  : Select an existing file tree to work with
+ </li>
+<li>
+<strong>
+   delete_file_tree
+  </strong>
+  : Delete a file tree configuration
+ </li>
+</ul>
+<h3 class="heading">
+ File Analysis
+</h3>
+<ul>
+<li>
+<strong>
+   list_files
+  </strong>
+  : List all files in the project with their importance rankings
+ </li>
+<li>
+<strong>
+   get_file_importance
+  </strong>
+  : Get detailed information about a specific file, including dependencies and dependents
+ </li>
+<li>
+<strong>
+   find_important_files
+  </strong>
+  : Find the most important files in the project based on configurable criteria
+ </li>
+<li>
+<strong>
+   read_file_content
+  </strong>
+  : Read the content of a specific file
+ </li>
+<li>
+<strong>
+   recalculate_importance
+  </strong>
+  : Recalculate importance values for all files based on dependencies
+ </li>
+</ul>
+<h3 class="heading">
+ File Summaries
+</h3>
+<ul>
+<li>
+<strong>
+   get_file_summary
+  </strong>
+  : Get the stored summary of a specific file
+ </li>
+<li>
+<strong>
+   set_file_summary
+  </strong>
+  : Set or update the summary of a specific file
+ </li>
+</ul>
+<h3 class="heading">
+ File Watching
+</h3>
+<ul>
+<li>
+<strong>
+   toggle_file_watching
+  </strong>
+  : Toggle file watching on/off
+ </li>
+<li>
+<strong>
+   get_file_watching_status
+  </strong>
+  : Get the current status of file watching
+ </li>
+<li>
+<strong>
+   update_file_watching_config
+  </strong>
+  : Update file watching configuration
+ </li>
+</ul>
+<h3 class="heading">
+ Diagram Generation
+</h3>
+<ul>
+<li>
+<strong>
+   generate_diagram
+  </strong>
+  : Create Mermaid diagrams with customizable options
+ </li>
+<li>
+  Output formats: Mermaid text (
+  <code class="code">
+   .mmd
+  </code>
+  ) or HTML with embedded rendering
+ </li>
+<li>
+  Diagram styles: default, dependency, directory, or hybrid views
+ </li>
+<li>
+  Filter options: max depth, minimum importance threshold
+ </li>
+<li>
+  Layout options: direction (TB, BT, LR, RL), node spacing, rank spacing
+ </li>
+</ul>
+<h2 class="heading">
+ Usage Examples
+</h2>
+<p>
+ The easiest way to get started is to enable this mcp in cursor and tell cursor to figure it out and use it. As soon as the mcp starts, it builds an initial json tree. Tell an LLM to make summaries of all your important files and use the mcp's set_file_summary to add them.
+</p>
+<h3 class="heading">
+ Analyzing a Project
+</h3>
+<ol>
+<li>
+<p>
+   Create a file tree for your project:
+   <code class="code">
+    create_file_tree(filename: "my-project.json", baseDirectory: "/path/to/project")
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Find the most important files:
+   <code class="code">
+    find_important_files(limit: 5, minImportance: 5)
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Get detailed information about a specific file:
+   <code class="code">
+    get_file_importance(filepath: "/path/to/project/src/main.ts")
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Working with Summaries
+</h3>
+<ol>
+<li>
+<p>
+   Read a file's content to understand it:
+   <code class="code">
+    read_file_content(filepath: "/path/to/project/src/main.ts")
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add a summary to the file:
+   <code class="code">
+    set_file_summary(filepath: "/path/to/project/src/main.ts", summary: "Main entry point that initializes the application, sets up routing, and starts the server.")
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Retrieve the summary later:
+   <code class="code">
+    get_file_summary(filepath: "/path/to/project/src/main.ts")
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Generating Diagrams
+</h3>
+<ol>
+<li>
+<p>
+   Create a basic project structure diagram:
+   <code class="code">
+    generate_diagram(style: "directory", maxDepth: 3, outputPath: "diagrams/project-structure", outputFormat: "mmd")
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Generate an HTML diagram with dependency relationships:
+   <code class="code">
+    generate_diagram(style: "hybrid", maxDepth: 2, minImportance: 5, showDependencies: true, outputPath: "diagrams/important-files", outputFormat: "html")
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Customize the diagram layout:
+   <code class="code">
+    generate_diagram(style: "dependency", layout: { direction: "LR", nodeSpacing: 50, rankSpacing: 70 }, outputPath: "diagrams/dependencies", outputFormat: "html")
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Using File Watching
+</h3>
+<ol>
+<li>
+<p>
+   Enable file watching for your project:
+   <code class="code">
+    toggle_file_watching()
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Check the current file watching status:
+   <code class="code">
+    get_file_watching_status()
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Update file watching configuration:
+   <code class="code">
+    update_file_watching_config(config: { 
+     debounceMs: 500, 
+     autoRebuildTree: true,
+     watchForNewFiles: true,
+     watchForDeleted: true,
+     watchForChanged: true
+   })
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ Future Improvements
+</h2>
+<ul>
+<li>
+  Add support for more programming languages
+ </li>
+<li>
+  Add more sophisticated importance calculation algorithms
+ </li>
+<li>
+  Enhance diagram customization options
+ </li>
+<li>
+  Support for exporting diagrams to additional formats
+ </li>
+</ul>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the GNU General Public License v3 (GPL-3.0). See the
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file for the full license text.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/admica-FileScopeMCP.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/admica-FileScopeMCP.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/admica-FileScopeMCP.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/admica-FileScopeMCP.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

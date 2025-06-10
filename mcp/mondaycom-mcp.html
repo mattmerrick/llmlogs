@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="mondaycom/mcp - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/mondaycom-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mondaycom/mcp - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>mondaycom/mcp - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">mondaycom/mcp</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">mondaycom/mcp</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 213</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agents</span><span class="topic-tag"> copilot</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> monday</span>
+                        </div>
+                        <a href="https://github.com/mondaycom/mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mondaycom/mcp - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mondaycom-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mondaycom/mcp - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>mondaycom/mcp - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">mondaycom/mcp</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">mondaycom/mcp</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 213</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> copilot</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> monday</span>
+</div>
+<a class="github-link" href="https://github.com/mondaycom/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="mondaycom/mcp - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/mondaycom-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="mondaycom/mcp - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>mondaycom/mcp - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mondaycom/mcp</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 213</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> copilot</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> monday</span>
+</div>
+<a class="github-link" href="https://github.com/mondaycom/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mondaycom/mcp - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mondaycom-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mondaycom/mcp - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>mondaycom/mcp - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mondaycom/mcp</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 213</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> copilot</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> monday</span>
+</div>
+<a class="github-link" href="https://github.com/mondaycom/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<div align="center">
+ # 🚀 monday.com MCP
+ <p>
+<a href="https://npmjs.com/package/@mondaydotcomorg/monday-api-mcp">
+<img alt="npm version" src="https://img.shields.io/npm/v/@mondaydotcomorg/monday-api-mcp.svg?style=flat"/>
+</a>
+<a href="https://github.com/mondaycom/mcp/blob/main/LICENSE">
+<img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg"/>
+</a>
+<a href="https://github.com/mondaycom/mcp">
+<img alt="GitHub Stars" src="https://img.shields.io/github/stars/mondaycom/mcp.svg?style=social"/>
+</a>
+<img alt="Node.js Version" src="https://img.shields.io/badge/Node.js-v20+-green.svg"/>
+<img alt="MCP Compatible" src="https://img.shields.io/badge/MCP-Compatible-blueviolet"/>
+<img alt="Claude Ready" src="https://img.shields.io/badge/Claude-Ready-orange"/>
+<img alt="OpenAI Compatible" src="https://img.shields.io/badge/OpenAI-Compatible-lightgrey"/>
+<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-Powered-blue"/>
+</p>
+ **Enable AI agents to operate reliably within real workflows. This MCP is monday.com's open framework for connecting agents into your work OS - giving them secure access to structured data, tools to take action, and the context needed to make smart decisions.**
+</div>
+<h2 class="heading">
+ 🌟 Overview
+</h2>
+<p>
+ This repository, maintained by the monday.com AI team, provides a comprehensive set of tools for AI agent developers who want to integrate with monday.com. Whether you're building AI assistants, automations, or custom integrations, our tools make it easy to connect to the monday.com platform.
+</p>
+<p>
+<a href="https://github.com/user-attachments/assets/ed8d24e1-256b-4f6b-9d84-38e54a8703fd">
+  https://github.com/user-attachments/assets/ed8d24e1-256b-4f6b-9d84-38e54a8703fd
+ </a>
+</p>
+<h2 class="heading">
+ 🔑 What is monday.com?
+</h2>
+<p>
+<a href="https://monday.com">
+  monday.com
+ </a>
+ is a work operating system that powers teams to run processes, projects, and everyday work. Teams use monday.com to plan, track, and manage their work in one centralized platform. It provides a visual, intuitive interface where teams can:
+</p>
+<ul>
+<li>
+  Create and manage projects with customizable boards
+ </li>
+<li>
+  Track tasks through different stages with status columns
+ </li>
+<li>
+  Collaborate with team members through updates and mentions
+ </li>
+<li>
+  Automate workflows and integrate with other tools
+ </li>
+<li>
+  Visualize data with dashboards and reports
+ </li>
+</ul>
+<h2 class="heading">
+ 📦 What's Inside
+</h2>
+<h3 class="heading">
+ 💻 monday API MCP Server
+</h3>
+<p>
+ The
+ <code class="code">
+  @mondaydotcomorg/monday-api-mcp
+ </code>
+ package provides a plug-and-play server implementation for the
+ <a href="https://modelcontextprotocol.io/">
+  Model Context Protocol (MCP)
+ </a>
+ . It allows AI agents to interact with the monday.com API without needing to build complex integrations.
+</p>
+<h3 class="heading">
+ 🤖 Agent Toolkit
+</h3>
+<p>
+ The
+ <code class="code">
+  @mondaydotcomorg/agent-toolkit
+ </code>
+ package provides a powerful set of tools and utilities for building AI agents that interact with the monday.com API, supporting both OpenAI and Model Context Protocol (MCP) implementations.
+</p>
+<h2 class="heading">
+ 🏁 Complete Installation Guide
+</h2>
+<h3 class="heading">
+ Step 1: Create a monday.com Account
+</h3>
+<p>
+ If you don't already have a monday.com account:
+</p>
+<ol>
+<li>
+  Go to
+  <a href="https://monday.com">
+   monday.com
+  </a>
+  and sign up for an account
+ </li>
+<li>
+  Create your first workspace and board to get started
+ </li>
+</ol>
+<h3 class="heading">
+ Step 2: Generate an API Token
+</h3>
+<p>
+ To interact with monday.com's API, you'll need an API token:
+</p>
+<ol>
+<li>
+  Log in to your monday.com account
+ </li>
+<li>
+  Click on your avatar in the bottom-left corner
+ </li>
+<li>
+  Select "Developers"
+ </li>
+<li>
+  Click "My access tokens" on the left menu
+ </li>
+<li>
+  Copy your personal access token
+ </li>
+</ol>
+<h3 class="heading">
+ Step 3: Configure Your MCP Client
+</h3>
+<h4 class="heading">
+ For Claude Desktop
+</h4>
+<ol>
+<li>
+  Open Claude Desktop
+ </li>
+<li>
+  Go to Settings → MCP Servers
+ </li>
+<li>
+  Add a new server with this configuration:
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "monday-api-mcp": {
+      "command": "npx",
+      "args": [
+        "@mondaydotcomorg/monday-api-mcp",
+        "-t",
+        "your_monday_api_token"
+      ]
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ For Cursor or Other MCP Clients
+</h4>
+<p>
+ Add to your settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "monday-api-mcp": {
+      "command": "npx",
+      "args": [
+        "@mondaydotcomorg/monday-api-mcp",
+        "-t",
+        "your_monday_api_token"
+      ],
+      "env": {}
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Step 5: Test Your Integration
+</h3>
+<ol>
+<li>
+  Ask Claude or your AI assistant a question like:
+ </li>
+<li>
+  "What items do I have in board 123?"
+ </li>
+<li>
+<p>
+   "Can you create a board to manage my project?"
+  </p>
+</li>
+<li>
+<p>
+   Your assistant should now be able to interact with your monday.com account!
+  </p>
+</li>
+</ol>
+<h2 class="heading">
+ 🌩️ Using the Hosted MCP Service
+</h2>
+<p>
+ Instead of running the MCP server locally, you can use monday.com's hosted MCP service for a simpler setup.
+</p>
+<h3 class="heading">
+ Step 1: Install the Monday MCP App
+</h3>
+<p>
+ Before using the hosted service, you need to install the Monday MCP app from the marketplace:
+</p>
+<ol>
+<li>
+  Visit
+  <a href="https://monday.com/marketplace/listing/10000806/monday-mcp">
+   monday MCP app in the marketplace
+  </a>
+</li>
+<li>
+  Click "Install" and follow the instructions to add it to your account
+ </li>
+</ol>
+<h3 class="heading">
+ Step 2: Configure Your MCP Client for the Hosted Service
+</h3>
+<p>
+ Add this configuration to your MCP client settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "monday-api-mcp-hosted": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://mcp.monday.com/sse"
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Benefits of the Hosted Service
+</h3>
+<ul>
+<li>
+  No need to manage your own server
+ </li>
+<li>
+  Automatic updates with the latest features
+ </li>
+<li>
+  Improved reliability and performance
+ </li>
+<li>
+  Instead of adding the token yourself, our OAuth mechanism takes control of it
+ </li>
+<li>
+  You can limit the mcp to work on specific workspaces
+ </li>
+</ul>
+<h2 class="heading">
+ 🧰 Available Tools
+</h2>
+<p>
+ Our MCP server provides a rich set of tools that give AI assistants the ability to interact with monday.com:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Category
+   </th>
+<th>
+    Tool
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+     Item Operations
+    </strong>
+</td>
+<td>
+    create_item
+   </td>
+<td>
+    Create a new item in a monday.com board with specified column values
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    delete_item
+   </td>
+<td>
+    Delete an item from a board permanently
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    get_board_items_by_name
+   </td>
+<td>
+    Search for items by board ID and term/name
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    create_update
+   </td>
+<td>
+    Add an update/comment to a specific item
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    change_item_column_values
+   </td>
+<td>
+    Modify the column values of an existing item
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    move_item_to_group
+   </td>
+<td>
+    Move an item to a different group within the same board
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Board Operations
+    </strong>
+</td>
+<td>
+    create_board
+   </td>
+<td>
+    Create a new monday.com board with specified columns
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    get_board_schema
+   </td>
+<td>
+    Retrieve the structure of columns and groups for a board
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    create_column
+   </td>
+<td>
+    Add a new column to an existing board
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+    delete_column
+   </td>
+<td>
+    Remove a column from a board
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Account Operations
+    </strong>
+</td>
+<td>
+    get_users_by_name
+   </td>
+<td>
+    Retrieve user information by name or partial name
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ 🔮 Dynamic API Tools (Beta)
+</h2>
+<p>
+ Our Dynamic API Tools feature represents a significant advancement in how AI agents can interact with monday.com. While our standard tools cover common operations, Dynamic API Tools unlock the
+ <strong>
+  full potential
+ </strong>
+ of the monday.com GraphQL API.
+</p>
+<h3 class="heading">
+ What are Dynamic API Tools?
+</h3>
+<p>
+ Dynamic API Tools provide AI agents with complete, adaptable access to monday.com's entire API surface. This means your AI assistant can:
+</p>
+<ol>
+<li>
+<strong>
+   Access any API endpoint
+  </strong>
+  - Not just the predefined operations we've built
+ </li>
+<li>
+<strong>
+   Generate custom GraphQL queries
+  </strong>
+  - Create exactly the query needed for any situation
+ </li>
+<li>
+<strong>
+   Dynamically explore monday.com's schema
+  </strong>
+  - Understand all available data types and their relationships
+ </li>
+</ol>
+<h3 class="heading">
+ Key Dynamic API Tools
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Tool
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    all_monday_api
+   </td>
+<td>
+    Generate and execute any GraphQL query or mutation dynamically
+   </td>
+</tr>
+<tr>
+<td>
+    get_graphql_schema
+   </td>
+<td>
+    Fetch monday.com's GraphQL schema to understand available operations
+   </td>
+</tr>
+<tr>
+<td>
+    get_type_details
+   </td>
+<td>
+    Retrieve detailed information about specific GraphQL types
+   </td>
+</tr>
+</tbody>
+</table>
+<h3 class="heading">
+ Unlocked Possibilities
+</h3>
+<p>
+ With Dynamic API Tools, your AI assistants can:
+</p>
+<ul>
+<li>
+<strong>
+   Create complex reports
+  </strong>
+  spanning multiple boards, items, and data points
+ </li>
+<li>
+<strong>
+   Perform batch operations
+  </strong>
+  across many items simultaneously
+ </li>
+<li>
+<strong>
+   Integrate deeply
+  </strong>
+  with monday.com's advanced features like docs, workspaces, and activity logs
+ </li>
+<li>
+<strong>
+   Discover new capabilities
+  </strong>
+  as monday.com adds features to their API
+ </li>
+</ul>
+<h3 class="heading">
+ How to Enable
+</h3>
+<p>
+ Dynamic API Tools are in beta and disabled by default. Enable them with:
+</p>
+<pre class="pre"><code class="language-bash code">npx @mondaydotcomorg/monday-api-mcp -t your_token --enable-dynamic-api-tools true
+</code></pre>
+<p>
+ You can also use the 'only' mode to exclusively enable Dynamic API Tools:
+</p>
+<pre class="pre"><code class="language-bash code">npx @mondaydotcomorg/monday-api-mcp -t your_token --enable-dynamic-api-tools only
+</code></pre>
+<p>
+ When 'only' mode is enabled, the server will provide just the Dynamic API Tools, filtering out all other standard tools. This is useful for advanced users who want to work directly with the GraphQL API.
+</p>
+<blockquote>
+<p>
+  ⚠️
+  <strong>
+   Note
+  </strong>
+  : Dynamic API Tools require full API access and are not compatible with read-only mode.
+ </p>
+</blockquote>
+<h2 class="heading">
+ 🖥️ MCP Server Configuration
+</h2>
+<table>
+<thead>
+<tr>
+<th>
+    Argument
+   </th>
+<th>
+    Flags
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Required
+   </th>
+<th>
+    Default
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    monday API Token
+   </td>
+<td>
+<code class="code">
+     --token
+    </code>
+    ,
+    <code class="code">
+     -t
+    </code>
+</td>
+<td>
+    monday.com API token
+   </td>
+<td>
+    Yes
+   </td>
+<td>
+    -
+   </td>
+</tr>
+<tr>
+<td>
+    API Version
+   </td>
+<td>
+<code class="code">
+     --version
+    </code>
+    ,
+    <code class="code">
+     -v
+    </code>
+</td>
+<td>
+    monday.com API version
+   </td>
+<td>
+    No
+   </td>
+<td>
+<code class="code">
+     current
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Read Only Mode
+   </td>
+<td>
+<code class="code">
+     --read-only
+    </code>
+    ,
+    <code class="code">
+     -ro
+    </code>
+</td>
+<td>
+    Enable read-only mode
+   </td>
+<td>
+    No
+   </td>
+<td>
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Dynamic API Tools
+   </td>
+<td>
+<code class="code">
+     --enable-dynamic-api-tools
+    </code>
+    ,
+    <code class="code">
+     -edat
+    </code>
+</td>
+<td>
+    Enable dynamic API tools
+   </td>
+<td>
+    No
+   </td>
+<td>
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ 🔐 Authentication &amp; Security
+</h2>
+<p>
+ The server requires a monday.com API token to authenticate with the monday.com API. You can provide this token in two ways:
+</p>
+<ol>
+<li>
+  Command line argument:
+  <code class="code">
+   -t your_monday_api_token
+  </code>
+</li>
+<li>
+  Environment variable:
+  <code class="code">
+   monday_token=your_monday_api_token
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ Security Best Practices
+</h3>
+<ul>
+<li>
+<strong>
+   Never share your API token
+  </strong>
+  in public repositories or discussions
+ </li>
+<li>
+  Consider using
+  <strong>
+   read-only mode
+  </strong>
+  (
+  <code class="code">
+   --read-only
+  </code>
+  ) when you only need to retrieve data
+ </li>
+<li>
+<strong>
+   Regularly rotate
+  </strong>
+  your API tokens for enhanced security
+ </li>
+</ul>
+<h2 class="heading">
+ 📚 Example Use Cases
+</h2>
+<p>
+ Here are some examples of what you can build with our tools:
+</p>
+<h3 class="heading">
+ 1. AI Assistant for Project Management
+</h3>
+<ul>
+<li>
+  Create and manage tasks in monday.com boards
+ </li>
+<li>
+  Get updates on project status
+ </li>
+<li>
+  Move items between groups as they progress
+ </li>
+</ul>
+<h3 class="heading">
+ 2. Data Analysis &amp; Reporting
+</h3>
+<ul>
+<li>
+  Extract data from monday.com boards
+ </li>
+<li>
+  Generate reports and insights
+ </li>
+<li>
+  Create new boards for reporting
+ </li>
+</ul>
+<h3 class="heading">
+ 3. Automated Workflows
+</h3>
+<ul>
+<li>
+  Create items based on external triggers
+ </li>
+<li>
+  Update item statuses based on conditions
+ </li>
+<li>
+  Link related items across boards
+ </li>
+</ul>
+<h2 class="heading">
+ 🌐 Community &amp; Support
+</h2>
+<ul>
+<li>
+<strong>
+   GitHub Issues
+  </strong>
+  : For bug reports and feature requests
+ </li>
+<li>
+<strong>
+   Discussions
+  </strong>
+  : For questions and community discussions
+ </li>
+<li>
+<strong>
+<a href="https://developer.monday.com/api-reference/docs">
+    monday.com Developer Documentation
+   </a>
+</strong>
+  : Learn more about the monday.com API
+ </li>
+</ul>
+<h2 class="heading">
+ 📚 Documentation
+</h2>
+<ul>
+<li>
+<a href="./packages/monday-api-mcp/README.md">
+   monday API MCP Documentation
+  </a>
+</li>
+<li>
+<a href="./packages/agent-toolkit/README.md">
+   Agent Toolkit Documentation
+  </a>
+</li>
+<li>
+<a href="https://developer.monday.com/api-reference/docs">
+   monday.com API Reference
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 📋 Prerequisites
+</h2>
+<p>
+ Before using these tools, make sure you have:
+</p>
+<ol>
+<li>
+  Node.js v20 or higher installed
+ </li>
+<li>
+  NPM v5.2.0 or higher installed
+ </li>
+<li>
+  A
+  <a href="https://developer.monday.com/api-reference/docs/authentication">
+   monday.com API token
+  </a>
+</li>
+</ol>
+<h2 class="heading">
+ 🛠️ Working Locally
+</h2>
+<p>
+ To work with this repository locally:
+</p>
+<ol>
+<li>
+  Clone the repository
+ </li>
+<li>
+  Install dependencies:
+  <code class="code">
+   yarn install
+  </code>
+</li>
+<li>
+  Build the project:
+  <code class="code">
+   yarn build
+  </code>
+</li>
+<li>
+  Copy the path of the dist/index.js file in the mcp package.
+ </li>
+<li>
+  Change the config to work locally
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">    "monday-api-mcp": {
+      "command": "node",
+      "args": [
+        "&lt;your_full_path_to_the_package&gt;/dist/index.js",
+        "-t",
+        "123",
+        "--enable-dynamic-api-tools",
+        "true"
+      ],
+      "env": {}
+    }
+</code></pre>
+<h2 class="heading">
+ 🤝 Contributing
+</h2>
+<p>
+ We welcome contributions from the community! Whether it's fixing bugs, improving documentation, or adding new features, your help is appreciated.
+</p>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create your feature branch:
+  <code class="code">
+   git checkout -b feature/amazing-feature
+  </code>
+</li>
+<li>
+  Commit your changes:
+  <code class="code">
+   git commit -m 'Add some amazing feature'
+  </code>
+</li>
+<li>
+  Push to the branch:
+  <code class="code">
+   git push origin feature/amazing-feature
+  </code>
+</li>
+<li>
+  Open a Pull Request
+ </li>
+</ol>
+<h2 class="heading">
+ 📄 License
+</h2>
+<p>
+ This project is licensed under the MIT License - see the
+ <a href="./LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+<p>
+ It is clarified that the server uses the monday.com API, which is subject to monday.com's
+ <a href="https://monday.com/l/marketplace-developers/developer-terms/">
+  Developer Terms
+ </a>
+</p>
+<hr/>
+<div align="center">
+<p>
+  Built with ❤️ by the monday.com AI Team
+ </p>
+<p>
+<a href="https://monday.com">
+   monday.com
+  </a>
+  |
+  <a href="https://developer.monday.com">
+   Developer Platform
+  </a>
+  |
+  <a href="https://github.com/mondaycom/mcp">
+   GitHub
+  </a>
+</p>
+</div>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mondaycom-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mondaycom-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mondaycom-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/mondaycom-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

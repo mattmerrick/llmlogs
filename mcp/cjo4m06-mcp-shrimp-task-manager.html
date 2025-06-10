@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="English|中文">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP Shrimp Task Manager - MCP Directory">
+    <meta property="og:description" content="English|中文">
+    <meta property="og:url" content="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP Shrimp Task Manager - MCP Directory">
+    <meta name="twitter:description" content="English|中文">
+    
+    <title>MCP Shrimp Task Manager - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP Shrimp Task Manager</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP Shrimp Task Manager</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 388</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">codeagent</span><span class="topic-tag"> coding-assistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> task-manager</span><span class="topic-tag"> agent</span><span class="topic-tag"> thought-processes</span><span class="topic-tag"> ai</span><span class="topic-tag"> cursor-ai</span><span class="topic-tag"> cursorai</span><span class="topic-tag"> roocode</span><span class="topic-tag"> task-list</span><span class="topic-tag"> tasks</span><span class="topic-tag"> windsurf</span><span class="topic-tag"> windsurf-ai</span>
+                        </div>
+                        <a href="https://github.com/cjo4m06/mcp-shrimp-task-manager" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="English|中文" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Shrimp Task Manager - MCP Directory" property="og:title"/>
+<meta content="English|中文" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Shrimp Task Manager - MCP Directory" name="twitter:title"/>
+<meta content="English|中文" name="twitter:description"/>
+<title>MCP Shrimp Task Manager - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP Shrimp Task Manager</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP Shrimp Task Manager</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 388</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">codeagent</span><span class="topic-tag"> coding-assistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> task-manager</span><span class="topic-tag"> agent</span><span class="topic-tag"> thought-processes</span><span class="topic-tag"> ai</span><span class="topic-tag"> cursor-ai</span><span class="topic-tag"> cursorai</span><span class="topic-tag"> roocode</span><span class="topic-tag"> task-list</span><span class="topic-tag"> tasks</span><span class="topic-tag"> windsurf</span><span class="topic-tag"> windsurf-ai</span>
+</div>
+<a class="github-link" href="https://github.com/cjo4m06/mcp-shrimp-task-manager" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="English|中文" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Shrimp Task Manager - MCP Directory" property="og:title">
+<meta content="English|中文" property="og:description">
+<meta content="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP Shrimp Task Manager - MCP Directory" name="twitter:title">
+<meta content="English|中文" name="twitter:description">
+<title>MCP Shrimp Task Manager - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Shrimp Task Manager</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 388</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">codeagent</span><span class="topic-tag"> coding-assistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> task-manager</span><span class="topic-tag"> agent</span><span class="topic-tag"> thought-processes</span><span class="topic-tag"> ai</span><span class="topic-tag"> cursor-ai</span><span class="topic-tag"> cursorai</span><span class="topic-tag"> roocode</span><span class="topic-tag"> task-list</span><span class="topic-tag"> tasks</span><span class="topic-tag"> windsurf</span><span class="topic-tag"> windsurf-ai</span>
+</div>
+<a class="github-link" href="https://github.com/cjo4m06/mcp-shrimp-task-manager" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="English|中文" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Shrimp Task Manager - MCP Directory" property="og:title"/>
+<meta content="English|中文" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Shrimp Task Manager - MCP Directory" name="twitter:title"/>
+<meta content="English|中文" name="twitter:description"/>
+<title>MCP Shrimp Task Manager - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Shrimp Task Manager</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 388</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">codeagent</span><span class="topic-tag"> coding-assistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> task-manager</span><span class="topic-tag"> agent</span><span class="topic-tag"> thought-processes</span><span class="topic-tag"> ai</span><span class="topic-tag"> cursor-ai</span><span class="topic-tag"> cursorai</span><span class="topic-tag"> roocode</span><span class="topic-tag"> task-list</span><span class="topic-tag"> tasks</span><span class="topic-tag"> windsurf</span><span class="topic-tag"> windsurf-ai</span>
+</div>
+<a class="github-link" href="https://github.com/cjo4m06/mcp-shrimp-task-manager" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<p>
+<a href="README.md">
+  English
+ </a>
+ |
+ <a href="docs/zh/README.md">
+  中文
+ </a>
+</p>
+<h2 class="heading">
+ 目錄
+</h2>
+<ul>
+<li>
+<a href="#features1">
+   ✨ Features
+  </a>
+</li>
+<li>
+<a href="#usage-guide">
+   🧭 Usage Guide
+  </a>
+</li>
+<li>
+<a href="#research-mode">
+   🔬 Research Mode
+  </a>
+</li>
+<li>
+<a href="#task-memory-function">
+   🧠 Task Memory Function
+  </a>
+</li>
+<li>
+<a href="#project-rules">
+   📋 Project Rules Initialization
+  </a>
+</li>
+<li>
+<a href="#web-gui">
+   🌐 Web GUI
+  </a>
+</li>
+<li>
+<a href="#documentation">
+   📚 Documentation Resources
+  </a>
+</li>
+<li>
+<a href="#installation">
+   🔧 Installation and Usage
+  </a>
+</li>
+<li>
+<a href="#clients">
+   🔌 Using with MCP-Compatible Clients
+  </a>
+</li>
+<li>
+<a href="#prompt">
+   💡 System Prompt Guidance
+  </a>
+</li>
+<li>
+<a href="#tools">
+   🛠️ Available Tools Overview
+  </a>
+</li>
+<li>
+<a href="#license">
+   📄 License
+  </a>
+</li>
+<li>
+<a href="#recommended">
+   🤖 Recommended Models
+  </a>
+</li>
+</ul>
+<h1 class="heading">
+ MCP Shrimp Task Manager
+</h1>
+<p>
+<a href="https://www.youtube.com/watch?v=Arzu0lV09so">
+<img alt="Shrimp Task Manager Demo" src="/docs/yt.png"/>
+</a>
+</p>
+<p>
+<a href="https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager">
+<img alt="smithery badge" src="https://smithery.ai/badge/@cjo4m06/mcp-shrimp-task-manager"/>
+</a>
+</p>
+<blockquote>
+<p>
+  🚀 An intelligent task management system based on Model Context Protocol (MCP), providing an efficient programming workflow framework for AI Agents.
+ </p>
+</blockquote>
+<p>
+<a href="https://glama.ai/mcp/servers/@cjo4m06/mcp-shrimp-task-manager">
+<img alt="Shrimp Task Manager MCP server" height="200" src="https://glama.ai/mcp/servers/@cjo4m06/mcp-shrimp-task-manager/badge" width="380"/>
+</a>
+</p>
+<p>
+ Shrimp Task Manager guides Agents through structured workflows for systematic programming, enhancing task memory management mechanisms, and effectively avoiding redundant and repetitive coding work.
+</p>
+<h2 class="heading">
+ ✨
+ <a id="features1">
+</a>
+ Features
+</h2>
+<ul>
+<li>
+<strong>
+   Task Planning and Analysis
+  </strong>
+  : Deep understanding and analysis of complex task requirements
+ </li>
+<li>
+<strong>
+   Intelligent Task Decomposition
+  </strong>
+  : Automatically break down large tasks into manageable smaller tasks
+ </li>
+<li>
+<strong>
+   Dependency Management
+  </strong>
+  : Precisely handle dependencies between tasks, ensuring correct execution order
+ </li>
+<li>
+<strong>
+   Execution Status Tracking
+  </strong>
+  : Real-time monitoring of task execution progress and status
+ </li>
+<li>
+<strong>
+   Task Completeness Verification
+  </strong>
+  : Ensure task results meet expected requirements
+ </li>
+<li>
+<strong>
+   Task Complexity Assessment
+  </strong>
+  : Automatically evaluate task complexity and provide optimal handling suggestions
+ </li>
+<li>
+<strong>
+   Automatic Task Summary Updates
+  </strong>
+  : Automatically generate summaries upon task completion, optimizing memory performance
+ </li>
+<li>
+<strong>
+   Task Memory Function
+  </strong>
+  : Automatically backup task history, providing long-term memory and reference capabilities
+ </li>
+<li>
+<strong>
+   Research Mode
+  </strong>
+  : Systematic technical research capabilities with guided workflows for exploring technologies, best practices, and solution comparisons
+ </li>
+<li>
+<strong>
+   Project Rules Initialization
+  </strong>
+  : Define project standards and rules to maintain consistency across large projects
+ </li>
+<li>
+<strong>
+<a id="web-gui">
+</a>
+   Web GUI
+  </strong>
+  : Provides an optional web-based graphical user interface for task management. Enable by setting
+  <code class="code">
+   ENABLE_GUI=true
+  </code>
+  in your
+  <code class="code">
+   .env
+  </code>
+  file. When enabled, a
+  <code class="code">
+   WebGUI.md
+  </code>
+  file containing the access address will be created in your
+  <code class="code">
+   DATA_DIR
+  </code>
+  .
+ </li>
+</ul>
+<h2 class="heading">
+ 🧭
+ <a id="usage-guide">
+</a>
+ Usage Guide
+</h2>
+<p>
+ Shrimp Task Manager offers a structured approach to AI-assisted programming through guided workflows and systematic task management.
+</p>
+<h3 class="heading">
+ What is Shrimp?
+</h3>
+<p>
+ Shrimp is essentially a prompt template that guides AI Agents to better understand and work with your project. It uses a series of prompts to ensure the Agent aligns closely with your project's specific needs and conventions.
+</p>
+<h3 class="heading">
+ Research Mode in Practice
+</h3>
+<p>
+ Before diving into task planning, you can leverage the research mode for technical investigation and knowledge gathering. This is particularly useful when:
+</p>
+<ul>
+<li>
+  You need to explore new technologies or frameworks
+ </li>
+<li>
+  You want to compare different solution approaches
+ </li>
+<li>
+  You're investigating best practices for your project
+ </li>
+<li>
+  You need to understand complex technical concepts
+ </li>
+</ul>
+<p>
+ Simply tell the Agent "research [your topic]" or "enter research mode for [technology/problem]" to begin systematic investigation. The research findings will then inform your subsequent task planning and development decisions.
+</p>
+<h3 class="heading">
+ First-Time Setup
+</h3>
+<p>
+ When working with a new project, simply tell the Agent "init project rules". This will guide the Agent to generate a set of rules tailored to your project's specific requirements and structure.
+</p>
+<h3 class="heading">
+ Task Planning Process
+</h3>
+<p>
+ To develop or update features, use the command "plan task [your description]". The system will reference the previously established rules, attempt to understand your project, search for relevant code sections, and propose a comprehensive plan based on the current state of your project.
+</p>
+<h3 class="heading">
+ Feedback Mechanism
+</h3>
+<p>
+ During the planning process, Shrimp guides the Agent through multiple steps of thinking. You can review this process and provide feedback if you feel it's heading in the wrong direction. Simply interrupt and share your perspective - the Agent will incorporate your feedback and continue the planning process.
+</p>
+<h3 class="heading">
+ Task Execution
+</h3>
+<p>
+ When you're satisfied with the plan, use "execute task [task name or ID]" to implement it. If you don't specify a task name or ID, the system will automatically identify and execute the highest priority task.
+</p>
+<h3 class="heading">
+ Continuous Mode
+</h3>
+<p>
+ If you prefer to execute all tasks in sequence without manual intervention for each task, use "continuous mode" to automatically process the entire task queue.
+</p>
+<h3 class="heading">
+ Token Limitation Note
+</h3>
+<p>
+ Due to LLM token limits, context may be lost during lengthy conversations. If this occurs, simply open a new chat session and ask the Agent to continue execution. The system will pick up where it left off without requiring you to repeat the task details or context.
+</p>
+<h3 class="heading">
+ Prompt Language and Customization
+</h3>
+<p>
+ You can switch the language of system prompts by setting the
+ <code class="code">
+  TEMPLATES_USE
+ </code>
+ environment variable. It supports
+ <code class="code">
+  en
+ </code>
+ (English) and
+ <code class="code">
+  zh
+ </code>
+ (Traditional Chinese) by default. Furthermore, you can copy an existing template directory (e.g.,
+ <code class="code">
+  src/prompts/templates_en
+ </code>
+ ) to the location specified by
+ <code class="code">
+  DATA_DIR
+ </code>
+ , modify it, and then point
+ <code class="code">
+  TEMPLATES_USE
+ </code>
+ to your custom template directory name. This allows for deeper prompt customization. For detailed instructions.
+</p>
+<h2 class="heading">
+ 🔬
+ <a id="research-mode">
+</a>
+ Research Mode
+</h2>
+<p>
+ Shrimp Task Manager includes a specialized research mode designed for systematic technical investigation and knowledge gathering.
+</p>
+<h3 class="heading">
+ What is Research Mode?
+</h3>
+<p>
+ Research Mode is a guided workflow system that helps AI Agents conduct thorough and systematic technical research. It provides structured approaches to exploring technologies, comparing solutions, investigating best practices, and gathering comprehensive information for programming tasks.
+</p>
+<h3 class="heading">
+ Key Features
+</h3>
+<ul>
+<li>
+<strong>
+   Systematic Investigation
+  </strong>
+  : Structured workflows ensure comprehensive coverage of research topics
+ </li>
+<li>
+<strong>
+   Multi-Source Research
+  </strong>
+  : Combines web search and codebase analysis for complete understanding
+ </li>
+<li>
+<strong>
+   State Management
+  </strong>
+  : Maintains research context and progress across multiple sessions
+ </li>
+<li>
+<strong>
+   Guided Exploration
+  </strong>
+  : Prevents research from becoming unfocused or going off-topic
+ </li>
+<li>
+<strong>
+   Knowledge Integration
+  </strong>
+  : Seamlessly integrates research findings with task planning and execution
+ </li>
+</ul>
+<h3 class="heading">
+ When to Use Research Mode
+</h3>
+<p>
+ Research Mode is particularly valuable for:
+</p>
+<ul>
+<li>
+<strong>
+   Technology Exploration
+  </strong>
+  : Investigating new frameworks, libraries, or tools
+ </li>
+<li>
+<strong>
+   Best Practices Research
+  </strong>
+  : Finding industry standards and recommended approaches
+ </li>
+<li>
+<strong>
+   Solution Comparison
+  </strong>
+  : Evaluating different technical approaches or architectures
+ </li>
+<li>
+<strong>
+   Problem Investigation
+  </strong>
+  : Deep-diving into complex technical challenges
+ </li>
+<li>
+<strong>
+   Architecture Planning
+  </strong>
+  : Researching design patterns and system architectures
+ </li>
+</ul>
+<h3 class="heading">
+ How to Use Research Mode
+</h3>
+<p>
+ Simply tell the Agent to enter research mode with your topic:
+</p>
+<ul>
+<li>
+<strong>
+   Basic usage
+  </strong>
+  : "Enter research mode for [your topic]"
+ </li>
+<li>
+<strong>
+   Specific research
+  </strong>
+  : "Research [specific technology/problem]"
+ </li>
+<li>
+<strong>
+   Comparative analysis
+  </strong>
+  : "Research and compare [options A vs B]"
+ </li>
+</ul>
+<p>
+ The system will guide the Agent through structured research phases, ensuring thorough investigation while maintaining focus on your specific needs.
+</p>
+<h3 class="heading">
+ Research Workflow
+</h3>
+<ol>
+<li>
+<strong>
+   Topic Definition
+  </strong>
+  : Clearly define the research scope and objectives
+ </li>
+<li>
+<strong>
+   Information Gathering
+  </strong>
+  : Systematic collection of relevant information
+ </li>
+<li>
+<strong>
+   Analysis and Synthesis
+  </strong>
+  : Processing and organizing findings
+ </li>
+<li>
+<strong>
+   State Updates
+  </strong>
+  : Regular progress tracking and context preservation
+ </li>
+<li>
+<strong>
+   Integration
+  </strong>
+  : Applying research results to your project context
+ </li>
+</ol>
+<blockquote>
+<p>
+<strong>
+   💡 Recommendation
+  </strong>
+  : For the best research mode experience, we recommend using
+  <strong>
+   Claude 4 Sonnet
+  </strong>
+  , which provides exceptional analytical capabilities and comprehensive research synthesis.
+ </p>
+</blockquote>
+<h2 class="heading">
+ 🧠
+ <a id="task-memory-function">
+</a>
+ Task Memory Function
+</h2>
+<p>
+ Shrimp Task Manager has long-term memory capabilities, automatically saving task execution history and providing reference experiences when planning new tasks.
+</p>
+<h3 class="heading">
+ Key Features
+</h3>
+<ul>
+<li>
+  The system automatically backs up tasks to the memory directory
+ </li>
+<li>
+  Backup files are named in chronological order, in the format tasks_backup_YYYY-MM-DDThh-mm-ss.json
+ </li>
+<li>
+  Task planning Agents automatically receive guidance on how to use the memory function
+ </li>
+</ul>
+<h3 class="heading">
+ Advantages and Benefits
+</h3>
+<ul>
+<li>
+<strong>
+   Avoid Duplicate Work
+  </strong>
+  : Reference past tasks, no need to solve similar problems from scratch
+ </li>
+<li>
+<strong>
+   Learn from Successful Experiences
+  </strong>
+  : Utilize proven effective solutions, improve development efficiency
+ </li>
+<li>
+<strong>
+   Learning and Improvement
+  </strong>
+  : Identify past mistakes or inefficient solutions, continuously optimize workflows
+ </li>
+<li>
+<strong>
+   Knowledge Accumulation
+  </strong>
+  : Form a continuously expanding knowledge base as system usage increases
+ </li>
+</ul>
+<p>
+ Through effective use of the task memory function, the system can continuously accumulate experience, with intelligence level and work efficiency continuously improving.
+</p>
+<h2 class="heading">
+ 📋
+ <a id="project-rules">
+</a>
+ Project Rules Initialization
+</h2>
+<p>
+ The Project Rules feature helps maintain consistency across your codebase:
+</p>
+<ul>
+<li>
+<strong>
+   Standardize Development
+  </strong>
+  : Establish consistent coding patterns and practices
+ </li>
+<li>
+<strong>
+   Onboard New Developers
+  </strong>
+  : Provide clear guidelines for project contributions
+ </li>
+<li>
+<strong>
+   Maintain Quality
+  </strong>
+  : Ensure all code meets established project standards
+ </li>
+</ul>
+<blockquote>
+<p>
+<strong>
+   ⚠️ Recommendation
+  </strong>
+  : Initialize project rules when your project grows larger or undergoes significant changes. This helps maintain consistency and quality as complexity increases.
+ </p>
+</blockquote>
+<p>
+ Use the
+ <code class="code">
+  init_project_rules
+ </code>
+ tool to set up or update project standards when:
+</p>
+<ul>
+<li>
+  Starting a new large-scale project
+ </li>
+<li>
+  Onboarding new team members
+ </li>
+<li>
+  Implementing major architectural changes
+ </li>
+<li>
+  Adopting new development conventions
+ </li>
+</ul>
+<h3 class="heading">
+ Usage Examples
+</h3>
+<p>
+ You can easily access this feature with simple natural language commands:
+</p>
+<ul>
+<li>
+<strong>
+   For initial setup
+  </strong>
+  : Simply tell the Agent "init rules" or "init project rules"
+ </li>
+<li>
+<strong>
+   For updates
+  </strong>
+  : When your project evolves, tell the Agent "Update rules" or "Update project rules"
+ </li>
+</ul>
+<p>
+ This tool is particularly valuable when your codebase expands or undergoes significant structural changes, helping maintain consistent development practices throughout the project lifecycle.
+</p>
+<h2 class="heading">
+ 📚
+ <a id="documentation">
+</a>
+ Documentation Resources
+</h2>
+<ul>
+<li>
+<a href="docs/en/prompt-customization.md">
+   Prompt Customization Guide
+  </a>
+  : Instructions for customizing tool prompts via environment variables
+ </li>
+<li>
+<a href="CHANGELOG.md">
+   Changelog
+  </a>
+  : Record of all notable changes to this project
+ </li>
+</ul>
+<h2 class="heading">
+ 🔧
+ <a id="installation">
+</a>
+ Installation and Usage
+</h2>
+<h3 class="heading">
+ Installing via Smithery
+</h3>
+<p>
+ To install Shrimp Task Manager for Claude Desktop automatically via
+ <a href="https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager">
+  Smithery
+ </a>
+ :
+</p>
+<pre class="pre"><code class="language-bash code">npx -y @smithery/cli install @cjo4m06/mcp-shrimp-task-manager --client claude
+</code></pre>
+<h3 class="heading">
+ Manual Installation
+</h3>
+<pre class="pre"><code class="language-bash code"># Install dependencies
+npm install
+
+# Build and start service
+npm run build
+</code></pre>
+<h2 class="heading">
+ 🔌
+ <a id="clients">
+</a>
+ Using with MCP-Compatible Clients
+</h2>
+<p>
+ Shrimp Task Manager can be used with any client that supports the Model Context Protocol, such as Cursor IDE.
+</p>
+<h3 class="heading">
+ Configuration in Cursor IDE
+</h3>
+<p>
+ Shrimp Task Manager offers two configuration methods: global configuration and project-specific configuration.
+</p>
+<h4 class="heading">
+ Global Configuration
+</h4>
+<ol>
+<li>
+  Open the Cursor IDE global configuration file (usually located at
+  <code class="code">
+   ~/.cursor/mcp.json
+  </code>
+  )
+ </li>
+<li>
+  Add the following configuration in the
+  <code class="code">
+   mcpServers
+  </code>
+  section:
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["/mcp-shrimp-task-manager/dist/index.js"],
+      "env": {
+        "DATA_DIR": "/path/to/project/data", // 必須使用絕對路徑
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+
+
+or
+
+{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "npx",
+      "args": ["-y", "mcp-shrimp-task-manager"],
+      "env": {
+        "DATA_DIR": "/mcp-shrimp-task-manager/data",
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>
+  ⚠️ Please replace
+  <code class="code">
+   /mcp-shrimp-task-manager
+  </code>
+  with your actual path.
+ </p>
+</blockquote>
+<h4 class="heading">
+ Project-Specific Configuration
+</h4>
+<p>
+ You can also set up dedicated configurations for each project to use independent data directories for different projects:
+</p>
+<ol>
+<li>
+  Create a
+  <code class="code">
+   .cursor
+  </code>
+  directory in the project root
+ </li>
+<li>
+  Create an
+  <code class="code">
+   mcp.json
+  </code>
+  file in this directory with the following content:
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["/path/to/mcp-shrimp-task-manager/dist/index.js"],
+      "env": {
+        "DATA_DIR": "/path/to/project/data", // Must use absolute path
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+
+
+or
+
+{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "npx",
+      "args": ["-y", "mcp-shrimp-task-manager"],
+      "env": {
+        "DATA_DIR": "/path/to/project/data", // Must use absolute path
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ ⚠️ Important Configuration Notes
+</h3>
+<p>
+ The
+ <strong>
+  DATA_DIR parameter
+ </strong>
+ is the directory where Shrimp Task Manager stores task data, conversation logs, and other information. Setting this parameter correctly is crucial for the normal operation of the system. This parameter must use an
+ <strong>
+  absolute path
+ </strong>
+ ; using a relative path may cause the system to incorrectly locate the data directory, resulting in data loss or function failure.
+</p>
+<blockquote>
+<p>
+<strong>
+   Warning
+  </strong>
+  : Using relative paths may cause the following issues:
+ </p>
+<ul>
+<li>
+   Data files not found, causing system initialization failure
+  </li>
+<li>
+   Task status loss or inability to save correctly
+  </li>
+<li>
+   Inconsistent application behavior across different environments
+  </li>
+<li>
+   System crashes or failure to start
+  </li>
+</ul>
+</blockquote>
+<h3 class="heading">
+ 🔧 Environment Variable Configuration
+</h3>
+<p>
+ Shrimp Task Manager supports customizing prompt behavior through environment variables, allowing you to fine-tune AI assistant responses without modifying code. You can set these variables in the configuration or through an
+ <code class="code">
+  .env
+ </code>
+ file:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["/path/to/mcp-shrimp-task-manager/dist/index.js"],
+      "env": {
+        "DATA_DIR": "/path/to/project/data",
+        "MCP_PROMPT_PLAN_TASK": "Custom planning guidance...",
+        "MCP_PROMPT_EXECUTE_TASK_APPEND": "Additional execution instructions...",
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ There are two customization methods:
+</p>
+<ul>
+<li>
+<strong>
+   Override Mode
+  </strong>
+  (
+  <code class="code">
+   MCP_PROMPT_[FUNCTION_NAME]
+  </code>
+  ): Completely replace the default prompt
+ </li>
+<li>
+<strong>
+   Append Mode
+  </strong>
+  (
+  <code class="code">
+   MCP_PROMPT_[FUNCTION_NAME]_APPEND
+  </code>
+  ): Add content to the existing prompt
+ </li>
+</ul>
+<p>
+ Additionally, there are other system configuration variables:
+</p>
+<ul>
+<li>
+<strong>
+   DATA_DIR
+  </strong>
+  : Specifies the directory where task data is stored
+ </li>
+<li>
+<strong>
+   TEMPLATES_USE
+  </strong>
+  : Specifies the template set to use for prompts. Defaults to
+  <code class="code">
+   en
+  </code>
+  . Currently available options are
+  <code class="code">
+   en
+  </code>
+  and
+  <code class="code">
+   zh
+  </code>
+  . To use custom templates, copy the
+  <code class="code">
+   src/prompts/templates_en
+  </code>
+  directory to the location specified by
+  <code class="code">
+   DATA_DIR
+  </code>
+  , rename the copied directory (e.g., to
+  <code class="code">
+   my_templates
+  </code>
+  ), and set
+  <code class="code">
+   TEMPLATES_USE
+  </code>
+  to the new directory name (e.g.,
+  <code class="code">
+   my_templates
+  </code>
+  ).
+ </li>
+</ul>
+<p>
+ For detailed instructions on customizing prompts, including supported parameters and examples, see the
+ <a href="docs/en/prompt-customization.md">
+  Prompt Customization Guide
+ </a>
+ .
+</p>
+<h2 class="heading">
+ 💡
+ <a id="prompt">
+</a>
+ System Prompt Guidance
+</h2>
+<h3 class="heading">
+ Cursor IDE Configuration
+</h3>
+<p>
+ You can enable Cursor Settings =&gt; Features =&gt; Custom modes, and configure the following two modes:
+</p>
+<h4 class="heading">
+ TaskPlanner Mode
+</h4>
+<pre class="pre"><code class="code">You are a professional task planning expert. You must interact with users, analyze their needs, and collect project-related information. Finally, you must use "plan_task" to create tasks. When the task is created, you must summarize it and inform the user to use the "TaskExecutor" mode to execute the task.
+You must focus on task planning. Do not use "execute_task" to execute tasks.
+Serious warning: you are a task planning expert, you cannot modify the program code directly, you can only plan tasks, and you cannot modify the program code directly, you can only plan tasks.
+</code></pre>
+<h4 class="heading">
+ TaskExecutor Mode
+</h4>
+<pre class="pre"><code class="code">You are a professional task execution expert. When a user specifies a task to execute, use "execute_task" to execute the task.
+If no task is specified, use "list_tasks" to find unexecuted tasks and execute them.
+When the execution is completed, a summary must be given to inform the user of the conclusion.
+You can only perform one task at a time, and when a task is completed, you are prohibited from performing the next task unless the user explicitly tells you to.
+If the user requests "continuous mode", all tasks will be executed in sequence.
+</code></pre>
+<blockquote>
+<p>
+  💡 Choose the appropriate mode based on your needs:
+ </p>
+<ul>
+<li>
+   Use
+   <strong>
+    TaskPlanner
+   </strong>
+   mode when planning tasks
+  </li>
+<li>
+   Use
+   <strong>
+    TaskExecutor
+   </strong>
+   mode when executing tasks
+  </li>
+</ul>
+</blockquote>
+<h3 class="heading">
+ Using with Other Tools
+</h3>
+<p>
+ If your tool doesn't support Custom modes, you can:
+</p>
+<ul>
+<li>
+  Manually paste the appropriate prompts at different stages
+ </li>
+<li>
+  Or directly use simple commands like
+  <code class="code">
+   Please plan the following task: ......
+  </code>
+  or
+  <code class="code">
+   Please start executing the task...
+  </code>
+</li>
+</ul>
+<h2 class="heading">
+ 🛠️
+ <a id="tools">
+</a>
+ Available Tools Overview
+</h2>
+<p>
+ After configuration, you can use the following tools:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Category
+   </th>
+<th>
+    Tool Name
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+     Task Planning
+    </strong>
+</td>
+<td>
+<code class="code">
+     plan_task
+    </code>
+</td>
+<td>
+    Start planning tasks
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Task Analysis
+    </strong>
+</td>
+<td>
+<code class="code">
+     analyze_task
+    </code>
+</td>
+<td>
+    In-depth analysis of task requirements
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<code class="code">
+     process_thought
+    </code>
+</td>
+<td>
+    Step-by-step reasoning for complex problems
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Solution Assessment
+    </strong>
+</td>
+<td>
+<code class="code">
+     reflect_task
+    </code>
+</td>
+<td>
+    Reflect and improve solution concepts
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Research &amp; Investigation
+    </strong>
+</td>
+<td>
+<code class="code">
+     research_mode
+    </code>
+</td>
+<td>
+    Enter systematic technical research mode
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Project Management
+    </strong>
+</td>
+<td>
+<code class="code">
+     init_project_rules
+    </code>
+</td>
+<td>
+    Initialize or update project standards and rules
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Task Management
+    </strong>
+</td>
+<td>
+<code class="code">
+     split_tasks
+    </code>
+</td>
+<td>
+    Break tasks into subtasks
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<code class="code">
+     list_tasks
+    </code>
+</td>
+<td>
+    Display all tasks and status
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<code class="code">
+     query_task
+    </code>
+</td>
+<td>
+    Search and list tasks
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<code class="code">
+     get_task_detail
+    </code>
+</td>
+<td>
+    Display complete task details
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<code class="code">
+     delete_task
+    </code>
+</td>
+<td>
+    Delete incomplete tasks
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     Task Execution
+    </strong>
+</td>
+<td>
+<code class="code">
+     execute_task
+    </code>
+</td>
+<td>
+    Execute specific tasks
+   </td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<code class="code">
+     verify_task
+    </code>
+</td>
+<td>
+    Verify task completion
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ 🔧 Technical Implementation
+</h2>
+<ul>
+<li>
+<strong>
+   Node.js
+  </strong>
+  : High-performance JavaScript runtime environment
+ </li>
+<li>
+<strong>
+   TypeScript
+  </strong>
+  : Provides type-safe development environment
+ </li>
+<li>
+<strong>
+   MCP SDK
+  </strong>
+  : Interface for seamless interaction with large language models
+ </li>
+<li>
+<strong>
+   UUID
+  </strong>
+  : Generate unique and reliable task identifiers
+ </li>
+</ul>
+<h2 class="heading">
+ 📄
+ <a id="license">
+</a>
+ License
+</h2>
+<p>
+ This project is licensed under the MIT License - see the
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+<h2 class="heading">
+<a id="recommended">
+</a>
+ Recommended Models
+</h2>
+<p>
+ For the best experience, we recommend using the following models:
+</p>
+<ul>
+<li>
+<strong>
+   Claude 3.7
+  </strong>
+  : Offers strong understanding and generation capabilities.
+ </li>
+<li>
+<strong>
+   Gemini 2.5
+  </strong>
+  : Google's latest model, performs excellently.
+ </li>
+</ul>
+<p>
+ Due to differences in training methods and understanding capabilities across models, using other models might lead to varying results for the same prompts. This project has been optimized for Claude 3.7 and Gemini 2.5.
+</p>
+<h2 class="heading">
+ Star History
+</h2>
+<p>
+<a href="https://www.star-history.com/#cjo4m06/mcp-shrimp-task-manager&amp;Timeline">
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=cjo4m06/mcp-shrimp-task-manager&amp;type=Timeline"/>
+</a>
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/cjo4m06-mcp-shrimp-task-manager.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

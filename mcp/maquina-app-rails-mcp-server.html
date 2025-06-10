@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Rails MCP Server - MCP Directory">
+    <meta property="og:description" content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec">
+    <meta property="og:url" content="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rails MCP Server - MCP Directory">
+    <meta name="twitter:description" content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec">
+    
+    <title>Rails MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Rails MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Rails MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 156</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Ruby</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/maquina-app/rails-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Rails MCP Server - MCP Directory" property="og:title"/>
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Rails MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" name="twitter:description"/>
+<title>Rails MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Rails MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Rails MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 156</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Ruby</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/maquina-app/rails-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Rails MCP Server - MCP Directory" property="og:title">
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" property="og:description">
+<meta content="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Rails MCP Server - MCP Directory" name="twitter:title">
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" name="twitter:description">
+<title>Rails MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Rails MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 156</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Ruby</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/maquina-app/rails-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Rails MCP Server - MCP Directory" property="og:title"/>
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Rails MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projec" name="twitter:description"/>
+<title>Rails MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Rails MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 156</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Ruby</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/maquina-app/rails-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Rails MCP Server
+</h1>
+<p>
+ A Ruby implementation of a Model Context Protocol (MCP) server for Rails projects. This server allows LLMs (Large Language Models) to interact with Rails projects through the Model Context Protocol, providing capabilities for code analysis, exploration, and development assistance.
+</p>
+<h2 class="heading">
+ What is MCP?
+</h2>
+<p>
+ The Model Context Protocol (MCP) is a standardized way for AI models to interact with their environment. It defines a structured method for models to request and use tools, access resources, and maintain context during interactions.
+</p>
+<p>
+ This Rails MCP Server implements the MCP specification to give AI models access to Rails projects for code analysis, exploration, and assistance.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  Manage multiple Rails projects
+ </li>
+<li>
+  Browse project files and structures
+ </li>
+<li>
+  View Rails routes
+ </li>
+<li>
+  Inspect model information and relationships
+ </li>
+<li>
+  Get database schema information
+ </li>
+<li>
+  Analyze controller-view relationships
+ </li>
+<li>
+  Analyze environment configurations
+ </li>
+<li>
+  Access comprehensive Rails, Turbo, Stimulus, and Kamal documentation
+ </li>
+<li>
+  Follow the Model Context Protocol standard
+ </li>
+<li>
+  Seamless integration with LLM clients
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<p>
+ Install the gem:
+</p>
+<pre class="pre"><code class="language-bash code">gem install rails-mcp-server
+</code></pre>
+<p>
+ After installation, the
+ <code class="code">
+  rails-mcp-server
+ </code>
+ and
+ <code class="code">
+  rails-mcp-setup-claude
+ </code>
+ executables will be available in your PATH.
+</p>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ The Rails MCP Server follows the XDG Base Directory Specification for configuration files:
+</p>
+<ul>
+<li>
+  On macOS:
+  <code class="code">
+   $XDG_CONFIG_HOME/rails-mcp
+  </code>
+  or
+  <code class="code">
+   ~/.config/rails-mcp
+  </code>
+  if XDG_CONFIG_HOME is not set
+ </li>
+<li>
+  On Windows:
+  <code class="code">
+   %APPDATA%\rails-mcp
+  </code>
+</li>
+</ul>
+<p>
+ The server will automatically create these directories and an empty
+ <code class="code">
+  projects.yml
+ </code>
+ file the first time it runs.
+</p>
+<p>
+ To configure your projects:
+</p>
+<ol>
+<li>
+  Edit the
+  <code class="code">
+   projects.yml
+  </code>
+  file in your config directory to include your Rails projects:
+ </li>
+</ol>
+<pre class="pre"><code class="language-yaml code">store: "~/projects/store"
+blog: "~/projects/rails-blog"
+ecommerce: "/full/path/to/ecommerce-app"
+</code></pre>
+<p>
+ Each key in the YAML file is a project name (which will be used with the
+ <code class="code">
+  switch_project
+ </code>
+ tool), and each value is the path to the project directory.
+</p>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Starting the server
+</h3>
+<p>
+ The Rails MCP Server can run in two modes:
+</p>
+<ol>
+<li>
+<strong>
+   STDIO mode (default)
+  </strong>
+  : Communicates over standard input/output for direct integration with clients like Claude Desktop.
+ </li>
+<li>
+<strong>
+   HTTP mode
+  </strong>
+  : Runs as an HTTP server with JSON-RPC and Server-Sent Events (SSE) endpoints.
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># Start in default STDIO mode
+rails-mcp-server
+
+# Start in HTTP mode on the default port (6029)
+rails-mcp-server --mode http
+
+# Start in HTTP mode on a custom port
+rails-mcp-server --mode http -p 8080
+</code></pre>
+<p>
+ When running in HTTP mode, the server provides two endpoints:
+</p>
+<ul>
+<li>
+  JSON-RPC endpoint:
+  <code class="code">
+   http://localhost:&lt;port&gt;/mcp/messages
+  </code>
+</li>
+<li>
+  SSE endpoint:
+  <code class="code">
+   http://localhost:&lt;port&gt;/mcp/sse
+  </code>
+</li>
+</ul>
+<h3 class="heading">
+ Logging Options
+</h3>
+<p>
+ The server logs to a file in the
+ <code class="code">
+  ./log
+ </code>
+ directory by default. You can customize logging with these options:
+</p>
+<pre class="pre"><code class="language-bash code"># Set the log level (debug, info, error)
+rails-mcp-server --log-level debug
+</code></pre>
+<h2 class="heading">
+ Claude Desktop Integration
+</h2>
+<p>
+ The Rails MCP Server can be used with Claude Desktop. There are two options to set this up:
+</p>
+<h3 class="heading">
+ Option 1: Use the setup script (recommended)
+</h3>
+<p>
+ Run the setup script which will automatically configure Claude Desktop and set up the proper XDG-compliant directory structure:
+</p>
+<pre class="pre"><code class="language-bash code">rails-mcp-setup-claude
+</code></pre>
+<p>
+ The script will:
+</p>
+<ul>
+<li>
+  Create the appropriate config directory for your platform
+ </li>
+<li>
+  Create an empty
+  <code class="code">
+   projects.yml
+  </code>
+  file if it doesn't exist
+ </li>
+<li>
+  Update the Claude Desktop configuration
+ </li>
+</ul>
+<p>
+ After running the script, restart Claude Desktop to apply the changes.
+</p>
+<h3 class="heading">
+ Option 2: Direct Configuration
+</h3>
+<ol>
+<li>
+  Create the appropriate config directory for your platform:
+ </li>
+<li>
+  macOS:
+  <code class="code">
+   $XDG_CONFIG_HOME/rails-mcp
+  </code>
+  or
+  <code class="code">
+   ~/.config/rails-mcp
+  </code>
+  if XDG_CONFIG_HOME is not set
+ </li>
+<li>
+<p>
+   Windows:
+   <code class="code">
+    %APPDATA%\rails-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Create a
+   <code class="code">
+    projects.yml
+   </code>
+   file in that directory with your Rails projects.
+  </p>
+</li>
+<li>
+<p>
+   Find or create the Claude Desktop configuration file:
+  </p>
+</li>
+<li>
+  macOS:
+  <code class="code">
+   ~/Library/Application Support/Claude/claude_desktop_config.json
+  </code>
+</li>
+<li>
+<p>
+   Windows:
+   <code class="code">
+    %APPDATA%\Claude\claude_desktop_config.json
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add or update the MCP server configuration:
+  </p>
+</li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "railsMcpServer": {
+      "command": "ruby",
+      "args": ["/full/path/to/rails-mcp-server/exe/rails-mcp-server"] 
+    }
+  }
+}
+</code></pre>
+<ol>
+<li>
+  Restart Claude Desktop to apply the changes.
+ </li>
+</ol>
+<h3 class="heading">
+ Ruby Version Manager Users
+</h3>
+<p>
+ Claude Desktop launches the MCP server using your system's default Ruby environment, bypassing version manager initialization (e.g., rbenv, RVM). The MCP server needs to use the same Ruby version where it was installed, as MCP server startup failures can occur when using an incompatible Ruby version.
+</p>
+<p>
+ If you are using a Ruby version manager such as rbenv, you can create a symbolic link to your Ruby shim to ensure the correct version is used:
+</p>
+<pre class="pre"><code class="language-bash code">sudo ln -s /home/your_user/.rbenv/shims/ruby /usr/local/bin/ruby
+</code></pre>
+<p>
+ Replace "/home/your_user/.rbenv/shims/ruby" with your actual path for the Ruby shim.
+</p>
+<h3 class="heading">
+ Using an MCP Proxy (Advanced)
+</h3>
+<p>
+ Claude Desktop and many other LLM clients only support STDIO mode communication, but you might want to use the HTTP/SSE capabilities of the server. An MCP proxy can bridge this gap:
+</p>
+<ol>
+<li>
+  Start the Rails MCP Server in HTTP mode:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">rails-mcp-server --mode http
+</code></pre>
+<ol>
+<li>
+  Install and run an MCP proxy. There are several implementations available in different languages. An MCP proxy allows a client that only supports STDIO communication to communicate via HTTP SSE. Here's an example using a JavaScript-based MCP proxy:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># Install the Node.js based MCP proxy
+npm install -g mcp-remote
+
+# Run the proxy, pointing to your running Rails MCP Server
+npx mcp-remote http://localhost:6029/mcp/sse
+</code></pre>
+<ol>
+<li>
+  Configure Claude Desktop (or other LLM client) to use the proxy instead of connecting directly to the server:
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "railsMcpServer": {
+      "command": "npx",
+      "args": ["mcp-remote", "http://localhost:6029/mcp/sse"]
+    }
+  }
+}
+</code></pre>
+<p>
+ This setup allows STDIO-only clients to communicate with the Rails MCP Server through the proxy, benefiting from the HTTP/SSE capabilities while maintaining client compatibility.
+</p>
+<h2 class="heading">
+ How the Server Works
+</h2>
+<p>
+ The Rails MCP Server implements the Model Context Protocol using either:
+</p>
+<ul>
+<li>
+<strong>
+   STDIO mode
+  </strong>
+  : Reads JSON-RPC 2.0 requests from standard input and returns responses to standard output.
+ </li>
+<li>
+<strong>
+   HTTP mode
+  </strong>
+  : Provides HTTP endpoints for JSON-RPC 2.0 requests and Server-Sent Events.
+ </li>
+</ul>
+<p>
+ Each request includes a sequence number to match requests with responses, as defined in the MCP specification. The server maintains project context and provides Rails-specific analysis capabilities across multiple codebases.
+</p>
+<h2 class="heading">
+ Available Tools
+</h2>
+<p>
+ The server provides the following tools for interacting with Rails projects:
+</p>
+<h3 class="heading">
+ 1.
+ <code class="code">
+  switch_project
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Change the active Rails project to interact with a different codebase. Must be called before using other tools. Available projects are defined in the projects.yml configuration file.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   project_name
+  </code>
+  : (String, required) Name of the project as defined in the projects.yml file (case-sensitive)
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you switch to the "store" project so we can explore it?
+</code></pre>
+<pre class="pre"><code class="code">I'd like to analyze my "blog" application. Please switch to that project first.
+</code></pre>
+<pre class="pre"><code class="code">Switch to the "ecommerce" project and give me a summary of the codebase.
+</code></pre>
+<h3 class="heading">
+ 2.
+ <code class="code">
+  project_info
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Retrieve comprehensive information about the current Rails project, including Rails version, directory structure, API-only status, and overall project organization. Useful for initial project exploration and understanding the codebase structure.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ None
+</p>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Now that we're in the blog project, can you give me an overview of the project structure and Rails version?
+</code></pre>
+<pre class="pre"><code class="code">Tell me about this Rails application. What version is it running and how is it organized?
+</code></pre>
+<pre class="pre"><code class="code">I'd like to understand the high-level architecture of this project. Can you provide the project information?
+</code></pre>
+<h3 class="heading">
+ 3.
+ <code class="code">
+  list_files
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ List files in the Rails project matching specific criteria. Use this to explore project directories or locate specific file types. If no parameters are provided, lists files in the project root.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   directory
+  </code>
+  : (String, optional) Directory path relative to the project root (e.g., 'app/models', 'config'). Leave empty to list files at the root.
+ </li>
+<li>
+<code class="code">
+   pattern
+  </code>
+  : (String, optional) File pattern using glob syntax (e.g., '
+  <em>
+   .rb' for Ruby files, '
+  </em>
+  .erb' for ERB templates, '*_controller.rb' for controllers)
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you list all the model files in this project?
+</code></pre>
+<pre class="pre"><code class="code">Show me all the controller files in the app/controllers directory.
+</code></pre>
+<pre class="pre"><code class="code">I need to see all the view templates in the users section. Can you list the files in app/views/users?
+</code></pre>
+<pre class="pre"><code class="code">List all the JavaScript files in the app/javascript directory.
+</code></pre>
+<h3 class="heading">
+ 4.
+ <code class="code">
+  get_file
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Retrieve the complete content of a specific file with syntax highlighting. Use this to examine implementation details, configurations, or any text file in the project.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   path
+  </code>
+  : (String, required) File path relative to the project root (e.g., 'app/models/user.rb', 'config/routes.rb'). Use list_files first if you're not sure about the exact path.
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you show me the content of the User model file?
+</code></pre>
+<pre class="pre"><code class="code">I need to see what's in app/controllers/products_controller.rb. Can you retrieve that file?
+</code></pre>
+<pre class="pre"><code class="code">Please show me the application.rb file so I can check the configuration settings.
+</code></pre>
+<pre class="pre"><code class="code">I'd like to examine the routes file. Can you display the content of config/routes.rb?
+</code></pre>
+<h3 class="heading">
+ 5.
+ <code class="code">
+  get_routes
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Retrieve all HTTP routes defined in the Rails application with their associated controllers and actions. Equivalent to running 'rails routes' command. This helps understand the API endpoints or page URLs available in the application.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ None
+</p>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you show me all the routes defined in this application?
+</code></pre>
+<pre class="pre"><code class="code">I need to understand the API endpoints available in this project. Can you list the routes?
+</code></pre>
+<pre class="pre"><code class="code">Show me the routing configuration for this Rails app so I can see how the URLs are structured.
+</code></pre>
+<h3 class="heading">
+ 6.
+ <code class="code">
+  analyze_models
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Retrieve detailed information about Active Record models in the project. When called without parameters, lists all model files. When a specific model is specified, returns its schema, associations (has_many, belongs_to, has_one), and complete source code.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   model_name
+  </code>
+  : (String, optional) Class name of a specific model to get detailed information for (e.g., 'User', 'Product'). Use CamelCase, not snake_case. If omitted, returns a list of all models.
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you list all the models in this Rails project?
+</code></pre>
+<pre class="pre"><code class="code">I'd like to understand the User model in detail. Can you show me its schema, associations, and code?
+</code></pre>
+<pre class="pre"><code class="code">Show me the Product model's definition, including its relationships with other models.
+</code></pre>
+<pre class="pre"><code class="code">What are all the models in this application, and can you then show me details for the Order model specifically?
+</code></pre>
+<h3 class="heading">
+ 7.
+ <code class="code">
+  get_schema
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Retrieve database schema information for the Rails application. Without parameters, returns all tables and the complete schema.rb. With a table name, returns detailed column information including data types, constraints, and foreign keys for that specific table.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   table_name
+  </code>
+  : (String, optional) Database table name to get detailed schema information for (e.g., 'users', 'products'). Use snake_case, plural form. If omitted, returns complete database schema.
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you show me the complete database schema for this Rails application?
+</code></pre>
+<pre class="pre"><code class="code">I'd like to see the structure of the users table. Can you retrieve that schema information?
+</code></pre>
+<pre class="pre"><code class="code">Show me the columns and their data types in the products table.
+</code></pre>
+<pre class="pre"><code class="code">I need to understand the database design. Can you first list all tables and then show me details for the orders table?
+</code></pre>
+<h3 class="heading">
+ 8.
+ <code class="code">
+  analyze_controller_views
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Analyze the relationships between controllers, their actions, and corresponding views to understand the application's UI flow.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   controller_name
+  </code>
+  : (String, optional) Name of a specific controller to analyze (e.g., 'UsersController' or 'users'). If omitted, all controllers will be analyzed.
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you analyze the Users controller and its views to help me understand the UI flow?
+</code></pre>
+<pre class="pre"><code class="code">Show me how the ProductsController connects to its views and what actions are available.
+</code></pre>
+<pre class="pre"><code class="code">I want to understand the entire controller-view structure of this application.
+</code></pre>
+<h3 class="heading">
+ 9.
+ <code class="code">
+  analyze_environment_config
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Analyze environment configurations to identify inconsistencies, security issues, and missing variables across environments.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+ None
+</p>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you analyze the environment configurations to find any security issues or missing environment variables?
+</code></pre>
+<pre class="pre"><code class="code">Check the configuration files for any inconsistencies between development and production environments.
+</code></pre>
+<h3 class="heading">
+ 10.
+ <code class="code">
+  load_guide
+ </code>
+</h3>
+<p>
+<strong>
+  Description:
+ </strong>
+ Load documentation guides from Rails, Turbo, Stimulus, Kamal, or Custom. Use this to get guide content for context in conversations.
+</p>
+<p>
+<strong>
+  Parameters:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   guides
+  </code>
+  : (String, required) The guides library to search: 'rails', 'turbo', 'stimulus', 'kamal', or 'custom'
+ </li>
+<li>
+<code class="code">
+   guide
+  </code>
+  : (String, optional) Specific guide name to load. If not provided, returns available guides list.
+ </li>
+</ul>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">Can you load the Rails getting started guide?
+</code></pre>
+<pre class="pre"><code class="code">Show me the available Turbo guides and then load the one about Turbo Frames.
+</code></pre>
+<pre class="pre"><code class="code">I need help with Stimulus. Can you load the hello_stimulus guide?
+</code></pre>
+<pre class="pre"><code class="code">Load the Kamal installation guide so I can understand deployment options.
+</code></pre>
+<h2 class="heading">
+ Resources and Documentation
+</h2>
+<p>
+ The Rails MCP Server provides access to comprehensive documentation through both the
+ <code class="code">
+  load_guide
+ </code>
+ tool and direct MCP resource access. You can access official guides for Rails, Turbo, Stimulus, and Kamal, as well as import your own custom documentation.
+</p>
+<h3 class="heading">
+ Available Resource Categories
+</h3>
+<ul>
+<li>
+<strong>
+   Rails Guides
+  </strong>
+  : Official Ruby on Rails 8.0.2 documentation
+ </li>
+<li>
+<strong>
+   Turbo Guides
+  </strong>
+  : Official Turbo (Hotwire) framework documentation
+ </li>
+<li>
+<strong>
+   Stimulus Guides
+  </strong>
+  : Official Stimulus JavaScript framework documentation
+ </li>
+<li>
+<strong>
+   Kamal Guides
+  </strong>
+  : Official Kamal deployment tool documentation
+ </li>
+<li>
+<strong>
+   Custom Guides
+  </strong>
+  : Your imported markdown files
+ </li>
+</ul>
+<h3 class="heading">
+ Getting Started with Resources
+</h3>
+<p>
+ Before using resources, you need to download them:
+</p>
+<pre class="pre"><code class="language-bash code"># Download Rails guides
+rails-mcp-server-download-resources rails
+
+# Download Turbo guides
+rails-mcp-server-download-resources turbo
+
+# Import custom markdown files
+rails-mcp-server-download-resources --file /path/to/your/docs/
+</code></pre>
+<h3 class="heading">
+ Resource Access Methods
+</h3>
+<ol>
+<li>
+<strong>
+   Tool-based access
+  </strong>
+  : Use the
+  <code class="code">
+   load_guide
+  </code>
+  tool in conversations
+ </li>
+<li>
+<strong>
+   Direct resource access
+  </strong>
+  : MCP clients can query resources using URI patterns like
+  <code class="code">
+   rails://guides/{guide_name}
+  </code>
+</li>
+</ol>
+<p>
+ For complete information about downloading, managing, and using resources, see the
+ <a href="docs/RESOURCES.md">
+  Resources Guide
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Testing and Debugging
+</h2>
+<p>
+ The easiest way to test and debug the Rails MCP Server is by using the MCP Inspector, a developer tool designed specifically for testing and debugging MCP servers.
+</p>
+<p>
+ To use MCP Inspector with Rails MCP Server:
+</p>
+<pre class="pre"><code class="language-bash code"># Install and run MCP Inspector with your Rails MCP Server
+npm -g install @modelcontextprotocol/inspector
+
+npx @modelcontextprotocol/inspector /path/to/rails-mcp-server
+</code></pre>
+<p>
+ This will:
+</p>
+<ol>
+<li>
+  Start your Rails MCP Server in HTTP mode
+ </li>
+<li>
+  Launch the MCP Inspector UI in your browser (default port: 6274)
+ </li>
+<li>
+  Set up an MCP Proxy server (default port: 6277)
+ </li>
+</ol>
+<p>
+ In the MCP Inspector UI, you can:
+</p>
+<ul>
+<li>
+  See all available tools
+ </li>
+<li>
+  Execute tool calls interactively
+ </li>
+<li>
+  View request and response details
+ </li>
+<li>
+  Debug issues in real-time
+ </li>
+</ul>
+<p>
+ The Inspector UI provides an intuitive interface to interact with your MCP server, making it easy to test and debug your Rails MCP Server implementation.
+</p>
+<h2 class="heading">
+ Integration with LLM Clients
+</h2>
+<p>
+ This server is designed to be integrated with LLM clients that support the Model Context Protocol, such as Claude Desktop or other MCP-compatible applications.
+</p>
+<p>
+ To use with an MCP client:
+</p>
+<ol>
+<li>
+  Start the Rails MCP Server (it will use STDIO mode by default)
+ </li>
+<li>
+  Connect your MCP-compatible client to the server
+ </li>
+<li>
+  The client will be able to use the available tools to interact with your Rails projects
+ </li>
+</ol>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This Rails MCP server is released under the MIT License, a permissive open-source license that allows for free use, modification, distribution, and private use.
+</p>
+<p>
+ Copyright (c) 2025 Mario Alberto Chávez Cárdenas
+</p>
+<p>
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+</p>
+<p>
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+</p>
+<p>
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Bug reports and pull requests are welcome on GitHub at
+ <a href="https://github.com/maquina-app/rails-mcp-server">
+  https://github.com/maquina-app/rails-mcp-server
+ </a>
+ .
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/maquina-app-rails-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

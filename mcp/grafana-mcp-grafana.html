@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AModel Context Protocol(MCP) server for Grafana.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Grafana MCP server - MCP Directory">
+    <meta property="og:description" content="AModel Context Protocol(MCP) server for Grafana.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/grafana-mcp-grafana.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Grafana MCP server - MCP Directory">
+    <meta name="twitter:description" content="AModel Context Protocol(MCP) server for Grafana.">
+    
+    <title>Grafana MCP server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Grafana MCP server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Grafana MCP server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 883</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Go</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/grafana/mcp-grafana" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AModel Context Protocol(MCP) server for Grafana." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Grafana MCP server - MCP Directory" property="og:title"/>
+<meta content="AModel Context Protocol(MCP) server for Grafana." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/grafana-mcp-grafana.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Grafana MCP server - MCP Directory" name="twitter:title"/>
+<meta content="AModel Context Protocol(MCP) server for Grafana." name="twitter:description"/>
+<title>Grafana MCP server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Grafana MCP server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Grafana MCP server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 883</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/grafana/mcp-grafana" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="AModel Context Protocol(MCP) server for Grafana." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Grafana MCP server - MCP Directory" property="og:title">
+<meta content="AModel Context Protocol(MCP) server for Grafana." property="og:description">
+<meta content="https://llmlogs.com/mcp/grafana-mcp-grafana.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Grafana MCP server - MCP Directory" name="twitter:title">
+<meta content="AModel Context Protocol(MCP) server for Grafana." name="twitter:description">
+<title>Grafana MCP server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Grafana MCP server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 883</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/grafana/mcp-grafana" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AModel Context Protocol(MCP) server for Grafana." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Grafana MCP server - MCP Directory" property="og:title"/>
+<meta content="AModel Context Protocol(MCP) server for Grafana." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/grafana-mcp-grafana.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Grafana MCP server - MCP Directory" name="twitter:title"/>
+<meta content="AModel Context Protocol(MCP) server for Grafana." name="twitter:description"/>
+<title>Grafana MCP server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Grafana MCP server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 883</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/grafana/mcp-grafana" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Grafana MCP server
+</h1>
+<p>
+ A
+ <a href="https://modelcontextprotocol.io/">
+  Model Context Protocol
+ </a>
+ (MCP) server for Grafana.
+</p>
+<p>
+ This provides access to your Grafana instance and the surrounding ecosystem.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<p>
+<em>
+  The following features are currently available in MCP server. This list is for informational purposes only and does not represent a roadmap or commitment to future features.
+ </em>
+</p>
+<h3 class="heading">
+ Dashboards
+</h3>
+<ul>
+<li>
+<strong>
+   Search for dashboards:
+  </strong>
+  Find dashboards by title or other metadata
+ </li>
+<li>
+<strong>
+   Get dashboard by UID:
+  </strong>
+  Retrieve full dashboard details using its unique identifier
+ </li>
+<li>
+<strong>
+   Update or create a dashboard:
+  </strong>
+  Modify existing dashboards or create new ones.
+  <em>
+   Note: Use with caution due to context window limitations; see
+   <a href="https://github.com/grafana/mcp-grafana/issues/101">
+    issue #101
+   </a>
+</em>
+</li>
+<li>
+<strong>
+   Get panel queries and datasource info:
+  </strong>
+  Get the title, query string, and datasource information (including UID and type, if available) from every panel in a dashboard
+ </li>
+</ul>
+<h3 class="heading">
+ Datasources
+</h3>
+<ul>
+<li>
+<strong>
+   List and fetch datasource information:
+  </strong>
+  View all configured datasources and retrieve detailed information about each.
+  <ul>
+<li>
+<em>
+     Supported datasource types: Prometheus, Loki.
+    </em>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="heading">
+ Prometheus Querying
+</h3>
+<ul>
+<li>
+<strong>
+   Query Prometheus:
+  </strong>
+  Execute PromQL queries (supports both instant and range metric queries) against Prometheus datasources.
+ </li>
+<li>
+<strong>
+   Query Prometheus metadata:
+  </strong>
+  Retrieve metric metadata, metric names, label names, and label values from Prometheus datasources.
+ </li>
+</ul>
+<h3 class="heading">
+ Loki Querying
+</h3>
+<ul>
+<li>
+<strong>
+   Query Loki logs and metrics:
+  </strong>
+  Run both log queries and metric queries using LogQL against Loki datasources.
+ </li>
+<li>
+<strong>
+   Query Loki metadata:
+  </strong>
+  Retrieve label names, label values, and stream statistics from Loki datasources.
+ </li>
+</ul>
+<h3 class="heading">
+ Incidents
+</h3>
+<ul>
+<li>
+<strong>
+   Search, create, update, and close incidents:
+  </strong>
+  Manage incidents in Grafana Incident, including searching, creating, updating, and resolving incidents.
+ </li>
+</ul>
+<h3 class="heading">
+ Sift Investigations
+</h3>
+<ul>
+<li>
+<strong>
+   Create Sift investigations:
+  </strong>
+  Start a new Sift investigation for analyzing logs or traces.
+ </li>
+<li>
+<strong>
+   List Sift investigations:
+  </strong>
+  Retrieve a list of Sift investigations, with support for a limit parameter.
+ </li>
+<li>
+<strong>
+   Get Sift investigation:
+  </strong>
+  Retrieve details of a specific Sift investigation by its UUID.
+ </li>
+<li>
+<strong>
+   Get Sift analyses:
+  </strong>
+  Retrieve a specific analysis from a Sift investigation.
+ </li>
+<li>
+<strong>
+   Find error patterns in logs:
+  </strong>
+  Detect elevated error patterns in Loki logs using Sift.
+ </li>
+<li>
+<strong>
+   Find slow requests:
+  </strong>
+  Detect slow requests using Sift (Tempo).
+ </li>
+</ul>
+<h3 class="heading">
+ Alerting
+</h3>
+<ul>
+<li>
+<strong>
+   List and fetch alert rule information:
+  </strong>
+  View alert rules and their statuses (firing/normal/error/etc.) in Grafana.
+ </li>
+<li>
+<strong>
+   List contact points:
+  </strong>
+  View configured notification contact points in Grafana.
+ </li>
+</ul>
+<h3 class="heading">
+ Grafana OnCall
+</h3>
+<ul>
+<li>
+<strong>
+   List and manage schedules:
+  </strong>
+  View and manage on-call schedules in Grafana OnCall.
+ </li>
+<li>
+<strong>
+   Get shift details:
+  </strong>
+  Retrieve detailed information about specific on-call shifts.
+ </li>
+<li>
+<strong>
+   Get current on-call users:
+  </strong>
+  See which users are currently on call for a schedule.
+ </li>
+<li>
+<strong>
+   List teams and users:
+  </strong>
+  View all OnCall teams and users.
+ </li>
+</ul>
+<h3 class="heading">
+ Admin
+</h3>
+<ul>
+<li>
+<strong>
+   List teams:
+  </strong>
+  View all configured teams in Grafana.
+ </li>
+</ul>
+<p>
+ The list of tools is configurable, so you can choose which tools you want to make available to the MCP client.
+This is useful if you don't use certain functionality or if you don't want to take up too much of the context window.
+To disable a category of tools, use the
+ <code class="code">
+  --disable-&lt;category&gt;
+ </code>
+ flag when starting the server. For example, to disable
+the OnCall tools, use
+ <code class="code">
+  --disable-oncall
+ </code>
+ .
+</p>
+<h3 class="heading">
+ Tools
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Tool
+   </th>
+<th>
+    Category
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     list_teams
+    </code>
+</td>
+<td>
+    Admin
+   </td>
+<td>
+    List all teams
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     search_dashboards
+    </code>
+</td>
+<td>
+    Search
+   </td>
+<td>
+    Search for dashboards
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_dashboard_by_uid
+    </code>
+</td>
+<td>
+    Dashboard
+   </td>
+<td>
+    Get a dashboard by uid
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     update_dashboard
+    </code>
+</td>
+<td>
+    Dashboard
+   </td>
+<td>
+    Update or create a new dashboard
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_dashboard_panel_queries
+    </code>
+</td>
+<td>
+    Dashboard
+   </td>
+<td>
+    Get panel title, queries, datasource UID and type from a dashboard
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_datasources
+    </code>
+</td>
+<td>
+    Datasources
+   </td>
+<td>
+    List datasources
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_datasource_by_uid
+    </code>
+</td>
+<td>
+    Datasources
+   </td>
+<td>
+    Get a datasource by uid
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_datasource_by_name
+    </code>
+</td>
+<td>
+    Datasources
+   </td>
+<td>
+    Get a datasource by name
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     query_prometheus
+    </code>
+</td>
+<td>
+    Prometheus
+   </td>
+<td>
+    Execute a query against a Prometheus datasource
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_prometheus_metric_metadata
+    </code>
+</td>
+<td>
+    Prometheus
+   </td>
+<td>
+    List metric metadata
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_prometheus_metric_names
+    </code>
+</td>
+<td>
+    Prometheus
+   </td>
+<td>
+    List available metric names
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_prometheus_label_names
+    </code>
+</td>
+<td>
+    Prometheus
+   </td>
+<td>
+    List label names matching a selector
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_prometheus_label_values
+    </code>
+</td>
+<td>
+    Prometheus
+   </td>
+<td>
+    List values for a specific label
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_incidents
+    </code>
+</td>
+<td>
+    Incident
+   </td>
+<td>
+    List incidents in Grafana Incident
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     create_incident
+    </code>
+</td>
+<td>
+    Incident
+   </td>
+<td>
+    Create an incident in Grafana Incident
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     add_activity_to_incident
+    </code>
+</td>
+<td>
+    Incident
+   </td>
+<td>
+    Add an activity item to an incident in Grafana Incident
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     resolve_incident
+    </code>
+</td>
+<td>
+    Incident
+   </td>
+<td>
+    Resolve an incident in Grafana Incident
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     query_loki_logs
+    </code>
+</td>
+<td>
+    Loki
+   </td>
+<td>
+    Query and retrieve logs using LogQL (either log or metric queries)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_loki_label_names
+    </code>
+</td>
+<td>
+    Loki
+   </td>
+<td>
+    List all available label names in logs
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_loki_label_values
+    </code>
+</td>
+<td>
+    Loki
+   </td>
+<td>
+    List values for a specific log label
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     query_loki_stats
+    </code>
+</td>
+<td>
+    Loki
+   </td>
+<td>
+    Get statistics about log streams
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_alert_rules
+    </code>
+</td>
+<td>
+    Alerting
+   </td>
+<td>
+    List alert rules
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_alert_rule_by_uid
+    </code>
+</td>
+<td>
+    Alerting
+   </td>
+<td>
+    Get alert rule by UID
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_oncall_schedules
+    </code>
+</td>
+<td>
+    OnCall
+   </td>
+<td>
+    List schedules from Grafana OnCall
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_oncall_shift
+    </code>
+</td>
+<td>
+    OnCall
+   </td>
+<td>
+    Get details for a specific OnCall shift
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_current_oncall_users
+    </code>
+</td>
+<td>
+    OnCall
+   </td>
+<td>
+    Get users currently on-call for a specific schedule
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_oncall_teams
+    </code>
+</td>
+<td>
+    OnCall
+   </td>
+<td>
+    List teams from Grafana OnCall
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_oncall_users
+    </code>
+</td>
+<td>
+    OnCall
+   </td>
+<td>
+    List users from Grafana OnCall
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_investigation
+    </code>
+</td>
+<td>
+    Sift
+   </td>
+<td>
+    Retrieve an existing Sift investigation by its UUID
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_analysis
+    </code>
+</td>
+<td>
+    Sift
+   </td>
+<td>
+    Retrieve a specific analysis from a Sift investigation
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_investigations
+    </code>
+</td>
+<td>
+    Sift
+   </td>
+<td>
+    Retrieve a list of Sift investigations with an optional limit
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     find_error_pattern_logs
+    </code>
+</td>
+<td>
+    Sift
+   </td>
+<td>
+    Finds elevated error patterns in Loki logs.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     find_slow_requests
+    </code>
+</td>
+<td>
+    Sift
+   </td>
+<td>
+    Finds slow requests from the relevant tempo datasources.
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Usage
+</h2>
+<ol>
+<li>
+<p>
+   Create a service account in Grafana with enough permissions to use the tools you want to use,
+   generate a service account token, and copy it to the clipboard for use in the configuration file.
+   Follow the
+   <a href="https://grafana.com/docs/grafana/latest/administration/service-accounts/">
+    Grafana documentation
+   </a>
+   for details.
+  </p>
+</li>
+<li>
+<p>
+   You have several options to install
+   <code class="code">
+    mcp-grafana
+   </code>
+   :
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Docker image
+   </strong>
+   : Use the pre-built Docker image from Docker Hub.
+  </p>
+<p>
+<strong>
+    Important
+   </strong>
+   : The Docker image's entrypoint is configured to run the MCP server in SSE mode by default, but most users will want to use STDIO mode for direct integration with AI assistants like Claude Desktop:
+  </p>
+<ol>
+<li>
+<strong>
+     STDIO Mode
+    </strong>
+    : For stdio mode you must explicitly override the default with
+    <code class="code">
+     -t stdio
+    </code>
+    and include the
+    <code class="code">
+     -i
+    </code>
+    flag to keep stdin open:
+   </li>
+</ol>
+<p>
+<code class="code">
+    bash
+ docker pull mcp/grafana
+ docker run --rm -i -e GRAFANA_URL=http://localhost:3000 -e GRAFANA_API_KEY=&lt;your service account token&gt; mcp/grafana -t stdio
+   </code>
+</p>
+<ol>
+<li>
+<strong>
+     SSE Mode
+    </strong>
+    : In this mode, the server runs as an HTTP server that clients connect to. You must expose port 8000 using the
+    <code class="code">
+     -p
+    </code>
+    flag:
+   </li>
+</ol>
+<p>
+<code class="code">
+    bash
+ docker pull mcp/grafana
+ docker run --rm -p 8000:8000 -e GRAFANA_URL=http://localhost:3000 -e GRAFANA_API_KEY=&lt;your service account token&gt; mcp/grafana
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Download binary
+   </strong>
+   : Download the latest release of
+   <code class="code">
+    mcp-grafana
+   </code>
+   from the
+   <a href="https://github.com/grafana/mcp-grafana/releases">
+    releases page
+   </a>
+   and place it in your
+   <code class="code">
+    $PATH
+   </code>
+   .
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Build from source
+   </strong>
+   : If you have a Go toolchain installed you can also build and install it from source, using the
+   <code class="code">
+    GOBIN
+   </code>
+   environment variable
+     to specify the directory where the binary should be installed. This should also be in your
+   <code class="code">
+    PATH
+   </code>
+   .
+  </p>
+<p>
+<code class="code">
+    bash
+ GOBIN="$HOME/go/bin" go install github.com/grafana/mcp-grafana/cmd/mcp-grafana@latest
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add the server configuration to your client configuration file. For example, for Claude Desktop:
+  </p>
+</li>
+</ol>
+<p>
+<strong>
+  If using the binary:
+ </strong>
+</p>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "grafana": {
+         "command": "mcp-grafana",
+         "args": [],
+         "env": {
+           "GRAFANA_URL": "http://localhost:3000",
+           "GRAFANA_API_KEY": "&lt;your service account token&gt;"
+         }
+       }
+     }
+   }
+ </code>
+</p>
+<blockquote>
+<p>
+  Note: if you see
+  <code class="code">
+   Error: spawn mcp-grafana ENOENT
+  </code>
+  in Claude Desktop, you need to specify the full path to
+  <code class="code">
+   mcp-grafana
+  </code>
+  .
+ </p>
+</blockquote>
+<p>
+<strong>
+  If using Docker:
+ </strong>
+</p>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "grafana": {
+         "command": "docker",
+         "args": [
+           "run",
+           "--rm",
+           "-i",
+           "-e",
+           "GRAFANA_URL",
+           "-e",
+           "GRAFANA_API_KEY",
+           "mcp/grafana",
+           "-t",
+           "stdio"
+         ],
+         "env": {
+           "GRAFANA_URL": "http://localhost:3000",
+           "GRAFANA_API_KEY": "&lt;your service account token&gt;"
+         }
+       }
+     }
+   }
+ </code>
+</p>
+<blockquote>
+<p>
+  Note: The
+  <code class="code">
+   -t stdio
+  </code>
+  argument is essential here because it overrides the default SSE mode in the Docker image.
+ </p>
+</blockquote>
+<p>
+<strong>
+  Using VSCode with remote MCP server
+ </strong>
+</p>
+<p>
+ If you're using VSCode and running the MCP server in SSE mode (which is the default when using the Docker image without overriding the transport), make sure your
+ <code class="code">
+  .vscode/settings.json
+ </code>
+ includes the following:
+</p>
+<pre class="pre"><code class="language-json code">"mcp": {
+  "servers": {
+    "grafana": {
+      "type": "sse",
+      "url": "http://localhost:8000/sse"
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Debug Mode
+</h3>
+<p>
+ You can enable debug mode for the Grafana transport by adding the
+ <code class="code">
+  -debug
+ </code>
+ flag to the command. This will provide detailed logging of HTTP requests and responses between the MCP server and the Grafana API, which can be helpful for troubleshooting.
+</p>
+<p>
+ To use debug mode with the Claude Desktop configuration, update your config as follows:
+</p>
+<p>
+<strong>
+  If using the binary:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "grafana": {
+      "command": "mcp-grafana",
+      "args": ["-debug"],
+      "env": {
+        "GRAFANA_URL": "http://localhost:3000",
+        "GRAFANA_API_KEY": "&lt;your service account token&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+<strong>
+  If using Docker:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "grafana": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "GRAFANA_URL",
+        "-e",
+        "GRAFANA_API_KEY",
+        "mcp/grafana",
+        "-t",
+        "stdio",
+        "-debug"
+      ],
+      "env": {
+        "GRAFANA_URL": "http://localhost:3000",
+        "GRAFANA_API_KEY": "&lt;your service account token&gt;"
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>
+  Note: As with the standard configuration, the
+  <code class="code">
+   -t stdio
+  </code>
+  argument is required to override the default SSE mode in the Docker image.
+ </p>
+</blockquote>
+<h2 class="heading">
+ Development
+</h2>
+<p>
+ Contributions are welcome! Please open an issue or submit a pull request if you have any suggestions or improvements.
+</p>
+<p>
+ This project is written in Go. Install Go following the instructions for your platform.
+</p>
+<p>
+ To run the server locally in STDIO mode (which is the default for local development), use:
+</p>
+<pre class="pre"><code class="language-bash code">make run
+</code></pre>
+<p>
+ To run the server locally in SSE mode, use:
+</p>
+<pre class="pre"><code class="language-bash code">go run ./cmd/mcp-grafana --transport sse
+</code></pre>
+<p>
+ You can also run the server using the SSE transport inside a custom built Docker image. Just like the published Docker image, this custom image's entrypoint defaults to SSE mode. To build the image, use:
+</p>
+<pre class="pre"><code class="code">make build-image
+</code></pre>
+<p>
+ And to run the image in SSE mode (the default), use:
+</p>
+<pre class="pre"><code class="code">docker run -it --rm -p 8000:8000 mcp-grafana:latest
+</code></pre>
+<p>
+ If you need to run it in STDIO mode instead, override the transport setting:
+</p>
+<pre class="pre"><code class="code">docker run -it --rm mcp-grafana:latest -t stdio
+</code></pre>
+<h3 class="heading">
+ Testing
+</h3>
+<p>
+ There are three types of tests available:
+</p>
+<ol>
+<li>
+  Unit Tests (no external dependencies required):
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">make test-unit
+</code></pre>
+<p>
+ You can also run unit tests with:
+</p>
+<pre class="pre"><code class="language-bash code">make test
+</code></pre>
+<ol>
+<li>
+  Integration Tests (requires docker containers to be up and running):
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">make test-integration
+</code></pre>
+<ol>
+<li>
+  Cloud Tests (requires cloud Grafana instance and credentials):
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">make test-cloud
+</code></pre>
+<blockquote>
+<p>
+  Note: Cloud tests are automatically configured in CI. For local development, you'll need to set up your own Grafana Cloud instance and credentials.
+ </p>
+</blockquote>
+<p>
+ More comprehensive integration tests will require a Grafana instance to be running locally on port 3000; you can start one with Docker Compose:
+</p>
+<pre class="pre"><code class="language-bash code">docker-compose up -d
+</code></pre>
+<p>
+ The integration tests can be run with:
+</p>
+<pre class="pre"><code class="language-bash code">make test-all
+</code></pre>
+<p>
+ If you're adding more tools, please add integration tests for them. The existing tests should be a good starting point.
+</p>
+<h3 class="heading">
+ Linting
+</h3>
+<p>
+ To lint the code, run:
+</p>
+<pre class="pre"><code class="language-bash code">make lint
+</code></pre>
+<p>
+ This includes a custom linter that checks for unescaped commas in
+ <code class="code">
+  jsonschema
+ </code>
+ struct tags. The commas in
+ <code class="code">
+  description
+ </code>
+ fields must be escaped with
+ <code class="code">
+  \\,
+ </code>
+ to prevent silent truncation. You can run just this linter with:
+</p>
+<pre class="pre"><code class="language-bash code">make lint-jsonschema
+</code></pre>
+<p>
+ See the
+ <a href="internal/linter/jsonschema/README.md">
+  JSONSchema Linter documentation
+ </a>
+ for more details.
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the
+ <a href="LICENSE">
+  Apache License, Version 2.0
+ </a>
+ .
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/grafana-mcp-grafana.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/grafana-mcp-grafana.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/grafana-mcp-grafana.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/grafana-mcp-grafana.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

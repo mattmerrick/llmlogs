@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="1、项目介绍 - MCP Directory">
+    <meta property="og:description" content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用">
+    <meta property="og:url" content="https://llmlogs.com/mcp/NanGePlus-MCPTest.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="1、项目介绍 - MCP Directory">
+    <meta name="twitter:description" content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用">
+    
+    <title>1、项目介绍 - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">1、项目介绍</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">1、项目介绍</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 74</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/NanGePlus/MCPTest" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="1、项目介绍 - MCP Directory" property="og:title"/>
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/NanGePlus-MCPTest.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="1、项目介绍 - MCP Directory" name="twitter:title"/>
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" name="twitter:description"/>
+<title>1、项目介绍 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">1、项目介绍</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">1、项目介绍</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 74</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/NanGePlus/MCPTest" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="1、项目介绍 - MCP Directory" property="og:title">
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" property="og:description">
+<meta content="https://llmlogs.com/mcp/NanGePlus-MCPTest.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="1、项目介绍 - MCP Directory" name="twitter:title">
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" name="twitter:description">
+<title>1、项目介绍 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>1、项目介绍</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 74</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/NanGePlus/MCPTest" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="1、项目介绍 - MCP Directory" property="og:title"/>
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/NanGePlus-MCPTest.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="1、项目介绍 - MCP Directory" name="twitter:title"/>
+<meta content="本期系列相关视频如下，按照发布的先后顺序:(第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用" name="twitter:description"/>
+<title>1、项目介绍 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>1、项目介绍</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 74</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/NanGePlus/MCPTest" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ 1、项目介绍
+</h1>
+<h2 class="heading">
+ 1.1、主要内容
+</h2>
+<p>
+ 本期系列相关视频如下，按照发布的先后顺序:
+ <br/>
+<strong>
+  (第一期)[2024.12.10]Claude重大突破！发布MCP(模型上下文协议)，带你在LLM应用程序脚本中感受它，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型
+ </strong>
+<br/>
+ 主要内容:MCP介绍、MCP功能测试,LLM(支持OpenAI接口风格的大模型)应用程序调用MCP
+ <br/>
+ https://www.bilibili.com/video/BV1HBquYbE7t/
+ <br/>
+ https://youtu.be/Jmo7rgb_OXQ
+ <br/>
+<strong>
+  (第二期)[2024.12.12]Claude MCP应用Text2SQL用例，带你在LLM应用程序中感受它的丝滑，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型
+ </strong>
+<br/>
+ 主要内容:使用MCP实现LLM应用程序Text2SQL功能操纵MySQL数据库
+ <br/>
+ https://www.bilibili.com/video/BV1ELq4YME8T/
+ <br/>
+ https://youtu.be/yaLAqEMz45A
+ <br/>
+<strong>
+  (第三期)[2024.12.12]Claude MCP应用客户端同时访问和调用多个服务器资源和工具，无需使用Claude Desktop桌面软件，支持类OpenAI风格大模型
+ </strong>
+<br/>
+ 主要内容:MCP客户端同时访问多个MCP服务器，支持文件系统操作和Text2SQL功能操纵MySQL数据库
+ <br/>
+ https://www.bilibili.com/video/BV1oNqaYJEUy/
+ <br/>
+ https://youtu.be/tG-ZjOgrcSA
+ <br/>
+<strong>
+  (第四期)[2024.12.23]DuckDuckGo在线搜索、Fetch内容提取MCP服务器，访问和调用多个服务器资源和工具，支持阿里通义千问大模型、GPT大模型、Ollama本地开源大模型
+ </strong>
+<br/>
+ 主要内容:MCP客户端同时访问多个MCP服务器，支持文件系统操作、Text2SQL功能操纵MySQL数据库、在线搜索(DuckDuckGo搜索引擎)和网页内容提取
+ <br/>
+ https://www.bilibili.com/video/BV1SckXY3E6S/
+ <br/>
+ https://youtu.be/9pzS9saNcGA
+</p>
+<h2 class="heading">
+ 1.2 MCP介绍
+</h2>
+<p>
+ MCP(模型上下文协议)是Claude开源的一种开放协议，可实现LLM应用程序与外部数据源和工具之间的无缝集成
+ <br/>
+ 该架构非常简单:开发人员可以通过MCP服务器公开数据，也可以构建连接到这些服务器的AI应用程序(MCP客户端)
+ <br/>
+ 目前MCP还算是一个测试版，一个本地的服务，运行在你自己的电脑上的
+ <br/>
+ MCP官方简介:https://www.anthropic.com/news/model-context-protocol
+ <br/>
+ MCP文档手册:https://modelcontextprotocol.io/introduction
+ <br/>
+ MCP官方服务器列表:https://github.com/modelcontextprotocol/servers
+ <br/>
+ PythonSDK的github地址:https://github.com/modelcontextprotocol/python-sdk
+</p>
+<h3 class="heading">
+ (1)PythonSDK版本
+</h3>
+<p>
+ 截止当前(12.9),当前的稳定版本为1.1.0
+</p>
+<h3 class="heading">
+ (2)MCP工作原理
+</h3>
+<p>
+ MCP遵循客户端-服务器架构(client-server)，其中主机应用程序可以连接到多个服务器
+ <br/>
+<img alt="" src="./01.png" width="600"/>
+<br/>
+<strong>
+  MCP主机(MCP Host):
+ </strong>
+ 是发起连接的LLM应用程序(Claude Desktop、IDE或AI应用等)
+ <br/>
+<strong>
+  MCP客户端(MCP Client):
+ </strong>
+ 在主机应用程序内部与服务器保持1:1连接
+ <br/>
+<strong>
+  MCP服务器(MCP Servers):
+ </strong>
+ 服务器向客户端提供上下文、工具和提示词(context, tools, and prompts)
+</p>
+<h3 class="heading">
+ (3)核心组件
+</h3>
+<p>
+<strong>
+  Protocol layer 协议层
+ </strong>
+<br/>
+ 协议层处理消息帧、请求/响应链接和高级通信模式。关键类:Protocol、Client、Server
+ <br/>
+<strong>
+  Transport layer 传输层
+ </strong>
+<br/>
+ 传输层处理客户端和服务器之间的实际通信
+ <br/>
+ Stdio(standard input/output):使用标准输入/输出进行通信
+ <br/>
+ SSE(Server-Sent Events):使用服务器发送的事件来发送服务器到客户端的消息
+ <br/>
+ 所有传输都使用JSON-RPC2.0 来交换消息
+ <br/>
+<strong>
+  Message types 消息类型
+ </strong>
+<br/>
+ Requests:请求期望来自另一方的响应
+ <br/>
+ Notifications:通知是一种不期望响应的单向消息
+ <br/>
+ Results:结果是对请求的成功响应
+ <br/>
+ Errors:错误表明请求失败
+</p>
+<h3 class="heading">
+ (4)连接生命周期
+</h3>
+<p>
+<strong>
+  Initialization 初始化
+ </strong>
+<br/>
+<img alt="" src="./02.png" width="600"/>
+<br/>
+ 客户端发送带有协议版本和功能的initialize请求
+ <br/>
+ 服务器响应其协议版本和功能
+ <br/>
+ 客户端发送initialized通知作为确认
+ <br/>
+ 正常消息交换开始
+ <br/>
+<strong>
+  Message exchange 消息交换
+ </strong>
+<br/>
+ 初始化后，支持以下模式:
+ <br/>
+ 请求-响应(Request-Response)：客户端或服务器发送请求，对方响应
+ <br/>
+ 通知(Notifications)：任何一方发送单向消息
+ <br/>
+<strong>
+  Termination 终止
+ </strong>
+<br/>
+ 定义了这些标准错误代码:
+ <br/>
+ ParseError = -32700
+ <br/>
+ InvalidRequest = -32600
+ <br/>
+ MethodNotFound = -32601
+ <br/>
+ InvalidParams = -32602
+ <br/>
+ InternalError = -32603
+</p>
+<h3 class="heading">
+ (5)核心功能
+</h3>
+<p>
+<strong>
+  Resources 资源
+ </strong>
+<br/>
+ 资源是模型上下文协议 (MCP) 中的核心功能，允许服务器公开可供客户端读取并用作LLM交互上下文的数据和内容
+ <br/>
+ File contents 文件内容
+ <br/>
+ Database records 数据库记录
+ <br/>
+ API responses API 响应
+ <br/>
+ Live system data 实时系统数据
+ <br/>
+ Screenshots and images 屏幕截图和图像
+ <br/>
+ Log files 日志文件
+ <br/>
+ And more 还有更多
+ <br/>
+ 每个资源都由唯一的 URI 标识，并且可以包含文本或二进制数据
+ <br/>
+<strong>
+  Prompts 提示
+ </strong>
+<br/>
+ 服务器能够定义可重用的提示模板和工作流程，客户端可以轻松地向用户和LLMs展示这些模板和工作流程。它们提供了一种强大的方法来标准化和共享常见的LLM交互
+ <br/>
+ 接受动态参数
+ <br/>
+ 包括资源中的上下文
+ <br/>
+ 指导具体工作流程
+ <br/>
+<strong>
+  Tools 工具
+ </strong>
+<br/>
+ 工具是MCP中的强大功能，工具被设计为LLMs控制的，这意味着工具从服务器公开给客户端，目的是让LLMs能够自动调用它们（有人在循环中授予批准）
+ <br/>
+ 工具的关键方面包括:
+ <br/>
+ 发现(Discovery):客户端可以通过tools/list端点列出可用的工具
+ <br/>
+ 调用(Invocation):使用tools/call端点调用工具，服务器在其中执行请求的操作并返回结果
+ <br/>
+ 灵活性(Flexibility):工具范围从简单的计算到复杂的API交互
+ <br/>
+<strong>
+  Sampling 采样
+ </strong>
+<br/>
+ 采样是一项强大的MCP功能，允许服务器通过客户端请求LLM完成，从而在保持安全和隐私的同时实现复杂的代理行为
+ <br/>
+ 服务器向客户端发送sampling/createMessage请求
+ <br/>
+ 客户端审查请求并可以修改它
+ <br/>
+ LLM采样的客户端样本
+ <br/>
+ 客户端审核完成情况
+ <br/>
+ 客户端将结果返回给服务器
+ <br/>
+ 这种人机交互设计可确保用户保持对LLM所看到和生成的内容的控制
+ <br/>
+<strong>
+  Transports 传输
+ </strong>
+<br/>
+ MCP的传输为客户端和服务器之间的通信提供了基础。传输处理消息发送和接收的底层机制
+ <br/>
+ MCP使用JSON-RPC 2.0作为其格式。传输层负责将MCP协议消息转换为JSON-RPC格式进行传输，并将接收到的JSON-RPC消息转换回MCP协议消息
+</p>
+<h1 class="heading">
+ 2、前期准备工作
+</h1>
+<h2 class="heading">
+ 2.1 集成开发环境搭建
+</h2>
+<p>
+ anaconda提供python虚拟环境,pycharm提供集成开发环境
+ <br/>
+<strong>
+  具体参考如下视频:
+ </strong>
+<br/>
+ 【大模型应用开发-入门系列】03 集成开发环境搭建-开发前准备工作
+ <br/>
+ https://youtu.be/KyfGduq5d7w
+ <br/>
+ https://www.bilibili.com/video/BV1nvdpYCE33/
+</p>
+<h2 class="heading">
+ 2.2 大模型LLM服务接口调用方案
+</h2>
+<p>
+ (1)gpt大模型等国外大模型使用方案
+ <br/>
+ 国内无法直接访问，可以使用代理的方式，具体代理方案自己选择
+ <br/>
+ 这里推荐大家使用:https://nangeai.top/register?aff=Vxlp
+ <br/>
+ (2)非gpt大模型方案 OneAPI方式或大模型厂商原生接口
+ <br/>
+ (3)本地开源大模型方案(Ollama方式)
+ <br/>
+<strong>
+  具体参考如下视频:
+ </strong>
+<br/>
+ 【大模型应用开发-入门系列】04 大模型LLM服务接口调用方案
+ <br/>
+ https://youtu.be/mTrgVllUl7Y
+ <br/>
+ https://www.bilibili.com/video/BV1BvduYKE75/
+</p>
+<h1 class="heading">
+ 3、项目初始化
+</h1>
+<h2 class="heading">
+ 3.1 下载源码
+</h2>
+<p>
+ GitHub或Gitee中下载工程文件到本地，下载地址如下：
+ <br/>
+ https://github.com/NanGePlus/MCPTest
+ <br/>
+ https://gitee.com/NanGePlus/MCPTest
+</p>
+<h2 class="heading">
+ 3.2 构建项目
+</h2>
+<p>
+ 使用pycharm构建一个项目，为项目配置虚拟python环境
+ <br/>
+ 项目名称：MCPTest
+ <br/>
+ 虚拟环境名称保持与项目名称一致
+</p>
+<h2 class="heading">
+ 3.3 将相关代码拷贝到项目工程中
+</h2>
+<p>
+ 将下载的代码文件夹中的文件全部拷贝到新建的项目根目录下
+</p>
+<h2 class="heading">
+ 3.4 安装项目依赖
+</h2>
+<p>
+ 新建命令行终端，在终端中运行 pip install -r requirements.txt 安装依赖
+ <br/>
+<strong>
+  注意:
+ </strong>
+ 建议先使用要求的对应版本进行本项目测试，避免因版本升级造成的代码不兼容。测试通过后，可进行升级测试
+</p>
+<h1 class="heading">
+ 4、功能测试
+</h1>
+<h2 class="heading">
+ 4.1 (第一期)[2024.12.10]测试步骤
+</h2>
+<p>
+<strong>
+  核心演示示例介绍:Filesystem 使用官方提供的文件操作MCP服务器
+ </strong>
+<br/>
+<strong>
+  描述:
+ </strong>
+ 提供文件系统操作功能，包括读写文件、目录管理和文件搜索
+ <br/>
+<strong>
+  资源:
+ </strong>
+ file://system 文件系统资源URI
+ <br/>
+<strong>
+  工具:
+ </strong>
+ read_file, write_file, create_directory, list_directory, move_file, search_files, get_file_info
+ <br/>
+ read_file:读取文件内容，参数:path (文件路径)
+ <br/>
+ read_multiple_files:读取多个文件内容，参数:paths (文件路径数组)
+ <br/>
+ write_file:创建或覆写文件，参数: path (文件路径), content (文件内容)
+ <br/>
+ create_directory:创建目录，参数: path (目录路径)
+ <br/>
+ list_directory:列出目录内容，参数: path (目录路径)
+ <br/>
+ move_file:移动/重命名文件，参数: source (源路径), destination (目标路径)
+ <br/>
+ search_files:递归搜索文件，参数: path (起始路径), pattern (搜索模式)
+ <br/>
+ get_file_info:获取文件元数据，参数: path (文件路径)
+ <br/>
+ 对应的链接:https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
+ <br/>
+<strong>
+  代码目录
+ </strong>
+<br/>
+ 脚本放置在nangeAGICode/basic、filesystem_basic、filesystem_chat目录内,运行对应脚本进行测试
+ <br/>
+<strong>
+  测试内容:
+ </strong>
+<br/>
+ 我当前可以访问哪个文件夹
+ <br/>
+ 帮我创建一个test文件夹
+ <br/>
+ 帮我在test文件夹下创建一个文件test1.txt，内容为：南哥AGI研习社。
+ <br/>
+ 把test1.txt中的内容agi改大写AGI。
+</p>
+<h2 class="heading">
+ 4.2 (第二期)[2024.12.12]测试步骤
+</h2>
+<p>
+<strong>
+  核心演示示例介绍:Text2SQL 自定义操纵MySQL数据库的MCP服务器
+ </strong>
+<br/>
+<strong>
+  描述:
+ </strong>
+ 提供Text2SQL功能操纵MySQL数据库
+ <br/>
+<strong>
+  资源:
+ </strong>
+ mysql://{table[0]}/data 数据库表资源URI
+ <br/>
+<strong>
+  工具描述:
+ </strong>
+ execute_sql
+ <br/>
+ execute_sql: 运行SQL脚本，参数:query (SQL语句)
+ <br/>
+<strong>
+  代码目录
+ </strong>
+<br/>
+ 脚本放置在nangeAGICode/mysql_chat目录内,运行对应脚本进行测试
+ <br/>
+ 提供LLM对MySQL数据库操作功能，增、删、改、查
+ <br/>
+<strong>
+  测试内容:
+ </strong>
+<br/>
+ (1)列举可用资源
+ <br/>
+ 当前可以访问哪些数据表
+ <br/>
+ (2)获取某资源内容
+ <br/>
+ 获取nange_agi这个表的内容
+ <br/>
+ (3)列举可用的工具
+ <br/>
+ 当前可以使用哪些工具
+ <br/>
+ (4)查询
+ <br/>
+ 调用工具获取nange_agi这个表的内容
+ <br/>
+ (5)增加
+ <br/>
+ 随机帮我增加一条数据
+ <br/>
+ 调用工具获取nange_agi这个表的内容
+ <br/>
+ (6)修改
+ <br/>
+ 新增的那条数据把名称改为test
+ <br/>
+ 调用工具获取nange_agi这个表的内容
+ <br/>
+ (7)删除
+ <br/>
+ 把刚新建的那条数据删除
+ <br/>
+ 调用工具获取nange_agi这个表的内容
+ <br/>
+ (8)统计数据量
+ <br/>
+ 这张表中一共几条数据
+</p>
+<h2 class="heading">
+ 4.3 (第三期)[2024.12.12]测试步骤
+</h2>
+<p>
+<strong>
+  核心演示示例介绍:MCP客户端访问多个MCP服务器
+ </strong>
+<br/>
+<strong>
+  描述:
+ </strong>
+ 结合前面两期的内容，对Filesystem和Text2SQL服务器进行融合使用
+ <br/>
+<strong>
+  代码目录
+ </strong>
+<br/>
+ 脚本放置在nangeAGICode/mysql_filesystem_chat目录内,运行对应脚本进行测试
+ <br/>
+<strong>
+  测试内容:
+ </strong>
+<br/>
+ 当前可以访问哪些资源
+ <br/>
+ 当前可以访问哪些表
+ <br/>
+ 当前可以使用哪些工具
+ <br/>
+ 创建一个test文件夹
+ <br/>
+ 在test文件夹下创建一个文件test1.txt，内容为：用户名:NanGe003，密码：6543217890，内容：南哥AGI研习社++。
+ <br/>
+ 获取nange_agi这个表的内容
+ <br/>
+ 增加一条数据，数据内容为刚刚创建的test1.txt中的内容
+ <br/>
+ 获取nange_agi这个表的内容
+ <br/>
+ 这张表中一共几条数据
+ <br/>
+ 新增的那条数据把名称改为test
+ <br/>
+ 获取nange_agi这个表的内容
+ <br/>
+ 把刚新建的那条数据删除
+ <br/>
+ 获取nange_agi这个表的内容
+</p>
+<h2 class="heading">
+ 4.4 (第四期)[2024.12.23]测试步骤
+</h2>
+<p>
+<strong>
+  核心演示示例介绍:在线搜索及获取链接内容 自定义在线搜索DuckDuckGo的MCP服务器及官方fetch MCP服务器
+ </strong>
+<br/>
+<strong>
+  描述:
+ </strong>
+ 提供在线搜索，并提前搜索结果中有关网页链接内容的提取和总结
+ <br/>
+<strong>
+  工具描述:
+ </strong>
+ duckduckgo_web_search、fetch
+ <br/>
+ duckduckgo_web_search: 执行在线搜索，参数:query(搜索关键词);参数:max_results(最大返回内容数量)
+ <br/>
+ fetch:从互联网获取 URL 并将其内容提取为markdown,参数:url(链接地址);参数:max_length(返回的最大字符数,默认值:5000);raw(获取原始内容而不进行Markdown转换,默认:false)
+ <br/>
+<strong>
+  代码目录
+ </strong>
+<br/>
+ 脚本放置在nangeAGICode/search_mysql_filesystem_chat目录内,运行对应脚本进行测试
+ <br/>
+<strong>
+  测试内容:
+ </strong>
+<br/>
+ 当前可以访问哪些资源
+ <br/>
+ 当前可以使用哪些工具
+ <br/>
+ 搜索2024年有关AI的最新进展，内容要以中文输出，列出10条，且需要带上相关的链接
+ <br/>
+ 将这些内容写入到test.txt文件
+ <br/>
+ 获取第一条链接中的内容并进行总结
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/NanGePlus-MCPTest.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/NanGePlus-MCPTest.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/NanGePlus-MCPTest.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/NanGePlus-MCPTest.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

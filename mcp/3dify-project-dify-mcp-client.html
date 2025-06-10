@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="dify-mcp-client - MCP Directory">
+    <meta property="og:description" content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="dify-mcp-client - MCP Directory">
+    <meta name="twitter:description" content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support.">
+    
+    <title>dify-mcp-client - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">dify-mcp-client</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">dify-mcp-client</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 130</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">dify-plugins</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> dify</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ui-tars</span><span class="topic-tag"> ui-tars-sdk</span>
+                        </div>
+                        <a href="https://github.com/3dify-project/dify-mcp-client" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="dify-mcp-client - MCP Directory" property="og:title"/>
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="dify-mcp-client - MCP Directory" name="twitter:title"/>
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." name="twitter:description"/>
+<title>dify-mcp-client - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">dify-mcp-client</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">dify-mcp-client</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 130</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">dify-plugins</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> dify</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ui-tars</span><span class="topic-tag"> ui-tars-sdk</span>
+</div>
+<a class="github-link" href="https://github.com/3dify-project/dify-mcp-client" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="dify-mcp-client - MCP Directory" property="og:title">
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." property="og:description">
+<meta content="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="dify-mcp-client - MCP Directory" name="twitter:title">
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." name="twitter:description">
+<title>dify-mcp-client - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>dify-mcp-client</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 130</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">dify-plugins</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> dify</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ui-tars</span><span class="topic-tag"> ui-tars-sdk</span>
+</div>
+<a class="github-link" href="https://github.com/3dify-project/dify-mcp-client" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="dify-mcp-client - MCP Directory" property="og:title"/>
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="dify-mcp-client - MCP Directory" name="twitter:title"/>
+<meta content="MCP Clientas Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support." name="twitter:description"/>
+<title>dify-mcp-client - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>dify-mcp-client</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 130</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">dify-plugins</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> dify</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ui-tars</span><span class="topic-tag"> ui-tars-sdk</span>
+</div>
+<a class="github-link" href="https://github.com/3dify-project/dify-mcp-client" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ dify-mcp-client
+</h1>
+<p>
+<code class="code">
+  MCP Client
+ </code>
+ as Agent Strategy Plugin with Computer Using Agent (UI-TARS-SDK) support.
+</p>
+<blockquote>
+<p>
+  [!IMPORTANT]
+Dify is not
+  <code class="code">
+   MCP Server
+  </code>
+  but
+  <code class="code">
+   MCP Host
+  </code>
+  .
+ </p>
+</blockquote>
+<p>
+<img alt="showcase1" src="./_assets/arxiv_mcp_server_test.png"/>
+</p>
+<h2 class="heading">
+ How it works
+</h2>
+<p>
+ Each
+ <code class="code">
+  MCP client
+ </code>
+ (ReAct Agent) node can connect
+ <code class="code">
+  MCP servers
+ </code>
+ .
+1.
+ <code class="code">
+  Tool
+ </code>
+ ,
+ <code class="code">
+  Resource
+ </code>
+ ,
+ <code class="code">
+  Prompt
+ </code>
+ lists are converted into Dify Tools.
+2.   Your selected LLM can see their
+ <code class="code">
+  name
+ </code>
+ ,
+ <code class="code">
+  description
+ </code>
+ ,
+ <code class="code">
+  argument type
+ </code>
+ 3.   The LLM calls Tools based on the ReAct loop (Reason → Act → Observe).
+</p>
+<blockquote>
+<p>
+  [!NOTE]
+Most of the code in this repository contains the following files.
+ </p>
+<h4 class="heading">
+  Dify Official Plugins / Agent Strategies
+ </h4>
+<p>
+  https://github.com/langgenius/dify-official-plugins/tree/main/agent-strategies/cot_agent
+ </p>
+</blockquote>
+<h2 class="heading">
+ ✅ What I did
+</h2>
+<ul>
+<li>
+  Copied
+  <code class="code">
+   ReAct.py
+  </code>
+  and renamed file as
+  <code class="code">
+   mcpReAct.py
+  </code>
+</li>
+<li>
+  Added
+  <code class="code">
+   config_json
+  </code>
+  GUI input field by editing
+  <code class="code">
+   mcpReAct.yaml
+  </code>
+  and
+  <code class="code">
+   class mcpReActParams()
+  </code>
+</li>
+</ul>
+<h3 class="heading">
+ in mcpReAct.py, I added
+</h3>
+<ul>
+<li>
+  New 12 functions for MCP
+ </li>
+<li>
+<code class="code">
+   __init__()
+  </code>
+  for initializing
+  <code class="code">
+   AsyncExitStack
+  </code>
+  and
+  <code class="code">
+   event loop
+  </code>
+</li>
+<li>
+  Some codes in
+  <code class="code">
+   _handle_invoke_action()
+  </code>
+  for MCP
+ </li>
+<li>
+  MCP setup and cleanup in
+  <code class="code">
+   _invoke()
+  </code>
+</li>
+</ul>
+<blockquote>
+<p>
+  [!IMPORTANT]
+ReAct while loop is as they are
+ </p>
+</blockquote>
+<h2 class="heading">
+ 🔄 Update history
+</h2>
+<ul>
+<li>
+  Add SSE MCP client (v0.0.2)
+ </li>
+<li>
+  Support multi SSE servers (v0.0.3)
+ </li>
+<li>
+  Update python module and simplify its dependency (v0.0.4)
+ </li>
+<li>
+  mcp(v1.1.2→v1.6.0+)
+ </li>
+<li>
+  dify_plugin(0.0.1b72→v0.1.0)
+ </li>
+<li>
+  Add UI-TARS SDK integration for GUI automation capabilities (v0.0.5)
+ </li>
+<li>
+  Support Streamable HTTP MCP client
+ </li>
+</ul>
+<h2 class="heading">
+ 🤖 UI-TARS Integration
+</h2>
+<p>
+ This plugin includes
+ <a href="https://github.com/bytedance/UI-TARS-desktop/blob/main/docs/sdk.md">
+  UI-TARS SDK
+ </a>
+ integration for GUI automation capabilities.
+</p>
+<h3 class="heading">
+ Key Features
+</h3>
+<ul>
+<li>
+<strong>
+   On-demand GUI automation
+  </strong>
+  : UI-TARS is called only when needed, reducing token consumption
+ </li>
+<li>
+<strong>
+   Life-time control
+  </strong>
+  : Set maximum loop count per task to prevent runaway automation
+ </li>
+</ul>
+<h3 class="heading">
+ Known Limitations
+</h3>
+<ul>
+<li>
+<strong>
+   Single Monitor Support
+  </strong>
+  : UI-TARS currently recognizes only the primary monitor. Multi-monitor setups are not supported.
+ </li>
+<li>
+<strong>
+   Mac Retina Display Issue
+  </strong>
+  : On macOS with Retina displays, UI-TARS requires the display resolution to be set to "Default" instead of the highest quality setting. Otherwise wrong (w,h) point is clicked. https://github.com/bytedance/UI-TARS-desktop/issues/591
+ </li>
+</ul>
+<h3 class="heading">
+ Life-time Parameter
+</h3>
+<p>
+ The
+ <code class="code">
+  life_time
+ </code>
+ parameter controls the maximum number of GUI actions UI-TARS can perform:
+- Default: 10 iterations
+- User-configurable maximum via
+ <code class="code">
+  ui_tars_max_life_time_count
+ </code>
+ - Your selected LLM can dynamically adjust within the user-defined limit based on task complexity
+</p>
+<blockquote>
+<p>
+  [!NOTE]
+Currently hardcoded to use UI-TARS-1.5-7B model for optimal cost-performance balance.
+ </p>
+</blockquote>
+<h2 class="heading">
+ 🐳 Docker Deployment with Pre-built Node.js
+</h2>
+<h3 class="heading">
+ Building the Docker Image
+</h3>
+<p>
+ Build the Docker image with Node.js support for stdio MCP and UI-TARS:
+</p>
+<pre class="pre"><code class="language-bash code">docker build -t dify-mcp-client:latest .
+</code></pre>
+<p>
+ Or use our pre-built image:
+</p>
+<pre class="pre"><code class="language-yaml code"># In your docker-compose.yml
+services:
+  plugin-daemon:
+    image: memedayo/dify-plugin-daemon:latest  # Pre-built with Node.js
+    # ... rest of configuration
+</code></pre>
+<blockquote>
+<p>
+  [!IMPORTANT]
+Node.js is essential for this plugin's core features. Without it, you lose TypeScript stdio MCP support and UI-TARS functionality.
+ </p>
+</blockquote>
+<h3 class="heading">
+ UI-TARS Configuration
+</h3>
+<p>
+ For detailed UI-TARS setup, refer to the
+ <a href="https://github.com/bytedance/UI-TARS/blob/main/README_deploy.md">
+  UI-TARS Desktop deployment guide
+ </a>
+ .
+</p>
+<p>
+ The plugin automatically configures UI-TARS as a tool within the ReAct loop. You only need to provide:
+- Hugging Face Inference Endpoint URL like 
+- API Key like (hf_xxxxx)
+- (Optional) Adjust
+ <code class="code">
+  ui_tars_max_life_time_count
+ </code>
+ in agent parameters
+</p>
+<h2 class="heading">
+ ⚠️ Caution and Limitation
+</h2>
+<blockquote>
+<p>
+  [!CAUTION]
+This plugin does
+  <strong>
+   not
+  </strong>
+  implement a
+  <strong>
+   human-in-the-loop
+  </strong>
+  mechanism by default, so connect
+  <strong>
+   reliable mcp server only
+  </strong>
+  .
+  <br/>
+  To avoid it, decrease
+  <code class="code">
+   max itereations
+  </code>
+  (default:
+  <code class="code">
+   3
+  </code>
+  ) to
+  <code class="code">
+   1
+  </code>
+  , and use this Agent node repeatedly in Chatflow.
+  <br/>
+  However, agent memory is reset by the end of Workflow.
+  <br/>
+  Use
+  <code class="code">
+   Conversaton Variable
+  </code>
+  to save history and pass it to QUERY.
+  <br/>
+  Don't forget to add a phrase such as
+  <em>
+   "ask for user's permission when calling tools"
+  </em>
+  in INSTRUCTION.
+ </p>
+</blockquote>
+<h1 class="heading">
+ How to use this plugin
+</h1>
+<h2 class="heading">
+ 🛜Install the plugin from GitHub
+</h2>
+<ul>
+<li>
+  Enter the following GitHub repository name
+ </li>
+</ul>
+<pre class="pre"><code class="code">https://github.com/3dify-project/dify-mcp-client/
+</code></pre>
+<ul>
+<li>
+  Dify &gt; PLUGINS &gt; + Install plugin &gt; INSTALL FROM &gt; GitHub
+  <img alt="difyUI1" src="./_assets/plugin_install_online.png"/>
+</li>
+</ul>
+<h2 class="heading">
+ ⬇️Install the plugin from .difypkg file
+</h2>
+<ul>
+<li>
+  Go to Releases https://github.com/3dify-project/dify-mcp-client/releases
+ </li>
+<li>
+  Select suitable version of
+  <code class="code">
+   .difypkg
+  </code>
+</li>
+<li>
+  Dify &gt; PLUGINS &gt; + Install plugin &gt; INSTALL FROM &gt; Local Package File
+  <img alt="difyUI2" src="./_assets/plugin_install_offline.png"/>
+</li>
+</ul>
+<h2 class="heading">
+ How to handle errors when installing plugins?
+</h2>
+<p>
+<strong>
+  Issue
+ </strong>
+ : If you encounter the error message:
+ <code class="code">
+  plugin verification has been enabled, and the plugin you want to install has a bad signature
+ </code>
+ , how to handle the issue?
+ <br/>
+<strong>
+  Solution
+ </strong>
+ : Open
+ <code class="code">
+  /docker/.env
+ </code>
+ and change from
+ <code class="code">
+  true
+ </code>
+ to
+ <code class="code">
+  false
+ </code>
+ :
+</p>
+<pre class="pre"><code class="code">FORCE_VERIFYING_SIGNATURE=false
+</code></pre>
+<p>
+ Run the following commands to restart the Dify service:
+</p>
+<pre class="pre"><code class="language-bash code">cd docker
+docker compose down
+docker compose up -d
+</code></pre>
+<p>
+ Once this field is added, the Dify platform will allow the installation of all plugins that are not listed (and thus not verified) in the Dify Marketplace.
+</p>
+<blockquote>
+<p>
+  [!TIP]
+Marketplace need Approval. I'm preparing to make PR for them after refactoring. 
+Perhaps I'll provide as a new plugin (UI-TARS-SDK as a Dify tool) separately
+ </p>
+</blockquote>
+<h2 class="heading">
+ Where does this plugin show up?
+</h2>
+<ul>
+<li>
+  It takes few minutes to install
+ </li>
+<li>
+  Once installed, you can use it any workflows as Agent node
+ </li>
+<li>
+  Select "mcpReAct" strategy (otherwise no MCP)
+  <img alt="asAgentStrategiesNode" src="./_assets/asAgentStrategiesNode.png"/>
+</li>
+</ul>
+<h2 class="heading">
+ Config
+</h2>
+<p>
+ MCP Agent Plugin node require config_json like this to command or URL to connect MCP servers
+</p>
+<pre class="pre"><code class="code">{
+    "mcpServers":{
+        "name_of_server1":{
+            "url": "http://host.docker.internal:8080/sse"
+        },
+        "name_of_server2":{
+            "url": "http://host.docker.internal:8008/mcp"
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p>
+  [!WARNING]
+- Each server's port number should be different, like 8080, 8008, ...
+- If you want to use stdio mcp server, there are 3 ways.
+  1. Convert it to SSE mcp server https://github.com/3dify-project/dify-mcp-client/edit/main/README.md#how-to-convert-stdio-mcp-server-into-sse-mcp-server
+  2. Deploy with source code (
+  <strong>
+   NOT
+  </strong>
+  by .difypkg or GitHub reposity name install) https://github.com/3dify-project/dify-mcp-client/edit/main/README.md#-how-to-develop-and-deploy-plugin
+  3. Pre-install Node.js inside dify-plugin docker (issue:https://github.com/3dify-project/dify-mcp-client/issues/10) guide: https://github.com/tangyoha/tangyoha-bili/tree/master/dify/mcp/map_mcp
+ </p>
+</blockquote>
+<h2 class="heading">
+ Chatflow Example
+</h2>
+<p>
+<img alt="showcase2" src="./_assets/everything_mcp_server_test_resource.png"/>
+</p>
+<blockquote>
+<p>
+  [!WARNING]
+- The Tools field should not be left blank. so
+  <strong>
+   select Dify tools
+  </strong>
+  like "current time".
+ </p>
+</blockquote>
+<h4 class="heading">
+ I provide this Dify ChatFlow
+ <code class="code">
+  .yml
+ </code>
+ for testing this plugin.
+</h4>
+<p>
+ https://github.com/3dify-project/dify-mcp-client/tree/main/test/chatflow
+</p>
+<h4 class="heading">
+ After download DSL(yml) file, import it in Dify and you can test MCP using "Everything MCP server"
+</h4>
+<p>
+ https://github.com/modelcontextprotocol/servers/tree/main/src/everything
+</p>
+<h1 class="heading">
+ How to convert stdio MCP server into Stremable HTTP (or SSE)
+</h1>
+<h2 class="heading">
+ option1️⃣: Edit MCP server's code
+</h2>
+<p>
+ If fastMCP server, change like this
+</p>
+<pre class="pre"><code class="language-diff code">if __name__ == "__main__":
+-    mcp.run(transport="stdio")
++    mcp.run(transport="streamable-http")
+</code></pre>
+<h2 class="heading">
+ option2️⃣: via mcp-proxy
+</h2>
+<blockquote>
+<p>
+  [!WARNNING]
+Streamable HTTP is recommended instead of deprecated SSE
+Following old SSE setup doesn't work. Read https://github.com/sparfenyuk/mcp-proxy instead.
+ </p>
+</blockquote>
+<details>
+<summary>
+  SSE setup (NOT Streamable HTTP)
+ </summary>
+<pre class="pre"><code class="code">\mcp-proxy&gt;uv venv -p 3.12
+.venv\Scripts\activate
+uv tool install mcp-proxy
+</code></pre>
+ ### Check Node.js has installed and npx(.cmd) Path 
+(Mac/Linux)
+ <pre class="pre"><code class="code">which npx
+</code></pre>
+ (Windows)
+ <pre class="pre"><code class="code">where npx
+</code></pre>
+ result
+ <pre class="pre"><code class="code">C:\Program Files\nodejs\npx
+C:\Program Files\nodejs\npx.cmd
+C:\Users\USER_NAME\AppData\Roaming\npm\npx
+C:\Users\USER_NAME\AppData\Roaming\npm\npx.cmd
+</code></pre>
+ If claude_desktop_config.json is following schema,
+ <pre class="pre"><code class="code">{
+  "mcpServers": {
+    "SERVER_NAME": {
+       "command": CMD_NAME_OR_PATH 
+       "args": {VALUE1, VALUE2}
+    }
+  }
+}
+</code></pre>
+ ### Wake up stdio MCP server by this command
+ <pre class="pre"><code class="code">mcp-proxy --sse-port=8080 --pass-environment -- CMD_NAME_OR_PATH --arg1 VALUE1 --arg2 VALUE2 ...
+</code></pre>
+ If your OS is Windows, use npx.cmd instead of npx. Following is example command to convert stdio "everything MCP server" to SSE via mcp-proxy.
+ <pre class="pre"><code class="code">mcp-proxy --sse-port=8080 --pass-environment -- C:\Program Files\nodejs\npx.cmd --arg1 -y --arg2 @modelcontextprotocol/server-everything
+</code></pre>
+ Similarly, on another command line (If you use sample Chatflow for v0.0.3)
+ <pre class="pre"><code class="code">pip install mcp-simple-arxiv
+mcp-proxy --sse-port=8008 --pass-environment -- C:\Users\USER_NAME\AppData\Local\Programs\Python\Python310\python.exe -m -mcp_simple_arxiv
+</code></pre>
+ Following is a mcp-proxy setup log.
+ <pre class="pre"><code class="code">(mcp_proxy) C:\User\USER_NAME\mcp-proxy&gt;mcp-proxy --sse-port=8080 --pass-environment -- C:\Program Files\nodejs\npx.cmd --arg1 -y --arg2 @modelcontextprotocol/server-everything
+DEBUG:root:Starting stdio client and SSE server
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:mcp.server.lowlevel.server:Initializing server 'example-servers/everything'
+DEBUG:mcp.server.sse:SseServerTransport initialized with endpoint: /messages/
+INFO:     Started server process [53104]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+</code></pre>
+</details>
+<h1 class="heading">
+ 🔨 How to develop and deploy plugin
+</h1>
+<h3 class="heading">
+ Official plugin dev guide
+</h3>
+<p>
+ https://github.com/3dify-project/dify-mcp-client/blob/main/GUIDE.md
+</p>
+<h3 class="heading">
+ Dify plugin SDK daemon
+</h3>
+<p>
+ If your OS is Windows and CPU is Intel or AMD, you need to download the latest
+ <code class="code">
+  dify-plugin-windows-amd64.exe
+ </code>
+<br/>
+ Choose your OS-compatible verson here:
+ <br/>
+ https://github.com/langgenius/dify-plugin-daemon/releases
+ <br/>
+ 1. Rename it as dify.exe for convinence
+2. mkdir "C\User\user\.local\bin" (Windows) and register it as system path.
+3. Copy
+ <code class="code">
+  dify.exe
+ </code>
+ to under dify-mcp-client/
+</p>
+<blockquote>
+<p>
+  [!TIP]
+Following guide is helpful.
+https://docs.dify.ai/plugins/quick-start/develop-plugins/initialize-development-tools
+ </p>
+</blockquote>
+<h3 class="heading">
+ Reference
+</h3>
+<p>
+ https://docs.dify.ai/plugins/quick-start/develop-plugins/initialize-development-tools
+</p>
+<blockquote>
+<p>
+  [!NOTE]
+You can skip this stage if you pull or download codes of this repo
+  <code class="code">
+   dify plugin init
+  </code>
+  Initial settings are as follow
+  <img alt="InitialDifyPluginSetting" src="./_assets/initial_mcp_plugin_settings.png"/>
+</p>
+</blockquote>
+<h3 class="heading">
+ Change directory
+</h3>
+<pre class="pre"><code class="code">cd dify-mcp-client
+</code></pre>
+<h3 class="heading">
+ Install python module
+</h3>
+<p>
+ Python3.12+ is compatible. The
+ <code class="code">
+  venv
+ </code>
+ and
+ <code class="code">
+  uv
+ </code>
+ are not necessary, but recommended.
+</p>
+<pre class="pre"><code class="code">uv venv -p 3.12
+.venv\Scripts\activate
+</code></pre>
+<p>
+ Install python modules for plugin development
+</p>
+<pre class="pre"><code class="code">uv pip install -r requirements.txt
+</code></pre>
+<h3 class="heading">
+ Duplicate
+ <code class="code">
+  env.example
+ </code>
+ and rename one to
+ <code class="code">
+  .env
+ </code>
+</h3>
+<p>
+ I changed
+ <code class="code">
+  REMOTE_INSTALL_HOST
+ </code>
+ from
+ <code class="code">
+  debug.dify.ai
+ </code>
+ to
+ <code class="code">
+  localhost
+ </code>
+ (Docker Compose environment)
+click 🪲bug icon button to see these information
+</p>
+<h3 class="heading">
+ Activate Dify plugin
+</h3>
+<pre class="pre"><code class="code">python -m main
+</code></pre>
+<p>
+ (ctrl+C to stop)
+</p>
+<blockquote>
+<p>
+  [!TIP]
+REMOTE_INSTALL_KEY of .env often changes.
+If you encounter error messages like
+  <code class="code">
+   handshake failed, invalid key
+  </code>
+  , renew it.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Package into .difypkg
+</h3>
+<p>
+<code class="code">
+  ./dify-mcp-client
+ </code>
+ is my default root name
+</p>
+<pre class="pre"><code class="code">dify plugin package ./ROOT_OF_YOUR_PROJECT
+</code></pre>
+<h2 class="heading">
+ Useful GitHub repositories for developers
+</h2>
+<h4 class="heading">
+ Dify Plugin SDKs
+</h4>
+<p>
+ https://github.com/langgenius/dify-plugin-sdks
+</p>
+<h4 class="heading">
+ MCP Python SDK
+</h4>
+<p>
+ https://github.com/modelcontextprotocol/python-sdk
+ <br/>
+</p>
+<blockquote>
+<p>
+  [!TIP]
+MCP client example
+  <br/>
+  https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/clients/simple-chatbot/mcp_simple_chatbot/main.py
+  <br/>
+</p>
+<p>
+  [!NOTE]
+Dify plugin has
+  <code class="code">
+   requirements.txt
+  </code>
+  which automatically installs python modules.
+  <br/>
+  I include latest
+  <code class="code">
+   mcp
+  </code>
+  in it, so you don't need to download the MCP SDK separately.
+ </p>
+</blockquote>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/3dify-project-dify-mcp-client.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

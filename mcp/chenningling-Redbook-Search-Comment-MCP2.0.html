@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory">
+    <meta property="og:description" content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！">
+    <meta property="og:url" content="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory">
+    <meta name="twitter:description" content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！">
+    
+    <title>小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">小红书自动搜索评论工具（MCP Server 2.0）</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">小红书自动搜索评论工具（MCP Server 2.0）</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 159</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/chenningling/Redbook-Search-Comment-MCP2.0" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory" property="og:title"/>
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory" name="twitter:title"/>
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" name="twitter:description"/>
+<title>小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">小红书自动搜索评论工具（MCP Server 2.0）</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">小红书自动搜索评论工具（MCP Server 2.0）</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 159</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chenningling/Redbook-Search-Comment-MCP2.0" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory" property="og:title">
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" property="og:description">
+<meta content="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory" name="twitter:title">
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" name="twitter:description">
+<title>小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>小红书自动搜索评论工具（MCP Server 2.0）</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 159</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chenningling/Redbook-Search-Comment-MCP2.0" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory" property="og:title"/>
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory" name="twitter:title"/>
+<meta content="本项目基于JonaFly/RednoteMCP并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！" name="twitter:description"/>
+<title>小红书自动搜索评论工具（MCP Server 2.0） - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>小红书自动搜索评论工具（MCP Server 2.0）</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 159</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chenningling/Redbook-Search-Comment-MCP2.0" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ 小红书自动搜索评论工具（MCP Server 2.0）
+</h1>
+<div align="right">
+ [English](README_EN.md) | 中文
+</div>
+<blockquote>
+<p>
+  本项目基于
+  <a href="https://github.com/JonaFly/RednoteMCP.git">
+   JonaFly/RednoteMCP
+  </a>
+  并结合多次实战经验，进行全面优化和功能扩展（by windsurf）。在此向原作者的贡献表示由衷的感谢！
+ </p>
+</blockquote>
+<p>
+ 这是一款基于 Playwright 开发的小红书自动搜索和评论工具，作为 MCP Server，可通过特定配置接入 MCP Client（如Claude for Desktop），帮助用户自动完成登录小红书、搜索关键词、获取笔记内容及发布AI生成评论等操作。
+</p>
+<h2 class="heading">
+ 主要特点与优势
+</h2>
+<ul>
+<li>
+<strong>
+   深度集成AI能力
+  </strong>
+  ：利用MCP客户端（如Claude）的大模型能力，生成更自然、更相关的评论内容
+ </li>
+<li>
+<strong>
+   模块化设计
+  </strong>
+  ：将功能分为笔记分析、评论生成和评论发布三个独立模块，提高代码可维护性
+ </li>
+<li>
+<strong>
+   强大的内容获取能力
+  </strong>
+  ：集成多种获取笔记内容的方法，确保能完整获取各类笔记的标题、作者和正文内容
+ </li>
+<li>
+<strong>
+   持久化登录
+  </strong>
+  ：使用持久化浏览器上下文，首次登录后无需重复登录
+ </li>
+<li>
+<strong>
+   两步式评论流程
+  </strong>
+  ：先获取笔记分析结果，然后由MCP客户端生成并发布评论
+ </li>
+</ul>
+<h2 class="heading">
+ 2.0版本主要优化
+</h2>
+<ul>
+<li>
+<strong>
+   内容获取增强
+  </strong>
+  ：重构了笔记内容获取模块，增加页面加载等待时间和滚动操作，实现四种不同的内容获取方法
+ </li>
+<li>
+<strong>
+   AI评论生成
+  </strong>
+  ：重构评论功能，将笔记分析结果返回给MCP客户端，由客户端的AI能力生成更自然、更相关的评论
+ </li>
+<li>
+<strong>
+   功能模块化
+  </strong>
+  ：将功能分为笔记分析、评论生成和评论发布三个独立模块，提高代码可维护性
+ </li>
+<li>
+<strong>
+   搜索结果优化
+  </strong>
+  ：解决了搜索笔记时标题不显示的问题，提供更完整的搜索结果
+ </li>
+<li>
+<strong>
+   错误处理增强
+  </strong>
+  ：添加更详细的错误处理和调试信息输出
+ </li>
+</ul>
+<h2 class="heading">
+ 一、核心功能
+</h2>
+<h3 class="heading">
+ 1. 用户认证与登录
+</h3>
+<ul>
+<li>
+<strong>
+   持久化登录
+  </strong>
+  ：支持手动扫码登录，首次登录后保存状态，后续使用无需重复扫码
+ </li>
+<li>
+<strong>
+   登录状态管理
+  </strong>
+  ：自动检测登录状态，并在需要时提示用户登录
+ </li>
+</ul>
+<h3 class="heading">
+ 2. 内容发现与获取
+</h3>
+<ul>
+<li>
+<strong>
+   智能关键词搜索
+  </strong>
+  ：支持多关键词搜索，可指定返回结果数量，并提供完整的笔记信息
+ </li>
+<li>
+<strong>
+   多维度内容获取
+  </strong>
+  ：集成四种不同的获取方法，确保能准确获取笔记的标题、作者、发布时间和正文内容
+ </li>
+<li>
+<strong>
+   评论数据获取
+  </strong>
+  ：支持获取笔记的评论内容，包括评论者、评论文本和时间信息
+ </li>
+</ul>
+<h3 class="heading">
+ 3. 内容分析与生成
+</h3>
+<ul>
+<li>
+<strong>
+   笔记内容分析
+  </strong>
+  ：自动分析笔记内容，提取关键信息并识别笔记所属领域
+ </li>
+<li>
+<strong>
+   AI评论生成
+  </strong>
+  ：利用MCP客户端（如Claude）的AI能力，基于笔记内容生成自然、相关的评论
+ </li>
+<li>
+<strong>
+   多类型评论支持
+  </strong>
+  ：支持四种不同类型的评论生成：
+ </li>
+<li>
+<strong>
+   引流型
+  </strong>
+  ：引导用户关注或私聊
+ </li>
+<li>
+<strong>
+   点赞型
+  </strong>
+  ：简单互动获取好感
+ </li>
+<li>
+<strong>
+   咨询型
+  </strong>
+  ：以问题形式增加互动
+ </li>
+<li>
+<strong>
+   专业型
+  </strong>
+  ：展示专业知识建立权威
+ </li>
+</ul>
+<h3 class="heading">
+ 4. 数据返回与反馈
+</h3>
+<ul>
+<li>
+<strong>
+   结构化数据返回
+  </strong>
+  ：将笔记分析结果以JSON格式返回给MCP客户端，便于AI生成评论
+ </li>
+<li>
+<strong>
+   评论发布反馈
+  </strong>
+  ：提供评论发布结果的实时反馈
+ </li>
+</ul>
+<h2 class="heading">
+ 二、安装步骤
+</h2>
+<ol>
+<li>
+<p>
+<strong>
+    Python 环境准备
+   </strong>
+   ：确保系统已安装 Python 3.8 或更高版本。若未安装，可从 Python 官方网站下载并安装。
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    项目获取
+   </strong>
+   ：将本项目克隆或下载到本地。
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    创建虚拟环境
+   </strong>
+   ：在项目目录下创建并激活虚拟环境（推荐）：
+   ```bash
+   # 创建虚拟环境
+   python3 -m venv venv
+  </p>
+</li>
+</ol>
+<p>
+ # 激活虚拟环境
+   # Windows
+   venv\Scripts\activate
+   # macOS/Linux
+   source venv/bin/activate
+   ```
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    安装依赖
+   </strong>
+   ：在激活的虚拟环境中安装所需依赖：
+   <code class="code">
+    bash
+   pip install -r requirements.txt
+   pip install fastmcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    安装浏览器
+   </strong>
+   ：安装Playwright所需的浏览器：
+   <code class="code">
+    bash
+   playwright install
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ 三、MCP Server 配置
+</h2>
+<p>
+ 在 MCP Client（如Claude for Desktop）的配置文件中添加以下内容，将本工具配置为 MCP Server：
+</p>
+<h3 class="heading">
+ Mac 配置示例
+</h3>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "xiaohongshu MCP": {
+            "command": "/绝对路径/到/venv/bin/python3",
+            "args": [
+                "/绝对路径/到/xiaohongshu_mcp.py",
+                "--stdio"
+            ]
+        }
+    }
+}
+</code></pre>
+<h3 class="heading">
+ Windows 配置示例
+</h3>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "xiaohongshu MCP": {
+            "command": "C:\\Users\\username\\Desktop\\MCP\\Redbook-Search-Comment-MCP2.0\\venv\\Scripts\\python.exe",
+            "args": [
+                "C:\\Users\\username\\Desktop\\MCP\\Redbook-Search-Comment-MCP2.0\\xiaohongshu_mcp.py",
+                "--stdio"
+            ]
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   重要提示
+  </strong>
+  ：
+- 请使用虚拟环境中Python解释器的
+  <strong>
+   完整绝对路径
+  </strong>
+  - Mac示例：
+  <code class="code">
+   /Users/username/Desktop/RedBook-Search-Comment-MCP/venv/bin/python3
+  </code>
+  - Windows示例：
+  <code class="code">
+   C:\Users\username\Desktop\MCP\Redbook-Search-Comment-MCP2.0\venv\Scripts\python.exe
+  </code>
+  - 同样，xiaohongshu_mcp.py也需要使用
+  <strong>
+   完整绝对路径
+  </strong>
+  - Windows路径中的反斜杠在JSON中需要双重转义（使用
+  <code class="code">
+   \
+  </code>
+  ）
+ </p>
+</blockquote>
+<h3 class="heading">
+ Python 命令区分（python 与 python3）
+</h3>
+<p>
+ 不同系统环境中，Python 命令可能有所不同，这取决于您的系统配置。以下是如何确定您应该使用哪个命令：
+</p>
+<ol>
+<li>
+<strong>
+   确定您的 Python 命令
+  </strong>
+  ：
+ </li>
+<li>
+  在终端中运行：
+  <code class="code">
+   python --version
+  </code>
+  和
+  <code class="code">
+   python3 --version
+  </code>
+</li>
+<li>
+<p>
+   查看哪个命令返回 Python 3.x 版本（本项目需要 Python 3.8+）
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    在虚拟环境中确认
+   </strong>
+   ：
+  </p>
+</li>
+<li>
+  激活虚拟环境后，运行
+  <code class="code">
+   which python
+  </code>
+  或
+  <code class="code">
+   where python
+  </code>
+  （Windows）
+ </li>
+<li>
+<p>
+   这将显示 Python 解释器的完整路径
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    配置中使用正确的命令
+   </strong>
+   ：
+  </p>
+</li>
+<li>
+  Mac：通常为
+  <code class="code">
+   python3
+  </code>
+  或虚拟环境中的
+  <code class="code">
+   python
+  </code>
+</li>
+<li>
+  Windows：通常为
+  <code class="code">
+   python
+  </code>
+  或
+  <code class="code">
+   python.exe
+  </code>
+</li>
+</ol>
+<p>
+ 在配置文件中，始终使用虚拟环境中 Python 解释器的
+ <strong>
+  完整绝对路径
+ </strong>
+ ，而不是命令名称。
+</p>
+<h2 class="heading">
+ 四、使用方法
+</h2>
+<h3 class="heading">
+ （一）启动服务器
+</h3>
+<ol>
+<li>
+<p>
+<strong>
+    直接运行
+   </strong>
+   ：在项目目录下，激活虚拟环境后执行：
+   <code class="code">
+    bash
+   python3 xiaohongshu_mcp.py
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    通过 MCP Client 启动
+   </strong>
+   ：配置好MCP Client后，按照客户端的操作流程进行启动和连接。
+  </p>
+</li>
+</ol>
+<h3 class="heading">
+ （二）主要功能操作
+</h3>
+<p>
+ 在MCP Client（如Claude for Desktop）中连接到服务器后，可以使用以下功能：
+</p>
+<h3 class="heading">
+ 1. 登录小红书
+</h3>
+<p>
+<strong>
+  工具函数
+ </strong>
+ ：
+</p>
+<pre class="pre"><code class="code">mcp0_login()
+</code></pre>
+<p>
+<strong>
+  在MCP客户端中的使用方式
+ </strong>
+ ：
+直接发送以下文本：
+</p>
+<pre class="pre"><code class="code">帮我登录小红书账号
+</code></pre>
+<p>
+ 或：
+</p>
+<pre class="pre"><code class="code">请登录小红书
+</code></pre>
+<p>
+<strong>
+  功能说明
+ </strong>
+ ：首次使用时会打开浏览器窗口，等待用户手动扫码登录。登录成功后，工具会保存登录状态。
+</p>
+<h3 class="heading">
+ 2. 搜索笔记
+</h3>
+<p>
+<strong>
+  工具函数
+ </strong>
+ ：
+</p>
+<pre class="pre"><code class="code">mcp0_search_notes(keywords="关键词", limit=5)
+</code></pre>
+<p>
+<strong>
+  在MCP客户端中的使用方式
+ </strong>
+ ：
+发送包含关键词的搜索请求：
+</p>
+<pre class="pre"><code class="code">帮我搜索小红书笔记，关键词为：美食
+</code></pre>
+<p>
+ 指定返回数量：
+</p>
+<pre class="pre"><code class="code">帮我搜索小红书笔记，关键词为旅游，返回10条结果
+</code></pre>
+<p>
+<strong>
+  功能说明
+ </strong>
+ ：根据关键词搜索小红书笔记，并返回指定数量的结果。默认返回5条结果。
+</p>
+<h3 class="heading">
+ 3. 获取笔记内容
+</h3>
+<p>
+<strong>
+  工具函数
+ </strong>
+ ：
+</p>
+<pre class="pre"><code class="code">mcp0_get_note_content(url="笔记URL")
+</code></pre>
+<p>
+<strong>
+  在MCP客户端中的使用方式
+ </strong>
+ ：
+发送包含笔记URL的请求：
+</p>
+<pre class="pre"><code class="code">帮我获取这个笔记的内容：https://www.xiaohongshu.com/search_result/xxxx
+</code></pre>
+<p>
+ 或：
+</p>
+<pre class="pre"><code class="code">请查看这个小红书笔记的内容：https://www.xiaohongshu.com/search_result/xxxx
+</code></pre>
+<p>
+<strong>
+  功能说明
+ </strong>
+ ：获取指定笔记URL的详细内容，包括标题、作者、发布时间和正文内容。
+</p>
+<h3 class="heading">
+ 4. 获取笔记评论
+</h3>
+<p>
+<strong>
+  工具函数
+ </strong>
+ ：
+</p>
+<pre class="pre"><code class="code">mcp0_get_note_comments(url="笔记URL")
+</code></pre>
+<p>
+<strong>
+  在MCP客户端中的使用方式
+ </strong>
+ ：
+发送包含笔记URL的评论请求：
+</p>
+<pre class="pre"><code class="code">帮我获取这个笔记的评论：https://www.xiaohongshu.com/search_result/xxxx
+</code></pre>
+<p>
+ 或：
+</p>
+<pre class="pre"><code class="code">请查看这个小红书笔记的评论区：https://www.xiaohongshu.com/search_result/xxxx
+</code></pre>
+<p>
+<strong>
+  功能说明
+ </strong>
+ ：获取指定笔记URL的评论信息，包括评论者、评论内容和评论时间。
+</p>
+<h3 class="heading">
+ 5. 发布智能评论
+</h3>
+<p>
+<strong>
+  工具函数
+ </strong>
+ ：
+</p>
+<pre class="pre"><code class="code">mcp0_post_smart_comment(url="笔记URL", comment_type="评论类型")
+</code></pre>
+<p>
+<strong>
+  在MCP客户端中的使用方式
+ </strong>
+ ：
+发送包含笔记URL和评论类型的请求：
+</p>
+<pre class="pre"><code class="code">帮我为这个笔记写一条[类型]评论：https://www.xiaohongshu.com/explore/xxxx
+</code></pre>
+<p>
+<strong>
+  功能说明
+ </strong>
+ ：获取笔记分析结果，并返回给MCP客户端，由客户端生成评论并调用post_comment发布。
+</p>
+<h3 class="heading">
+ 6. 发布评论
+</h3>
+<p>
+<strong>
+  工具函数
+ </strong>
+ ：
+</p>
+<pre class="pre"><code class="code">mcp0_post_comment(url="笔记URL", comment="评论内容")
+</code></pre>
+<p>
+<strong>
+  在MCP客户端中的使用方式
+ </strong>
+ ：
+发送包含笔记URL和评论内容的请求：
+</p>
+<pre class="pre"><code class="code">帮我发布这条评论到笔记：https://www.xiaohongshu.com/explore/xxxx
+评论内容：[评论内容]
+</code></pre>
+<p>
+<strong>
+  功能说明
+ </strong>
+ ：将指定的评论内容发布到笔记页面。
+</p>
+<h2 class="heading">
+ 四、使用指南
+</h2>
+<h3 class="heading">
+ 0. 工作原理
+</h3>
+<p>
+ 本工具采用两步式流程实现智能评论功能：
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    笔记分析
+   </strong>
+   ：调用
+   <code class="code">
+    post_smart_comment
+   </code>
+   工具获取笔记信息（标题、作者、内容等）
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    评论生成与发布
+   </strong>
+   ：
+  </p>
+</li>
+<li>
+  MCP客户端(如Claude)基于笔记分析结果生成评论
+ </li>
+<li>
+  调用
+  <code class="code">
+   post_comment
+  </code>
+  工具发布评论
+ </li>
+</ol>
+<p>
+ 这种设计充分利用了MCP客户端的AI能力，实现了更自然、相关的评论生成。
+</p>
+<h3 class="heading">
+ 1. 在MCP客户端中的使用方式
+</h3>
+<h4 class="heading">
+ 基本操作
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    功能
+   </th>
+<th>
+    示例命令
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+     搜索笔记
+    </strong>
+</td>
+<td>
+<code class="code">
+     帮我搜索关于[关键词]的小红书笔记
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+     获取笔记内容
+    </strong>
+</td>
+<td>
+<code class="code">
+     帮我查看这篇小红书笔记的内容：https://www.xiaohongshu.com/explore/xxxx
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+     分析笔记
+    </strong>
+</td>
+<td>
+<code class="code">
+     帮我分析这篇小红书笔记：https://www.xiaohongshu.com/explore/xxxx
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+     获取评论
+    </strong>
+</td>
+<td>
+<code class="code">
+     帮我查看这篇笔记的评论：https://www.xiaohongshu.com/explore/xxxx
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+     生成评论
+    </strong>
+</td>
+<td>
+<code class="code">
+     帮我为这篇小红书笔记写一条[类型]评论：https://www.xiaohongshu.com/explore/xxxx
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ 评论类型选项
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    类型
+   </th>
+<th>
+    描述
+   </th>
+<th>
+    适用场景
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+     引流
+    </strong>
+</td>
+<td>
+    引导用户关注或私聊
+   </td>
+<td>
+    增加粉丝或私信互动
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     点赞
+    </strong>
+</td>
+<td>
+    简单互动获取好感
+   </td>
+<td>
+    增加曝光和互动率
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     咨询
+    </strong>
+</td>
+<td>
+    以问题形式增加互动
+   </td>
+<td>
+    引发博主回复，增加互动深度
+   </td>
+</tr>
+<tr>
+<td>
+<strong>
+     专业
+    </strong>
+</td>
+<td>
+    展示专业知识建立权威
+   </td>
+<td>
+    建立专业形象，增强可信度
+   </td>
+</tr>
+</tbody>
+</table>
+<h3 class="heading">
+ 2. 实际工作流程示例
+</h3>
+<pre class="pre"><code class="code">用户: 帮我为这个小红书笔记写一条专业类型的评论：https://www.xiaohongshu.com/explore/xxxx
+
+Claude: 我会帮您写一条专业类型的评论。让我获取笔记内容并生成评论。
+[调用post_smart_comment工具]
+
+# 工具返回笔记分析结果，包含标题、作者、内容、领域和关键词
+
+Claude: 我已经获取到笔记信息，这是一篇关于[主题]的笔记。基于内容，我生成并发布了以下专业评论：
+
+"[生成的专业评论内容]"
+
+[调用post_comment工具]
+
+Claude: 评论已成功发布！
+</code></pre>
+<p>
+<strong>
+  注意
+ </strong>
+ ：上述流程中，
+ <code class="code">
+  post_smart_comment
+ </code>
+ 工具只负责获取笔记分析结果并返回给MCP客户端，实际的评论生成是由MCP客户端（如Claude）自身完成的。
+</p>
+<h3 class="heading">
+ 3. 工作原理
+</h3>
+<p>
+ 新版小红书MCP工具采用了模块化设计，分为三个核心模块：
+</p>
+<ol>
+<li>
+<strong>
+   笔记分析模块
+  </strong>
+  （analyze_note）
+ </li>
+<li>
+  获取笔记的标题、作者、发布时间和内容
+ </li>
+<li>
+  分析笔记所属领域和关键词
+ </li>
+<li>
+<p>
+   返回结构化的笔记信息
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    评论生成模块
+   </strong>
+   （由MCP客户端实现）
+  </p>
+</li>
+<li>
+  接收笔记分析结果
+ </li>
+<li>
+  根据笔记内容和评论类型生成自然、相关的评论
+ </li>
+<li>
+<p>
+   允许用户在发布前预览和修改评论
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    评论发布模块
+   </strong>
+   （post_comment）
+  </p>
+</li>
+<li>
+  接收生成的评论内容
+ </li>
+<li>
+  定位并操作评论输入框
+ </li>
+<li>
+  发布评论并返回结果
+ </li>
+</ol>
+<h2 class="heading">
+ 五、代码结构
+</h2>
+<ul>
+<li>
+<strong>
+   xiaohongshu_mcp.py
+  </strong>
+  ：实现主要功能的核心文件，包含登录、搜索、获取内容和评论、发布评论等功能的代码逻辑。
+ </li>
+<li>
+<strong>
+   requirements.txt
+  </strong>
+  ：记录项目所需的依赖库。
+ </li>
+</ul>
+<h2 class="heading">
+ 六、常见问题与解决方案
+</h2>
+<ol>
+<li>
+<strong>
+   连接失败
+  </strong>
+  ：
+ </li>
+<li>
+  确保使用了虚拟环境中Python解释器的
+  <strong>
+   完整绝对路径
+  </strong>
+</li>
+<li>
+  确保MCP服务器正在运行
+ </li>
+<li>
+<p>
+   尝试重启MCP服务器和客户端
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    浏览器会话问题
+   </strong>
+   ：
+   如果遇到
+   <code class="code">
+    Page.goto: Target page, context or browser has been closed
+   </code>
+   错误：
+  </p>
+</li>
+<li>
+  重启MCP服务器
+ </li>
+<li>
+<p>
+   重新连接并登录
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    依赖安装问题
+   </strong>
+   ：
+   如果遇到
+   <code class="code">
+    ModuleNotFoundError
+   </code>
+   错误：
+  </p>
+</li>
+<li>
+  确保在虚拟环境中安装了所有依赖
+ </li>
+<li>
+  检查是否安装了fastmcp包
+ </li>
+</ol>
+<h2 class="heading">
+ 七、注意事项与问题解决
+</h2>
+<h3 class="heading">
+ 1. 使用注意事项
+</h3>
+<ul>
+<li>
+<strong>
+   浏览器模式
+  </strong>
+  ：工具使用 Playwright 的非隐藏模式运行，运行时会打开真实浏览器窗口
+ </li>
+<li>
+<strong>
+   登录方式
+  </strong>
+  ：首次登录需要手动扫码，后续使用若登录状态有效，则无需再次扫码
+ </li>
+<li>
+<strong>
+   平台规则
+  </strong>
+  ：使用过程中请严格遵守小红书平台的相关规定，避免过度操作，防止账号面临封禁风险
+ </li>
+<li>
+<strong>
+   评论频率
+  </strong>
+  ：建议控制评论发布频率，避免短时间内发布大量评论，每天发布评论数量不超过30条
+ </li>
+</ul>
+<h3 class="heading">
+ 2. 常见问题与解决方案
+</h3>
+<h4 class="heading">
+ 浏览器实例问题
+</h4>
+<p>
+ 如果遇到“Page.goto: Target page, context or browser has been closed”类似错误，可能是浏览器实例没有正确关闭或数据目录锁文件问题，请尝试：
+</p>
+<pre class="pre"><code class="language-bash code"># 删除浏览器锁文件
+rm -f /项目路径/browser_data/SingletonLock /项目路径/browser_data/SingletonCookie
+
+# 如果问题仍然存在，备份并重建浏览器数据目录
+mkdir -p /项目路径/backup_browser_data
+mv /项目路径/browser_data/* /项目路径/backup_browser_data/
+mkdir -p /项目路径/browser_data
+</code></pre>
+<h4 class="heading">
+ 内容获取问题
+</h4>
+<p>
+ 如果无法获取笔记内容或内容不完整，可尝试：
+</p>
+<ol>
+<li>
+<strong>
+   增加等待时间
+  </strong>
+  ：小红书笔记页面可能需要更长的加载时间，特别是包含大量图片或视频的笔记
+ </li>
+<li>
+<strong>
+   清除浏览器缓存
+  </strong>
+  ：有时浏览器缓存会影响内容获取
+ </li>
+<li>
+<strong>
+   尝试不同的获取方法
+  </strong>
+  ：工具集成了多种获取方法，如果一种方法失败，可以尝试其他方法
+ </li>
+</ol>
+<h4 class="heading">
+ 平台变化适应
+</h4>
+<p>
+ 小红书平台可能会更新页面结构和DOM元素，导致工具无法正常工作。如遇到此类问题：
+</p>
+<ol>
+<li>
+<strong>
+   检查项目更新
+  </strong>
+  ：关注项目最新版本，及时更新
+ </li>
+<li>
+<strong>
+   调整选择器
+  </strong>
+  ：如果您熟悉代码，可以尝试调整CSS选择器或XPath表达式
+ </li>
+<li>
+<strong>
+   提交问题反馈
+  </strong>
+  ：向项目维护者提交问题，描述遇到的具体问题和页面变化
+ </li>
+</ol>
+<h2 class="heading">
+ 八、免责声明
+</h2>
+<p>
+ 本工具仅用于学习和研究目的，使用者应严格遵守相关法律法规以及小红书平台的规定。因使用不当导致的任何问题，本项目开发者不承担任何责任。
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/chenningling-Redbook-Search-Comment-MCP2.0.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

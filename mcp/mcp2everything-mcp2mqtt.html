@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="English| 简体中文">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory">
+    <meta property="og:description" content="English| 简体中文">
+    <meta property="og:url" content="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory">
+    <meta name="twitter:description" content="English| 简体中文">
+    
+    <title>mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">mcp2mqtt: 连接物理世界与AI大模型的桥梁</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">mcp2mqtt: 连接物理世界与AI大模型的桥梁</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 44</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/mcp2everything/mcp2mqtt" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="English| 简体中文" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory" property="og:title"/>
+<meta content="English| 简体中文" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory" name="twitter:title"/>
+<meta content="English| 简体中文" name="twitter:description"/>
+<title>mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">mcp2mqtt: 连接物理世界与AI大模型的桥梁</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">mcp2mqtt: 连接物理世界与AI大模型的桥梁</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 44</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/mcp2everything/mcp2mqtt" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="English| 简体中文" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory" property="og:title">
+<meta content="English| 简体中文" property="og:description">
+<meta content="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory" name="twitter:title">
+<meta content="English| 简体中文" name="twitter:description">
+<title>mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp2mqtt: 连接物理世界与AI大模型的桥梁</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 44</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/mcp2everything/mcp2mqtt" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="English| 简体中文" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory" property="og:title"/>
+<meta content="English| 简体中文" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory" name="twitter:title"/>
+<meta content="English| 简体中文" name="twitter:description"/>
+<title>mcp2mqtt: 连接物理世界与AI大模型的桥梁 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp2mqtt: 连接物理世界与AI大模型的桥梁</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 44</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/mcp2everything/mcp2mqtt" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ mcp2mqtt: 连接物理世界与AI大模型的桥梁
+</h1>
+<p>
+<a href="README_EN.md">
+  English
+ </a>
+ | 简体中文
+</p>
+<div align="center">
+<img alt="mcp2mqtt Logo" src="docs/images/logo.png" width="200"/>
+<p>
+  通过自然语言控制硬件，开启物联网新纪元
+ </p>
+</div>
+<h2 class="heading">
+ 系统架构
+</h2>
+<div align="center">
+<img alt="系统架构图" src="docs/images/stru_chs.png" width="800"/>
+<p>
+  mcp2mqtt 系统架构图
+ </p>
+</div>
+<h2 class="heading">
+ 工作流程
+</h2>
+<div align="center">
+<img alt="工作流程图" src="docs/images/workflow_chs.png" width="800"/>
+<p>
+  mcp2mqtt 工作流程图
+ </p>
+</div>
+<h2 class="heading">
+ 项目愿景
+</h2>
+<p>
+ mcp2mqtt 是一个将物联网设备接入AI大模型的项目，它通过 Model Context Protocol (MCP) 和 MQTT 协议将物理世界与 AI 大模型无缝连接。最终实现：
+- 用自然语言控制你的硬件设备
+- AI 实时响应并调整物理参数
+- 让你的设备具备理解和执行复杂指令的能力
+- 通过MQTT协议实现设备间的互联互通
+</p>
+<h2 class="heading">
+ 主要特性
+</h2>
+<ul>
+<li>
+<strong>
+   智能MQTT通信
+  </strong>
+</li>
+<li>
+  支持MQTT协议的发布/订阅模式
+ </li>
+<li>
+  支持多种MQTT服务器（如Mosquitto、EMQ X等）
+ </li>
+<li>
+  支持QoS服务质量保证
+ </li>
+<li>
+  支持主题过滤和消息路由
+ </li>
+<li>
+<p>
+   实时状态监控和错误处理
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    MCP 协议集成
+   </strong>
+</p>
+</li>
+<li>
+  完整支持 Model Context Protocol
+ </li>
+<li>
+  支持资源管理和工具调用
+ </li>
+<li>
+  灵活的提示词系统
+ </li>
+<li>
+  通过MQTT实现命令的发布与响应
+ </li>
+</ul>
+<h2 class="heading">
+ 配置说明
+</h2>
+<h3 class="heading">
+ MQTT配置
+</h3>
+<pre class="pre"><code class="language-yaml code">mqtt:
+  broker: "localhost"  # MQTT服务器地址
+  port: 1883  # MQTT服务器端口
+  client_id: "mcp2mqtt_client"  # MQTT客户端ID
+  username: "mqtt_user"  # MQTT用户名
+  password: "mqtt_password"  # MQTT密码
+  keepalive: 60  # 保持连接时间
+  topics:
+    command:
+      publish: "mcp/command"  # 发送命令的主题
+      subscribe: "mcp/response"  # 接收响应的主题
+    status:
+      publish: "mcp/status"  # 发送状态的主题
+      subscribe: "mcp/control"  # 接收控制命令的主题
+</code></pre>
+<h3 class="heading">
+ 命令配置
+</h3>
+<pre class="pre"><code class="language-yaml code">commands:
+  set_pwm:
+    command: "CMD_PWM {frequency}"
+    need_parse: false
+    data_type: "ascii"
+    prompts:
+      - "把PWM调到最大"
+      - "把PWM调到最小"
+    mqtt_topic: "mcp/pwm"  # MQTT发布主题
+    response_topic: "mcp/pwm/response"  # MQTT响应主题
+</code></pre>
+<h2 class="heading">
+ MQTT 命令和响应
+</h2>
+<h3 class="heading">
+ 命令格式
+</h3>
+<p>
+ 命令使用简单的文本格式：
+</p>
+<ol>
+<li>
+  PWM 控制：
+ </li>
+<li>
+  命令：
+  <code class="code">
+   PWM {值}
+  </code>
+</li>
+<li>
+  示例：
+  <ul>
+<li>
+<code class="code">
+     PWM 100
+    </code>
+    （最大值）
+   </li>
+<li>
+<code class="code">
+     PWM 0
+    </code>
+    （关闭）
+   </li>
+<li>
+<code class="code">
+     PWM 50
+    </code>
+    （50%）
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   响应：
+   <code class="code">
+    CMD PWM {值} OK
+   </code>
+</p>
+</li>
+<li>
+<p>
+   LED 控制：
+  </p>
+</li>
+<li>
+  命令：
+  <code class="code">
+   LED {状态}
+  </code>
+</li>
+<li>
+  示例：
+  <ul>
+<li>
+<code class="code">
+     LED on
+    </code>
+    （打开）
+   </li>
+<li>
+<code class="code">
+     LED off
+    </code>
+    （关闭）
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   响应：
+   <code class="code">
+    CMD LED {状态} OK
+   </code>
+</p>
+</li>
+<li>
+<p>
+   设备信息：
+  </p>
+</li>
+<li>
+  命令：
+  <code class="code">
+   INFO
+  </code>
+</li>
+<li>
+  响应：
+  <code class="code">
+   CMD INFO {设备信息}
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ 错误响应
+</h3>
+<p>
+ 如果发生错误，响应格式将为：
+ <code class="code">
+  ERROR: {错误信息}
+ </code>
+</p>
+<h2 class="heading">
+ 支持的客户端
+</h2>
+<p>
+ mcp2mqtt 支持所有实现了 MCP 协议的客户端，以及支持MQTT协议的物联网设备：
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    客户端类型
+   </th>
+<th>
+    特性支持
+   </th>
+<th>
+    说明
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    Claude Desktop
+   </td>
+<td>
+    完整支持
+   </td>
+<td>
+    推荐使用，支持所有 MCP 功能
+   </td>
+</tr>
+<tr>
+<td>
+    Continue
+   </td>
+<td>
+    完整支持
+   </td>
+<td>
+    优秀的开发工具集成
+   </td>
+</tr>
+<tr>
+<td>
+    Cline
+   </td>
+<td>
+    资源+工具
+   </td>
+<td>
+    支持多种 AI 提供商
+   </td>
+</tr>
+<tr>
+<td>
+    MQTT设备
+   </td>
+<td>
+    发布/订阅
+   </td>
+<td>
+    支持所有MQTT协议的物联网设备
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ 快速开始
+</h2>
+<h3 class="heading">
+ 1. 安装
+</h3>
+<h4 class="heading">
+ Windows用户
+</h4>
+<p>
+ 下载
+ <a href="https://raw.githubusercontent.com/mcp2everything/mcp2mqtt/main/install.py">
+  install.py
+ </a>
+</p>
+<pre class="pre"><code class="language-bash code">python install.py
+</code></pre>
+<h4 class="heading">
+ macOS用户
+</h4>
+<pre class="pre"><code class="language-bash code"># 下载安装脚本
+curl -O https://raw.githubusercontent.com/mcp2everything/mcp2mqtt/main/install_macos.py
+
+# 运行安装脚本
+python3 install_macos.py
+</code></pre>
+<h4 class="heading">
+ Ubuntu/Raspberry Pi用户
+</h4>
+<pre class="pre"><code class="language-bash code"># 下载安装脚本
+curl -O https://raw.githubusercontent.com/mcp2everything/mcp2mqtt/main/install_ubuntu.py
+
+# 运行安装脚本
+python3 install_ubuntu.py
+</code></pre>
+<p>
+ 安装脚本会自动完成以下操作：
+- 检查系统环境
+- 安装必要的依赖
+- 创建默认配置文件
+- 配置Claude桌面版（如果已安装）
+</p>
+<h3 class="heading">
+ 手动分步安装依赖
+</h3>
+<pre class="pre"><code class="language-bash code">windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+MacOS
+curl -LsSf https://astral.sh/uv/install.sh | sh
+</code></pre>
+<p>
+ 主要依赖uv工具，所以当python和uv以及Claude或Cline安装好后就可以了。
+</p>
+<h3 class="heading">
+ 基本配置
+</h3>
+<p>
+ 在你的 MCP 客户端（如 Claude Desktop 或 Cline）配置文件中添加以下内容：
+注意：如果使用的自动安装那么会自动配置Calude Desktop无需此步。
+使用默认配置文件：
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp2mqtt": {
+            "command": "uvx",
+            "args": [
+                "mcp2mqtt"
+            ]
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p>
+  注意：修改配置后需要重启Cline或者Claude客户端软件
+ </p>
+</blockquote>
+<h2 class="heading">
+ 配置说明
+</h2>
+<h3 class="heading">
+ 配置文件位置
+</h3>
+<p>
+ 复制配置文件（
+ <code class="code">
+  config.yaml
+ </code>
+ ）可以放在位置：
+用户主目录（推荐个人使用）
+</p>
+<pre class="pre"><code class="language-bash code"># Windows系统
+C:\Users\用户名\.mcp2mqtt\config.yaml
+
+# macOS系统
+/Users/用户名/.mcp2mqtt/config.yaml
+
+# Linux系统
+/home/用户名/.mcp2mqtt/config.yaml
+</code></pre>
+<ul>
+<li>
+  适用场景：个人配置
+ </li>
+<li>
+  需要创建
+  <code class="code">
+   .mcp2mqtt
+  </code>
+  目录：
+  ```bash
+  # Windows系统（在命令提示符中）
+  mkdir "%USERPROFILE%.mcp2mqtt"
+ </li>
+</ul>
+<p>
+ # macOS/Linux系统
+  mkdir -p ~/.mcp2mqtt
+  ```
+</p>
+<p>
+ 指定配置文件：
+比如指定加载Pico配置文件：Pico_config.yaml
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp2mqtt": {
+            "command": "uvx",
+            "args": [
+                "mcp2mqtt",
+                "--config",
+                "Pico"  //指定配置文件名，不需要添加_config.yaml后缀
+            ]
+        }
+    }
+}
+</code></pre>
+<p>
+ 为了能使用多个mqtt，我们可以新增多个mcp2mqtt的服务 指定不同的配置文件名即可。
+如果要接入多个设备，如有要连接第二个设备：
+指定加载Pico2配置文件：Pico2_config.yaml
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp2mqtt2": {
+            "command": "uvx",
+            "args": [
+                "mcp2mqtt",
+                "--config",
+                "Pico2"  //指定配置文件名，不需要添加_config.yaml后缀
+            ]
+        }
+    }
+}
+</code></pre>
+<h3 class="heading">
+ 硬件连接
+</h3>
+<ol>
+<li>
+  将你的设备通过网络连接到mqtt服务器
+ </li>
+<li>
+  也可以用tests目录下的responder.py来模拟设备
+ </li>
+</ol>
+<h2 class="heading">
+ 运行测试
+</h2>
+<h3 class="heading">
+ 启动设备模拟器
+</h3>
+<p>
+ 项目在
+ <code class="code">
+  tests
+ </code>
+ 目录中包含了一个设备模拟器。它可以模拟一个硬件设备，能够：
+- 响应 PWM 控制命令
+- 提供设备信息
+- 控制 LED 状态
+</p>
+<p>
+ 启动模拟器：
+</p>
+<pre class="pre"><code class="language-bash code">python tests/responder.py
+</code></pre>
+<p>
+ 你应该能看到模拟器正在运行并已连接到 MQTT 服务器的输出信息。
+</p>
+<h3 class="heading">
+ 启动客户端Claude 桌面版或Cline
+</h3>
+<div align="center">
+<img alt="Cline Configuration Example" src="docs/images/test_output.png" width="600"/>
+<p>
+  Example in Cline
+ </p>
+</div>
+<h3 class="heading">
+ 从源码快速开始
+</h3>
+<ol>
+<li>
+  从源码安装
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># 通过源码安装：
+git clone https://github.com/mcp2everything/mcp2mqtt.git
+cd mcp2mqtt
+
+# 创建虚拟环境
+uv venv .venv
+
+# 激活虚拟环境
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
+
+# 安装开发依赖
+uv pip install --editable .
+</code></pre>
+<h3 class="heading">
+ MCP客户端配置
+</h3>
+<p>
+ 在使用支持MCP协议的客户端（如Claude Desktop或Cline）时，需要在客户端的配置文件中添加以下内容：
+直接自动安装的配置方式
+源码开发的配置方式
+</p>
+<h4 class="heading">
+ 使用默认演示参数：
+</h4>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp2mqtt": {
+            "command": "uv",
+            "args": [
+                "--directory",
+                "你的实际路径/mcp2mqtt",  // 例如: "C:/Users/Administrator/Documents/develop/my-mcp-server/mcp2mqtt"
+                "run",
+                "mcp2mqtt"
+            ]
+        }
+    }
+}
+</code></pre>
+<h4 class="heading">
+ 指定参数文件名
+</h4>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp2mqtt": {
+            "command": "uv",
+            "args": [
+                "--directory",
+                "你的实际路径/mcp2mqtt",  // 例如: "C:/Users/Administrator/Documents/develop/my-mcp-server/mcp2mqtt"
+                "run",
+                "mcp2mqtt",
+                "--config", // 可选参数，指定配置文件名
+                "Pico"  // 可选参数，指定配置文件名，不需要添加_config.yaml后缀
+            ]
+        }
+    }
+}
+</code></pre>
+<div align="center">
+<img alt="Cline Configuration Example" src="docs/images/config.png" width="600"/>
+<p>
+  Example in Cline
+ </p>
+</div>
+<h3 class="heading">
+ 配置文件位置
+</h3>
+<p>
+ 配置文件（
+ <code class="code">
+  config.yaml
+ </code>
+ ）可以放在不同位置，程序会按以下顺序查找：
+</p>
+<h4 class="heading">
+ 1. 当前工作目录（适合开发测试）
+</h4>
+<ul>
+<li>
+  路径：
+  <code class="code">
+   ./config.yaml
+  </code>
+</li>
+<li>
+  示例：如果你在
+  <code class="code">
+   C:\Projects
+  </code>
+  运行程序，它会查找
+  <code class="code">
+   C:\Projects\config.yaml
+  </code>
+</li>
+<li>
+  适用场景：开发和测试
+ </li>
+<li>
+  不需要特殊权限
+ </li>
+</ul>
+<h4 class="heading">
+ 2. 用户主目录（推荐个人使用）
+</h4>
+<pre class="pre"><code class="language-bash code"># Windows系统
+C:\Users\用户名\.mcp2mqtt\config.yaml
+
+# macOS系统
+/Users/用户名/.mcp2mqtt/config.yaml
+
+# Linux系统
+/home/用户名/.mcp2mqtt/config.yaml
+</code></pre>
+<ul>
+<li>
+  适用场景：个人配置
+ </li>
+<li>
+  需要创建
+  <code class="code">
+   .mcp2mqtt
+  </code>
+  目录：
+  ```bash
+  # Windows系统（在命令提示符中）
+  mkdir "%USERPROFILE%.mcp2mqtt"
+ </li>
+</ul>
+<p>
+ # macOS/Linux系统
+  mkdir -p ~/.mcp2mqtt
+  ```
+</p>
+<h4 class="heading">
+ 3. 系统级配置（适合多用户环境）
+</h4>
+<pre class="pre"><code class="language-bash code"># Windows系统（需要管理员权限）
+C:\ProgramData\mcp2mqtt\config.yaml
+
+# macOS/Linux系统（需要root权限）
+/etc/mcp2mqtt/config.yaml
+</code></pre>
+<ul>
+<li>
+  适用场景：多用户共享配置
+ </li>
+<li>
+  创建目录并设置权限：
+  ```bash
+  # Windows系统（以管理员身份运行）
+  mkdir "C:\ProgramData\mcp2mqtt"
+ </li>
+</ul>
+<p>
+ # macOS/Linux系统（以root身份运行）
+  sudo mkdir -p /etc/mcp2mqtt
+  sudo chown root:root /etc/mcp2mqtt
+  sudo chmod 755 /etc/mcp2mqtt
+  ```
+</p>
+<p>
+ 程序会按照上述顺序查找配置文件，使用找到的第一个有效配置文件。根据你的需求选择合适的位置：
+- 开发测试：使用当前目录
+- 个人使用：建议使用用户主目录（推荐）
+- 多用户环境：使用系统级配置（ProgramData或/etc）
+</p>
+<ol>
+<li>
+  运行服务器：
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># 确保已激活虚拟环境
+.venv\Scripts\activate
+
+# 运行服务器（使用默认配置config.yaml 案例中用的LOOP_BACK 模拟串口，无需真实串口和串口设备）
+uv run src/mcp2mqtt/server.py
+或
+uv run mcp2mqtt
+# 运行服务器（使用指定配置Pico_config.yaml）
+uv run src/mcp2mqtt/server.py --config Pico
+或
+uv run mcp2mqtt --config Pico
+</code></pre>
+<h2 class="heading">
+ 文档
+</h2>
+<ul>
+<li>
+<a href="./docs/zh/installation.md">
+   安装指南
+  </a>
+</li>
+<li>
+<a href="./docs/zh/api.md">
+   API文档
+  </a>
+</li>
+<li>
+<a href="./docs/zh/configuration.md">
+   配置说明
+  </a>
+</li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/mcp2everything-mcp2mqtt.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

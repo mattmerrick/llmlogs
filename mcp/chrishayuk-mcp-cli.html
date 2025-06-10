@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory">
+    <meta property="og:description" content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug">
+    <meta property="og:url" content="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory">
+    <meta name="twitter:description" content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug">
+    
+    <title>MCP CLI - Model Context Protocol Command Line Interface - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP CLI - Model Context Protocol Command Line Interface</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP CLI - Model Context Protocol Command Line Interface</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 1263</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/chrishayuk/mcp-cli" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory" property="og:title"/>
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory" name="twitter:title"/>
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" name="twitter:description"/>
+<title>MCP CLI - Model Context Protocol Command Line Interface - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP CLI - Model Context Protocol Command Line Interface</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP CLI - Model Context Protocol Command Line Interface</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 1263</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chrishayuk/mcp-cli" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory" property="og:title">
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" property="og:description">
+<meta content="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory" name="twitter:title">
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" name="twitter:description">
+<title>MCP CLI - Model Context Protocol Command Line Interface - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP CLI - Model Context Protocol Command Line Interface</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 1263</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chrishayuk/mcp-cli" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory" property="og:title"/>
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP CLI - Model Context Protocol Command Line Interface - MCP Directory" name="twitter:title"/>
+<meta content="A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs throug" name="twitter:description"/>
+<title>MCP CLI - Model Context Protocol Command Line Interface - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP CLI - Model Context Protocol Command Line Interface</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 1263</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chrishayuk/mcp-cli" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ MCP CLI - Model Context Protocol Command Line Interface
+</h1>
+<p>
+ A powerful, feature-rich command-line interface for interacting with Model Context Protocol servers. This client enables seamless communication with LLMs through integration with the
+ <a href="https://github.com/chrishayuk/chuk-mcp">
+  CHUK-MCP protocol library
+ </a>
+ which is a pyodide compatible pure python protocol implementation of MCP, supporting tool usage, conversation management, and multiple operational modes.
+</p>
+<h2 class="heading">
+ 🔄 Protocol Implementation
+</h2>
+<p>
+ The core protocol implementation has been moved to a separate package at:
+ <strong>
+<a href="https://github.com/chrishayuk/chuk-mcp">
+   https://github.com/chrishayuk/chuk-mcp
+  </a>
+</strong>
+</p>
+<p>
+ This CLI is built on top of the protocol library, focusing on providing a rich user experience while the protocol library handles the communication layer.
+</p>
+<h2 class="heading">
+ 🌟 Features
+</h2>
+<ul>
+<li>
+<strong>
+   Multiple Operational Modes
+  </strong>
+  :
+ </li>
+<li>
+<strong>
+   Chat Mode
+  </strong>
+  : Conversational interface with direct LLM interaction and automated tool usage
+ </li>
+<li>
+<strong>
+   Interactive Mode
+  </strong>
+  : Command-driven interface for direct server operations
+ </li>
+<li>
+<strong>
+   Command Mode
+  </strong>
+  : Unix-friendly mode for scriptable automation and pipelines
+ </li>
+<li>
+<p>
+<strong>
+    Direct Commands
+   </strong>
+   : Run individual commands without entering interactive mode
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Multi-Provider Support
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  OpenAI integration (
+  <code class="code">
+   gpt-4o-mini
+  </code>
+  ,
+  <code class="code">
+   gpt-4o
+  </code>
+  ,
+  <code class="code">
+   gpt-4-turbo
+  </code>
+  , etc.)
+ </li>
+<li>
+  Ollama integration (
+  <code class="code">
+   llama3.2
+  </code>
+  ,
+  <code class="code">
+   qwen2.5-coder
+  </code>
+  , etc.)
+ </li>
+<li>
+  Anthropic integration (
+  <code class="code">
+   claude-3-opus
+  </code>
+  ,
+  <code class="code">
+   claude-3-sonnet
+  </code>
+  , etc.)
+ </li>
+<li>
+<p>
+   Extensible architecture for additional providers
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Provider and Model Management
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Configure multiple LLM providers (API keys, endpoints, default models)
+ </li>
+<li>
+  Switch between providers and models during sessions
+ </li>
+<li>
+  Command-line arguments for provider/model selection
+ </li>
+<li>
+<p>
+   Interactive commands for provider configuration
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Robust Tool System
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Automatic discovery of server-provided tools
+ </li>
+<li>
+  Server-aware tool execution
+ </li>
+<li>
+  Tool call history tracking and analysis
+ </li>
+<li>
+<p>
+   Support for complex, multi-step tool chains
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Advanced Conversation Management
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Complete conversation history tracking
+ </li>
+<li>
+  Filtering and viewing specific message ranges
+ </li>
+<li>
+  JSON export capabilities for debugging or analysis
+ </li>
+<li>
+<p>
+   Conversation compaction for reduced token usage
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Rich User Experience
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Command completion with context-aware suggestions
+ </li>
+<li>
+  Colorful, formatted console output
+ </li>
+<li>
+  Progress indicators for long-running operations
+ </li>
+<li>
+<p>
+   Detailed help and documentation
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Resilient Resource Management
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Proper cleanup of asyncio resources
+ </li>
+<li>
+  Graceful error handling
+ </li>
+<li>
+  Clean terminal restoration
+ </li>
+<li>
+  Support for multiple simultaneous server connections
+ </li>
+</ul>
+<h2 class="heading">
+ 📋 Prerequisites
+</h2>
+<ul>
+<li>
+  Python 3.11 or higher
+ </li>
+<li>
+  For OpenAI: Valid API key in
+  <code class="code">
+   OPENAI_API_KEY
+  </code>
+  environment variable
+ </li>
+<li>
+  For Anthropic: Valid API key in
+  <code class="code">
+   ANTHROPIC_API_KEY
+  </code>
+  environment variable
+ </li>
+<li>
+  For Ollama: Local Ollama installation
+ </li>
+<li>
+  Server configuration file (default:
+  <code class="code">
+   server_config.json
+  </code>
+  )
+ </li>
+<li>
+<a href="https://github.com/chrishayuk/chuk-mcp">
+   CHUK-MCP
+  </a>
+  protocol library
+ </li>
+</ul>
+<h2 class="heading">
+ 🚀 Installation
+</h2>
+<h3 class="heading">
+ Install from Source
+</h3>
+<ol>
+<li>
+  Clone the repository:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">git clone https://github.com/chrishayuk/mcp-cli
+cd mcp-cli  
+</code></pre>
+<ol>
+<li>
+  Install the package with development dependencies:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">pip install -e ".[cli,dev]"
+</code></pre>
+<ol>
+<li>
+  Run the CLI:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">mcp-cli --help
+</code></pre>
+<h3 class="heading">
+ Using UV (Alternative Installation)
+</h3>
+<p>
+ If you prefer using UV for dependency management:
+</p>
+<pre class="pre"><code class="language-bash code"># Install UV if not already installed
+pip install uv
+
+# Install dependencies
+uv sync --reinstall
+
+# Run using UV
+uv run mcp-cli --help
+</code></pre>
+<h2 class="heading">
+ 🧰 Global Command-line Arguments
+</h2>
+<p>
+ Global options available for all modes and commands:
+</p>
+<ul>
+<li>
+<code class="code">
+   --server
+  </code>
+  : Specify the server(s) to connect to (comma-separated for multiple)
+ </li>
+<li>
+<code class="code">
+   --config-file
+  </code>
+  : Path to server configuration file (default:
+  <code class="code">
+   server_config.json
+  </code>
+  )
+ </li>
+<li>
+<code class="code">
+   --provider
+  </code>
+  : LLM provider to use (
+  <code class="code">
+   openai
+  </code>
+  ,
+  <code class="code">
+   anthropic
+  </code>
+  ,
+  <code class="code">
+   ollama
+  </code>
+  , default:
+  <code class="code">
+   openai
+  </code>
+  )
+ </li>
+<li>
+<code class="code">
+   --model
+  </code>
+  : Specific model to use (provider-dependent defaults)
+ </li>
+<li>
+<code class="code">
+   --disable-filesystem
+  </code>
+  : Disable filesystem access (default: true)
+ </li>
+</ul>
+<h3 class="heading">
+ CLI Argument Format Issue
+</h3>
+<p>
+ You might encounter a "Missing argument 'KWARGS'" error when running various commands. This is due to how the CLI parser is configured. To resolve this, use one of these approaches:
+</p>
+<ol>
+<li>
+<p>
+   Use the equals sign format for all arguments:
+   <code class="code">
+    bash
+   mcp-cli tools call --server=sqlite
+   mcp-cli chat --server=sqlite --provider=ollama --model=llama3.2
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add a double-dash (
+   <code class="code">
+    --
+   </code>
+   ) after the command and before arguments:
+   <code class="code">
+    bash
+   mcp-cli tools call -- --server sqlite
+   mcp-cli chat -- --server sqlite --provider ollama --model llama3.2
+   </code>
+</p>
+</li>
+<li>
+<p>
+   When using uv and multiple extra parameters, follow the 2nd step but add an empty string at the end:
+   <code class="code">
+    uv run mcp-cli chat -- --server sqlite --provider ollama --model llama3.2 ""
+   </code>
+</p>
+</li>
+</ol>
+<p>
+ These format issues apply to all commands (chat, interactive, tools, etc.) and are due to how the argument parser interprets positional vs. named arguments.
+</p>
+<h2 class="heading">
+ 🌐 Available Modes
+</h2>
+<h3 class="heading">
+ 1. Chat Mode
+</h3>
+<p>
+ Chat mode provides a natural language interface for interacting with LLMs, where the model can automatically use available tools:
+</p>
+<pre class="pre"><code class="language-bash code"># Default (makes chat the default when no other command is specified)
+uv run mcp-cli
+
+# Explicit chat mode
+uv run mcp-cli chat --server sqlite
+
+# With specific provider and model
+uv run mcp-cli chat --server sqlite --provider openai --model gpt-4o
+</code></pre>
+<h3 class="heading">
+ 2. Interactive Mode
+</h3>
+<p>
+ Interactive mode provides a command-driven shell interface for direct server operations:
+</p>
+<pre class="pre"><code class="language-bash code">uv run mcp-cli interactive --server sqlite
+</code></pre>
+<h3 class="heading">
+ 3. Command Mode (Cmd)
+</h3>
+<p>
+ Command mode provides a Unix-friendly interface for automation and pipeline integration:
+</p>
+<pre class="pre"><code class="language-bash code">uv run mcp-cli cmd --server sqlite [options]
+</code></pre>
+<h3 class="heading">
+ 4. Direct Commands
+</h3>
+<p>
+ Run individual commands without entering an interactive mode:
+</p>
+<pre class="pre"><code class="language-bash code"># List available tools
+uv run mcp-cli tools list {} --server sqlite
+
+# Call a specific tool
+uv run mcp-cli tools call {} --server sqlite
+</code></pre>
+<h2 class="heading">
+ 🤖 Using Chat Mode
+</h2>
+<p>
+ Chat mode provides a conversational interface with the LLM, automatically using available tools when needed.
+</p>
+<h3 class="heading">
+ Starting Chat Mode
+</h3>
+<pre class="pre"><code class="language-bash code"># Default with {} for KWARGS
+uv run mcp-cli --server sqlite
+
+# Explicit chat mode with {}
+uv run mcp-cli chat --server sqlite
+
+# With specific provider and model
+uv run mcp-cli chat --server sqlite --provider openai --model gpt-4o
+</code></pre>
+<pre class="pre"><code class="language-bash code"># Note: Be careful with the command syntax
+# Correct format without any KWARGS parameter
+uv run mcp-cli chat --server sqlite --provider ollama --model llama3.2
+
+# Or if you encounter the "Missing argument 'KWARGS'" error, try:
+uv run mcp-cli chat --server=sqlite --provider=ollama --model=llama3.2
+</code></pre>
+<h3 class="heading">
+ Chat Commands
+</h3>
+<p>
+ In chat mode, use these slash commands:
+</p>
+<h4 class="heading">
+ General Commands
+</h4>
+<ul>
+<li>
+<code class="code">
+   /help
+  </code>
+  : Show available commands
+ </li>
+<li>
+<code class="code">
+   /help &lt;command&gt;
+  </code>
+  : Show detailed help for a specific command
+ </li>
+<li>
+<code class="code">
+   /quickhelp
+  </code>
+  or
+  <code class="code">
+   /qh
+  </code>
+  : Display a quick reference of common commands
+ </li>
+<li>
+<code class="code">
+   exit
+  </code>
+  or
+  <code class="code">
+   quit
+  </code>
+  : Exit chat mode
+ </li>
+</ul>
+<h4 class="heading">
+ Provider and Model Commands
+</h4>
+<ul>
+<li>
+<code class="code">
+   /provider
+  </code>
+  or
+  <code class="code">
+   /p
+  </code>
+  : Display or manage LLM providers
+ </li>
+<li>
+<code class="code">
+   /provider
+  </code>
+  : Show current provider and model
+ </li>
+<li>
+<code class="code">
+   /provider list
+  </code>
+  : List all configured providers
+ </li>
+<li>
+<code class="code">
+   /provider config
+  </code>
+  : Show detailed provider configuration
+ </li>
+<li>
+<code class="code">
+   /provider set &lt;name&gt; &lt;key&gt; &lt;value&gt;
+  </code>
+  : Set a provider configuration value
+ </li>
+<li>
+<code class="code">
+   /provider &lt;name&gt;
+  </code>
+  : Switch to a different provider
+ </li>
+<li>
+<code class="code">
+   /model
+  </code>
+  or
+  <code class="code">
+   /m
+  </code>
+  : Display or change the current model
+ </li>
+<li>
+<code class="code">
+   /model
+  </code>
+  : Show current model
+ </li>
+<li>
+<code class="code">
+   /model &lt;name&gt;
+  </code>
+  : Switch to a different model
+ </li>
+</ul>
+<h4 class="heading">
+ Tool Commands
+</h4>
+<ul>
+<li>
+<code class="code">
+   /tools
+  </code>
+  : Display all available tools with their server information
+ </li>
+<li>
+<code class="code">
+   /tools --all
+  </code>
+  : Show detailed tool information including parameters
+ </li>
+<li>
+<code class="code">
+   /tools --raw
+  </code>
+  : Show raw tool definitions
+ </li>
+<li>
+<code class="code">
+   /toolhistory
+  </code>
+  or
+  <code class="code">
+   /th
+  </code>
+  : Show history of tool calls in the current session
+ </li>
+<li>
+<code class="code">
+   /th &lt;N&gt;
+  </code>
+  : Show details for a specific tool call
+ </li>
+<li>
+<code class="code">
+   /th -n 5
+  </code>
+  : Show only the last 5 tool calls
+ </li>
+<li>
+<code class="code">
+   /th --json
+  </code>
+  : Show tool calls in JSON format
+ </li>
+</ul>
+<h4 class="heading">
+ Conversation Commands
+</h4>
+<ul>
+<li>
+<code class="code">
+   /conversation
+  </code>
+  or
+  <code class="code">
+   /ch
+  </code>
+  : Show the conversation history
+ </li>
+<li>
+<code class="code">
+   /ch &lt;N&gt;
+  </code>
+  : Show a specific message from history
+ </li>
+<li>
+<code class="code">
+   /ch -n 5
+  </code>
+  : Show only the last 5 messages
+ </li>
+<li>
+<code class="code">
+   /ch &lt;N&gt; --json
+  </code>
+  : Show a specific message in JSON format
+ </li>
+<li>
+<code class="code">
+   /ch --json
+  </code>
+  : View the entire conversation history in raw JSON format
+ </li>
+<li>
+<code class="code">
+   /save &lt;filename&gt;
+  </code>
+  : Save conversation history to a JSON file
+ </li>
+<li>
+<code class="code">
+   /compact
+  </code>
+  : Condense conversation history into a summary
+ </li>
+</ul>
+<h4 class="heading">
+ Display Commands
+</h4>
+<ul>
+<li>
+<code class="code">
+   /cls
+  </code>
+  : Clear the screen while keeping conversation history
+ </li>
+<li>
+<code class="code">
+   /clear
+  </code>
+  : Clear both the screen and conversation history
+ </li>
+<li>
+<code class="code">
+   /verbose
+  </code>
+  or
+  <code class="code">
+   /v
+  </code>
+  : Toggle between verbose and compact tool display modes
+ </li>
+</ul>
+<h4 class="heading">
+ Control Commands
+</h4>
+<ul>
+<li>
+<code class="code">
+   /interrupt
+  </code>
+  ,
+  <code class="code">
+   /stop
+  </code>
+  , or
+  <code class="code">
+   /cancel
+  </code>
+  : Interrupt running tool execution
+ </li>
+<li>
+<code class="code">
+   /servers
+  </code>
+  : List connected servers and their status
+ </li>
+</ul>
+<h2 class="heading">
+ 🖥️ Using Interactive Mode
+</h2>
+<p>
+ Interactive mode provides a command-driven shell interface for direct server interaction.
+</p>
+<h3 class="heading">
+ Starting Interactive Mode
+</h3>
+<pre class="pre"><code class="language-bash code"># Using {} to satisfy KWARGS requirement
+mcp-cli interactive {} --server sqlite
+</code></pre>
+<h3 class="heading">
+ Interactive Commands
+</h3>
+<p>
+ In interactive mode, use these commands:
+</p>
+<ul>
+<li>
+<code class="code">
+   help
+  </code>
+  : Show available commands
+ </li>
+<li>
+<code class="code">
+   exit
+  </code>
+  or
+  <code class="code">
+   quit
+  </code>
+  or
+  <code class="code">
+   q
+  </code>
+  : Exit interactive mode
+ </li>
+<li>
+<code class="code">
+   clear
+  </code>
+  or
+  <code class="code">
+   cls
+  </code>
+  : Clear the terminal screen
+ </li>
+<li>
+<code class="code">
+   servers
+  </code>
+  or
+  <code class="code">
+   srv
+  </code>
+  : List connected servers with their status
+ </li>
+<li>
+<code class="code">
+   provider
+  </code>
+  or
+  <code class="code">
+   p
+  </code>
+  : Manage LLM providers
+ </li>
+<li>
+<code class="code">
+   provider
+  </code>
+  : Show current provider and model
+ </li>
+<li>
+<code class="code">
+   provider list
+  </code>
+  : List all configured providers
+ </li>
+<li>
+<code class="code">
+   provider config
+  </code>
+  : Show detailed provider configuration
+ </li>
+<li>
+<code class="code">
+   provider set &lt;name&gt; &lt;key&gt; &lt;value&gt;
+  </code>
+  : Set a provider configuration value
+ </li>
+<li>
+<code class="code">
+   provider &lt;name&gt;
+  </code>
+  : Switch to a different provider
+ </li>
+<li>
+<code class="code">
+   model
+  </code>
+  or
+  <code class="code">
+   m
+  </code>
+  : Display or change the current model
+ </li>
+<li>
+<code class="code">
+   model
+  </code>
+  : Show current model
+ </li>
+<li>
+<code class="code">
+   model &lt;name&gt;
+  </code>
+  : Switch to a different model
+ </li>
+<li>
+<code class="code">
+   tools
+  </code>
+  or
+  <code class="code">
+   t
+  </code>
+  : List available tools or call one interactively
+ </li>
+<li>
+<code class="code">
+   tools --all
+  </code>
+  : Show detailed tool information
+ </li>
+<li>
+<code class="code">
+   tools --raw
+  </code>
+  : Show raw JSON definitions
+ </li>
+<li>
+<code class="code">
+   tools call
+  </code>
+  : Launch the interactive tool-call UI
+ </li>
+<li>
+<code class="code">
+   resources
+  </code>
+  or
+  <code class="code">
+   res
+  </code>
+  : List available resources from all servers
+ </li>
+<li>
+<code class="code">
+   prompts
+  </code>
+  or
+  <code class="code">
+   p
+  </code>
+  : List available prompts from all servers
+ </li>
+<li>
+<code class="code">
+   ping
+  </code>
+  : Ping connected servers (optionally filter by index/name)
+ </li>
+</ul>
+<h2 class="heading">
+ 📄 Using Command Mode (Cmd)
+</h2>
+<p>
+ Command mode provides a Unix-friendly interface for automation and pipeline integration.
+</p>
+<h3 class="heading">
+ Starting Command Mode
+</h3>
+<pre class="pre"><code class="language-bash code"># Using {} to satisfy KWARGS requirement
+mcp-cli cmd {} --server sqlite [options]
+</code></pre>
+<h3 class="heading">
+ Command Mode Options
+</h3>
+<ul>
+<li>
+<code class="code">
+   --input
+  </code>
+  : Input file path (use
+  <code class="code">
+   -
+  </code>
+  for stdin)
+ </li>
+<li>
+<code class="code">
+   --output
+  </code>
+  : Output file path (use
+  <code class="code">
+   -
+  </code>
+  for stdout, default)
+ </li>
+<li>
+<code class="code">
+   --prompt
+  </code>
+  : Prompt template (use
+  <code class="code">
+   {{input}}
+  </code>
+  as placeholder for input)
+ </li>
+<li>
+<code class="code">
+   --raw
+  </code>
+  : Output raw text without formatting
+ </li>
+<li>
+<code class="code">
+   --tool
+  </code>
+  : Directly call a specific tool
+ </li>
+<li>
+<code class="code">
+   --tool-args
+  </code>
+  : JSON arguments for tool call
+ </li>
+<li>
+<code class="code">
+   --system-prompt
+  </code>
+  : Custom system prompt
+ </li>
+<li>
+<code class="code">
+   --verbose
+  </code>
+  : Enable verbose logging
+ </li>
+<li>
+<code class="code">
+   --provider
+  </code>
+  : Specify LLM provider
+ </li>
+<li>
+<code class="code">
+   --model
+  </code>
+  : Specify model to use
+ </li>
+</ul>
+<h3 class="heading">
+ Command Mode Examples
+</h3>
+<p>
+ Process content with LLM:
+</p>
+<pre class="pre"><code class="language-bash code"># Summarize a document (with {} for KWARGS)
+uv run mcp-cli cmd --server sqlite --input document.md --prompt "Summarize this: {{input}}" --output summary.md
+
+# Process stdin and output to stdout
+cat document.md | mcp-cli cmd {} --server sqlite --input - --prompt "Extract key points: {{input}}"
+
+# Use a specific provider and model
+uv run mcp-cli cmd {} --server sqlite --input document.md --prompt "Summarize: {{input}}" --provider anthropic --model claude-3-opus
+</code></pre>
+<p>
+ Call tools directly:
+</p>
+<pre class="pre"><code class="language-bash code"># List database tables
+uv run mcp-cli cmd {} --server sqlite --tool list_tables --raw
+
+# Run a SQL query
+uv run mcp-cli cmd {} --server sqlite --tool read_query --tool-args '{"query": "SELECT COUNT(*) FROM users"}'
+</code></pre>
+<p>
+ Batch processing:
+</p>
+<pre class="pre"><code class="language-bash code"># Process multiple files with GNU Parallel
+ls *.md | parallel mcp-cli cmd --server sqlite --input {} --output {}.summary.md --prompt "Summarize: {{input}}"
+</code></pre>
+<h2 class="heading">
+ 🔧 Direct CLI Commands
+</h2>
+<p>
+ Run individual commands without entering interactive mode:
+</p>
+<h3 class="heading">
+ Provider Commands
+</h3>
+<pre class="pre"><code class="language-bash code"># Show current provider configuration
+mcp-cli provider show
+
+# List all configured providers
+mcp-cli provider list
+
+# Show detailed provider configuration
+mcp-cli provider config
+
+# Set a configuration value
+mcp-cli provider set &lt;provider_name&gt; &lt;key&gt; &lt;value&gt;
+# Example: mcp-cli provider set openai api_key "sk-..."
+</code></pre>
+<h3 class="heading">
+ Tools Commands
+</h3>
+<pre class="pre"><code class="language-bash code"># List all tools (using {} to satisfy KWARGS requirement)
+uv run mcp-cli tools list {} --server sqlite
+
+# Show detailed tool information
+uv run mcp-cli tools list {} --server sqlite --all
+
+# Show raw tool definitions
+uv run mcp-cli tools list {} --server sqlite --raw
+
+# Call a specific tool interactively
+uv run mcp-cli tools call {} --server sqlite
+</code></pre>
+<h3 class="heading">
+ Resources and Prompts Commands
+</h3>
+<pre class="pre"><code class="language-bash code"># List available resources
+uv run mcp-cli resources list {} --server sqlite
+
+# List available prompts
+uv run mcp-cli prompts list {} --server sqlite
+</code></pre>
+<h3 class="heading">
+ Server Commands
+</h3>
+<pre class="pre"><code class="language-bash code"># Ping all servers
+uv run mcp-cli ping {} --server sqlite
+
+# Ping specific server(s)
+uv run mcp-cli ping {} --server sqlite,another-server
+</code></pre>
+<h2 class="heading">
+ 📂 Server Configuration
+</h2>
+<p>
+ Create a
+ <code class="code">
+  server_config.json
+ </code>
+ file with your server configurations:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "sqlite": {
+      "command": "python",
+      "args": ["-m", "mcp_server.sqlite_server"],
+      "env": {
+        "DATABASE_PATH": "your_database.db"
+      }
+    },
+    "another-server": {
+      "command": "python",
+      "args": ["-m", "another_server_module"],
+      "env": {}
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ 🔐 Provider Configuration
+</h2>
+<p>
+ Provider configurations are stored with these key settings:
+</p>
+<ul>
+<li>
+<code class="code">
+   api_key
+  </code>
+  : API key for authentication
+ </li>
+<li>
+<code class="code">
+   api_base
+  </code>
+  : Base URL for API requests
+ </li>
+<li>
+<code class="code">
+   default_model
+  </code>
+  : Default model to use with this provider
+ </li>
+<li>
+  Other provider-specific settings
+ </li>
+</ul>
+<h3 class="heading">
+ Environment Variables
+</h3>
+<p>
+ You can also set the default provider and model using environment variables:
+</p>
+<pre class="pre"><code class="language-bash code">export LLM_PROVIDER=openai
+export LLM_MODEL=gpt-4o-mini
+</code></pre>
+<h3 class="heading">
+ Configuration Example
+</h3>
+<p>
+ The provider configuration is typically stored in a JSON file and looks like:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "openai": {
+    "api_key": "sk-...",
+    "api_base": "https://api.openai.com/v1",
+    "default_model": "gpt-4o-mini"
+  },
+  "anthropic": {
+    "api_key": "sk-...",
+    "api_base": "https://api.anthropic.com",
+    "default_model": "claude-3-opus"
+  },
+  "ollama": {
+    "api_base": "http://localhost:11434",
+    "default_model": "llama3.2"
+  }
+}
+</code></pre>
+<h2 class="heading">
+ 📈 Advanced Usage Examples
+</h2>
+<h3 class="heading">
+ Provider and Model Selection
+</h3>
+<p>
+ You can change providers or models during a session:
+</p>
+<pre class="pre"><code class="code"># In chat mode
+&gt; /provider
+Current provider: openai
+Current model: gpt-4o-mini
+To change provider: /provider &lt;provider_name&gt;
+
+&gt; /provider list
+Available Providers
+┏━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Provider  ┃ Default Model  ┃ API Base                        ┃
+┡━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ openai    │ gpt-4o-mini    │ https://api.openai.com/v1       │
+│ anthropic │ claude-3-opus  │ https://api.anthropic.com       │
+│ ollama    │ llama3.2       │ http://localhost:11434          │
+└───────────┴────────────────┴─────────────────────────────────┘
+
+&gt; /provider anthropic
+Switched to provider: anthropic with model: claude-3-opus
+LLM client updated successfully
+
+&gt; /model claude-3-sonnet
+Switched to model: claude-3-sonnet
+</code></pre>
+<h3 class="heading">
+ Working with Tools in Chat Mode
+</h3>
+<p>
+ In chat mode, simply ask questions that require tool usage, and the LLM will automatically call the appropriate tools:
+</p>
+<pre class="pre"><code class="code">You: What tables are available in the database?
+[Tool Call: list_tables]
+Assistant: There's one table in the database named products. How would you like to proceed?
+
+You: Select top 10 products ordered by price in descending order
+[Tool Call: read_query]
+Assistant: Here are the top 10 products ordered by price in descending order:
+  1 Mini Drone - $299.99
+  2 Smart Watch - $199.99
+  3 Portable SSD - $179.99
+  ...
+</code></pre>
+<h3 class="heading">
+ Using Conversation Management
+</h3>
+<p>
+ The MCP CLI provides powerful conversation history management:
+</p>
+<pre class="pre"><code class="code">&gt; /conversation
+Conversation History (12 messages)
+# | Role      | Content
+1 | system    | You are an intelligent assistant capable of using t...
+2 | user      | What tables are available in the database?
+3 | assistant | Let me check for you.
+...
+
+&gt; /save conversation.json
+Conversation saved to conversation.json
+
+&gt; /compact
+Conversation history compacted with summary.
+</code></pre>
+<h2 class="heading">
+ 🛠️ Implementation Details
+</h2>
+<p>
+ The provider configuration is managed by the
+ <code class="code">
+  ProviderConfig
+ </code>
+ class, which:
+- Loads/saves configuration from a local file
+- Manages active provider and model settings
+- Provides helper methods for retrieving configuration values
+</p>
+<p>
+ The LLM client is created using the
+ <code class="code">
+  get_llm_client
+ </code>
+ function, which instantiates the appropriate client based on the provider and model settings.
+</p>
+<h2 class="heading">
+ 📦 Dependencies
+</h2>
+<p>
+ The CLI is organized with optional dependency groups:
+</p>
+<ul>
+<li>
+<strong>
+   cli
+  </strong>
+  : Rich terminal UI, command completion, and provider integrations
+ </li>
+<li>
+<strong>
+   dev
+  </strong>
+  : Development tools and testing utilities
+ </li>
+<li>
+<strong>
+   wasm
+  </strong>
+  : (Reserved for future WebAssembly support)
+ </li>
+<li>
+<strong>
+   chuk-mcp
+  </strong>
+  : Protocol implementation library (core dependency)
+ </li>
+</ul>
+<p>
+ Install with specific extras using:
+</p>
+<pre class="pre"><code class="language-bash code">pip install "mcp-cli[cli]"     # Basic CLI features
+pip install "mcp-cli[cli,dev]" # CLI with development tools
+</code></pre>
+<h2 class="heading">
+ 🤝 Contributing
+</h2>
+<p>
+ Contributions are welcome! Please follow these steps:
+</p>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create a feature branch (
+  <code class="code">
+   git checkout -b feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Commit your changes (
+  <code class="code">
+   git commit -m 'Add some amazing feature'
+  </code>
+  )
+ </li>
+<li>
+  Push to the branch (
+  <code class="code">
+   git push origin feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Open a Pull Request
+ </li>
+</ol>
+<h2 class="heading">
+ 📜 License
+</h2>
+<p>
+ This project is licensed under the MIT License - see the
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+<h2 class="heading">
+ 🙏 Acknowledgments
+</h2>
+<ul>
+<li>
+<a href="https://github.com/Textualize/rich">
+   Rich
+  </a>
+  for beautiful terminal formatting
+ </li>
+<li>
+<a href="https://typer.tiangolo.com/">
+   Typer
+  </a>
+  for CLI argument parsing
+ </li>
+<li>
+<a href="https://github.com/prompt-toolkit/python-prompt-toolkit">
+   Prompt Toolkit
+  </a>
+  for interactive input
+ </li>
+<li>
+<a href="https://github.com/chrishayuk/chuk-mcp">
+   CHUK-MCP
+  </a>
+  for the core protocol implementation
+ </li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/chrishayuk-mcp-cli.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

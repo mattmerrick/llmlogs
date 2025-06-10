@@ -1,0 +1,3061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AWS Model Context Protocol (MCP) Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS Model Context Protocol (MCP) Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>AWS Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">AWS Model Context Protocol (MCP) Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">AWS Model Context Protocol (MCP) Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 121</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">ai-assistant</span><span class="topic-tag"> aws</span><span class="topic-tag"> aws-automation</span><span class="topic-tag"> claude</span><span class="topic-tag"> cloud-infrastructure</span><span class="topic-tag"> devops</span><span class="topic-tag"> docker</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+                        </div>
+                        <a href="https://github.com/alexei-led/aws-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="AWS Model Context Protocol (MCP) Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AWS Model Context Protocol (MCP) Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>AWS Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">AWS Model Context Protocol (MCP) Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">AWS Model Context Protocol (MCP) Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 121</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai-assistant</span><span class="topic-tag"> aws</span><span class="topic-tag"> aws-automation</span><span class="topic-tag"> claude</span><span class="topic-tag"> cloud-infrastructure</span><span class="topic-tag"> devops</span><span class="topic-tag"> docker</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/alexei-led/aws-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="AWS Model Context Protocol (MCP) Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="AWS Model Context Protocol (MCP) Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>AWS Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>AWS Model Context Protocol (MCP) Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 121</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai-assistant</span><span class="topic-tag"> aws</span><span class="topic-tag"> aws-automation</span><span class="topic-tag"> claude</span><span class="topic-tag"> cloud-infrastructure</span><span class="topic-tag"> devops</span><span class="topic-tag"> docker</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/alexei-led/aws-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="AWS Model Context Protocol (MCP) Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AWS Model Context Protocol (MCP) Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>AWS Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>AWS Model Context Protocol (MCP) Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 121</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai-assistant</span><span class="topic-tag"> aws</span><span class="topic-tag"> aws-automation</span><span class="topic-tag"> claude</span><span class="topic-tag"> cloud-infrastructure</span><span class="topic-tag"> devops</span><span class="topic-tag"> docker</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/alexei-led/aws-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ AWS Model Context Protocol (MCP) Server
+</h1>
+<p>
+<a href="https://github.com/alexei-led/aws-mcp-server/actions/workflows/ci.yml">
+<img alt="CI" src="https://github.com/alexei-led/aws-mcp-server/actions/workflows/ci.yml/badge.svg"/>
+</a>
+<a href="https://codecov.io/gh/alexei-led/aws-mcp-server">
+<img alt="Code Coverage" src="https://codecov.io/gh/alexei-led/aws-mcp-server/branch/main/graph/badge.svg?token=K8vdP3zyuy"/>
+</a>
+<a href="https://github.com/alexei-led/aws-mcp-server">
+<img alt="Linter: Ruff" src="https://img.shields.io/badge/Linter-Ruff-brightgreen?style=flat-square"/>
+</a>
+<a href="https://github.com/alexei-led/aws-mcp-server/pkgs/container/aws-mcp-server/versions">
+<img alt="Image Tags" src="https://ghcr-badge.egpl.dev/alexei-led/aws-mcp-server/tags?color=%2344cc11&amp;ignore=latest&amp;n=4&amp;label=image+tags&amp;trim="/>
+</a>
+<a href="https://github.com/alexei-led/aws-mcp-server/pkgs/container/aws-mcp-server">
+<img alt="Image Size" src="https://ghcr-badge.egpl.dev/alexei-led/aws-mcp-server/size?color=%2344cc11&amp;tag=latest&amp;label=image+size&amp;trim="/>
+</a>
+</p>
+<p>
+ A lightweight service that enables AI assistants to execute AWS CLI commands through the Model Context Protocol (MCP).
+</p>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ The AWS MCP Server provides a bridge between MCP-aware AI assistants (like Claude Desktop, Cursor, Windsurf) and the AWS CLI. It enables these assistants to:
+</p>
+<ol>
+<li>
+<strong>
+   Retrieve AWS CLI documentation
+  </strong>
+  (
+  <code class="code">
+   aws_cli_help
+  </code>
+  ) - Get detailed help on AWS services and commands
+ </li>
+<li>
+<strong>
+   Execute AWS CLI commands
+  </strong>
+  (
+  <code class="code">
+   aws_cli_pipeline
+  </code>
+  ) - Run commands with Unix pipes and receive formatted results optimized for AI consumption
+ </li>
+</ol>
+<pre class="pre"><code class="language-mermaid code">flowchart LR
+    AI[AI Assistant] &lt;--&gt;|MCP Protocol| Server[AWS MCP Server]
+    Server &lt;--&gt;|Subprocess| AWS[AWS CLI]
+    AWS &lt;--&gt;|API| Cloud[AWS Cloud]
+</code></pre>
+<h2 class="heading">
+ Demo
+</h2>
+<p>
+<a href="https://private-user-images.githubusercontent.com/1898375/424996801-b51ddc8e-5df5-40c4-8509-84c1a7800d62.mp4?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDI0NzY5OTUsIm5iZiI6MTc0MjQ3NjY5NSwicGF0aCI6Ii8xODk4Mzc1LzQyNDk5NjgwMS1iNTFkZGM4ZS01ZGY1LTQwYzQtODUwOS04NGMxYTc4MDBkNjIubXA0P1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDMyMCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAzMjBUMTMxODE1WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9NjgwNTM4MDVjN2U4YjQzN2Y2N2Y5MGVkMThiZTgxYWEyNzBhZTlhMTRjZDY3ZDJmMzJkNmViM2U4M2U4MTEzNSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.tIb7uSkDpSaspIluzCliHS8ATmlzkvEnF3CiClD-UGQ">
+  Demo
+ </a>
+</p>
+<p>
+ The video demonstrates using Claude Desktop with AWS MCP Server to create a new AWS EC2 instance with AWS SSM agent installed.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+<strong>
+   Command Documentation
+  </strong>
+  - Detailed help information for AWS CLI commands
+ </li>
+<li>
+<strong>
+   Command Execution
+  </strong>
+  - Execute AWS CLI commands and return human-readable results
+ </li>
+<li>
+<strong>
+   Unix Pipe Support
+  </strong>
+  - Filter and transform AWS CLI output using standard Unix pipes and utilities
+ </li>
+<li>
+<strong>
+   AWS Resources Context
+  </strong>
+  - Access to AWS profiles, regions, account information, and environment details via MCP Resources
+ </li>
+<li>
+<strong>
+   Prompt Templates
+  </strong>
+  - Pre-defined prompt templates for common AWS tasks following best practices
+ </li>
+<li>
+<strong>
+   Docker Integration
+  </strong>
+  - Simple deployment through containerization with multi-architecture support (AMD64/x86_64 and ARM64)
+ </li>
+<li>
+<strong>
+   AWS Authentication
+  </strong>
+  - Leverages existing AWS credentials on the host machine
+ </li>
+</ul>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+  Docker (default) or Python 3.13+ (and AWS CLI installed locally)
+ </li>
+<li>
+  AWS credentials configured
+ </li>
+</ul>
+<h2 class="heading">
+ Getting Started
+</h2>
+<p>
+<strong>
+  Note:
+ </strong>
+ For security and reliability, running the server inside a Docker container is the
+ <strong>
+  strongly recommended
+ </strong>
+ method. Please review the
+ <a href="#security-considerations">
+  Security Considerations
+ </a>
+ section for important considerations.
+</p>
+<h3 class="heading">
+ Run Server Option 1: Using Docker (Recommended)
+</h3>
+<pre class="pre"><code class="language-bash code"># Clone repository
+git clone https://github.com/alexei-led/aws-mcp-server.git
+cd aws-mcp-server
+
+# Build and run Docker container
+docker compose -f deploy/docker/docker-compose.yml up -d
+</code></pre>
+<p>
+ The Docker image supports both AMD64/x86_64 (Intel/AMD) and ARM64 (Apple Silicon M1-M4, AWS Graviton) architectures.
+</p>
+<blockquote>
+<p>
+<strong>
+   Note
+  </strong>
+  : The official image from GitHub Packages is multi-architecture and will automatically use the appropriate version for your system.
+ </p>
+<p>
+  ```bash
+ </p>
+<h1 class="heading">
+  Use the latest stable version
+ </h1>
+<p>
+  docker pull ghcr.io/alexei-led/aws-mcp-server:latest
+ </p>
+<h1 class="heading">
+  Or pin to a specific version (recommended for production)
+ </h1>
+<p>
+  docker pull ghcr.io/alexei-led/aws-mcp-server:1.0.0
+```
+ </p>
+<p>
+<strong>
+   Docker Image Tags
+  </strong>
+  :
+ </p>
+<ul>
+<li>
+<code class="code">
+    latest
+   </code>
+   : Latest stable release
+  </li>
+<li>
+<code class="code">
+    x.y.z
+   </code>
+   (e.g.,
+   <code class="code">
+    1.0.0
+   </code>
+   ): Specific version
+  </li>
+<li>
+<code class="code">
+    sha-&lt;commit-sha&gt;
+   </code>
+   : Development builds, tagged with Git commit SHA (e.g.,
+   <code class="code">
+    sha-gb697684
+   </code>
+   )
+  </li>
+</ul>
+</blockquote>
+<h3 class="heading">
+ Run Server Option 2: Using Python
+</h3>
+<p>
+<strong>
+  Use with Caution:
+ </strong>
+ Running natively requires careful environment setup and carries higher security risks compared to the recommended Docker deployment. Ensure you understand the implications outlined in the
+ <a href="#security-considerations">
+  Security Considerations
+ </a>
+ section.
+</p>
+<pre class="pre"><code class="language-bash code"># Clone repository
+git clone https://github.com/alexei-led/aws-mcp-server.git
+cd aws-mcp-server
+
+# Set up virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install in development mode
+pip install -e .
+
+# Run the server
+python -m aws_mcp_server
+</code></pre>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ The AWS MCP Server can be configured using environment variables:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Environment Variable
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Default
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     AWS_MCP_TIMEOUT
+    </code>
+</td>
+<td>
+    Command execution timeout in seconds
+   </td>
+<td>
+    300
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_MCP_MAX_OUTPUT
+    </code>
+</td>
+<td>
+    Maximum output size in characters
+   </td>
+<td>
+    100000
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_MCP_TRANSPORT
+    </code>
+</td>
+<td>
+    Transport protocol to use ("stdio" or "sse")
+   </td>
+<td>
+    stdio
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_PROFILE
+    </code>
+</td>
+<td>
+    AWS profile to use
+   </td>
+<td>
+    default
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_REGION
+    </code>
+</td>
+<td>
+    AWS region to use
+   </td>
+<td>
+    us-east-1
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_MCP_SECURITY_MODE
+    </code>
+</td>
+<td>
+    Security mode ("strict" or "permissive")
+   </td>
+<td>
+    strict
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_MCP_SECURITY_CONFIG
+    </code>
+</td>
+<td>
+    Path to custom security configuration file
+   </td>
+<td>
+    ""
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+<strong>
+  Important:
+ </strong>
+ Securely manage the AWS credentials provided to the server, whether via mounted
+ <code class="code">
+  ~/.aws
+ </code>
+ files or environment variables. Ensure the credentials follow the principle of least privilege as detailed in the
+ <a href="#security-considerations">
+  Security Considerations
+ </a>
+ section. When running via Docker, ensure these variables are passed correctly to the container environment (e.g., using
+ <code class="code">
+  docker run -e VAR=value ...
+ </code>
+ ).
+</p>
+<h2 class="heading">
+ Security Considerations
+</h2>
+<p>
+ Security is paramount when executing commands against your AWS environment. While AWS MCP Server provides functionality,
+ <strong>
+  you are responsible
+ </strong>
+ for configuring and running it securely. Please adhere strictly to the following:
+</p>
+<p>
+<strong>
+  1. Recommended Deployment: Docker Container
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   Isolation:
+  </strong>
+  Running the server inside a Docker container is the
+  <strong>
+   strongly recommended and default
+  </strong>
+  deployment method. Containerization provides crucial filesystem and process isolation. Potentially destructive Unix commands (like
+  <code class="code">
+   rm
+  </code>
+  ,
+  <code class="code">
+   mv
+  </code>
+  ) executed via pipes, even if misused, will be contained within the ephemeral Docker environment and will
+  <strong>
+   not
+  </strong>
+  affect your host machine's filesystem. The container can be easily stopped and recreated.
+ </li>
+<li>
+<strong>
+   Controlled Environment:
+  </strong>
+  Docker ensures a consistent environment with necessary dependencies, reducing unexpected behavior.
+ </li>
+</ul>
+<p>
+<strong>
+  2. AWS Credentials and IAM Least Privilege (Critical)
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   User Responsibility:
+  </strong>
+  You provide the AWS credentials to the server (via mounted
+  <code class="code">
+   ~/.aws
+  </code>
+  or environment variables).
+ </li>
+<li>
+<strong>
+   Least Privilege is Essential:
+  </strong>
+  The server executes AWS CLI commands
+  <em>
+   using the credentials you provide
+  </em>
+  . It is
+  <strong>
+   absolutely critical
+  </strong>
+  that these credentials belong to an IAM principal (User or Role) configured with the
+  <strong>
+   minimum necessary permissions
+  </strong>
+  (least privilege) for
+  <em>
+   only
+  </em>
+  the AWS actions you intend to perform through this tool.
+  <ul>
+<li>
+<strong>
+     Do Not Use Root Credentials:
+    </strong>
+    Never use AWS account root user credentials.
+   </li>
+<li>
+<strong>
+     Regularly Review Permissions:
+    </strong>
+    Periodically audit the IAM permissions associated with the credentials.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   Impact Limitation:
+  </strong>
+  Properly configured IAM permissions are the
+  <strong>
+   primary mechanism
+  </strong>
+  for limiting the potential impact of
+  <em>
+   any
+  </em>
+  command executed via the server, whether intended or unintended. Even if a command were manipulated, it could only perform actions allowed by the specific IAM policy.
+ </li>
+</ul>
+<p>
+<strong>
+  3. Trusted User Model
+ </strong>
+</p>
+<ul>
+<li>
+  The server assumes the end-user interacting with the MCP client (e.g., Claude Desktop, Cursor) is the
+  <strong>
+   same trusted individual
+  </strong>
+  who configured the server and provided the least-privilege AWS credentials. Do not expose the server or connected client to untrusted users.
+ </li>
+</ul>
+<p>
+<strong>
+  4. Understanding Execution Risks (Current Implementation)
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   Command Execution:
+  </strong>
+  The current implementation uses shell features (
+  <code class="code">
+   shell=True
+  </code>
+  in subprocess calls) to execute AWS commands and handle Unix pipes. While convenient, this approach carries inherent risks if the input command string were manipulated (command injection).
+ </li>
+<li>
+<strong>
+   Mitigation via Operational Controls:
+  </strong>
+  In the context of the
+  <strong>
+   trusted user model
+  </strong>
+  and
+  <strong>
+   Docker deployment
+  </strong>
+  , these risks are mitigated operationally:
+  <ul>
+<li>
+    The trusted user is assumed not to provide intentionally malicious commands against their own environment.
+   </li>
+<li>
+    Docker contains filesystem side-effects.
+   </li>
+<li>
+<strong>
+     Crucially, IAM least privilege limits the scope of
+     <em>
+      any
+     </em>
+     AWS action that could be executed.
+    </strong>
+</li>
+</ul>
+</li>
+<li>
+<strong>
+   Credential Exfiltration Risk:
+  </strong>
+  Despite containerization and IAM, a sophisticated command injection could potentially attempt to read the mounted credentials (
+  <code class="code">
+   ~/.aws
+  </code>
+  ) or environment variables within the container and exfiltrate them (e.g., via
+  <code class="code">
+   curl
+  </code>
+  ).
+  <strong>
+   Strict IAM policies remain the most vital defense
+  </strong>
+  to limit the value of potentially exfiltrated credentials.
+ </li>
+</ul>
+<p>
+<strong>
+  5. Network Exposure (SSE Transport)
+ </strong>
+</p>
+<ul>
+<li>
+  If using the
+  <code class="code">
+   sse
+  </code>
+  transport (which implies a network listener), ensure you bind the server only to trusted network interfaces (e.g.,
+  <code class="code">
+   localhost
+  </code>
+  ) or implement appropriate network security controls (firewalls, authentication proxies) if exposing it more broadly. The default
+  <code class="code">
+   stdio
+  </code>
+  transport does not open network ports.
+ </li>
+</ul>
+<p>
+<strong>
+  6. Shared Responsibility Summary
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   AWS MCP Server provides the tool.
+  </strong>
+</li>
+<li>
+<strong>
+   You, the user, are responsible for:
+  </strong>
+<ul>
+<li>
+    Running it within the recommended secure Docker environment.
+   </li>
+<li>
+    Providing and securely managing
+    <strong>
+     least-privilege
+    </strong>
+    AWS credentials.
+   </li>
+<li>
+    Ensuring only trusted users interact with the server/client.
+   </li>
+<li>
+    Securing the network environment if applicable.
+   </li>
+</ul>
+</li>
+</ul>
+<p>
+ By strictly adhering to Docker deployment and meticulous IAM least-privilege configuration, you establish the necessary operational controls for using the AWS MCP Server securely with its current implementation.
+</p>
+<h2 class="heading">
+ Integrating with Claude Desktop
+</h2>
+<h3 class="heading">
+ Configuration
+</h3>
+<p>
+ To manually integrate AWS MCP Server with Claude Desktop:
+</p>
+<ol>
+<li>
+<strong>
+   Locate the Claude Desktop configuration file
+  </strong>
+  :
+ </li>
+<li>
+  macOS:
+  <code class="code">
+   ~/Library/Application Support/Claude/claude_desktop_config.json
+  </code>
+</li>
+<li>
+<p>
+   Windows:
+   <code class="code">
+    %APPDATA%\Claude\claude_desktop_config.json
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Edit the configuration file
+   </strong>
+   to include the AWS MCP Server:
+   <code class="code">
+    json
+   {
+     "mcpServers": {
+       "aws-mcp-server": {
+         "command": "docker",
+         "args": [
+           "run",
+           "-i",
+           "--rm",
+           "-v",
+           "/Users/YOUR_USER_NAME/.aws:/home/appuser/.aws:ro",
+           "ghcr.io/alexei-led/aws-mcp-server:latest"
+         ]
+       }
+     }
+   }
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Restart Claude Desktop
+   </strong>
+   to apply the changes
+  </p>
+</li>
+<li>
+  After restarting, you should see a hammer 🔨 icon in the bottom right corner of the input box
+ </li>
+<li>
+  This indicates that the AWS MCP Server is available for use
+ </li>
+</ol>
+<pre class="pre"><code class="language-mermaid code">flowchart TD
+    subgraph "User Device"
+        config[Edit claude_desktop_config.json]
+        claude[Claude Desktop]
+        docker[Docker Container]
+        aws_creds[AWS Credentials]
+    end
+
+    subgraph "AWS Cloud"
+        services[AWS Services]
+    end
+
+    subgraph "MCP Server Components"
+        tools[AWS CLI Tools]
+        resources[AWS Resources]
+        templates[Prompt Templates]
+    end
+
+    config --&gt;|Add MCP Server Config| claude
+    claude --&gt;|Docker Run Command| docker
+    docker --- tools
+    docker --- resources
+    docker --- templates
+    aws_creds --&gt;|Mount Read-only| docker
+    resources -.-&gt;|Read| aws_creds
+    tools --&gt;|API Calls| services
+</code></pre>
+<h3 class="heading">
+ Example Interactions
+</h3>
+<p>
+<strong>
+  Getting AWS CLI Documentation
+ </strong>
+ :
+</p>
+<pre class="pre"><code class="code">User: What are the available options for the AWS S3 cp command?
+
+Claude: Let me get that information for you.
+
+The AWS S3 cp command has the following options:
+
+NAME
+    cp - Copies a local file or S3 object to another location locally or in S3.
+
+SYNOPSIS
+    cp &lt;LocalPath&gt; &lt;S3Uri&gt; or &lt;S3Uri&gt; &lt;LocalPath&gt; or &lt;S3Uri&gt; &lt;S3Uri&gt; [--acl &lt;value&gt;] [--cache-control &lt;value&gt;] ...
+</code></pre>
+<p>
+<strong>
+  Executing AWS CLI Commands
+ </strong>
+ :
+</p>
+<pre class="pre"><code class="code">User: List my S3 buckets
+
+Claude: I'll list your S3 buckets for you.
+
+2023-10-15 14:30:45 my-bucket-1
+2023-11-20 09:15:32 my-bucket-2
+2024-01-05 11:22:18 my-backup-bucket
+</code></pre>
+<p>
+<strong>
+  Using Command Pipes
+ </strong>
+ :
+</p>
+<pre class="pre"><code class="code">User: List my S3 buckets that have "backup" in their name and show them in alphabetical order
+
+Claude: Let me find that for you.
+
+2024-01-05 11:22:18 my-backup-bucket
+2024-03-01 09:44:12 weekly-backup-bucket
+2024-03-15 13:10:57 database-backup-bucket
+</code></pre>
+<p>
+<strong>
+  Accessing AWS Resources
+ </strong>
+ :
+</p>
+<pre class="pre"><code class="code">User: What AWS regions are available for me to use?
+
+Claude: Let me check what AWS regions are available for you.
+
+Available regions:
+- us-east-1 (US East, N. Virginia) - Currently selected
+- us-east-2 (US East, Ohio)
+- us-west-1 (US West, N. California)
+- us-west-2 (US West, Oregon)
+- eu-west-1 (EU West, Ireland)
+- eu-central-1 (EU Central, Frankfurt)
+- ap-northeast-1 (Asia Pacific, Tokyo)
+- ap-southeast-1 (Asia Pacific, Singapore)
+- ap-southeast-2 (Asia Pacific, Sydney)
+
+You're currently using the us-east-1 region.
+</code></pre>
+<p>
+<strong>
+  Using Prompt Templates
+ </strong>
+ :
+</p>
+<pre class="pre"><code class="code">User: I need to perform a security audit of my S3 buckets
+
+Claude: I'll help you audit the security of your S3 buckets.
+
+Here are AWS CLI commands to perform a comprehensive security audit:
+
+# List all buckets with public access settings
+aws s3api list-buckets --query 'Buckets[*].Name' --output text | xargs -I {} aws s3api get-public-access-block --bucket {}
+
+# Check bucket policies for public access
+aws s3api list-buckets --query 'Buckets[*].Name' --output text | xargs -I {} aws s3api get-bucket-policy --bucket {} 2&gt;/dev/null
+
+# Identify buckets without encryption
+aws s3api list-buckets --query 'Buckets[*].Name' --output text | xargs -I {} aws s3api get-bucket-encryption --bucket {} 2&gt;/dev/null
+
+# Check for buckets without logging enabled
+aws s3api list-buckets --query 'Buckets[*].Name' --output text | xargs -I {} aws s3api get-bucket-logging --bucket {} 2&gt;/dev/null
+
+# Verify bucket versioning status
+aws s3api list-buckets --query 'Buckets[*].Name' --output text | xargs -I {} aws s3api get-bucket-versioning --bucket {}
+</code></pre>
+<h2 class="heading">
+ Available Prompt Templates
+</h2>
+<p>
+ The AWS MCP Server includes the following pre-defined prompt templates:
+</p>
+<h3 class="heading">
+ Core Operations
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Prompt
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     create_resource
+    </code>
+</td>
+<td>
+    Generate commands to create AWS resources with best practices
+   </td>
+<td>
+<code class="code">
+     resource_type
+    </code>
+    ,
+    <code class="code">
+     resource_name
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     resource_inventory
+    </code>
+</td>
+<td>
+    Create comprehensive inventory of resources
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     region
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     troubleshoot_service
+    </code>
+</td>
+<td>
+    Generate commands to troubleshoot service issues
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     resource_id
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     resource_cleanup
+    </code>
+</td>
+<td>
+    Identify and safely clean up resources
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     criteria
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h3 class="heading">
+ Security &amp; Compliance
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Prompt
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     security_audit
+    </code>
+</td>
+<td>
+    Audit security settings for a specific AWS service
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     security_posture_assessment
+    </code>
+</td>
+<td>
+    Comprehensive security assessment across your AWS environment
+   </td>
+<td>
+    None
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     iam_policy_generator
+    </code>
+</td>
+<td>
+    Create least-privilege IAM policies
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     actions
+    </code>
+    ,
+    <code class="code">
+     resource_pattern
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     compliance_check
+    </code>
+</td>
+<td>
+    Check compliance with standards
+   </td>
+<td>
+<code class="code">
+     compliance_standard
+    </code>
+    ,
+    <code class="code">
+     service
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h3 class="heading">
+ Cost &amp; Performance
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Prompt
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     cost_optimization
+    </code>
+</td>
+<td>
+    Find cost optimization opportunities for a service
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     performance_tuning
+    </code>
+</td>
+<td>
+    Optimize and tune performance of AWS resources
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     resource_id
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 class="heading">
+ Infrastructure &amp; Architecture
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Prompt
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     serverless_deployment
+    </code>
+</td>
+<td>
+    Deploy serverless applications with best practices
+   </td>
+<td>
+<code class="code">
+     application_name
+    </code>
+    ,
+    <code class="code">
+     runtime
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     container_orchestration
+    </code>
+</td>
+<td>
+    Set up container environments (ECS/EKS)
+   </td>
+<td>
+<code class="code">
+     cluster_name
+    </code>
+    ,
+    <code class="code">
+     service_type
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     vpc_network_design
+    </code>
+</td>
+<td>
+    Design and implement secure VPC networking
+   </td>
+<td>
+<code class="code">
+     vpc_name
+    </code>
+    ,
+    <code class="code">
+     cidr_block
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     infrastructure_automation
+    </code>
+</td>
+<td>
+    Automate infrastructure management
+   </td>
+<td>
+<code class="code">
+     resource_type
+    </code>
+    ,
+    <code class="code">
+     automation_scope
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     multi_account_governance
+    </code>
+</td>
+<td>
+    Implement secure multi-account strategies
+   </td>
+<td>
+<code class="code">
+     account_type
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h3 class="heading">
+ Reliability &amp; Monitoring
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Prompt
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     service_monitoring
+    </code>
+</td>
+<td>
+    Set up comprehensive monitoring
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     metric_type
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     disaster_recovery
+    </code>
+</td>
+<td>
+    Implement enterprise-grade DR solutions
+   </td>
+<td>
+<code class="code">
+     service
+    </code>
+    ,
+    <code class="code">
+     recovery_point_objective
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Security
+</h2>
+<p>
+ The AWS MCP Server implements a comprehensive multi-layered approach to command validation and security:
+</p>
+<h3 class="heading">
+ Command Validation System
+</h3>
+<p>
+ The server validates all AWS CLI commands through a three-layer system:
+</p>
+<ol>
+<li>
+<strong>
+   Basic Command Structure
+  </strong>
+  :
+ </li>
+<li>
+  Verifies commands start with 'aws' prefix and contain a valid service
+ </li>
+<li>
+<p>
+   Ensures proper command syntax
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Security-Focused Command Filtering
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<strong>
+   Dangerous Commands
+  </strong>
+  : Blocks commands that could compromise security
+ </li>
+<li>
+<strong>
+   Safe Patterns
+  </strong>
+  : Explicitly allows read-only operations needed for normal use
+ </li>
+<li>
+<p>
+<strong>
+    Regex Pattern Matching
+   </strong>
+   : Prevents complex security risks with pattern matching
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Pipe Command Security
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Validates Unix commands used in pipes
+ </li>
+<li>
+  Restricts commands to a safe allowlist
+ </li>
+<li>
+  Prevents filesystem manipulation and arbitrary command execution
+ </li>
+</ol>
+<h3 class="heading">
+ Default Security Configuration
+</h3>
+<p>
+ The default security configuration focuses on preventing the following attack vectors:
+</p>
+<h4 class="heading">
+ 1. Identity and Access Management (IAM) Risks
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    Blocked Command
+   </th>
+<th>
+    Security Risk
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     aws iam create-user
+    </code>
+</td>
+<td>
+    Creates potential backdoor accounts with persistent access
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam create-access-key
+    </code>
+</td>
+<td>
+    Creates long-term credentials that can be stolen or misused
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam attach-*-policy
+    </code>
+</td>
+<td>
+    Potential privilege escalation via policy attachments
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam put-user-policy
+    </code>
+</td>
+<td>
+    Inline policies can grant excessive permissions
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam create-policy
+    </code>
+</td>
+<td>
+    Creating new policies with potentially dangerous permissions
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam create-login-profile
+    </code>
+</td>
+<td>
+    Creates console passwords for existing users
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam deactivate-mfa-device
+    </code>
+</td>
+<td>
+    Disables multi-factor authentication, weakening security
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws iam update-assume-role-policy
+    </code>
+</td>
+<td>
+    Modifies trust relationships, enabling privilege escalation
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ 2. Audit and Logging Tampering
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    Blocked Command
+   </th>
+<th>
+    Security Risk
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     aws cloudtrail delete-trail
+    </code>
+</td>
+<td>
+    Removes audit trail of AWS activity
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws cloudtrail stop-logging
+    </code>
+</td>
+<td>
+    Stops collecting activity logs, creating blind spots
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws cloudtrail update-trail
+    </code>
+</td>
+<td>
+    Can redirect or modify logging configuration
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws config delete-configuration-recorder
+    </code>
+</td>
+<td>
+    Disables AWS Config recording of resource changes
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws guardduty delete-detector
+    </code>
+</td>
+<td>
+    Disables threat detection capabilities
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ 3. Sensitive Data Access and Protection
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    Blocked Command
+   </th>
+<th>
+    Security Risk
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     aws secretsmanager put-secret-value
+    </code>
+</td>
+<td>
+    Modifies sensitive credentials
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws secretsmanager delete-secret
+    </code>
+</td>
+<td>
+    Removes sensitive credentials
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws kms schedule-key-deletion
+    </code>
+</td>
+<td>
+    Schedules deletion of encryption keys, risking data loss
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws kms disable-key
+    </code>
+</td>
+<td>
+    Disables encryption keys, potentially exposing data
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws s3api put-bucket-policy
+    </code>
+</td>
+<td>
+    Can create public S3 buckets, exposing data
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws s3api delete-bucket-policy
+    </code>
+</td>
+<td>
+    Removes protective policies from buckets
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ 4. Network Security Risks
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    Blocked Command
+   </th>
+<th>
+    Security Risk
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     aws ec2 authorize-security-group-ingress
+    </code>
+</td>
+<td>
+    Opens inbound network access, potential exposure
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws ec2 authorize-security-group-egress
+    </code>
+</td>
+<td>
+    Opens outbound network access, potential data exfiltration
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     aws ec2 modify-instance-attribute
+    </code>
+</td>
+<td>
+    Can alter security properties of instances
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ Many read-only operations that match these patterns are explicitly allowed via safe patterns:
+</p>
+<ul>
+<li>
+  All
+  <code class="code">
+   get-
+  </code>
+  ,
+  <code class="code">
+   list-
+  </code>
+  , and
+  <code class="code">
+   describe-
+  </code>
+  commands
+ </li>
+<li>
+  All help commands (
+  <code class="code">
+   --help
+  </code>
+  ,
+  <code class="code">
+   help
+  </code>
+  )
+ </li>
+<li>
+  Simulation and testing commands (e.g.,
+  <code class="code">
+   aws iam simulate-custom-policy
+  </code>
+  )
+ </li>
+</ul>
+<h3 class="heading">
+ Configuration Options
+</h3>
+<ul>
+<li>
+<strong>
+   Security Modes
+  </strong>
+  :
+ </li>
+<li>
+<code class="code">
+   strict
+  </code>
+  (default): Enforces all security validations
+ </li>
+<li>
+<p>
+<code class="code">
+    permissive
+   </code>
+   : Logs warnings but allows execution (use with caution)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Custom Configuration
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Override default security rules via YAML configuration file
+ </li>
+<li>
+  Configure service-specific dangerous commands
+ </li>
+<li>
+  Define custom safe patterns and regex rules
+ </li>
+<li>
+<p>
+   Environment variable:
+   <code class="code">
+    AWS_MCP_SECURITY_CONFIG
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Execution Controls
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Timeouts prevent long-running commands (default: 300 seconds)
+ </li>
+<li>
+  Output size limits prevent memory issues
+ </li>
+<li>
+  Environment variables:
+  <code class="code">
+   AWS_MCP_TIMEOUT
+  </code>
+  ,
+  <code class="code">
+   AWS_MCP_MAX_OUTPUT
+  </code>
+</li>
+</ul>
+<h3 class="heading">
+ Custom Security Rules Example
+</h3>
+<p>
+ You can create custom security rules by defining a YAML configuration file:
+</p>
+<pre class="pre"><code class="language-yaml code"># Example custom security configuration
+# Save to a file and set AWS_MCP_SECURITY_CONFIG environment variable
+
+# Dangerous commands to block
+dangerous_commands:
+  iam:
+    # Only block specific IAM operations for your environment
+    - "aws iam create-user"
+    - "aws iam attach-user-policy"
+
+  # Custom service restrictions for your organization
+  lambda:
+    - "aws lambda delete-function"
+    - "aws lambda remove-permission"
+
+  # Prevent accidental DynamoDB table deletion
+  dynamodb:
+    - "aws dynamodb delete-table"
+
+# Safe patterns to explicitly allow
+safe_patterns:
+  # Global safe patterns
+  general:
+    - "--help"
+    - "--dry-run"
+
+  # Allow read operations on IAM
+  iam:
+    - "aws iam get-"
+    - "aws iam list-"
+
+  # Allow specific Lambda operations
+  lambda:
+    - "aws lambda list-functions"
+    - "aws lambda get-function"
+
+# Complex regex rules for security validation
+regex_rules:
+  general:
+    # Prevent use of root credentials
+    - pattern: "aws .* --profile\\s+root"
+      description: "Prevent use of root profile"
+      error_message: "Using the root profile is not allowed for security reasons"
+
+  iam:
+    # Block creation of admin users
+    - pattern: "aws iam create-user.*--user-name\\s+.*admin.*"
+      description: "Prevent creation of admin users"
+      error_message: "Creating users with 'admin' in the name is restricted"
+
+    # Prevent wildcards in IAM policies
+    - pattern: "aws iam create-policy.*\"Effect\":\\s*\"Allow\".*\"Action\":\\s*\"\\*\".*\"Resource\":\\s*\"\\*\""
+      description: "Prevent wildcards in policies"
+      error_message: "Creating policies with '*' wildcards for both Action and Resource is not allowed"
+
+  s3:
+    # Prevent public bucket policies
+    - pattern: "aws s3api put-bucket-policy.*\"Effect\":\\s*\"Allow\".*\"Principal\":\\s*\"\\*\""
+      description: "Prevent public bucket policies"
+      error_message: "Creating bucket policies with public access is restricted"
+</code></pre>
+<h3 class="heading">
+ Security Examples
+</h3>
+<p>
+ The system follows IAM best practices, focusing on preventing escalation of privilege:
+</p>
+<pre class="pre"><code class="language-bash code"># This command would be blocked (creates user)
+aws iam create-user --user-name new-user
+&gt; Error: This command (aws iam create-user) is restricted for security reasons.
+
+# This command would be blocked (attaches admin policy)
+aws iam attach-user-policy --user-name any-user --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+&gt; Error: Attaching Administrator policies is restricted for security reasons.
+
+# This command would be blocked (opens SSH port globally)
+aws ec2 authorize-security-group-ingress --group-id sg-12345 --protocol tcp --port 22 --cidr 0.0.0.0/0
+&gt; Error: Opening non-web ports to the entire internet (0.0.0.0/0) is restricted.
+
+# These commands are allowed (read-only operations)
+aws iam list-users
+aws s3 ls
+aws ec2 describe-instances
+</code></pre>
+<h3 class="heading">
+ Security Best Practices
+</h3>
+<ul>
+<li>
+  Always use the default
+  <code class="code">
+   strict
+  </code>
+  security mode in production
+ </li>
+<li>
+  Follow the deployment recommendations in
+  <a href="#security-considerations">
+   Security Considerations
+  </a>
+</li>
+<li>
+  Run with least-privilege AWS credentials
+ </li>
+<li>
+  For custom configurations, focus on your security requirements
+ </li>
+</ul>
+<h2 class="heading">
+ Development
+</h2>
+<h3 class="heading">
+ Setting Up the Development Environment
+</h3>
+<pre class="pre"><code class="language-bash code"># Install only runtime dependencies using pip
+pip install -e .
+
+# Install all development dependencies using pip
+pip install -e ".[dev]"
+
+# Or use uv for faster dependency management
+make uv-install       # Install runtime dependencies
+make uv-dev-install   # Install development dependencies
+</code></pre>
+<h3 class="heading">
+ Makefile Commands
+</h3>
+<p>
+ The project includes a Makefile with various targets for common tasks:
+</p>
+<pre class="pre"><code class="language-bash code"># Test commands
+make test             # Run tests excluding integration tests
+make test-unit        # Run unit tests only (all tests except integration tests)
+make test-integration # Run integration tests only (requires AWS credentials)
+make test-all         # Run all tests including integration tests
+
+# Test coverage commands
+make test-coverage    # Run tests with coverage report (excluding integration tests)
+make test-coverage-all # Run all tests with coverage report (including integration tests)
+
+# Linting and formatting
+make lint             # Run linters (ruff check and format --check)
+make lint-fix         # Run linters and auto-fix issues where possible
+make format           # Format code with ruff
+</code></pre>
+<p>
+ For a complete list of available commands, run
+ <code class="code">
+  make help
+ </code>
+ .
+</p>
+<h3 class="heading">
+ Code Coverage
+</h3>
+<p>
+ The project includes configuration for
+ <a href="https://codecov.io">
+  Codecov
+ </a>
+ to track code coverage metrics. The configuration is in the
+ <code class="code">
+  codecov.yml
+ </code>
+ file, which:
+</p>
+<ul>
+<li>
+  Sets a target coverage threshold of 80%
+ </li>
+<li>
+  Excludes test files, setup files, and documentation from coverage reports
+ </li>
+<li>
+  Configures PR comments and status checks
+ </li>
+</ul>
+<p>
+ Coverage reports are automatically generated during CI/CD runs and uploaded to Codecov.
+</p>
+<h3 class="heading">
+ Integration Testing
+</h3>
+<p>
+ Integration tests verify AWS MCP Server works correctly with actual AWS resources. To run them:
+</p>
+<ol>
+<li>
+<strong>
+   Set up AWS resources
+  </strong>
+  :
+ </li>
+<li>
+  Create an S3 bucket for testing
+ </li>
+<li>
+  Set the environment variable:
+  <code class="code">
+   export AWS_TEST_BUCKET=your-test-bucket-name
+  </code>
+</li>
+<li>
+<p>
+   Ensure your AWS credentials are configured
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Run integration tests
+   </strong>
+   :
+   ```bash
+   # Run all tests including integration tests
+   make test-all
+  </p>
+</li>
+</ol>
+<p>
+ # Run only integration tests
+   make test-integration
+   ```
+</p>
+<p>
+ Or you can run the pytest commands directly:
+</p>
+<pre class="pre"><code class="language-bash code"># Run all tests including integration tests
+pytest --run-integration
+
+# Run only integration tests
+pytest --run-integration -m integration
+</code></pre>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<ul>
+<li>
+<strong>
+   Authentication Issues
+  </strong>
+  : Ensure your AWS credentials are properly configured
+ </li>
+<li>
+<strong>
+   Connection Errors
+  </strong>
+  : Verify the server is running and AI assistant connection settings are correct
+ </li>
+<li>
+<strong>
+   Permission Errors
+  </strong>
+  : Check that your AWS credentials have the necessary permissions
+ </li>
+<li>
+<strong>
+   Timeout Errors
+  </strong>
+  : For long-running commands, increase the
+  <code class="code">
+   AWS_MCP_TIMEOUT
+  </code>
+  environment variable
+ </li>
+</ul>
+<h2 class="heading">
+ Why Deploy with Docker
+</h2>
+<p>
+ Deploying AWS MCP Server via Docker is the recommended approach, offering significant security and reliability advantages that form the core of the tool's secure usage pattern:
+</p>
+<h3 class="heading">
+ Security Benefits
+</h3>
+<ul>
+<li>
+<strong>
+   Isolation (Primary Mitigation):
+  </strong>
+  The Docker container provides essential filesystem and process isolation. AWS CLI commands and piped Unix utilities run in a contained environment. Accidental or misused commands affecting the filesystem are limited to the container,
+  <strong>
+   protecting your host machine
+  </strong>
+  .
+ </li>
+<li>
+<strong>
+   Controlled Credential Access:
+  </strong>
+  When mounting credentials, using the
+  <code class="code">
+   :ro
+  </code>
+  (read-only) flag limits the container's ability to modify your AWS configuration files.
+ </li>
+<li>
+<strong>
+   No Local Installation:
+  </strong>
+  Avoids installing the AWS CLI and its dependencies directly on your host system.
+ </li>
+<li>
+<strong>
+   Clean Environment:
+  </strong>
+  Each container run starts with a known, clean state.
+ </li>
+</ul>
+<h3 class="heading">
+ Reliability Advantages
+</h3>
+<ul>
+<li>
+<strong>
+   Consistent Configuration
+  </strong>
+  : All required tools (AWS CLI, SSM plugin, jq) are pre-installed and properly configured
+ </li>
+<li>
+<strong>
+   Dependency Management
+  </strong>
+  : Avoid version conflicts between tools and dependencies
+ </li>
+<li>
+<strong>
+   Cross-Platform Consistency
+  </strong>
+  : Works the same way across different operating systems
+ </li>
+<li>
+<strong>
+   Complete Environment
+  </strong>
+  : Includes all necessary tools for command pipes, filtering, and formatting
+ </li>
+</ul>
+<h3 class="heading">
+ Other Benefits
+</h3>
+<ul>
+<li>
+<strong>
+   Multi-Architecture Support
+  </strong>
+  : Runs on both Intel/AMD (x86_64) and ARM (Apple Silicon, AWS Graviton) processors
+ </li>
+<li>
+<strong>
+   Simple Updates
+  </strong>
+  : Update to new versions with a single pull command
+ </li>
+<li>
+<strong>
+   No Python Environment Conflicts
+  </strong>
+  : Avoids potential conflicts with other Python applications on your system
+ </li>
+<li>
+<strong>
+   Version Pinning
+  </strong>
+  : Easily pin to specific versions for stability in production environments
+ </li>
+</ul>
+<h2 class="heading">
+ Versioning
+</h2>
+<p>
+ This project uses
+ <a href="https://github.com/pypa/setuptools_scm">
+  setuptools_scm
+ </a>
+ to automatically determine versions based on Git tags:
+</p>
+<ul>
+<li>
+<strong>
+   Release versions
+  </strong>
+  : When a Git tag exists (e.g.,
+  <code class="code">
+   1.2.3
+  </code>
+  ), the version will be exactly that tag
+ </li>
+<li>
+<strong>
+   Development versions
+  </strong>
+  : For commits without tags, a development version is generated in the format:
+  <code class="code">
+   &lt;last-tag&gt;.post&lt;commits-since-tag&gt;+g&lt;commit-hash&gt;.d&lt;date&gt;
+  </code>
+  (e.g.,
+  <code class="code">
+   1.2.3.post10+gb697684.d20250406
+  </code>
+  )
+ </li>
+</ul>
+<p>
+ The version is automatically included in:
+- Package version information
+- Docker image labels
+- Continuous integration builds
+</p>
+<h3 class="heading">
+ Creating Releases
+</h3>
+<p>
+ To create a new release version:
+</p>
+<pre class="pre"><code class="language-bash code"># Create and push a new tag
+git tag -a 1.2.3 -m "Release version 1.2.3"
+git push origin 1.2.3
+</code></pre>
+<p>
+ The CI/CD pipeline will automatically build and publish Docker images with appropriate version tags.
+</p>
+<p>
+ For more detailed information about the version management system, see
+ <a href="docs/VERSION.md">
+  VERSION.md
+ </a>
+ .
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the MIT License - see the LICENSE file for details.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/alexei-led-aws-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

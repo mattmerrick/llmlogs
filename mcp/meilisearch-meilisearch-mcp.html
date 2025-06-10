@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Meilisearch MCP Server - MCP Directory">
+    <meta property="og:description" content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meilisearch MCP Server - MCP Directory">
+    <meta name="twitter:description" content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude.">
+    
+    <title>Meilisearch MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Meilisearch MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Meilisearch MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 89</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/meilisearch/meilisearch-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Meilisearch MCP Server - MCP Directory" property="og:title"/>
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Meilisearch MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." name="twitter:description"/>
+<title>Meilisearch MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Meilisearch MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Meilisearch MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 89</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/meilisearch/meilisearch-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Meilisearch MCP Server - MCP Directory" property="og:title">
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." property="og:description">
+<meta content="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Meilisearch MCP Server - MCP Directory" name="twitter:title">
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." name="twitter:description">
+<title>Meilisearch MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Meilisearch MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 89</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/meilisearch/meilisearch-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Meilisearch MCP Server - MCP Directory" property="og:title"/>
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Meilisearch MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude." name="twitter:description"/>
+<title>Meilisearch MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Meilisearch MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 89</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/meilisearch/meilisearch-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Meilisearch MCP Server
+</h1>
+<p>
+ A Model Context Protocol (MCP) server for interacting with Meilisearch through LLM interfaces like Claude.
+</p>
+<p>
+<a href="https://glama.ai/mcp/servers/tbc3n51jja">
+<img alt="Meilisearch Server MCP server" height="200" src="https://glama.ai/mcp/servers/tbc3n51jja/badge" width="380"/>
+</a>
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  Index and document management
+ </li>
+<li>
+  Settings configuration and management
+ </li>
+<li>
+  Task monitoring and API key management
+ </li>
+<li>
+  Built-in logging and monitoring tools
+ </li>
+<li>
+  Dynamic connection configuration to switch between Meilisearch instances
+ </li>
+<li>
+  Smart search across single or multiple indices
+ </li>
+<li>
+  This is a Python implementation,
+  <a href="https://github.com/devlimelabs/meilisearch-ts-mcp">
+   there is Typescript integration if you need to work with a Meilisearch MCP server within the browser
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<pre class="pre"><code class="language-bash code"># Clone repository
+git clone &lt;repository_url&gt;
+cd meilisearch-mcp
+
+# Create virtual environment and install
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install -e .
+
+# Install development dependencies (for testing and development)
+uv pip install -r requirements-dev.txt
+</code></pre>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+  Python ≥ 3.9
+ </li>
+<li>
+  Running Meilisearch instance
+ </li>
+<li>
+  Node.js (for testing with MCP Inspector)
+ </li>
+</ul>
+<h2 class="heading">
+ Development Setup
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ol>
+<li>
+<strong>
+   Start Meilisearch server
+  </strong>
+  :
+   ```bash
+   # Using Docker (recommended for development)
+   docker run -d -p 7700:7700 getmeili/meilisearch:v1.6
+ </li>
+</ol>
+<p>
+ # Or using brew (macOS)
+   brew install meilisearch
+   meilisearch
+</p>
+<p>
+ # Or download from https://github.com/meilisearch/meilisearch/releases
+   ```
+</p>
+<ol>
+<li>
+<strong>
+   Install development tools
+  </strong>
+  :
+   ```bash
+   # Install uv for Python package management
+   pip install uv
+ </li>
+</ol>
+<p>
+ # Install Node.js for MCP Inspector testing
+   # Visit https://nodejs.org/ or use your package manager
+   ```
+</p>
+<h3 class="heading">
+ Running Tests
+</h3>
+<p>
+ This project includes comprehensive integration tests that verify MCP tool functionality:
+</p>
+<pre class="pre"><code class="language-bash code"># Run all tests
+python -m pytest tests/ -v
+
+# Run specific test file
+python -m pytest tests/test_mcp_client.py -v
+
+# Run tests with coverage report
+python -m pytest --cov=src tests/
+
+# Run tests in watch mode (requires pytest-watch)
+pytest-watch tests/
+</code></pre>
+<p>
+<strong>
+  Important
+ </strong>
+ : Tests require a running Meilisearch instance on
+ <code class="code">
+  http://localhost:7700
+ </code>
+ . The tests will:
+- Create temporary test indices with unique names
+- Test all MCP tools end-to-end
+- Clean up test data automatically
+- Verify error handling and edge cases
+</p>
+<h3 class="heading">
+ Code Quality
+</h3>
+<pre class="pre"><code class="language-bash code"># Format code with Black
+black src/ tests/
+
+# Run type checking (if mypy is configured)
+mypy src/
+
+# Lint code (if flake8 is configured)
+flake8 src/ tests/
+</code></pre>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Environment Variables
+</h3>
+<pre class="pre"><code class="language-bash code">MEILI_HTTP_ADDR=http://localhost:7700  # Default Meilisearch URL
+MEILI_MASTER_KEY=your_master_key       # Optional: Default Meilisearch API key
+</code></pre>
+<h3 class="heading">
+ Dynamic Connection Configuration
+</h3>
+<p>
+ The server provides tools to view and update connection settings at runtime:
+</p>
+<ul>
+<li>
+<code class="code">
+   get-connection-settings
+  </code>
+  : View current connection URL and API key status
+ </li>
+<li>
+<code class="code">
+   update-connection-settings
+  </code>
+  : Update URL and/or API key to connect to a different Meilisearch instance
+ </li>
+</ul>
+<p>
+ Example usage through MCP:
+</p>
+<pre class="pre"><code class="language-json code">// Get current settings
+{
+  "name": "get-connection-settings"
+}
+
+// Update connection settings
+{
+  "name": "update-connection-settings",
+  "arguments": {
+    "url": "http://new-host:7700",
+    "api_key": "new-api-key"
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Search Functionality
+</h3>
+<p>
+ The server provides a flexible search tool that can search across one or all indices:
+</p>
+<ul>
+<li>
+<code class="code">
+   search
+  </code>
+  : Search through Meilisearch indices with optional parameters
+ </li>
+</ul>
+<p>
+ Example usage through MCP:
+</p>
+<pre class="pre"><code class="language-json code">// Search in a specific index
+{
+  "name": "search",
+  "arguments": {
+    "query": "search term",
+    "indexUid": "movies",
+    "limit": 10
+  }
+}
+
+// Search across all indices
+{
+  "name": "search",
+  "arguments": {
+    "query": "search term",
+    "limit": 5,
+    "sort": ["releaseDate:desc"]
+  }
+}
+</code></pre>
+<p>
+ Available search parameters:
+-
+ <code class="code">
+  query
+ </code>
+ : The search query (required)
+-
+ <code class="code">
+  indexUid
+ </code>
+ : Specific index to search in (optional)
+-
+ <code class="code">
+  limit
+ </code>
+ : Maximum number of results per index (optional, default: 20)
+-
+ <code class="code">
+  offset
+ </code>
+ : Number of results to skip (optional, default: 0)
+-
+ <code class="code">
+  filter
+ </code>
+ : Filter expression (optional)
+-
+ <code class="code">
+  sort
+ </code>
+ : Sorting rules (optional)
+</p>
+<h3 class="heading">
+ Running the Server
+</h3>
+<pre class="pre"><code class="language-bash code">python -m src.meilisearch_mcp
+</code></pre>
+<h3 class="heading">
+ Usage with Claude Desktop
+</h3>
+<p>
+ To use this with Claude Desktop, add the following to your
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "meilisearch": {
+      "command": "uvx",
+      "args": ["-n", "meilisearch-mcp"]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Testing with MCP Inspector
+</h3>
+<pre class="pre"><code class="language-bash code">npx @modelcontextprotocol/inspector python -m src.meilisearch_mcp
+</code></pre>
+<h2 class="heading">
+ Available Tools
+</h2>
+<h3 class="heading">
+ Connection Management
+</h3>
+<ul>
+<li>
+<code class="code">
+   get-connection-settings
+  </code>
+  : View current Meilisearch connection URL and API key status
+ </li>
+<li>
+<code class="code">
+   update-connection-settings
+  </code>
+  : Update URL and/or API key to connect to a different instance
+ </li>
+</ul>
+<h3 class="heading">
+ Index Management
+</h3>
+<ul>
+<li>
+<code class="code">
+   create-index
+  </code>
+  : Create a new index with optional primary key
+ </li>
+<li>
+<code class="code">
+   list-indexes
+  </code>
+  : List all available indexes
+ </li>
+<li>
+<code class="code">
+   delete-index
+  </code>
+  : Delete an existing index and all its documents
+ </li>
+<li>
+<code class="code">
+   get-index-metrics
+  </code>
+  : Get detailed metrics for a specific index
+ </li>
+</ul>
+<h3 class="heading">
+ Document Operations
+</h3>
+<ul>
+<li>
+<code class="code">
+   get-documents
+  </code>
+  : Retrieve documents from an index with pagination
+ </li>
+<li>
+<code class="code">
+   add-documents
+  </code>
+  : Add or update documents in an index
+ </li>
+</ul>
+<h3 class="heading">
+ Search
+</h3>
+<ul>
+<li>
+<code class="code">
+   search
+  </code>
+  : Flexible search across single or multiple indices with filtering and sorting options
+ </li>
+</ul>
+<h3 class="heading">
+ Settings Management
+</h3>
+<ul>
+<li>
+<code class="code">
+   get-settings
+  </code>
+  : View current settings for an index
+ </li>
+<li>
+<code class="code">
+   update-settings
+  </code>
+  : Update index settings (ranking, faceting, etc.)
+ </li>
+</ul>
+<h3 class="heading">
+ API Key Management
+</h3>
+<ul>
+<li>
+<code class="code">
+   get-keys
+  </code>
+  : List all API keys
+ </li>
+<li>
+<code class="code">
+   create-key
+  </code>
+  : Create new API key with specific permissions
+ </li>
+<li>
+<code class="code">
+   delete-key
+  </code>
+  : Delete an existing API key
+ </li>
+</ul>
+<h3 class="heading">
+ Task Management
+</h3>
+<ul>
+<li>
+<code class="code">
+   get-task
+  </code>
+  : Get information about a specific task
+ </li>
+<li>
+<code class="code">
+   get-tasks
+  </code>
+  : List tasks with optional filters:
+ </li>
+<li>
+<code class="code">
+   limit
+  </code>
+  : Maximum number of tasks to return
+ </li>
+<li>
+<code class="code">
+   from
+  </code>
+  : Number of tasks to skip
+ </li>
+<li>
+<code class="code">
+   reverse
+  </code>
+  : Sort order of tasks
+ </li>
+<li>
+<code class="code">
+   batchUids
+  </code>
+  : Filter by batch UIDs
+ </li>
+<li>
+<code class="code">
+   uids
+  </code>
+  : Filter by task UIDs
+ </li>
+<li>
+<code class="code">
+   canceledBy
+  </code>
+  : Filter by cancellation source
+ </li>
+<li>
+<code class="code">
+   types
+  </code>
+  : Filter by task types
+ </li>
+<li>
+<code class="code">
+   statuses
+  </code>
+  : Filter by task statuses
+ </li>
+<li>
+<code class="code">
+   indexUids
+  </code>
+  : Filter by index UIDs
+ </li>
+<li>
+<code class="code">
+   afterEnqueuedAt
+  </code>
+  /
+  <code class="code">
+   beforeEnqueuedAt
+  </code>
+  : Filter by enqueue time
+ </li>
+<li>
+<code class="code">
+   afterStartedAt
+  </code>
+  /
+  <code class="code">
+   beforeStartedAt
+  </code>
+  : Filter by start time
+ </li>
+<li>
+<code class="code">
+   afterFinishedAt
+  </code>
+  /
+  <code class="code">
+   beforeFinishedAt
+  </code>
+  : Filter by finish time
+ </li>
+<li>
+<code class="code">
+   cancel-tasks
+  </code>
+  : Cancel pending or enqueued tasks
+ </li>
+<li>
+<code class="code">
+   delete-tasks
+  </code>
+  : Delete completed tasks
+ </li>
+</ul>
+<h3 class="heading">
+ System Monitoring
+</h3>
+<ul>
+<li>
+<code class="code">
+   health-check
+  </code>
+  : Basic health check
+ </li>
+<li>
+<code class="code">
+   get-health-status
+  </code>
+  : Comprehensive health status
+ </li>
+<li>
+<code class="code">
+   get-version
+  </code>
+  : Get Meilisearch version information
+ </li>
+<li>
+<code class="code">
+   get-stats
+  </code>
+  : Get database statistics
+ </li>
+<li>
+<code class="code">
+   get-system-info
+  </code>
+  : Get system-level information
+ </li>
+</ul>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ We welcome contributions! Please follow these guidelines:
+</p>
+<ol>
+<li>
+<strong>
+   Fork and clone
+  </strong>
+  the repository
+ </li>
+<li>
+<strong>
+   Set up development environment
+  </strong>
+  following the Development Setup section above
+ </li>
+<li>
+<strong>
+   Create a feature branch
+  </strong>
+  from
+  <code class="code">
+   main
+  </code>
+</li>
+<li>
+<strong>
+   Write tests first
+  </strong>
+  if adding new functionality (Test-Driven Development)
+ </li>
+<li>
+<strong>
+   Run tests locally
+  </strong>
+  to ensure all tests pass before committing
+ </li>
+<li>
+<strong>
+   Format code
+  </strong>
+  with Black and ensure code quality
+ </li>
+<li>
+<strong>
+   Commit changes
+  </strong>
+  with descriptive commit messages
+ </li>
+<li>
+<strong>
+   Push to your fork
+  </strong>
+  and create a pull request
+ </li>
+</ol>
+<h3 class="heading">
+ Development Workflow
+</h3>
+<pre class="pre"><code class="language-bash code"># Create feature branch
+git checkout -b feature/your-feature-name
+
+# Make your changes, write tests first
+# Edit files...
+
+# Run tests to ensure everything works
+python -m pytest tests/ -v
+
+# Format code
+black src/ tests/
+
+# Commit and push
+git add .
+git commit -m "Add feature description"
+git push origin feature/your-feature-name
+</code></pre>
+<h3 class="heading">
+ Testing Guidelines
+</h3>
+<ul>
+<li>
+  All new features should include tests
+ </li>
+<li>
+  Tests should pass before submitting PRs
+ </li>
+<li>
+  Use descriptive test names and clear assertions
+ </li>
+<li>
+  Test both success and error cases
+ </li>
+<li>
+  Ensure Meilisearch is running before running tests
+ </li>
+</ul>
+<h2 class="heading">
+ Release Process
+</h2>
+<p>
+ This project uses automated versioning and publishing to PyPI. The release process is designed to be simple and automated.
+</p>
+<h3 class="heading">
+ How Releases Work
+</h3>
+<ol>
+<li>
+<strong>
+   Automated Publishing
+  </strong>
+  : When the version number in
+  <code class="code">
+   pyproject.toml
+  </code>
+  changes on the
+  <code class="code">
+   main
+  </code>
+  branch, a GitHub Action automatically:
+ </li>
+<li>
+  Builds the Python package
+ </li>
+<li>
+  Publishes it to PyPI using trusted publishing
+ </li>
+<li>
+<p>
+   Creates a new release on GitHub
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Version Detection
+   </strong>
+   : The workflow compares the current version in
+   <code class="code">
+    pyproject.toml
+   </code>
+   with the previous commit to detect changes
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    PyPI Publishing
+   </strong>
+   : Uses PyPA's official publish action with trusted publishing (no manual API keys needed)
+  </p>
+</li>
+</ol>
+<h3 class="heading">
+ Creating a New Release
+</h3>
+<p>
+ To create a new release, follow these steps:
+</p>
+<h4 class="heading">
+ 1. Determine Version Number
+</h4>
+<p>
+ Follow
+ <a href="https://semver.org/">
+  Semantic Versioning
+ </a>
+ (MAJOR.MINOR.PATCH):
+</p>
+<ul>
+<li>
+<strong>
+   PATCH
+  </strong>
+  (e.g., 0.4.0 → 0.4.1): Bug fixes, documentation updates, minor improvements
+ </li>
+<li>
+<strong>
+   MINOR
+  </strong>
+  (e.g., 0.4.0 → 0.5.0): New features, new MCP tools, significant enhancements
+ </li>
+<li>
+<strong>
+   MAJOR
+  </strong>
+  (e.g., 0.5.0 → 1.0.0): Breaking changes, major API changes
+ </li>
+</ul>
+<h4 class="heading">
+ 2. Update Version and Create PR
+</h4>
+<pre class="pre"><code class="language-bash code"># 1. Create a branch from latest main
+git checkout main
+git pull origin main
+git checkout -b release/v0.5.0
+
+# 2. Update version in pyproject.toml
+# Edit the version = "0.4.0" line to your new version
+
+# 3. Commit and push
+git add pyproject.toml
+git commit -m "Bump version to 0.5.0"
+git push origin release/v0.5.0
+
+# 4. Create PR and get it reviewed/merged
+gh pr create --title "Release v0.5.0" --body "Bump version for release"
+</code></pre>
+<h4 class="heading">
+ 3. Merge to Main
+</h4>
+<p>
+ Once the PR is approved and merged to
+ <code class="code">
+  main
+ </code>
+ , the GitHub Action will automatically:
+</p>
+<ol>
+<li>
+  Detect the version change
+ </li>
+<li>
+  Build the package
+ </li>
+<li>
+  Publish to PyPI at https://pypi.org/p/meilisearch-mcp
+ </li>
+<li>
+  Make the new version available via
+  <code class="code">
+   pip install meilisearch-mcp
+  </code>
+</li>
+</ol>
+<h4 class="heading">
+ 4. Verify Release
+</h4>
+<p>
+ After merging, verify the release:
+</p>
+<pre class="pre"><code class="language-bash code"># Check GitHub Action status
+gh run list --workflow=publish.yml
+
+# Verify on PyPI (may take a few minutes)
+pip index versions meilisearch-mcp
+
+# Test installation of new version
+pip install --upgrade meilisearch-mcp
+</code></pre>
+<h3 class="heading">
+ Release Workflow File
+</h3>
+<p>
+ The automated release is handled by
+ <code class="code">
+  .github/workflows/publish.yml
+ </code>
+ , which:
+</p>
+<ul>
+<li>
+  Triggers on pushes to
+  <code class="code">
+   main
+  </code>
+  branch
+ </li>
+<li>
+  Checks if
+  <code class="code">
+   pyproject.toml
+  </code>
+  version changed
+ </li>
+<li>
+  Uses Python 3.10 and official build tools
+ </li>
+<li>
+  Publishes using trusted publishing (no API keys required)
+ </li>
+<li>
+  Provides verbose output for debugging
+ </li>
+</ul>
+<h3 class="heading">
+ Troubleshooting Releases
+</h3>
+<p>
+<strong>
+  Release didn't trigger
+ </strong>
+ : Check that the version in
+ <code class="code">
+  pyproject.toml
+ </code>
+ actually changed between commits
+</p>
+<p>
+<strong>
+  Build failed
+ </strong>
+ : Check the GitHub Actions logs for Python package build errors
+</p>
+<p>
+<strong>
+  PyPI publish failed
+ </strong>
+ : Verify the package name and that trusted publishing is configured properly
+</p>
+<p>
+<strong>
+  Version conflicts
+ </strong>
+ : Ensure the new version number hasn't been used before on PyPI
+</p>
+<h3 class="heading">
+ Development vs Production Versions
+</h3>
+<ul>
+<li>
+<strong>
+   Development
+  </strong>
+  : Install from source using
+  <code class="code">
+   pip install -e .
+  </code>
+</li>
+<li>
+<strong>
+   Production
+  </strong>
+  : Install from PyPI using
+  <code class="code">
+   pip install meilisearch-mcp
+  </code>
+</li>
+<li>
+<strong>
+   Specific version
+  </strong>
+  : Install using
+  <code class="code">
+   pip install meilisearch-mcp==0.5.0
+  </code>
+</li>
+</ul>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/meilisearch-meilisearch-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

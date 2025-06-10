@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Unified MCP Client Library - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/mcp-use-mcp-use.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Unified MCP Client Library - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Unified MCP Client Library - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Unified MCP Client Library</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Unified MCP Client Library</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 3577</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> agent</span><span class="topic-tag"> python</span>
+                        </div>
+                        <a href="https://github.com/mcp-use/mcp-use" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Unified MCP Client Library - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mcp-use-mcp-use.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Unified MCP Client Library - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Unified MCP Client Library - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Unified MCP Client Library</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Unified MCP Client Library</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3577</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> agent</span><span class="topic-tag"> python</span>
+</div>
+<a class="github-link" href="https://github.com/mcp-use/mcp-use" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Unified MCP Client Library - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/mcp-use-mcp-use.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Unified MCP Client Library - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Unified MCP Client Library - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Unified MCP Client Library</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3577</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> agent</span><span class="topic-tag"> python</span>
+</div>
+<a class="github-link" href="https://github.com/mcp-use/mcp-use" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Unified MCP Client Library - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mcp-use-mcp-use.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Unified MCP Client Library - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Unified MCP Client Library - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Unified MCP Client Library</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3577</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> agent</span><span class="topic-tag"> python</span>
+</div>
+<a class="github-link" href="https://github.com/mcp-use/mcp-use" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<div align="center" style="margin: 0 auto; max-width: 80%;">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="static/logo_white.svg"/>
+<source media="(prefers-color-scheme: light)" srcset="static/logo_black.svg"/>
+<img alt="mcp use logo" src="./static/logo-white.svg" style="margin: 20px auto;" width="80%"/>
+</picture>
+</div>
+<h1 align="center" class="heading">
+ Unified MCP Client Library
+</h1>
+<p align="center">
+<a alt="PyPI Version" href="https://pypi.org/project/mcp_use/">
+<img src="https://img.shields.io/pypi/v/mcp_use.svg"/>
+</a>
+<a alt="PyPI Downloads" href="https://pypi.org/project/mcp_use/">
+<img src="https://static.pepy.tech/badge/mcp-use"/>
+</a>
+<a alt="Python Versions" href="https://pypi.org/project/mcp_use/">
+<img src="https://img.shields.io/pypi/pyversions/mcp_use.svg"/>
+</a>
+<a alt="Documentation" href="https://docs.mcp-use.io">
+<img src="https://img.shields.io/badge/docs-mcp--use.io-blue"/>
+</a>
+<a alt="Website" href="https://mcp-use.io">
+<img src="https://img.shields.io/badge/website-mcp--use.io-blue"/>
+</a>
+<a alt="License" href="https://github.com/pietrozullo/mcp-use/blob/main/LICENSE">
+<img src="https://img.shields.io/github/license/pietrozullo/mcp-use"/>
+</a>
+<a alt="Code style: Ruff" href="https://github.com/astral-sh/ruff">
+<img src="https://img.shields.io/badge/code%20style-ruff-000000.svg"/>
+</a>
+<a alt="GitHub stars" href="https://github.com/pietrozullo/mcp-use/stargazers">
+<img src="https://img.shields.io/github/stars/pietrozullo/mcp-use?style=social"/>
+</a>
+</p>
+<pre class="pre"><code class="code">&lt;p align="center"&gt;
+&lt;a href="https://x.com/pietrozullo" alt="Twitter Follow - Pietro"&gt;
+    &lt;img src="https://img.shields.io/twitter/follow/Pietro?style=social" /&gt;&lt;/a&gt;
+&lt;a href="https://x.com/pederzh" alt="Twitter Follow - Luigi"&gt;
+    &lt;img src="https://img.shields.io/twitter/follow/Luigi?style=social" /&gt;&lt;/a&gt;
+&lt;a href="https://discord.gg/XkNkSkMz3V" alt="Discord"&gt;
+    &lt;img src="https://dcbadge.limes.pink/api/server/https://discord.gg/XkNkSkMz3V?style=flat" /&gt;&lt;/a&gt;
+</code></pre>
+<p>
+</p>
+🌐 MCP-Use is the open source way to connect
+<strong>
+ any LLM to any MCP server
+</strong>
+and build custom agents that have tool access, without using closed source or application clients.
+<p>
+ 💬 Get started quickly - chat with your servers on our
+ <b>
+  hosted version
+ </b>
+ !
+ <b>
+<a href="https://chat.mcp-use.io">
+   Try mcp-use chat
+   <em>
+    (beta)
+   </em>
+</a>
+</b>
+ .
+</p>
+<p>
+ 💡 Let developers easily connect any LLM to tools like web browsing, file operations, and more.
+</p>
+<h1 class="heading">
+ Features
+</h1>
+<h2 class="heading">
+ ✨ Key Features
+</h2>
+<table>
+<tr>
+<th width="400">
+   Feature
+  </th>
+<th>
+   Description
+  </th>
+</tr>
+<tr>
+<td>
+   🔄
+   <a href="#quick-start">
+<strong>
+     Ease of use
+    </strong>
+</a>
+</td>
+<td>
+   Create your first MCP capable agent you need only 6 lines of code
+  </td>
+</tr>
+<tr>
+<td>
+   🤖
+   <a href="#installing-langchain-providers">
+<strong>
+     LLM Flexibility
+    </strong>
+</a>
+</td>
+<td>
+   Works with any langchain supported LLM that supports tool calling (OpenAI, Anthropic, Groq, LLama etc.)
+  </td>
+</tr>
+<tr>
+<td>
+   🌐
+   <a href="https://mcp-use.io/builder">
+<strong>
+     Code Builder
+    </strong>
+</a>
+</td>
+<td>
+   Explore MCP capabilities and generate starter code with the interactive
+   <a href="https://mcp-use.io/builder">
+    code builder
+   </a>
+   .
+  </td>
+</tr>
+<tr>
+<td>
+   🔗
+   <a href="#http-connection-example">
+<strong>
+     HTTP Support
+    </strong>
+</a>
+</td>
+<td>
+   Direct connection to MCP servers running on specific HTTP ports
+  </td>
+</tr>
+<tr>
+<td>
+   ⚙️
+   <a href="#dynamic-server-selection-server-manager">
+<strong>
+     Dynamic Server Selection
+    </strong>
+</a>
+</td>
+<td>
+   Agents can dynamically choose the most appropriate MCP server for a given task from the available pool
+  </td>
+</tr>
+<tr>
+<td>
+   🧩
+   <a href="#multi-server-support">
+<strong>
+     Multi-Server Support
+    </strong>
+</a>
+</td>
+<td>
+   Use multiple MCP servers simultaneously in a single agent
+  </td>
+</tr>
+<tr>
+<td>
+   🛡️
+   <a href="#tool-access-control">
+<strong>
+     Tool Restrictions
+    </strong>
+</a>
+</td>
+<td>
+   Restrict potentially dangerous tools like file system or network access
+  </td>
+</tr>
+<tr>
+<td>
+   🔧
+   <a href="#build-a-custom-agent">
+<strong>
+     Custom Agents
+    </strong>
+</a>
+</td>
+<td>
+   Build your own agents with any framework using the LangChain adapter or create new adapters
+  </td>
+</tr>
+<tr>
+<td>
+   ❓
+   <a href="https://mcp-use.io/what-should-we-build-next">
+<strong>
+     What should we build next
+    </strong>
+</a>
+</td>
+<td>
+   Let us know what you'd like us to build next
+  </td>
+</tr>
+</table>
+<h1 class="heading">
+ Quick start
+</h1>
+<p>
+ With pip:
+</p>
+<pre class="pre"><code class="language-bash code">pip install mcp-use
+</code></pre>
+<p>
+ Or install from source:
+</p>
+<pre class="pre"><code class="language-bash code">git clone https://github.com/pietrozullo/mcp-use.git
+cd mcp-use
+pip install -e .
+</code></pre>
+<h3 class="heading">
+ Installing LangChain Providers
+</h3>
+<p>
+ mcp_use works with various LLM providers through LangChain. You'll need to install the appropriate LangChain provider package for your chosen LLM. For example:
+</p>
+<pre class="pre"><code class="language-bash code"># For OpenAI
+pip install langchain-openai
+
+# For Anthropic
+pip install langchain-anthropic
+</code></pre>
+<p>
+ For other providers, check the
+ <a href="https://python.langchain.com/docs/integrations/chat/">
+  LangChain chat models documentation
+ </a>
+ and add your API keys for the provider you want to use to your
+ <code class="code">
+  .env
+ </code>
+ file.
+</p>
+<pre class="pre"><code class="language-bash code">OPENAI_API_KEY=
+ANTHROPIC_API_KEY=
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   Important
+  </strong>
+  : Only models with tool calling capabilities can be used with mcp_use. Make sure your chosen model supports function calling or tool use.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Spin up your agent:
+</h3>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from mcp_use import MCPAgent, MCPClient
+
+async def main():
+    # Load environment variables
+    load_dotenv()
+
+    # Create configuration dictionary
+    config = {
+      "mcpServers": {
+        "playwright": {
+          "command": "npx",
+          "args": ["@playwright/mcp@latest"],
+          "env": {
+            "DISPLAY": ":1"
+          }
+        }
+      }
+    }
+
+    # Create MCPClient from configuration dictionary
+    client = MCPClient.from_dict(config)
+
+    # Create LLM
+    llm = ChatOpenAI(model="gpt-4o")
+
+    # Create agent with the client
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+
+    # Run the query
+    result = await agent.run(
+        "Find the best restaurant in San Francisco",
+    )
+    print(f"\nResult: {result}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<p>
+ You can also add the servers configuration from a config file like this:
+</p>
+<pre class="pre"><code class="language-python code">client = MCPClient.from_config_file(
+        os.path.join("browser_mcp.json")
+    )
+</code></pre>
+<p>
+ Example configuration file (
+ <code class="code">
+  browser_mcp.json
+ </code>
+ ):
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": {
+        "DISPLAY": ":1"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ For other settings, models, and more, check out the documentation.
+</p>
+<h2 class="heading">
+ Streaming Agent Output
+</h2>
+<p>
+ MCP-Use supports asynchronous streaming of agent output using the
+ <code class="code">
+  astream
+ </code>
+ method on
+ <code class="code">
+  MCPAgent
+ </code>
+ . This allows you to receive incremental results, tool actions, and intermediate steps as they are generated by the agent, enabling real-time feedback and progress reporting.
+</p>
+<h3 class="heading">
+ How to use
+</h3>
+<p>
+ Call
+ <code class="code">
+  agent.astream(query)
+ </code>
+ and iterate over the results asynchronously:
+</p>
+<pre class="pre"><code class="language-python code">async for chunk in agent.astream("Find the best restaurant in San Francisco"):
+    print(chunk["messages"], end="", flush=True)
+</code></pre>
+<p>
+ Each chunk is a dictionary containing keys such as
+ <code class="code">
+  actions
+ </code>
+ ,
+ <code class="code">
+  steps
+ </code>
+ ,
+ <code class="code">
+  messages
+ </code>
+ , and (on the last chunk)
+ <code class="code">
+  output
+ </code>
+ . This enables you to build responsive UIs or log agent progress in real time.
+</p>
+<h4 class="heading">
+ Example: Streaming in Practice
+</h4>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from mcp_use import MCPAgent, MCPClient
+
+async def main():
+    load_dotenv()
+    client = MCPClient.from_config_file("browser_mcp.json")
+    llm = ChatOpenAI(model="gpt-4o")
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+    async for chunk in agent.astream("Look for job at nvidia for machine learning engineer."):
+        print(chunk["messages"], end="", flush=True)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<p>
+ This streaming interface is ideal for applications that require real-time updates, such as chatbots, dashboards, or interactive notebooks.
+</p>
+<h1 class="heading">
+ Example Use Cases
+</h1>
+<h2 class="heading">
+ Web Browsing with Playwright
+</h2>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from mcp_use import MCPAgent, MCPClient
+
+async def main():
+    # Load environment variables
+    load_dotenv()
+
+    # Create MCPClient from config file
+    client = MCPClient.from_config_file(
+        os.path.join(os.path.dirname(__file__), "browser_mcp.json")
+    )
+
+    # Create LLM
+    llm = ChatOpenAI(model="gpt-4o")
+    # Alternative models:
+    # llm = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    # llm = ChatGroq(model="llama3-8b-8192")
+
+    # Create agent with the client
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+
+    # Run the query
+    result = await agent.run(
+        "Find the best restaurant in San Francisco USING GOOGLE SEARCH",
+        max_steps=30,
+    )
+    print(f"\nResult: {result}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<h2 class="heading">
+ Airbnb Search
+</h2>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+from dotenv import load_dotenv
+from langchain_anthropic import ChatAnthropic
+from mcp_use import MCPAgent, MCPClient
+
+async def run_airbnb_example():
+    # Load environment variables
+    load_dotenv()
+
+    # Create MCPClient with Airbnb configuration
+    client = MCPClient.from_config_file(
+        os.path.join(os.path.dirname(__file__), "airbnb_mcp.json")
+    )
+
+    # Create LLM - you can choose between different models
+    llm = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+
+    # Create agent with the client
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+
+    try:
+        # Run a query to search for accommodations
+        result = await agent.run(
+            "Find me a nice place to stay in Barcelona for 2 adults "
+            "for a week in August. I prefer places with a pool and "
+            "good reviews. Show me the top 3 options.",
+            max_steps=30,
+        )
+        print(f"\nResult: {result}")
+    finally:
+        # Ensure we clean up resources properly
+        if client.sessions:
+            await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(run_airbnb_example())
+</code></pre>
+<p>
+ Example configuration file (
+ <code class="code">
+  airbnb_mcp.json
+ </code>
+ ):
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "airbnb": {
+      "command": "npx",
+      "args": ["-y", "@openbnb/mcp-server-airbnb"]
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ Blender 3D Creation
+</h2>
+<pre class="pre"><code class="language-python code">import asyncio
+from dotenv import load_dotenv
+from langchain_anthropic import ChatAnthropic
+from mcp_use import MCPAgent, MCPClient
+
+async def run_blender_example():
+    # Load environment variables
+    load_dotenv()
+
+    # Create MCPClient with Blender MCP configuration
+    config = {"mcpServers": {"blender": {"command": "uvx", "args": ["blender-mcp"]}}}
+    client = MCPClient.from_dict(config)
+
+    # Create LLM
+    llm = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+
+    # Create agent with the client
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+
+    try:
+        # Run the query
+        result = await agent.run(
+            "Create an inflatable cube with soft material and a plane as ground.",
+            max_steps=30,
+        )
+        print(f"\nResult: {result}")
+    finally:
+        # Ensure we clean up resources properly
+        if client.sessions:
+            await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(run_blender_example())
+</code></pre>
+<h1 class="heading">
+ Configuration File Support
+</h1>
+<p>
+ MCP-Use supports initialization from configuration files, making it easy to manage and switch between different MCP server setups:
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from mcp_use import create_session_from_config
+
+async def main():
+    # Create an MCP session from a config file
+    session = create_session_from_config("mcp-config.json")
+
+    # Initialize the session
+    await session.initialize()
+
+    # Use the session...
+
+    # Disconnect when done
+    await session.disconnect()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<h2 class="heading">
+ HTTP Connection Example
+</h2>
+<p>
+ MCP-Use supports HTTP connections, allowing you to connect to MCP servers running on specific HTTP ports. This feature is particularly useful for integrating with web-based MCP servers.
+</p>
+<p>
+ Here's an example of how to use the HTTP connection feature:
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from mcp_use import MCPAgent, MCPClient
+
+async def main():
+    """Run the example using a configuration file."""
+    # Load environment variables
+    load_dotenv()
+
+    config = {
+        "mcpServers": {
+            "http": {
+                "url": "http://localhost:8931/sse"
+            }
+        }
+    }
+
+    # Create MCPClient from config file
+    client = MCPClient.from_dict(config)
+
+    # Create LLM
+    llm = ChatOpenAI(model="gpt-4o")
+
+    # Create agent with the client
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+
+    # Run the query
+    result = await agent.run(
+        "Find the best restaurant in San Francisco USING GOOGLE SEARCH",
+        max_steps=30,
+    )
+    print(f"\nResult: {result}")
+
+if __name__ == "__main__":
+    # Run the appropriate example
+    asyncio.run(main())
+</code></pre>
+<p>
+ This example demonstrates how to connect to an MCP server running on a specific HTTP port. Make sure to start your MCP server before running this example.
+</p>
+<h1 class="heading">
+ Multi-Server Support
+</h1>
+<p>
+ MCP-Use allows configuring and connecting to multiple MCP servers simultaneously using the
+ <code class="code">
+  MCPClient
+ </code>
+ . This enables complex workflows that require tools from different servers, such as web browsing combined with file operations or 3D modeling.
+</p>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ You can configure multiple servers in your configuration file:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "airbnb": {
+      "command": "npx",
+      "args": ["-y", "@openbnb/mcp-server-airbnb", "--ignore-robots-txt"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": {
+        "DISPLAY": ":1"
+      }
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ Usage
+</h2>
+<p>
+ The
+ <code class="code">
+  MCPClient
+ </code>
+ class provides methods for managing connections to multiple servers. When creating an
+ <code class="code">
+  MCPAgent
+ </code>
+ , you can provide an
+ <code class="code">
+  MCPClient
+ </code>
+ configured with multiple servers.
+</p>
+<p>
+ By default, the agent will have access to tools from all configured servers. If you need to target a specific server for a particular task, you can specify the
+ <code class="code">
+  server_name
+ </code>
+ when calling the
+ <code class="code">
+  agent.run()
+ </code>
+ method.
+</p>
+<pre class="pre"><code class="language-python code"># Example: Manually selecting a server for a specific task
+result = await agent.run(
+    "Search for Airbnb listings in Barcelona",
+    server_name="airbnb" # Explicitly use the airbnb server
+)
+
+result_google = await agent.run(
+    "Find restaurants near the first result using Google Search",
+    server_name="playwright" # Explicitly use the playwright server
+)
+</code></pre>
+<h2 class="heading">
+ Dynamic Server Selection (Server Manager)
+</h2>
+<p>
+ For enhanced efficiency and to reduce potential agent confusion when dealing with many tools from different servers, you can enable the Server Manager by setting
+ <code class="code">
+  use_server_manager=True
+ </code>
+ during
+ <code class="code">
+  MCPAgent
+ </code>
+ initialization.
+</p>
+<p>
+ When enabled, the agent intelligently selects the correct MCP server based on the tool chosen by the LLM for a specific step. This minimizes unnecessary connections and ensures the agent uses the appropriate tools for the task.
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from mcp_use import MCPClient, MCPAgent
+from langchain_anthropic import ChatAnthropic
+
+async def main():
+    # Create client with multiple servers
+    client = MCPClient.from_config_file("multi_server_config.json")
+
+    # Create agent with the client
+    agent = MCPAgent(
+        llm=ChatAnthropic(model="claude-3-5-sonnet-20240620"),
+        client=client,
+        use_server_manager=True  # Enable the Server Manager
+    )
+
+    try:
+        # Run a query that uses tools from multiple servers
+        result = await agent.run(
+            "Search for a nice place to stay in Barcelona on Airbnb, "
+            "then use Google to find nearby restaurants and attractions."
+        )
+        print(result)
+    finally:
+        # Clean up all sessions
+        await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<h1 class="heading">
+ Tool Access Control
+</h1>
+<p>
+ MCP-Use allows you to restrict which tools are available to the agent, providing better security and control over agent capabilities:
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from mcp_use import MCPAgent, MCPClient
+from langchain_openai import ChatOpenAI
+
+async def main():
+    # Create client
+    client = MCPClient.from_config_file("config.json")
+
+    # Create agent with restricted tools
+    agent = MCPAgent(
+        llm=ChatOpenAI(model="gpt-4"),
+        client=client,
+        disallowed_tools=["file_system", "network"]  # Restrict potentially dangerous tools
+    )
+
+    # Run a query with restricted tool access
+    result = await agent.run(
+        "Find the best restaurant in San Francisco"
+    )
+    print(result)
+
+    # Clean up
+    await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<h1 class="heading">
+ Sandboxed Execution
+</h1>
+<p>
+ MCP-Use supports running MCP servers in a sandboxed environment using E2B's cloud infrastructure. This allows you to run MCP servers without having to install dependencies locally, making it easier to use tools that might have complex setups or system requirements.
+</p>
+<h2 class="heading">
+ Installation
+</h2>
+<p>
+ To use sandboxed execution, you need to install the E2B dependency:
+</p>
+<pre class="pre"><code class="language-bash code"># Install mcp-use with E2B support
+pip install "mcp-use[e2b]"
+
+# Or install the dependency directly
+pip install e2b-code-interpreter
+</code></pre>
+<p>
+ You'll also need an E2B API key. You can sign up at
+ <a href="https://e2b.dev">
+  e2b.dev
+ </a>
+ to get your API key.
+</p>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ To enable sandboxed execution, use the sandbox parameter when creating your
+ <code class="code">
+  MCPClient
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from mcp_use import MCPAgent, MCPClient
+from mcp_use.types.sandbox import SandboxOptions
+
+async def main():
+    # Load environment variables (needs E2B_API_KEY)
+    load_dotenv()
+
+    # Define MCP server configuration
+    server_config = {
+        "mcpServers": {
+            "everything": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-everything"],
+            }
+        }
+    }
+
+    # Define sandbox options
+    sandbox_options: SandboxOptions = {
+        "api_key": os.getenv("E2B_API_KEY"),  # API key can also be provided directly
+        "sandbox_template_id": "base",  # Use base template
+    }
+
+    # Create client with sandboxed mode enabled
+    client = MCPClient(
+        config=server_config,
+        sandbox=True,
+        sandbox_options=sandbox_options,
+
+    )
+
+    # Create agent with the sandboxed client
+    llm = ChatOpenAI(model="gpt-4o")
+    agent = MCPAgent(llm=llm, client=client)
+
+    # Run your agent
+    result = await agent.run("Use the command line tools to help me add 1+1")
+    print(result)
+
+    # Clean up
+    await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<h2 class="heading">
+ Sandbox Options
+</h2>
+<p>
+ The
+ <code class="code">
+  SandboxOptions
+ </code>
+ type provides configuration for the sandbox environment:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Option
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Default
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     api_key
+    </code>
+</td>
+<td>
+    E2B API key. Required - can be provided directly or via E2B_API_KEY environment variable
+   </td>
+<td>
+    None
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     sandbox_template_id
+    </code>
+</td>
+<td>
+    Template ID for the sandbox environment
+   </td>
+<td>
+    "base"
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     supergateway_command
+    </code>
+</td>
+<td>
+    Command to run supergateway
+   </td>
+<td>
+    "npx -y supergateway"
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Benefits of Sandboxed Execution
+</h2>
+<ul>
+<li>
+<strong>
+   No local dependencies
+  </strong>
+  : Run MCP servers without installing dependencies locally
+ </li>
+<li>
+<strong>
+   Isolation
+  </strong>
+  : Execute code in a secure, isolated environment
+ </li>
+<li>
+<strong>
+   Consistent environment
+  </strong>
+  : Ensure consistent behavior across different systems
+ </li>
+<li>
+<strong>
+   Resource efficiency
+  </strong>
+  : Offload resource-intensive tasks to cloud infrastructure
+ </li>
+</ul>
+<h1 class="heading">
+ Build a Custom Agent:
+</h1>
+<p>
+ You can also build your own custom agent using the LangChain adapter:
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from langchain_openai import ChatOpenAI
+from mcp_use.client import MCPClient
+from mcp_use.adapters.langchain_adapter import LangChainAdapter
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+async def main():
+    # Initialize MCP client
+    client = MCPClient.from_config_file("examples/browser_mcp.json")
+    llm = ChatOpenAI(model="gpt-4o")
+
+    # Create adapter instance
+    adapter = LangChainAdapter()
+    # Get LangChain tools with a single line
+    tools = await adapter.create_tools(client)
+
+    # Create a custom LangChain agent
+    llm_with_tools = llm.bind_tools(tools)
+    result = await llm_with_tools.ainvoke("What tools do you have avilable ? ")
+    print(result)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
+</code></pre>
+<h1 class="heading">
+ Debugging
+</h1>
+<p>
+ MCP-Use provides a built-in debug mode that increases log verbosity and helps diagnose issues in your agent implementation.
+</p>
+<h2 class="heading">
+ Enabling Debug Mode
+</h2>
+<p>
+ There are two primary ways to enable debug mode:
+</p>
+<h3 class="heading">
+ 1. Environment Variable (Recommended for One-off Runs)
+</h3>
+<p>
+ Run your script with the
+ <code class="code">
+  DEBUG
+ </code>
+ environment variable set to the desired level:
+</p>
+<pre class="pre"><code class="language-bash code"># Level 1: Show INFO level messages
+DEBUG=1 python3.11 examples/browser_use.py
+
+# Level 2: Show DEBUG level messages (full verbose output)
+DEBUG=2 python3.11 examples/browser_use.py
+</code></pre>
+<p>
+ This sets the debug level only for the duration of that specific Python process.
+</p>
+<p>
+ Alternatively you can set the following environment variable to the desired logging level:
+</p>
+<pre class="pre"><code class="language-bash code">export MCP_USE_DEBUG=1 # or 2
+</code></pre>
+<h3 class="heading">
+ 2. Setting the Debug Flag Programmatically
+</h3>
+<p>
+ You can set the global debug flag directly in your code:
+</p>
+<pre class="pre"><code class="language-python code">import mcp_use
+
+mcp_use.set_debug(1)  # INFO level
+# or
+mcp_use.set_debug(2)  # DEBUG level (full verbose output)
+</code></pre>
+<h3 class="heading">
+ 3. Agent-Specific Verbosity
+</h3>
+<p>
+ If you only want to see debug information from the agent without enabling full debug logging, you can set the
+ <code class="code">
+  verbose
+ </code>
+ parameter when creating an MCPAgent:
+</p>
+<pre class="pre"><code class="language-python code"># Create agent with increased verbosity
+agent = MCPAgent(
+    llm=your_llm,
+    client=your_client,
+    verbose=True  # Only shows debug messages from the agent
+)
+</code></pre>
+<p>
+ This is useful when you only need to see the agent's steps and decision-making process without all the low-level debug information from other components.
+</p>
+<h2 class="heading">
+ Star History
+</h2>
+<p>
+<a href="https://www.star-history.com/#pietrozullo/mcp-use&amp;Date">
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=pietrozullo/mcp-use&amp;type=Date"/>
+</a>
+</p>
+<h1 class="heading">
+ Contributing
+</h1>
+<p>
+ We love contributions! Feel free to open issues for bugs or feature requests. Look at
+ <a href="CONTRIBUTING.md">
+  CONTRIBUTING.md
+ </a>
+ for guidelines.
+</p>
+<h2 class="heading">
+ Contributors
+</h2>
+<p>
+ Thanks to all our amazing contributors!
+</p>
+<p>
+<a href="https://github.com/mcp-use/mcp-use/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=mcp-use/mcp-use"/>
+</a>
+</p>
+<h2 class="heading">
+ Top Starred Dependents
+</h2>
+<!-- gh-dependents-info-used-by-start -->
+<table>
+<tr>
+<th width="400">
+   Repository
+  </th>
+<th>
+   Stars
+  </th>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/170207473?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/tavily-ai/meeting-prep-agent">
+<strong>
+     tavily-ai/meeting-prep-agent
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 112
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/20041231?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/krishnaik06/MCP-CRASH-Course">
+<strong>
+     krishnaik06/MCP-CRASH-Course
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 37
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/892404?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/truemagic-coder/solana-agent-app">
+<strong>
+     truemagic-coder/solana-agent-app
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 29
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/8344498?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/schogini/techietalksai">
+<strong>
+     schogini/techietalksai
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 21
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/201161342?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/autometa-dev/whatsapp-mcp-voice-agent">
+<strong>
+     autometa-dev/whatsapp-mcp-voice-agent
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 18
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/100749943?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/Deniscartin/mcp-cli">
+<strong>
+     Deniscartin/mcp-cli
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 17
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/6764390?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/elastic/genai-workshops">
+<strong>
+     elastic/genai-workshops
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 9
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/6688805?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/innovaccer/Healthcare-MCP">
+<strong>
+     innovaccer/Healthcare-MCP
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 6
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/205593730?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/Qingyon-AI/Revornix">
+<strong>
+     Qingyon-AI/Revornix
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 5
+  </td>
+</tr>
+<tr>
+<td>
+<img height="20" src="https://avatars.githubusercontent.com/u/68845761?s=40&amp;v=4" style="vertical-align: middle; margin-right: 8px;" width="20"/>
+<a href="https://github.com/entbappy/MCP-Tutorials">
+<strong>
+     entbappy/MCP-Tutorials
+    </strong>
+</a>
+</td>
+<td>
+   ⭐ 5
+  </td>
+</tr>
+</table>
+<!-- gh-dependents-info-used-by-end -->
+<h1 class="heading">
+ Requirements
+</h1>
+<ul>
+<li>
+  Python 3.11+
+ </li>
+<li>
+  MCP implementation (like Playwright MCP)
+ </li>
+<li>
+  LangChain and appropriate model libraries (OpenAI, Anthropic, etc.)
+ </li>
+</ul>
+<h1 class="heading">
+ License
+</h1>
+<p>
+ MIT
+</p>
+<h1 class="heading">
+ Citation
+</h1>
+<p>
+ If you use MCP-Use in your research or project, please cite:
+</p>
+<pre class="pre"><code class="language-bibtex code">@software{mcp_use2025,
+  author = {Zullo, Pietro},
+  title = {MCP-Use: MCP Library for Python},
+  year = {2025},
+  publisher = {GitHub},
+  url = {https://github.com/pietrozullo/mcp-use}
+}
+</code></pre>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mcp-use-mcp-use.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mcp-use-mcp-use.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mcp-use-mcp-use.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/mcp-use-mcp-use.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

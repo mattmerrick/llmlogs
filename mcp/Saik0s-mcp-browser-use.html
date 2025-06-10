@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="browser-use MCP server & CLI - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="browser-use MCP server & CLI - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>browser-use MCP server & CLI - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">browser-use MCP server & CLI</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">browser-use MCP server & CLI</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 642</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/Saik0s/mcp-browser-use" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="browser-use MCP server &amp; CLI - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="browser-use MCP server &amp; CLI - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>browser-use MCP server &amp; CLI - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">browser-use MCP server &amp; CLI</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">browser-use MCP server &amp; CLI</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 642</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/Saik0s/mcp-browser-use" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="browser-use MCP server &amp; CLI - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="browser-use MCP server &amp; CLI - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>browser-use MCP server &amp; CLI - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>browser-use MCP server &amp; CLI</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 642</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/Saik0s/mcp-browser-use" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="browser-use MCP server &amp; CLI - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="browser-use MCP server &amp; CLI - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>browser-use MCP server &amp; CLI - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>browser-use MCP server &amp; CLI</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 642</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/Saik0s/mcp-browser-use" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<p>
+<img alt="Browser Use Web UI" src="./assets/header.png" width="full"/>
+</p>
+<p>
+<br/>
+</p>
+<h1 class="heading">
+ browser-use MCP server &amp; CLI
+</h1>
+<p>
+<a href="https://docs.browser-use.com">
+<img alt="Documentation" src="https://img.shields.io/badge/Documentation-📕-blue"/>
+</a>
+<a href="LICENSE">
+<img alt="License" src="https://img.shields.io/badge/License-MIT-green"/>
+</a>
+</p>
+<blockquote>
+<p>
+<strong>
+   Project Note
+  </strong>
+  : This MCP server implementation builds upon the
+  <a href="https://github.com/browser-use/web-ui">
+   browser-use/web-ui
+  </a>
+  foundation. Core browser automation logic and configuration patterns are adapted from the original project.
+ </p>
+</blockquote>
+<p>
+ AI-driven browser automation server implementing the Model Context Protocol (MCP) for natural language browser control and web research. Also provides CLI access to its core functionalities.
+</p>
+<p>
+<a href="https://glama.ai/mcp/servers/@Saik0s/mcp-browser-use">
+<img alt="Browser-Use MCP server" height="200" src="https://glama.ai/mcp/servers/@Saik0s/mcp-browser-use/badge" width="380"/>
+</a>
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  🧠
+  <strong>
+   MCP Integration
+  </strong>
+  - Full protocol implementation for AI agent communication.
+ </li>
+<li>
+  🌐
+  <strong>
+   Browser Automation
+  </strong>
+  - Page navigation, form filling, element interaction via natural language (
+  <code class="code">
+   run_browser_agent
+  </code>
+  tool).
+ </li>
+<li>
+  👁️
+  <strong>
+   Visual Understanding
+  </strong>
+  - Optional screenshot analysis for vision-capable LLMs.
+ </li>
+<li>
+  🔄
+  <strong>
+   State Persistence
+  </strong>
+  - Option to manage a server browser session across multiple MCP calls or connect to user's browser.
+ </li>
+<li>
+  🔌
+  <strong>
+   Multi-LLM Support
+  </strong>
+  - Integrates with OpenAI, Anthropic, Azure, DeepSeek, Google, Mistral, Ollama, OpenRouter, Alibaba, Moonshot, Unbound AI.
+ </li>
+<li>
+  🔍
+  <strong>
+   Deep Research Tool
+  </strong>
+  - Dedicated tool for multi-step web research and report generation (
+  <code class="code">
+   run_deep_research
+  </code>
+  tool).
+ </li>
+<li>
+  ⚙️
+  <strong>
+   Environment Variable Configuration
+  </strong>
+  - Fully configurable via environment variables using a structured Pydantic model.
+ </li>
+<li>
+  🔗
+  <strong>
+   CDP Connection
+  </strong>
+  - Ability to connect to and control a user-launched Chrome/Chromium instance via Chrome DevTools Protocol.
+ </li>
+<li>
+  ⌨️
+  <strong>
+   CLI Interface
+  </strong>
+  - Access core agent functionalities (
+  <code class="code">
+   run_browser_agent
+  </code>
+  ,
+  <code class="code">
+   run_deep_research
+  </code>
+  ) directly from the command line for testing and scripting.
+ </li>
+</ul>
+<h2 class="heading">
+ Quick Start
+</h2>
+<h3 class="heading">
+ The Essentials
+</h3>
+<ol>
+<li>
+<p>
+   Install UV - the rocket-powered Python installer:
+   <code class="code">
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Get Playwright browsers (required for automation):
+   <code class="code">
+    uvx --from mcp-server-browser-use@latest python -m playwright install
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Integration Patterns
+</h3>
+<p>
+ For MCP clients like Claude Desktop, add a server configuration that's as simple as:
+</p>
+<pre class="pre"><code class="language-json code">// Example 1: One-Line Latest Version (Always Fresh)
+"mcpServers": {
+    "browser-use": {
+      "command": "uvx",
+      "args": ["mcp-server-browser-use@latest"],
+      "env": {
+        "MCP_LLM_GOOGLE_API_KEY": "YOUR_KEY_HERE_IF_USING_GOOGLE",
+        "MCP_LLM_PROVIDER": "google",
+        "MCP_LLM_MODEL_NAME": "gemini-2.5-flash-preview-04-17",
+        "MCP_BROWSER_HEADLESS": "true",
+      }
+    }
+}
+</code></pre>
+<pre class="pre"><code class="language-json code">// Example 2: Advanced Configuration with CDP
+"mcpServers": {
+    "browser-use": {
+      "command": "uvx",
+      "args": ["mcp-server-browser-use@latest"],
+      "env": {
+        "MCP_LLM_OPENROUTER_API_KEY": "YOUR_KEY_HERE_IF_USING_OPENROUTER",
+        "MCP_LLM_PROVIDER": "openrouter",
+        "MCP_LLM_MODEL_NAME": "anthropic/claude-3.5-haiku",
+        "MCP_LLM_TEMPERATURE": "0.4",
+
+        "MCP_BROWSER_HEADLESS": "false",
+        "MCP_BROWSER_WINDOW_WIDTH": "1440",
+        "MCP_BROWSER_WINDOW_HEIGHT": "1080",
+        "MCP_AGENT_TOOL_USE_VISION": "true",
+
+        "MCP_RESEARCH_TOOL_SAVE_DIR": "/path/to/your/research",
+        "MCP_RESEARCH_TOOL_MAX_PARALLEL_BROWSERS": "5",
+
+        "MCP_PATHS_DOWNLOADS": "/path/to/your/downloads",
+
+        "MCP_BROWSER_USE_OWN_BROWSER": "true",
+        "MCP_BROWSER_CDP_URL": "http://localhost:9222",
+
+        "MCP_AGENT_TOOL_HISTORY_PATH": "/path/to/your/history",
+
+        "MCP_SERVER_LOGGING_LEVEL": "DEBUG",
+        "MCP_SERVER_LOG_FILE": "/path/to/your/log/mcp_server_browser_use.log",
+      }
+    }
+}
+</code></pre>
+<pre class="pre"><code class="language-json code">// Example 3: Advanced Configuration with User Data and custom chrome path
+"mcpServers": {
+    "browser-use": {
+      "command": "uvx",
+      "args": ["mcp-server-browser-use@latest"],
+      "env": {
+        "MCP_LLM_OPENAI_API_KEY": "YOUR_KEY_HERE_IF_USING_OPENAI",
+        "MCP_LLM_PROVIDER": "openai",
+        "MCP_LLM_MODEL_NAME": "gpt-4.1-mini",
+        "MCP_LLM_TEMPERATURE": "0.2",
+
+        "MCP_BROWSER_HEADLESS": "false",
+
+        "MCP_BROWSER_BINARY_PATH": "/path/to/your/chrome/binary",
+        "MCP_BROWSER_USER_DATA_DIR": "/path/to/your/user/data",
+        "MCP_BROWSER_DISABLE_SECURITY": "true",
+        "MCP_BROWSER_KEEP_OPEN": "true",
+        "MCP_BROWSER_TRACE_PATH": "/path/to/your/trace",
+
+        "MCP_AGENT_TOOL_HISTORY_PATH": "/path/to/your/history",
+
+        "MCP_SERVER_LOGGING_LEVEL": "DEBUG",
+        "MCP_SERVER_LOG_FILE": "/path/to/your/log/mcp_server_browser_use.log",
+      }
+    }
+}
+</code></pre>
+<pre class="pre"><code class="language-json code">// Example 4: Local Development Flow
+"mcpServers": {
+    "browser-use": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/your/dev/path",
+        "run",
+        "mcp-server-browser-use"
+      ],
+      "env": {
+        "MCP_LLM_OPENROUTER_API_KEY": "YOUR_KEY_HERE_IF_USING_OPENROUTER",
+        "MCP_LLM_PROVIDER": "openrouter",
+        "MCP_LLM_MODEL_NAME": "openai/gpt-4o-mini",
+        "MCP_BROWSER_HEADLESS": "true",
+      }
+    }
+}
+</code></pre>
+<p>
+<strong>
+  Key Insight:
+ </strong>
+ The best configurations emerge from starting simple (Example 1). The .env.example file contains all possible dials.
+</p>
+<h2 class="heading">
+ MCP Tools
+</h2>
+<p>
+ This server exposes the following tools via the Model Context Protocol:
+</p>
+<h3 class="heading">
+ Synchronous Tools (Wait for Completion)
+</h3>
+<ol>
+<li>
+<p>
+<strong>
+<code class="code">
+     run_browser_agent
+    </code>
+</strong>
+</p>
+<ul>
+<li>
+<strong>
+     Description:
+    </strong>
+    Executes a browser automation task based on natural language instructions and waits for it to complete. Uses settings from
+    <code class="code">
+     MCP_AGENT_TOOL_*
+    </code>
+    ,
+    <code class="code">
+     MCP_LLM_*
+    </code>
+    , and
+    <code class="code">
+     MCP_BROWSER_*
+    </code>
+    environment variables.
+   </li>
+<li>
+<strong>
+     Arguments:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       task
+      </code>
+      (string, required): The primary task or objective.
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Returns:
+    </strong>
+    (string) The final result extracted by the agent or an error message. Agent history (JSON, optional GIF) saved if
+    <code class="code">
+     MCP_AGENT_TOOL_HISTORY_PATH
+    </code>
+    is set.
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+<code class="code">
+     run_deep_research
+    </code>
+</strong>
+</p>
+<ul>
+<li>
+<strong>
+     Description:
+    </strong>
+    Performs in-depth web research on a topic, generates a report, and waits for completion. Uses settings from
+    <code class="code">
+     MCP_RESEARCH_TOOL_*
+    </code>
+    ,
+    <code class="code">
+     MCP_LLM_*
+    </code>
+    , and
+    <code class="code">
+     MCP_BROWSER_*
+    </code>
+    environment variables. If
+    <code class="code">
+     MCP_RESEARCH_TOOL_SAVE_DIR
+    </code>
+    is set, outputs are saved to a subdirectory within it; otherwise, operates in memory-only mode.
+   </li>
+<li>
+<strong>
+     Arguments:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       research_task
+      </code>
+      (string, required): The topic or question for the research.
+     </li>
+<li>
+<code class="code">
+       max_parallel_browsers
+      </code>
+      (integer, optional): Overrides
+      <code class="code">
+       MCP_RESEARCH_TOOL_MAX_PARALLEL_BROWSERS
+      </code>
+      from environment.
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Returns:
+    </strong>
+    (string) The generated research report in Markdown format, including the file path (if saved), or an error message.
+   </li>
+</ul>
+</li>
+</ol>
+<h2 class="heading">
+ CLI Usage
+</h2>
+<p>
+ This package also provides a command-line interface
+ <code class="code">
+  mcp-browser-cli
+ </code>
+ for direct testing and scripting.
+</p>
+<p>
+<strong>
+  Global Options:
+ </strong>
+ *
+ <code class="code">
+  --env-file PATH, -e PATH
+ </code>
+ : Path to a
+ <code class="code">
+  .env
+ </code>
+ file to load configurations from.
+*
+ <code class="code">
+  --log-level LEVEL, -l LEVEL
+ </code>
+ : Override the logging level (e.g.,
+ <code class="code">
+  DEBUG
+ </code>
+ ,
+ <code class="code">
+  INFO
+ </code>
+ ).
+</p>
+<p>
+<strong>
+  Commands:
+ </strong>
+</p>
+<ol>
+<li>
+<p>
+<strong>
+<code class="code">
+     mcp-browser-cli run-browser-agent [OPTIONS] TASK
+    </code>
+</strong>
+</p>
+<ul>
+<li>
+<strong>
+     Description:
+    </strong>
+    Runs a browser agent task.
+   </li>
+<li>
+<strong>
+     Arguments:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       TASK
+      </code>
+      (string, required): The primary task for the agent.
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Example:
+    </strong>
+<code class="code">
+     bash
+    mcp-browser-cli run-browser-agent "Go to example.com and find the title." -e .env
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+<code class="code">
+     mcp-browser-cli run-deep-research [OPTIONS] RESEARCH_TASK
+    </code>
+</strong>
+</p>
+<ul>
+<li>
+<strong>
+     Description:
+    </strong>
+    Performs deep web research.
+   </li>
+<li>
+<strong>
+     Arguments:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       RESEARCH_TASK
+      </code>
+      (string, required): The topic or question for research.
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Options:
+    </strong>
+<ul>
+<li>
+<code class="code">
+       --max-parallel-browsers INTEGER, -p INTEGER
+      </code>
+      : Override
+      <code class="code">
+       MCP_RESEARCH_TOOL_MAX_PARALLEL_BROWSERS
+      </code>
+      .
+     </li>
+</ul>
+</li>
+<li>
+<strong>
+     Example:
+    </strong>
+<code class="code">
+     bash
+    mcp-browser-cli run-deep-research "What are the latest advancements in AI-driven browser automation?" --max-parallel-browsers 5 -e .env
+    </code>
+</li>
+</ul>
+</li>
+</ol>
+<p>
+ All other configurations (LLM keys, paths, browser settings) are picked up from environment variables (or the specified
+ <code class="code">
+  .env
+ </code>
+ file) as detailed in the Configuration section.
+</p>
+<h2 class="heading">
+ Configuration (Environment Variables)
+</h2>
+<p>
+ Configure the server and CLI using environment variables. You can set these in your system or place them in a
+ <code class="code">
+  .env
+ </code>
+ file in the project root (use
+ <code class="code">
+  --env-file
+ </code>
+ for CLI). Variables are structured with prefixes.
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">
+    Variable Group (Prefix)
+   </th>
+<th style="text-align: left;">
+    Example Variable
+   </th>
+<th style="text-align: left;">
+    Description
+   </th>
+<th style="text-align: left;">
+    Default Value
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Main LLM (MCP_LLM_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    Settings for the primary LLM used by agents.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_PROVIDER
+    </code>
+</td>
+<td style="text-align: left;">
+    LLM provider. Options:
+    <code class="code">
+     openai
+    </code>
+    ,
+    <code class="code">
+     azure_openai
+    </code>
+    ,
+    <code class="code">
+     anthropic
+    </code>
+    ,
+    <code class="code">
+     google
+    </code>
+    ,
+    <code class="code">
+     mistral
+    </code>
+    ,
+    <code class="code">
+     ollama
+    </code>
+    , etc.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     openai
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_MODEL_NAME
+    </code>
+</td>
+<td style="text-align: left;">
+    Specific model name for the provider.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     gpt-4.1
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_TEMPERATURE
+    </code>
+</td>
+<td style="text-align: left;">
+    LLM temperature (0.0-2.0).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     0.0
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_BASE_URL
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Generic override for LLM provider's base URL.
+   </td>
+<td style="text-align: left;">
+    Provider-specific
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_API_KEY
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Generic LLM API key (takes precedence).
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_OPENAI_API_KEY
+    </code>
+</td>
+<td style="text-align: left;">
+    API Key for OpenAI (if provider is
+    <code class="code">
+     openai
+    </code>
+    ).
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_ANTHROPIC_API_KEY
+    </code>
+</td>
+<td style="text-align: left;">
+    API Key for Anthropic.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_GOOGLE_API_KEY
+    </code>
+</td>
+<td style="text-align: left;">
+    API Key for Google AI (Gemini).
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_AZURE_OPENAI_API_KEY
+    </code>
+</td>
+<td style="text-align: left;">
+    API Key for Azure OpenAI.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_AZURE_OPENAI_ENDPOINT
+    </code>
+</td>
+<td style="text-align: left;">
+<strong>
+     Required if using Azure.
+    </strong>
+    Your Azure resource endpoint.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_OLLAMA_ENDPOINT
+    </code>
+</td>
+<td style="text-align: left;">
+    Ollama API endpoint URL.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     http://localhost:11434
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_OLLAMA_NUM_CTX
+    </code>
+</td>
+<td style="text-align: left;">
+    Context window size for Ollama models.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     32000
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Planner LLM (MCP_LLM_PLANNER_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    Optional: Settings for a separate LLM for agent planning. Defaults to Main LLM if not set.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_PLANNER_PROVIDER
+    </code>
+</td>
+<td style="text-align: left;">
+    Planner LLM provider.
+   </td>
+<td style="text-align: left;">
+    Main LLM Provider
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_LLM_PLANNER_MODEL_NAME
+    </code>
+</td>
+<td style="text-align: left;">
+    Planner LLM model name.
+   </td>
+<td style="text-align: left;">
+    Main LLM Model
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Browser (MCP_BROWSER_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    General browser settings.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_HEADLESS
+    </code>
+</td>
+<td style="text-align: left;">
+    Run browser without UI (general setting).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_DISABLE_SECURITY
+    </code>
+</td>
+<td style="text-align: left;">
+    Disable browser security features (general setting, use cautiously).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_BINARY_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    Path to Chrome/Chromium executable.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_USER_DATA_DIR
+    </code>
+</td>
+<td style="text-align: left;">
+    Path to Chrome user data directory.
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_WINDOW_WIDTH
+    </code>
+</td>
+<td style="text-align: left;">
+    Browser window width (pixels).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     1280
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_WINDOW_HEIGHT
+    </code>
+</td>
+<td style="text-align: left;">
+    Browser window height (pixels).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     1080
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_USE_OWN_BROWSER
+    </code>
+</td>
+<td style="text-align: left;">
+    Connect to user's browser via CDP URL.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_CDP_URL
+    </code>
+</td>
+<td style="text-align: left;">
+    CDP URL (e.g.,
+    <code class="code">
+     http://localhost:9222
+    </code>
+    ). Required if
+    <code class="code">
+     MCP_BROWSER_USE_OWN_BROWSER=true
+    </code>
+    .
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_KEEP_OPEN
+    </code>
+</td>
+<td style="text-align: left;">
+    Keep server-managed browser open between MCP calls (if
+    <code class="code">
+     MCP_BROWSER_USE_OWN_BROWSER=false
+    </code>
+    ).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_BROWSER_TRACE_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Directory to save Playwright trace files. If not set, tracing to file is disabled.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (empty, tracing disabled)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Agent Tool (MCP_AGENT_TOOL_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    Settings for the
+    <code class="code">
+     run_browser_agent
+    </code>
+    tool.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_MAX_STEPS
+    </code>
+</td>
+<td style="text-align: left;">
+    Max steps per agent run.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     100
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_MAX_ACTIONS_PER_STEP
+    </code>
+</td>
+<td style="text-align: left;">
+    Max actions per agent step.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     5
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_TOOL_CALLING_METHOD
+    </code>
+</td>
+<td style="text-align: left;">
+    Method for tool invocation ('auto', 'json_schema', 'function_calling').
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     auto
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_MAX_INPUT_TOKENS
+    </code>
+</td>
+<td style="text-align: left;">
+    Max input tokens for LLM context.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     128000
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_USE_VISION
+    </code>
+</td>
+<td style="text-align: left;">
+    Enable vision capabilities (screenshot analysis).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     true
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_HEADLESS
+    </code>
+</td>
+<td style="text-align: left;">
+    Override
+    <code class="code">
+     MCP_BROWSER_HEADLESS
+    </code>
+    for this tool (true/false/empty).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (uses general)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_DISABLE_SECURITY
+    </code>
+</td>
+<td style="text-align: left;">
+    Override
+    <code class="code">
+     MCP_BROWSER_DISABLE_SECURITY
+    </code>
+    for this tool (true/false/empty).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (uses general)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_ENABLE_RECORDING
+    </code>
+</td>
+<td style="text-align: left;">
+    Enable Playwright video recording.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     false
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_SAVE_RECORDING_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Path to save recordings. If not set, recording to file is disabled even if
+    <code class="code">
+     ENABLE_RECORDING=true
+    </code>
+    .
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (empty, recording disabled)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_AGENT_TOOL_HISTORY_PATH
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Directory to save agent history JSON files. If not set, history saving is disabled.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (empty, history saving disabled)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Research Tool (MCP_RESEARCH_TOOL_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    Settings for the
+    <code class="code">
+     run_deep_research
+    </code>
+    tool.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_RESEARCH_TOOL_MAX_PARALLEL_BROWSERS
+    </code>
+</td>
+<td style="text-align: left;">
+    Max parallel browser instances for deep research.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     3
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_RESEARCH_TOOL_SAVE_DIR
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Base directory to save research artifacts. Task ID will be appended. If not set, operates in memory-only mode.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     None
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Paths (MCP_PATHS_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    General path settings.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_PATHS_DOWNLOADS
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: Directory for downloaded files. If not set, persistent downloads to a specific path are disabled.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (empty, downloads disabled)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Server (MCP_SERVER_)
+    </strong>
+</td>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+    Server-specific settings.
+   </td>
+<td style="text-align: left;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_SERVER_LOG_FILE
+    </code>
+</td>
+<td style="text-align: left;">
+    Path for the server log file. Empty for stdout.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+</code>
+    (empty, logs to stdout)
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_SERVER_LOGGING_LEVEL
+    </code>
+</td>
+<td style="text-align: left;">
+    Logging level (
+    <code class="code">
+     DEBUG
+    </code>
+    ,
+    <code class="code">
+     INFO
+    </code>
+    ,
+    <code class="code">
+     WARNING
+    </code>
+    ,
+    <code class="code">
+     ERROR
+    </code>
+    ,
+    <code class="code">
+     CRITICAL
+    </code>
+    ).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     ERROR
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_SERVER_ANONYMIZED_TELEMETRY
+    </code>
+</td>
+<td style="text-align: left;">
+    Enable/disable anonymized telemetry (
+    <code class="code">
+     true
+    </code>
+    /
+    <code class="code">
+     false
+    </code>
+    ).
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     true
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+<td style="text-align: left;">
+<code class="code">
+     MCP_SERVER_MCP_CONFIG
+    </code>
+</td>
+<td style="text-align: left;">
+    Optional: JSON string for MCP client config used by the internal controller.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     null
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<strong>
+  Supported LLM Providers (
+  <code class="code">
+   MCP_LLM_PROVIDER
+  </code>
+  ):
+ </strong>
+<code class="code">
+  openai
+ </code>
+ ,
+ <code class="code">
+  azure_openai
+ </code>
+ ,
+ <code class="code">
+  anthropic
+ </code>
+ ,
+ <code class="code">
+  google
+ </code>
+ ,
+ <code class="code">
+  mistral
+ </code>
+ ,
+ <code class="code">
+  ollama
+ </code>
+ ,
+ <code class="code">
+  deepseek
+ </code>
+ ,
+ <code class="code">
+  openrouter
+ </code>
+ ,
+ <code class="code">
+  alibaba
+ </code>
+ ,
+ <code class="code">
+  moonshot
+ </code>
+ ,
+ <code class="code">
+  unbound
+ </code>
+</p>
+<p>
+<em>
+  (Refer to
+  <code class="code">
+   .env.example
+  </code>
+  for a comprehensive list of all supported environment variables and their specific provider keys/endpoints.)
+ </em>
+</p>
+<h2 class="heading">
+ Connecting to Your Own Browser (CDP)
+</h2>
+<p>
+ Instead of having the server launch and manage its own browser instance, you can connect it to a Chrome/Chromium browser that you launch and manage yourself.
+</p>
+<p>
+<strong>
+  Steps:
+ </strong>
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Launch Chrome/Chromium with Remote Debugging Enabled:
+   </strong>
+   (Commands for macOS, Linux, Windows as previously listed, e.g.,
+   <code class="code">
+    google-chrome --remote-debugging-port=9222
+   </code>
+   )
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Configure Environment Variables:
+   </strong>
+   Set the following environment variables:
+   <code class="code">
+    dotenv
+    MCP_BROWSER_USE_OWN_BROWSER=true
+    MCP_BROWSER_CDP_URL=http://localhost:9222 # Use the same port
+    # Optional: MCP_BROWSER_USER_DATA_DIR=/path/to/your/profile
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Run the MCP Server or CLI:
+   </strong>
+   Start the server (
+   <code class="code">
+    uv run mcp-server-browser-use
+   </code>
+   ) or CLI (
+   <code class="code">
+    mcp-browser-cli ...
+   </code>
+   ) as usual.
+  </p>
+</li>
+</ol>
+<p>
+<strong>
+  Important Considerations:
+ </strong>
+ *   The browser launched with
+ <code class="code">
+  --remote-debugging-port
+ </code>
+ must remain open.
+*   Settings like
+ <code class="code">
+  MCP_BROWSER_HEADLESS
+ </code>
+ and
+ <code class="code">
+  MCP_BROWSER_KEEP_OPEN
+ </code>
+ are ignored when
+ <code class="code">
+  MCP_BROWSER_USE_OWN_BROWSER=true
+ </code>
+ .
+</p>
+<h2 class="heading">
+ Development
+</h2>
+<pre class="pre"><code class="language-bash code"># Install dev dependencies and sync project deps
+uv sync --dev
+
+# Install playwright browsers
+uv run playwright install
+
+# Run MCP server with debugger (Example connecting to own browser via CDP)
+# 1. Launch Chrome: google-chrome --remote-debugging-port=9222 --user-data-dir="optional/path/to/user/profile"
+# 2. Run inspector command with environment variables:
+npx @modelcontextprotocol/inspector@latest \
+  -e MCP_LLM_GOOGLE_API_KEY=$GOOGLE_API_KEY \
+  -e MCP_LLM_PROVIDER=google \
+  -e MCP_LLM_MODEL_NAME=gemini-2.5-flash-preview-04-17 \
+  -e MCP_BROWSER_USE_OWN_BROWSER=true \
+  -e MCP_BROWSER_CDP_URL=http://localhost:9222 \
+  -e MCP_RESEARCH_TOOL_SAVE_DIR=./tmp/dev_research_output \
+  uv --directory . run mcp-server-browser-use
+
+# Note: Change timeout in inspector's config panel if needed (default is 10 seconds)
+
+# Run CLI example
+# Create a .env file with your settings (including MCP_RESEARCH_TOOL_SAVE_DIR) or use environment variables
+uv run mcp-browser-cli -e .env run-browser-agent "What is the title of example.com?"
+uv run mcp-browser-cli -e .env run-deep-research "What is the best material for a pan for everyday use on amateur kitchen and dishwasher?"
+</code></pre>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<ul>
+<li>
+<strong>
+   Configuration Error on Startup
+  </strong>
+  : If the application fails to start with an error about a missing setting, ensure all
+  <strong>
+   mandatory
+  </strong>
+  environment variables (like
+  <code class="code">
+   MCP_RESEARCH_TOOL_SAVE_DIR
+  </code>
+  ) are set correctly in your environment or
+  <code class="code">
+   .env
+  </code>
+  file.
+ </li>
+<li>
+<strong>
+   Browser Conflicts
+  </strong>
+  : If
+  <em>
+   not
+  </em>
+  using CDP (
+  <code class="code">
+   MCP_BROWSER_USE_OWN_BROWSER=false
+  </code>
+  ), ensure no conflicting Chrome instances are running with the same user data directory if
+  <code class="code">
+   MCP_BROWSER_USER_DATA_DIR
+  </code>
+  is specified.
+ </li>
+<li>
+<strong>
+   CDP Connection Issues
+  </strong>
+  : If using
+  <code class="code">
+   MCP_BROWSER_USE_OWN_BROWSER=true
+  </code>
+  :
+  <ul>
+<li>
+    Verify Chrome was launched with
+    <code class="code">
+     --remote-debugging-port
+    </code>
+    .
+   </li>
+<li>
+    Ensure the port in
+    <code class="code">
+     MCP_BROWSER_CDP_URL
+    </code>
+    matches.
+   </li>
+<li>
+    Check firewalls and ensure the browser is running.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   API Errors
+  </strong>
+  : Double-check API keys (
+  <code class="code">
+   MCP_LLM_&lt;PROVIDER&gt;_API_KEY
+  </code>
+  or
+  <code class="code">
+   MCP_LLM_API_KEY
+  </code>
+  ) and endpoints (e.g.,
+  <code class="code">
+   MCP_LLM_AZURE_OPENAI_ENDPOINT
+  </code>
+  for Azure).
+ </li>
+<li>
+<strong>
+   Vision Issues
+  </strong>
+  : Ensure
+  <code class="code">
+   MCP_AGENT_TOOL_USE_VISION=true
+  </code>
+  and your LLM supports vision.
+ </li>
+<li>
+<strong>
+   Dependency Problems
+  </strong>
+  : Run
+  <code class="code">
+   uv sync
+  </code>
+  and
+  <code class="code">
+   uv run playwright install
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   File/Path Issues
+  </strong>
+  :
+  <ul>
+<li>
+    If optional features like history saving, tracing, or downloads are not working, ensure the corresponding path variables (
+    <code class="code">
+     MCP_AGENT_TOOL_HISTORY_PATH
+    </code>
+    ,
+    <code class="code">
+     MCP_BROWSER_TRACE_PATH
+    </code>
+    ,
+    <code class="code">
+     MCP_PATHS_DOWNLOADS
+    </code>
+    ) are set and the application has write permissions to those locations.
+   </li>
+<li>
+    For deep research, ensure
+    <code class="code">
+     MCP_RESEARCH_TOOL_SAVE_DIR
+    </code>
+    is set to a valid, writable directory.
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   Logging
+  </strong>
+  : Check the log file (
+  <code class="code">
+   MCP_SERVER_LOG_FILE
+  </code>
+  , if set) or console output. Increase
+  <code class="code">
+   MCP_SERVER_LOGGING_LEVEL
+  </code>
+  to
+  <code class="code">
+   DEBUG
+  </code>
+  for more details. For CLI, use
+  <code class="code">
+   --log-level DEBUG
+  </code>
+  .
+ </li>
+</ul>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT - See
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ for details.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/Saik0s-mcp-browser-use.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

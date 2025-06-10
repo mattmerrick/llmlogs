@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="mcp-openapi-proxy - MCP Directory">
+    <meta property="og:description" content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific">
+    <meta property="og:url" content="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mcp-openapi-proxy - MCP Directory">
+    <meta name="twitter:description" content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific">
+    
+    <title>mcp-openapi-proxy - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">mcp-openapi-proxy</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">mcp-openapi-proxy</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 79</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/matthewhand/mcp-openapi-proxy" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp-openapi-proxy - MCP Directory" property="og:title"/>
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp-openapi-proxy - MCP Directory" name="twitter:title"/>
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" name="twitter:description"/>
+<title>mcp-openapi-proxy - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">mcp-openapi-proxy</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">mcp-openapi-proxy</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 79</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/matthewhand/mcp-openapi-proxy" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="mcp-openapi-proxy - MCP Directory" property="og:title">
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" property="og:description">
+<meta content="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="mcp-openapi-proxy - MCP Directory" name="twitter:title">
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" name="twitter:description">
+<title>mcp-openapi-proxy - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp-openapi-proxy</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 79</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/matthewhand/mcp-openapi-proxy" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp-openapi-proxy - MCP Directory" property="og:title"/>
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp-openapi-proxy - MCP Directory" name="twitter:title"/>
+<meta content="mcp-openapi-proxyis a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specific" name="twitter:description"/>
+<title>mcp-openapi-proxy - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp-openapi-proxy</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 79</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/matthewhand/mcp-openapi-proxy" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ mcp-openapi-proxy
+</h1>
+<p>
+<strong>
+  mcp-openapi-proxy
+ </strong>
+ is a Python package that implements a Model Context Protocol (MCP) server, designed to dynamically expose REST APIs—defined by OpenAPI specifications—as MCP tools. This facilitates seamless integration of OpenAPI-described APIs into MCP-based workflows.
+</p>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#overview">
+   Overview
+  </a>
+</li>
+<li>
+<a href="#features">
+   Features
+  </a>
+</li>
+<li>
+<a href="#installation">
+   Installation
+  </a>
+</li>
+<li>
+<a href="#mcp-ecosystem-integration">
+   MCP Ecosystem Integration
+  </a>
+</li>
+<li>
+<a href="#modes-of-operation">
+   Modes of Operation
+  </a>
+</li>
+<li>
+<a href="#fastmcp-mode-simple-mode">
+   FastMCP Mode (Simple Mode)
+  </a>
+</li>
+<li>
+<a href="#low-level-mode-default">
+   Low-Level Mode (Default)
+  </a>
+</li>
+<li>
+<a href="#environment-variables">
+   Environment Variables
+  </a>
+</li>
+<li>
+<a href="#examples">
+   Examples
+  </a>
+</li>
+<li>
+<a href="#glama-example">
+   Glama Example
+  </a>
+</li>
+<li>
+<a href="#flyio-example">
+   Fly.io Example
+  </a>
+</li>
+<li>
+<a href="#render-example">
+   Render Example
+  </a>
+</li>
+<li>
+<a href="#slack-example">
+   Slack Example
+  </a>
+</li>
+<li>
+<a href="#getzep-example">
+   GetZep Example
+  </a>
+</li>
+<li>
+<a href="#virustotal-example">
+   Virustotal Example
+  </a>
+</li>
+<li>
+<a href="#notion-example">
+   Notion Example
+  </a>
+</li>
+<li>
+<a href="#asana-example">
+   Asana Example
+  </a>
+</li>
+<li>
+<a href="#apisguru-example">
+   APIs.guru Example
+  </a>
+</li>
+<li>
+<a href="#netbox-example">
+   NetBox Example
+  </a>
+</li>
+<li>
+<a href="#box-api-example">
+   Box API Example
+  </a>
+</li>
+<li>
+<a href="#wolframalpha-api-example">
+   WolframAlpha API Example
+  </a>
+</li>
+<li>
+<a href="#troubleshooting">
+   Troubleshooting
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ The package offers two operational modes:
+</p>
+<ul>
+<li>
+<strong>
+   Low-Level Mode (Default):
+  </strong>
+  Dynamically registers tools corresponding to all valid API endpoints specified in an OpenAPI document (e.g.
+  <code class="code">
+   /chat/completions
+  </code>
+  becomes
+  <code class="code">
+   chat_completions()
+  </code>
+  ).
+ </li>
+<li>
+<strong>
+   FastMCP Mode (Simple Mode):
+  </strong>
+  Provides a streamlined approach by exposing a predefined set of tools (e.g.
+  <code class="code">
+   list_functions()
+  </code>
+  and
+  <code class="code">
+   call_function()
+  </code>
+  ) based on static configurations.
+ </li>
+</ul>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+<strong>
+   Dynamic Tool Generation:
+  </strong>
+  Automatically creates MCP tools from OpenAPI endpoint definitions.
+ </li>
+<li>
+<strong>
+   Simple Mode Option:
+  </strong>
+  Offers a static configuration alternative via FastMCP mode.
+ </li>
+<li>
+<strong>
+   OpenAPI Specification Support:
+  </strong>
+  Compatible with OpenAPI v3 with potential support for v2.
+ </li>
+<li>
+<strong>
+   Flexible Filtering:
+  </strong>
+  Allows endpoint filtering through whitelisting by paths or other criteria.
+ </li>
+<li>
+<strong>
+   Payload Authentication:
+  </strong>
+  Supports custom authentication via JMESPath expressions (e.g. for APIs like Slack that expect tokens in the payload not the HTTP header).
+ </li>
+<li>
+<strong>
+   Header Authentication:
+  </strong>
+  Uses
+  <code class="code">
+   Bearer
+  </code>
+  by default for
+  <code class="code">
+   API_KEY
+  </code>
+  in the Authorization header, customizable for APIs like Fly.io requiring
+  <code class="code">
+   Api-Key
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   MCP Integration:
+  </strong>
+  Seamlessly integrates with MCP ecosystems for invoking REST APIs as tools.
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<p>
+ Install the package directly from PyPI using the following command:
+</p>
+<pre class="pre"><code class="language-bash code">uvx mcp-openapi-proxy
+</code></pre>
+<h3 class="heading">
+ MCP Ecosystem Integration
+</h3>
+<p>
+ To incorporate
+ <strong>
+  mcp-openapi-proxy
+ </strong>
+ into your MCP ecosystem configure it within your
+ <code class="code">
+  mcpServers
+ </code>
+ settings. Below is a generic example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp-openapi-proxy": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "${OPENAPI_SPEC_URL}",
+                "API_KEY": "${API_OPENAPI_KEY}"
+            }
+        }
+    }
+}
+</code></pre>
+<p>
+ Refer to the
+ <strong>
+  Examples
+ </strong>
+ section below for practical configurations tailored to specific APIs.
+</p>
+<h2 class="heading">
+ Modes of Operation
+</h2>
+<h3 class="heading">
+ FastMCP Mode (Simple Mode)
+</h3>
+<ul>
+<li>
+<strong>
+   Enabled by:
+  </strong>
+  Setting the environment variable
+  <code class="code">
+   OPENAPI_SIMPLE_MODE=true
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   Description:
+  </strong>
+  Exposes a fixed set of tools derived from specific OpenAPI endpoints as defined in the code.
+ </li>
+<li>
+<strong>
+   Configuration:
+  </strong>
+  Relies on environment variables to specify tool behavior.
+ </li>
+</ul>
+<h3 class="heading">
+ Low-Level Mode (Default)
+</h3>
+<ul>
+<li>
+<strong>
+   Description:
+  </strong>
+  Automatically registers all valid API endpoints from the provided OpenAPI specification as individual tools.
+ </li>
+<li>
+<strong>
+   Tool Naming:
+  </strong>
+  Derives tool names from normalized OpenAPI paths and methods.
+ </li>
+<li>
+<strong>
+   Behavior:
+  </strong>
+  Generates tool descriptions from OpenAPI operation summaries and descriptions.
+ </li>
+</ul>
+<h2 class="heading">
+ Environment Variables
+</h2>
+<ul>
+<li>
+<code class="code">
+   OPENAPI_SPEC_URL
+  </code>
+  : (Required) The URL to the OpenAPI specification JSON file (e.g.
+  <code class="code">
+   https://example.com/spec.json
+  </code>
+  or
+  <code class="code">
+   file:///path/to/local/spec.json
+  </code>
+  ).
+ </li>
+<li>
+<code class="code">
+   OPENAPI_LOGFILE_PATH
+  </code>
+  : (Optional) Specifies the log file path.
+ </li>
+<li>
+<code class="code">
+   OPENAPI_SIMPLE_MODE
+  </code>
+  : (Optional) Set to
+  <code class="code">
+   true
+  </code>
+  to enable FastMCP mode.
+ </li>
+<li>
+<code class="code">
+   TOOL_WHITELIST
+  </code>
+  : (Optional) A comma-separated list of endpoint paths to expose as tools.
+ </li>
+<li>
+<code class="code">
+   TOOL_NAME_PREFIX
+  </code>
+  : (Optional) A prefix to prepend to all tool names.
+ </li>
+<li>
+<code class="code">
+   API_KEY
+  </code>
+  : (Optional) Authentication token for the API sent as
+  <code class="code">
+   Bearer &lt;API_KEY&gt;
+  </code>
+  in the Authorization header by default.
+ </li>
+<li>
+<code class="code">
+   API_AUTH_TYPE
+  </code>
+  : (Optional) Overrides the default
+  <code class="code">
+   Bearer
+  </code>
+  Authorization header type (e.g.
+  <code class="code">
+   Api-Key
+  </code>
+  for GetZep).
+ </li>
+<li>
+<code class="code">
+   STRIP_PARAM
+  </code>
+  : (Optional) JMESPath expression to strip unwanted parameters (e.g.
+  <code class="code">
+   token
+  </code>
+  for Slack).
+ </li>
+<li>
+<code class="code">
+   DEBUG
+  </code>
+  : (Optional) Enables verbose debug logging when set to "true", "1", or "yes".
+ </li>
+<li>
+<code class="code">
+   EXTRA_HEADERS
+  </code>
+  : (Optional) Additional HTTP headers in "Header: Value" format (one per line) to attach to outgoing API requests.
+ </li>
+<li>
+<code class="code">
+   SERVER_URL_OVERRIDE
+  </code>
+  : (Optional) Overrides the base URL from the OpenAPI specification when set, useful for custom deployments.
+ </li>
+<li>
+<code class="code">
+   TOOL_NAME_MAX_LENGTH
+  </code>
+  : (Optional) Truncates tool names to a max length.
+ </li>
+<li>
+  Additional Variable:
+  <code class="code">
+   OPENAPI_SPEC_URL_&lt;hash&gt;
+  </code>
+  – a variant for unique per-test configurations (falls back to
+  <code class="code">
+   OPENAPI_SPEC_URL
+  </code>
+  ).
+ </li>
+<li>
+<code class="code">
+   IGNORE_SSL_SPEC
+  </code>
+  : (Optional) Set to
+  <code class="code">
+   true
+  </code>
+  to disable SSL certificate verification when fetching the OpenAPI spec.
+ </li>
+<li>
+<code class="code">
+   IGNORE_SSL_TOOLS
+  </code>
+  : (Optional) Set to
+  <code class="code">
+   true
+  </code>
+  to disable SSL certificate verification for API requests made by tools.
+ </li>
+</ul>
+<h2 class="heading">
+ Examples
+</h2>
+<p>
+ For testing you can run the uvx command as demonstrated in the examples then interact with the MCP server via JSON-RPC messages to list tools and resources. See the "JSON-RPC Testing" section below.
+</p>
+<h3 class="heading">
+ Glama Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/84afdaa8-7b4f-4726-835f-64255ca970b7"/>
+</p>
+<p>
+ Glama offers the most minimal configuration for mcp-openapi-proxy requiring only the
+ <code class="code">
+  OPENAPI_SPEC_URL
+ </code>
+ environment variable. This simplicity makes it ideal for quick testing.
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Glama OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://glama.ai/api/mcp/openapi.json
+</code></pre>
+<p>
+ Ensure the response is a valid OpenAPI JSON document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Glama
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "glama": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://glama.ai/api/mcp/openapi.json"
+            }
+        }
+    }
+}
+</code></pre>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Start the service with:
+</p>
+<pre class="pre"><code class="language-bash code">OPENAPI_SPEC_URL="https://glama.ai/api/mcp/openapi.json" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ Then refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ Fly.io Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/80abd7fa-ccca-4e35-b0dd-36ef82a236c5"/>
+</p>
+<p>
+ Fly.io provides a simple API for managing machines making it an ideal starting point. Obtain an API token from
+ <a href="https://fly.io/docs/hands-on/install-flyctl/">
+  Fly.io documentation
+ </a>
+ .
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Fly.io OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/abhiaagarwal/peristera/refs/heads/main/fly-machines-gen/fixed_spec.json
+</code></pre>
+<p>
+ Ensure the response is a valid OpenAPI JSON document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Fly.io
+</h4>
+<p>
+ Update your MCP ecosystem configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "flyio": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/abhiaagarwal/peristera/refs/heads/main/fly-machines-gen/fixed_spec.json",
+                "API_KEY": "&lt;your_flyio_token_here&gt;"
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>
+<strong>
+   OPENAPI_SPEC_URL
+  </strong>
+  : Points to the Fly.io OpenAPI specification.
+ </li>
+<li>
+<strong>
+   API_KEY
+  </strong>
+  : Your Fly.io API token (replace
+  <code class="code">
+   &lt;your_flyio_token_here&gt;
+  </code>
+  ).
+ </li>
+<li>
+<strong>
+   API_AUTH_TYPE
+  </strong>
+  : Set to
+  <code class="code">
+   Api-Key
+  </code>
+  for Fly.io’s header-based authentication (overrides default
+  <code class="code">
+   Bearer
+  </code>
+  ).
+ </li>
+</ul>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ After starting the service refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ Render Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/f1dee1bf-e330-41f1-a700-6386edd8895e"/>
+</p>
+<p>
+ Render offers infrastructure hosting that can be managed via an API. The provided configuration file
+ <code class="code">
+  examples/render-claude_desktop_config.json
+ </code>
+ demonstrates how to set up your MCP ecosystem quickly with minimal settings.
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Render OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://api-docs.render.com/openapi/6140fb3daeae351056086186
+</code></pre>
+<p>
+ Ensure the response is a valid OpenAPI document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Render
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "render": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://api-docs.render.com/openapi/6140fb3daeae351056086186",
+                "TOOL_WHITELIST": "/services,/maintenance",
+                "API_KEY": "your_render_token_here"
+            }
+        }
+    }
+}
+</code></pre>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Launch the proxy with your Render configuration:
+</p>
+<pre class="pre"><code class="language-bash code">OPENAPI_SPEC_URL="https://api-docs.render.com/openapi/6140fb3daeae351056086186" TOOL_WHITELIST="/services,/maintenance" API_KEY="your_render_token_here" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ Then refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ Slack Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/706adad5-3f1c-4f32-aef5-6a1af794aef3"/>
+</p>
+<p>
+ Slack’s API showcases stripping unnecessary token payload using JMESPath. Obtain a bot token from
+ <a href="https://api.slack.com/authentication/token-types#bot">
+  Slack API documentation
+ </a>
+ .
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Slack OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json
+</code></pre>
+<p>
+ Ensure it’s a valid OpenAPI JSON document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Slack
+</h4>
+<p>
+ Update your configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "slack": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json",
+                "TOOL_WHITELIST": "/chat,/bots,/conversations,/reminders,/files,/users",
+                "API_KEY": "&lt;your_slack_bot_token, starts with xoxb&gt;",
+                "STRIP_PARAM": "token",
+                "TOOL_NAME_PREFIX": "slack_"
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>
+<strong>
+   OPENAPI_SPEC_URL
+  </strong>
+  : Slack’s OpenAPI spec URL.
+ </li>
+<li>
+<strong>
+   TOOL_WHITELIST
+  </strong>
+  : Limits tools to useful endpoint groups (e.g. chat, conversations, users).
+ </li>
+<li>
+<strong>
+   API_KEY
+  </strong>
+  : Your Slack bot token (e.g.
+  <code class="code">
+   xoxb-...
+  </code>
+  , replace
+  <code class="code">
+   &lt;your_slack_bot_token&gt;
+  </code>
+  ).
+ </li>
+<li>
+<strong>
+   STRIP_PARAM
+  </strong>
+  : Removes the token field from the request payload.
+ </li>
+<li>
+<strong>
+   TOOL_NAME_PREFIX
+  </strong>
+  : Prepends
+  <code class="code">
+   slack_
+  </code>
+  to tool names.
+ </li>
+</ul>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ After starting the service refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ GetZep Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/9a4fdabb-fa3d-4626-a50f-438147eadc9f"/>
+</p>
+<p>
+ GetZep offers a free cloud API for memory management with detailed endpoints. Since GetZep did not provide an official OpenAPI specification, this project includes a generated spec hosted on GitHub for convenience. Users can similarly generate OpenAPI specs for any REST API and reference them locally (e.g.
+ <code class="code">
+  file:///path/to/spec.json
+ </code>
+ ). Obtain an API key from
+ <a href="https://docs.getzep.com/">
+  GetZep's documentation
+ </a>
+ .
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the project-provided GetZep OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/matthewhand/mcp-openapi-proxy/refs/heads/main/examples/getzep.swagger.json
+</code></pre>
+<p>
+ Ensure it’s a valid OpenAPI JSON document. Alternatively, generate your own spec and use a
+ <code class="code">
+  file://
+ </code>
+ URL to reference a local file.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for GetZep
+</h4>
+<p>
+ Update your configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "getzep": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/matthewhand/mcp-openapi-proxy/refs/heads/main/examples/getzep.swagger.json",
+                "TOOL_WHITELIST": "/sessions",
+                "API_KEY": "&lt;your_getzep_api_key&gt;",
+                "API_AUTH_TYPE": "Api-Key",
+                "TOOL_NAME_PREFIX": "zep_"
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>
+<strong>
+   OPENAPI_SPEC_URL
+  </strong>
+  : Points to the project-provided GetZep Swagger spec (or use
+  <code class="code">
+   file:///path/to/your/spec.json
+  </code>
+  for a local file).
+ </li>
+<li>
+<strong>
+   TOOL_WHITELIST
+  </strong>
+  : Limits to
+  <code class="code">
+   /sessions
+  </code>
+  endpoints.
+ </li>
+<li>
+<strong>
+   API_KEY
+  </strong>
+  : Your GetZep API key.
+ </li>
+<li>
+<strong>
+   API_AUTH_TYPE
+  </strong>
+  : Uses
+  <code class="code">
+   Api-Key
+  </code>
+  for header-based authentication.
+ </li>
+<li>
+<strong>
+   TOOL_NAME_PREFIX
+  </strong>
+  : Prepends
+  <code class="code">
+   zep_
+  </code>
+  to tool names.
+ </li>
+</ul>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ After starting the service refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ Virustotal Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/d1760e58-a299-4004-9593-6dbaf3b685a1"/>
+</p>
+<p>
+ This example demonstrates:
+- Using a YAML OpenAPI specification file
+- Using custom HTTP auth header, "x-apikey"
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Virustotal OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/matthewhand/mcp-openapi-proxy/refs/heads/main/examples/virustotal.openapi.yml
+</code></pre>
+<p>
+ Ensure that the response is a valid OpenAPI YAML document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Virustotal
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "virustotal": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/matthewhand/mcp-openapi-proxy/refs/heads/main/examples/virustotal.openapi.yml",
+                "EXTRA_HEADERS": "x-apikey: ${VIRUSTOTAL_API_KEY}",
+                "OPENAPI_SPEC_FORMAT": "yaml"
+            }
+        }
+    }
+}
+</code></pre>
+<p>
+ Key configuration points:
+- By default, the proxy expects a JSON specification and sends the API key with a Bearer prefix.
+- To use a YAML OpenAPI specification, include
+ <code class="code">
+  OPENAPI_SPEC_FORMAT="yaml"
+ </code>
+ .
+- Note: VirusTotal requires a special authentication header; EXTRA_HEADERS is used to transmit the API key as "x-apikey: ${VIRUSTOTAL_API_KEY}".
+</p>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Launch the proxy with the Virustotal configuration:
+</p>
+<pre class="pre"><code class="language-bash code">OPENAPI_SPEC_URL="https://raw.githubusercontent.com/matthewhand/mcp-openapi-proxy/refs/heads/main/examples/virustotal.openapi.yml" API_KEY="your_virustotal_api_key" API_AUTH_HEADER="x-apikey" API_AUTH_TYPE="" OPENAPI_SPEC_FORMAT="yaml" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ After starting the service, refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ Notion Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/45038bcf-9537-4337-8a90-8553ad3aa81b"/>
+</p>
+<p>
+ Notion’s API requires specifying a particular version via HTTP headers. This example uses the
+ <code class="code">
+  EXTRA_HEADERS
+ </code>
+ environment variable to include the required header, and focuses on verifying the OpenAPI specification.
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Notion OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://storage.googleapis.com/versori-assets/public-specs/20240214/NotionAPI.yml
+</code></pre>
+<p>
+ Ensure the response is a valid YAML document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Notion
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "notion": {
+      "command": "uvx",
+      "args": [
+        "mcp-openapi-proxy"
+      ],
+      "env": {
+          "API_KEY": "ntn_&lt;your_key&gt;",
+          "OPENAPI_SPEC_URL": "https://storage.googleapis.com/versori-assets/public-specs/20240214/NotionAPI.yml",
+          "SERVER_URL_OVERRIDE": "https://api.notion.com",
+          "EXTRA_HEADERS": "Notion-Version: 2022-06-28"
+      }
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Launch the proxy with the Notion configuration:
+</p>
+<pre class="pre"><code class="language-bash code">OPENAPI_SPEC_URL="https://storage.googleapis.com/versori-assets/public-specs/20240214/NotionAPI.yml" SERVER_URL_OVERRIDE="https://api.notion.com" EXTRA_HEADERS="Notion-Version: 2022-06-28" API_KEY="ntn_&lt;your_key&gt;" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ After starting the service, refer to the
+ <a href="#json-rpc-testing">
+  JSON-RPC Testing
+ </a>
+ section for instructions on listing resources and tools.
+</p>
+<h3 class="heading">
+ Asana Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/087571dd-9e06-407e-905c-92815231f618"/>
+</p>
+<p>
+ Asana provides a rich set of endpoints for managing workspaces, tasks, projects, and users. The integration tests demonstrate usage of endpoints such as
+ <code class="code">
+  GET /workspaces
+ </code>
+ ,
+ <code class="code">
+  GET /tasks
+ </code>
+ , and
+ <code class="code">
+  GET /projects
+ </code>
+ .
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the Asana OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/Asana/openapi/refs/heads/master/defs/asana_oas.yaml
+</code></pre>
+<p>
+ Ensure the response is a valid YAML (or JSON) document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for Asana
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "asana": {
+      "command": "uvx",
+      "args": [
+        "mcp-openapi-proxy"
+      ],
+      "env": {
+        "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/Asana/openapi/refs/heads/master/defs/asana_oas.yaml",
+        "SERVER_URL_OVERRIDE": "https://app.asana.com/api/1.0",
+        "TOOL_WHITELIST": "/workspaces,/tasks,/projects,/users",
+        "API_KEY": "${ASANA_API_KEY}"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+<em>
+  Note: Most Asana API endpoints require authentication. Set
+  <code class="code">
+   ASANA_API_KEY
+  </code>
+  in your environment or
+  <code class="code">
+   .env
+  </code>
+  file with a valid token.
+ </em>
+</p>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Start the service with:
+</p>
+<pre class="pre"><code class="language-bash code">ASANA_API_KEY="&lt;your_asana_api_key&gt;" OPENAPI_SPEC_URL="https://raw.githubusercontent.com/Asana/openapi/refs/heads/master/defs/asana_oas.yaml" SERVER_URL_OVERRIDE="https://app.asana.com/api/1.0" TOOL_WHITELIST="/workspaces,/tasks,/projects,/users" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ You can then use the MCP ecosystem to list and invoke tools for endpoints like
+ <code class="code">
+  /dcim/devices/
+ </code>
+ and
+ <code class="code">
+  /ipam/ip-addresses/
+ </code>
+ .
+</p>
+<h3 class="heading">
+ APIs.guru Example
+</h3>
+<p>
+ APIs.guru provides a directory of OpenAPI definitions for thousands of public APIs. This example shows how to use mcp-openapi-proxy to expose the APIs.guru directory as MCP tools.
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the APIs.guru OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/apis.guru/2.2.0/openapi.yaml
+</code></pre>
+<p>
+ Ensure the response is a valid OpenAPI YAML document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for APIs.guru
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "apisguru": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/apis.guru/2.2.0/openapi.yaml"
+            }
+        }
+    }
+}
+</code></pre>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Start the service with:
+</p>
+<pre class="pre"><code class="language-bash code">OPENAPI_SPEC_URL="https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/apis.guru/2.2.0/openapi.yaml" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ You can then use the MCP ecosystem to list and invoke tools such as
+ <code class="code">
+  listAPIs
+ </code>
+ ,
+ <code class="code">
+  getMetrics
+ </code>
+ , and
+ <code class="code">
+  getProviders
+ </code>
+ that are defined in the APIs.guru directory.
+</p>
+<h3 class="heading">
+ NetBox Example
+</h3>
+<p>
+ NetBox is an open-source IP address management (IPAM) and data center infrastructure management (DCIM) tool. This example demonstrates how to use mcp-openapi-proxy to expose the NetBox API as MCP tools.
+</p>
+<h4 class="heading">
+ 1. Verify the OpenAPI Specification
+</h4>
+<p>
+ Retrieve the NetBox OpenAPI specification:
+</p>
+<pre class="pre"><code class="language-bash code">curl https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/netbox.dev/3.4/openapi.yaml
+</code></pre>
+<p>
+ Ensure the response is a valid OpenAPI YAML document.
+</p>
+<h4 class="heading">
+ 2. Configure mcp-openapi-proxy for NetBox
+</h4>
+<p>
+ Add the following configuration to your MCP ecosystem settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "netbox": {
+            "command": "uvx",
+            "args": ["mcp-openapi-proxy"],
+            "env": {
+                "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/netbox.dev/3.4/openapi.yaml",
+                "API_KEY": "${NETBOX_API_KEY}"
+            }
+        }
+    }
+}
+</code></pre>
+<p>
+<em>
+  Note: Most NetBox API endpoints require authentication. Set
+  <code class="code">
+   NETBOX_API_KEY
+  </code>
+  in your environment or
+  <code class="code">
+   .env
+  </code>
+  file with a valid token.
+ </em>
+</p>
+<h4 class="heading">
+ 3. Testing
+</h4>
+<p>
+ Start the service with:
+</p>
+<pre class="pre"><code class="language-bash code">OPENAPI_SPEC_URL="https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/netbox.dev/3.4/openapi.yaml" API_KEY="$NETBOX_API_KEY" uvx mcp-openapi-proxy
+</code></pre>
+<p>
+ You can then use the MCP ecosystem to list and invoke tools for endpoints like
+ <code class="code">
+  /dcim/devices/
+ </code>
+ and
+ <code class="code">
+  /ipam/ip-addresses/
+ </code>
+ .
+</p>
+<h3 class="heading">
+ Box API Example
+</h3>
+<p>
+ You can integrate the Box Platform API using your own developer token for authenticated access to your Box account. This example demonstrates how to expose Box API endpoints as MCP tools.
+</p>
+<h4 class="heading">
+ Example config:
+ <code class="code">
+  examples/box-claude_desktop_config.json
+ </code>
+</h4>
+<pre class="pre"><code class="language-json code">"env": {
+  "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/box.com/2.0.0/openapi.yaml",
+  "TOOL_WHITELIST": "/folders/{folder_id}/items,/files/{file_id},/search,/recent_items",
+  "API_KEY": "${BOX_API_KEY}"
+}
+</code></pre>
+<ul>
+<li>
+<p>
+   Set your Box developer token as an environment variable in
+   <code class="code">
+    .env
+   </code>
+   :
+   <code class="code">
+    BOX_API_KEY=your_box_developer_token
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Or run the proxy with a one-liner:
+   <code class="code">
+    bash
+  OPENAPI_SPEC_URL="https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/box.com/2.0.0/openapi.yaml" API_KEY="$BOX_API_KEY" uvx mcp-openapi-proxy
+   </code>
+</p>
+</li>
+</ul>
+<p>
+ You can now use the MCP ecosystem to list and invoke Box API tools. For integration tests, see
+ <code class="code">
+  tests/integration/test_box_integration.py
+ </code>
+ .
+</p>
+<p>
+ Note: developer api keys for free tier box users are limited to 60 minutes :(.
+</p>
+<h3 class="heading">
+ WolframAlpha API Example
+</h3>
+<p>
+<img alt="image" src="https://github.com/user-attachments/assets/6a634d63-5734-4275-8876-6bacb8beabcc"/>
+</p>
+<p>
+ You can integrate the WolframAlpha API using your own App ID for authenticated access. This example demonstrates how to expose WolframAlpha API endpoints as MCP tools.
+</p>
+<h4 class="heading">
+ Example config:
+ <code class="code">
+  examples/wolframalpha-claude_desktop_config.json
+ </code>
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "wolframalpha": {
+      "command": "uvx",
+      "args": [
+        "mcp-openapi-proxy"
+      ],
+      "env": {
+        "OPENAPI_SPEC_URL": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/wolframalpha.com/v0.1/openapi.yaml",
+        "API_KEY": "${WOLFRAM_LLM_APP_ID}"
+      }
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>
+<p>
+   Set your WolframAlpha App ID as an environment variable in
+   <code class="code">
+    .env
+   </code>
+   :
+   <code class="code">
+    WOLFRAM_LLM_APP_ID=your_wolfram_app_id
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Or run the proxy with a one-liner:
+   <code class="code">
+    bash
+  OPENAPI_SPEC_URL="https://raw.githubusercontent.com/APIs-guru/openapi-directory/refs/heads/main/APIs/wolframalpha.com/v0.1/openapi.yaml" API_KEY="$WOLFRAM_LLM_APP_ID" uvx mcp-openapi-proxy
+   </code>
+</p>
+</li>
+</ul>
+<p>
+ You can now use the MCP ecosystem to list and invoke WolframAlpha API tools. For integration tests, see
+ <code class="code">
+  tests/integration/test_wolframalpha_integration.py
+ </code>
+ .
+</p>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ JSON-RPC Testing
+</h3>
+<p>
+ For alternative testing, you can interact with the MCP server via JSON-RPC. After starting the server, paste the following initialization message:
+</p>
+<pre class="pre"><code class="language-json code">{"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0}
+</code></pre>
+<p>
+ Expected response:
+</p>
+<pre class="pre"><code class="language-json code">{"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2024-11-05","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"sqlite","version":"0.1.0"}}}
+</code></pre>
+<p>
+ Then paste these follow-up messages:
+</p>
+<pre class="pre"><code class="language-json code">{"method":"notifications/initialized","jsonrpc":"2.0"}
+{"method":"resources/list","params":{},"jsonrpc":"2.0","id":1}
+{"method":"tools/list","params":{},"jsonrpc":"2.0","id":2}
+</code></pre>
+<ul>
+<li>
+<strong>
+   Missing OPENAPI_SPEC_URL:
+  </strong>
+  Ensure it’s set to a valid OpenAPI JSON URL or local file path.
+ </li>
+<li>
+<strong>
+   Invalid Specification:
+  </strong>
+  Verify the OpenAPI document is standard-compliant.
+ </li>
+<li>
+<strong>
+   Tool Filtering Issues:
+  </strong>
+  Check
+  <code class="code">
+   TOOL_WHITELIST
+  </code>
+  matches desired endpoints.
+ </li>
+<li>
+<strong>
+   Authentication Errors:
+  </strong>
+  Confirm
+  <code class="code">
+   API_KEY
+  </code>
+  and
+  <code class="code">
+   API_AUTH_TYPE
+  </code>
+  are correct.
+ </li>
+<li>
+<strong>
+   Logging:
+  </strong>
+  Set
+  <code class="code">
+   DEBUG=true
+  </code>
+  for detailed output to stderr.
+ </li>
+<li>
+<strong>
+   Test Server:
+  </strong>
+  Run directly:
+ </li>
+</ul>
+<pre class="pre"><code class="language-bash code">uvx mcp-openapi-proxy
+</code></pre>
+<h2 class="heading">
+ License
+</h2>
+<p>
+<a href="LICENSE">
+  MIT License
+ </a>
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/matthewhand-mcp-openapi-proxy.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

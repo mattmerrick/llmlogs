@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="GitMCP - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/idosal-git-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GitMCP - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>GitMCP - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">GitMCP</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">GitMCP</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 2952</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agentic-ai</span><span class="topic-tag"> agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> claude</span><span class="topic-tag"> copilot</span><span class="topic-tag"> cursor</span><span class="topic-tag"> git</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span>
+                        </div>
+                        <a href="https://github.com/idosal/git-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="GitMCP - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/idosal-git-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GitMCP - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>GitMCP - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">GitMCP</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">GitMCP</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2952</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-ai</span><span class="topic-tag"> agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> claude</span><span class="topic-tag"> copilot</span><span class="topic-tag"> cursor</span><span class="topic-tag"> git</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/idosal/git-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="GitMCP - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/idosal-git-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="GitMCP - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>GitMCP - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>GitMCP</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2952</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-ai</span><span class="topic-tag"> agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> claude</span><span class="topic-tag"> copilot</span><span class="topic-tag"> cursor</span><span class="topic-tag"> git</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/idosal/git-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="GitMCP - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/idosal-git-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="GitMCP - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>GitMCP - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>GitMCP</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2952</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-ai</span><span class="topic-tag"> agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> claude</span><span class="topic-tag"> copilot</span><span class="topic-tag"> cursor</span><span class="topic-tag"> git</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/idosal/git-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ GitMCP
+</h1>
+<p align="center">
+<img alt="image" src="https://github.com/user-attachments/assets/2bf3e3df-556c-49c6-ab7b-36c279d53bba" width="884"/>
+</p>
+<p align="center">
+<a href="#-what-is-gitmcp">
+  What is GitMCP
+ </a>
+ •
+ <a href="#-features">
+  Features
+ </a>
+ •
+ <a href="#-getting-started">
+  Getting Started
+ </a>
+ •
+ <a href="#-how-it-works">
+  How It Works
+ </a>
+ •
+ <a href="#-badge">
+  Badge
+ </a>
+ •
+ <a href="#-examples">
+  Examples
+ </a>
+ •
+ <a href="#-faq">
+  FAQ
+ </a>
+ •
+ <a href="#-privacy">
+  Privacy
+ </a>
+ •
+ <a href="#-contributing">
+  Contributing
+ </a>
+ •
+ <a href="#-license">
+  License
+ </a>
+</p>
+<div align="center">
+ [![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/idosal/git-mcp)](https://gitmcp.io/idosal/git-mcp)
+[![Twitter Follow](https://img.shields.io/twitter/follow/idosal1?style=social)](https://twitter.com/idosal1)
+[![Twitter Follow](https://img.shields.io/twitter/follow/liadyosef?style=social)](https://twitter.com/liadyosef)
+</div>
+<div align="center">
+<a href="https://www.pulsemcp.com/servers/idosal-git-mcp">
+<img alt="Pulse MCP Badge" src="https://www.pulsemcp.com/badge/top-pick/idosal-git-mcp" width="400"/>
+</a>
+</div>
+<h2 class="heading">
+ 🤔 What is GitMCP?
+</h2>
+<p>
+<strong>
+  Stop vibe-hallucinating and start vibe-coding!
+ </strong>
+</p>
+<p>
+<a href="https://gitmcp.io">
+  GitMCP
+ </a>
+ is a free, open-source, remote
+ <a href="https://docs.anthropic.com/en/docs/agents-and-tools/mcp">
+  Model Context Protocol (MCP)
+ </a>
+ server that transforms
+ <strong>
+  any
+ </strong>
+ GitHub project (repositories or GitHub pages) into a documentation hub. It enables AI tools like Cursor to access up-to-date documentation and code, even if the LLM has never encountered them, thereby eliminating code hallucinations seamlessly.
+</p>
+<p>
+ GitMCP supports
+ <strong>
+  two flavors
+ </strong>
+ -
+</p>
+<ul>
+<li>
+<strong>
+   Specific Repository (
+   <code class="code">
+    gitmcp.io/{owner}/{repo}
+   </code>
+   or
+   <code class="code">
+    {owner}.gitmcp.io/{repo}
+   </code>
+   ):
+  </strong>
+  Use these when you primarily work with a select number of libraries. This ensures your AI assistant always targets the correct project, enhancing security and relevance by preventing access to unintended repositories.
+ </li>
+<li>
+<strong>
+   Generic Server (
+   <code class="code">
+    gitmcp.io/docs
+   </code>
+   ):
+  </strong>
+  Use this for maximum flexibility when you need to switch between different repositories frequently. The AI assistant will prompt you (or decide based on context) which repository to access for each request. Be mindful that this relies on correctly identifying the target repository each time.
+ </li>
+</ul>
+<p>
+<strong>
+  With GitMCP:
+ </strong>
+</p>
+<ul>
+<li>
+  AI assistants access the
+  <em>
+   latest
+  </em>
+  documentation and code directly from the source.
+ </li>
+<li>
+  Get accurate API usage and reliable code examples.
+ </li>
+<li>
+  Work effectively even with niche, new, or rapidly changing libraries.
+ </li>
+<li>
+  Significantly reduced hallucinations and improved code correctness.
+ </li>
+</ul>
+<p>
+ For example, this side-by-side comparison shows the result for the same one-shot prompt in Cursor when creating a
+ <a href="https://github.com/mrdoob/three.js">
+  three.js
+ </a>
+ scene -
+</p>
+<p>
+ https://github.com/user-attachments/assets/fbf1b4a7-f9f0-4c0e-831c-4d64faae2c45
+</p>
+<h2 class="heading">
+ ✨ Features
+</h2>
+<ul>
+<li>
+  😎
+  <strong>
+   Latest Documentation on ANY GitHub Project
+  </strong>
+  : Grant your AI assistant seamless access to the GitHub project's documentation and code. The built-in smart search capabilities help find exactly what the AI needs without using too many tokens!
+ </li>
+<li>
+  🧠
+  <strong>
+   No More Hallucinations
+  </strong>
+  : With GitMCP, your AI assistant can provide accurate and relevant answers to your questions.
+ </li>
+<li>
+  ☁️
+  <strong>
+   Zero Setup
+  </strong>
+  : GitMCP runs in the cloud. Simply add the chosen GitMCP URL as an MCP server in your IDE — no downloads, installations, signups, or changes are required.
+ </li>
+<li>
+  💬
+  <strong>
+   Embedded Chat
+  </strong>
+  : Start quickly by chatting directly with the repository's documentation through our in-browser chat!
+ </li>
+<li>
+  ✅
+  <strong>
+   Open, Free, and Private
+  </strong>
+  : GitMCP is open-source and completely free to use. It doesn't collect personal information or store queries. You can even self-host it!
+ </li>
+</ul>
+<video src="https://github.com/user-attachments/assets/2c3afaf9-6c08-436e-9efd-db8710554430">
+</video>
+<h2 class="heading">
+ 🚀 Getting Started
+</h2>
+<p>
+ Using GitMCP is easy! Simply follow these steps:
+</p>
+<h3 class="heading">
+ Step 1: Choose the type of server you want
+</h3>
+<p>
+ Choose one of these URL formats depending on what you want to connect to:
+</p>
+<ul>
+<li>
+  For GitHub repositories:
+  <code class="code">
+   gitmcp.io/{owner}/{repo}
+  </code>
+</li>
+<li>
+  For GitHub Pages sites:
+  <code class="code">
+   {owner}.gitmcp.io/{repo}
+  </code>
+</li>
+<li>
+  For a generic tool that supports any repository (dynamic):
+  <code class="code">
+   gitmcp.io/docs
+  </code>
+</li>
+</ul>
+<p>
+ Replace
+ <code class="code">
+  {owner}
+ </code>
+ with the GitHub username or organization name, and
+ <code class="code">
+  {repo}
+ </code>
+ with the repository name.
+</p>
+<p>
+ For your convenience, you can also use the conversion tool on the landing page to format the GitHub URL into an MCP URL!
+</p>
+<h3 class="heading">
+ Step 2: Connect your AI assistant
+</h3>
+<p>
+ Select your AI assistant from the options below and follow the configuration instructions:
+</p>
+<h4 class="heading">
+ Connecting Cursor
+</h4>
+<p>
+ Update your Cursor configuration file at
+ <code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ :
+ <code class="code">
+  json
+   {
+     "mcpServers": {
+       "gitmcp": {
+         "url": "https://gitmcp.io/{owner}/{repo}"
+       }
+     }
+   }
+ </code>
+</p>
+<h4 class="heading">
+ Connecting Claude Desktop
+</h4>
+<ol>
+<li>
+  In Claude Desktop, go to Settings &gt; Developer &gt; Edit Config
+ </li>
+<li>
+  Replace the configuration with:
+  <code class="code">
+   json
+   {
+     "mcpServers": {
+       "gitmcp": {
+         "command": "npx",
+         "args": [
+           "mcp-remote",
+           "https://gitmcp.io/{owner}/{repo}"
+         ]
+       }
+     }
+   }
+  </code>
+</li>
+</ol>
+<h4 class="heading">
+ Connecting Windsurf
+</h4>
+<p>
+ Update your Windsurf configuration file at
+ <code class="code">
+  ~/.codeium/windsurf/mcp_config.json
+ </code>
+ :
+ <code class="code">
+  json
+   {
+     "mcpServers": {
+       "gitmcp": {
+         "serverUrl": "https://gitmcp.io/{owner}/{repo}"
+       }
+     }
+   }
+ </code>
+</p>
+<h4 class="heading">
+ Connecting VSCode
+</h4>
+<p>
+ Update your VSCode configuration file at
+ <code class="code">
+  .vscode/mcp.json
+ </code>
+ :
+ <code class="code">
+  json
+   {
+     "servers": {
+       "gitmcp": {
+         "type": "sse",
+         "url": "https://gitmcp.io/{owner}/{repo}"
+       }
+     }
+   }
+ </code>
+</p>
+<h4 class="heading">
+ Connecting Cline
+</h4>
+<p>
+ Update your Cline configuration file at
+ <code class="code">
+  ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
+ </code>
+ :
+ <code class="code">
+  json
+   {
+     "mcpServers": {
+       "gitmcp": {
+         "url": "https://gitmcp.io/{owner}/{repo}",
+         "disabled": false,
+         "autoApprove": []
+       }
+     }
+   }
+ </code>
+</p>
+<h4 class="heading">
+ Connecting Highlight AI
+</h4>
+<ol>
+<li>
+  Open Highlight AI and click the plugins icon (@ symbol) in the sidebar
+ </li>
+<li>
+  Click
+  <strong>
+   Installed Plugins
+  </strong>
+  at the top of the sidebar
+ </li>
+<li>
+  Select
+  <strong>
+   Custom Plugin
+  </strong>
+</li>
+<li>
+  Click
+  <strong>
+   Add a plugin using a custom SSE URL
+  </strong>
+</li>
+</ol>
+<p>
+ Plugin name:
+ <code class="code">
+  gitmcp
+ </code>
+ SSE URL:
+ <code class="code">
+  https://gitmcp.io/{owner}/{repo}
+ </code>
+</p>
+<p>
+ For more details on adding custom MCP servers to HighlightAI, refer to
+ <a href="https://docs.highlightai.com/learn/developers/plugins/custom-plugins-setup">
+  the documentation
+ </a>
+ .
+</p>
+<h4 class="heading">
+ Connecting Augment Code
+</h4>
+<ol>
+<li>
+  Open Augment Code settings
+ </li>
+<li>
+  Navigate to the MCP section
+ </li>
+<li>
+  Add a new MCP server with the following details:
+ </li>
+</ol>
+<p>
+ Name the MCP server:
+ <code class="code">
+  git-mcp Docs
+ </code>
+</p>
+<p>
+ Use this command:
+</p>
+<pre class="pre"><code class="language-bash code">npx mcp-remote https://gitmcp.io/{owner}/{repo}
+</code></pre>
+<p>
+ Or use the following configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "git-mcp Docs": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/{owner}/{repo}"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ For more details on configuring MCP servers in Augment Code, visit
+ <a href="https://docs.augmentcode.com/setup-augment/mcp">
+  the Augment Code documentation
+ </a>
+ .
+</p>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  Remember to replace
+  <code class="code">
+   {owner}
+  </code>
+  and
+  <code class="code">
+   {repo}
+  </code>
+  with the actual GitHub username/organization and repository name. You can also use the dynamic endpoint
+  <code class="code">
+   https://gitmcp.io/docs
+  </code>
+  to allow your AI to access any repository on demand.
+ </p>
+</blockquote>
+<h2 class="heading">
+ ⚙ How It Works
+</h2>
+<p>
+ GitMCP connects your AI assistant to GitHub repositories using the Model Context Protocol (MCP), a standard that lets AI tools request additional information from external sources.
+</p>
+<p>
+ What happens when you use GitMCP:
+</p>
+<ol>
+<li>
+<strong>
+   You provide the GitMCP URL
+  </strong>
+  to your AI assistant (e.g.,
+  <code class="code">
+   gitmcp.io/microsoft/typescript
+  </code>
+  ). GitMCP exposes tools like documentation fetching, smart search, code search, etc.
+ </li>
+<li>
+<strong>
+   Prompt the AI assistant
+  </strong>
+  on documentation/code-related questions.
+ </li>
+<li>
+<strong>
+   Your AI sends requests
+  </strong>
+  to GitMCP to use its tools (with your approval).
+ </li>
+<li>
+<strong>
+   GitMCP executes the AI's request
+  </strong>
+  and returns the requested data.
+ </li>
+<li>
+<strong>
+   Your AI receives the information
+  </strong>
+  and generates a more accurate, grounded response without hallucinations.
+ </li>
+</ol>
+<h3 class="heading">
+ Supported Documentation
+</h3>
+<p>
+ GitMCP currently supports the following documents (in order of priority):
+1.
+ <a href="https://llmstxt.org">
+  llms.txt
+ </a>
+ 2. AI-optimized version of the project's documentation
+3.
+ <code class="code">
+  README.md
+ </code>
+ /root
+</p>
+<h2 class="heading">
+ 💡 Examples
+</h2>
+<p>
+ Here are some examples of how to use GitMCP with different AI assistants and repositories:
+</p>
+<h3 class="heading">
+ Example 1: Using Windsurf with a specific repository
+</h3>
+<p>
+ For the GitHub repository
+ <code class="code">
+  https://github.com/microsoft/playwright-mcp
+ </code>
+ , add
+ <code class="code">
+  https://gitmcp.io/microsoft/playwright-mcp
+ </code>
+ as an MCP server to Windsurf.
+</p>
+<p>
+<strong>
+  Prompt to Claude:
+ </strong>
+</p>
+<blockquote>
+<p>
+  "How do I use the Playwright MCP"
+ </p>
+</blockquote>
+<p>
+ Windsurf will pull the relevant documentation from GitMCP to implement the memory feature correctly.
+</p>
+<h3 class="heading">
+ Example 2: Using Cursor with a GitHub Pages site
+</h3>
+<p>
+ For the GitHub Pages site
+ <code class="code">
+  langchain-ai.github.io/langgraph
+ </code>
+ , add
+ <code class="code">
+  https://langchain-ai.gitmcp.io/langgraph
+ </code>
+ as an MCP server to Cursor.
+</p>
+<p>
+<strong>
+  Prompt to Cursor:
+ </strong>
+</p>
+<blockquote>
+<p>
+  "Add memory to my LangGraph agent"
+ </p>
+</blockquote>
+<p>
+ Cursor will pull the relevant documentation and code from GitMCP to correctly implement the memory feature.
+</p>
+<h3 class="heading">
+ Example 3: Using Claude Desktop with the dynamic endpoint
+</h3>
+<p>
+ You don't have to pick specific repositories. The generic
+ <code class="code">
+  gitmcp.io/docs
+ </code>
+ endpoint allows AI to pick the GitHub project on the fly!
+</p>
+<p>
+<strong>
+  Prompt to any AI assistant:
+ </strong>
+</p>
+<blockquote>
+<p>
+  "I want to learn about the OpenAI Whisper speech recognition model. Explain how it works.
+ </p>
+</blockquote>
+<p>
+ Claude will pull the data from GitMCP and answer the question.
+</p>
+<h2 class="heading">
+ 🛠️ Tools
+</h2>
+<p>
+ GitMCP provides AI assistants with several valuable tools to help them access, understand, and query GitHub repositories.
+</p>
+<h3 class="heading">
+<code class="code">
+  fetch_&lt;repo-name&gt;_documentation
+ </code>
+</h3>
+<p>
+ This tool gets the primary documentation from a GitHub repository. It works by retrieving relevant documentation (e.g.,
+ <code class="code">
+  llms.txt
+ </code>
+ ). This gives the AI a good overview of what the project is about
+</p>
+<p>
+<strong>
+  When it's useful:
+ </strong>
+ For general questions about a project's purpose, features, or how to get started
+</p>
+<h3 class="heading">
+<code class="code">
+  search_&lt;repo-name&gt;_documentation
+ </code>
+</h3>
+<p>
+ This tool lets the AI search through a repository's documentation by providing a specific search query. Instead of loading all the documentation (which could be very large), it uses intelligent search to find just the relevant parts.
+</p>
+<p>
+<strong>
+  When it's useful:
+ </strong>
+ For specific questions about particular features, functions, or concepts within a project
+</p>
+<h3 class="heading">
+<code class="code">
+  fetch_url_content
+ </code>
+</h3>
+<p>
+ This tool helps the AI get information from links mentioned in the documentation. It retrieves the content from those links and converts it to a format the AI can easily read.
+</p>
+<p>
+<strong>
+  When it's useful:
+ </strong>
+ When documentation references external information that would help answer your question
+</p>
+<h3 class="heading">
+<code class="code">
+  search_&lt;repo-name&gt;_code
+ </code>
+</h3>
+<p>
+ This tool searches through the actual code in the repository using GitHub's code search. It helps AI find specific code examples or implementation details.
+</p>
+<p>
+<strong>
+  When it's useful:
+ </strong>
+ When you want examples of how something is implemented or need technical details not covered in documentation
+</p>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  When using the dynamic endpoint (
+  <code class="code">
+   gitmcp.io/docs
+  </code>
+  ), these tools are named slightly differently (
+  <code class="code">
+   fetch_generic_documentation
+  </code>
+  ,
+  <code class="code">
+   search_generic_code
+  </code>
+  , and
+  <code class="code">
+   search_generic_documentation
+  </code>
+  ) and need additional information about which repository to access.
+ </p>
+</blockquote>
+<h2 class="heading">
+ 📊 Badge
+</h2>
+<p>
+ GitMCP has a badge to your repository's README. It allows users to quickly access your documentation through their IDE or browser (using the embedded chat). It also showcases how many times your documentation has been accessed through GitMCP.
+</p>
+<p>
+ Example (
+ <code class="code">
+  idosal/git-mcp
+ </code>
+ ):
+ <a href="https://gitmcp.io/idosal/git-mcp">
+<img alt="GitMCP" src="https://img.shields.io/endpoint?url=https://gitmcp.io/badge/idosal/git-mcp"/>
+</a>
+</p>
+<h3 class="heading">
+ Adding the Badge to Your Repository
+</h3>
+<p>
+ Add the following to your
+ <code class="code">
+  README.md
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-markdown code">[![GitMCP](https://img.shields.io/endpoint?url=https://gitmcp.io/badge/OWNER/REPO)](https://gitmcp.io/OWNER/REPO)
+</code></pre>
+<p>
+ Replace
+ <code class="code">
+  OWNER
+ </code>
+ with your GitHub username or organization, and
+ <code class="code">
+  REPO
+ </code>
+ with your repository name.
+</p>
+<h3 class="heading">
+ How We Count Views
+</h3>
+<p>
+ Increment for each tool call on the specific repository.
+</p>
+<h3 class="heading">
+ Customizing the Badge
+</h3>
+<p>
+ You can customize the badge's appearance with parameters:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Parameter
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Default
+   </th>
+<th>
+    Example
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     color
+    </code>
+</td>
+<td>
+    Color for the badge value
+   </td>
+<td>
+<code class="code">
+     aquamarine
+    </code>
+</td>
+<td>
+<code class="code">
+     ?color=green
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     label
+    </code>
+</td>
+<td>
+    Badge label
+   </td>
+<td>
+<code class="code">
+     GitMCP
+    </code>
+</td>
+<td>
+<code class="code">
+     Documentation
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+ Please reach out!
+</p>
+<h2 class="heading">
+ ❓ FAQ
+</h2>
+<h3 class="heading">
+ What is the Model Context Protocol?
+</h3>
+<p>
+ The
+ <a href="https://modelcontextprotocol.io/introduction">
+  Model Context Protocol
+ </a>
+ is a standard that allows AI assistants to request and receive additional context from external sources in a structured manner, enhancing their understanding and performance.
+</p>
+<h3 class="heading">
+ Does GitMCP work with any AI assistant?
+</h3>
+<p>
+ Yes, GitMCP is compatible with any AI assistant supporting the Model Context Protocol, including tools like Cursor, VSCode, Claude, etc.
+</p>
+<h3 class="heading">
+ Is GitMCP compatible with all GitHub projects?
+</h3>
+<p>
+ Absolutely! GitMCP works with any public GitHub repository without requiring any modifications. It prioritizes the
+ <code class="code">
+  llms.txt
+ </code>
+ file and falls back to
+ <code class="code">
+  README.md
+ </code>
+ or other pages if the former is unavailable. Future updates aim to support additional documentation methods and even generate content dynamically.
+</p>
+<h3 class="heading">
+ Does GitMCP cost money?
+</h3>
+<p>
+ No, GitMCP is a free service to the community with no associated costs.
+</p>
+<h2 class="heading">
+ 🔒 Privacy
+</h2>
+<p>
+ GitMCP is deeply committed to its users' privacy. The service doesn't have access to or store any personally identifiable information as it doesn't require authentication. In addition, it doesn't store any queries sent by the agents. Moreover, as GitMCP is an open-source project, it can be deployed independently in your environment.
+</p>
+<p>
+ GitMCP only accesses content that is already publicly available and only when queried by a user. GitMCP does not automatically scrape repositories. Before accessing any GitHub Pages site, the code checks for
+ <code class="code">
+  robots.txt
+ </code>
+ rules and follows the directives set by site owners, allowing them to opt out. Please note that GitMCP doesn't permanently store data regarding the GitHub projects or their content.
+</p>
+<h2 class="heading">
+ 👥 Contributing
+</h2>
+<p>
+ We welcome contributions, feedback, and ideas! Please review our
+ <a href="https://github.com/idosal/git-mcp/blob/main/.github/CONTRIBUTING.md">
+  contribution
+ </a>
+ guidelines.
+</p>
+<h3 class="heading">
+ Local Development Setup
+</h3>
+<ol>
+<li>
+<p>
+<strong>
+    Clone the repository
+   </strong>
+<code class="code">
+    bash
+   git clone https://github.com/idosal/git-mcp.git
+   cd git-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Install dependencies
+   </strong>
+<code class="code">
+    bash
+   pnpm install
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Run locally for development
+   </strong>
+<code class="code">
+    bash
+   npm run dev
+   # or
+   pnpm dev
+   </code>
+</p>
+</li>
+</ol>
+<h4 class="heading">
+ Using MCP Inspector for Testing
+</h4>
+<ol>
+<li>
+<p>
+   Install the MCP Inspector tool:
+   <code class="code">
+    bash
+   npx @modelcontextprotocol/inspector
+   </code>
+</p>
+</li>
+<li>
+<p>
+   In the inspector interface:
+  </p>
+</li>
+<li>
+  Set Transport Type to
+  <code class="code">
+   SSE
+  </code>
+</li>
+<li>
+  Enter your GitMCP URL (e.g.,
+  <code class="code">
+   http://localhost:5173/docs
+  </code>
+  )
+ </li>
+<li>
+  Click "Connect"
+ </li>
+</ol>
+<h2 class="heading">
+ 📄 License
+</h2>
+<p>
+ This project is licensed under the
+ <a href="LICENSE">
+  Apache License 2.0
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Disclaimer
+</h2>
+<p>
+ GitMCP is provided "as is" without warranty of any kind. While we strive to ensure the reliability and security of our service, we are not responsible for any damages or issues that may arise from its use. GitHub projects accessed through GitMCP are subject to their respective owners' terms and conditions. GitMCP is not affiliated with GitHub or any of the mentioned AI tools.
+</p>
+<h2 class="heading">
+ Star History
+</h2>
+<p>
+<a href="https://www.star-history.com/#idosal/git-mcp&amp;Timeline">
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=idosal/git-mcp&amp;type=Timeline"/>
+</a>
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/idosal-git-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/idosal-git-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/idosal-git-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/idosal-git-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MongoDB MCP Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MongoDB MCP Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>MongoDB MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MongoDB MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MongoDB MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 194</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mongodb</span><span class="topic-tag"> mongodb-atlas</span><span class="topic-tag"> mongodb-database</span>
+                        </div>
+                        <a href="https://github.com/mongodb-js/mongodb-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MongoDB MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MongoDB MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MongoDB MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MongoDB MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MongoDB MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 194</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mongodb</span><span class="topic-tag"> mongodb-atlas</span><span class="topic-tag"> mongodb-database</span>
+</div>
+<a class="github-link" href="https://github.com/mongodb-js/mongodb-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MongoDB MCP Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MongoDB MCP Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>MongoDB MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MongoDB MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 194</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mongodb</span><span class="topic-tag"> mongodb-atlas</span><span class="topic-tag"> mongodb-database</span>
+</div>
+<a class="github-link" href="https://github.com/mongodb-js/mongodb-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MongoDB MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MongoDB MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MongoDB MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MongoDB MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 194</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mongodb</span><span class="topic-tag"> mongodb-atlas</span><span class="topic-tag"> mongodb-database</span>
+</div>
+<a class="github-link" href="https://github.com/mongodb-js/mongodb-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<p>
+<a href="https://insiders.vscode.dev/redirect/mcp/install?name=mongodb&amp;inputs=%5B%7B%22id%22%3A%22connection_string%22%2C%22type%22%3A%22promptString%22%2C%22description%22%3A%22MongoDB%20connection%20string%22%7D%5D&amp;config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mongodb-mcp-server%22%5D%2C%22env%22%3A%7B%22MDB_MCP_CONNECTION_STRING%22%3A%22%24%7Binput%3Aconnection_string%7D%22%7D%7D">
+<img alt="Install in VS Code" src="https://img.shields.io/badge/VS_Code-Install_Server-0098FF?logo=data:image/svg%2bxml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgNDggNDgiIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiPjxwYXRoIGQ9Ik00NC45OTkgMTAuODd2MjYuMjFjMCAxLjAzLS41OSAxLjk3LTEuNTEgMi40Mi0yLjY4IDEuMjktOCAzLjg1LTguMzUgNC4wMS0uMTMuMDctLjM4LjItLjY3LjMxLjM1LS42LjUzLTEuMy41My0yLjAyVjYuMmMwLS43NS0uMi0xLjQ1LS41Ni0yLjA2LjA5LjA0LjE3LjA4LjI0LjExLjIuMSA1Ljk4IDIuODYgOC44IDQuMkM0NC40MDkgOC45IDQ0Ljk5OSA5Ljg0IDQ0Ljk5OSAxMC44N3pNNy40OTkgMjYuMDNjMS42IDEuNDYgMy40MyAzLjEzIDUuMzQgNC44NmwtNC42IDMuNWMtLjc3LjU3LTEuNzguNS0yLjU2LS4wNS0uNS0uMzYtMS44OS0xLjY1LTEuODktMS42NS0xLjAxLS44MS0xLjA2LTIuMzItLjExLTMuMTlDMy42NzkgMjkuNSA1LjE3OSAyOC4xMyA3LjQ5OSAyNi4wM3pNMzEuOTk5IDYuMnYxMC4xMWwtNy42MyA1LjgtNi44NS01LjIxYzQuOTgtNC41MyAxMC4wMS05LjExIDEyLjY1LTExLjUyQzMwLjg2OSA0Ljc0IDMxLjk5OSA1LjI1IDMxLjk5OSA2LjJ6TTMyIDQxLjc5OFYzMS42OUw4LjI0IDEzLjYxYy0uNzctLjU3LTEuNzgtLjUtMi41Ni4wNS0uNS4zNi0xLjg5IDEuNjUtMS44OSAxLjY1LTEuMDEuODEtMS4wNiAyLjMyLS4xMSAzLjE5IDAgMCAyMC4xNDUgMTguMzM4IDI2LjQ4NSAyNC4xMTZDMzAuODcxIDQzLjI2IDMyIDQyLjc1MyAzMiA0MS43OTh6Ii8+PC9zdmc+"/>
+</a>
+<a href="https://cursor.com/install-mcp?name=MongoDB&amp;config=eyJjb21tYW5kIjoibnB4IC15IG1vbmdvZGItbWNwLXNlcnZlciJ9">
+<img alt="Install in Cursor" src="https://img.shields.io/badge/Cursor-Install_Server-1e1e1e?logo=data:image/svg%2bxml;base64,PHN2ZyBoZWlnaHQ9IjFlbSIgc3R5bGU9ImZsZXg6bm9uZTtsaW5lLWhlaWdodDoxIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIxZW0iCiAgICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHRpdGxlPkN1cnNvcjwvdGl0bGU+CiAgICA8cGF0aCBkPSJNMTEuOTI1IDI0bDEwLjQyNS02LTEwLjQyNS02TDEuNSAxOGwxMC40MjUgNnoiCiAgICAgICAgZmlsbD0idXJsKCNsb2JlLWljb25zLWN1cnNvcnVuZGVmaW5lZC1maWxsLTApIj48L3BhdGg+CiAgICA8cGF0aCBkPSJNMjIuMzUgMThWNkwxMS45MjUgMHYxMmwxMC40MjUgNnoiIGZpbGw9InVybCgjbG9iZS1pY29ucy1jdXJzb3J1bmRlZmluZWQtZmlsbC0xKSI+PC9wYXRoPgogICAgPHBhdGggZD0iTTExLjkyNSAwTDEuNSA2djEybDEwLjQyNS02VjB6IiBmaWxsPSJ1cmwoI2xvYmUtaWNvbnMtY3Vyc29ydW5kZWZpbmVkLWZpbGwtMikiPjwvcGF0aD4KICAgIDxwYXRoIGQ9Ik0yMi4zNSA2TDExLjkyNSAyNFYxMkwyMi4zNSA2eiIgZmlsbD0iIzU1NSI+PC9wYXRoPgogICAgPHBhdGggZD0iTTIyLjM1IDZsLTEwLjQyNSA2TDEuNSA2aDIwLjg1eiIgZmlsbD0iI2ZmZiI+PC9wYXRoPgogICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBpZD0ibG9iZS1pY29ucy1jdXJzb3J1bmRlZmluZWQtZmlsbC0wIgogICAgICAgICAgICB4MT0iMTEuOTI1IiB4Mj0iMTEuOTI1IiB5MT0iMTIiIHkyPSIyNCI+CiAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iLjE2IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii4zOSI+PC9zdG9wPgogICAgICAgICAgICA8c3RvcCBvZmZzZXQ9Ii42NTgiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjgiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICAgIDxsaW5lYXJHcmFkaWVudCBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgaWQ9ImxvYmUtaWNvbnMtY3Vyc29ydW5kZWZpbmVkLWZpbGwtMSIKICAgICAgICAgICAgeDE9IjIyLjM1IiB4Mj0iMTEuOTI1IiB5MT0iNi4wMzciIHkyPSIxMi4xNSI+CiAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iLjE4MiIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMzEiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIuNzE1IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICAgIDxsaW5lYXJHcmFkaWVudCBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgaWQ9ImxvYmUtaWNvbnMtY3Vyc29ydW5kZWZpbmVkLWZpbGwtMiIKICAgICAgICAgICAgeDE9IjExLjkyNSIgeDI9IjEuNSIgeTE9IjAiIHkyPSIxOCI+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjYiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIuNjY3IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii4yMiI+PC9zdG9wPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+Cjwvc3ZnPgo="/>
+</a>
+<a href="https://smithery.ai/server/@mongodb-js/mongodb-mcp-server">
+<img alt="View on Smithery" src="https://smithery.ai/badge/@mongodb-js/mongodb-mcp-server"/>
+</a>
+</p>
+<h1 class="heading">
+ MongoDB MCP Server
+</h1>
+<p>
+ A Model Context Protocol server for interacting with MongoDB Databases and MongoDB Atlas.
+</p>
+<h2 class="heading">
+ 📚 Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#getting-started">
+   🚀 Getting Started
+  </a>
+</li>
+<li>
+<a href="#prerequisites">
+   Prerequisites
+  </a>
+</li>
+<li>
+<a href="#setup">
+   Setup
+  </a>
+<ul>
+<li>
+<a href="#quick-start">
+     Quick Start
+    </a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#supported-tools">
+   🛠️ Supported Tools
+  </a>
+</li>
+<li>
+<a href="#mongodb-atlas-tools">
+   MongoDB Atlas Tools
+  </a>
+</li>
+<li>
+<a href="#mongodb-database-tools">
+   MongoDB Database Tools
+  </a>
+</li>
+<li>
+<a href="#configuration">
+   ⚙️ Configuration
+  </a>
+</li>
+<li>
+<a href="#configuration-options">
+   Configuration Options
+  </a>
+</li>
+<li>
+<a href="#atlas-api-access">
+   Atlas API Access
+  </a>
+</li>
+<li>
+<a href="#configuration-methods">
+   Configuration Methods
+  </a>
+<ul>
+<li>
+<a href="#environment-variables">
+     Environment Variables
+    </a>
+</li>
+<li>
+<a href="#command-line-arguments">
+     Command-Line Arguments
+    </a>
+</li>
+<li>
+<a href="#mcp-configuration-file-examples">
+     MCP Client Configuration
+    </a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#contributing">
+   🤝 Contributing
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Prerequisites
+</h2>
+<ul>
+<li>
+  Node.js (v20.10.0 or later)
+ </li>
+</ul>
+<pre class="pre"><code class="language-shell code">node -v
+</code></pre>
+<ul>
+<li>
+  A MongoDB connection string or Atlas API credentials,
+  <strong>
+<em>
+    the Server will not start unless configured
+   </em>
+</strong>
+  .
+ </li>
+<li>
+<strong>
+<em>
+    Service Accounts Atlas API credentials
+   </em>
+</strong>
+  are required to use the Atlas tools. You can create a service account in MongoDB Atlas and use its credentials for authentication. See
+  <a href="#atlas-api-access">
+   Atlas API Access
+  </a>
+  for more details.
+ </li>
+<li>
+  If you have a MongoDB connection string, you can use it directly to connect to your MongoDB instance.
+ </li>
+</ul>
+<h2 class="heading">
+ Setup
+</h2>
+<h3 class="heading">
+ Quick Start
+</h3>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  When using Atlas API credentials, be sure to assign only the minimum required permissions to your service account. See
+  <a href="#atlas-api-permissions">
+   Atlas API Permissions
+  </a>
+  for details.
+ </p>
+</blockquote>
+<p>
+ Most MCP clients require a configuration file to be created or modified to add the MCP server.
+</p>
+<p>
+ Note: The configuration file syntax can be different across clients. Please refer to the following links for the latest expected syntax:
+</p>
+<ul>
+<li>
+<strong>
+   Windsurf
+  </strong>
+  :https://docs.windsurf.com/windsurf/mcp
+ </li>
+<li>
+<strong>
+   VSCode
+  </strong>
+  : https://code.visualstudio.com/docs/copilot/chat/mcp-servers
+ </li>
+<li>
+<strong>
+   Claude Desktop
+  </strong>
+  : https://modelcontextprotocol.io/quickstart/user
+ </li>
+<li>
+<strong>
+   Cursor
+  </strong>
+  : https://docs.cursor.com/context/model-context-protocol
+ </li>
+</ul>
+<h4 class="heading">
+ Option 1: Connection String args
+</h4>
+<p>
+ You can pass your connection string via args, make sure to use a valid username and password.
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server",
+        "--connectionString",
+        "mongodb://localhost:27017/myDatabase"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ NOTE: The connection string can be configured to connect to any MongoDB cluster, whether it's a local instance or an Atlas cluster.
+</p>
+<h4 class="heading">
+ Option 2: Atlas API credentials args
+</h4>
+<p>
+ Use your Atlas API Service Accounts credentials. Must follow all the steps in
+ <a href="#atlas-api-access">
+  Atlas API Access
+ </a>
+ section.
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server",
+        "--apiClientId",
+        "your-atlas-service-accounts-client-id",
+        "--apiClientSecret",
+        "your-atlas-service-accounts-client-secret"
+      ]
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ Option 3: Standalone Service using command arguments
+</h4>
+<p>
+ Start Server using npx command:
+</p>
+<pre class="pre"><code class="language-shell code"> npx -y mongodb-mcp-server --apiClientId="your-atlas-service-accounts-client-id" --apiClientSecret="your-atlas-service-accounts-client-secret"
+</code></pre>
+<ul>
+<li>
+  For a complete list of arguments see
+  <a href="#configuration-options">
+   Configuration Options
+  </a>
+</li>
+<li>
+  To configure your Atlas Service Accounts credentials please refer to
+  <a href="#atlas-api-access">
+   Atlas API Access
+  </a>
+</li>
+</ul>
+<h4 class="heading">
+ Option 4: Standalone Service using environment variables
+</h4>
+<pre class="pre"><code class="language-shell code"> npx -y mongodb-mcp-server
+</code></pre>
+<p>
+ You can use environment variables in the config file or set them and run the server via npx.
+</p>
+<ul>
+<li>
+  Connection String via environment variables in the MCP file
+  <a href="#connection-string-with-environment-variables">
+   example
+  </a>
+</li>
+<li>
+  Atlas API credentials via environment variables in the MCP file
+  <a href="#atlas-api-credentials-with-environment-variables">
+   example
+  </a>
+</li>
+</ul>
+<h4 class="heading">
+ Option 5: Using Docker
+</h4>
+<p>
+ You can run the MongoDB MCP Server in a Docker container, which provides isolation and doesn't require a local Node.js installation.
+</p>
+<h4 class="heading">
+ Run with Environment Variables
+</h4>
+<p>
+ You may provide either a MongoDB connection string OR Atlas API credentials:
+</p>
+<h5 class="heading">
+ Option A: No configuration
+</h5>
+<pre class="pre"><code class="language-shell code">docker run --rm -i \
+  mongodb/mongodb-mcp-server:latest
+</code></pre>
+<h5 class="heading">
+ Option B: With MongoDB connection string
+</h5>
+<pre class="pre"><code class="language-shell code">docker run --rm -i \
+  -e MDB_MCP_CONNECTION_STRING="mongodb+srv://username:password@cluster.mongodb.net/myDatabase" \
+  mongodb/mongodb-mcp-server:latest
+</code></pre>
+<h5 class="heading">
+ Option C: With Atlas API credentials
+</h5>
+<pre class="pre"><code class="language-shell code">docker run --rm -i \
+  -e MDB_MCP_API_CLIENT_ID="your-atlas-service-accounts-client-id" \
+  -e MDB_MCP_API_CLIENT_SECRET="your-atlas-service-accounts-client-secret" \
+  mongodb/mongodb-mcp-server:latest
+</code></pre>
+<h5 class="heading">
+ Docker in MCP Configuration File
+</h5>
+<p>
+ Without options:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "mongodb/mongodb-mcp-server:latest"]
+    }
+  }
+}
+</code></pre>
+<p>
+ With connection string:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "MDB_MCP_CONNECTION_STRING=mongodb+srv://username:password@cluster.mongodb.net/myDatabase",
+        "mongodb/mongodb-mcp-server:latest"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ With Atlas API credentials:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "MDB_MCP_API_CLIENT_ID=your-atlas-service-accounts-client-id",
+        "-e",
+        "MDB_MCP_API_CLIENT_SECRET=your-atlas-service-accounts-client-secret",
+        "mongodb/mongodb-mcp-server:latest"
+      ]
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ 🛠️ Supported Tools
+</h2>
+<h3 class="heading">
+ Tool List
+</h3>
+<h4 class="heading">
+ MongoDB Atlas Tools
+</h4>
+<ul>
+<li>
+<code class="code">
+   atlas-list-orgs
+  </code>
+  - Lists MongoDB Atlas organizations
+ </li>
+<li>
+<code class="code">
+   atlas-list-projects
+  </code>
+  - Lists MongoDB Atlas projects
+ </li>
+<li>
+<code class="code">
+   atlas-create-project
+  </code>
+  - Creates a new MongoDB Atlas project
+ </li>
+<li>
+<code class="code">
+   atlas-list-clusters
+  </code>
+  - Lists MongoDB Atlas clusters
+ </li>
+<li>
+<code class="code">
+   atlas-inspect-cluster
+  </code>
+  - Inspect a specific MongoDB Atlas cluster
+ </li>
+<li>
+<code class="code">
+   atlas-create-free-cluster
+  </code>
+  - Create a free MongoDB Atlas cluster
+ </li>
+<li>
+<code class="code">
+   atlas-connect-cluster
+  </code>
+  - Connects to MongoDB Atlas cluster
+ </li>
+<li>
+<code class="code">
+   atlas-inspect-access-list
+  </code>
+  - Inspect IP/CIDR ranges with access to MongoDB Atlas clusters
+ </li>
+<li>
+<code class="code">
+   atlas-create-access-list
+  </code>
+  - Configure IP/CIDR access list for MongoDB Atlas clusters
+ </li>
+<li>
+<code class="code">
+   atlas-list-db-users
+  </code>
+  - List MongoDB Atlas database users
+ </li>
+<li>
+<code class="code">
+   atlas-create-db-user
+  </code>
+  - Creates a MongoDB Atlas database user
+ </li>
+<li>
+<code class="code">
+   atlas-list-alerts
+  </code>
+  - List MongoDB Atlas Alerts for a Project
+ </li>
+</ul>
+<p>
+ NOTE: atlas tools are only available when you set credentials on
+ <a href="#configuration">
+  configuration
+ </a>
+ section.
+</p>
+<h4 class="heading">
+ MongoDB Database Tools
+</h4>
+<ul>
+<li>
+<code class="code">
+   connect
+  </code>
+  - Connect to a MongoDB instance
+ </li>
+<li>
+<code class="code">
+   find
+  </code>
+  - Run a find query against a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   aggregate
+  </code>
+  - Run an aggregation against a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   count
+  </code>
+  - Get the number of documents in a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   insert-one
+  </code>
+  - Insert a single document into a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   insert-many
+  </code>
+  - Insert multiple documents into a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   create-index
+  </code>
+  - Create an index for a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   update-one
+  </code>
+  - Update a single document in a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   update-many
+  </code>
+  - Update multiple documents in a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   rename-collection
+  </code>
+  - Rename a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   delete-one
+  </code>
+  - Delete a single document from a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   delete-many
+  </code>
+  - Delete multiple documents from a MongoDB collection
+ </li>
+<li>
+<code class="code">
+   drop-collection
+  </code>
+  - Remove a collection from a MongoDB database
+ </li>
+<li>
+<code class="code">
+   drop-database
+  </code>
+  - Remove a MongoDB database
+ </li>
+<li>
+<code class="code">
+   list-databases
+  </code>
+  - List all databases for a MongoDB connection
+ </li>
+<li>
+<code class="code">
+   list-collections
+  </code>
+  - List all collections for a given database
+ </li>
+<li>
+<code class="code">
+   collection-indexes
+  </code>
+  - Describe the indexes for a collection
+ </li>
+<li>
+<code class="code">
+   collection-schema
+  </code>
+  - Describe the schema for a collection
+ </li>
+<li>
+<code class="code">
+   collection-storage-size
+  </code>
+  - Get the size of a collection in MB
+ </li>
+<li>
+<code class="code">
+   db-stats
+  </code>
+  - Return statistics about a MongoDB database
+ </li>
+</ul>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ The MongoDB MCP Server can be configured using multiple methods, with the following precedence (highest to lowest):
+</p>
+<ol>
+<li>
+  Command-line arguments
+ </li>
+<li>
+  Environment variables
+ </li>
+</ol>
+<h3 class="heading">
+ Configuration Options
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Option
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     apiClientId
+    </code>
+</td>
+<td>
+    Atlas API client ID for authentication. Required for running Atlas tools.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     apiClientSecret
+    </code>
+</td>
+<td>
+    Atlas API client secret for authentication. Required for running Atlas tools.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     connectionString
+    </code>
+</td>
+<td>
+    MongoDB connection string for direct database connections. Optional, if not set, you'll need to call the
+    <code class="code">
+     connect
+    </code>
+    tool before interacting with MongoDB data.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     logPath
+    </code>
+</td>
+<td>
+    Folder to store logs.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     disabledTools
+    </code>
+</td>
+<td>
+    An array of tool names, operation types, and/or categories of tools that will be disabled.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     readOnly
+    </code>
+</td>
+<td>
+    When set to true, only allows read and metadata operation types, disabling create/update/delete operations.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     telemetry
+    </code>
+</td>
+<td>
+    When set to disabled, disables telemetry collection.
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Log Path
+</h4>
+<p>
+ Default log location is as follows:
+</p>
+<ul>
+<li>
+  Windows:
+  <code class="code">
+   %LOCALAPPDATA%\mongodb\mongodb-mcp\.app-logs
+  </code>
+</li>
+<li>
+  macOS/Linux:
+  <code class="code">
+   ~/.mongodb/mongodb-mcp/.app-logs
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+ Disabled Tools
+</h4>
+<p>
+ You can disable specific tools or categories of tools by using the
+ <code class="code">
+  disabledTools
+ </code>
+ option. This option accepts an array of strings,
+where each string can be a tool name, operation type, or category.
+</p>
+<p>
+ The way the array is constructed depends on the type of configuration method you use:
+</p>
+<ul>
+<li>
+  For
+  <strong>
+   environment variable
+  </strong>
+  configuration, use a comma-separated string:
+  <code class="code">
+   export MDB_MCP_DISABLED_TOOLS="create,update,delete,atlas,collectionSchema"
+  </code>
+  .
+ </li>
+<li>
+  For
+  <strong>
+   command-line argument
+  </strong>
+  configuration, use a space-separated string:
+  <code class="code">
+   --disabledTools create update delete atlas collectionSchema
+  </code>
+  .
+ </li>
+</ul>
+<p>
+ Categories of tools:
+</p>
+<ul>
+<li>
+<code class="code">
+   atlas
+  </code>
+  - MongoDB Atlas tools, such as list clusters, create cluster, etc.
+ </li>
+<li>
+<code class="code">
+   mongodb
+  </code>
+  - MongoDB database tools, such as find, aggregate, etc.
+ </li>
+</ul>
+<p>
+ Operation types:
+</p>
+<ul>
+<li>
+<code class="code">
+   create
+  </code>
+  - Tools that create resources, such as create cluster, insert document, etc.
+ </li>
+<li>
+<code class="code">
+   update
+  </code>
+  - Tools that update resources, such as update document, rename collection, etc.
+ </li>
+<li>
+<code class="code">
+   delete
+  </code>
+  - Tools that delete resources, such as delete document, drop collection, etc.
+ </li>
+<li>
+<code class="code">
+   read
+  </code>
+  - Tools that read resources, such as find, aggregate, list clusters, etc.
+ </li>
+<li>
+<code class="code">
+   metadata
+  </code>
+  - Tools that read metadata, such as list databases, list collections, collection schema, etc.
+ </li>
+</ul>
+<h4 class="heading">
+ Read-Only Mode
+</h4>
+<p>
+ The
+ <code class="code">
+  readOnly
+ </code>
+ configuration option allows you to restrict the MCP server to only use tools with "read" and "metadata" operation types. When enabled, all tools that have "create", "update" or "delete" operation types will not be registered with the server.
+</p>
+<p>
+ This is useful for scenarios where you want to provide access to MongoDB data for analysis without allowing any modifications to the data or infrastructure.
+</p>
+<p>
+ You can enable read-only mode using:
+</p>
+<ul>
+<li>
+<strong>
+   Environment variable
+  </strong>
+  :
+  <code class="code">
+   export MDB_MCP_READ_ONLY=true
+  </code>
+</li>
+<li>
+<strong>
+   Command-line argument
+  </strong>
+  :
+  <code class="code">
+   --readOnly
+  </code>
+</li>
+</ul>
+<p>
+ When read-only mode is active, you'll see a message in the server logs indicating which tools were prevented from registering due to this restriction.
+</p>
+<h4 class="heading">
+ Telemetry
+</h4>
+<p>
+ The
+ <code class="code">
+  telemetry
+ </code>
+ configuration option allows you to disable telemetry collection. When enabled, the MCP server will collect usage data and send it to MongoDB.
+</p>
+<p>
+ You can disable telemetry using:
+</p>
+<ul>
+<li>
+<strong>
+   Environment variable
+  </strong>
+  :
+  <code class="code">
+   export MDB_MCP_TELEMETRY=disabled
+  </code>
+</li>
+<li>
+<strong>
+   Command-line argument
+  </strong>
+  :
+  <code class="code">
+   --telemetry disabled
+  </code>
+</li>
+<li>
+<strong>
+   DO_NOT_TRACK environment variable
+  </strong>
+  :
+  <code class="code">
+   export DO_NOT_TRACK=1
+  </code>
+</li>
+</ul>
+<h3 class="heading">
+ Atlas API Access
+</h3>
+<p>
+ To use the Atlas API tools, you'll need to create a service account in MongoDB Atlas:
+</p>
+<blockquote>
+<p>
+<strong>
+   ℹ️ Note:
+  </strong>
+  For a detailed breakdown of the minimum required permissions for each Atlas operation, see the
+  <a href="#atlas-api-permissions">
+   Atlas API Permissions
+  </a>
+  section below.
+ </p>
+</blockquote>
+<ol>
+<li>
+<p>
+<strong>
+    Create a Service Account:
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Log in to MongoDB Atlas at
+   <a href="https://cloud.mongodb.com">
+    cloud.mongodb.com
+   </a>
+</p>
+</li>
+<li>
+  Navigate to Access Manager &gt; Organization Access
+ </li>
+<li>
+  Click Add New &gt; Applications &gt; Service Accounts
+ </li>
+<li>
+  Enter name, description and expiration for your service account (e.g., "MCP, MCP Server Access, 7 days")
+ </li>
+<li>
+<strong>
+   Assign only the minimum permissions needed for your use case.
+  </strong>
+<ul>
+<li>
+    See
+    <a href="#atlas-api-permissions">
+     Atlas API Permissions
+    </a>
+    for details.
+   </li>
+</ul>
+</li>
+<li>
+  Click "Create"
+ </li>
+</ol>
+<p>
+ To learn more about Service Accounts, check the
+ <a href="https://www.mongodb.com/docs/atlas/api/service-accounts-overview/">
+  MongoDB Atlas documentation
+ </a>
+ .
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Save Client Credentials:
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   After creation, you'll be shown the Client ID and Client Secret
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Important:
+   </strong>
+   Copy and save the Client Secret immediately as it won't be displayed again
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Add Access List Entry:
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   Add your IP address to the API access list
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Configure the MCP Server:
+   </strong>
+</p>
+</li>
+<li>
+  Use one of the configuration methods below to set your
+  <code class="code">
+   apiClientId
+  </code>
+  and
+  <code class="code">
+   apiClientSecret
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ Atlas API Permissions
+</h3>
+<blockquote>
+<p>
+<strong>
+   Security Warning:
+  </strong>
+  Granting the Organization Owner role is rarely necessary and can be a security risk. Assign only the minimum permissions needed for your use case.
+ </p>
+</blockquote>
+<h4 class="heading">
+ Quick Reference: Required roles per operation
+</h4>
+<table>
+<thead>
+<tr>
+<th>
+    What you want to do
+   </th>
+<th>
+    Safest Role to Assign (where)
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    List orgs/projects
+   </td>
+<td>
+    Org Member or Org Read Only (Org)
+   </td>
+</tr>
+<tr>
+<td>
+    Create new projects
+   </td>
+<td>
+    Org Project Creator (Org)
+   </td>
+</tr>
+<tr>
+<td>
+    View clusters/databases in a project
+   </td>
+<td>
+    Project Read Only (Project)
+   </td>
+</tr>
+<tr>
+<td>
+    Create/manage clusters in a project
+   </td>
+<td>
+    Project Cluster Manager (Project)
+   </td>
+</tr>
+<tr>
+<td>
+    Manage project access lists
+   </td>
+<td>
+    Project IP Access List Admin (Project)
+   </td>
+</tr>
+<tr>
+<td>
+    Manage database users
+   </td>
+<td>
+    Project Database Access Admin (Project)
+   </td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<strong>
+   Prefer project-level roles
+  </strong>
+  for most operations. Assign only to the specific projects you need to manage or view.
+ </li>
+<li>
+<strong>
+   Avoid Organization Owner
+  </strong>
+  unless you require full administrative control over all projects and settings in the organization.
+ </li>
+</ul>
+<p>
+ For a full list of roles and their privileges, see the
+ <a href="https://www.mongodb.com/docs/atlas/reference/user-roles/#service-user-roles">
+  Atlas User Roles documentation
+ </a>
+ .
+</p>
+<h3 class="heading">
+ Configuration Methods
+</h3>
+<h4 class="heading">
+ Environment Variables
+</h4>
+<p>
+ Set environment variables with the prefix
+ <code class="code">
+  MDB_MCP_
+ </code>
+ followed by the option name in uppercase with underscores:
+</p>
+<pre class="pre"><code class="language-shell code"># Set Atlas API credentials (via Service Accounts)
+export MDB_MCP_API_CLIENT_ID="your-atlas-service-accounts-client-id"
+export MDB_MCP_API_CLIENT_SECRET="your-atlas-service-accounts-client-secret"
+
+# Set a custom MongoDB connection string
+export MDB_MCP_CONNECTION_STRING="mongodb+srv://username:password@cluster.mongodb.net/myDatabase"
+
+export MDB_MCP_LOG_PATH="/path/to/logs"
+
+</code></pre>
+<h4 class="heading">
+ MCP configuration file examples
+</h4>
+<h5 class="heading">
+ Connection String with environment variables
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": ["-y", "mongodb-mcp-server"],
+      "env": {
+        "MDB_MCP_CONNECTION_STRING": "mongodb+srv://username:password@cluster.mongodb.net/myDatabase"
+      }
+    }
+  }
+}
+</code></pre>
+<h5 class="heading">
+ Atlas API credentials with environment variables
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": ["-y", "mongodb-mcp-server"],
+      "env": {
+        "MDB_MCP_API_CLIENT_ID": "your-atlas-service-accounts-client-id",
+        "MDB_MCP_API_CLIENT_SECRET": "your-atlas-service-accounts-client-secret"
+      }
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ Command-Line Arguments
+</h4>
+<p>
+ Pass configuration options as command-line arguments when starting the server:
+</p>
+<pre class="pre"><code class="language-shell code">npx -y mongodb-mcp-server --apiClientId="your-atlas-service-accounts-client-id" --apiClientSecret="your-atlas-service-accounts-client-secret" --connectionString="mongodb+srv://username:password@cluster.mongodb.net/myDatabase" --logPath=/path/to/logs
+</code></pre>
+<h4 class="heading">
+ MCP configuration file examples
+</h4>
+<h5 class="heading">
+ Connection String with command-line arguments
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server",
+        "--connectionString",
+        "mongodb+srv://username:password@cluster.mongodb.net/myDatabase"
+      ]
+    }
+  }
+}
+</code></pre>
+<h5 class="heading">
+ Atlas API credentials with command-line arguments
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "MongoDB": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mongodb-mcp-server",
+        "--apiClientId",
+        "your-atlas-service-accounts-client-id",
+        "--apiClientSecret",
+        "your-atlas-service-accounts-client-secret"
+      ]
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ 🤝 Contributing
+</h2>
+<p>
+ Interested in contributing? Great! Please check our
+ <a href="CONTRIBUTING.md">
+  Contributing Guide
+ </a>
+ for guidelines on code contributions, standards, adding new tools, and troubleshooting information.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/mongodb-js-mongodb-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

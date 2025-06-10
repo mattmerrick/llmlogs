@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP Boilerplate: Simple Setup Guide - MCP Directory">
+    <meta property="og:description" content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru">
+    <meta property="og:url" content="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP Boilerplate: Simple Setup Guide - MCP Directory">
+    <meta name="twitter:description" content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru">
+    
+    <title>MCP Boilerplate: Simple Setup Guide - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP Boilerplate: Simple Setup Guide</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP Boilerplate: Simple Setup Guide</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 655</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/iannuttall/mcp-boilerplate" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Boilerplate: Simple Setup Guide - MCP Directory" property="og:title"/>
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Boilerplate: Simple Setup Guide - MCP Directory" name="twitter:title"/>
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" name="twitter:description"/>
+<title>MCP Boilerplate: Simple Setup Guide - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP Boilerplate: Simple Setup Guide</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP Boilerplate: Simple Setup Guide</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 655</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/iannuttall/mcp-boilerplate" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Boilerplate: Simple Setup Guide - MCP Directory" property="og:title">
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" property="og:description">
+<meta content="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP Boilerplate: Simple Setup Guide - MCP Directory" name="twitter:title">
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" name="twitter:description">
+<title>MCP Boilerplate: Simple Setup Guide - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Boilerplate: Simple Setup Guide</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 655</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/iannuttall/mcp-boilerplate" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Boilerplate: Simple Setup Guide - MCP Directory" property="og:title"/>
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Boilerplate: Simple Setup Guide - MCP Directory" name="twitter:title"/>
+<meta content="This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it ru" name="twitter:description"/>
+<title>MCP Boilerplate: Simple Setup Guide - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Boilerplate: Simple Setup Guide</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 655</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/iannuttall/mcp-boilerplate" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ MCP Boilerplate: Simple Setup Guide
+</h1>
+<p>
+ This project helps you create your own remote MCP server on Cloudflare with user login and payment options. You don't need to be a technical expert to get it running.
+</p>
+<blockquote>
+<p>
+  [!NOTE]
+This project is now free to use and open source. If you want to support me, just follow me on X
+  <a href="https://x.com/iannuttall">
+   @iannuttall
+  </a>
+  and subscribe to
+  <a href="https://ian.is">
+   my newsletter
+  </a>
+  .
+ </p>
+</blockquote>
+<h2 class="heading">
+ What You'll Get
+</h2>
+<ul>
+<li>
+  An MCP server that works with Cursor, Claude and other AI assistants
+ </li>
+<li>
+  User login with Google or GitHub
+ </li>
+<li>
+  Payment processing with Stripe
+ </li>
+<li>
+  The ability to create both free and paid MCP tools
+ </li>
+</ul>
+<h2 class="heading">
+ Setup Checklist
+</h2>
+<p>
+ Before starting, make sure you have:
+</p>
+<ul>
+<li>
+  Node.js installed (download from
+  <a href="https://nodejs.org/">
+   nodejs.org
+  </a>
+  )
+ </li>
+<li>
+  A Cloudflare account (sign up at
+  <a href="https://dash.cloudflare.com/sign-up">
+   dash.cloudflare.com/sign-up
+  </a>
+  )
+ </li>
+<li>
+  A Google account for setting up login (or GitHub if you prefer)
+ </li>
+<li>
+  A Stripe account for payments (sign up at
+  <a href="https://dashboard.stripe.com/register">
+   dashboard.stripe.com/register
+  </a>
+  )
+ </li>
+</ul>
+<h2 class="heading">
+ Step-by-Step Setup
+</h2>
+<h3 class="heading">
+ Step 1: Get the Code
+</h3>
+<ol>
+<li>
+  Clone this repository to your computer:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">git clone https://github.com/iannuttall/mcp-boilerplate.git
+cd mcp-boilerplate
+</code></pre>
+<ol>
+<li>
+  Install everything needed:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npm install
+</code></pre>
+<h3 class="heading">
+ Step 2: Set Up the Database
+</h3>
+<ol>
+<li>
+  Install Wrangler (Cloudflare's tool) if you haven't already:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npm install -g wrangler
+</code></pre>
+<ol>
+<li>
+  Create a database for user login:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npx wrangler kv namespace create "OAUTH_KV"
+</code></pre>
+<p>
+ Note: you can't use a different name for this database. It has to be "OAUTH_KV".
+</p>
+<ol>
+<li>
+<p>
+   After running this command, you'll see some text that includes
+   <code class="code">
+    id
+   </code>
+   and
+   <code class="code">
+    preview_id
+   </code>
+   values
+  </p>
+</li>
+<li>
+<p>
+   Open the
+   <code class="code">
+    wrangler.jsonc
+   </code>
+   file in the project folder
+  </p>
+</li>
+<li>
+<p>
+   Look for the section with
+   <code class="code">
+    "kv_namespaces": [
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add your database information there:
+  </p>
+</li>
+</ol>
+<pre class="pre"><code class="language-json code">"kv_namespaces": [
+  {
+    "binding": "OAUTH_KV",
+    "id": "paste-your-id-here",
+    "preview_id": "paste-your-preview-id-here"
+  }
+]
+</code></pre>
+<h3 class="heading">
+ Step 3: Set Up Your Local Settings
+</h3>
+<ol>
+<li>
+  Create a file for your settings:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">cp .dev.vars.example .dev.vars
+</code></pre>
+<ol>
+<li>
+<p>
+   Open the
+   <code class="code">
+    .dev.vars
+   </code>
+   file in your code editor
+  </p>
+</li>
+<li>
+<p>
+   You'll need to add several values here (we'll get them in the next steps)
+  </p>
+</li>
+</ol>
+<h3 class="heading">
+ Step 4a: Setting Up Google Login (Recommended)
+</h3>
+<ol>
+<li>
+  Go to the
+  <a href="https://console.cloud.google.com/">
+   Google Cloud Console
+  </a>
+</li>
+<li>
+  Create a new project with any name you like
+ </li>
+<li>
+  Go to "APIs &amp; Services" &gt; "Credentials"
+ </li>
+<li>
+  Click "+ CREATE CREDENTIALS" and choose "OAuth client ID"
+ </li>
+<li>
+  If prompted, set up a consent screen:
+ </li>
+<li>
+  Choose "External" for User Type
+ </li>
+<li>
+  Add an App name (like "My AI Tool")
+ </li>
+<li>
+  Add your email address where required
+ </li>
+<li>
+  You can skip the "Scopes" and "Test users" sections
+ </li>
+<li>
+  For the OAuth client:
+ </li>
+<li>
+  Select "Web application" for Application type
+ </li>
+<li>
+  Give it a name
+ </li>
+<li>
+  Under "Authorized redirect URIs" add the following:
+ </li>
+</ol>
+<pre class="pre"><code class="code">http://localhost:8787/callback/google
+</code></pre>
+<ol>
+<li>
+  Click "CREATE"
+ </li>
+<li>
+  You'll now see your Client ID and Client Secret - copy these values
+ </li>
+<li>
+  Add them to your
+  <code class="code">
+   .dev.vars
+  </code>
+  file:
+ </li>
+</ol>
+<pre class="pre"><code class="language-ini code">GOOGLE_CLIENT_ID="paste-your-client-id-here"
+GOOGLE_CLIENT_SECRET="paste-your-client-secret-here"
+</code></pre>
+<p>
+ Once you've completed this step, you can proceed directly to Step 5 if you don't need GitHub login.
+</p>
+<h3 class="heading">
+ Step 4b: Setting Up GitHub Login (Optional)
+</h3>
+<p>
+ If you prefer to use GitHub for login instead of Google:
+</p>
+<ol>
+<li>
+  Go to your GitHub account
+ </li>
+<li>
+  Click on your profile picture in the top-right corner, then go to "Settings"
+ </li>
+<li>
+  In the left sidebar, scroll down and click on "Developer settings"
+ </li>
+<li>
+  Click on "OAuth Apps", then click the "New OAuth App" button
+ </li>
+<li>
+  Fill in the form:
+ </li>
+<li>
+  Application name: Give it a name (like "My AI Tool")
+ </li>
+<li>
+  Homepage URL:
+  <code class="code">
+   http://localhost:8787
+  </code>
+</li>
+<li>
+  Application description: A brief description of your app (optional)
+ </li>
+<li>
+  Authorization callback URL:
+  <code class="code">
+   http://localhost:8787/callback/github
+  </code>
+</li>
+<li>
+  Click "Register application"
+ </li>
+<li>
+  On the next page, you'll see your Client ID
+ </li>
+<li>
+  Click "Generate a new client secret"
+ </li>
+<li>
+  Copy your Client Secret immediately (you won't be able to see it again)
+ </li>
+<li>
+  Add these values to your
+  <code class="code">
+   .dev.vars
+  </code>
+  file:
+ </li>
+</ol>
+<pre class="pre"><code class="language-ini code">GITHUB_CLIENT_ID="paste-your-client-id-here"
+GITHUB_CLIENT_SECRET="paste-your-client-secret-here"
+</code></pre>
+<ol>
+<li>
+  You'll also need to update the default authentication in your code:
+  <ul>
+<li>
+    Open
+    <code class="code">
+     src/index.ts
+    </code>
+</li>
+<li>
+    Find the import for Google handler:
+    <code class="code">
+     import { GoogleHandler } from "./auth/google-handler";
+    </code>
+</li>
+<li>
+    Replace it with:
+    <code class="code">
+     import { GitHubHandler } from "./auth/github-handler";
+    </code>
+</li>
+<li>
+    Find the line with
+    <code class="code">
+     defaultHandler: GoogleHandler as any,
+    </code>
+</li>
+<li>
+    Change it to:
+    <code class="code">
+     defaultHandler: GitHubHandler as any,
+    </code>
+</li>
+</ul>
+</li>
+</ol>
+<p>
+ After completing either Step 4a or 4b, proceed to Step 5.
+</p>
+<h3 class="heading">
+ Step 5: Setting Up Stripe Payments
+</h3>
+<ol>
+<li>
+  Log in to your
+  <a href="https://dashboard.stripe.com/">
+   Stripe Dashboard
+  </a>
+</li>
+<li>
+  Get your test API key:
+ </li>
+<li>
+  Go to Developers &gt; API keys
+ </li>
+<li>
+  Copy your "Secret key" (it starts with
+  <code class="code">
+   sk_test_
+  </code>
+  )
+ </li>
+<li>
+  Create a product and price:
+ </li>
+<li>
+  Go to Products &gt; Add Product
+ </li>
+<li>
+  Give it a name and description
+ </li>
+<li>
+  Add a price (this is what users will pay)
+ </li>
+<li>
+  Save the product
+ </li>
+<li>
+  After saving, find and copy the "Price ID" (it starts with
+  <code class="code">
+   price_
+  </code>
+  )
+ </li>
+<li>
+  Add these values to your
+  <code class="code">
+   .dev.vars
+  </code>
+  file:
+ </li>
+</ol>
+<pre class="pre"><code class="language-ini code">STRIPE_SECRET_KEY="sk_test_your-key-here"
+STRIPE_SUBSCRIPTION_PRICE_ID="price_your-price-id-here"
+STRIPE_METERED_PRICE_ID="your-stripe-metered-price-id"
+</code></pre>
+<h3 class="heading">
+ Step 5a: Configuring the Stripe Customer Billing Portal
+</h3>
+<p>
+ This boilerplate includes a tool (
+ <code class="code">
+  check_user_subscription_status
+ </code>
+ ) that can provide your end-users with a link to their Stripe Customer Billing Portal. This portal allows them to manage their subscriptions, such as canceling them or, if you configure it, switching between different plans.
+</p>
+<p>
+<strong>
+  Initial Setup (Important):
+ </strong>
+</p>
+<p>
+ By default, the Stripe Customer Billing Portal might not be fully configured in your Stripe account, especially in the test environment.
+</p>
+<ol>
+<li>
+  After setting up your Stripe keys and products (Step 5) and running your server, you can test the
+  <code class="code">
+   check_user_subscription_status
+  </code>
+  tool (e.g., via MCP Inspector, or by triggering it through an AI assistant).
+ </li>
+<li>
+  If the tool returns a JSON response where
+  <code class="code">
+   billingPortal.message
+  </code>
+  contains an error like:
+  <em>
+   "Could not generate a link to the customer billing portal: No configuration provided and your test mode default configuration has not been created. Provide a configuration or create your default by saving your customer portal settings in test mode at https://dashboard.stripe.com/test/settings/billing/portal."
+  </em>
+</li>
+<li>
+  You
+  <strong>
+   must
+  </strong>
+  visit the URL provided in that error message (usually
+  <code class="code">
+   https://dashboard.stripe.com/test/settings/billing/portal
+  </code>
+  ) and save your portal settings in Stripe. This activates the portal for your test environment. You'll need to do a similar check and configuration for your live environment.
+ </li>
+</ol>
+<p>
+ Once activated, the
+ <code class="code">
+  check_user_subscription_status
+ </code>
+ tool will provide a direct link in the
+ <code class="code">
+  billingPortal.url
+ </code>
+ field of its JSON response, which your users can use.
+</p>
+<p>
+<strong>
+  Allowing Users to Switch Plans (Optional):
+ </strong>
+</p>
+<p>
+ By default, the billing portal allows users to cancel their existing subscriptions. If you offer multiple subscription products for your MCP server and want to allow users to switch between them:
+</p>
+<ol>
+<li>
+  In your Stripe Dashboard, navigate to
+  <strong>
+   Settings
+  </strong>
+  (click the gear icon in the top-right) and then find
+  <strong>
+   Customer portal
+  </strong>
+  under "Billing". (Alternatively, use the direct link:
+  <code class="code">
+   https://dashboard.stripe.com/settings/billing/portal
+  </code>
+  for live mode, or
+  <code class="code">
+   https://dashboard.stripe.com/test/settings/billing/portal
+  </code>
+  for test mode).
+ </li>
+<li>
+  Under the "
+  <strong>
+   Products
+  </strong>
+  " section of the Customer Portal settings page, find "
+  <strong>
+   Subscription products
+  </strong>
+  ".
+ </li>
+<li>
+  Enable the "
+  <strong>
+   Customers can switch plans
+  </strong>
+  " toggle.
+ </li>
+<li>
+  In the "Choose the eligible products that customers can update" subsection that appears, click to "
+  <strong>
+   Find a test product...
+  </strong>
+  " (or "Find a product..." in live mode) and add the other subscription products you want to make available for your users to switch to. The image you provided earlier shows this UI in Stripe.
+ </li>
+<li>
+  You can also configure other options here, like allowing customers to change the quantity of their plan if applicable.
+ </li>
+</ol>
+<p>
+ This configuration empowers your users to manage their subscriptions more flexibly directly through the Stripe-hosted portal.
+</p>
+<h3 class="heading">
+ Step 6: Complete Your Settings
+</h3>
+<p>
+ Make sure your
+ <code class="code">
+  .dev.vars
+ </code>
+ file has all these values:
+</p>
+<pre class="pre"><code class="language-ini code">BASE_URL="http://localhost:8787"
+COOKIE_ENCRYPTION_KEY="generate-a-random-string-at-least-32-characters"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+STRIPE_SECRET_KEY="your-stripe-secret-key"
+STRIPE_SUBSCRIPTION_PRICE_ID="your-stripe-price-id"
+STRIPE_METERED_PRICE_ID="your-stripe-metered-price-id"
+</code></pre>
+<p>
+ For the
+ <code class="code">
+  COOKIE_ENCRYPTION_KEY
+ </code>
+ , you can generate a random string with this command:
+</p>
+<pre class="pre"><code class="language-bash code">openssl rand -hex 32
+</code></pre>
+<h3 class="heading">
+ Step 7: Start Your Server Locally
+</h3>
+<ol>
+<li>
+  Run this command to start your server:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npx wrangler dev
+</code></pre>
+<ol>
+<li>
+<p>
+   Your server will start at
+   <code class="code">
+    http://localhost:8787
+   </code>
+</p>
+</li>
+<li>
+<p>
+   The main endpoint for AI tools will be at
+   <code class="code">
+    http://localhost:8787/sse
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Step 8: Try It Out
+</h3>
+<p>
+ You can test your server by connecting to it with an AI assistant:
+</p>
+<ol>
+<li>
+  Go to
+  <a href="https://playground.ai.cloudflare.com/">
+   Cloudflare AI Playground
+  </a>
+</li>
+<li>
+  Enter your server URL:
+  <code class="code">
+   http://localhost:8787/sse
+  </code>
+</li>
+<li>
+  You'll be redirected to log in with Google
+ </li>
+<li>
+  After logging in, you can start testing the tools
+ </li>
+</ol>
+<p>
+ Or with Claude Desktop:
+</p>
+<ol>
+<li>
+  Open Claude Desktop
+ </li>
+<li>
+  Go to Settings &gt; Developer &gt; Edit Config
+ </li>
+<li>
+  Add your server:
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "my_server": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://localhost:8787/sse"
+      ]
+    }
+  }
+}
+</code></pre>
+<ol>
+<li>
+  Restart Claude Desktop
+ </li>
+<li>
+  Your tools should now be available in Claude
+ </li>
+</ol>
+<p>
+ Or with MCP Inspector:
+</p>
+<ol>
+<li>
+  Run MCP Inspector and connect to your server:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npx @modelcontextprotocol/inspector@0.11.0 
+</code></pre>
+<blockquote>
+<p>
+  [!WARNING]
+The latest version of MCP Inspector is 0.12.0 but using npx @modelcontextprotocol/inspector@latest doesn't work right now. Working on it.
+ </p>
+</blockquote>
+<ol>
+<li>
+  Enter your server URL:
+  <code class="code">
+   http://localhost:8787/sse
+  </code>
+</li>
+<li>
+  Use the web interface to test and debug your tools
+ </li>
+<li>
+  You can directly call your tools, see the request/response data, and quickly iterate during development
+ </li>
+</ol>
+<h3 class="heading">
+ Step 9: Going Live (Deploying)
+</h3>
+<p>
+ When you're ready to make your server available online:
+</p>
+<ol>
+<li>
+  Deploy to Cloudflare:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npx wrangler deploy
+</code></pre>
+<ol>
+<li>
+  After deployment, you'll get a URL like
+  <code class="code">
+   https://your-worker-name.your-account.workers.dev
+  </code>
+</li>
+</ol>
+<p>
+ 3a. Update your Google OAuth settings:
+   - Go back to Google Cloud Console &gt; APIs &amp; Services &gt; Credentials.
+   - Edit your OAuth client.
+   - Add another redirect URI:
+ <code class="code">
+  https://your-worker-name.your-account.workers.dev/callback/google
+ </code>
+ .
+   - Next, navigate to the "OAuth consent screen" page (still within "APIs &amp; Services").
+   - Under "Publishing status", if it currently shows "Testing", click the "Publish app" button and confirm to move it to "Production". This allows users outside your GSuite organization to use the login if you initially set it up as "External".
+</p>
+<p>
+ 3b. Update your GitHub OAuth App settings: (optional)
+   - Go to your GitHub Developer settings &gt; OAuth Apps
+   - Select your OAuth App
+   - Update the "Authorization callback URL" to:
+ <code class="code">
+  https://your-worker-name.your-account.workers.dev/callback/github
+ </code>
+</p>
+<ol>
+<li>
+  Add your settings to Cloudflare by running these commands (you'll be prompted to enter each value):
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">npx wrangler secret put BASE_URL
+npx wrangler secret put COOKIE_ENCRYPTION_KEY
+npx wrangler secret put GOOGLE_CLIENT_ID
+npx wrangler secret put GOOGLE_CLIENT_SECRET
+npx wrangler secret put STRIPE_SECRET_KEY
+npx wrangler secret put STRIPE_SUBSCRIPTION_PRICE_ID
+npx wrangler secret put STRIPE_METERED_PRICE_ID
+</code></pre>
+<p>
+ For the
+ <code class="code">
+  BASE_URL
+ </code>
+ , use your Cloudflare URL:
+ <code class="code">
+  https://your-worker-name.your-account.workers.dev
+ </code>
+</p>
+<h2 class="heading">
+ Creating Your Own Tools
+</h2>
+<p>
+ You can easily create your own AI tools by adding new files to the
+ <code class="code">
+  src/tools
+ </code>
+ folder. The project comes with examples of both free and paid tools.
+</p>
+<h3 class="heading">
+ Creating a Free Tool
+</h3>
+<p>
+ To create a free tool (one that users can access without payment):
+</p>
+<ol>
+<li>
+  Create a new file in the
+  <code class="code">
+   src/tools
+  </code>
+  folder (for example:
+  <code class="code">
+   myTool.ts
+  </code>
+  )
+ </li>
+<li>
+  Copy this template from the existing
+  <code class="code">
+   add.ts
+  </code>
+  example:
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">import { z } from "zod";
+import { experimental_PaidMcpAgent as PaidMcpAgent } from "@stripe/agent-toolkit/cloudflare";
+
+export function myTool(agent: PaidMcpAgent&lt;Env, any, any&gt;) {
+  const server = agent.server;
+  // @ts-ignore
+  server.tool(
+    "my_tool_name",                      // The tool name
+    "This tool does something cool.",    // Description of what your tool does
+    {                                    // Input parameters
+      input1: z.string(),                // Parameter definitions using Zod
+      input2: z.number()                 // E.g., strings, numbers, booleans
+    },
+    async ({ input1, input2 }: { input1: string; input2: number }) =&gt; ({
+      // The function that runs when the tool is called
+      content: [{ type: "text", text: `You provided: ${input1} and ${input2}` }],
+    })
+  );
+}
+</code></pre>
+<ol>
+<li>
+  Modify the code to create your own tool:
+ </li>
+<li>
+  Change the function name (
+  <code class="code">
+   myTool
+  </code>
+  )
+ </li>
+<li>
+  Change the tool name (
+  <code class="code">
+   my_tool_name
+  </code>
+  )
+ </li>
+<li>
+  Update the description
+ </li>
+<li>
+  Define the input parameters your tool needs
+ </li>
+<li>
+<p>
+   Write the code that runs when the tool is called
+  </p>
+</li>
+<li>
+<p>
+   Add your tool to
+   <code class="code">
+    src/tools/index.ts
+   </code>
+   :
+  </p>
+</li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Add this line with your other exports
+export * from './myTool';
+</code></pre>
+<ol>
+<li>
+  Register your tool in
+  <code class="code">
+   src/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Inside the init() method, add:
+tools.myTool(this);
+</code></pre>
+<h3 class="heading">
+ Creating Paid Tools: Subscription, Metered, or One-Time Payment
+</h3>
+<p>
+ You can create tools that require payment in three ways: recurring subscriptions, metered usage, or one-time payments.
+</p>
+<h4 class="heading">
+ Option 1: Creating a Subscription-Based Paid Tool
+</h4>
+<p>
+ This option is suitable if you want to charge users a recurring fee (e.g., monthly) for access to a tool or a suite of tools.
+</p>
+<p>
+<strong>
+  Stripe Setup for Subscription Billing:
+ </strong>
+</p>
+<ol>
+<li>
+  In your Stripe Dashboard, create a new Product.
+ </li>
+<li>
+  Give your product a name (e.g., "Pro Access Tier").
+ </li>
+<li>
+  Add a Price to this product:
+  <ul>
+<li>
+    Select "Recurring" for the pricing model.
+   </li>
+<li>
+    Set the price amount and billing interval (e.g., $10 per month).
+   </li>
+<li>
+    Save the price.
+   </li>
+</ul>
+</li>
+<li>
+  After creating the price, Stripe will show you the Price ID (e.g.,
+  <code class="code">
+   price_xxxxxxxxxxxxxx
+  </code>
+  ). This is the ID you will use for
+  <code class="code">
+   STRIPE_SUBSCRIPTION_PRICE_ID
+  </code>
+  in your
+  <code class="code">
+   .dev.vars
+  </code>
+  file and when registering the tool.
+ </li>
+</ol>
+<p>
+<strong>
+  Tool Implementation:
+ </strong>
+</p>
+<ol>
+<li>
+  Create a new file in the
+  <code class="code">
+   src/tools
+  </code>
+  folder (for example:
+  <code class="code">
+   mySubscriptionTool.ts
+  </code>
+  )
+ </li>
+<li>
+  Copy this template from the existing
+  <code class="code">
+   subscriptionAdd.ts
+  </code>
+  example:
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">import { z } from "zod";
+import { experimental_PaidMcpAgent as PaidMcpAgent } from "@stripe/agent-toolkit/cloudflare";
+import { REUSABLE_PAYMENT_REASON } from "../helpers/constants";
+
+export function mySubscriptionTool(
+  agent: PaidMcpAgent&lt;Env, any, any&gt;,
+  env?: { STRIPE_SUBSCRIPTION_PRICE_ID: string; BASE_URL: string }
+) {
+  const priceId = env?.STRIPE_SUBSCRIPTION_PRICE_ID || null;
+  const baseUrl = env?.BASE_URL || null;
+
+  if (!priceId || !baseUrl) {
+    throw new Error("Stripe Price ID and Base URL must be provided for paid tools");
+  }
+
+  agent.paidTool(
+    "my_subscription_tool_name", // The tool name
+    {
+      // Input parameters
+      input1: z.string(), // Parameter definitions using Zod
+      input2: z.number(), // E.g., strings, numbers, booleans
+    },
+    async ({ input1, input2 }: { input1: string; input2: number }) =&gt; ({
+      // The function that runs when the tool is called
+      content: [
+        { type: "text", text: `You provided: ${input1} and ${input2}` },
+      ],
+    }),
+    {
+      priceId, // Uses the Stripe price ID for a subscription product
+      successUrl: `${baseUrl}/payment/success`,
+      paymentReason: REUSABLE_PAYMENT_REASON, // General reason shown to user
+    }
+  );
+}
+</code></pre>
+<ol>
+<li>
+  Modify the code:
+  <ul>
+<li>
+    Change the function name (
+    <code class="code">
+     mySubscriptionTool
+    </code>
+    )
+   </li>
+<li>
+    Change the tool name (
+    <code class="code">
+     my_subscription_tool_name
+    </code>
+    )
+   </li>
+<li>
+    Update the input parameters and the tool's logic.
+   </li>
+</ul>
+</li>
+<li>
+  Add your tool to
+  <code class="code">
+   src/tools/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Add this line with your other exports
+export * from './mySubscriptionTool';
+</code></pre>
+<ol>
+<li>
+  Register your tool in
+  <code class="code">
+   src/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Inside the init() method, add:
+tools.mySubscriptionTool(this, {
+  STRIPE_SUBSCRIPTION_PRICE_ID: this.env.STRIPE_SUBSCRIPTION_PRICE_ID, // Ensure this matches a subscription Price ID
+  BASE_URL: this.env.BASE_URL
+});
+</code></pre>
+<h4 class="heading">
+ Option 2: Creating a Metered-Usage Paid Tool
+</h4>
+<p>
+ This option is suitable if you want to charge users based on how much they use an MCP tool.
+</p>
+<p>
+<strong>
+  Stripe Setup for Metered Billing:
+ </strong>
+</p>
+<ol>
+<li>
+  In your Stripe Dashboard, create a new Product.
+ </li>
+<li>
+  Add a Price to this product.
+  <ul>
+<li>
+    Choose "Standard pricing" or "Package pricing" as appropriate for your model.
+   </li>
+<li>
+<strong>
+     Under "Price options", check "Usage is metered".
+    </strong>
+</li>
+<li>
+    You can then define how usage is reported (e.g., "per unit").
+   </li>
+<li>
+    If you want to offer a free tier (like the first 3 uses are free), you can set up "Graduated pricing". For example:
+    <ul>
+<li>
+      First 3 units: $0.00 per unit
+     </li>
+<li>
+      Next units (4 and up): $0.10 per unit
+     </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+  After creating the price, Stripe will show you the Price ID (e.g.,
+  <code class="code">
+   price_xxxxxxxxxxxxxx
+  </code>
+  ).
+ </li>
+<li>
+  You will also need to define a "meter" in Stripe for this product/price if you haven't already. This meter will have an event name (e.g.,
+  <code class="code">
+   metered_add_usage
+  </code>
+  ) that you'll use in your tool's code. You can usually set this up under the "Usage" tab of your product or when defining the metered price.
+ </li>
+</ol>
+<p>
+<strong>
+  Tool Implementation:
+ </strong>
+</p>
+<ol>
+<li>
+  Create a new file in the
+  <code class="code">
+   src/tools
+  </code>
+  folder (e.g.,
+  <code class="code">
+   myMeteredTool.ts
+  </code>
+  ).
+ </li>
+<li>
+  Use this template, inspired by the
+  <code class="code">
+   meteredAdd.ts
+  </code>
+  example:
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">import { z } from "zod";
+import { experimental_PaidMcpAgent as PaidMcpAgent } from "@stripe/agent-toolkit/cloudflare";
+import { METERED_TOOL_PAYMENT_REASON } from "../helpers/constants"; // You might want a specific constant
+
+export function myMeteredTool(
+  agent: PaidMcpAgent&lt;Env, any, any&gt;,
+  env?: { STRIPE_METERED_PRICE_ID: string; BASE_URL: string }
+) {
+  const priceId = env?.STRIPE_METERED_PRICE_ID || null;
+  const baseUrl = env?.BASE_URL || null;
+
+  if (!priceId || !baseUrl) {
+    throw new Error("Stripe Metered Price ID and Base URL must be provided for metered tools");
+  }
+
+  agent.paidTool(
+    "my_metered_tool_name", // The tool name
+    {
+      // Input parameters
+      a: z.number(),
+      b: z.number(),
+    },
+    async ({ a, b }: { a: number; b: number }) =&gt; {
+      // The function that runs when the tool is called
+      // IMPORTANT: Business logic for your tool
+      const result = a + b; // Example logic
+      return {
+        content: [{ type: "text", text: String(result) }],
+      };
+    },
+    {
+      checkout: {
+        success_url: `${baseUrl}/payment/success`,
+        line_items: [
+          {
+            price: priceId, // Uses the Stripe Price ID for a metered product
+          },
+        ],
+        mode: 'subscription', // Metered plans are usually set up as subscriptions
+      },
+      paymentReason:
+        "METER INFO: Details about your metered usage. E.g., Your first X uses are free, then $Y per use. " +
+        METERED_TOOL_PAYMENT_REASON, // Customize this message
+      meterEvent: "your_meter_event_name_from_stripe", // ** IMPORTANT: Use the event name from your Stripe meter setup **
+                                                     // e.g., "metered_add_usage"
+    }
+  );
+}
+</code></pre>
+<ol>
+<li>
+  Modify the code:
+  <ul>
+<li>
+    Change the function name (
+    <code class="code">
+     myMeteredTool
+    </code>
+    ).
+   </li>
+<li>
+    Change the tool name (
+    <code class="code">
+     my_metered_tool_name
+    </code>
+    ).
+   </li>
+<li>
+    Update the input parameters and the tool's core logic.
+   </li>
+<li>
+<strong>
+     Crucially, update
+     <code class="code">
+      meterEvent
+     </code>
+</strong>
+    to match the event name you configured in your Stripe meter.
+   </li>
+<li>
+    Customize the
+    <code class="code">
+     paymentReason
+    </code>
+    to clearly explain the metered billing to the user.
+   </li>
+</ul>
+</li>
+<li>
+  Add your tool to
+  <code class="code">
+   src/tools/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Add this line with your other exports
+export * from './myMeteredTool';
+</code></pre>
+<ol>
+<li>
+  Register your tool in
+  <code class="code">
+   src/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Inside the init() method, add:
+tools.myMeteredTool(this, {
+  STRIPE_METERED_PRICE_ID: this.env.STRIPE_METERED_PRICE_ID, // Ensure this matches your metered Price ID
+  BASE_URL: this.env.BASE_URL
+});
+</code></pre>
+<h4 class="heading">
+ Option 3: Creating a One-Time Payment Tool
+</h4>
+<p>
+ This option is suitable if you want to charge users a single fee for access to a tool, rather than a recurring subscription or usage-based metering.
+</p>
+<p>
+<strong>
+  Stripe Setup for One-Time Payments:
+ </strong>
+</p>
+<ol>
+<li>
+  In your Stripe Dashboard, create a new Product.
+ </li>
+<li>
+  Give your product a name (e.g., "Single Report Generation").
+ </li>
+<li>
+  Add a Price to this product:
+  <ul>
+<li>
+    Select "One time" for the pricing model.
+   </li>
+<li>
+    Set the price amount.
+   </li>
+<li>
+    Save the price.
+   </li>
+</ul>
+</li>
+<li>
+  After creating the price, Stripe will show you the Price ID (e.g.,
+  <code class="code">
+   price_xxxxxxxxxxxxxx
+  </code>
+  ). This is the ID you will use for a new environment variable, for example,
+  <code class="code">
+   STRIPE_ONE_TIME_PRICE_ID
+  </code>
+  .
+ </li>
+</ol>
+<p>
+<strong>
+  Tool Implementation:
+ </strong>
+</p>
+<ol>
+<li>
+  Create a new file in the
+  <code class="code">
+   src/tools
+  </code>
+  folder (for example:
+  <code class="code">
+   myOnetimeTool.ts
+  </code>
+  ).
+ </li>
+<li>
+  Use this template, inspired by the
+  <code class="code">
+   onetimeAdd.ts
+  </code>
+  example:
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">import { z } from "zod";
+import { experimental_PaidMcpAgent as PaidMcpAgent } from "@stripe/agent-toolkit/cloudflare";
+import { REUSABLE_PAYMENT_REASON } from "../helpers/constants"; // Or a more specific reason
+
+export function myOnetimeTool(
+  agent: PaidMcpAgent&lt;Env, any, any&gt;, // Adjust AgentProps if needed
+  env?: { STRIPE_ONE_TIME_PRICE_ID: string; BASE_URL: string }
+) {
+  const priceId = env?.STRIPE_ONE_TIME_PRICE_ID || null;
+  const baseUrl = env?.BASE_URL || null;
+
+  if (!priceId || !baseUrl) {
+    throw new Error("Stripe One-Time Price ID and Base URL must be provided for this tool");
+  }
+
+  agent.paidTool(
+    "my_onetime_tool_name", // The tool name
+    {
+      // Input parameters
+      input1: z.string(), // Parameter definitions using Zod
+    },
+    async ({ input1 }: { input1: string }) =&gt; ({
+      // The function that runs when the tool is called
+      content: [
+        { type: "text", text: `You processed: ${input1}` },
+      ],
+    }),
+    {
+      checkout: { // Defines a one-time payment checkout session
+        success_url: `${baseUrl}/payment/success`,
+        line_items: [
+          {
+            price: priceId, // Uses the Stripe Price ID for a one-time payment product
+            quantity: 1,
+          },
+        ],
+        mode: 'payment', // Specifies this is a one-time payment, not a subscription
+      },
+      paymentReason: "Enter a clear reason for this one-time charge. E.g., 'Unlock premium feature X for a single use.'", // Customize this message
+    }
+  );
+}
+</code></pre>
+<ol>
+<li>
+  Modify the code:
+  <ul>
+<li>
+    Change the function name (
+    <code class="code">
+     myOnetimeTool
+    </code>
+    ).
+   </li>
+<li>
+    Change the tool name (
+    <code class="code">
+     my_onetime_tool_name
+    </code>
+    ).
+   </li>
+<li>
+    Update the input parameters and the tool's core logic.
+   </li>
+<li>
+    Ensure the
+    <code class="code">
+     checkout.mode
+    </code>
+    is set to
+    <code class="code">
+     'payment'
+    </code>
+    .
+   </li>
+<li>
+    Customize the
+    <code class="code">
+     paymentReason
+    </code>
+    to clearly explain the one-time charge to the user.
+   </li>
+</ul>
+</li>
+<li>
+  Add your tool to
+  <code class="code">
+   src/tools/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Add this line with your other exports
+export * from './myOnetimeTool';
+</code></pre>
+<ol>
+<li>
+  Register your tool in
+  <code class="code">
+   src/index.ts
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-typescript code">// Inside the init() method, add:
+tools.myOnetimeTool(this, {
+  STRIPE_ONE_TIME_PRICE_ID: this.env.STRIPE_ONE_TIME_PRICE_ID, // Ensure this matches your one-time payment Price ID
+  BASE_URL: this.env.BASE_URL
+});
+</code></pre>
+<ol>
+<li>
+  Remember to add
+  <code class="code">
+   STRIPE_ONE_TIME_PRICE_ID
+  </code>
+  to your
+  <code class="code">
+   .dev.vars
+  </code>
+  file and Cloudflare secrets:
+   In
+  <code class="code">
+   .dev.vars
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-ini code">STRIPE_ONE_TIME_PRICE_ID="price_your-onetime-price-id-here"
+</code></pre>
+<p>
+ And for production:
+</p>
+<pre class="pre"><code class="language-bash code">npx wrangler secret put STRIPE_ONE_TIME_PRICE_ID
+</code></pre>
+<p>
+ You can create different paid tools with different Stripe products (subscription or metered) by creating additional price IDs in your Stripe dashboard and passing them as environment variables.
+</p>
+<h3 class="heading">
+ What Happens When a Free User Tries a Paid Tool
+</h3>
+<p>
+ When a user tries to access a paid tool without having purchased it:
+</p>
+<ol>
+<li>
+  The server checks if they've already paid
+ </li>
+<li>
+  If not, the AI assistant will automatically prompt them with a checkout link
+ </li>
+<li>
+  After completing payment on Stripe they should be able to use the tool immediately
+ </li>
+</ol>
+<h2 class="heading">
+ Future Enhancements (Optional)
+</h2>
+<h3 class="heading">
+ Setting Up Stripe Webhooks
+</h3>
+<p>
+ The basic setup above is all you need to get started. The built-in Stripe integration verifies payments directly when users try to access paid tools - it checks both one-time payments and subscriptions automatically.
+</p>
+<p>
+ Webhooks are completely optional but could be useful for more complex payment scenarios in the future, like:
+</p>
+<ul>
+<li>
+  Building a customer dashboard to display subscription status
+ </li>
+<li>
+  Implementing usage-based billing with metering
+ </li>
+<li>
+  Creating custom workflows when subscriptions are created or canceled
+ </li>
+<li>
+  Handling refunds and disputes with special logic
+ </li>
+</ul>
+<p>
+ If you ever want to add webhook support:
+</p>
+<ol>
+<li>
+  Go to your Stripe Dashboard &gt; Developers &gt; Webhooks
+ </li>
+<li>
+  Click "Add endpoint"
+ </li>
+<li>
+  For the endpoint URL:
+ </li>
+<li>
+  For local development:
+  <code class="code">
+   http://localhost:8787/webhooks/stripe
+  </code>
+</li>
+<li>
+  For production:
+  <code class="code">
+   https://your-worker-name.your-account.workers.dev/webhooks/stripe
+  </code>
+</li>
+<li>
+  For "Events to send", select events relevant to your needs, such as:
+ </li>
+<li>
+  checkout.session.completed
+ </li>
+<li>
+  invoice.payment_succeeded
+ </li>
+<li>
+  customer.subscription.updated
+ </li>
+<li>
+  After creating the webhook, copy the "Signing secret"
+ </li>
+<li>
+  Add this value to your settings:
+ </li>
+<li>
+  For local development, add to
+  <code class="code">
+   .dev.vars
+  </code>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-ini code">STRIPE_WEBHOOK_SECRET="whsec_your-webhook-secret-here"
+</code></pre>
+<ul>
+<li>
+  For production, set it using Wrangler:
+ </li>
+</ul>
+<pre class="pre"><code class="language-bash code">npx wrangler secret put STRIPE_WEBHOOK_SECRET
+</code></pre>
+<h2 class="heading">
+ Need Help?
+</h2>
+<p>
+ If you encounter any bugs or have issues with the boilerplate, please submit an issue on the GitHub repository. Please note that this project is provided as-is and does not include direct support.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/iannuttall-mcp-boilerplate.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

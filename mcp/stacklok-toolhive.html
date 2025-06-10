@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="||||">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ToolHive - making MCP servers easy and secure - MCP Directory">
+    <meta property="og:description" content="||||">
+    <meta property="og:url" content="https://llmlogs.com/mcp/stacklok-toolhive.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ToolHive - making MCP servers easy and secure - MCP Directory">
+    <meta name="twitter:description" content="||||">
+    
+    <title>ToolHive - making MCP servers easy and secure - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">ToolHive - making MCP servers easy and secure</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">ToolHive - making MCP servers easy and secure</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 546</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Go</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">ai</span><span class="topic-tag"> aicodeassistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ai-security</span><span class="topic-tag"> mcp-security</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> security</span><span class="topic-tag"> golang</span><span class="topic-tag"> kubernetes</span>
+                        </div>
+                        <a href="https://github.com/stacklok/toolhive" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="||||" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="ToolHive - making MCP servers easy and secure - MCP Directory" property="og:title"/>
+<meta content="||||" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/stacklok-toolhive.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ToolHive - making MCP servers easy and secure - MCP Directory" name="twitter:title"/>
+<meta content="||||" name="twitter:description"/>
+<title>ToolHive - making MCP servers easy and secure - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">ToolHive - making MCP servers easy and secure</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">ToolHive - making MCP servers easy and secure</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 546</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> aicodeassistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ai-security</span><span class="topic-tag"> mcp-security</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> security</span><span class="topic-tag"> golang</span><span class="topic-tag"> kubernetes</span>
+</div>
+<a class="github-link" href="https://github.com/stacklok/toolhive" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="||||" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="ToolHive - making MCP servers easy and secure - MCP Directory" property="og:title">
+<meta content="||||" property="og:description">
+<meta content="https://llmlogs.com/mcp/stacklok-toolhive.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="ToolHive - making MCP servers easy and secure - MCP Directory" name="twitter:title">
+<meta content="||||" name="twitter:description">
+<title>ToolHive - making MCP servers easy and secure - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>ToolHive - making MCP servers easy and secure</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 546</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> aicodeassistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ai-security</span><span class="topic-tag"> mcp-security</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> security</span><span class="topic-tag"> golang</span><span class="topic-tag"> kubernetes</span>
+</div>
+<a class="github-link" href="https://github.com/stacklok/toolhive" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="||||" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="ToolHive - making MCP servers easy and secure - MCP Directory" property="og:title"/>
+<meta content="||||" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/stacklok-toolhive.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ToolHive - making MCP servers easy and secure - MCP Directory" name="twitter:title"/>
+<meta content="||||" name="twitter:description"/>
+<title>ToolHive - making MCP servers easy and secure - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>ToolHive - making MCP servers easy and secure</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 546</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> aicodeassistant</span><span class="topic-tag"> mcp</span><span class="topic-tag"> ai-security</span><span class="topic-tag"> mcp-security</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> security</span><span class="topic-tag"> golang</span><span class="topic-tag"> kubernetes</span>
+</div>
+<a class="github-link" href="https://github.com/stacklok/toolhive" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ ToolHive - making MCP servers easy and secure
+ <!-- omit in toc -->
+</h1>
+<p>
+<a href="https://github.com/stacklok/toolhive/releases">
+<img alt="Release" src="https://img.shields.io/github/v/release/stacklok/toolhive?style=flat&amp;label=Latest%20version"/>
+</a>
+ |
+ <a href="https://github.com/stacklok/toolhive/actions/workflows/run-on-main.yml">
+<img alt="CI" src="https://github.com/stacklok/toolhive/actions/workflows/run-on-main.yml/badge.svg?event=push"/>
+</a>
+ |
+ <a href="https://opensource.org/licenses/Apache-2.0">
+<img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache2.0-brightgreen.svg?style=flat"/>
+</a>
+ |
+ <a href="https://github.com/stacklok/toolhive">
+<img alt="Star on GitHub" src="https://img.shields.io/github/stars/stacklok/toolhive.svg?style=flat&amp;logo=github&amp;label=Stars"/>
+</a>
+ |
+ <a href="https://discord.gg/stacklok">
+<img alt="Discord" src="https://img.shields.io/discord/1184987096302239844?style=flat&amp;logo=discord&amp;label=Discord"/>
+</a>
+</p>
+<p>
+<img alt="ToolHive Logo" src="docs/images/toolhive.png" width="300"/>
+</p>
+<p>
+ ToolHive (thv) is a lightweight utility designed to simplify the deployment and
+management of MCP (Model Context Protocol) servers, ensuring ease of use,
+consistency, and security.
+</p>
+<p>
+<img alt="Terminal Recording" src="./docs/images/thv-readme-demo.svg"/>
+</p>
+<h2 class="heading">
+ Contents
+ <!-- omit in toc -->
+</h2>
+<ul>
+<li>
+<a href="#why-toolhive">
+   Why ToolHive?
+  </a>
+</li>
+<li>
+<a href="#key-benefits">
+   Key benefits
+  </a>
+</li>
+<li>
+<a href="#getting-started">
+   Getting started
+  </a>
+</li>
+<li>
+<a href="#prerequisites">
+   Prerequisites
+  </a>
+</li>
+<li>
+<a href="#installation">
+   Installation
+  </a>
+</li>
+<li>
+<a href="#quickstart---run-your-first-mcp-server">
+   Quickstart - run your first MCP server
+  </a>
+</li>
+<li>
+<a href="#client-compatibility">
+   Client compatibility
+  </a>
+</li>
+<li>
+<a href="#architecture-overview">
+   Architecture overview
+  </a>
+</li>
+<li>
+<a href="#usage-examples">
+   Usage examples
+  </a>
+</li>
+<li>
+<a href="#register-clients">
+   Register clients
+  </a>
+</li>
+<li>
+<a href="#configure-custom-registry">
+   Configure custom registry
+  </a>
+</li>
+<li>
+<a href="#find-and-run-an-mcp-server">
+   Find and run an MCP server
+  </a>
+</li>
+<li>
+<a href="#manage-mcp-servers">
+   Manage MCP servers
+  </a>
+</li>
+<li>
+<a href="#secrets-management">
+   Secrets management
+  </a>
+<ul>
+<li>
+<a href="#encrypted">
+<code class="code">
+      encrypted
+     </code>
+</a>
+</li>
+<li>
+<a href="#1password">
+<code class="code">
+      1password
+     </code>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#run-a-custom-mcp-server">
+   Run a custom MCP server
+  </a>
+</li>
+<li>
+<a href="#run-mcp-servers-using-protocol-schemes">
+   Run MCP servers using protocol schemes
+  </a>
+</li>
+<li>
+<a href="#advanced-usage">
+   Advanced usage
+  </a>
+</li>
+<li>
+<a href="#customize-permissions">
+   Customize permissions
+  </a>
+</li>
+<li>
+<a href="#security-and-middleware-architecture">
+   Security and middleware architecture
+  </a>
+</li>
+<li>
+<a href="#run-toolhive-in-kubernetes">
+   Run ToolHive in Kubernetes
+  </a>
+</li>
+<li>
+<a href="#add-an-mcp-server-to-the-registry">
+   Add an MCP server to the registry
+  </a>
+</li>
+<li>
+<a href="#api-documentation">
+   API Documentation
+  </a>
+</li>
+<li>
+<a href="#contributing-to-toolhive">
+   Contributing to ToolHive
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Why ToolHive?
+</h2>
+<p>
+ Deploying MCP servers often involves complex, multi-step processes that can
+introduce friction, such as running potentially unsafe commands (e.g., uv or
+npx), manually managing security credentials (e.g., storing API tokens in
+plaintext), and dealing with inconsistent packaging methods.
+</p>
+<p>
+ ToolHive aims to solve these challenges by running containers in a consistent
+and locked-down environment, granting only the minimal permissions required to
+run. This significantly reduces the attack surface, improves usability, and
+enforces best practices for container security.
+</p>
+<p>
+ ToolHive simplifies MCP deployment by focusing on three key areas:
+</p>
+<ul>
+<li>
+<p>
+<strong>
+    Ease of use
+   </strong>
+   : Instantly deploy MCP servers using Docker containers. Start
+  MCP servers with a single, straightforward command without the need to install
+  and manage different versions of Python, Node.js, or other build tools.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Enhanced security
+   </strong>
+   : Secure by default. ToolHive securely manages secrets
+  and configurations, greatly reducing the risk of leaks. Avoid plaintext
+  secrets in configuration files.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Standardized packaging
+   </strong>
+   : Leverage OCI container standards to provide a
+  repeatable, standardized packaging method for MCP servers, ensuring
+  compatibility and reliability.
+  </p>
+</li>
+</ul>
+<h3 class="heading">
+ Key benefits
+</h3>
+<ul>
+<li>
+<p>
+<strong>
+    Curated MCP registry
+   </strong>
+   : ToolHive provides a curated registry of MCPs with
+  verified configurations, allowing you to discover and deploy MCP servers
+  effortlessly. Simply select one from the list and run it securely with a
+  single command.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Enterprise-ready authorization
+   </strong>
+   : Robust authorization controls designed for
+  enterprise environments, securely managing tool access and integrating
+  seamlessly with existing infrastructure (e.g., Kubernetes).
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Seamless integration
+   </strong>
+   : Automatic configuration of popular development tools
+  like GitHub Copilot, Cursor, and more to streamline your workflow.
+  </p>
+</li>
+</ul>
+<h2 class="heading">
+ Getting started
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<p>
+ ToolHive currently works on macOS and Linux using Docker or Podman.
+</p>
+<p>
+ For client auto-discovery/configuration, a supported client:
+</p>
+<ul>
+<li>
+  VS Code (v1.99.0 or newer) with an active GitHub Copilot subscription
+ </li>
+<li>
+  Cursor
+ </li>
+<li>
+  Roo Code (VS Code extension)
+ </li>
+</ul>
+<h3 class="heading">
+ Installation
+</h3>
+<p>
+ ToolHive is a CLI tool written in Go and packaged as a single binary. You can
+install it using one of the following methods:
+</p>
+<h4 class="heading">
+ Download the binary
+ <!-- omit in toc -->
+</h4>
+<p>
+ Download the latest cross-platform release binaries from
+ <a href="https://github.com/stacklok/toolhive/releases">
+  toolhive/releases
+ </a>
+ .
+</p>
+<h4 class="heading">
+ Homebrew (macOS)
+ <!-- omit in toc -->
+</h4>
+<p>
+ Install on macOS using Homebrew:
+</p>
+<pre class="pre"><code class="language-bash code">brew tap stacklok/tap
+brew install thv
+</code></pre>
+<h4 class="heading">
+ Winget (Windows)
+ <!-- omit in toc -->
+</h4>
+<p>
+ If you're on Windows, you can install ToolHive using the Windows Package Manager (Winget).
+</p>
+<blockquote>
+<p>
+  Note: Make sure you have
+  <a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/">
+   Winget
+  </a>
+  installed.
+ </p>
+</blockquote>
+<pre class="pre"><code class="language-bash code">winget install stacklok.thv
+</code></pre>
+<h4 class="heading">
+ Build from source
+ <!-- omit in toc -->
+</h4>
+<p>
+ To build ToolHive from source, clone this repository and build the CLI using Go:
+</p>
+<pre class="pre"><code class="language-bash code">go build ./cmd/thv
+go install ./cmd/thv
+</code></pre>
+<p>
+ Or using
+ <a href="https://taskfile.dev/installation">
+  Task
+ </a>
+ :
+</p>
+<pre class="pre"><code class="language-bash code">task build
+task install
+</code></pre>
+<h3 class="heading">
+ Quickstart - run your first MCP server
+</h3>
+<blockquote>
+<p>
+  Note: This example enables auto-discovery to automatically find supported
+client(s) and update their configuration. Skip this step if you prefer to
+manually configure your client, or run
+  <code class="code">
+   thv config register-client --help
+  </code>
+  to
+learn how to explicitly register a client.
+ </p>
+</blockquote>
+<pre class="pre"><code class="language-bash code"># Enable client auto-discovery:
+thv config auto-discovery true
+
+# Run the Fetch MCP server which allows LLMs to fetch the contents of a website:
+thv run fetch
+
+# List the running MCP servers:
+thv list
+</code></pre>
+<p>
+ Your client should now be able to use the
+ <code class="code">
+  fetch
+ </code>
+ MCP tool to fetch website
+content.
+</p>
+<h2 class="heading">
+ Client compatibility
+</h2>
+<p>
+ ToolHive has been tested with the following clients:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Client
+   </th>
+<th>
+    Supported
+   </th>
+<th>
+    Auto-discovery
+   </th>
+<th>
+    Notes
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    GitHub Copilot (VS Code)
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    v1.99.0+ or Insiders version
+   </td>
+</tr>
+<tr>
+<td>
+    Cursor
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    v0.47.0+
+   </td>
+</tr>
+<tr>
+<td>
+    Roo Code
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    v3.9.0+
+   </td>
+</tr>
+<tr>
+<td>
+    Claude Code
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    v0.2.54+
+   </td>
+</tr>
+<tr>
+<td>
+    Cline
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    v3.8.5+
+   </td>
+</tr>
+<tr>
+<td>
+    Continue
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    Pre-release extension v1.39+ (
+    <a href="https://github.com/continuedev/continue/issues/5359">
+     issue
+    </a>
+    )
+   </td>
+</tr>
+<tr>
+<td>
+    PydanticAI
+   </td>
+<td>
+    ✅
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+    GitHub Copilot (JetBrains)
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    No support for HTTP/SSE MCPs (
+    <a href="https://github.com/microsoft/copilot-intellij-feedback/issues/224">
+     issue
+    </a>
+    )
+   </td>
+</tr>
+<tr>
+<td>
+    Claude Desktop
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    ❌
+   </td>
+<td>
+    No support for HTTP/SSE MCPs (
+    <a href="https://github.com/orgs/modelcontextprotocol/discussions/16">
+     issue
+    </a>
+    )
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ Other clients and development libraries that support the SSE protocol can also
+be used with ToolHive.
+</p>
+<p>
+ Automatic configuration is supported for Copilot, Cursor, and Roo Code. For
+other clients, manual configuration of the MCP server URL is required.
+</p>
+<h2 class="heading">
+ Architecture overview
+</h2>
+<p>
+ ToolHive exposes an SSE proxy to forward requests to MCP servers running in
+containers. The proxy communicates with MCP servers via standard input/output
+(stdio) or server-sent events (SSE).
+</p>
+<pre class="pre"><code class="language-mermaid code">flowchart LR
+  subgraph container["Docker/Podman"]
+    direction LR
+    subgraph container1["Container"]
+        mcp1["MCP Server 1"]
+    end
+    subgraph container2["Container"]
+        mcp2["MCP Server 2"]
+    end
+    subgraph container3["Container"]
+        mcp3["MCP Server 3"]
+    end
+  end
+    proxy1["SSE proxy 1"] -- stdio --&gt; mcp1
+    proxy2["SSE proxy 2"] -- stdio --&gt; mcp2
+    proxy3["SSE proxy 3"] -- sse --&gt; mcp3
+    T["ToolHive CLI"] -- Socket API --&gt; container
+    C["Client"] -- HTTP/SSE --&gt; proxy1 &amp; proxy2 &amp; proxy3
+    T ~~~ C
+</code></pre>
+<h2 class="heading">
+ Usage examples
+</h2>
+<p>
+ Common usage scenarios are detailed below. To view all available commands and
+options, see the
+ <a href="./docs/cli/thv.md">
+  ToolHive CLI reference
+ </a>
+ or run
+ <code class="code">
+  thv --help
+ </code>
+ .
+</p>
+<h3 class="heading">
+ Register clients
+</h3>
+<p>
+ ToolHive can automatically configure supported clients to use the MCP servers
+you run. To take advantage of this feature, clients must be registered before
+you run an MCP server.
+</p>
+<p>
+ To enable automatic discovery and configuration of supported clients, run:
+</p>
+<pre class="pre"><code class="language-bash code">thv config auto-discovery true
+</code></pre>
+<p>
+ Or, you can register clients manually:
+</p>
+<pre class="pre"><code class="language-bash code"># Register a client
+thv config register-client &lt;client-name&gt;
+
+# Show registered clients
+thv config list-registered-clients
+
+# Remove a client
+thv config remove-client &lt;client-name&gt;
+</code></pre>
+<h3 class="heading">
+ Configure custom registry
+</h3>
+<p>
+ By default, ToolHive uses a built-in registry of curated MCP servers. However, you can configure ToolHive to use a custom remote registry instead.
+</p>
+<p>
+ To set a custom registry URL:
+</p>
+<pre class="pre"><code class="language-bash code"># Set a custom registry URL
+thv config set-registry-url https://example.com/custom-registry.json
+
+# View the currently configured registry URL
+thv config get-registry-url
+
+# Remove the custom registry URL and revert to the built-in registry
+thv config unset-registry-url
+</code></pre>
+<p>
+ The custom registry must be a JSON file that follows the same format as the
+ <a href="pkg/registry/data/registry.json">
+  built-in registry
+ </a>
+ . When a custom registry URL is configured, ToolHive will fetch the registry data from that URL instead of using the embedded registry.
+</p>
+<p>
+ This feature is useful for organizations that want to maintain their own curated list of MCP servers or for testing custom registry configurations.
+</p>
+<h3 class="heading">
+ Find and run an MCP server
+</h3>
+<p>
+ First, find the MCP server you want to run. You can list or search available MCP
+servers in the built-in registry using:
+</p>
+<pre class="pre"><code class="language-bash code"># List all available servers
+thv registry list
+
+# Find a server by keyword
+thv search &lt;search-term&gt;
+</code></pre>
+<p>
+ To view detailed information about a specific MCP server including its available
+tools, configuration options, and other metadata, use:
+</p>
+<pre class="pre"><code class="language-bash code">thv registry info &lt;name-of-mcp-server&gt;
+</code></pre>
+<p>
+ Once you find the MCP server you want to run, start it using the
+ <code class="code">
+  thv run
+ </code>
+ command:
+</p>
+<pre class="pre"><code class="language-bash code">thv run &lt;name-of-mcp-server&gt;
+</code></pre>
+<p>
+ The registry already contains all the parameters needed to run the server, so
+you don't need to specify any additional arguments. ToolHive will automatically
+pull the image and start the server.
+</p>
+<p>
+ We're always looking to expand our MCP server registry. If you have a specific
+server you'd like to see included, feel free to
+ <a href="https://github.com/stacklok/toolhive/issues">
+  open an issue
+ </a>
+ or submit a pull
+request to update the
+ <a href="pkg/registry/data/registry.json">
+  registry.json
+ </a>
+ file.
+</p>
+<h4 class="heading">
+ Registry curation
+</h4>
+<p>
+ Our registry curation process uses a set of heuristics to evaluate MCP servers for quality,
+security, and compatibility before inclusion. We prioritize servers that demonstrate good
+documentation, active maintenance, and follow security best practices.
+</p>
+<p>
+ For detailed information about our curation process, see:
+-
+ <a href="./docs/registry/heuristics.md">
+  Registry Heuristics
+ </a>
+ -
+ <a href="./docs/registry/management.md">
+  Registry Management
+ </a>
+</p>
+<h3 class="heading">
+ Manage MCP servers
+</h3>
+<p>
+ To list the running MCP servers:
+</p>
+<pre class="pre"><code class="language-bash code">thv list
+</code></pre>
+<p>
+ This displays all active MCP servers managed by ToolHive, along with their
+current status. To include stopped servers, add the
+ <code class="code">
+  --all
+ </code>
+ flag.
+</p>
+<p>
+ To stop and/or remove a server:
+</p>
+<pre class="pre"><code class="language-bash code">thv stop &lt;name-of-mcp-server&gt;
+thv rm &lt;name-of-mcp-server&gt;
+
+# Or to stop and remove in one command:
+thv rm -f &lt;name-of-mcp-server&gt;
+</code></pre>
+<h3 class="heading">
+ Secrets management
+</h3>
+<p>
+ Many MCP servers require API tokens or other secrets for authentication.
+ToolHive provides a secure way to manage these secrets without exposing them in
+plaintext configuration files.
+</p>
+<p>
+ ToolHive offers integration with multiple secret providers:
+</p>
+<ul>
+<li>
+<code class="code">
+   encrypted
+  </code>
+</li>
+<li>
+<code class="code">
+   1password
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+<code class="code">
+  encrypted
+ </code>
+</h4>
+<p>
+ This example enables ToolHive's encrypted secrets store, creates a secret for a
+GitHub authentication token, and runs the GitHub MCP server with the token:
+</p>
+<pre class="pre"><code class="language-bash code">thv config secrets-provider encrypted
+thv secret set github
+# &lt;enter your GitHub personal access token when prompted&gt;
+
+thv run --secret github,target=GITHUB_PERSONAL_ACCESS_TOKEN github
+</code></pre>
+<p>
+ ToolHive stores the encryption password in your operating system's keyring
+service.
+</p>
+<p>
+ For more details on managing secrets, see the
+ <a href="./docs/cli/thv_secret.md">
+<code class="code">
+   thv secret
+  </code>
+  command reference
+ </a>
+ or run
+ <code class="code">
+  thv secret --help
+ </code>
+ .
+</p>
+<h4 class="heading">
+<code class="code">
+  1password
+ </code>
+</h4>
+<p>
+ This example enables ToolHive's 1Password integration for retrieving secrets.
+</p>
+<p>
+ To enable the
+ <code class="code">
+  1password
+ </code>
+ provider:
+</p>
+<pre class="pre"><code class="language-bash code">$ thv config secrets-provider 1password
+Secrets provider type updated to: 1password
+</code></pre>
+<p>
+ To allow ToolHive to retrieve secrets from your 1Password make sure you setup a
+ <a href="https://developer.1password.com/docs/sdks/#step-1-create-a-service-account">
+  Service Account
+ </a>
+ and set the
+ <code class="code">
+  OP_SERVICE_ACCOUNT_TOKEN
+ </code>
+ variable before running any ToolHive
+commands that use it.
+</p>
+<p>
+ When you are referencing a secret make sure to follow the
+ <a href="https://developer.1password.com/docs/cli/secret-references/#step-3-resolve-secret-references">
+  secret reference
+ </a>
+ required by 1Password
+</p>
+<pre class="pre"><code class="language-bash code"># `op://&lt;vault-name&gt;/&lt;item-name&gt;/[section-name/]&lt;field-name&gt;`
+$ OP_SERVICE_ACCOUNT_TOKEN="&lt;token&gt;" thv secret get op://test/login/password
+Secret op://test/login/password: my-test-passywordy
+</code></pre>
+<blockquote>
+<p>
+  Note: Only getting of secrets is supported with 1Password currently. If there
+is a demand to support setting of secrets in future, we will look into adding
+this capability.
+ </p>
+</blockquote>
+<p>
+ For more details on managing secrets, see the
+ <a href="./docs/cli/thv_secret.md">
+<code class="code">
+   thv secret
+  </code>
+  command reference
+ </a>
+ or run
+ <code class="code">
+  thv secret --help
+ </code>
+ .
+</p>
+<h3 class="heading">
+ Run a custom MCP server
+</h3>
+<p>
+ If you want to run a custom MCP server that is not in the registry, you can do
+so by specifying the image name and any additional arguments. For example:
+</p>
+<pre class="pre"><code class="language-bash code">thv run --transport sse --name my-mcp-server --port 8080 my-mcp-server-image:latest -- my-mcp-server-args
+</code></pre>
+<p>
+ This command closely resembles
+ <code class="code">
+  docker run
+ </code>
+ but focuses on security and
+simplicity. When invoked:
+</p>
+<ul>
+<li>
+<p>
+   ToolHive creates a container from the specified image
+  (
+   <code class="code">
+    my-mcp-server-image:latest
+   </code>
+   ).
+  </p>
+</li>
+<li>
+<p>
+   It configures the container to listen on the chosen port (8080).
+  </p>
+</li>
+<li>
+<p>
+   Labels the container so it can be tracked by ToolHive:
+  </p>
+</li>
+</ul>
+<p>
+<code class="code">
+  yaml
+  toolhive: true
+  toolhive-name: my-mcp-server
+ </code>
+</p>
+<ul>
+<li>
+  Sets up the specified transport method (
+  <code class="code">
+   --transport stdio
+  </code>
+  or
+  <code class="code">
+   --transport sse
+  </code>
+  ):
+ </li>
+<li>
+<strong>
+   Standard I/O
+  </strong>
+  (
+  <code class="code">
+   stdio
+  </code>
+  ), default:\
+    ToolHive redirects SSE traffic from the client to the container's standard input
+    and output. This acts as a secure proxy, ensuring that the container does not
+    have direct access to the network or the host machine.
+ </li>
+<li>
+<strong>
+   Server-sent events (SSE)
+  </strong>
+  (
+  <code class="code">
+   sse
+  </code>
+  ):\
+    ToolHive creates a reverse proxy on a random port that forwards requests to the
+    container. This means the container itself does not directly expose any ports.
+ </li>
+</ul>
+<h3 class="heading">
+ Run MCP servers using protocol schemes
+</h3>
+<p>
+ ToolHive supports running MCP servers directly from package managers using
+protocol schemes. This allows you to run MCP servers without having to build and
+publish Docker images first.
+</p>
+<p>
+ Currently, three protocol schemes are supported:
+</p>
+<ul>
+<li>
+<strong>
+   uvx://
+  </strong>
+  : For Python-based MCP servers using the uv package manager
+ </li>
+<li>
+<strong>
+   npx://
+  </strong>
+  : For Node.js-based MCP servers using npm
+ </li>
+<li>
+<strong>
+   go://
+  </strong>
+  : For Go-based MCP servers using the Go toolchain
+ </li>
+</ul>
+<p>
+ For example, to run a Python-based MCP server:
+</p>
+<pre class="pre"><code class="language-bash code">thv run uvx://awslabs.core-mcp-server@latest
+</code></pre>
+<p>
+ Or to run a Node.js-based MCP server:
+</p>
+<pre class="pre"><code class="language-bash code">thv run npx://@pulumi/mcp-server@latest
+</code></pre>
+<p>
+ Or to run a Go-based MCP server:
+</p>
+<pre class="pre"><code class="language-bash code">thv run go://github.com/example/go-mcp-server@latest
+</code></pre>
+<p>
+ For Go-based MCP servers, you can also run local projects by providing a local
+path:
+</p>
+<pre class="pre"><code class="language-bash code"># Run from a relative path
+thv run go://./cmd/my-mcp-server
+
+# Run from the current directory
+cd my-go-mcp-project
+thv run go://.
+
+# Run from an absolute path
+thv run go:///path/to/my-go-project
+</code></pre>
+<p>
+ When you use a protocol scheme, ToolHive will:
+</p>
+<ol>
+<li>
+  Detect the protocol scheme and extract the package name or path
+ </li>
+<li>
+  For local Go paths, copy the source code into the build context
+ </li>
+<li>
+  Generate a Dockerfile based on the appropriate template
+ </li>
+<li>
+  Build a Docker image with the package installed or source code copied
+ </li>
+<li>
+  Run the MCP server using the built image
+ </li>
+</ol>
+<p>
+ Note that in this case, you still might need to specify additional arguments
+like the transport method, volumes, and environment variables. So, the command
+might look like:
+</p>
+<pre class="pre"><code class="language-bash code">thv run --transport sse --name my-mcp-server --port 8080 uvx://some-sse-mcp-server@latest -- my-mcp-server-args
+</code></pre>
+<p>
+ Read the documentation for the specific MCP server to see if it requires any
+additional arguments.
+</p>
+<h2 class="heading">
+ Advanced usage
+</h2>
+<h3 class="heading">
+ Customize permissions
+</h3>
+<p>
+ Containers launched by ToolHive come with a minimal set of permissions, strictly
+limited to what is required. Permissions can be further customized via a
+JSON-based permission profile provided with the
+ <code class="code">
+  --permission-profile
+ </code>
+ flag.
+</p>
+<p>
+ An example permission profile file could be:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "read": ["/var/run/mcp.sock"],
+  "write": ["/var/run/mcp.sock"],
+  "network": {
+    "outbound": {
+      "insecure_allow_all": false,
+      "allow_transport": ["tcp", "udp"],
+      "allow_host": ["localhost", "google.com"],
+      "allow_port": [80, 443]
+    }
+  }
+}
+</code></pre>
+<p>
+ This profile lets the container read and write to the
+ <code class="code">
+  /var/run/mcp.sock
+ </code>
+ Unix
+socket and also make outbound network requests to
+ <code class="code">
+  localhost
+ </code>
+ and
+ <code class="code">
+  google.com
+ </code>
+ on ports
+ <code class="code">
+  80
+ </code>
+ and
+ <code class="code">
+  443
+ </code>
+ .
+</p>
+<p>
+ Two built-in profiles are included for convenience:
+</p>
+<ul>
+<li>
+<code class="code">
+   none
+  </code>
+  : Grants minimal permissions with no network access.
+ </li>
+<li>
+<code class="code">
+   network
+  </code>
+  : Permits outbound network connections to any host on any port (not
+  recommended for production use).
+ </li>
+</ul>
+<h3 class="heading">
+ Security and middleware architecture
+</h3>
+<p>
+ ToolHive uses a layered middleware architecture to provide authentication, authorization, and auditing capabilities for MCP servers. The middleware chain ensures secure request processing and comprehensive observability.
+</p>
+<p>
+ For detailed information about the middleware architecture, including request flow diagrams and configuration options, see the
+ <a href="./docs/middleware.md">
+  Middleware Architecture
+ </a>
+ documentation.
+</p>
+<p>
+ For authorization-specific configuration and Cedar policy examples, see the
+ <a href="./docs/authz.md">
+  Authorization Framework
+ </a>
+ documentation.
+</p>
+<h3 class="heading">
+ Run ToolHive in Kubernetes
+</h3>
+<p>
+ ToolHive can also be used to deploy MCP servers in a Kubernetes cluster via our
+new Operator. This functionality is still under active development for
+production use cases, but we invite you to try it out locally using a Kind
+cluster.
+</p>
+<p>
+ Check out the
+ <a href="./docs/kind/deploying-toolhive-operator.md">
+  Run ToolHive Operator in Kubernetes using kind
+ </a>
+ guide to get started.
+</p>
+<p>
+<a href="./docs/kind/deploying-mcp-server-with-operator.md">
+  Deploy MCP Servers in Kubernetes with ToolHive Operator
+ </a>
+</p>
+<h2 class="heading">
+ Add an MCP server to the registry
+</h2>
+<p>
+ Have an MCP server in mind? We'll be happy to add it to our registry!
+</p>
+<p>
+ Follow these steps to submit your MCP server for inclusion:
+</p>
+<ol>
+<li>
+<strong>
+   Submit a request
+  </strong>
+  :
+  <a href="https://github.com/stacklok/toolhive/issues/new?template=add-an-mcp-server.md">
+   Open a registry submission issue
+  </a>
+  using our template
+ </li>
+<li>
+<strong>
+   Review process
+  </strong>
+  : Our team will evaluate your submission based on security, quality, and community value (see
+  <a href="./docs/registry/heuristics.md">
+   Registry Heuristics
+  </a>
+  for details)
+ </li>
+<li>
+<strong>
+   Approval
+  </strong>
+  : Once approved, your server will be added to the registry!
+ </li>
+</ol>
+<h2 class="heading">
+ API Documentation
+</h2>
+<p>
+ Full OpenAPI 3.1.0 REST API generation and documentation is available in the
+ <a href="./docs/server">
+  docs/server
+ </a>
+ directory.
+</p>
+<h2 class="heading">
+ Contributing to ToolHive
+</h2>
+<p>
+ We welcome contributions to ToolHive! If you'd like to contribute, please review
+the
+ <a href="./CONTRIBUTING.md">
+  CONTRIBUTING guide
+ </a>
+ for details on how to get started.
+</p>
+<p>
+ If you run into a bug or have a feature request, please
+ <a href="https://github.com/stacklok/toolhive/issues">
+  open an issue
+ </a>
+ in the repository
+or join us in the
+ <code class="code">
+  #toolhive-developers
+ </code>
+ channel on our
+ <a href="https://discord.gg/stacklok">
+  community Discord server
+ </a>
+ .
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the Apache 2.0 License. See the
+ <a href="./LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+<!-- markdownlint-disable-file MD033 -->
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/stacklok-toolhive.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/stacklok-toolhive.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/stacklok-toolhive.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/stacklok-toolhive.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

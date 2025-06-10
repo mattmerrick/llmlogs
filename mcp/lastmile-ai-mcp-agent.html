@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="lastmile-ai/mcp-agent - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="lastmile-ai/mcp-agent - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>lastmile-ai/mcp-agent - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">lastmile-ai/mcp-agent</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">lastmile-ai/mcp-agent</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 5009</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> ai-agents</span><span class="topic-tag"> llms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> python</span><span class="topic-tag"> llm</span>
+                        </div>
+                        <a href="https://github.com/lastmile-ai/mcp-agent" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="lastmile-ai/mcp-agent - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="lastmile-ai/mcp-agent - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>lastmile-ai/mcp-agent - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">lastmile-ai/mcp-agent</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">lastmile-ai/mcp-agent</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 5009</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> ai-agents</span><span class="topic-tag"> llms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> python</span><span class="topic-tag"> llm</span>
+</div>
+<a class="github-link" href="https://github.com/lastmile-ai/mcp-agent" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="lastmile-ai/mcp-agent - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="lastmile-ai/mcp-agent - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>lastmile-ai/mcp-agent - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>lastmile-ai/mcp-agent</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 5009</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> ai-agents</span><span class="topic-tag"> llms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> python</span><span class="topic-tag"> llm</span>
+</div>
+<a class="github-link" href="https://github.com/lastmile-ai/mcp-agent" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="lastmile-ai/mcp-agent - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="lastmile-ai/mcp-agent - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>lastmile-ai/mcp-agent - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>lastmile-ai/mcp-agent</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 5009</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agents</span><span class="topic-tag"> ai</span><span class="topic-tag"> ai-agents</span><span class="topic-tag"> llms</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> python</span><span class="topic-tag"> llm</span>
+</div>
+<a class="github-link" href="https://github.com/lastmile-ai/mcp-agent" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<p align="center">
+<img alt="Logo" src="https://github.com/user-attachments/assets/c8d059e5-bd56-4ea2-a72d-807fb4897bde" width="300"/>
+</p>
+<p align="center">
+<em>
+  Build effective agents with Model Context Protocol using simple, composable patterns.
+ </em>
+<p align="center">
+<a href="https://github.com/lastmile-ai/mcp-agent/tree/main/examples" target="_blank">
+<strong>
+    Examples
+   </strong>
+</a>
+  |
+  <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank">
+<strong>
+    Building Effective Agents
+   </strong>
+</a>
+  |
+  <a href="https://modelcontextprotocol.io/introduction" target="_blank">
+<strong>
+    MCP
+   </strong>
+</a>
+</p>
+<p align="center">
+<a href="https://pypi.org/project/mcp-agent/">
+<img src="https://img.shields.io/pypi/v/mcp-agent?color=%2334D058&amp;label=pypi"/>
+</a>
+<a href="https://github.com/lastmile-ai/mcp-agent/issues">
+<img src="https://img.shields.io/github/issues-raw/lastmile-ai/mcp-agent"/>
+</a>
+<a href="https://lmai.link/discord/mcp-agent">
+<img alt="discord" src="https://shields.io/discord/1089284610329952357"/>
+</a>
+<img alt="Pepy Total Downloads" src="https://img.shields.io/pepy/dt/mcp-agent?label=pypi%20%7C%20downloads"/>
+<a href="https://github.com/lastmile-ai/mcp-agent/blob/main/LICENSE">
+<img src="https://img.shields.io/pypi/l/mcp-agent"/>
+</a>
+</p>
+ ## Overview
+
+**`mcp-agent`** is a simple, composable framework to build agents using [Model Context Protocol](https://modelcontextprotocol.io/introduction).
+
+**Inspiration**: Anthropic announced 2 foundational updates for AI application developers:
+
+1. [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) - a standardized interface to let any software be accessible to AI assistants via MCP servers.
+2. [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - a seminal writeup on simple, composable patterns for building production-ready AI agents.
+
+`mcp-agent` puts these two foundational pieces into an AI application framework:
+
+1. It handles the pesky business of managing the lifecycle of MCP server connections so you don't have to.
+2. It implements every pattern described in Building Effective Agents, and does so in a _composable_ way, allowing you to chain these patterns together.
+3. **Bonus**: It implements [OpenAI's Swarm](https://github.com/openai/swarm) pattern for multi-agent orchestration, but in a model-agnostic way.
+
+Altogether, this is the simplest and easiest way to build robust agent applications. Much like MCP, this project is in early development.
+We welcome all kinds of [contributions](/CONTRIBUTING.md), feedback and your help in growing this to become a new standard.
+
+## Get Started
+
+We recommend using [uv](https://docs.astral.sh/uv/) to manage your Python projects:
+ <pre class="pre"><code class="language-bash code">uv add "mcp-agent"
+</code></pre>
+ Alternatively:
+ <pre class="pre"><code class="language-bash code">pip install mcp-agent
+</code></pre>
+ ### Quickstart
+
+&gt; [!TIP]
+&gt; The [`examples`](/examples) directory has several example applications to get started with.
+&gt; To run an example, clone this repo, then:
+&gt;
+&gt; ```bash
+&gt; cd examples/basic/mcp_basic_agent # Or any other example
+&gt; cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml # Update API keys
+&gt; uv run main.py
+&gt; ```
+
+Here is a basic "finder" agent that uses the fetch and filesystem servers to look up a file, read a blog and write a tweet. [Example link](./examples/basic/mcp_basic_agent/):
+ <details open="">
+<summary>
+   finder_agent.py
+  </summary>
+<pre class="pre"><code class="language-python code">import asyncio
+import os
+
+from mcp_agent.app import MCPApp
+from mcp_agent.agents.agent import Agent
+from mcp_agent.workflows.llm.augmented_llm_openai import OpenAIAugmentedLLM
+
+app = MCPApp(name="hello_world_agent")
+
+async def example_usage():
+    async with app.run() as mcp_agent_app:
+        logger = mcp_agent_app.logger
+        # This agent can read the filesystem or fetch URLs
+        finder_agent = Agent(
+            name="finder",
+            instruction="""You can read local files or fetch URLs.
+                Return the requested information when asked.""",
+            server_names=["fetch", "filesystem"], # MCP servers this Agent can use
+        )
+
+        async with finder_agent:
+            # Automatically initializes the MCP servers and adds their tools for LLM use
+            tools = await finder_agent.list_tools()
+            logger.info(f"Tools available:", data=tools)
+
+            # Attach an OpenAI LLM to the agent (defaults to GPT-4o)
+            llm = await finder_agent.attach_llm(OpenAIAugmentedLLM)
+
+            # This will perform a file lookup and read using the filesystem server
+            result = await llm.generate_str(
+                message="Show me what's in README.md verbatim"
+            )
+            logger.info(f"README.md contents: {result}")
+
+            # Uses the fetch server to fetch the content from URL
+            result = await llm.generate_str(
+                message="Print the first two paragraphs from https://www.anthropic.com/research/building-effective-agents"
+            )
+            logger.info(f"Blog intro: {result}")
+
+            # Multi-turn interactions by default
+            result = await llm.generate_str("Summarize that in a 128-char tweet")
+            logger.info(f"Tweet: {result}")
+
+if __name__ == "__main__":
+    asyncio.run(example_usage())
+
+</code></pre>
+</details>
+<details>
+<summary>
+   mcp_agent.config.yaml
+  </summary>
+<pre class="pre"><code class="language-yaml code">execution_engine: asyncio
+logger:
+  transports: [console] # You can use [file, console] for both
+  level: debug
+  path: "logs/mcp-agent.jsonl" # Used for file transport
+  # For dynamic log filenames:
+  # path_settings:
+  #   path_pattern: "logs/mcp-agent-{unique_id}.jsonl"
+  #   unique_id: "timestamp"  # Or "session_id"
+  #   timestamp_format: "%Y%m%d_%H%M%S"
+
+mcp:
+  servers:
+    fetch:
+      command: "uvx"
+      args: ["mcp-server-fetch"]
+    filesystem:
+      command: "npx"
+      args:
+        [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "&lt;add_your_directories&gt;",
+        ]
+
+openai:
+  # Secrets (API keys, etc.) are stored in an mcp_agent.secrets.yaml file which can be gitignored
+  default_model: gpt-4o
+</code></pre>
+</details>
+<details>
+<summary>
+   Agent output
+  </summary>
+<img alt="Image" src="https://github.com/user-attachments/assets/eaa60fdf-bcc6-460b-926e-6fa8534e9089" width="2398"/>
+</details>
+ ## Table of Contents
+
+- [Why use mcp-agent?](#why-use-mcp-agent)
+- [Example Applications](#examples)
+  - [Claude Desktop](#claude-desktop)
+  - [Streamlit](#streamlit)
+    - [Gmail Agent](#gmail-agent)
+    - [RAG](#simple-rag-chatbot)
+  - [Marimo](#marimo)
+  - [Python](#python)
+    - [Swarm (CLI)](#swarm)
+- [Core Concepts](#core-components)
+- [Workflows Patterns](#workflows)
+  - [Augmented LLM](#augmentedllm)
+  - [Parallel](#parallel)
+  - [Router](#router)
+  - [Intent-Classifier](#intentclassifier)
+  - [Orchestrator-Workers](#orchestrator-workers)
+  - [Evaluator-Optimizer](#evaluator-optimizer)
+  - [OpenAI Swarm](#swarm-1)
+- [Advanced](#advanced)
+  - [Composing multiple workflows](#composability)
+  - [Signaling and Human input](#signaling-and-human-input)
+  - [App Config](#app-config)
+  - [MCP Server Management](#mcp-server-management)
+- [Contributing](#contributing)
+- [Roadmap](#roadmap)
+- [FAQs](#faqs)
+
+## Why use `mcp-agent`?
+
+There are too many AI frameworks out there already. But `mcp-agent` is the only one that is purpose-built for a shared protocol - [MCP](https://modelcontextprotocol.io/introduction). It is also the most lightweight, and is closer to an agent pattern library than a framework.
+
+As [more services become MCP-aware](https://github.com/punkpeye/awesome-mcp-servers), you can use mcp-agent to build robust and controllable AI agents that can leverage those services out-of-the-box.
+
+## Examples
+
+Before we go into the core concepts of mcp-agent, let's show what you can build with it.
+
+In short, you can build any kind of AI application with mcp-agent: multi-agent collaborative workflows, human-in-the-loop workflows, RAG pipelines and more.
+
+### Claude Desktop
+
+You can integrate mcp-agent apps into MCP clients like Claude Desktop.
+
+#### mcp-agent server
+
+This app wraps an mcp-agent application inside an MCP server, and exposes that server to Claude Desktop.
+The app exposes agents and workflows that Claude Desktop can invoke to service of the user's request.
+
+https://github.com/user-attachments/assets/7807cffd-dba7-4f0c-9c70-9482fd7e0699
+
+This demo shows a multi-agent evaluation task where each agent evaluates aspects of an input poem, and
+then an aggregator summarizes their findings into a final response.
+
+**Details**: Starting from a user's request over text, the application:
+
+- dynamically defines agents to do the job
+- uses the appropriate workflow to orchestrate those agents (in this case the Parallel workflow)
+
+**Link to code**: [examples/basic/mcp_agent_server](./examples/basic/mcp_agent_server)
+
+&gt; [!NOTE]
+&gt; Huge thanks to [Jerron Lim (@StreetLamb)](https://github.com/StreetLamb)
+&gt; for developing and contributing this example!
+
+### Streamlit
+
+You can deploy mcp-agent apps using Streamlit.
+
+#### Gmail agent
+
+This app is able to perform read and write actions on gmail using text prompts -- i.e. read, delete, send emails, mark as read/unread, etc.
+It uses an MCP server for Gmail.
+
+https://github.com/user-attachments/assets/54899cac-de24-4102-bd7e-4b2022c956e3
+
+**Link to code**: [gmail-mcp-server](https://github.com/jasonsum/gmail-mcp-server/blob/add-mcp-agent-streamlit/streamlit_app.py)
+
+&gt; [!NOTE]
+&gt; Huge thanks to [Jason Summer (@jasonsum)](https://github.com/jasonsum)
+&gt; for developing and contributing this example!
+
+#### Simple RAG Chatbot
+
+This app uses a Qdrant vector database (via an MCP server) to do Q&amp;A over a corpus of text.
+
+https://github.com/user-attachments/assets/f4dcd227-cae9-4a59-aa9e-0eceeb4acaf4
+
+**Link to code**: [examples/usecases/streamlit_mcp_rag_agent](./examples/usecases/streamlit_mcp_rag_agent/)
+
+&gt; [!NOTE]
+&gt; Huge thanks to [Jerron Lim (@StreetLamb)](https://github.com/StreetLamb)
+&gt; for developing and contributing this example!
+
+### Marimo
+
+[Marimo](https://github.com/marimo-team/marimo) is a reactive Python notebook that replaces Jupyter and Streamlit.
+Here's the "file finder" agent from [Quickstart](#quickstart) implemented in Marimo:
+ <img src="https://github.com/user-attachments/assets/139a95a5-e3ac-4ea7-9c8f-bad6577e8597" width="400"/>
+ **Link to code**: [examples/usecases/marimo_mcp_basic_agent](./examples/usecases/marimo_mcp_basic_agent/)
+
+&gt; [!NOTE]
+&gt; Huge thanks to [Akshay Agrawal (@akshayka)](https://github.com/akshayka)
+&gt; for developing and contributing this example!
+
+### Python
+
+You can write mcp-agent apps as Python scripts or Jupyter notebooks.
+
+#### Swarm
+
+This example demonstrates a multi-agent setup for handling different customer service requests in an airline context using the Swarm workflow pattern. The agents can triage requests, handle flight modifications, cancellations, and lost baggage cases.
+
+https://github.com/user-attachments/assets/b314d75d-7945-4de6-965b-7f21eb14a8bd
+
+**Link to code**: [examples/workflows/workflow_swarm](./examples/workflows/workflow_swarm/)
+
+## Core Components
+
+The following are the building blocks of the mcp-agent framework:
+
+- **[MCPApp](./src/mcp_agent/app.py)**: global state and app configuration
+- **MCP server management**: [`gen_client`](./src/mcp_agent/mcp/gen_client.py) and [`MCPConnectionManager`](./src/mcp_agent/mcp/mcp_connection_manager.py) to easily connect to MCP servers.
+- **[Agent](./src/mcp_agent/agents/agent.py)**: An Agent is an entity that has access to a set of MCP servers and exposes them to an LLM as tool calls. It has a name and purpose (instruction).
+- **[AugmentedLLM](./src/mcp_agent/workflows/llm/augmented_llm.py)**: An LLM that is enhanced with tools provided from a collection of MCP servers. Every Workflow pattern described below is an `AugmentedLLM` itself, allowing you to compose and chain them together.
+
+Everything in the framework is a derivative of these core capabilities.
+
+## Workflows
+
+mcp-agent provides implementations for every pattern in Anthropic’s [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents), as well as the OpenAI [Swarm](https://github.com/openai/swarm) pattern.
+Each pattern is model-agnostic, and exposed as an `AugmentedLLM`, making everything very composable.
+
+### AugmentedLLM
+
+[AugmentedLLM](./src/mcp_agent/workflows/llm/augmented_llm.py) is an LLM that has access to MCP servers and functions via Agents.
+
+LLM providers implement the AugmentedLLM interface to expose 3 functions:
+
+- `generate`: Generate message(s) given a prompt, possibly over multiple iterations and making tool calls as needed.
+- `generate_str`: Calls `generate` and returns result as a string output.
+- `generate_structured`: Uses [Instructor](https://github.com/instructor-ai/instructor) to return the generated result as a Pydantic model.
+
+Additionally, `AugmentedLLM` has memory, to keep track of long or short-term history.
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">from mcp_agent.agents.agent import Agent
+from mcp_agent.workflows.llm.augmented_llm_anthropic import AnthropicAugmentedLLM
+
+finder_agent = Agent(
+    name="finder",
+    instruction="You are an agent with filesystem + fetch access. Return the requested file or URL contents.",
+    server_names=["fetch", "filesystem"],
+)
+
+async with finder_agent:
+   llm = await finder_agent.attach_llm(AnthropicAugmentedLLM)
+
+   result = await llm.generate_str(
+      message="Print the first 2 paragraphs of https://www.anthropic.com/research/building-effective-agents",
+      # Can override model, tokens and other defaults
+   )
+   logger.info(f"Result: {result}")
+
+   # Multi-turn conversation
+   result = await llm.generate_str(
+      message="Summarize those paragraphs in a 128 character tweet",
+   )
+   logger.info(f"Result: {result}")
+</code></pre>
+</details>
+ ### [Parallel](src/mcp_agent/workflows/parallel/parallel_llm.py)
+
+![Parallel workflow (Image credit: Anthropic)](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F406bb032ca007fd1624f261af717d70e6ca86286-2401x1000.png&amp;w=3840&amp;q=75)
+
+Fan-out tasks to multiple sub-agents and fan-in the results. Each subtask is an AugmentedLLM, as is the overall Parallel workflow, meaning each subtask can optionally be a more complex workflow itself.
+
+&gt; [!NOTE]
+&gt;
+&gt; **[Link to full example](examples/workflows/workflow_parallel/main.py)**
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">proofreader = Agent(name="proofreader", instruction="Review grammar...")
+fact_checker = Agent(name="fact_checker", instruction="Check factual consistency...")
+style_enforcer = Agent(name="style_enforcer", instruction="Enforce style guidelines...")
+
+grader = Agent(name="grader", instruction="Combine feedback into a structured report.")
+
+parallel = ParallelLLM(
+    fan_in_agent=grader,
+    fan_out_agents=[proofreader, fact_checker, style_enforcer],
+    llm_factory=OpenAIAugmentedLLM,
+)
+
+result = await parallel.generate_str("Student short story submission: ...", RequestParams(model="gpt4-o"))
+</code></pre>
+</details>
+ ### [Router](src/mcp_agent/workflows/router/)
+
+![Router workflow (Image credit: Anthropic)](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F5c0c0e9fe4def0b584c04d37849941da55e5e71c-2401x1000.png&amp;w=3840&amp;q=75)
+
+Given an input, route to the `top_k` most relevant categories. A category can be an Agent, an MCP server or a regular function.
+
+mcp-agent provides several router implementations, including:
+
+- [`EmbeddingRouter`](src/mcp_agent/workflows/router/router_embedding.py): uses embedding models for classification
+- [`LLMRouter`](src/mcp_agent/workflows/router/router_llm.py): uses LLMs for classification
+
+&gt; [!NOTE]
+&gt;
+&gt; **[Link to full example](examples/workflows/workflow_router/main.py)**
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">def print_hello_world:
+     print("Hello, world!")
+
+finder_agent = Agent(name="finder", server_names=["fetch", "filesystem"])
+writer_agent = Agent(name="writer", server_names=["filesystem"])
+
+llm = OpenAIAugmentedLLM()
+router = LLMRouter(
+    llm=llm,
+    agents=[finder_agent, writer_agent],
+    functions=[print_hello_world],
+)
+
+results = await router.route( # Also available: route_to_agent, route_to_server
+    request="Find and print the contents of README.md verbatim",
+    top_k=1
+)
+chosen_agent = results[0].result
+async with chosen_agent:
+    ...
+</code></pre>
+</details>
+ ### [IntentClassifier](src/mcp_agent/workflows/intent_classifier/)
+
+A close sibling of Router, the Intent Classifier pattern identifies the `top_k` Intents that most closely match a given input.
+Just like a Router, mcp-agent provides both an [embedding](src/mcp_agent/workflows/intent_classifier/intent_classifier_embedding.py) and [LLM-based](src/mcp_agent/workflows/intent_classifier/intent_classifier_llm.py) intent classifier.
+
+### [Evaluator-Optimizer](src/mcp_agent/workflows/evaluator_optimizer/evaluator_optimizer.py)
+
+![Evaluator-optimizer workflow (Image credit: Anthropic)](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png&amp;w=3840&amp;q=75)
+
+One LLM (the “optimizer”) refines a response, another (the “evaluator”) critiques it until a response exceeds a quality criteria.
+
+&gt; [!NOTE]
+&gt;
+&gt; **[Link to full example](examples/workflows/workflow_evaluator_optimizer/main.py)**
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">optimizer = Agent(name="cover_letter_writer", server_names=["fetch"], instruction="Generate a cover letter ...")
+evaluator = Agent(name="critiquer", instruction="Evaluate clarity, specificity, relevance...")
+
+llm = EvaluatorOptimizerLLM(
+    optimizer=optimizer,
+    evaluator=evaluator,
+    llm_factory=OpenAIAugmentedLLM,
+    min_rating=QualityRating.EXCELLENT, # Keep iterating until the minimum quality bar is reached
+)
+
+result = await eo_llm.generate_str("Write a job cover letter for an AI framework developer role at LastMile AI.")
+print("Final refined cover letter:", result)
+</code></pre>
+</details>
+ ### [Orchestrator-workers](src/mcp_agent/workflows/orchestrator/orchestrator.py)
+
+![Orchestrator workflow (Image credit: Anthropic)](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png&amp;w=3840&amp;q=75)
+
+A higher-level LLM generates a plan, then assigns them to sub-agents, and synthesizes the results.
+The Orchestrator workflow automatically parallelizes steps that can be done in parallel, and blocks on dependencies.
+
+&gt; [!NOTE]
+&gt;
+&gt; **[Link to full example](examples/workflows/workflow_orchestrator_worker/main.py)**
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">finder_agent = Agent(name="finder", server_names=["fetch", "filesystem"])
+writer_agent = Agent(name="writer", server_names=["filesystem"])
+proofreader = Agent(name="proofreader", ...)
+fact_checker = Agent(name="fact_checker", ...)
+style_enforcer = Agent(name="style_enforcer", instructions="Use APA style guide from ...", server_names=["fetch"])
+
+orchestrator = Orchestrator(
+    llm_factory=AnthropicAugmentedLLM,
+    available_agents=[finder_agent, writer_agent, proofreader, fact_checker, style_enforcer],
+)
+
+task = "Load short_story.md, evaluate it, produce a graded_report.md with multiple feedback aspects."
+result = await orchestrator.generate_str(task, RequestParams(model="gpt-4o"))
+print(result)
+</code></pre>
+</details>
+ ### [Swarm](src/mcp_agent/workflows/swarm/swarm.py)
+
+OpenAI has an experimental multi-agent pattern called [Swarm](https://github.com/openai/swarm), which we provide a model-agnostic reference implementation for in mcp-agent.
+ <img src="https://github.com/openai/swarm/blob/main/assets/swarm_diagram.png?raw=true" width="500"/>
+ The mcp-agent Swarm pattern works seamlessly with MCP servers, and is exposed as an `AugmentedLLM`, allowing for composability with other patterns above.
+
+&gt; [!NOTE]
+&gt;
+&gt; **[Link to full example](examples/workflows/workflow_swarm/main.py)**
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">triage_agent = SwarmAgent(...)
+flight_mod_agent = SwarmAgent(...)
+lost_baggage_agent = SwarmAgent(...)
+
+# The triage agent decides whether to route to flight_mod_agent or lost_baggage_agent
+swarm = AnthropicSwarm(agent=triage_agent, context_variables={...})
+
+test_input = "My bag was not delivered!"
+result = await swarm.generate_str(test_input)
+print("Result:", result)
+</code></pre>
+</details>
+ ## Advanced
+
+### Composability
+
+An example of composability is using an [Evaluator-Optimizer](#evaluator-optimizer) workflow as the planner LLM inside
+the [Orchestrator](#orchestrator-workers) workflow. Generating a high-quality plan to execute is important for robust behavior, and an evaluator-optimizer can help ensure that.
+
+Doing so is seamless in mcp-agent, because each workflow is implemented as an `AugmentedLLM`.
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">optimizer = Agent(name="plan_optimizer", server_names=[...], instruction="Generate a plan given an objective ...")
+evaluator = Agent(name="plan_evaluator", instruction="Evaluate logic, ordering and precision of plan......")
+
+planner_llm = EvaluatorOptimizerLLM(
+    optimizer=optimizer,
+    evaluator=evaluator,
+    llm_factory=OpenAIAugmentedLLM,
+    min_rating=QualityRating.EXCELLENT,
+)
+
+orchestrator = Orchestrator(
+    llm_factory=AnthropicAugmentedLLM,
+    available_agents=[finder_agent, writer_agent, proofreader, fact_checker, style_enforcer],
+    planner=planner_llm # It's that simple
+)
+
+...
+</code></pre>
+</details>
+ ### Signaling and Human Input
+
+**Signaling**: The framework can pause/resume tasks. The agent or LLM might “signal” that it needs user input, so the workflow awaits. A developer may signal during a workflow to seek approval or review before continuing with a workflow.
+
+**Human Input**: If an Agent has a `human_input_callback`, the LLM can call a `__human_input__` tool to request user input mid-workflow.
+ <details>
+<summary>
+   Example
+  </summary>
+  The [Swarm example](examples/workflows/workflow_swarm/main.py) shows this in action.
+  <pre class="pre"><code class="language-python code">from mcp_agent.human_input.handler import console_input_callback
+
+lost_baggage = SwarmAgent(
+    name="Lost baggage traversal",
+    instruction=lambda context_variables: f"""
+        {
+        FLY_AIR_AGENT_PROMPT.format(
+            customer_context=context_variables.get("customer_context", "None"),
+            flight_context=context_variables.get("flight_context", "None"),
+        )
+    }\n Lost baggage policy: policies/lost_baggage_policy.md""",
+    functions=[
+        escalate_to_agent,
+        initiate_baggage_search,
+        transfer_to_triage,
+        case_resolved,
+    ],
+    server_names=["fetch", "filesystem"],
+    human_input_callback=console_input_callback, # Request input from the console
+)
+</code></pre>
+</details>
+ ### App Config
+
+Create an [`mcp_agent.config.yaml`](/schema/mcp-agent.config.schema.json) and a gitignored [`mcp_agent.secrets.yaml`](./examples/basic/mcp_basic_agent/mcp_agent.secrets.yaml.example) to define MCP app configuration. This controls logging, execution, LLM provider APIs, and MCP server configuration.
+
+### MCP server management
+
+mcp-agent makes it trivial to connect to MCP servers. Create an [`mcp_agent.config.yaml`](/schema/mcp-agent.config.schema.json) to define server configuration under the `mcp` section:
+ <pre class="pre"><code class="language-yaml code">mcp:
+  servers:
+    fetch:
+      command: "uvx"
+      args: ["mcp-server-fetch"]
+      description: "Fetch content at URLs from the world wide web"
+</code></pre>
+ #### [`gen_client`](src/mcp_agent/mcp/gen_client.py)
+
+Manage the lifecycle of an MCP server within an async context manager:
+ <pre class="pre"><code class="language-python code">from mcp_agent.mcp.gen_client import gen_client
+
+async with gen_client("fetch") as fetch_client:
+    # Fetch server is initialized and ready to use
+    result = await fetch_client.list_tools()
+
+# Fetch server is automatically disconnected/shutdown
+</code></pre>
+ The gen_client function makes it easy to spin up connections to MCP servers.
+
+#### Persistent server connections
+
+In many cases, you want an MCP server to stay online for persistent use (e.g. in a multi-step tool use workflow).
+For persistent connections, use:
+
+- [`connect`](&lt;(src/mcp_agent/mcp/gen_client.py)&gt;) and [`disconnect`](src/mcp_agent/mcp/gen_client.py)
+ <pre class="pre"><code class="language-python code">from mcp_agent.mcp.gen_client import connect, disconnect
+
+fetch_client = None
+try:
+     fetch_client = connect("fetch")
+     result = await fetch_client.list_tools()
+finally:
+     disconnect("fetch")
+</code></pre>
+ - [`MCPConnectionManager`](src/mcp_agent/mcp/mcp_connection_manager.py)
+  For even more fine-grained control over server connections, you can use the MCPConnectionManager.
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">from mcp_agent.context import get_current_context
+from mcp_agent.mcp.mcp_connection_manager import MCPConnectionManager
+
+context = get_current_context()
+connection_manager = MCPConnectionManager(context.server_registry)
+
+async with connection_manager:
+fetch_client = await connection_manager.get_server("fetch") # Initializes fetch server
+result = fetch_client.list_tool()
+fetch_client2 = await connection_manager.get_server("fetch") # Reuses same server connection
+
+# All servers managed by connection manager are automatically disconnected/shut down
+</code></pre>
+</details>
+ #### MCP Server Aggregator
+
+[`MCPAggregator`](src/mcp_agent/mcp/mcp_aggregator.py) acts as a "server-of-servers".
+It provides a single MCP server interface for interacting with multiple MCP servers.
+This allows you to expose tools from multiple servers to LLM applications.
+ <details>
+<summary>
+   Example
+  </summary>
+<pre class="pre"><code class="language-python code">from mcp_agent.mcp.mcp_aggregator import MCPAggregator
+
+aggregator = await MCPAggregator.create(server_names=["fetch", "filesystem"])
+
+async with aggregator:
+   # combined list of tools exposed by 'fetch' and 'filesystem' servers
+   tools = await aggregator.list_tools()
+
+   # namespacing -- invokes the 'fetch' server to call the 'fetch' tool
+   fetch_result = await aggregator.call_tool(name="fetch-fetch", arguments={"url": "https://www.anthropic.com/research/building-effective-agents"})
+
+   # no namespacing -- first server in the aggregator exposing that tool wins
+   read_file_result = await aggregator.call_tool(name="read_file", arguments={})
+</code></pre>
+</details>
+ ## Contributing
+
+We welcome any and all kinds of contributions. Please see the [CONTRIBUTING guidelines](./CONTRIBUTING.md) to get started.
+
+### Special Mentions
+
+There have already been incredible community contributors who are driving this project forward:
+
+- [Shaun Smith (@evalstate)](https://github.com/evalstate) -- who has been leading the charge on countless complex improvements, both to `mcp-agent` and generally to the MCP ecosystem.
+- [Jerron Lim (@StreetLamb)](https://github.com/StreetLamb) -- who has contributed countless hours and excellent examples, and great ideas to the project.
+- [Jason Summer (@jasonsum)](https://github.com/jasonsum) -- for identifying several issues and adapting his Gmail MCP server to work with mcp-agent
+
+## Roadmap
+
+We will be adding a detailed roadmap (ideally driven by your feedback). The current set of priorities include:
+
+- **Durable Execution** -- allow workflows to pause/resume and serialize state so they can be replayed or be paused indefinitely. We are working on integrating [Temporal](./src/mcp_agent/executor/temporal.py) for this purpose.
+- **Memory** -- adding support for long-term memory
+- **Streaming** -- Support streaming listeners for iterative progress
+- **Additional MCP capabilities** -- Expand beyond tool calls to support:
+  - Resources
+  - Prompts
+  - Notifications
+
+## FAQs
+
+### What are the core benefits of using mcp-agent?
+
+mcp-agent provides a streamlined approach to building AI agents using capabilities exposed by **MCP** (Model Context Protocol) servers.
+
+MCP is quite low-level, and this framework handles the mechanics of connecting to servers, working with LLMs, handling external signals (like human input) and supporting persistent state via durable execution. That lets you, the developer, focus on the core business logic of your AI application.
+
+Core benefits:
+
+- 🤝 **Interoperability**: ensures that any tool exposed by any number of MCP servers can seamlessly plug in to your agents.
+- ⛓️ **Composability &amp; Cutstomizability**: Implements well-defined workflows, but in a composable way that enables compound workflows, and allows full customization across model provider, logging, orchestrator, etc.
+- 💻 **Programmatic control flow**: Keeps things simple as developers just write code instead of thinking in graphs, nodes and edges. For branching logic, you write `if` statements. For cycles, use `while` loops.
+- 🖐️ **Human Input &amp; Signals**: Supports pausing workflows for external signals, such as human input, which are exposed as tool calls an Agent can make.
+
+### Do you need an MCP client to use mcp-agent?
+
+No, you can use mcp-agent anywhere, since it handles MCPClient creation for you. This allows you to leverage MCP servers outside of MCP hosts like Claude Desktop.
+
+Here's all the ways you can set up your mcp-agent application:
+
+#### MCP-Agent Server
+
+You can expose mcp-agent applications as MCP servers themselves (see [example](./examples/basic/mcp_agent_server)), allowing MCP clients to interface with sophisticated AI workflows using the standard tools API of MCP servers. This is effectively a server-of-servers.
+
+#### MCP Client or Host
+
+You can embed mcp-agent in an MCP client directly to manage the orchestration across multiple MCP servers.
+
+#### Standalone
+
+You can use mcp-agent applications in a standalone fashion (i.e. they aren't part of an MCP client). The [`examples`](/examples/) are all standalone applications.
+
+### Tell me a fun fact
+
+I debated naming this project _silsila_ (سلسلہ), which means chain of events in Urdu. mcp-agent is more matter-of-fact, but there's still an easter egg in the project paying homage to silsila.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/lastmile-ai-mcp-agent.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

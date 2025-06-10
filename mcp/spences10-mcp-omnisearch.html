@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="mcp-omnisearch - MCP Directory">
+    <meta property="og:description" content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P">
+    <meta property="og:url" content="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mcp-omnisearch - MCP Directory">
+    <meta name="twitter:description" content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P">
+    
+    <title>mcp-omnisearch - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">mcp-omnisearch</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">mcp-omnisearch</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 88</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">brave</span><span class="topic-tag"> kagi</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> perplexity-ai</span><span class="topic-tag"> search</span><span class="topic-tag"> tavily</span>
+                        </div>
+                        <a href="https://github.com/spences10/mcp-omnisearch" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp-omnisearch - MCP Directory" property="og:title"/>
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp-omnisearch - MCP Directory" name="twitter:title"/>
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" name="twitter:description"/>
+<title>mcp-omnisearch - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">mcp-omnisearch</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">mcp-omnisearch</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 88</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">brave</span><span class="topic-tag"> kagi</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> perplexity-ai</span><span class="topic-tag"> search</span><span class="topic-tag"> tavily</span>
+</div>
+<a class="github-link" href="https://github.com/spences10/mcp-omnisearch" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="mcp-omnisearch - MCP Directory" property="og:title">
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" property="og:description">
+<meta content="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="mcp-omnisearch - MCP Directory" name="twitter:title">
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" name="twitter:description">
+<title>mcp-omnisearch - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp-omnisearch</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 88</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">brave</span><span class="topic-tag"> kagi</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> perplexity-ai</span><span class="topic-tag"> search</span><span class="topic-tag"> tavily</span>
+</div>
+<a class="github-link" href="https://github.com/spences10/mcp-omnisearch" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp-omnisearch - MCP Directory" property="og:title"/>
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp-omnisearch - MCP Directory" name="twitter:title"/>
+<meta content="A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, P" name="twitter:description"/>
+<title>mcp-omnisearch - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp-omnisearch</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 88</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">brave</span><span class="topic-tag"> kagi</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> perplexity-ai</span><span class="topic-tag"> search</span><span class="topic-tag"> tavily</span>
+</div>
+<a class="github-link" href="https://github.com/spences10/mcp-omnisearch" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ mcp-omnisearch
+</h1>
+<p>
+ A Model Context Protocol (MCP) server that provides unified access to
+multiple search providers and AI tools. This server combines the
+capabilities of Tavily, Perplexity, Kagi, Jina AI, Brave, and
+Firecrawl to offer comprehensive search, AI responses, content
+processing, and enhancement features through a single interface.
+</p>
+<p>
+<a href="https://glama.ai/mcp/servers/gz5wgmptd8">
+<img alt="Glama badge" height="200" src="https://glama.ai/mcp/servers/gz5wgmptd8/badge" width="380"/>
+</a>
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<h3 class="heading">
+ 🔍 Search Tools
+</h3>
+<ul>
+<li>
+<strong>
+   Tavily Search
+  </strong>
+  : Optimized for factual information with strong
+  citation support. Supports domain filtering through API parameters (include_domains/exclude_domains).
+ </li>
+<li>
+<strong>
+   Brave Search
+  </strong>
+  : Privacy-focused search with good technical content
+  coverage. Features native support for search operators (site:, -site:, filetype:, intitle:, inurl:, before:, after:, and exact phrases).
+ </li>
+<li>
+<strong>
+   Kagi Search
+  </strong>
+  : High-quality search results with minimal
+  advertising influence, focused on authoritative sources. Supports search operators in query string (site:, -site:, filetype:, intitle:, inurl:, before:, after:, and exact phrases).
+ </li>
+</ul>
+<h3 class="heading">
+ 🎯 Search Operators
+</h3>
+<p>
+ MCP Omnisearch provides powerful search capabilities through operators and parameters:
+</p>
+<h4 class="heading">
+ Common Search Features
+</h4>
+<ul>
+<li>
+  Domain filtering: Available across all providers
+ </li>
+<li>
+  Tavily: Through API parameters (include_domains/exclude_domains)
+ </li>
+<li>
+  Brave &amp; Kagi: Through site: and -site: operators
+ </li>
+<li>
+  File type filtering: Available in Brave and Kagi (filetype:)
+ </li>
+<li>
+  Title and URL filtering: Available in Brave and Kagi (intitle:, inurl:)
+ </li>
+<li>
+  Date filtering: Available in Brave and Kagi (before:, after:)
+ </li>
+<li>
+  Exact phrase matching: Available in Brave and Kagi ("phrase")
+ </li>
+</ul>
+<h4 class="heading">
+ Example Usage
+</h4>
+<pre class="pre"><code class="language-typescript code">// Using Brave or Kagi with query string operators
+{
+  "query": "filetype:pdf site:microsoft.com typescript guide"
+}
+
+// Using Tavily with API parameters
+{
+  "query": "typescript guide",
+  "include_domains": ["microsoft.com"],
+  "exclude_domains": ["github.com"]
+}
+</code></pre>
+<h4 class="heading">
+ Provider Capabilities
+</h4>
+<ul>
+<li>
+<strong>
+   Brave Search
+  </strong>
+  : Full native operator support in query string
+ </li>
+<li>
+<strong>
+   Kagi Search
+  </strong>
+  : Complete operator support in query string
+ </li>
+<li>
+<strong>
+   Tavily Search
+  </strong>
+  : Domain filtering through API parameters
+ </li>
+</ul>
+<h3 class="heading">
+ 🤖 AI Response Tools
+</h3>
+<ul>
+<li>
+<strong>
+   Perplexity AI
+  </strong>
+  : Advanced response generation combining real-time
+  web search with GPT-4 Omni and Claude 3
+ </li>
+<li>
+<strong>
+   Kagi FastGPT
+  </strong>
+  : Quick AI-generated answers with citations (900ms
+  typical response time)
+ </li>
+</ul>
+<h3 class="heading">
+ 📄 Content Processing Tools
+</h3>
+<ul>
+<li>
+<strong>
+   Jina AI Reader
+  </strong>
+  : Clean content extraction with image captioning
+  and PDF support
+ </li>
+<li>
+<strong>
+   Kagi Universal Summarizer
+  </strong>
+  : Content summarization for pages,
+  videos, and podcasts
+ </li>
+<li>
+<strong>
+   Tavily Extract
+  </strong>
+  : Extract raw content from single or multiple web
+  pages with configurable extraction depth ('basic' or 'advanced').
+  Returns both combined content and individual URL content, with
+  metadata including word count and extraction statistics
+ </li>
+<li>
+<strong>
+   Firecrawl Scrape
+  </strong>
+  : Extract clean, LLM-ready data from single URLs
+  with enhanced formatting options
+ </li>
+<li>
+<strong>
+   Firecrawl Crawl
+  </strong>
+  : Deep crawling of all accessible subpages on a
+  website with configurable depth limits
+ </li>
+<li>
+<strong>
+   Firecrawl Map
+  </strong>
+  : Fast URL collection from websites for
+  comprehensive site mapping
+ </li>
+<li>
+<strong>
+   Firecrawl Extract
+  </strong>
+  : Structured data extraction with AI using
+  natural language prompts
+ </li>
+<li>
+<strong>
+   Firecrawl Actions
+  </strong>
+  : Support for page interactions (clicking,
+  scrolling, etc.) before extraction for dynamic content
+ </li>
+</ul>
+<h3 class="heading">
+ 🔄 Enhancement Tools
+</h3>
+<ul>
+<li>
+<strong>
+   Kagi Enrichment API
+  </strong>
+  : Supplementary content from specialized
+  indexes (Teclis, TinyGem)
+ </li>
+<li>
+<strong>
+   Jina AI Grounding
+  </strong>
+  : Real-time fact verification against web
+  knowledge
+ </li>
+</ul>
+<h2 class="heading">
+ Flexible API Key Requirements
+</h2>
+<p>
+ MCP Omnisearch is designed to work with the API keys you have
+available. You don't need to have keys for all providers - the server
+will automatically detect which API keys are available and only enable
+those providers.
+</p>
+<p>
+ For example:
+</p>
+<ul>
+<li>
+  If you only have a Tavily and Perplexity API key, only those
+  providers will be available
+ </li>
+<li>
+  If you don't have a Kagi API key, Kagi-based services won't be
+  available, but all other providers will work normally
+ </li>
+<li>
+  The server will log which providers are available based on the API
+  keys you've configured
+ </li>
+</ul>
+<p>
+ This flexibility makes it easy to get started with just one or two
+providers and add more as needed.
+</p>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ This server requires configuration through your MCP client. Here are
+examples for different environments:
+</p>
+<h3 class="heading">
+ Cline Configuration
+</h3>
+<p>
+ Add this to your Cline MCP settings:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp-omnisearch": {
+            "command": "node",
+            "args": ["/path/to/mcp-omnisearch/dist/index.js"],
+            "env": {
+                "TAVILY_API_KEY": "your-tavily-key",
+                "PERPLEXITY_API_KEY": "your-perplexity-key",
+                "KAGI_API_KEY": "your-kagi-key",
+                "JINA_AI_API_KEY": "your-jina-key",
+                "BRAVE_API_KEY": "your-brave-key",
+                "FIRECRAWL_API_KEY": "your-firecrawl-key"
+            },
+            "disabled": false,
+            "autoApprove": []
+        }
+    }
+}
+</code></pre>
+<h3 class="heading">
+ Claude Desktop with WSL Configuration
+</h3>
+<p>
+ For WSL environments, add this to your Claude Desktop configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "mcp-omnisearch": {
+            "command": "wsl.exe",
+            "args": [
+                "bash",
+                "-c",
+                "TAVILY_API_KEY=key1 PERPLEXITY_API_KEY=key2 KAGI_API_KEY=key3 JINA_AI_API_KEY=key4 BRAVE_API_KEY=key5 FIRECRAWL_API_KEY=key6 node /path/to/mcp-omnisearch/dist/index.js"
+            ]
+        }
+    }
+}
+</code></pre>
+<h3 class="heading">
+ Environment Variables
+</h3>
+<p>
+ The server uses API keys for each provider.
+ <strong>
+  You don't need keys for
+all providers
+ </strong>
+ - only the providers corresponding to your available
+API keys will be activated:
+</p>
+<ul>
+<li>
+<code class="code">
+   TAVILY_API_KEY
+  </code>
+  : For Tavily Search
+ </li>
+<li>
+<code class="code">
+   PERPLEXITY_API_KEY
+  </code>
+  : For Perplexity AI
+ </li>
+<li>
+<code class="code">
+   KAGI_API_KEY
+  </code>
+  : For Kagi services (FastGPT, Summarizer, Enrichment)
+ </li>
+<li>
+<code class="code">
+   JINA_AI_API_KEY
+  </code>
+  : For Jina AI services (Reader, Grounding)
+ </li>
+<li>
+<code class="code">
+   BRAVE_API_KEY
+  </code>
+  : For Brave Search
+ </li>
+<li>
+<code class="code">
+   FIRECRAWL_API_KEY
+  </code>
+  : For Firecrawl services (Scrape, Crawl, Map,
+  Extract, Actions)
+ </li>
+</ul>
+<p>
+ You can start with just one or two API keys and add more later as
+needed. The server will log which providers are available on startup.
+</p>
+<h2 class="heading">
+ API
+</h2>
+<p>
+ The server implements MCP Tools organized by category:
+</p>
+<h3 class="heading">
+ Search Tools
+</h3>
+<h4 class="heading">
+ search_tavily
+</h4>
+<p>
+ Search the web using Tavily Search API. Best for factual queries
+requiring reliable sources and citations.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   query
+  </code>
+  (string, required): Search query
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "query": "latest developments in quantum computing"
+}
+</code></pre>
+<h4 class="heading">
+ search_brave
+</h4>
+<p>
+ Privacy-focused web search with good coverage of technical topics.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   query
+  </code>
+  (string, required): Search query
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "query": "rust programming language features"
+}
+</code></pre>
+<h4 class="heading">
+ search_kagi
+</h4>
+<p>
+ High-quality search results with minimal advertising influence. Best
+for finding authoritative sources and research materials.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   query
+  </code>
+  (string, required): Search query
+ </li>
+<li>
+<code class="code">
+   language
+  </code>
+  (string, optional): Language filter (e.g., "en")
+ </li>
+<li>
+<code class="code">
+   no_cache
+  </code>
+  (boolean, optional): Bypass cache for fresh results
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "query": "latest research in machine learning",
+    "language": "en"
+}
+</code></pre>
+<h3 class="heading">
+ AI Response Tools
+</h3>
+<h4 class="heading">
+ ai_perplexity
+</h4>
+<p>
+ AI-powered response generation with real-time web search integration.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   query
+  </code>
+  (string, required): Question or topic for AI response
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "query": "Explain the differences between REST and GraphQL"
+}
+</code></pre>
+<h4 class="heading">
+ ai_kagi_fastgpt
+</h4>
+<p>
+ Quick AI-generated answers with citations.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   query
+  </code>
+  (string, required): Question for quick AI response
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "query": "What are the main features of TypeScript?"
+}
+</code></pre>
+<h3 class="heading">
+ Content Processing Tools
+</h3>
+<h4 class="heading">
+ process_jina_reader
+</h4>
+<p>
+ Convert URLs to clean, LLM-friendly text with image captioning.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string, required): URL to process
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://example.com/article"
+}
+</code></pre>
+<h4 class="heading">
+ process_kagi_summarizer
+</h4>
+<p>
+ Summarize content from URLs.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string, required): URL to summarize
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://example.com/long-article"
+}
+</code></pre>
+<h4 class="heading">
+ process_tavily_extract
+</h4>
+<p>
+ Extract raw content from web pages with Tavily Extract.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string | string[], required): Single URL or array of URLs to
+  extract content from
+ </li>
+<li>
+<code class="code">
+   extract_depth
+  </code>
+  (string, optional): Extraction depth - 'basic'
+  (default) or 'advanced'
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": [
+        "https://example.com/article1",
+        "https://example.com/article2"
+    ],
+    "extract_depth": "advanced"
+}
+</code></pre>
+<p>
+ Response includes:
+</p>
+<ul>
+<li>
+  Combined content from all URLs
+ </li>
+<li>
+  Individual raw content for each URL
+ </li>
+<li>
+  Metadata with word count, successful extractions, and any failed
+  URLs
+ </li>
+</ul>
+<h4 class="heading">
+ firecrawl_scrape_process
+</h4>
+<p>
+ Extract clean, LLM-ready data from single URLs with enhanced
+formatting options.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string | string[], required): Single URL or array of URLs to
+  extract content from
+ </li>
+<li>
+<code class="code">
+   extract_depth
+  </code>
+  (string, optional): Extraction depth - 'basic'
+  (default) or 'advanced'
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://example.com/article",
+    "extract_depth": "basic"
+}
+</code></pre>
+<p>
+ Response includes:
+</p>
+<ul>
+<li>
+  Clean, markdown-formatted content
+ </li>
+<li>
+  Metadata including title, word count, and extraction statistics
+ </li>
+</ul>
+<h4 class="heading">
+ firecrawl_crawl_process
+</h4>
+<p>
+ Deep crawling of all accessible subpages on a website with
+configurable depth limits.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string | string[], required): Starting URL for crawling
+ </li>
+<li>
+<code class="code">
+   extract_depth
+  </code>
+  (string, optional): Extraction depth - 'basic'
+  (default) or 'advanced' (controls crawl depth and limits)
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://example.com",
+    "extract_depth": "advanced"
+}
+</code></pre>
+<p>
+ Response includes:
+</p>
+<ul>
+<li>
+  Combined content from all crawled pages
+ </li>
+<li>
+  Individual content for each page
+ </li>
+<li>
+  Metadata including title, word count, and crawl statistics
+ </li>
+</ul>
+<h4 class="heading">
+ firecrawl_map_process
+</h4>
+<p>
+ Fast URL collection from websites for comprehensive site mapping.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string | string[], required): URL to map
+ </li>
+<li>
+<code class="code">
+   extract_depth
+  </code>
+  (string, optional): Extraction depth - 'basic'
+  (default) or 'advanced' (controls map depth)
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://example.com",
+    "extract_depth": "basic"
+}
+</code></pre>
+<p>
+ Response includes:
+</p>
+<ul>
+<li>
+  List of all discovered URLs
+ </li>
+<li>
+  Metadata including site title and URL count
+ </li>
+</ul>
+<h4 class="heading">
+ firecrawl_extract_process
+</h4>
+<p>
+ Structured data extraction with AI using natural language prompts.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string | string[], required): URL to extract structured data
+  from
+ </li>
+<li>
+<code class="code">
+   extract_depth
+  </code>
+  (string, optional): Extraction depth - 'basic'
+  (default) or 'advanced'
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://example.com",
+    "extract_depth": "basic"
+}
+</code></pre>
+<p>
+ Response includes:
+</p>
+<ul>
+<li>
+  Structured data extracted from the page
+ </li>
+<li>
+  Metadata including title, extraction statistics
+ </li>
+</ul>
+<h4 class="heading">
+ firecrawl_actions_process
+</h4>
+<p>
+ Support for page interactions (clicking, scrolling, etc.) before
+extraction for dynamic content.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   url
+  </code>
+  (string | string[], required): URL to interact with and
+  extract content from
+ </li>
+<li>
+<code class="code">
+   extract_depth
+  </code>
+  (string, optional): Extraction depth - 'basic'
+  (default) or 'advanced' (controls complexity of interactions)
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "url": "https://news.ycombinator.com",
+    "extract_depth": "basic"
+}
+</code></pre>
+<p>
+ Response includes:
+</p>
+<ul>
+<li>
+  Content extracted after performing interactions
+ </li>
+<li>
+  Description of actions performed
+ </li>
+<li>
+  Screenshot of the page (if available)
+ </li>
+<li>
+  Metadata including title and extraction statistics
+ </li>
+</ul>
+<h3 class="heading">
+ Enhancement Tools
+</h3>
+<h4 class="heading">
+ enhance_kagi_enrichment
+</h4>
+<p>
+ Get supplementary content from specialized indexes.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   query
+  </code>
+  (string, required): Query for enrichment
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "query": "emerging web technologies"
+}
+</code></pre>
+<h4 class="heading">
+ enhance_jina_grounding
+</h4>
+<p>
+ Verify statements against web knowledge.
+</p>
+<p>
+ Parameters:
+</p>
+<ul>
+<li>
+<code class="code">
+   statement
+  </code>
+  (string, required): Statement to verify
+ </li>
+</ul>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "statement": "TypeScript adds static typing to JavaScript"
+}
+</code></pre>
+<h2 class="heading">
+ Development
+</h2>
+<h3 class="heading">
+ Setup
+</h3>
+<ol>
+<li>
+  Clone the repository
+ </li>
+<li>
+  Install dependencies:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">pnpm install
+</code></pre>
+<ol>
+<li>
+  Build the project:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">pnpm run build
+</code></pre>
+<ol>
+<li>
+  Run in development mode:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">pnpm run dev
+</code></pre>
+<h3 class="heading">
+ Publishing
+</h3>
+<ol>
+<li>
+  Update version in package.json
+ </li>
+<li>
+  Build the project:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">pnpm run build
+</code></pre>
+<ol>
+<li>
+  Publish to npm:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">pnpm publish
+</code></pre>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ API Keys and Access
+</h3>
+<p>
+ Each provider requires its own API key and may have different access
+requirements:
+</p>
+<ul>
+<li>
+<strong>
+   Tavily
+  </strong>
+  : Requires an API key from their developer portal
+ </li>
+<li>
+<strong>
+   Perplexity
+  </strong>
+  : API access through their developer program
+ </li>
+<li>
+<strong>
+   Kagi
+  </strong>
+  : Some features limited to Business (Team) plan users
+ </li>
+<li>
+<strong>
+   Jina AI
+  </strong>
+  : API key required for all services
+ </li>
+<li>
+<strong>
+   Brave
+  </strong>
+  : API key from their developer portal
+ </li>
+<li>
+<strong>
+   Firecrawl
+  </strong>
+  : API key required from their developer portal
+ </li>
+</ul>
+<h3 class="heading">
+ Rate Limits
+</h3>
+<p>
+ Each provider has its own rate limits. The server will handle rate
+limit errors gracefully and return appropriate error messages.
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Contributions are welcome! Please feel free to submit a Pull Request.
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT License - see the
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+<h2 class="heading">
+ Acknowledgments
+</h2>
+<p>
+ Built on:
+</p>
+<ul>
+<li>
+<a href="https://github.com/modelcontextprotocol">
+   Model Context Protocol
+  </a>
+</li>
+<li>
+<a href="https://tavily.com">
+   Tavily Search
+  </a>
+</li>
+<li>
+<a href="https://perplexity.ai">
+   Perplexity AI
+  </a>
+</li>
+<li>
+<a href="https://kagi.com">
+   Kagi Search
+  </a>
+</li>
+<li>
+<a href="https://jina.ai">
+   Jina AI
+  </a>
+</li>
+<li>
+<a href="https://search.brave.com">
+   Brave Search
+  </a>
+</li>
+<li>
+<a href="https://firecrawl.dev">
+   Firecrawl
+  </a>
+</li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/spences10-mcp-omnisearch.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

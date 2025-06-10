@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[TOC]">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory">
+    <meta property="og:description" content="[TOC]">
+    <meta property="og:url" content="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory">
+    <meta name="twitter:description" content="[TOC]">
+    
+    <title>Model Context Protocol(MCP) 编程极速入门 - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Model Context Protocol(MCP) 编程极速入门</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Model Context Protocol(MCP) 编程极速入门</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 2043</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Not specified</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">ai</span><span class="topic-tag"> deepseek</span><span class="topic-tag"> mcp</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> mcp-server</span>
+                        </div>
+                        <a href="https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="[TOC]" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory" property="og:title"/>
+<meta content="[TOC]" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory" name="twitter:title"/>
+<meta content="[TOC]" name="twitter:description"/>
+<title>Model Context Protocol(MCP) 编程极速入门 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Model Context Protocol(MCP) 编程极速入门</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Model Context Protocol(MCP) 编程极速入门</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2043</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> deepseek</span><span class="topic-tag"> mcp</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="[TOC]" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory" property="og:title">
+<meta content="[TOC]" property="og:description">
+<meta content="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory" name="twitter:title">
+<meta content="[TOC]" name="twitter:description">
+<title>Model Context Protocol(MCP) 编程极速入门 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Model Context Protocol(MCP) 编程极速入门</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2043</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> deepseek</span><span class="topic-tag"> mcp</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="[TOC]" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory" property="og:title"/>
+<meta content="[TOC]" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Model Context Protocol(MCP) 编程极速入门 - MCP Directory" name="twitter:title"/>
+<meta content="[TOC]" name="twitter:description"/>
+<title>Model Context Protocol(MCP) 编程极速入门 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Model Context Protocol(MCP) 编程极速入门</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 2043</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> deepseek</span><span class="topic-tag"> mcp</span><span class="topic-tag"> modelcontextprotocol</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Model Context Protocol(MCP) 编程极速入门
+</h1>
+<p>
+ [TOC]
+</p>
+<h2 class="heading">
+ 简介
+</h2>
+<p>
+ 模型上下文协议（MCP）是一个创新的开源协议，它重新定义了大语言模型（LLM）与外部世界的互动方式。MCP 提供了一种标准化方法，使任意大语言模型能够轻松连接各种数据源和工具，实现信息的无缝访问和处理。MCP 就像是 AI 应用程序的 USB-C 接口，为 AI 模型提供了一种标准化的方式来连接不同的数据源和工具。
+</p>
+<p>
+<img alt="image-20250223214308430" src=".assets/image-20250223214308430.png"/>
+</p>
+<p>
+ MCP 有以下几个核心功能：
+</p>
+<ul>
+<li>
+  Resources 资源
+ </li>
+<li>
+  Prompts 提示词
+ </li>
+<li>
+  Tools 工具
+ </li>
+<li>
+  Sampling 采样
+ </li>
+<li>
+  Roots 根目录
+ </li>
+<li>
+  Transports 传输层
+ </li>
+</ul>
+<p>
+ 因为大部分功能其实都是服务于 Claude 客户端的，本文更希望编写的 MCP 服务器服务与通用大语言模型，所以本文将会主要以“工具”为重点，其他功能会放到最后进行简单讲解。
+</p>
+<p>
+ 其中 MCP 的传输层支持了 2 种协议的实现：stdio（标准输入/输出）和 SSE（服务器发送事件），因为 stdio 更为常用，所以本文会以 stdio 为例进行讲解。
+</p>
+<p>
+ 本文将会使用 3.11 的 Python 版本，并使用 uv 来管理 Python 项目。同时代码将会在文末放到 Github 上，废话不多说，我们这就开始吧~
+</p>
+<h2 class="heading">
+ 开发 MCP 服务器
+</h2>
+<p>
+ 在这一小节中，我们将会实现一个用于网络搜索的服务器。首先，我们先来通过 uv 初始化我们的项目。
+</p>
+<blockquote>
+<p>
+  uv 官方文档：https://docs.astral.sh/uv/
+ </p>
+</blockquote>
+<pre class="pre"><code class="language-shell code"># 初始化项目
+uv init mcp_getting_started
+cd mcp_getting_started
+
+# 创建虚拟环境并进入虚拟环境
+uv venv
+.venv\Scripts\activate.bat
+
+# 安装依赖
+uv add "mcp[cli]" httpx openai
+
+</code></pre>
+<p>
+ 然后我们来创建一个叫
+ <code class="code">
+  web_search.py
+ </code>
+ 文件，来实现我们的服务。MCP 为我们提供了2个对象：
+ <code class="code">
+  mcp.server.FastMCP
+ </code>
+ 和
+ <code class="code">
+  mcp.server.Server
+ </code>
+ ，
+ <code class="code">
+  mcp.server.FastMCP
+ </code>
+ 是更高层的封装，我们这里就来使用它。
+</p>
+<pre class="pre"><code class="language-python code">import httpx
+from mcp.server import FastMCP
+
+# # 初始化 FastMCP 服务器
+app = FastMCP('web-search')
+</code></pre>
+<p>
+ 实现执行的方法非常简单，MCP 为我们提供了一个
+ <code class="code">
+  @mcp.tool()
+ </code>
+ 我们只需要将实现函数用这个装饰器装饰即可。函数名称将作为工具名称，参数将作为工具参数，并通过注释来描述工具与参数，以及返回值。
+</p>
+<p>
+ 这里我们直接使用智谱的接口，它这个接口不仅能帮我们搜索到相关的结果链接，并帮我们生成了对应链接中文章总结后的内容的，~~并且现阶段是免费的~~(目前已经开始收费，0.03元/次)，非常适合我们。
+</p>
+<blockquote>
+<p>
+  官方文档：https://bigmodel.cn/dev/api/search-tool/web-search-pro
+ </p>
+<p>
+  API Key 生成地址：https://bigmodel.cn/usercenter/proj-mgmt/apikeys
+ </p>
+</blockquote>
+<pre class="pre"><code class="language-python code">@app.tool()
+async def web_search(query: str) -&gt; str:
+    """
+    搜索互联网内容
+
+    Args:
+        query: 要搜索内容
+
+    Returns:
+        搜索结果的总结
+    """
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            'https://open.bigmodel.cn/api/paas/v4/tools',
+            headers={'Authorization': '换成你自己的API KEY'},
+            json={
+                'tool': 'web-search-pro',
+                'messages': [
+                    {'role': 'user', 'content': query}
+                ],
+                'stream': False
+            }
+        )
+
+        res_data = []
+        for choice in response.json()['choices']:
+            for message in choice['message']['tool_calls']:
+                search_results = message.get('search_result')
+                if not search_results:
+                    continue
+                for result in search_results:
+                    res_data.append(result['content'])
+
+        return '\n\n\n'.join(res_data)
+</code></pre>
+<p>
+ 最后，我们来添加运行服务器的代码。
+</p>
+<pre class="pre"><code class="language-python code">if __name__ == "__main__":
+    app.run(transport='stdio')
+</code></pre>
+<h2 class="heading">
+ 调试 MCP 服务器
+</h2>
+<p>
+ 此时，我们就完成了 MCP 服务端的编写。下面，我们来使用官方提供的
+ <code class="code">
+  Inspector
+ </code>
+ 可视化工具来调试我们的服务器。
+</p>
+<p>
+ 我们可以通过两种方法来运行
+ <code class="code">
+  Inspector
+ </code>
+ ：
+</p>
+<blockquote>
+<p>
+  请先确保已经安装了 node 环境。
+ </p>
+</blockquote>
+<p>
+ 通过 npx：
+</p>
+<pre class="pre"><code class="language-shell code">npx -y @modelcontextprotocol/inspector &lt;command&gt; &lt;arg1&gt; &lt;arg2&gt;
+</code></pre>
+<p>
+ 我们的这个代码运行命令为：
+</p>
+<pre class="pre"><code class="language-shell code">npx -y @modelcontextprotocol/inspector uv run web_search.py
+</code></pre>
+<p>
+ 通过 mcp dev 来运行：
+</p>
+<pre class="pre"><code class="language-shell code">mcp dev PYTHONFILE
+</code></pre>
+<p>
+ 我们的这个代码运行命令为：
+</p>
+<pre class="pre"><code class="language-shell code">mcp dev web_search.py
+</code></pre>
+<p>
+ 当出现如下提示则代表运行成功。如果提示连接出错，可能是端口被占用，可以看这个 issue 的解决方法：https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide/issues/6
+</p>
+<p>
+<img alt="image-20250223223638135" src=".assets/image-20250223223638135.png"/>
+</p>
+<p>
+ 然后，我们打开这个地址，点击左侧的
+ <code class="code">
+  Connect
+ </code>
+ 按钮，即可连接我们刚写的服务。然后我们切换到
+ <code class="code">
+  Tools
+ </code>
+ 栏中，点击
+ <code class="code">
+  List Tools
+ </code>
+ 按钮即可看到我们刚写的工具，我们就可以开始进行调试啦。
+</p>
+<p>
+<img alt="image-20250223224052795" src=".assets/image-20250223224052795.png"/>
+</p>
+<h2 class="heading">
+ 开发 MCP 客户端
+</h2>
+<p>
+ 首先，我们先来看看如何在客户端如何调用我们刚才开发的 MCP 服务器中的工具。
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+
+from mcp.client.stdio import stdio_client
+from mcp import ClientSession, StdioServerParameters
+
+# 为 stdio 连接创建服务器参数
+server_params = StdioServerParameters(
+    # 服务器执行的命令，这里我们使用 uv 来运行 web_search.py
+    command='uv',
+    # 运行的参数
+    args=['run', 'web_search.py'],
+    # 环境变量，默认为 None，表示使用当前环境变量
+    # env=None
+)
+
+
+async def main():
+    # 创建 stdio 客户端
+    async with stdio_client(server_params) as (stdio, write):
+        # 创建 ClientSession 对象
+        async with ClientSession(stdio, write) as session:
+            # 初始化 ClientSession
+            await session.initialize()
+
+            # 列出可用的工具
+            response = await session.list_tools()
+            print(response)
+
+            # 调用工具
+            response = await session.call_tool('web_search', {'query': '今天杭州天气'})
+            print(response)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+
+</code></pre>
+<p>
+ 因为我们的python脚本需要在虚拟环境中才能运行，所以这里我们通过
+ <code class="code">
+  uv
+ </code>
+ 来启动我们的脚本。
+</p>
+<p>
+ 下面我们来通过一个小例子来看看如何让
+ <code class="code">
+  DeepSeek
+ </code>
+ 来调用我们 MCP 服务器中的方法。
+</p>
+<p>
+ 这里我们会用
+ <code class="code">
+  dotenv
+ </code>
+ 来管理我们相关的环境变量。.env 文件内容如下：
+</p>
+<pre class="pre"><code class="language-shell code">OPENAI_API_KEY=sk-89baxxxxxxxxxxxxxxxxxx
+OPENAI_BASE_URL=https://api.deepseek.com
+OPENAI_MODEL=deepseek-chat
+</code></pre>
+<p>
+ 首先我们来编写我们的
+ <code class="code">
+  MCPClient
+ </code>
+ 类。
+</p>
+<pre class="pre"><code class="language-python code">import json
+import asyncio
+import os
+from typing import Optional
+from contextlib import AsyncExitStack
+
+from openai import OpenAI
+from dotenv import load_dotenv
+
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+
+load_dotenv()
+
+
+class MCPClient:
+    def __init__(self):
+        self.session: Optional[ClientSession] = None
+        self.exit_stack = AsyncExitStack()
+        self.client = OpenAI()
+</code></pre>
+<p>
+ 然后我们添加
+ <code class="code">
+  connect_to_server
+ </code>
+ 方法来初始化我们的 MCP 服务器的 session。
+</p>
+<pre class="pre"><code class="language-python code">    async def connect_to_server(self):
+        server_params = StdioServerParameters(
+            command='uv',
+            args=['run', 'web_search.py'],
+            env=None
+        )
+
+        stdio_transport = await self.exit_stack.enter_async_context(
+            stdio_client(server_params))
+        stdio, write = stdio_transport
+        self.session = await self.exit_stack.enter_async_context(
+            ClientSession(stdio, write))
+
+        await self.session.initialize()
+</code></pre>
+<p>
+ 然后我们再实现一个用于调用 MCP 服务器的方法来处理和 DeepSeek 之间的交互。
+</p>
+<pre class="pre"><code class="language-python code">    async def process_query(self, query: str) -&gt; str:
+        # 这里需要通过 system prompt 来约束一下大语言模型，
+        # 否则会出现不调用工具，自己乱回答的情况
+        system_prompt = (
+            "You are a helpful assistant."
+            "You have the function of online search. "
+            "Please MUST call web_search tool to search the Internet content before answering."
+            "Please do not lose the user's question information when searching,"
+            "and try to maintain the completeness of the question content as much as possible."
+            "When there is a date related question in the user's question," 
+            "please use the search function directly to search and PROHIBIT inserting specific time."
+        )
+
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": query}
+        ]
+
+        # 获取所有 mcp 服务器 工具列表信息
+        response = await self.session.list_tools()
+        # 生成 function call 的描述信息
+        available_tools = [{
+            "type": "function",
+            "function": {
+                "name": tool.name,
+                "description": tool.description,
+                "input_schema": tool.inputSchema
+            }
+        } for tool in response.tools]
+
+        # 请求 deepseek，function call 的描述信息通过 tools 参数传入
+        response = self.client.chat.completions.create(
+            model=os.getenv("OPENAI_MODEL"),
+            messages=messages,
+            tools=available_tools
+        )
+
+        # 处理返回的内容
+        content = response.choices[0]
+        if content.finish_reason == "tool_calls":
+            # 如何是需要使用工具，就解析工具
+            tool_call = content.message.tool_calls[0]
+            tool_name = tool_call.function.name
+            tool_args = json.loads(tool_call.function.arguments)
+
+            # 执行工具
+            result = await self.session.call_tool(tool_name, tool_args)
+            print(f"\n\n[Calling tool {tool_name} with args {tool_args}]\n\n")
+
+            # 将 deepseek 返回的调用哪个工具数据和工具执行完成后的数据都存入messages中
+            messages.append(content.message.model_dump())
+            messages.append({
+                "role": "tool",
+                "content": result.content[0].text,
+                "tool_call_id": tool_call.id,
+            })
+
+            # 将上面的结果再返回给 deepseek 用于生产最终的结果
+            response = self.client.chat.completions.create(
+                model=os.getenv("OPENAI_MODEL"),
+                messages=messages,
+            )
+            return response.choices[0].message.content
+
+        return content.message.content
+</code></pre>
+<p>
+ 接着，我们来实现循环提问和最后退出后关闭session的操作。
+</p>
+<pre class="pre"><code class="language-python code">    async def chat_loop(self):
+        while True:
+            try:
+                query = input("\nQuery: ").strip()
+
+                if query.lower() == 'quit':
+                    break
+
+                response = await self.process_query(query)
+                print("\n" + response)
+
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+
+    async def cleanup(self):
+        """Clean up resources"""
+        await self.exit_stack.aclose()
+</code></pre>
+<p>
+ 最后，我们来完成运行这个客户端相关的代码
+</p>
+<pre class="pre"><code class="language-python code">async def main():
+    client = MCPClient()
+    try:
+        await client.connect_to_server()
+        await client.chat_loop()
+    finally:
+        await client.cleanup()
+
+
+if __name__ == "__main__":
+    import sys
+
+    asyncio.run(main())
+
+</code></pre>
+<p>
+ 这是一个最精简的代码，里面没有实现记录上下文消息等功能，只是为了用最简单的代码来了解如何通过大语言模型来调动 MCP 服务器。这里只演示了如何连接单服务器，如果你期望连接多个 MCP 服务器，无非就是循环一下
+ <code class="code">
+  connect_to_server
+ </code>
+ 中的代码，可以将他们封装成一个类，然后将所有的 MCP 服务器中的工具循环遍历生成一个大的
+ <code class="code">
+  available_tools
+ </code>
+ ，然后在通过大语言模型的返回结果进行调用即可，这里就不再赘述了。
+</p>
+<blockquote>
+<p>
+  可以参考官方案例：https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/clients/simple-chatbot/mcp_simple_chatbot/main.py
+ </p>
+</blockquote>
+<h2 class="heading">
+ Sampling 讲解
+</h2>
+<p>
+ MCP 还为我们提供了一个
+ <code class="code">
+  Sampling
+ </code>
+ 的功能，这个如果从字面来理解会让人摸不到头脑，但实际上这个功能就给了我们一个在执行工具的前后的接口，我们可以在工具执行前后来执行一些操作。比如，当调用本地文件的删除的工具的时候，肯定是期望我们确认后再进行删除。那么，此时就可以使用这个功能。
+</p>
+<p>
+ 下面我们就来实现这个人工监督的小功能。
+</p>
+<p>
+ 首先，我们来创建个模拟拥有删除文件的 MCP 服务器：
+</p>
+<pre class="pre"><code class="language-python code"># 服务端
+from mcp.server import FastMCP
+from mcp.types import SamplingMessage, TextContent
+
+app = FastMCP('file_server')
+
+
+@app.tool()
+async def delete_file(file_path: str):
+    # 创建 SamplingMessage 用于触发 sampling callback 函数
+    result = await app.get_context().session.create_message(
+        messages=[
+            SamplingMessage(
+                role='user', content=TextContent(
+                    type='text', text=f'是否要删除文件: {file_path} (Y)')
+            )
+        ],
+        max_tokens=100
+    )
+
+    # 获取到 sampling callback 函数的返回值，并根据返回值进行处理
+    if result.content.text == 'Y':
+        return f'文件 {file_path} 已被删除！！'
+
+
+if __name__ == '__main__':
+    app.run(transport='stdio')
+
+</code></pre>
+<p>
+ 这里最重要的就是需要通过
+ <code class="code">
+  create_message
+ </code>
+ 方法来创建一个
+ <code class="code">
+  SamplingMessage
+ </code>
+ 类型的 message，他会将这个 message 发送给 sampling callback 对应的函数中。
+</p>
+<p>
+ 接着，我们来创建客户端的代码：
+</p>
+<pre class="pre"><code class="language-python code"># 客户端
+import asyncio
+
+from mcp.client.stdio import stdio_client
+from mcp import ClientSession, StdioServerParameters
+from mcp.shared.context import RequestContext
+from mcp.types import (
+    TextContent,
+    CreateMessageRequestParams,
+    CreateMessageResult,
+)
+
+server_params = StdioServerParameters(
+    command='uv',
+    args=['run', 'file_server.py'],
+)
+
+
+async def sampling_callback(
+        context: RequestContext[ClientSession, None],
+        params: CreateMessageRequestParams,
+):
+    # 获取工具发送的消息并显示给用户
+    input_message = input(params.messages[0].content.text)
+    # 将用户输入发送回工具
+    return CreateMessageResult(
+        role='user',
+        content=TextContent(
+            type='text',
+            text=input_message.strip().upper() or 'Y'
+        ),
+        model='user-input',
+        stopReason='endTurn'
+    )
+
+
+async def main():
+    async with stdio_client(server_params) as (stdio, write):
+        async with ClientSession(
+                stdio, write,
+                # 设置 sampling_callback 对应的方法
+                sampling_callback=sampling_callback
+        ) as session:
+            await session.initialize()
+            res = await session.call_tool(
+                'delete_file',
+                {'file_path': 'C:/xxx.txt'}
+            )
+            # 获取工具最后执行完的返回结果
+            print(res)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+
+</code></pre>
+<p>
+ 特别要注意的是，目前在工具里面打印的内容实际上使用
+ <code class="code">
+  stdio_client
+ </code>
+ 是无法显示到命令行窗口的。所以，我们调试的话，可以使用
+ <code class="code">
+  mcp.shared.memory.create_connected_server_and_client_session
+ </code>
+ 。
+</p>
+<p>
+ 具体代码如下：
+</p>
+<pre class="pre"><code class="language-python code"># 客户端
+from mcp.shared.memory import (
+    create_connected_server_and_client_session as create_session
+)
+# 这里需要引入服务端的 app 对象
+from file_server import app
+
+async def sampling_callback(context, params):
+    ...
+
+async def main():
+    async with create_session(
+        app._mcp_server,
+        sampling_callback=sampling_callback
+    ) as client_session:
+        await client_session.call_tool(
+            'delete_file', 
+            {'file_path': 'C:/xxx.txt'}
+        )
+
+if __name__ == '__main__':
+    asyncio.run(main())
+</code></pre>
+<h2 class="heading">
+ Claude Desktop 加载 MCP Server
+</h2>
+<p>
+ 因为后面的两个功能实际上都是为了提供给 Claude 桌面端用的，所以这里先说下如何加载我们自定义的 MCP Server 到 Claude 桌面端。
+</p>
+<p>
+ 首先，我们先打开配置。
+</p>
+<p>
+<img alt="image-20250227221154638" src=".assets/image-20250227221154638.png"/>
+</p>
+<p>
+ 我们点击
+ <code class="code">
+  Developer
+ </code>
+ 菜单，然后点击
+ <code class="code">
+  Edit Config
+ </code>
+ 按钮打开 Claude 桌面端的配置文件
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+</p>
+<p>
+<img alt="image-20250227221302174" src=".assets/image-20250227221302174.png"/>
+</p>
+<p>
+ 然后开始添加我们的服务器，服务器需要在
+ <code class="code">
+  mcpServers
+ </code>
+ 层级下，参数有
+ <code class="code">
+  command
+ </code>
+ 、
+ <code class="code">
+  args
+ </code>
+ 、
+ <code class="code">
+  env
+ </code>
+ 。实际上，参数和
+ <code class="code">
+  StdioServerParameters
+ </code>
+ 对象初始化时候的参数是一样的。
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "web-search-server": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "D:/projects/mcp_getting_started",
+        "run",
+        "web_search.py"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ 最后，我们保存文件后重启 Claude 桌面端就可以在这里看到我们的插件了。
+</p>
+<p>
+<img alt="image-20250227221911231" src=".assets/image-20250227221911231.png"/>
+</p>
+<p>
+<img alt="image-20250227221921036" src=".assets/image-20250227221921036.png"/>
+</p>
+<p>
+ 当然，我们也可以直接在我们插件的目录下运行以下命令来直接安装：
+</p>
+<pre class="pre"><code class="language-shell code">mcp install web_search.py
+</code></pre>
+<h2 class="heading">
+ 其他功能
+</h2>
+<h3 class="heading">
+ Prompt
+</h3>
+<p>
+ MCP 还为我们提供了一个生成 Prompt 模板的功能。他使用起来也很简单，只需要使用
+ <code class="code">
+  prompt
+ </code>
+ 装饰器装饰一下即可，代码如下：
+</p>
+<pre class="pre"><code class="language-python code">from mcp.server import FastMCP
+
+app = FastMCP('prompt_and_resources')
+
+@app.prompt('翻译专家')
+async def translate_expert(
+        target_language: str = 'Chinese',
+) -&gt; str:
+    return f'你是一个翻译专家，擅长将任何语言翻译成{target_language}。请翻译以下内容：'
+
+
+if __name__ == '__main__':
+    app.run(transport='stdio')
+
+</code></pre>
+<p>
+ 然后我们用上一节讲到的配置 Claude 桌面端 MCP 服务器的方法添加下我们的新 MCP 服务器。然后我们就可以点击右下角的图标开始使用啦。
+</p>
+<p>
+ 他会让我们设置一下我们传入的参数，然后他会在我们的聊天窗口上生成一个附件。
+</p>
+<p>
+<img alt="mcp001" src=".assets/mcp001-1740666812436-2.gif"/>
+</p>
+<h3 class="heading">
+ Resource
+</h3>
+<p>
+ 我们还可以在 Claude 客户端上选择我们为用户提供的预设资源，同时也支持自定义的协议。具体代码如下：
+</p>
+<pre class="pre"><code class="language-python code">from mcp.server import FastMCP
+
+app = FastMCP('prompt_and_resources')
+
+@app.resource('echo://static')
+async def echo_resource():
+    # 返回的是，当用户使用这个资源时，资源的内容
+    return 'Echo!'
+
+@app.resource('greeting://{name}')
+async def get_greeting(name):
+    return f'Hello, {name}!'
+
+
+if __name__ == '__main__':
+    app.run(transport='stdio')
+
+</code></pre>
+<p>
+ 然后，我们到 Claude 桌面端上看看。
+</p>
+<p>
+<img alt="mcp002" src=".assets/mcp002.gif"/>
+</p>
+<p>
+ 这里要特别注意的是，目前 Claude 桌面端是没法读到资源装饰器设置
+ <code class="code">
+  greeting://{name}
+ </code>
+ 这种通配符的路径，未来将会被支持。但是，在我们的客户端代码中是可以当做资源模板来使用的，具体代码如下：
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from pydantic import AnyUrl
+
+from mcp.client.stdio import stdio_client
+from mcp import ClientSession, StdioServerParameters
+
+server_params = StdioServerParameters(
+    command='uv',
+    args=['run', 'prompt_and_resources.py'],
+)
+
+
+async def main():
+    async with stdio_client(server_params) as (stdio, write):
+        async with ClientSession(stdio, write) as session:
+            await session.initialize()
+
+            # 获取无通配符的资源列表
+            res = await session.list_resources()
+            print(res)
+
+            # 获取有通配符的资源列表(资源模板)
+            res = await session.list_resource_templates()
+            print(res)
+
+            # 读取资源，会匹配通配符
+            res = await session.read_resource(AnyUrl('greeting://liming'))
+            print(res)
+
+            # 获取 Prompt 模板列表
+            res = await session.list_prompts()
+            print(res)
+
+            # 使用 Prompt 模板
+            res = await session.get_prompt(
+                '翻译专家', arguments={'target_language': '英语'})
+            print(res)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+
+</code></pre>
+<h3 class="heading">
+ 生命周期
+</h3>
+<p>
+ MCP 生命周期分为3个阶段：
+</p>
+<ul>
+<li>
+  初始化
+ </li>
+<li>
+  交互通信中
+ </li>
+<li>
+  服务被关闭
+ </li>
+</ul>
+<p>
+ 因此，我们可以在这个三个阶段的开始和结束来做一些事情，比如创建数据库连接和关闭数据库连接、记录日志、记录工具使用信息等。
+</p>
+<p>
+ 下面我们将以网页搜索工具，把工具调用时的查询和查询到的结果存储到一个全局上下文中作为缓存为例，来看看生命周期如何使用。完整代码如下：
+</p>
+<pre class="pre"><code class="language-python code">import httpx
+from dataclasses import dataclass
+from contextlib import asynccontextmanager
+
+from mcp.server import FastMCP
+from mcp.server.fastmcp import Context
+
+
+@dataclass
+# 初始化一个生命周期上下文对象
+class AppContext:
+    # 里面有一个字段用于存储请求历史
+    histories: dict
+
+
+@asynccontextmanager
+async def app_lifespan(server):
+    # 在 MCP 初始化时执行
+    histories = {}
+    try:
+        # 每次通信会把这个上下文通过参数传入工具
+        yield AppContext(histories=histories)
+    finally:
+        # 当 MCP 服务关闭时执行
+        print(histories)
+
+
+app = FastMCP(
+    'web-search', 
+    # 设置生命周期监听函数
+    lifespan=app_lifespan
+)
+
+
+@app.tool()
+# 第一个参数会被传入上下文对象
+async def web_search(ctx: Context, query: str) -&gt; str:
+    """
+    搜索互联网内容
+
+    Args:
+        query: 要搜索内容
+
+    Returns:
+        搜索结果的总结
+    """
+    # 如果之前问过同样的问题，就直接返回缓存
+    histories = ctx.request_context.lifespan_context.histories
+    if query in histories：
+        return histories[query]
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            'https://open.bigmodel.cn/api/paas/v4/tools',
+            headers={'Authorization': 'YOUR API KEY'},
+            json={
+                'tool': 'web-search-pro',
+                'messages': [
+                    {'role': 'user', 'content': query}
+                ],
+                'stream': False
+            }
+        )
+
+        res_data = []
+        for choice in response.json()['choices']:
+            for message in choice['message']['tool_calls']:
+                search_results = message.get('search_result')
+                if not search_results:
+                    continue
+                for result in search_results:
+                    res_data.append(result['content'])
+
+        return_data = '\n\n\n'.join(res_data)
+
+        # 将查询值和返回值存入到 histories 中
+        ctx.request_context.lifespan_context.histories[query] = return_data
+        return return_data
+
+
+if __name__ == "__main__":
+    app.run()
+
+</code></pre>
+<h2 class="heading">
+ 在 LangChain 中使用 MCP 服务器
+</h2>
+<p>
+ 最近 LangChain 发布了一个新的开源项目
+ <code class="code">
+  langchain-mcp-adapters
+ </code>
+ ，可以很方便的将 MCP 服务器集成到 LangChain 中。下面我们来看看如何使用它:
+</p>
+<pre class="pre"><code class="language-python code">from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+from langchain_mcp_adapters.tools import load_mcp_tools
+from langgraph.prebuilt import create_react_agent
+
+from langchain_openai import ChatOpenAI
+model = ChatOpenAI(model="gpt-4o")
+
+server_params = StdioServerParameters(
+    command='uv',
+    args=['run', 'web_search.py'],
+)
+
+async with stdio_client(server_params) as (read, write):
+    async with ClientSession(read, write) as session:
+        await session.initialize()
+
+        # 获取工具列表
+        tools = await load_mcp_tools(session)
+
+        # 创建并使用 ReAct agent
+        agent = create_react_agent(model, tools)
+        agent_response = await agent.ainvoke({'messages': '杭州今天天气怎么样？'})
+</code></pre>
+<p>
+ 更详细的使用方法请参考：https://github.com/langchain-ai/langchain-mcp-adapters
+</p>
+<h2 class="heading">
+ DeepSeek + cline + 自定义MCP = 图文大师
+</h2>
+<p>
+ 最后，我们来使用 VsCode 的 cline 插件，来通过 DeepSeek 和我们自定义的一个图片生成的 mcp 服务器来构建一个图文大师的应用。废话不多说，我们直接开始。
+</p>
+<p>
+ 首先先来构建我们的图片生成的 mcp server，这里我们直接用 huggingface 上的
+ <code class="code">
+  FLUX.1-schnell
+ </code>
+ 模型，地址是：https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell 。这里我们不使用
+ <code class="code">
+  gradio_client
+ </code>
+ 库，而是会使用
+ <code class="code">
+  httpx
+ </code>
+ 手搓一个，因为使用
+ <code class="code">
+  gradio_client
+ </code>
+ 库可能会出现编码错误的bug。具体代码如下：
+</p>
+<pre class="pre"><code class="language-python code"># image_server.py
+
+import json
+import httpx
+from mcp.server import FastMCP
+
+
+app = FastMCP('image_server')
+
+
+@app.tool()
+async def image_generation(image_prompt: str):
+    """
+    生成图片
+    :param image_prompt: 图片描述，需要是英文
+    :return: 图片保存到的本地路径
+    """
+    async with httpx.AsyncClient() as client:
+        data = {'data': [image_prompt, 0, True, 512, 512, 3]}
+
+        # 创建生成图片任务
+        response1 = await client.post(
+            'https://black-forest-labs-flux-1-schnell.hf.space/call/infer',
+            json=data,
+            headers={"Content-Type": "application/json"}
+        )
+
+        # 解析响应获取事件 ID
+        response_data = response1.json()
+        event_id = response_data.get('event_id')
+
+        if not event_id:
+            return '无法获取事件 ID'
+
+        # 通过流式的方式拿到返回数据
+        url = f'https://black-forest-labs-flux-1-schnell.hf.space/call/infer/{event_id}'
+        full_response = ''
+        async with client.stream('GET', url) as response2:
+            async for chunk in response2.aiter_text():
+                full_response += chunk
+
+        return json.loads(full_response.split('data: ')[-1])[0]['url']
+
+if __name__ == '__main__':
+    app.run(transport='stdio')
+
+</code></pre>
+<p>
+ 然后我们可以在虚拟环境下使用下面的命令打开 MCP Inspector 进行调试下我们的工具。
+</p>
+<pre class="pre"><code class="language-shell code">mcp dev image_server.py
+</code></pre>
+<p>
+<img alt="image-20250301231332749" src=".assets/image-20250301231332749.png"/>
+</p>
+<p>
+ 接着我们在 VsCode 中安装 cline 插件，当安装完插件后，我们配置一下我们的 deepseek 的 api key。接着，我们点击右上角的
+ <code class="code">
+  MCP Server
+ </code>
+ 按钮打开 mcp server 列表。
+</p>
+<p>
+<img alt="image-20250301232248034" src=".assets/image-20250301232248034.png"/>
+</p>
+<p>
+ 然后切换到
+ <code class="code">
+  Installed
+ </code>
+ Tab 点击
+ <code class="code">
+  Configure MCP Servers
+ </code>
+ 按钮来编辑自定义的 mcp 服务器。
+</p>
+<p>
+<img alt="image-20250301232417966" src=".assets/image-20250301232417966.png"/>
+</p>
+<p>
+ 配置如下：
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "image_server": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "D:/projects/mcp_getting_started",
+        "run",
+        "image_server.py"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+</code></pre>
+<p>
+ 我们保存后，这里的这个小点是绿色的就表示我们的服务器已连接，然后我们就可以开始使用啦。
+</p>
+<p>
+<img alt="image-20250301232809433" src=".assets/image-20250301232809433.png"/>
+</p>
+<p>
+ 然后，我们就打开输入框，来输入我们的要写的文章的内容：
+</p>
+<p>
+<img alt="image-20250301233421292" src=".assets/image-20250301233421292.png"/>
+</p>
+<p>
+ 我们可以看到，他正确的调用了我们的工具
+</p>
+<p>
+<img alt="image-20250301233726301" src=".assets/image-20250301233726301.png"/>
+</p>
+<p>
+ 最后，就是可以看到生成的文章啦。
+</p>
+<p>
+<img alt="image-20250301234532249" src=".assets/image-20250301234532249.png"/>
+</p>
+<h2 class="heading">
+ 借助 serverless 将 MCP 服务部署到云端
+</h2>
+<p>
+ 上面我们讲的都是如何使用本地的 MCP 服务，但是有时我们希望直接把 MCP 服务部署到云端来直接调用，就省去了本地下载启动的烦恼了。此时，我们就需要来使用 MCP 的 SSE 的协议来实现了。
+</p>
+<p>
+ 此时，我们先来写 SSE 协议的 MCP 服务。实现起来很简单，只需要将我们最后的
+ <code class="code">
+  run
+ </code>
+ 命令中的
+ <code class="code">
+  transport
+ </code>
+ 参数设置为
+ <code class="code">
+  sse
+ </code>
+ 即可。下面还是以上面的网络搜索为例子，来实现一下 ，具体代码如下：
+</p>
+<pre class="pre"><code class="language-python code"># sse_web_search.py
+import httpx
+
+from mcp.server import FastMCP
+
+
+app = FastMCP('web-search', port=9000)
+
+
+@app.tool()
+async def web_search(query: str) -&gt; str:
+    """
+    搜索互联网内容
+
+    Args:
+        query: 要搜索内容
+
+    Returns:
+        搜索结果的总结
+    """
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            'https://open.bigmodel.cn/api/paas/v4/tools',
+            headers={'Authorization': 'YOUR API KEY'},
+            json={
+                'tool': 'web-search-pro',
+                'messages': [
+                    {'role': 'user', 'content': query}
+                ],
+                'stream': False
+            }
+        )
+
+        res_data = []
+        for choice in response.json()['choices']:
+            for message in choice['message']['tool_calls']:
+                search_results = message.get('search_result')
+                if not search_results:
+                    continue
+                for result in search_results:
+                    res_data.append(result['content'])
+
+        return '\n\n\n'.join(res_data)
+
+
+if __name__ == "__main__":
+    app.run(transport='sse')
+
+</code></pre>
+<p>
+ 在
+ <code class="code">
+  FastMCP
+ </code>
+ 中，有几个可以设置 SSE 协议相关的参数：
+</p>
+<ul>
+<li>
+  host: 服务地址，默认为
+  <code class="code">
+   0.0.0.0
+  </code>
+</li>
+<li>
+  port: 服务端口，默认为 8000。上述代码中，我设置为
+  <code class="code">
+   9000
+  </code>
+</li>
+<li>
+  sse_path：sse 的路由，默认为
+  <code class="code">
+   /sse
+  </code>
+</li>
+</ul>
+<p>
+ 此时，我们就可以直接写一个客户端的代码来进行测试了。具体代码如下：
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from mcp.client.sse import sse_client
+from mcp import ClientSession
+
+
+async def main():
+    async with sse_client('http://localhost:9000/sse') as streams:
+        async with ClientSession(*streams) as session:
+            await session.initialize()
+
+            res = await session.call_tool('web_search', {'query': '杭州今天天气'})
+            print(res)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+
+</code></pre>
+<p>
+ 我们可以看到，他正常工作了，并搜索到了内容：
+</p>
+<p>
+<img alt="image-20250406152518223" src=".assets/image-20250406152518223.png"/>
+</p>
+<p>
+ 当然，我们也可以使用
+ <code class="code">
+  mcp dev sse_web_search.py
+ </code>
+ 的方式来测试。这里要注意的是，
+ <code class="code">
+  Transport Type
+ </code>
+ 需要改成
+ <code class="code">
+  SSE
+ </code>
+ ，然后下面填写我们的本地服务地址。
+</p>
+<p>
+<img alt="image-20250406153106098" src=".assets/image-20250406153106098.png"/>
+</p>
+<p>
+ 当一切都测试没有问题后，我们就来将他通过 severless 的方式来部署到云端。这里我们选择的是阿里云的函数计算服务。首先我们先进入到阿里云的
+ <code class="code">
+  函数计算 FC 3.0
+ </code>
+ 的
+ <code class="code">
+  函数
+ </code>
+ 菜单，并点击
+ <code class="code">
+  创建函数
+ </code>
+ 来创建我们的服务。地址是：https://fcnext.console.aliyun.com/cn-hangzhou/functions
+</p>
+<p>
+<img alt="image-20250406153655185" src=".assets/image-20250406153655185.png"/>
+</p>
+<p>
+ 我们这里选择
+ <code class="code">
+  Web函数
+ </code>
+ ，运行环境我们选择
+ <code class="code">
+  Python 10
+ </code>
+ 。代码上传方式这里可以根据大家需求来，因为我这里就一个 python 文件，所以我这里就直接选择
+ <code class="code">
+  使用示例代码
+ </code>
+ 了，这样我后面直接把我的代码覆盖进去了就行了。启动命令和监听端口我这里都保留为默认(
+ <strong>
+  端口需要和代码中一致
+ </strong>
+ )。
+</p>
+<p>
+ 环境变量大家可以将代码中用到的 apikey 可以设置为一个环境变量，这里我就不设置了。最后设置完成截图如下：
+</p>
+<p>
+<img alt="image-20250406154115438" src=".assets/image-20250406154115438.png"/>
+</p>
+<p>
+ 在高级设置中，为了方便调试，我启动了日志功能。
+</p>
+<p>
+<img alt="image-20250406154228341" src=".assets/image-20250406154228341.png"/>
+</p>
+<p>
+ 设置完成后，点创建即可。他就跳转到代码编辑部分，然后我们把之前的代码复制进去即可。
+</p>
+<p>
+<img alt="image-20250406154441634" src=".assets/image-20250406154441634.png"/>
+</p>
+<p>
+ 完成后，我们来安装下依赖。我们点击右上角的
+ <code class="code">
+  编辑层
+ </code>
+ 。这里默认会有个默认的 flask 的层，因为开始的模板用的是 flask，这里我们就不需要了。我们删除他，再添加一个 mcp 的层。选择
+ <code class="code">
+  添加官方公共层
+ </code>
+ ，然后搜索
+ <code class="code">
+  mcp
+ </code>
+ 就能看到了一个 python 版的 MCP 层，里面包含了 MCP 所有用到的依赖。
+</p>
+<p>
+<img alt="image-20250406154753623" src=".assets/image-20250406154753623.png"/>
+</p>
+<p>
+ 如果你还有其他第三方的，可以先搜索下看看公共层中是否有，没有就可以自行构建一个自定义的层。点击这里就可以，只需要提供一个
+ <code class="code">
+  requirements
+ </code>
+ 列表就可以了，这里就不赘述了。
+</p>
+<p>
+<img alt="image-20250406154935751" src=".assets/image-20250406154935751.png"/>
+</p>
+<p>
+ 当我们都设置完成后，点击右下角的部署即可。
+</p>
+<p>
+ 然后我们又回到了我们代码编辑的页面，此时，我们再点击左上角的部署代码。稍等一两秒就会提示代码部署成功。此时，我们的 MCP 服务就被部署到了云端。
+</p>
+<p>
+<img alt="image-20250406155135563" src=".assets/image-20250406155135563.png"/>
+</p>
+<blockquote>
+<p>
+  20250409 更新：不知道是不是官方看到了这篇文章，现在运行时可以直接选择
+  <code class="code">
+   MCP 运行时
+  </code>
+  了，就不用再在层那里手动添加
+  <code class="code">
+   MCP 层
+  </code>
+  了。
+ </p>
+<p>
+<img alt="image-20250409213302652" src=".assets/image-20250409213302652.png"/>
+</p>
+</blockquote>
+<p>
+ 然后，我们切换到
+ <code class="code">
+  配置
+ </code>
+ 的
+ <code class="code">
+  触发器
+ </code>
+ 中，就可以看到我们用来访问的 URL 地址了。当然，你也可以绑定自己的域名。
+</p>
+<p>
+<img alt="image-20250406155353662" src=".assets/image-20250406155353662.png"/>
+</p>
+<p>
+ 然后，我们就可以用我们上面的客户端代码进行测试了。
+</p>
+<pre class="pre"><code class="language-python code">import asyncio
+from mcp.client.sse import sse_client
+from mcp import ClientSession
+
+
+async def main():
+    async with sse_client('https://mcp-test-whhergsbso.cn-hangzhou.fcapp.run/sse') as streams:
+        async with ClientSession(*streams) as session:
+            await session.initialize()
+
+            res = await session.call_tool('web_search', {'query': '杭州今天天气'})
+            print(res)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+</code></pre>
+<p>
+ 如果我们发现在客户端有报错也不用慌，我们可以直接在日志中找到对应出错的请求点击
+ <code class="code">
+  请求日志
+ </code>
+ 查看报错来修复。
+</p>
+<p>
+<img alt="image-20250406155803071" src=".assets/image-20250406155803071.png"/>
+</p>
+<p>
+ 到这里，我们的 MCP 服务就被部署到了云端，我们就可以在任何地方直接来使用它了。
+</p>
+<p>
+ 比如，在
+ <code class="code">
+  Cherry-Studio
+ </code>
+ 中，我们可以这样来设置：
+</p>
+<p>
+<img alt="image-20250406160152782" src=".assets/image-20250406160152782.png"/>
+</p>
+<p>
+ 在
+ <code class="code">
+  Cline
+ </code>
+ 中：
+</p>
+<p>
+<img alt="image-20250406160709759" src=".assets/image-20250406160709759.png"/>
+</p>
+<p>
+ 在
+ <code class="code">
+  Cursor
+ </code>
+ 中：
+</p>
+<p>
+<img alt="image-20250406161055717" src=".assets/image-20250406161055717.png"/>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "web-search": {
+      "url": "https://mcp-test-whhergsbso.cn-hangzhou.fcapp.run/sse"
+    }
+  }
+}
+</code></pre>
+<p>
+ 至此，整个 MCP 入门教程就到这里啦，后续有其他的再进行更新。相关代码会放到 github 仓库中：https://github.com/liaokongVFX/MCP-Chinese-Getting-Started-Guide
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/liaokongVFX-MCP-Chinese-Getting-Started-Guide.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

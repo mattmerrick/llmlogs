@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP Security Checklist: A Security Guide for the AI Tool Ecosystem</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP Security Checklist: A Security Guide for the AI Tool Ecosystem</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 529</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Not specified</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/slowmist/MCP-Security-Checklist" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP Security Checklist: A Security Guide for the AI Tool Ecosystem</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP Security Checklist: A Security Guide for the AI Tool Ecosystem</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 529</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/slowmist/MCP-Security-Checklist" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Security Checklist: A Security Guide for the AI Tool Ecosystem</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 529</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/slowmist/MCP-Security-Checklist" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MCP Security Checklist: A Security Guide for the AI Tool Ecosystem - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Security Checklist: A Security Guide for the AI Tool Ecosystem</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 529</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/slowmist/MCP-Security-Checklist" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ MCP Security Checklist: A Security Guide for the AI Tool Ecosystem
+</h1>
+<p>
+<a href="https://twitter.com/slowmist_team">
+<img alt="Twitter URL" src="https://img.shields.io/twitter/url/https/twitter.com/slowmist_team.svg?style=social&amp;label=Follow%20%40SlowMist_Team"/>
+</a>
+</p>
+<p>
+<a href="./README.md">
+  English Version
+ </a>
+ ,
+ <a href="./README_CN.md">
+  中文版本
+ </a>
+</p>
+<h2 class="heading">
+ Author Information
+</h2>
+<p>
+ This security checklist was compiled and is maintained by
+ <a href="https://twitter.com/slowmist_team">
+  @SlowMist_Team
+ </a>
+ .
+</p>
+<blockquote>
+<p>
+  SlowMist, a global leader in blockchain ecosystem threat intelligence, aims to enhance security protection and safeguard user privacy during the integration of blockchain and AI ecosystems.
+ </p>
+</blockquote>
+<p>
+ We sincerely thank
+ <a href="https://fenz.ai/">
+  FENZ.AI
+ </a>
+ for their valuable contributions and support.
+</p>
+<blockquote>
+<p>
+  FENZ.AI redefines AI security with future-proof auditing. FENZ is the essential infrastructure for the AI era: "Superintelligence starts with super safety."
+ </p>
+</blockquote>
+<h2 class="heading">
+ 📚 Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#overview">
+   Overview
+  </a>
+</li>
+<li>
+<a href="#how-to-use">
+   How to Use
+  </a>
+</li>
+<li>
+<a href="#mcp-servermcp-plugin-security">
+   MCP Server (MCP Plugin) Security
+  </a>
+</li>
+<li>
+<a href="#mcp-clientmcp-host-security">
+   MCP Client/MCP HOST Security
+  </a>
+</li>
+<li>
+<a href="#mcp-adaptation-and-invocation-security-on-different-llms">
+   MCP Adaptation and Invocation Security on Different LLMs
+  </a>
+</li>
+<li>
+<a href="#multi-mcp-scenario-security">
+   Multi-MCP Scenario Security
+  </a>
+</li>
+<li>
+<a href="#unique-security-points-for-cryptocurrency-related-mcps">
+   Unique Security Points for Cryptocurrency-related MCPs
+  </a>
+</li>
+<li>
+<a href="#MCP-Security-Self-Assessment-Tools">
+   MCP Security Self-Assessment Tools
+  </a>
+</li>
+<li>
+<a href="#references">
+   References
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ With the rapid development of large language models (LLMs), a variety of new AI tools have continued to emerge. Among them, tools based on the Model Context Protocol (MCP) standard have become a key bridge connecting LLMs with external tools and data sources. Since its release in late 2024, MCP has been widely adopted in mainstream AI applications such as Claude Desktop and Cursor. Various MCP Server marketplaces have also emerged, demonstrating strong ecosystem scalability.
+</p>
+<p>
+ However, the rapid adoption of MCP has also introduced new security challenges. In the current MCP architecture, the system consists of three main components: the
+ <strong>
+  Host
+ </strong>
+ (the local environment where the AI application runs), the
+ <strong>
+  Client
+ </strong>
+ (responsible for communicating with the Server and invoking tools), and the
+ <strong>
+  Server
+ </strong>
+ (the backend service corresponding to an MCP plugin). Users interact with the AI through the Host, while the Client parses the user's request and forwards it to the MCP Server for tool invocation or resource access. In scenarios involving multiple instances and cross-component collaboration, this architecture exposes a range of security risks—especially in sensitive contexts such as cryptocurrency transactions or custom plugin integration with LLMs—where the potential for exploitation is even higher and requires appropriate security controls.
+</p>
+<p>
+ Against this backdrop,
+ <strong>
+  establishing and following a comprehensive MCP Security Checklist becomes critically important
+ </strong>
+ . This checklist covers key areas ranging from user interface interaction, client components, and service-side plugins, to multi-MCP collaboration mechanisms and domain-specific scenarios such as cryptocurrency integrations. It is designed to help developers systematically identify and mitigate potential risks. By implementing these security measures, the overall stability and controllability of MCP systems can be significantly enhanced, ensuring that security evolves in parallel with the rapid advancement of AI applications.
+</p>
+<p align="center">
+<img alt="MCP flow risk diagram" src="assets/mcp_risk_points_en.png"/>
+</p>
+<p align="center" style="font-style: italic; color: gray;">
+ Figure: Schematic diagram of MCP multi-component interaction process and key risk points
+</p>
+<h2 class="heading">
+ How to Use
+</h2>
+<p>
+ This checklist is based on possible risk points encountered during our security audits of MCP projects, aiming to help developers ensure the security of MCP implementations. We use three priority levels to denote the importance of each item:
+</p>
+<ul>
+<li>
+<img alt="Low" src="assets/priority/low.svg"/>
+  Indicates recommended items that can be omitted in specific contexts.
+ </li>
+<li>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Indicates strongly recommended items which could be omitted in special cases, but doing so might negatively impact security.
+ </li>
+<li>
+<img alt="High" src="assets/priority/high.svg"/>
+  Indicates items that must not be omitted under any circumstances; removing them may lead to system failures or security vulnerabilities.
+ </li>
+</ul>
+<h2 class="heading">
+ MCP Server (MCP Plugin) Security
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  The MCP Server provides external tools, resources, and functionalities that AI can invoke. This is essentially the MCP plugin form. In general, it contains Resources, Tools, and Prompts.
+ </p>
+</blockquote>
+<h3 class="heading">
+ API Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Input Validation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Enforce strict validation on all API inputs to prevent injection attacks and invalid parameters.
+ </li>
+<li>
+  [ ]
+  <strong>
+   API Rate Limiting:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Implement call rate limits to prevent abuse or DoS attacks.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Output Encoding:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Properly encode API outputs.
+ </li>
+</ul>
+<h3 class="heading">
+ Server Authentication &amp; Authorization
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Access Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Implement role-based access control, limit resource access, and enforce the principle of least privilege.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Credential Management:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Securely manage and store service credentials; avoid hard-coded secrets and use key management services.
+ </li>
+<li>
+  [ ]
+  <strong>
+   External Service Authentication:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Use secure methods when authenticating with third-party services.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Least Privilege:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Run service processes with the minimum required permissions to reduce the potential attack surface and elevation risks.
+ </li>
+<li>
+  [ ]
+  <strong>
+   API Key Rotation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Automatically rotate API keys and service credentials periodically, limiting the valid timeframe of keys.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Service Identity Authentication:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Provide a mechanism for Tools to verify the Server’s identity, helping clients to authenticate and use the service securely.
+ </li>
+</ul>
+<h3 class="heading">
+ Background Persistence Control
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Lifecycle Management:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Implement strict lifecycle management for MCP plugins and coordinate with the client.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Shutdown Cleanup:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Forcefully clean up all MCP background processes when the client is shut down.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Health Check Mechanism:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Regularly check the status of MCP plugins to detect abnormal persistence.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Background Activity Monitoring:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Monitor and log all MCP background activities.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Activity Restrictions:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Limit the operations and their duration that MCP plugins can perform in the background.
+ </li>
+</ul>
+<h3 class="heading">
+ Deployment &amp; Runtime Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Isolation Environment:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Server runs in an isolated environment (container, VM, or sandbox) to prevent escape and mitigate lateral movement attacks.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Container Security:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Adopt hardened container security configurations and run containers as non-root users. Employ immutable infrastructure and runtime protection.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Secure Boot:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Validate service boot processes, implementing secure boot chains and integrity checks.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Environment Variable Security:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Protect sensitive environment variables and ensure they are not exposed in logs.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Resource Limits:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Enforce resource usage limits to prevent infinite loops or excessive calls when a large model malfunctions.
+ </li>
+</ul>
+<h3 class="heading">
+ Code &amp; Data Integrity
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Integrity Verification Mechanisms:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Use digital signatures, checksums, or similar to ensure code has not been tampered with.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Remote Validation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Support mechanisms for remote verification of code integrity.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Code Obfuscation &amp; Hardening:
+  </strong>
+<img alt="Low" src="assets/priority/low.svg"/>
+  Apply code obfuscation and hardening techniques to increase the difficulty of reverse engineering.
+ </li>
+</ul>
+<h3 class="heading">
+ Supply Chain Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Dependency Management:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Securely manage third-party dependencies.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Package Integrity:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Verify the integrity and authenticity of packages.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Source Verification:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Validate the source of all code and dependencies.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Secure Build:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Ensure the build process is secure.
+ </li>
+</ul>
+<h3 class="heading">
+ Monitoring &amp; Logging
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Anomaly Detection:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Detect and report anomalous activity patterns.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Detailed Logging:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Log all service activities and security events.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Security Event Alerts:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Configure real-time alerts for critical security events.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Centralized Log Management:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Collect and analyze logs in a centralized manner.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Log Integrity:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Ensure log integrity to prevent tampering.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Audit Capability:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Provide detailed auditing and incident investigation capabilities.
+ </li>
+</ul>
+<h3 class="heading">
+ Invocation Environment Isolation
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Isolation Between MCP Instances:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Ensure operational isolation among multiple MCP Servers.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Resource Access Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Assign each MCP Server a clearly defined resource access boundary.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Permission Separation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Use distinct permission sets for tools in different domains.
+ </li>
+</ul>
+<h3 class="heading">
+ Platform Compatibility &amp; Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   System Resource Isolation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Implement suitable resource isolation strategies according to different operating system characteristics.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Cross-platform Compatibility Testing:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Test consistent security behavior of MCP Server across different OS and clients.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Platform-specific Risk Assessment:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Evaluate unique security risks specific to each platform and apply mitigating measures.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Client-specific Handling:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Ensure security controls can adapt to differences among various client implementations.
+ </li>
+</ul>
+<h3 class="heading">
+ Data Security &amp; Privacy
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Data Minimization:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Collect and process only the necessary data.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Data Encryption:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Encrypt sensitive data in storage and transit.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Data Isolation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Ensure effective isolation of different users’ data.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Data Access Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Enforce strict access controls on data.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sensitive Data Identification:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Automatically identify and handle sensitive data in a specialized manner.
+ </li>
+</ul>
+<h3 class="heading">
+ Resources Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Resource Access Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Implement fine-grained access control for resources.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Resource Limits:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Limit the size and quantity of a single resource.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Resource Template Security:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Validate and sanitize template parameters of resources.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sensitive Resource Labeling:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Label and handle sensitive resources distinctly.
+ </li>
+</ul>
+<h3 class="heading">
+ Tools Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Secure Coding Practices:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Adhere to security coding standards and best practices.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Isolation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Execute tools in a controlled environment to prevent system-level impact.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Input Validation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Strictly validate all inputs from clients.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Permission Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Each tool should have only the minimum permissions needed to complete its task.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Data Validation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Validate the data processed by tools to prevent injection or tampering.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Behavior Constraints:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Restrict the range and types of actions a tool can perform.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Third-party Interface Response Security:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Verify that the returned information from interfaces is as expected; do not directly insert the returned data into context.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Error Handling:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Handle errors securely without exposing sensitive information.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Namespace Isolation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Enforce strict namespace isolation for different tools.
+ </li>
+</ul>
+<p>
+<strong>
+<a href="#-table-of-contents">
+   ⬆ Back to Top
+  </a>
+</strong>
+</p>
+<h2 class="heading">
+ MCP Client/MCP HOST Security
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  The Host is the environment running the AI application and the MCP client, acting as the terminal where end users interact with AI (e.g., Claude Desktop, Cursor). The Client is a component within the AI application that communicates with the MCP Server, handling context, tool invocation, and result presentation. Typically, the Client is integrated into the Host by default.
+ </p>
+</blockquote>
+<h3 class="heading">
+ User Interaction Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   User Interface Security:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  The UI should clearly display the scope of AI operations and potential impacts, offering an intuitive security indicator.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Confirmation of Sensitive Operations:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  High-risk operations (e.g., file deletion, fund transfers) must explicitly require user confirmation.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Transparency in Permission Requests:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Permission requests should explicitly state their purpose and scope so users can make informed decisions and avoid over-authorization.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Operation Visualization:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Tool invocation and data access should be visible and auditable by users, accompanied by detailed operation logs.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Information Transparency:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+<br/>
+  Tools should allow users to choose whether to display hidden tags by default, such as
+  <code class="code">
+   &lt;SECRET&gt;
+  </code>
+  . This ensures that the context seen by the user is consistent with what is actually generated and invoked, preventing malicious logic from being embedded within hidden tags.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Status Feedback:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Users should be able to clearly understand the current MCP operations in progress.
+ </li>
+</ul>
+<h3 class="heading">
+ AI Control &amp; Monitoring
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Operation Logging:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Record all critical AI operations and their results.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Anomaly Detection:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Detect abnormal patterns of tool invocation or request sequences.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Invocation Limitation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Impose frequency and quantity limits on tool calls.
+ </li>
+</ul>
+<h3 class="heading">
+ Local Storage Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Credential Secure Storage:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Use a system keychain or dedicated encrypted storage for sensitive credentials to prevent unauthorized access.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sensitive Data Isolation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Implement mechanisms to isolate sensitive user data from ordinary data in storage and processing.
+ </li>
+</ul>
+<h3 class="heading">
+ Application Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Application Integrity:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Validate the integrity of the application and MCP plugins to prevent tampering.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Update Verification:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Verify the digital signatures of Host application updates.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Application Sandbox:
+  </strong>
+<img alt="Low" src="assets/priority/low.svg"/>
+  Whenever possible, run the application in a sandbox environment to limit system access.
+ </li>
+</ul>
+<h3 class="heading">
+ Client Authentication &amp; Authorization
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Mandatory Authentication:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Enforce authentication before communicating with any critical MCP Server, preventing anonymous access.
+ </li>
+<li>
+  [ ]
+  <strong>
+   OAuth Implementation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Correctly implement OAuth 2.1 or higher, following best practices and security standards.
+ </li>
+<li>
+  [ ]
+  <strong>
+   State Parameter:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  For certain web clients, use a state parameter to mitigate CSRF attacks, employing a unique random value for each request.
+ </li>
+</ul>
+<h3 class="heading">
+ MCP Tools &amp; Servers Management
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   MCP Tool Verification:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Validate the authenticity and integrity of registered tools.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Secure Updates:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  The MCP client should regularly check for and apply security updates, and verify whether the updated tools contain any malicious descriptions.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Function Name Checking:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Check for name conflicts or malicious overwriting before registering any tool.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Malicious MCP Detection:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Monitor and identify potentially malicious MCP behavior.
+ </li>
+<li>
+  [ ]
+  <strong>
+   MCP Tool Naming Control:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Use namespaces or unique identifiers to avoid naming collisions.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Server Directory:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Maintain an authorized directory of trustworthy MCP Servers and tools.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Conflict Resolution:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Establish clear rules to resolve tool name conflicts.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Domain Isolation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Isolate tools in different domains to prevent cross-impact.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Priority Mechanism:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Set explicit function priority rules to avoid malicious overwriting.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Version Control:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Version functions and tools to detect changes.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Registration &amp; Deregistration Mechanism:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Define clear processes for tool registration and deregistration to prevent leftover tools posing security risks.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Conflict Detection Mechanism:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Detect and resolve function and resource conflicts in multi-MCP environments.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Classification:
+  </strong>
+<img alt="Low" src="assets/priority/low.svg"/>
+  Classify tools according to sensitivity and risk level.
+ </li>
+</ul>
+<h3 class="heading">
+ Prompt Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Prompt Injection Defense:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Implement layered defense measures to prevent prompt injection attacks, including manual verification for critical executions.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Malicious Instruction Detection:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Establish mechanisms to detect and block potential malicious user instructions, preventing the system from being manipulated. This includes detecting and blocking preloaded malicious prompts during local initialization, as well as identifying harmful instructions embedded in tools provided by third-party MCP servers.
+ </li>
+<li>
+  [ ]
+  <strong>
+   System Prompt Protection:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Clearly separate system prompts from user inputs to prevent tampering.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sensitive Data Filtering:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Filter out sensitive personal data from prompts and context.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Context Isolation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Ensure that contexts from different sources remain isolated to prevent contamination or information leakage.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Prompt Templates:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Use secure prompt templates to reduce the risk of injection.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Tool Description Verification:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Check tool descriptions for potential malicious instructions.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Prompt Consistency Verification:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Ensure that identical prompts produce predictable and consistent results across different environments.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Historical Context Management:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Clearly define the mechanism for cleaning up historical context to prevent data buildup and potential information leakage.
+ </li>
+</ul>
+<h3 class="heading">
+ Logging &amp; Auditing
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Client Logging:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Record all interactions with the MCP Server, tool calls, and authorization activities.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Security Event Recording:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Log all security-related events, including authorization failures.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Anomaly Alerts:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Detect and alert on abnormal activity patterns.
+ </li>
+</ul>
+<h3 class="heading">
+ Server Verification &amp; Communication Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Server Identity Verification:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Verify the identity of the MCP Server to prevent connections to malicious servers; implement certificate pinning if possible.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Certificate Validation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Strictly validate TLS certificates of remote Servers to prevent Man-in-the-Middle (MitM) attacks and check the integrity of the certificate chain.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Encrypted Communication:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Use TLS 1.2+ to encrypt all Client-Server communications; disable weak cipher suites.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Secure Protocol Configuration:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Configure secure TLS parameters, regularly review, and update encryption algorithms and protocols.
+ </li>
+</ul>
+<h3 class="heading">
+ Permission Token Storage &amp; Management
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Permission Scope Limitation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Strictly limit the scope of tokens under the principle of least privilege.
+ </li>
+</ul>
+<h3 class="heading">
+ Auto-approve Control
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Auto-approve Restrictions:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Carefully control which tools and operations can be auto-approved.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Whitelist Management:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Maintain a whitelist mechanism of tools that can be auto-approved.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Dynamic Risk Assessment:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Dynamically adjust auto-approve policies based on context.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Approval Process Auditing:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Log and audit all auto-approval decisions.
+ </li>
+</ul>
+<h3 class="heading">
+ Sampling Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Context Inclusion Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Strictly control the scope of context included in sampling requests.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sensitive Data Filtering:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Filter out sensitive data from sampling requests and responses.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sampling Request Validation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Validate all parameters and content within sampling requests.
+ </li>
+<li>
+  [ ]
+  <strong>
+   User Control:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Ensure users have clear control over sampling requests and results.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Model Preference Security:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Handle model preference information securely to prevent misuse.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Result Validation:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Verify that sampling results conform to security standards.
+ </li>
+</ul>
+<p>
+<strong>
+<a href="#-table-of-contents">
+   ⬆ Back to Top
+  </a>
+</strong>
+</p>
+<h2 class="heading">
+ MCP Adaptation and Invocation Security on Different LLMs
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  In practice, different LLM backends can vary in their invocation priorities and execution logic of MCP. Therefore, we need to not only focus on the MCP implementation but also on how the LLM and MCP work together.
+ </p>
+</blockquote>
+<h3 class="heading">
+ LLM Secure Execution
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Priority Function Execution:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Ensure the LLM can correctly prioritize and execute the intended plugin functions.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Malicious Prompt Prevention:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  The LLM should identify and defend against malicious mnemonic or injection instructions within prompts.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Secure Invocation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  The LLM should securely and correctly invoke relevant MCP functionalities.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Sensitive Information Protection:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Prevent leakage of sensitive information.
+ </li>
+</ul>
+<h3 class="heading">
+ Multi-modal Security
+</h3>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Multi-modal Content Filtering:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Filter out harmful or sensitive information in multi-modal content (e.g., malicious prompt text within images).
+ </li>
+</ul>
+<p>
+<strong>
+<a href="#-table-of-contents">
+   ⬆ Back to Top
+  </a>
+</strong>
+</p>
+<h2 class="heading">
+ Multi-MCP Scenario Security
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  It is common for users to simultaneously enable multiple MCP Servers in daily use. Given that no official store currently audits MCP plugins, users might install malicious MCPs that seriously compromise overall usage security. This demands heightened caution: introducing a malicious MCP can pose significant security risks.
+ </p>
+</blockquote>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Multi-MCP Environment Security:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Ensure overall security in multi-MCP environments; periodically scan and inspect installed MCPs.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Function Priority Hijacking Prevention:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Check for potential malicious prompt presets to prevent hijacking of function priority.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Cross-MCP Function Call Control:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Secure control over cross-MCP function calls to prevent malicious MCP servers from returning harmful prompts that could trigger other MCPs to perform sensitive operations.
+ </li>
+</ul>
+<p>
+<strong>
+<a href="#-table-of-contents">
+   ⬆ Back to Top
+  </a>
+</strong>
+</p>
+<h2 class="heading">
+ Unique Security Points for Cryptocurrency-related MCPs
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  With the increasing number of MCPs for cryptocurrency, many carry high-risk operations like managing crypto wallets. The following suggestions specifically target cryptocurrency-related MCPs.
+ </p>
+</blockquote>
+<ul>
+<li>
+  [ ]
+  <strong>
+   Private Key Protection:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Enhance security measures for private keys (e.g., using Scrypt).
+ </li>
+<li>
+  [ ]
+  <strong>
+   Wallet Generation Security:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Ensure the security of mnemonic or wallet generation processes.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Wallet Information Privacy:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Protect wallet information privacy; thoroughly filter data before sending wallet information to third-party interfaces.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Transfer Information Confirmation:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Ensure the completeness and clarity of all on-chain or exchange transfer signature information.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Funds Operation Verification:
+  </strong>
+<img alt="High" src="assets/priority/high.svg"/>
+  Implement secondary verification methods (e.g., Google Authenticator) for critical fund operations.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Local Model Privacy Protection:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Use locally hosted LLMs to safeguard privacy data; prevent third-party model providers from accessing wallet information or other sensitive data.
+ </li>
+<li>
+  [ ]
+  <strong>
+   Traditional Wallet Compatibility:
+  </strong>
+<img alt="Medium" src="assets/priority/medium.svg"/>
+  Provide secure compatibility with traditional wallets, such as supporting transaction signing through existing wallet solutions.
+ </li>
+</ul>
+<p>
+<strong>
+<a href="#-table-of-contents">
+   ⬆ Back to Top
+  </a>
+</strong>
+</p>
+<h2 class="heading">
+ MCP Security Self-Assessment Tools
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  For most MCP applications, you can use the following security tools to perform scans and quickly detect high-risk issues automatically.
+-
+  <a href="https://github.com/Tencent/AI-Infra-Guard">
+   Tencent: AI Infrastructure Security Assessment System
+  </a>
+</p>
+</blockquote>
+<p>
+<strong>
+<a href="#-table-of-contents">
+   ⬆ Back to Top
+  </a>
+</strong>
+</p>
+<hr/>
+<h2 class="heading">
+ References
+</h2>
+<ul>
+<li>
+<a href="https://github.com/modelcontextprotocol/modelcontextprotocol">
+   Model Context Protocol (MCP) GitHub
+  </a>
+</li>
+<li>
+<a href="https://doi.org/10.48550/arXiv.2503.23278">
+   Hou, X., Zhao, Y., Wang, S., &amp; Wang, H. (2025). Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions.
+   <em>
+    arXiv preprint arXiv:2503.23278
+   </em>
+   .
+  </a>
+</li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/slowmist-MCP-Security-Checklist.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Xcode MCP Server - MCP Directory">
+    <meta property="og:description" content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project">
+    <meta property="og:url" content="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Xcode MCP Server - MCP Directory">
+    <meta name="twitter:description" content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project">
+    
+    <title>Xcode MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Xcode MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Xcode MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 248</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/r-huijts/xcode-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Xcode MCP Server - MCP Directory" property="og:title"/>
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Xcode MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" name="twitter:description"/>
+<title>Xcode MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Xcode MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Xcode MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 248</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/r-huijts/xcode-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Xcode MCP Server - MCP Directory" property="og:title">
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" property="og:description">
+<meta content="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Xcode MCP Server - MCP Directory" name="twitter:title">
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" name="twitter:description">
+<title>Xcode MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Xcode MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 248</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/r-huijts/xcode-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Xcode MCP Server - MCP Directory" property="og:title"/>
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Xcode MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode project" name="twitter:description"/>
+<title>Xcode MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Xcode MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 248</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/r-huijts/xcode-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Xcode MCP Server
+</h1>
+<p>
+ An MCP (Model Context Protocol) server providing comprehensive Xcode integration for AI assistants. This server enables AI agents to interact with Xcode projects, manage iOS simulators, and perform various Xcode-related tasks with enhanced error handling and support for multiple project types.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<h3 class="heading">
+ Project Management
+</h3>
+<ul>
+<li>
+  Set active projects and get detailed project information
+ </li>
+<li>
+  Create new Xcode projects from templates (iOS, macOS, watchOS, tvOS)
+ </li>
+<li>
+  Add files to Xcode projects with target and group specification
+ </li>
+<li>
+  Parse workspace documents to find associated projects
+ </li>
+<li>
+  List available schemes in projects and workspaces
+ </li>
+</ul>
+<h3 class="heading">
+ File Operations
+</h3>
+<ul>
+<li>
+  Read/write files with support for different encodings
+ </li>
+<li>
+  Handle binary files with base64 encoding/decoding
+ </li>
+<li>
+  Search for text content within files using patterns and regex
+ </li>
+<li>
+  Check file existence and get file metadata
+ </li>
+<li>
+  Create directory structures automatically
+ </li>
+</ul>
+<h3 class="heading">
+ Build &amp; Testing
+</h3>
+<ul>
+<li>
+  Build projects with customizable options
+ </li>
+<li>
+  Run tests with detailed failure reporting
+ </li>
+<li>
+  Analyze code for potential issues
+ </li>
+<li>
+  Clean build directories
+ </li>
+<li>
+  Archive projects for distribution
+ </li>
+</ul>
+<h3 class="heading">
+ CocoaPods Integration
+</h3>
+<ul>
+<li>
+  Initialize CocoaPods in projects
+ </li>
+<li>
+  Install and update pods
+ </li>
+<li>
+  Add and remove pod dependencies
+ </li>
+<li>
+  Execute arbitrary pod commands
+ </li>
+</ul>
+<h3 class="heading">
+ Swift Package Manager
+</h3>
+<ul>
+<li>
+  Initialize new Swift packages
+ </li>
+<li>
+  Add and remove package dependencies with various version requirements
+ </li>
+<li>
+  Update packages and resolve dependencies
+ </li>
+<li>
+  Generate documentation for Swift packages using DocC
+ </li>
+<li>
+  Run tests and build Swift packages
+ </li>
+</ul>
+<h3 class="heading">
+ iOS Simulator Tools
+</h3>
+<ul>
+<li>
+  List available simulators with detailed information
+ </li>
+<li>
+  Boot and shut down simulators
+ </li>
+<li>
+  Install and launch apps on simulators
+ </li>
+<li>
+  Take screenshots and record videos
+ </li>
+<li>
+  Manage simulator settings and state
+ </li>
+</ul>
+<h3 class="heading">
+ Xcode Utilities
+</h3>
+<ul>
+<li>
+  Execute Xcode commands via xcrun
+ </li>
+<li>
+  Compile asset catalogs
+ </li>
+<li>
+  Generate app icon sets from source images
+ </li>
+<li>
+  Trace app performance
+ </li>
+<li>
+  Export and validate archives for App Store submission
+ </li>
+<li>
+  Switch between different Xcode versions
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ul>
+<li>
+  macOS with Xcode 14.0 or higher installed
+ </li>
+<li>
+  Node.js 16 or higher
+ </li>
+<li>
+  npm or yarn
+ </li>
+<li>
+  Swift 5.5+ for Swift Package Manager features
+ </li>
+<li>
+  CocoaPods (optional, for CocoaPods integration)
+ </li>
+</ul>
+<h3 class="heading">
+ Setup
+</h3>
+<h4 class="heading">
+ Option 1: Automated Setup (Recommended)
+</h4>
+<p>
+ Use the included setup script which automates the installation and configuration process:
+</p>
+<pre class="pre"><code class="language-bash code"># Make the script executable
+chmod +x setup.sh
+
+# Run the setup script
+./setup.sh
+</code></pre>
+<p>
+<strong>
+  What the Setup Script Does:
+ </strong>
+</p>
+<ol>
+<li>
+<strong>
+   Environment Verification
+  </strong>
+  :
+ </li>
+<li>
+  Checks that you're running on macOS
+ </li>
+<li>
+  Verifies Xcode is installed and accessible
+ </li>
+<li>
+  Confirms Node.js (v16+) and npm are available
+ </li>
+<li>
+  Checks for Ruby installation
+ </li>
+<li>
+<p>
+   Verifies CocoaPods installation (offers to install if missing)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Dependency Installation
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Runs
+  <code class="code">
+   npm install
+  </code>
+  to install all required Node.js packages
+ </li>
+<li>
+<p>
+   Executes
+   <code class="code">
+    npm run build
+   </code>
+   to compile the TypeScript code
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Configuration Setup
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Creates a
+  <code class="code">
+   .env
+  </code>
+  file if one doesn't exist
+ </li>
+<li>
+  Prompts for your projects base directory
+ </li>
+<li>
+  Asks if you want to enable debug logging
+ </li>
+<li>
+<p>
+   Saves your configuration preferences
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Claude Desktop Integration
+   </strong>
+   (Optional):
+  </p>
+</li>
+<li>
+  Offers to configure the server for Claude Desktop
+ </li>
+<li>
+  Creates or updates the Claude Desktop configuration file
+ </li>
+<li>
+  Sets up the proper command and arguments to launch the server
+ </li>
+</ol>
+<p>
+<strong>
+  When to Use the Setup Script:
+ </strong>
+</p>
+<ul>
+<li>
+  First-time installation to ensure all prerequisites are met
+ </li>
+<li>
+  When you want guided configuration with interactive prompts
+ </li>
+<li>
+  If you want to quickly set up Claude Desktop integration
+ </li>
+<li>
+  To verify your environment has all necessary components
+ </li>
+</ul>
+<p>
+ The script will guide you through the configuration process with clear prompts and helpful feedback.
+</p>
+<h4 class="heading">
+ Option 2: Manual Setup
+</h4>
+<p>
+<strong>
+  When to Use Manual Setup:
+ </strong>
+</p>
+<ul>
+<li>
+  You prefer explicit control over each installation step
+ </li>
+<li>
+  You have a custom environment or non-standard configuration
+ </li>
+<li>
+  You're setting up in a CI/CD pipeline or automated environment
+ </li>
+<li>
+  You want to customize specific aspects of the installation process
+ </li>
+<li>
+  You're an experienced developer familiar with Node.js projects
+ </li>
+</ul>
+<p>
+ Follow these steps for manual installation:
+</p>
+<ol>
+<li>
+<p>
+   Clone the repository:
+   <code class="code">
+    bash
+   git clone https://github.com/r-huijts/xcode-mcp-server.git
+   cd xcode-mcp-server
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Verify prerequisites (these must be installed):
+  </p>
+</li>
+<li>
+  Xcode and Xcode Command Line Tools
+ </li>
+<li>
+  Node.js v16 or higher
+ </li>
+<li>
+  npm
+ </li>
+<li>
+  Ruby (for CocoaPods support)
+ </li>
+<li>
+<p>
+   CocoaPods (optional, for pod-related features)
+  </p>
+</li>
+<li>
+<p>
+   Install dependencies:
+   <code class="code">
+    bash
+   npm install
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Build the project:
+   <code class="code">
+    bash
+   npm run build
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Create a configuration file:
+   ```bash
+   # Option A: Start with the example configuration
+   cp .env.example .env
+  </p>
+</li>
+</ol>
+<p>
+ # Option B: Create a minimal configuration
+   echo "PROJECTS_BASE_DIR=/path/to/your/projects" &gt; .env
+   echo "DEBUG=false" &gt;&gt; .env
+   ```
+</p>
+<p>
+ Edit the
+ <code class="code">
+  .env
+ </code>
+ file to set your preferred configuration.
+</p>
+<ol>
+<li>
+  For Claude Desktop integration (optional):
+ </li>
+<li>
+  Edit or create
+  <code class="code">
+   ~/Library/Application Support/Claude/claude_desktop_config.json
+  </code>
+</li>
+<li>
+  Add the following configuration (adjust paths as needed):
+  <code class="code">
+   json
+   {
+     "mcpServers": {
+       "xcode": {
+         "command": "node",
+         "args": ["/path/to/xcode-mcp-server/dist/index.js"]
+       }
+     }
+   }
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ Setup Troubleshooting
+</h3>
+<p>
+<strong>
+  Common Setup Issues:
+ </strong>
+</p>
+<ol>
+<li>
+<strong>
+   Build Errors
+  </strong>
+  :
+ </li>
+<li>
+  Ensure you have the correct Node.js version (v16+)
+ </li>
+<li>
+  Try deleting
+  <code class="code">
+   node_modules
+  </code>
+  and running
+  <code class="code">
+   npm install
+  </code>
+  again
+ </li>
+<li>
+  Check for TypeScript errors with
+  <code class="code">
+   npx tsc --noEmit
+  </code>
+</li>
+<li>
+<p>
+   Make sure all imports in the code are properly resolved
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Missing Dependencies
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  If you see errors about missing modules, run
+  <code class="code">
+   npm install
+  </code>
+  again
+ </li>
+<li>
+<p>
+   For native dependencies, you may need Xcode Command Line Tools:
+   <code class="code">
+    xcode-select --install
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Permission Issues
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Ensure you have write permissions to the installation directory
+ </li>
+<li>
+<p>
+   For CocoaPods installation, you may need to use
+   <code class="code">
+    sudo gem install cocoapods
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Configuration Problems
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Verify your
+  <code class="code">
+   .env
+  </code>
+  file has the correct format and valid paths
+ </li>
+<li>
+  Make sure
+  <code class="code">
+   PROJECTS_BASE_DIR
+  </code>
+  points to an existing directory
+ </li>
+<li>
+<p>
+   Check that the path doesn't contain special characters that need escaping
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Claude Desktop Integration
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Ensure the path in the Claude configuration points to the correct location of
+  <code class="code">
+   index.js
+  </code>
+</li>
+<li>
+  Restart Claude Desktop after making configuration changes
+ </li>
+<li>
+  Check that the server is running before attempting to use it with Claude
+ </li>
+</ol>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Starting the Server
+</h3>
+<pre class="pre"><code class="language-bash code">npm start
+</code></pre>
+<p>
+ For development mode with automatic restarts:
+</p>
+<pre class="pre"><code class="language-bash code">npm run dev
+</code></pre>
+<h3 class="heading">
+ Configuration Options
+</h3>
+<p>
+ You can configure the server in two ways:
+</p>
+<ol>
+<li>
+<p>
+   Environment variables in
+   <code class="code">
+    .env
+   </code>
+   file:
+   <code class="code">
+    PROJECTS_BASE_DIR=/path/to/your/projects
+   DEBUG=true
+   ALLOWED_PATHS=/path/to/additional/allowed/directory
+   PORT=8080
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Command line arguments:
+   <code class="code">
+    bash
+   npm start -- --projects-dir=/path/to/your/projects --port=8080
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Key Configuration Parameters
+</h3>
+<ul>
+<li>
+<code class="code">
+   PROJECTS_BASE_DIR
+  </code>
+  /
+  <code class="code">
+   --projects-dir
+  </code>
+  : Base directory for projects (required)
+ </li>
+<li>
+<code class="code">
+   ALLOWED_PATHS
+  </code>
+  /
+  <code class="code">
+   --allowed-paths
+  </code>
+  : Additional directories to allow access to (comma-separated)
+ </li>
+<li>
+<code class="code">
+   PORT
+  </code>
+  /
+  <code class="code">
+   --port
+  </code>
+  : Port to run the server on (default: 3000)
+ </li>
+<li>
+<code class="code">
+   DEBUG
+  </code>
+  /
+  <code class="code">
+   --debug
+  </code>
+  : Enable debug logging (default: false)
+ </li>
+<li>
+<code class="code">
+   LOG_LEVEL
+  </code>
+  /
+  <code class="code">
+   --log-level
+  </code>
+  : Set logging level (default: info)
+ </li>
+</ul>
+<h3 class="heading">
+ Connecting to AI Assistants
+</h3>
+<p>
+ The server implements the Model Context Protocol (MCP), making it compatible with various AI assistants that support this protocol. To connect:
+</p>
+<ol>
+<li>
+  Start the Xcode MCP server
+ </li>
+<li>
+  Configure your AI assistant to use the server URL (typically
+  <code class="code">
+   http://localhost:3000
+  </code>
+  )
+ </li>
+<li>
+  The AI assistant will now have access to all the Xcode tools provided by the server
+ </li>
+</ol>
+<h3 class="heading">
+ Tool Documentation
+</h3>
+<p>
+ For a comprehensive overview of all available tools and their usage, see
+ <a href="docs/tools-overview.md">
+  Tools Overview
+ </a>
+ .
+</p>
+<p>
+ For detailed usage examples and best practices, see
+ <a href="docs/user-guide.md">
+  User Guide
+ </a>
+ .
+</p>
+<h3 class="heading">
+ Common Workflows
+</h3>
+<h4 class="heading">
+ Setting Up a New Project
+</h4>
+<pre class="pre"><code class="language-javascript code">// Create a new iOS app project
+await tools.create_xcode_project({
+  name: "MyAwesomeApp",
+  template: "ios-app",
+  outputDirectory: "~/Projects",
+  organizationName: "My Organization",
+  organizationIdentifier: "com.myorganization",
+  language: "swift",
+  includeTests: true,
+  setAsActive: true
+});
+
+// Add a Swift Package dependency
+await tools.add_swift_package({
+  url: "https://github.com/Alamofire/Alamofire.git",
+  version: "from: 5.0.0"
+});
+</code></pre>
+<h4 class="heading">
+ Working with Files
+</h4>
+<pre class="pre"><code class="language-javascript code">// Read a file with specific encoding
+const fileContent = await tools.read_file({
+  filePath: "MyAwesomeApp/AppDelegate.swift",
+  encoding: "utf-8"
+});
+
+// Write to a file
+await tools.write_file({
+  path: "MyAwesomeApp/NewFile.swift",
+  content: "import Foundation\n\nclass NewClass {}\n",
+  createIfMissing: true
+});
+
+// Search for text in files
+const searchResults = await tools.search_in_files({
+  directory: "MyAwesomeApp",
+  pattern: "*.swift",
+  searchText: "class",
+  isRegex: false
+});
+</code></pre>
+<h4 class="heading">
+ Building and Testing
+</h4>
+<pre class="pre"><code class="language-javascript code">// Build the project
+await tools.build_project({
+  scheme: "MyAwesomeApp",
+  configuration: "Debug"
+});
+
+// Run tests
+await tools.test_project({
+  scheme: "MyAwesomeApp",
+  testPlan: "MyAwesomeAppTests"
+});
+</code></pre>
+<h2 class="heading">
+ Project Structure
+</h2>
+<pre class="pre"><code class="code">xcode-mcp-server/
+├── src/
+│   ├── index.ts                 # Entry point
+│   ├── server.ts                # MCP server implementation
+│   ├── types/                   # Type definitions
+│   │   └── index.ts             # Core type definitions
+│   ├── utils/                   # Utility functions
+│   │   ├── errors.js            # Error handling classes
+│   │   ├── pathManager.ts       # Path validation and management
+│   │   ├── project.js           # Project utilities
+│   │   └── simulator.js         # Simulator utilities
+│   └── tools/                   # Tool implementations
+│       ├── project/             # Project management tools
+│       │   └── index.ts         # Project creation, detection, file adding
+│       ├── file/                # File operation tools
+│       │   └── index.ts         # File reading, writing, searching
+│       ├── build/               # Build and testing tools
+│       │   └── index.ts         # Building, testing, analyzing
+│       ├── cocoapods/           # CocoaPods integration
+│       │   └── index.ts         # Pod installation and management
+│       ├── spm/                 # Swift Package Manager tools
+│       │   └── index.ts         # Package management and documentation
+│       ├── simulator/           # iOS simulator tools
+│       │   └── index.ts         # Simulator control and interaction
+│       └── xcode/               # Xcode utilities
+│           └── index.ts         # Xcode version management, asset tools
+├── docs/                        # Documentation
+│   ├── tools-overview.md        # Comprehensive tool documentation
+│   └── user-guide.md            # Usage examples and best practices
+├── tests/                       # Tests
+└── dist/                        # Compiled code (generated)
+</code></pre>
+<h2 class="heading">
+ How It Works
+</h2>
+<p>
+ The Xcode MCP server uses the Model Context Protocol to provide a standardized interface for AI models to interact with Xcode projects. The server architecture is designed with several key components:
+</p>
+<h3 class="heading">
+ Core Components
+</h3>
+<ol>
+<li>
+<p>
+<strong>
+    Server Implementation
+   </strong>
+   : The main MCP server that handles tool registration and request processing.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Path Management
+   </strong>
+   : Ensures secure file access by validating all paths against allowed directories.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Project Management
+   </strong>
+   : Detects, loads, and manages different types of Xcode projects:
+  </p>
+</li>
+<li>
+  Standard Xcode projects (.xcodeproj)
+ </li>
+<li>
+  Xcode workspaces (.xcworkspace)
+ </li>
+<li>
+<p>
+   Swift Package Manager projects (Package.swift)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Directory State
+   </strong>
+   : Maintains the active directory context for relative path resolution.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Tool Registry
+   </strong>
+   : Organizes tools into logical categories for different Xcode operations.
+  </p>
+</li>
+</ol>
+<h3 class="heading">
+ Request Flow
+</h3>
+<ol>
+<li>
+<p>
+   An AI assistant sends a tool execution request to the MCP server.
+  </p>
+</li>
+<li>
+<p>
+   The server validates the request parameters and permissions.
+  </p>
+</li>
+<li>
+<p>
+   The appropriate tool handler is invoked with the validated parameters.
+  </p>
+</li>
+<li>
+<p>
+   The tool executes the requested operation, often using native Xcode commands.
+  </p>
+</li>
+<li>
+<p>
+   Results are formatted and returned to the AI assistant.
+  </p>
+</li>
+<li>
+<p>
+   Comprehensive error handling provides meaningful feedback for troubleshooting.
+  </p>
+</li>
+</ol>
+<h3 class="heading">
+ Safety Features
+</h3>
+<ul>
+<li>
+<strong>
+   Path Validation
+  </strong>
+  : All file operations are restricted to allowed directories.
+ </li>
+<li>
+<strong>
+   Error Handling
+  </strong>
+  : Detailed error messages help diagnose issues.
+ </li>
+<li>
+<strong>
+   Parameter Validation
+  </strong>
+  : Input parameters are validated using Zod schemas.
+ </li>
+<li>
+<strong>
+   Process Management
+  </strong>
+  : External processes are executed safely with proper error handling.
+ </li>
+</ul>
+<h3 class="heading">
+ Project Type Support
+</h3>
+<p>
+ The server intelligently handles different project types:
+</p>
+<ul>
+<li>
+<strong>
+   Standard Projects
+  </strong>
+  : Direct .xcodeproj manipulation
+ </li>
+<li>
+<strong>
+   Workspaces
+  </strong>
+  : Manages multiple projects within a workspace
+ </li>
+<li>
+<strong>
+   SPM Projects
+  </strong>
+  : Handles Swift Package Manager specific operations
+ </li>
+</ul>
+<p>
+ This architecture allows AI assistants to seamlessly work with any type of Xcode project while maintaining security and providing detailed feedback.
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Contributions are welcome! Please feel free to submit a Pull Request.
+</p>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create your feature branch (
+  <code class="code">
+   git checkout -b feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Commit your changes (
+  <code class="code">
+   git commit -m 'Add some amazing feature'
+  </code>
+  )
+ </li>
+<li>
+  Push to the branch (
+  <code class="code">
+   git push origin feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Open a Pull Request
+ </li>
+</ol>
+<h3 class="heading">
+ Development Guidelines
+</h3>
+<ul>
+<li>
+  Follow the existing code style and organization
+ </li>
+<li>
+  Add comprehensive error handling with specific error messages
+ </li>
+<li>
+  Write tests for new functionality
+ </li>
+<li>
+  Update documentation to reflect your changes
+ </li>
+<li>
+  Ensure compatibility with different project types (standard, workspace, SPM)
+ </li>
+</ul>
+<h3 class="heading">
+ Adding New Tools
+</h3>
+<p>
+ To add a new tool to the server:
+</p>
+<ol>
+<li>
+  Identify the appropriate category in the
+  <code class="code">
+   src/tools/
+  </code>
+  directory
+ </li>
+<li>
+  Implement the tool using the existing patterns with Zod schema validation
+ </li>
+<li>
+  Register the tool in the category's
+  <code class="code">
+   index.ts
+  </code>
+  file
+ </li>
+<li>
+  Add error handling with specific error messages
+ </li>
+<li>
+  Document the tool in the appropriate documentation files
+ </li>
+</ol>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ Common Issues
+</h3>
+<ul>
+<li>
+<strong>
+   Path Access Errors
+  </strong>
+  : Ensure the paths you're trying to access are within the allowed directories
+ </li>
+<li>
+<strong>
+   Build Failures
+  </strong>
+  : Check that Xcode command line tools are installed and up to date
+ </li>
+<li>
+<strong>
+   Tool Not Found
+  </strong>
+  : Verify that the tool name is correct and properly registered
+ </li>
+<li>
+<strong>
+   Parameter Validation Errors
+  </strong>
+  : Check the parameter types and requirements in the tool documentation
+ </li>
+</ul>
+<h3 class="heading">
+ Debugging
+</h3>
+<ol>
+<li>
+  Start the server with debug logging enabled:
+  <code class="code">
+   npm start -- --debug
+  </code>
+</li>
+<li>
+  Check the console output for detailed error messages
+ </li>
+<li>
+  Examine the server logs for request and response details
+ </li>
+<li>
+  For tool-specific issues, try running the equivalent Xcode command directly in the terminal
+ </li>
+</ol>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the MIT License - see the LICENSE file for details.
+</p>
+<h2 class="heading">
+ Acknowledgments
+</h2>
+<ul>
+<li>
+  Thanks to the Model Context Protocol team for the MCP SDK
+ </li>
+<li>
+  Built with TypeScript and Node.js
+ </li>
+<li>
+  Uses Xcode command line tools and Swift Package Manager
+ </li>
+<li>
+  Special thanks to all contributors who have helped improve the server's functionality and robustness
+ </li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/r-huijts-xcode-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

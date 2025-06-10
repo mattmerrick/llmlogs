@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Version:v0.2.0">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Postman MCP Server - MCP Directory">
+    <meta property="og:description" content="Version:v0.2.0">
+    <meta property="og:url" content="https://llmlogs.com/mcp/delano-postman-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Postman MCP Server - MCP Directory">
+    <meta name="twitter:description" content="Version:v0.2.0">
+    
+    <title>Postman MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Postman MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Postman MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 98</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">anthropic</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+                        </div>
+                        <a href="https://github.com/delano/postman-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Version:v0.2.0" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Postman MCP Server - MCP Directory" property="og:title"/>
+<meta content="Version:v0.2.0" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/delano-postman-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Postman MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="Version:v0.2.0" name="twitter:description"/>
+<title>Postman MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Postman MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Postman MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 98</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">anthropic</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/delano/postman-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Version:v0.2.0" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Postman MCP Server - MCP Directory" property="og:title">
+<meta content="Version:v0.2.0" property="og:description">
+<meta content="https://llmlogs.com/mcp/delano-postman-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Postman MCP Server - MCP Directory" name="twitter:title">
+<meta content="Version:v0.2.0" name="twitter:description">
+<title>Postman MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Postman MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 98</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">anthropic</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/delano/postman-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Version:v0.2.0" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Postman MCP Server - MCP Directory" property="og:title"/>
+<meta content="Version:v0.2.0" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/delano-postman-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Postman MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="Version:v0.2.0" name="twitter:description"/>
+<title>Postman MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Postman MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 98</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">anthropic</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/delano/postman-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Postman MCP Server
+</h1>
+<p>
+<a href="https://smithery.ai/server/postman-api-server">
+<img alt="smithery badge" src="https://smithery.ai/badge/postman-api-server"/>
+</a>
+<strong>
+  Version:
+ </strong>
+ v0.2.0
+</p>
+<p>
+ An MCP server that provides access to the
+ <a href="https://www.postman.com/">
+  Postman
+ </a>
+ API. Functionality is based on the
+ <a href="https://www.postman.com/postman/postman-public-workspace/documentation/i2uqzpp/postman-api">
+  official OpenAPI specification
+ </a>
+ . For more information, see the
+ <a href="https://www.postman.com/postman-public-workspace/">
+  Postman API documentation
+ </a>
+ .
+</p>
+<p>
+ This project is part of the Model Context Protocol (MCP) initiative from Anthropic. For more information, visit the
+ <a href="https://github.com/modelcontextprotocol">
+  MCP GitHub repository
+ </a>
+ and the announcement on the
+ <a href="https://www.anthropic.com/news/model-context-protocol">
+  Anthropic blog
+ </a>
+ .
+</p>
+<p>
+<strong>
+<a href="#installation">
+   Skip ahead to install instructions
+  </a>
+</strong>
+</p>
+<p>
+<img alt="postman-mcp-server - Cover Image" src="https://github.com/user-attachments/assets/e19d712f-ad97-4456-a414-d69b159a9ed2"/>
+</p>
+<blockquote>
+<p>
+  [!WARNING]
+This project is currently under active development. Please use with caution and expect breaking changes.
+ </p>
+<p>
+  [!NOTE]
+AI Generated Code. I used Cline v2.2.2 with Claude 3.5 Sonnet (2024-10-22). See docs/README.md for prompts and details about how this code was generated.
+ </p>
+</blockquote>
+<p>
+<a href="https://glama.ai/mcp/servers/zoig549xfd">
+<img alt="postman-mcp-server MCP server" height="200" src="https://glama.ai/mcp/servers/zoig549xfd/badge" width="380"/>
+</a>
+</p>
+<hr/>
+<ul>
+<li>
+<a href="#overview">
+   Overview
+  </a>
+</li>
+<li>
+<a href="#features">
+   Features
+  </a>
+</li>
+<li>
+<a href="#collections">
+   Collections
+  </a>
+</li>
+<li>
+<a href="#environments">
+   Environments
+  </a>
+</li>
+<li>
+<a href="#apis">
+   APIs
+  </a>
+</li>
+<li>
+<a href="#authentication--authorization">
+   Authentication \&amp; Authorization
+  </a>
+</li>
+<li>
+<a href="#additional-features">
+   Additional Features
+  </a>
+</li>
+<li>
+<a href="#installation">
+   Installation
+  </a>
+</li>
+<li>
+<a href="#prerequisites">
+   Prerequisites
+  </a>
+</li>
+<li>
+<a href="#steps">
+   Steps
+  </a>
+</li>
+<li>
+<a href="#usage">
+   Usage
+  </a>
+</li>
+<li>
+<a href="#setting-up-api-keys">
+   Setting up API Keys
+  </a>
+</li>
+<li>
+<a href="#using-claude-desktop">
+   Using Claude Desktop
+  </a>
+</li>
+<li>
+<a href="#using-cline">
+   Using Cline
+  </a>
+</li>
+<li>
+<a href="#using-zed">
+   Using Zed
+  </a>
+</li>
+<li>
+<a href="#documentation">
+   Documentation
+  </a>
+</li>
+<li>
+<a href="#project-overview">
+   Project Overview
+  </a>
+</li>
+<li>
+<a href="#rationale">
+   Rationale
+  </a>
+</li>
+<li>
+<a href="#development">
+   Development
+  </a>
+</li>
+<li>
+<a href="#debugging">
+   Debugging
+  </a>
+</li>
+<li>
+<a href="#other-mcp-servers">
+   Other MCP Servers
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ Postman MCP Server is a TypeScript-based MCP server that integrates with the Postman API, providing comprehensive management of Postman collections, environments, and APIs.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<h3 class="heading">
+ Collections
+</h3>
+<ul>
+<li>
+<strong>
+   CRUD Operations
+  </strong>
+  : Create, retrieve, update, and delete Postman collections.
+ </li>
+<li>
+<strong>
+   Folder Management
+  </strong>
+  : Organize requests into folders within collections.
+ </li>
+<li>
+<strong>
+   Request Management
+  </strong>
+  : Add, update, and delete requests within collections.
+ </li>
+<li>
+<strong>
+   Response Management
+  </strong>
+  : Manage responses associated with requests.
+ </li>
+<li>
+<strong>
+   Version Control
+  </strong>
+  : Fork, merge, and pull changes for collections.
+ </li>
+<li>
+<strong>
+   Comments
+  </strong>
+  : Add and manage comments on collections.
+ </li>
+</ul>
+<h3 class="heading">
+ Environments
+</h3>
+<ul>
+<li>
+<strong>
+   Manage Environments
+  </strong>
+  : Create and retrieve environments for different setups.
+ </li>
+<li>
+<strong>
+   CRUD Operations
+  </strong>
+  : Full support for creating, updating, and deleting environments.
+ </li>
+</ul>
+<h3 class="heading">
+ APIs
+</h3>
+<ul>
+<li>
+<strong>
+   API Management
+  </strong>
+  : Create, retrieve, update, and delete APIs.
+ </li>
+<li>
+<strong>
+   Schema Support
+  </strong>
+  : Manage API schemas with multi-file support.
+ </li>
+<li>
+<strong>
+   Tagging
+  </strong>
+  : Add and manage tags for APIs.
+ </li>
+<li>
+<strong>
+   Comments
+  </strong>
+  : Add and manage comments on APIs.
+ </li>
+</ul>
+<h3 class="heading">
+ Authentication &amp; Authorization
+</h3>
+<ul>
+<li>
+<strong>
+   API Key Authentication
+  </strong>
+  : Secure access using API keys.
+ </li>
+<li>
+<strong>
+   Role-Based Access Control
+  </strong>
+  : Manage permissions at workspace and collection levels.
+ </li>
+<li>
+<strong>
+   Workspace Permissions
+  </strong>
+  : Define permissions specific to workspaces.
+ </li>
+</ul>
+<h3 class="heading">
+ Additional Features
+</h3>
+<ul>
+<li>
+<strong>
+   Private API Network
+  </strong>
+  : Manage elements and folders within a private API network.
+ </li>
+<li>
+<strong>
+   Webhooks
+  </strong>
+  : Create webhooks to trigger collections with custom payloads.
+ </li>
+<li>
+<strong>
+   Enterprise Features
+  </strong>
+  : Advanced role controls and SCIM support for enterprise environments.
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Installing via Smithery
+</h3>
+<p>
+ To install Postman MCP Server for Claude Desktop automatically via
+ <a href="https://smithery.ai/server/postman-api-server">
+  Smithery
+ </a>
+ :
+</p>
+<pre class="pre"><code class="language-bash code">npx -y @smithery/cli install postman-api-server --client claude
+</code></pre>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ul>
+<li>
+<a href="https://nodejs.org/">
+   Node.js
+  </a>
+  installed.
+ </li>
+</ul>
+<h3 class="heading">
+ Steps
+</h3>
+<ol>
+<li>
+<p>
+<strong>
+    Clone the repository:
+   </strong>
+<code class="code">
+    bash
+    git clone https://github.com/delano/postman-api-server.git
+    cd postman-api-server
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Install dependencies:
+   </strong>
+<code class="code">
+    bash
+    pnpm install
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Build the server:
+   </strong>
+<code class="code">
+    bash
+    pnpm run build
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Run in development mode with auto-rebuild:
+   </strong>
+<code class="code">
+    bash
+    pnpm run watch
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Setting up API Keys
+</h3>
+<ol>
+<li>
+<strong>
+   Generate your API Key
+  </strong>
+</li>
+<li>
+  Visit
+  <a href="https://go.postman.co/settings/me/api-keys">
+   Postman Account Settings
+  </a>
+</li>
+<li>
+  Click "Generate API Key"
+ </li>
+<li>
+<p>
+   Save the key securely - it won't be shown again
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Configure the API Key
+   </strong>
+</p>
+</li>
+<li>
+  Add the key to your environment as
+  <code class="code">
+   POSTMAN_API_KEY
+  </code>
+</li>
+<li>
+  For Claude Desktop or Cline, include it in your config file (see configuration examples below)
+ </li>
+<li>
+<p>
+   Never commit API keys to version control
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Verify Access
+   </strong>
+</p>
+</li>
+<li>
+  The API key provides access to all Postman resources you have permissions for
+ </li>
+<li>
+  Test access by running a simple query (e.g., list workspaces)
+ </li>
+</ol>
+<blockquote>
+<p>
+  [!NOTE]
+If you're using the
+  <a href="https://www.postman.com/postman/postman-public-workspace/documentation/i2uqzpp/postman-api">
+   Postman API collection
+  </a>
+  directly, store your API key as a
+  <code class="code">
+   postman-api-key
+  </code>
+  collection variable.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Using Claude Desktop
+</h3>
+<p>
+ To use with Claude Desktop, add the server config:
+</p>
+<ul>
+<li>
+<strong>
+   macOS:
+  </strong>
+<code class="code">
+   ~/Library/Application Support/Claude/claude_desktop_config.json
+  </code>
+</li>
+<li>
+<strong>
+   Windows:
+  </strong>
+<code class="code">
+   %APPDATA%/Claude/claude_desktop_config.json
+  </code>
+</li>
+</ul>
+<blockquote>
+<p>
+  [!IMPORTANT]
+If you're updating this provider, Claude must be restarted to pick up API changes from the input schema (i.e. When the MCP server's ToolDefinition elements have changed). This is because Claude caches the tool definitions when it starts up.
+ </p>
+</blockquote>
+<p>
+<img alt="claude-desktop-settings" src="https://github.com/user-attachments/assets/7ea7cba2-e27e-413a-a50a-590054d51344" width="480"/>
+</p>
+<h4 class="heading">
+ Example configuration
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "postman": {
+      "command": "node",
+      "args": [
+        "/path/to/postman-api-server/build/index.js"
+      ],
+      "env": {
+        "POSTMAN_API_KEY": "CHANGEME"
+      }
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Using Cline
+</h3>
+<p>
+ Using the same example configuration, add the server config to your Cline MCP Servers configuration:
+</p>
+<p>
+<img alt="cline-settings" src="https://github.com/user-attachments/assets/651ec517-9aa2-4314-84f5-bee716aa8889" width="480"/>
+</p>
+<h4 class="heading">
+ Example configuration
+</h4>
+<p>
+<em>
+  Same as Claude above.
+ </em>
+</p>
+<h3 class="heading">
+ Using Zed
+</h3>
+<p>
+ I'm still trying to get this to work. From the
+ <a href="https://zed.dev/docs/assistant/model-context-protocol">
+  Zed docs
+ </a>
+ it looks like it needs to be an extension (
+ <a href="https://github.com/zed-industries/zed/discussions/21455">
+  also this issue #21455
+ </a>
+ ).
+</p>
+<hr/>
+<h2 class="heading">
+ Documentation
+</h2>
+<p>
+ The official
+ <a href="https://learning.postman.com/docs/developer/postman-api/intro-api/">
+  Postman API documentation
+ </a>
+ is available in the
+ <a href="https://www.postman.com/postman/postman-public-workspace/">
+  Postman Public Workspace
+ </a>
+ .
+</p>
+<h3 class="heading">
+ Project Overview
+</h3>
+<h4 class="heading">
+ Postman API References &amp; Summaries
+</h4>
+<p>
+ This project leverages the Claude model and Cline extension to convert the OpenAPI specification into TypeScript code, enhancing type safety and integration within the MCP server.
+</p>
+<p>
+ This GitHub project includes
+ <a href="docs/api/references/README.md">
+  API References documentation
+ </a>
+ that provides detailed guidance on utilizing the Postman platform programmatically. It covers both the Collection SDK for local development and the Postman API for cloud platform integration. Key topics include authentication mechanisms, rate limits, and in-depth documentation of all API endpoints, including workspaces, collections, environments, mock servers, monitors, and more. Additionally, the guide offers prerequisites and quick-start instructions to facilitate seamless API interactions.
+</p>
+<p>
+ The
+ <code class="code">
+  docs/api/summaries
+ </code>
+ directory contains comprehensive Markdown summaries of the Postman API. These documents outline API endpoints, request/response formats, and implementation details essential for validating and ensuring the functionality of the MCP server. Refer to the
+ <a href="docs/api/summaries/README.md">
+  API Summaries README
+ </a>
+ for an overview of the documentation structure and implementation strategies.
+</p>
+<h4 class="heading">
+ Converting OpenAPI Spec to TypeScript Code with Claude
+</h4>
+<h4 class="heading">
+ Building the MCP Server
+</h4>
+<p>
+ Refer to the
+ <a href="src/handlers/README.md">
+  Handlers Documentation
+ </a>
+ for detailed specifications on implementing MCP server handlers. This includes URI formats, prompt requirements, and resource handling patterns. This guide is crucial for developers working on integrating and enhancing the Postman API functionalities within the MCP server.
+</p>
+<hr/>
+<h2 class="heading">
+ Rationale
+</h2>
+<p>
+ The MCP wrapper for Postman tools makes sense primarily as an AI interaction layer for complex, multi-step operations where structure and safety are paramount. However, it may be overengineered for simple operations where direct CLI or API usage would suffice. The MCP wrapper provides most value when:
+</p>
+<ol>
+<li>
+<strong>
+   Complex Operations
+  </strong>
+</li>
+<li>
+  Managing multiple collections
+ </li>
+<li>
+  Coordinating environments
+ </li>
+<li>
+<p>
+   Generating comprehensive reports
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    AI-Driven Automation
+   </strong>
+</p>
+</li>
+<li>
+  Automated testing workflows
+ </li>
+<li>
+  API documentation maintenance
+ </li>
+<li>
+<p>
+   Environment management
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Error-Sensitive Operations
+   </strong>
+</p>
+</li>
+<li>
+  Critical API testing
+ </li>
+<li>
+  Production deployments
+ </li>
+<li>
+  Compliance checking
+ </li>
+</ol>
+<p>
+ It provides less value for:
+</p>
+<ol>
+<li>
+<strong>
+   Simple Operations
+  </strong>
+</li>
+<li>
+  Basic collection runs
+ </li>
+<li>
+  Single API calls
+ </li>
+<li>
+  Quick environment checks
+ </li>
+<li>
+<strong>
+   Direct CLI Usage
+  </strong>
+</li>
+<li>
+  Developer-driven operations
+ </li>
+<li>
+  Local testing
+ </li>
+<li>
+  Quick iterations
+ </li>
+</ol>
+<h2 class="heading">
+ Development
+</h2>
+<p>
+ Install dependencies:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm install
+</code></pre>
+<p>
+ Build the server:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm run build
+</code></pre>
+<p>
+ For development with auto-rebuild:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm run watch
+</code></pre>
+<h2 class="heading">
+ Debugging
+</h2>
+<p>
+ Since MCP servers communicate over stdio, debugging can be challenging. We recommend using the
+ <a href="https://github.com/modelcontextprotocol/inspector">
+  MCP Inspector
+ </a>
+ , available as a package script:
+</p>
+<pre class="pre"><code class="language-bash code">pnpm run inspector
+</code></pre>
+<p>
+<a href="https://modelcontextprotocol.io/docs/tools/inspector">
+  Docs
+ </a>
+</p>
+<p>
+ The Inspector will provide a URL to access debugging tools in your browser: http://localhost:5173. You will need to add the POSTMAN_API_KEY before connecting. Navigate to "Tools" to get started.
+</p>
+<h2 class="heading">
+ Other MCP Servers
+</h2>
+<ul>
+<li>
+<a href="https://github.com/appcypher/awesome-mcp-servers">
+   Awesome MCP Servers by AppCypher
+  </a>
+</li>
+<li>
+<a href="https://github.com/punkpeye/awesome-mcp-servers">
+   Awesome MCP Servers by PunkPeye
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the MIT License. See the
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ file for details.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/delano-postman-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/delano-postman-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/delano-postman-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/delano-postman-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

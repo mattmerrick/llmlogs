@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server & Client - MCP Directory">
+    <meta property="og:description" content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M">
+    <meta property="og:url" content="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server & Client - MCP Directory">
+    <meta name="twitter:description" content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M">
+    
+    <title>AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server & Client - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server & Client</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server & Client</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 111</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">bedrock</span><span class="topic-tag"> cost</span><span class="topic-tag"> cost-explorer</span><span class="topic-tag"> langgraph</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> sse</span><span class="topic-tag"> claude-desktop</span><span class="topic-tag"> mcp-client</span>
+                        </div>
+                        <a href="https://github.com/aarora79/aws-cost-explorer-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory" property="og:title"/>
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory" name="twitter:title"/>
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" name="twitter:description"/>
+<title>AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 111</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">bedrock</span><span class="topic-tag"> cost</span><span class="topic-tag"> cost-explorer</span><span class="topic-tag"> langgraph</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> sse</span><span class="topic-tag"> claude-desktop</span><span class="topic-tag"> mcp-client</span>
+</div>
+<a class="github-link" href="https://github.com/aarora79/aws-cost-explorer-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory" property="og:title">
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" property="og:description">
+<meta content="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory" name="twitter:title">
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" name="twitter:description">
+<title>AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 111</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">bedrock</span><span class="topic-tag"> cost</span><span class="topic-tag"> cost-explorer</span><span class="topic-tag"> langgraph</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> sse</span><span class="topic-tag"> claude-desktop</span><span class="topic-tag"> mcp-client</span>
+</div>
+<a class="github-link" href="https://github.com/aarora79/aws-cost-explorer-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory" property="og:title"/>
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory" name="twitter:title"/>
+<meta content="An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data viaModel invocation logsin Amazon Cloud Watch throughAnthropic's MCP (M" name="twitter:description"/>
+<title>AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 111</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">bedrock</span><span class="topic-tag"> cost</span><span class="topic-tag"> cost-explorer</span><span class="topic-tag"> langgraph</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> sse</span><span class="topic-tag"> claude-desktop</span><span class="topic-tag"> mcp-client</span>
+</div>
+<a class="github-link" href="https://github.com/aarora79/aws-cost-explorer-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ AWS Cost Explorer and Amazon Bedrock Model Invocation Logs MCP Server &amp; Client
+</h1>
+<p>
+ An MCP server for getting AWS spend data via Cost Explorer and Amazon Bedrock usage data via
+ <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html">
+<code class="code">
+   Model invocation logs
+  </code>
+</a>
+ in Amazon Cloud Watch through
+ <a href="https://www.anthropic.com/news/model-context-protocol">
+  Anthropic's MCP (Model Control Protocol)
+ </a>
+ . See section on
+ <a href="#secure-remote-mcp-server">
+  "secure" remote MCP server
+ </a>
+ to see how you can run your MCP server over HTTPS.
+</p>
+<pre class="pre"><code class="language-mermaid code">flowchart LR
+    User([User]) --&gt; UserApp[User Application]
+    UserApp --&gt; |Queries| Host[Host]
+
+    subgraph "Claude Desktop"
+        Host --&gt; MCPClient[MCP Client]
+    end
+
+    MCPClient --&gt; |MCP Protocol over HTTPS| MCPServer[AWS Cost Explorer MCP Server]
+
+    subgraph "AWS Services"
+        MCPServer --&gt; |API Calls| CostExplorer[(AWS Cost Explorer)]
+        MCPServer --&gt; |API Calls| CloudWatchLogs[(AWS CloudWatch Logs)]
+    end
+</code></pre>
+<p>
+ You can run the MCP server locally and access it via the Claude Desktop or you could also run a Remote MCP server on Amazon EC2 and access it via a MCP client built into a LangGraph Agent.
+</p>
+<p>
+ 🚨You can also use this MCP server to get AWS spend information from other accounts as long as the IAM role used by the MCP server can assume roles in those other accounts🚨
+</p>
+<h3 class="heading">
+ Demo video
+</h3>
+<p>
+<a href="https://youtu.be/WuVOmYLRFmI">
+<img alt="AWS Cost Explorer MCP Server Deep Dive" src="https://img.youtube.com/vi/WuVOmYLRFmI/maxresdefault.jpg"/>
+</a>
+</p>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ This tool provides a convenient way to analyze and visualize AWS cloud spending data using Anthropic's Claude model as an interactive interface. It functions as an MCP server that exposes AWS Cost Explorer API functionality to Claude Desktop, allowing you to ask questions about your AWS spend in natural language.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+<strong>
+   Amazon EC2 Spend Analysis
+  </strong>
+  : View detailed breakdowns of EC2 spending for the last day
+ </li>
+<li>
+<strong>
+   Amazon Bedrock Spend Analysis
+  </strong>
+  : View breakdown by region, users and models over the last 30 days
+ </li>
+<li>
+<strong>
+   Service Spend Reports
+  </strong>
+  : Analyze spending across all AWS services for the last 30 days
+ </li>
+<li>
+<strong>
+   Detailed Cost Breakdown
+  </strong>
+  : Get granular cost data by day, region, service, and instance type
+ </li>
+<li>
+<strong>
+   Interactive Interface
+  </strong>
+  : Use Claude to query your cost data through natural language
+ </li>
+</ul>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+  Python 3.12
+ </li>
+<li>
+  AWS credentials with Cost Explorer access
+ </li>
+<li>
+  Anthropic API access (for Claude integration)
+ </li>
+<li>
+  [Optional] Amazon Bedrock access (for LangGraph Agent)
+ </li>
+<li>
+  [Optional] Amazon EC2 for running a remote MCP server
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<ol>
+<li>
+  Install
+  <code class="code">
+   uv
+  </code>
+  :
+  <code class="code">
+   bash
+   # On macOS and Linux
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+  </code>
+</li>
+</ol>
+<p>
+<code class="code">
+  powershell
+   # On Windows
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+ </code>
+ Additional installation options are documented
+ <a href="https://docs.astral.sh/uv/getting-started/installation/">
+  here
+ </a>
+</p>
+<ol>
+<li>
+<p>
+   Clone this repository: (assuming this will be updated to point to aws-samples?)
+   <code class="code">
+    git clone https://github.com/aarora79/aws-cost-explorer-mcp.git
+   cd aws-cost-explorer-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Set up the Python virtual environment and install dependencies:
+   <code class="code">
+    uv venv --python 3.12 &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install --requirement pyproject.toml
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Configure your AWS credentials:
+   <code class="code">
+    mkdir -p ~/.aws
+   # Set up your credentials in ~/.aws/credentials and ~/.aws/config
+   </code>
+   If you useAWS IAM Identity Center, follow the
+   <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html">
+    docs
+   </a>
+   to configure your short-term credentials
+  </p>
+</li>
+</ol>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ol>
+<li>
+  Setup
+  <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html#setup-cloudwatch-logs-destination">
+   model invocation logs
+  </a>
+  in Amazon CloudWatch.
+ </li>
+<li>
+  Ensure that the IAM user/role being used has full read-only access to Amazon Cost Explorer and Amazon CloudWatch, this is required for the MCP server to retrieve data from these services.
+See
+  <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-example-policies.html">
+   here
+  </a>
+  and
+  <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/CloudWatchLogsReadOnlyAccess.html">
+   here
+  </a>
+  for sample policy examples that you can use &amp; modify as per your requirements.
+ </li>
+<li>
+  To allow your MCP server to access AWS spend information from other accounts set the the
+  <code class="code">
+   CROSS_ACCOUNT_ROLE_NAME
+  </code>
+  parameter while starting the server and now you can provide the account AWS account id for another account while interacting with your agent and then agent will pass the account id to the server.
+ </li>
+</ol>
+<h3 class="heading">
+ Local setup
+</h3>
+<p>
+ Uses
+ <code class="code">
+  stdio
+ </code>
+ as a transport for MCP, both the MCP server and client are running on your local machine.
+</p>
+<h4 class="heading">
+ Starting the Server (local)
+</h4>
+<p>
+ Run the server using:
+</p>
+<pre class="pre"><code class="code">export MCP_TRANSPORT=stdio
+export BEDROCK_LOG_GROUP_NAME=YOUR_BEDROCK_CW_LOG_GROUP_NAME
+export CROSS_ACCOUNT_ROLE_NAME=ROLE_NAME_FOR_THE_ROLE_TO_ASSUME_IN_OTHER_ACCOUNTS # can be ignored if you do not want AWS spend info from other accounts
+python server.py
+</code></pre>
+<h4 class="heading">
+ Claude Desktop Configuration
+</h4>
+<p>
+ There are two ways to configure this tool with Claude Desktop:
+</p>
+<h5 class="heading">
+ Option 1: Using Docker
+</h5>
+<p>
+ Add the following to your Claude Desktop configuration file. The file can be found out these paths depending upon you operating system.
+</p>
+<ul>
+<li>
+  macOS: ~/Library/Application Support/Claude/claude_desktop_config.json.
+ </li>
+<li>
+  Windows: %APPDATA%\Claude\claude_desktop_config.json.
+ </li>
+<li>
+  Linux: ~/.config/Claude/claude_desktop_config.json.
+ </li>
+</ul>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "aws-cost-explorer": {
+      "command": "docker",
+      "args": [ "run", "-i", "--rm", "-e", "AWS_ACCESS_KEY_ID", "-e", "AWS_SECRET_ACCESS_KEY", "-e", "AWS_REGION", "-e", "BEDROCK_LOG_GROUP_NAME", "-e", "MCP_TRANSPORT", "-e", "CROSS_ACCOUNT_ROLE_NAME", "aws-cost-explorer-mcp:latest" ],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "YOUR_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY": "YOUR_SECRET_ACCESS_KEY",
+        "AWS_REGION": "us-east-1",
+        "BEDROCK_LOG_GROUP_NAME": "YOUR_CLOUDWATCH_BEDROCK_MODEL_INVOCATION_LOG_GROUP_NAME",
+        "CROSS_ACCOUNT_ROLE_NAME": "ROLE_NAME_FOR_THE_ROLE_TO_ASSUME_IN_OTHER_ACCOUNTS",
+        "MCP_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   IMPORTANT
+  </strong>
+  : Replace
+  <code class="code">
+   YOUR_ACCESS_KEY_ID
+  </code>
+  and
+  <code class="code">
+   YOUR_SECRET_ACCESS_KEY
+  </code>
+  with your actual AWS credentials. Never commit actual credentials to version control.
+ </p>
+</blockquote>
+<h5 class="heading">
+ Option 2: Using UV (without Docker)
+</h5>
+<p>
+ If you prefer to run the server directly without Docker, you can use UV:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "aws_cost_explorer": {
+      "command": "uv",
+      "args": [
+          "--directory",
+          "/path/to/aws-cost-explorer-mcp-server",
+          "run",
+          "server.py"
+      ],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "YOUR_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY": "YOUR_SECRET_ACCESS_KEY",
+        "AWS_REGION": "us-east-1",
+        "BEDROCK_LOG_GROUP_NAME": "YOUR_CLOUDWATCH_BEDROCK_MODEL_INVOCATION_LOG_GROUP_NAME",
+        "CROSS_ACCOUNT_ROLE_NAME": "ROLE_NAME_FOR_THE_ROLE_TO_ASSUME_IN_OTHER_ACCOUNTS",
+        "MCP_TRANSPORT": "stdio"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ Make sure to replace the directory path with the actual path to your repository on your system.
+</p>
+<h3 class="heading">
+ Remote setup
+</h3>
+<p>
+ Uses
+ <code class="code">
+  sse
+ </code>
+ as a transport for MCP, the MCP servers on EC2 and the client is running on your local machine. Note that Claude Desktop does not support remote MCP servers at this time (see
+ <a href="https://github.com/orgs/modelcontextprotocol/discussions/16">
+  this
+ </a>
+ GitHub issue).
+</p>
+<h4 class="heading">
+ Starting the Server (remote)
+</h4>
+<p>
+ You can start a remote MCP server on Amazon EC2 by following the same instructions as above. Make sure to set the
+ <code class="code">
+  MCP_TRANSPORT
+ </code>
+ as
+ <code class="code">
+  sse
+ </code>
+ (server side events) as shown below.
+ <strong>
+  Note that the MCP uses JSON-RPC 2.0 as its wire format, therefore the protocol itself does not include authorization and authentication (see
+  <a href="https://github.com/modelcontextprotocol/specification/discussions/102">
+   this GitHub issue
+  </a>
+  ), do not send or receive sensitive data over MCP
+ </strong>
+ .
+</p>
+<p>
+ Run the server using:
+</p>
+<pre class="pre"><code class="code">export MCP_TRANSPORT=sse
+export BEDROCK_LOG_GROUP_NAME=YOUR_BEDROCK_CW_LOG_GROUP_NAME
+export CROSS_ACCOUNT_ROLE_NAME=ROLE_NAME_FOR_THE_ROLE_TO_ASSUME_IN_OTHER_ACCOUNTS # can be ignored if you do not want AWS spend info from other accounts
+python server.py
+</code></pre>
+<ol>
+<li>
+  The MCP server will start listening on TCP port 8000.
+ </li>
+<li>
+  Configure an ingress rule in the security group associated with your EC2 instance to allow access to TCP port 8000 from your local machine (where you are running the MCP client/LangGraph based app) to your EC2 instance.
+ </li>
+</ol>
+<blockquote>
+<p>
+  Also see section on running a
+  <a href="#secure-remote-mcp-server">
+   "secure" remote MCP server
+  </a>
+  i.e. a server to which your MCP clients can connect over HTTPS.
+ </p>
+</blockquote>
+<h4 class="heading">
+ Testing with a CLI MCP client
+</h4>
+<p>
+ You can test your remote MCP server with the
+ <code class="code">
+  mcp_sse_client.py
+ </code>
+ script. Running this script will print the list of tools available from the MCP server and an output for the
+ <code class="code">
+  get_bedrock_daily_usage_stats
+ </code>
+ tool.
+</p>
+<pre class="pre"><code class="language-bashrc code"># set the hostname for your MCP server
+MCP_SERVER_HOSTNAME=YOUR_MCP_SERVER_EC2_HOSTNAME
+# or localhost if your MCP server is running locally
+# MCP_SERVER_HOSTNAME=localhost 
+AWS_ACCOUNT_ID=AWS_ACCOUNT_ID_TO_GET_INFO_ABOUT # if set to empty or if the --aws-account-id switch is not specified then it gets the info about the AWS account MCP server is running in
+python mcp_sse_client.py --host $MCP_SERVER_HOSTNAME --aws-account-id $AWS_ACCOUNT_ID
+</code></pre>
+<h4 class="heading">
+ Testing with Chainlit app
+</h4>
+<p>
+ The
+ <code class="code">
+  app.py
+ </code>
+ file in this repo provides a Chainlit app (chatbot) which creates a LangGraph agent that uses the
+ <a href="https://github.com/langchain-ai/langchain-mcp-adapters">
+<code class="code">
+   LangChain MCP Adapter
+  </code>
+</a>
+ to import the tools provided by the MCP server as tools in a LangGraph Agent. The Agent is then able to use an LLM to respond to user questions and use the tools available to it as needed. Thus if the user asks a question such as "
+ <em>
+  What was my Bedrock usage like in the last one week?
+ </em>
+ " then the Agent will use the tools available to it via the remote MCP server to answer that question. We use Claude 3.5 Haiku model available via Amazon Bedrock to power this agent.
+</p>
+<p>
+ Run the Chainlit app using:
+</p>
+<pre class="pre"><code class="language-bashrc code">chainlit run app.py --port 8080 
+</code></pre>
+<p>
+ A browser window should open up on
+ <code class="code">
+  localhost:8080
+ </code>
+ and you should be able to use the chatbot to get details about your AWS spend.
+</p>
+<h3 class="heading">
+ Available Tools
+</h3>
+<p>
+ The server exposes the following tools that Claude can use:
+</p>
+<ol>
+<li>
+<strong>
+<code class="code">
+    get_ec2_spend_last_day()
+   </code>
+</strong>
+  : Retrieves EC2 spending data for the previous day
+ </li>
+<li>
+<strong>
+<code class="code">
+    get_detailed_breakdown_by_day(days=7)
+   </code>
+</strong>
+  : Delivers a comprehensive analysis of costs by region, service, and instance type
+ </li>
+<li>
+<strong>
+<code class="code">
+    get_bedrock_daily_usage_stats(days=7, region='us-east-1', log_group_name='BedrockModelInvocationLogGroup')
+   </code>
+</strong>
+  : Delivers a per-day breakdown of model usage by region and users.
+ </li>
+<li>
+<strong>
+<code class="code">
+    get_bedrock_hourly_usage_stats(days=7, region='us-east-1', log_group_name='BedrockModelInvocationLogGroup')
+   </code>
+</strong>
+  : Delivers a per-day per-hour breakdown of model usage by region and users.
+ </li>
+</ol>
+<h3 class="heading">
+ Example Queries
+</h3>
+<p>
+ Once connected to Claude through an MCP-enabled interface, you can ask questions like:
+</p>
+<ul>
+<li>
+  "Help me understand my Bedrock spend over the last few weeks"
+ </li>
+<li>
+  "What was my EC2 spend yesterday?"
+ </li>
+<li>
+  "Show me my top 5 AWS services by cost for the last month"
+ </li>
+<li>
+  "Analyze my spending by region for the past 14 days"
+ </li>
+<li>
+  "Which instance types are costing me the most money?"
+ </li>
+<li>
+  "Which services had the highest month-over-month cost increase?"
+ </li>
+</ul>
+<h2 class="heading">
+ Docker Support
+</h2>
+<p>
+ A Dockerfile is included for containerized deployment:
+</p>
+<pre class="pre"><code class="code">docker build -t aws-cost-explorer-mcp .
+docker run -v ~/.aws:/root/.aws aws-cost-explorer-mcp
+</code></pre>
+<h2 class="heading">
+ Development
+</h2>
+<h3 class="heading">
+ Project Structure
+</h3>
+<ul>
+<li>
+<code class="code">
+   server.py
+  </code>
+  : Main server implementation with MCP tools
+ </li>
+<li>
+<code class="code">
+   pyproject.toml
+  </code>
+  : Project dependencies and metadata
+ </li>
+<li>
+<code class="code">
+   Dockerfile
+  </code>
+  : Container definition for deployments
+ </li>
+</ul>
+<h3 class="heading">
+ Adding New Cost Analysis Tools
+</h3>
+<p>
+ To extend the functionality:
+</p>
+<ol>
+<li>
+  Add new functions to
+  <code class="code">
+   server.py
+  </code>
+</li>
+<li>
+  Annotate them with
+  <code class="code">
+   @mcp.tool()
+  </code>
+</li>
+<li>
+  Implement the AWS Cost Explorer API calls
+ </li>
+<li>
+  Format the results for easy readability
+ </li>
+</ol>
+<h2 class="heading">
+ Secure "remote" MCP server
+</h2>
+<p>
+ We can use
+ <a href="https://nginx.org/">
+<code class="code">
+   nginx
+  </code>
+</a>
+ as a reverse-proxy so that it can provide an HTTPS endpoint for connecting to the MCP server. Remote MCP clients can connect to
+ <code class="code">
+  nginx
+ </code>
+ over HTTPS and then it can proxy traffic internally to
+ <code class="code">
+  http://localhost:8000
+ </code>
+ . The following steps describe how to do this.
+</p>
+<ol>
+<li>
+<p>
+   Enable access to TCP port 443 from the IP address of your MCP client (your laptop, or anywhere) in the inbound rules in the security group associated with your EC2 instance.
+  </p>
+</li>
+<li>
+<p>
+   You would need to have an HTTPS certificate and private key to proceed. Let's say you use
+   <code class="code">
+    your-mcp-server-domain-name.com
+   </code>
+   as the domain for your MCP server then you will need an SSL cert for
+   <code class="code">
+    your-mcp-server-domain-name.com
+   </code>
+   and it will be accessible to MCP clients as
+   <code class="code">
+    https://your-mcp-server-domain-name.com/sse
+   </code>
+   .
+   <em>
+    While you can use a self-signed cert but it would require disabling SSL verification on the MCP client, we DO NOT recommend you do that
+   </em>
+   . If you are hosting your MCP server on EC2 then you could generate an SSL cert using
+   <a href="https://www.noip.com/">
+    no-ip
+   </a>
+   or
+   <a href="https://letsencrypt.org/">
+    Let' Encrypt
+   </a>
+   or other similar services. Place the SSL cert and private key files in
+   <code class="code">
+    /etc/ssl/certs
+   </code>
+   and
+   <code class="code">
+    /etc/ssl/privatekey
+   </code>
+   folders respectively on your EC2 machine.
+  </p>
+</li>
+<li>
+<p>
+   Install
+   <code class="code">
+    nginx
+   </code>
+   on your EC2 machine using the following commands.
+  </p>
+<p>
+<code class="code">
+    {.bashrc}
+sudo apt-get install nginx
+sudo nginx -t
+sudo systemctl reload nginx
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Get the hostname for your EC2 instance, this would be needed for configuring the
+   <code class="code">
+    nginx
+   </code>
+   reverse proxy.
+  </p>
+<p>
+<code class="code">
+    {.bashrc}
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") &amp;&amp; curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-hostname
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Copy the following content into a new file
+   <code class="code">
+    /etc/nginx/conf.d/ec2.conf
+   </code>
+   . Replace
+   <code class="code">
+    YOUR_EC2_HOSTNAME
+   </code>
+   ,
+   <code class="code">
+    /etc/ssl/certs/cert.pem
+   </code>
+   and
+   <code class="code">
+    /etc/ssl/privatekey/privkey.pem
+   </code>
+   with values appropriate for your setup.
+  </p>
+</li>
+</ol>
+<p>
+ ```{.bashrc}
+   server {
+    listen 80;
+    server_name YOUR_EC2_HOSTNAME;
+</p>
+<pre class="pre"><code class="code"># Optional: Redirect HTTP to HTTPS
+return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name YOUR_EC2_HOSTNAME;
+
+    # Self-signed certificate paths
+    ssl_certificate     /etc/ssl/certs/cert.pem;
+    ssl_certificate_key /etc/ssl/privatekey/privkey.pem;
+
+    # Optional: Good practice
+    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    location / {
+        # Reverse proxy to your local app (e.g., port 8000)
+        proxy_pass http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre>
+<p>
+ ```
+</p>
+<ol>
+<li>
+<p>
+   Restart
+   <code class="code">
+    nginx
+   </code>
+   .
+  </p>
+<p>
+<code class="code">
+    {.bashrc}
+sudo systemctl start nginx
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Start your MCP server as usual as described in the
+   <a href="#remote-setup">
+    remote setup
+   </a>
+   section.
+  </p>
+</li>
+<li>
+<p>
+   Your MCP server is now accessible over HTTPS as
+   <code class="code">
+    https://your-mcp-server-domain-name.com/sse
+   </code>
+   to your MCP client.
+  </p>
+</li>
+<li>
+<p>
+   On the client side now (say on your laptop or in your Agent) configure your MCP client to communicate to your MCP server as follows.
+  </p>
+<p>
+<code class="code">
+    {.bashrc}
+MCP_SERVER_HOSTNAME=YOUR_MCP_SERVER_DOMAIN_NAME
+AWS_ACCOUNT_ID=AWS_ACCOUNT_ID_TO_GET_INFO_ABOUT # if set to empty or if the --aws-account-id switch is not specified then it gets the info about the AWS account MCP server is running in
+python mcp_sse_client.py --host $MCP_SERVER_HOSTNAME --port 443 --aws-account-id $AWS_ACCOUNT_ID
+   </code>
+</p>
+<p>
+   Similarly you could run the chainlit app to talk to remote MCP server over HTTPS.
+  </p>
+<p>
+<code class="code">
+    {.bashrc}
+export MCP_SERVER_URL=YOUR_MCP_SERVER_DOMAIN_NAME
+export MCP_SERVER_PORT=443
+chainlit run app.py --port 8080
+   </code>
+</p>
+<p>
+   Similarly you could run the LangGraph Agent to talk to remote MCP server over HTTPS.
+  </p>
+<p>
+<code class="code">
+    {.bashrc}    
+python langgraph_agent_mcp_sse_client.py --host $MCP_SERVER_HOSTNAME --port 443 --aws-account-id $AWS_ACCOUNT_ID
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ License
+</h2>
+<p>
+<a href="LICENSE">
+  MIT License
+ </a>
+</p>
+<h2 class="heading">
+ Acknowledgments
+</h2>
+<ul>
+<li>
+  This tool uses Anthropic's MCP framework
+ </li>
+<li>
+  Powered by AWS Cost Explorer API
+ </li>
+<li>
+  Built with
+  <a href="https://github.com/jlowin/fastmcp">
+   FastMCP
+  </a>
+  for server implementation
+ </li>
+<li>
+  README was generated by providing a text dump of the repo via
+  <a href="https://gitingest.com/">
+   GitIngest
+  </a>
+  to Claude
+ </li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/aarora79-aws-cost-explorer-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

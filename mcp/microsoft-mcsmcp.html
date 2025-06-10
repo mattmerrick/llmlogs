@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Microsoft Copilot Studio ❤️ MCP - MCP Directory">
+    <meta property="og:description" content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/microsoft-mcsmcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Microsoft Copilot Studio ❤️ MCP - MCP Directory">
+    <meta name="twitter:description" content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio.">
+    
+    <title>Microsoft Copilot Studio ❤️ MCP - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Microsoft Copilot Studio ❤️ MCP</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Microsoft Copilot Studio ❤️ MCP</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 123</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Bicep</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/microsoft/mcsmcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Microsoft Copilot Studio ❤️ MCP - MCP Directory" property="og:title"/>
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/microsoft-mcsmcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Microsoft Copilot Studio ❤️ MCP - MCP Directory" name="twitter:title"/>
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." name="twitter:description"/>
+<title>Microsoft Copilot Studio ❤️ MCP - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Microsoft Copilot Studio ❤️ MCP</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Microsoft Copilot Studio ❤️ MCP</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 123</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Bicep</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/microsoft/mcsmcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Microsoft Copilot Studio ❤️ MCP - MCP Directory" property="og:title">
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." property="og:description">
+<meta content="https://llmlogs.com/mcp/microsoft-mcsmcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Microsoft Copilot Studio ❤️ MCP - MCP Directory" name="twitter:title">
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." name="twitter:description">
+<title>Microsoft Copilot Studio ❤️ MCP - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Microsoft Copilot Studio ❤️ MCP</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 123</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Bicep</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/microsoft/mcsmcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Microsoft Copilot Studio ❤️ MCP - MCP Directory" property="og:title"/>
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/microsoft-mcsmcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Microsoft Copilot Studio ❤️ MCP - MCP Directory" name="twitter:title"/>
+<meta content="Welcome to theMicrosoft Copilot Studio ❤️ MCPlab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio." name="twitter:description"/>
+<title>Microsoft Copilot Studio ❤️ MCP - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Microsoft Copilot Studio ❤️ MCP</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 123</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Bicep</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/microsoft/mcsmcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Microsoft Copilot Studio ❤️ MCP
+</h1>
+<p>
+ Welcome to the
+ <strong>
+  Microsoft Copilot Studio ❤️ MCP
+ </strong>
+ lab. In this lab, you will learn how to deploy an MCP Server, and how to add it to Microsoft Copilot Studio.
+</p>
+<h2 class="heading">
+ ❓ What is MCP?
+</h2>
+<p>
+<a href="https://modelcontextprotocol.io/introduction">
+  Model Context Protocol (MCP)
+ </a>
+ is an open protocol that standardizes how applications provide context to LLMs, defined by
+ <a href="https://www.anthropic.com/">
+  Anthropic
+ </a>
+ . MCP provides a standardized way to connect AI models to different data sources and tools. MCP allows makers to seamlessly integrate existing knowledge servers and APIs directly into Copilot Studio.
+</p>
+<p>
+ Currently, Copilot Studio only supports Tools. To learn more about current capabilities, see
+ <a href="https://aka.ms/mcsmcp">
+  aka.ms/mcsmcp
+ </a>
+ . There are some known issues &amp; planned improvements. These are listed
+ <a href="#known-issues-and-planned-improvements">
+  here
+ </a>
+ .
+</p>
+<h2 class="heading">
+ 🆚 MCP vs Connectors
+</h2>
+<p>
+ When do you use MCP? And when do you use connectors? Will MCP replace connectors?
+</p>
+<p>
+ MCP servers are made available to Copilot Studio using connector infrastructure, so these questions are not really applicable. The fact that MCP servers use the connector infrastructure means they can employ enterprise security and governance controls such as
+ <a href="https://learn.microsoft.com/power-platform/admin/vnet-support-overview">
+  Virtual Network
+ </a>
+ integration,
+ <a href="https://learn.microsoft.com/power-platform/admin/wp-data-loss-prevention">
+  Data Loss Prevention
+ </a>
+ controls,
+ <a href="https://learn.microsoft.com/connectors/custom-connectors/#2-secure-your-api">
+  multiple authentication methods
+ </a>
+ —all of which are available in this release—while supporting real-time data access for AI-powered agents.
+</p>
+<p>
+ So, MCP and connectors are really
+ <strong>
+  better together
+ </strong>
+ .
+</p>
+<h2 class="heading">
+ ⚙️ Prerequisites
+</h2>
+<ul>
+<li>
+  Visual Studio Code (
+  <a href="https://code.visualstudio.com/download">
+   link
+  </a>
+  )
+ </li>
+<li>
+  Node v22 (ideally installed via
+  <a href="https://github.com/coreybutler/nvm-windows">
+   nvm for Windows
+  </a>
+  or
+  <a href="https://github.com/nvm-sh/nvm">
+   nvm
+  </a>
+  )
+ </li>
+<li>
+  Git installed (
+  <a href="https://git-scm.com/downloads">
+   link
+  </a>
+  )
+ </li>
+<li>
+  Azure Developer CLI (
+  <a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd">
+   link
+  </a>
+  )
+ </li>
+<li>
+  Azure Subscription (with payment method added)
+ </li>
+<li>
+  GitHub account
+ </li>
+<li>
+  Copilot Studio trial or developer account
+ </li>
+<li>
+  Power Platform environment provisioned - with the following toggle on:
+ </li>
+</ul>
+<p>
+<img alt="Get new features early toggle" src="./assets/newfeatures.png"/>
+</p>
+<h2 class="heading">
+ ➕ Create a new GitHub repository based on the template
+</h2>
+<ol>
+<li>
+  Select
+  <code class="code">
+   Use this template
+  </code>
+</li>
+<li>
+<p>
+   Select `Create a new repository
+  </p>
+<p>
+<img alt="" src="./assets/usetemplate.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select the right
+   <code class="code">
+    Owner
+   </code>
+   (it might already be selected when you have only one owner to choose from)
+  </p>
+</li>
+<li>
+  Give it a
+  <code class="code">
+   Repository name
+  </code>
+</li>
+<li>
+  Optionally you can give it a
+  <code class="code">
+   Description
+  </code>
+</li>
+<li>
+  Select
+  <code class="code">
+   Private
+  </code>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Create repository
+   </code>
+</p>
+<p>
+   This will take a little while. After it's done, you will be directed to the newly created repository.
+  </p>
+</li>
+</ol>
+<h2 class="heading">
+ ⚖️ Choice: Run the server locally or deploy to Azure
+</h2>
+<p>
+ Now you have a choice! You either run the server locally - or you can deploy it to Azure.
+</p>
+<p>
+ There are a couple of steps that you need to do for both:
+</p>
+<ol>
+<li>
+<p>
+   Clone this repository by running the following command (replace
+   <code class="code">
+    {account}
+   </code>
+   by your own GitHub account name):
+  </p>
+<p>
+<code class="code">
+    git clone https://github.com/{account}/mcsmcp.git
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Open Visual Studio Code and open the cloned folder
+  </p>
+</li>
+<li>
+  Open the terminal and navigate to the cloned folder
+ </li>
+</ol>
+<h3 class="heading">
+ 🏃‍♀️ Run the MCP Server Locally
+</h3>
+<ol>
+<li>
+  Run
+  <code class="code">
+   npm install
+  </code>
+</li>
+<li>
+<p>
+   Run
+   <code class="code">
+    npm run build &amp;&amp; npm run start
+   </code>
+</p>
+<p>
+<img alt="Terminal view after building and starting the server" src="./assets/vscode-terminal-run-start.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    PORTS
+   </code>
+   at the top of the Visual Studio Code Terminal
+  </p>
+<p>
+<img alt="Image of VS Code where the terminal is open and the PORTS tab is highlighted" src="./assets/vscode-terminal-ports.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select the green
+   <code class="code">
+    Forward a Port
+   </code>
+   button
+  </p>
+<p>
+<img alt="Image of VS Code where the PORTS tab is open and the green Forward a Port button is highlighted" src="./assets/vscode-terminal-ports-forward.png"/>
+</p>
+</li>
+<li>
+<p>
+   Enter
+   <code class="code">
+    3000
+   </code>
+   as the port number (this should be the same as the port number you see when you ran the command in step 5). You might be prompted to sign in to GitHub, if so please do this, since this is required to use the port forwarding feature.
+  </p>
+</li>
+<li>
+  Right click on the row you just added and select
+  <code class="code">
+   Port visibility
+  </code>
+  &gt;
+  <code class="code">
+   Public
+  </code>
+  to make the server publicly available
+ </li>
+<li>
+  Ctrl + click on the
+  <code class="code">
+   Forwarded address
+  </code>
+  , which should be something like:
+  <code class="code">
+   https://something-3000.something.devtunnels.ms
+  </code>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Copy
+   </code>
+   on the following pop-up to copy the URL
+  </p>
+<p>
+<img alt="View of the PORTS setup with highlighted the port, the forwarded address and the visibility" src="./assets/vscode-terminal-ports-setup.png"/>
+</p>
+</li>
+<li>
+<p>
+   Open to the browser of your choice and paste the URL in the address bar, type
+   <code class="code">
+    /mcp
+   </code>
+   behind it and hit enter
+  </p>
+</li>
+</ol>
+<p>
+ If all went well, you will see the following error message:
+</p>
+<pre class="pre"><code class="language-json code">{"jsonrpc":"2.0","error":{"code":-32000,"message":"Method not allowed."},"id":null}
+</code></pre>
+<p>
+ Don't worry - this error message is nothing to be worried about!
+</p>
+<h3 class="heading">
+ 🌎 Deploy to Azure
+</h3>
+<blockquote>
+<p>
+  [!IMPORTANT]
+As listed in the
+  <a href="#️-prerequisites">
+   prerequisites
+  </a>
+  , the
+  <a href="https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd">
+   Azure Developer CLI
+  </a>
+  needs to be installed on your machine for this part.
+ </p>
+</blockquote>
+<p>
+ Make sure to login to Azure Developer CLI if you haven't done that yet.
+</p>
+<pre class="pre"><code class="language-azurecli code">azd auth login
+</code></pre>
+<blockquote>
+<p>
+  [!WARNING]
+  <br/>
+  After running
+  <code class="code">
+   azd up
+  </code>
+  , you will have an MCP Server running on Azure that is publicly available. Ideally, you don't want that. Make sure to run
+  <code class="code">
+   azd down
+  </code>
+  after finishing the lab to delete all the resources from your Azure subscription. Learn how to run
+  <code class="code">
+   azd down
+  </code>
+  by going to
+  <a href="#-remove-the-azure-resources">
+   this section
+  </a>
+  .
+ </p>
+</blockquote>
+<p>
+ Run the following command in the terminal:
+</p>
+<pre class="pre"><code class="language-azurecli code">azd up
+</code></pre>
+<p>
+ For the unique environment name, enter
+ <code class="code">
+  mcsmcplab
+ </code>
+ or something similar. Select the Azure Subscription to use and select a value for the location. After that, it will take a couple of minutes before the server has been deployed. When it's done - you should be able to go to the URL that's listed at the end and add
+ <code class="code">
+  /mcp
+ </code>
+ to the end of that URL.
+</p>
+<p>
+<img alt="Azd deploy server output" src="./assets/azd-deploy-server.png"/>
+</p>
+<p>
+ You should again see the following error:
+</p>
+<pre class="pre"><code class="language-json code">{"jsonrpc":"2.0","error":{"code":-32000,"message":"Method not allowed."},"id":null}
+</code></pre>
+<h2 class="heading">
+ 👨‍💻 Use the Jokes MCP Server in Visual Studio Code / GitHub Copilot
+</h2>
+<p>
+ To use the Jokes MCP Server, you need to use the URL of your server (can be either your devtunnel URL or your deployed Azure Container App) with the
+ <code class="code">
+  /mcp
+ </code>
+ part at the end and add it as an MCP Server in Visual Studio Code.
+</p>
+<ol>
+<li>
+  Press either
+  <code class="code">
+   ctrl
+  </code>
+  +
+  <code class="code">
+   shift
+  </code>
+  +
+  <code class="code">
+   P
+  </code>
+  (Windows/Linux) or
+  <code class="code">
+   cmd
+  </code>
+  +
+  <code class="code">
+   shift
+  </code>
+  +
+  <code class="code">
+   P
+  </code>
+  (Mac) and type
+  <code class="code">
+   MCP
+  </code>
+</li>
+<li>
+  Select
+  <code class="code">
+   MCP: Add Server...
+  </code>
+</li>
+<li>
+  Select
+  <code class="code">
+   HTTP (HTTP or Server-Sent Events)
+  </code>
+</li>
+<li>
+  Paste the URL of your server in the input box (make sure
+  <code class="code">
+   /mcp
+  </code>
+  in the end is included)
+ </li>
+<li>
+  Press
+  <code class="code">
+   Enter
+  </code>
+</li>
+<li>
+  Enter a name for the server, for instance
+  <code class="code">
+   JokesMCP
+  </code>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    User Settings
+   </code>
+   to save the MCP Server settings in your user settings
+  </p>
+<p>
+   This will add an MCP Server to your
+   <code class="code">
+    settings.json
+   </code>
+   file. It should look like this:
+   <img alt="settings.json file" src="./assets/settings.png"/>
+</p>
+</li>
+<li>
+<p>
+   Open
+   <code class="code">
+    GitHub Copilot
+   </code>
+</p>
+</li>
+<li>
+  Switch from
+  <code class="code">
+   Ask
+  </code>
+  to
+  <code class="code">
+   Agent
+  </code>
+</li>
+<li>
+<p>
+   Make sure the
+   <code class="code">
+    JokesMCP
+   </code>
+   server actions are selected when you select the tools icon:
+  </p>
+<p>
+<img alt="Tools menu in GitHub Copilot" src="./assets/tools-menu.png"/>
+</p>
+</li>
+<li>
+<p>
+   Ask the following question:
+  </p>
+<p>
+<code class="code">
+    text
+Get a chuck norris joke from the Dev category
+   </code>
+</p>
+</li>
+</ol>
+<p>
+ This should give you a response like this:
+</p>
+<p>
+<img alt="Screenshot of question to provide a joke from the dev category and the answer from GitHub Copilot" src="./assets/github-copilot-get-joke.png"/>
+</p>
+<p>
+ Now you have added the
+ <code class="code">
+  JokesMCP
+ </code>
+ server to Visual Studio Code!
+</p>
+<h2 class="heading">
+ 👨‍💻 Use the Jokes MCP Server in Microsoft Copilot Studio
+</h2>
+<p>
+<strong>
+  Import the Connector
+ </strong>
+</p>
+<ol>
+<li>
+  Go to https://make.preview.powerapps.com/customconnectors (make sure you’re in the correct environment) and click
+  <strong>
+   + New custom connector
+  </strong>
+  .
+ </li>
+<li>
+  Select
+  <code class="code">
+   Import from GitHub
+  </code>
+</li>
+<li>
+  Select
+  <code class="code">
+   Custom
+  </code>
+  as
+  <strong>
+   Connector Type
+  </strong>
+</li>
+<li>
+  Select
+  <code class="code">
+   dev
+  </code>
+  as the
+  <strong>
+   Branch
+  </strong>
+</li>
+<li>
+  Select
+  <code class="code">
+   MCP-Streamable-HTTP
+  </code>
+  as the
+  <strong>
+   Connector
+  </strong>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Continue
+   </code>
+</p>
+<p>
+<img alt="View of the import from GitHub section" src="./assets/import-from-github.png"/>
+</p>
+</li>
+<li>
+<p>
+   Change the
+   <strong>
+    Connector Name
+   </strong>
+   to something appropriate, like for instance
+   <code class="code">
+    Jokes MCP
+   </code>
+</p>
+</li>
+<li>
+  Change the
+  <strong>
+   Description
+  </strong>
+  to something appropriate
+ </li>
+<li>
+  Paste your root URL (for instance
+  <code class="code">
+   something-3000.something.devtunnels.ms
+  </code>
+  or
+  <code class="code">
+   something.azurecontainerapps.io
+  </code>
+  ) in the
+  <strong>
+   Host
+  </strong>
+  field
+ </li>
+<li>
+  Select
+  <strong>
+   Create connector
+  </strong>
+</li>
+</ol>
+<blockquote>
+<p>
+  [!WARNING]
+  <br/>
+  You may see a warning and an error upon creation – it should be resolved soon - but you can ignore it for now.
+ </p>
+</blockquote>
+<ol>
+<li>
+  Close the connector
+ </li>
+</ol>
+<p>
+<strong>
+  Create an agent and add the MCP server as a tool
+ </strong>
+</p>
+<ol>
+<li>
+  Go to https://copilotstudio.preview.microsoft.com/
+ </li>
+<li>
+  Select the environment picker at the top right corner
+ </li>
+<li>
+  Select the right environment (the environment with the
+  <code class="code">
+   Get new features early
+  </code>
+  toggle switched on)
+ </li>
+<li>
+  Select
+  <code class="code">
+   Create
+  </code>
+  in the left navigation
+ </li>
+<li>
+<p>
+   Select the blue
+   <code class="code">
+    New agent
+   </code>
+   button
+  </p>
+<p>
+<img alt="New agent" src="./assets/newagent.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select the
+   <code class="code">
+    Configure
+   </code>
+   tab on the left
+  </p>
+<p>
+<img alt="Configure" src="./assets/configure.png"/>
+</p>
+</li>
+<li>
+<p>
+   Change the name to
+   <code class="code">
+    Jokester
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add the following
+   <code class="code">
+    Description
+   </code>
+</p>
+<p>
+<code class="code">
+    text
+A humor-focused agent that delivers concise, engaging jokes only upon user request, adapting its style to match the user's tone and preferences. It remains in character, avoids repetition, and filters out offensive content to ensure a consistently appropriate and witty experience.
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Add the following
+   <code class="code">
+    Instructions
+   </code>
+</p>
+<p>
+   ```text
+You are a joke-telling assistant. Your sole purpose is to deliver appropriate, clever, and engaging jokes upon request. Follow these rules:
+  </p>
+<ul>
+<li>
+    Respond only when the user asks for a joke or something related (e.g., "Tell me something funny").
+   </li>
+<li>
+    Match the tone and humor preference of the user based on their input—clean, dark, dry, pun-based, dad jokes, etc.
+   </li>
+<li>
+    Never break character or provide information unrelated to humor.
+   </li>
+<li>
+    Keep jokes concise and clearly formatted.
+   </li>
+<li>
+    Avoid offensive, discriminatory, or NSFW content.
+   </li>
+<li>
+    When unsure about humor preference, default to a clever and universally appropriate joke.
+   </li>
+<li>
+    Do not repeat jokes within the same session.
+   </li>
+<li>
+    Avoid explaining the joke unless explicitly asked.
+   </li>
+<li>
+    Be responsive, witty, and quick.
+```
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Continue
+   </code>
+   on the top right
+  </p>
+<p>
+<img alt="Click continue to create agent" src="./assets/continue.png"/>
+</p>
+</li>
+<li>
+<p>
+   Enable Generative AI
+   <code class="code">
+    Orchestration
+   </code>
+</p>
+<p>
+<img alt="Turn on orchestration" src="./assets/turnonorchestration.png"/>
+</p>
+</li>
+<li>
+<p>
+   Disable general knowledge in the
+   <code class="code">
+    Knowledge
+   </code>
+   section
+  </p>
+<p>
+<img alt="Turn off general knowledge" src="./assets/turnoffgeneralknowledge.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Tools
+   </code>
+   in the top menu
+  </p>
+<p>
+<img alt="Tools" src="./assets/tools.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Add a tool
+   </code>
+</p>
+<p>
+<img alt="Add a tool" src="./assets/addatool.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select the
+   <code class="code">
+    Model Context Protocol
+   </code>
+   tab to filter all the Model Context Protocol Servers (see number 1 in the screenshot below)
+  </p>
+</li>
+<li>
+<p>
+   Select the
+   <code class="code">
+    Jokes MCP
+   </code>
+   server (see number 2 in the screenshot below)
+  </p>
+<p>
+<img alt="MCP" src="./assets/mcpsteps.png"/>
+</p>
+</li>
+<li>
+<p>
+   Create a new connection by selecting the
+   <code class="code">
+    Not connected
+   </code>
+   and
+   <strong>
+    Create new Connection
+   </strong>
+</p>
+<p>
+<img alt="Action and connection" src="./assets/create-connection-action.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Create
+   </code>
+</p>
+<p>
+<img alt="Create connection" src="./assets/create-connection-action-create.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Add to agent
+   </code>
+   to add the tool to the agent
+  </p>
+<p>
+<img alt="Add tool to agent" src="./assets/add-tool-to-agent.png"/>
+</p>
+</li>
+<li>
+<p>
+   Select the
+   <code class="code">
+    refresh icon
+   </code>
+   in the
+   <code class="code">
+    Test your agent
+   </code>
+   pane
+  </p>
+<p>
+<img alt="Refresh testing pane" src="./assets/refreshtestingpane.png"/>
+</p>
+</li>
+<li>
+<p>
+   In the
+   <code class="code">
+    Test your agent
+   </code>
+   pane send the following message:
+  </p>
+<p>
+<code class="code">
+    text
+Can I get a Chuck Norris joke?
+   </code>
+</p>
+<p>
+   This will show you message that additional permissions are required to run this action. This is because of the user authentication in the action wizard.
+  </p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Connect
+   </code>
+</p>
+<p>
+<img alt="Additional permissions" src="./assets/additionalpermissions.png"/>
+</p>
+<p>
+   This will open a new window where you can manage your connections for this agent.
+  </p>
+</li>
+<li>
+<p>
+   Select
+   <code class="code">
+    Connect
+   </code>
+   next to the
+   <code class="code">
+    JokesMCP
+   </code>
+</p>
+<p>
+<img alt="Connect to JokesMCP" src="./assets/connect.png"/>
+</p>
+</li>
+<li>
+<p>
+   Wait until the connection is created and select
+   <code class="code">
+    Submit
+   </code>
+</p>
+<p>
+<img alt="Pick a connection" src="./assets/submitconnection.png"/>
+</p>
+</li>
+<li>
+<p>
+   The connection should now be connected, so the status should be set to
+   <code class="code">
+    Connected
+   </code>
+</p>
+<p>
+<img alt="Status connected" src="./assets/connected.png"/>
+</p>
+</li>
+<li>
+<p>
+   Close the manage your connections tab in your browser
+  </p>
+<p>
+   Now you should be back in the Jokester agent screen.
+  </p>
+</li>
+<li>
+<p>
+   Select the
+   <code class="code">
+    refresh icon
+   </code>
+   in the
+   <code class="code">
+    Test your agent
+   </code>
+   pane
+  </p>
+<p>
+<img alt="Refresh testing pane" src="./assets/refreshtestingpane.png"/>
+</p>
+</li>
+<li>
+<p>
+   In the
+   <code class="code">
+    Test your agent
+   </code>
+   pane send the following message:
+  </p>
+<p>
+<code class="code">
+    text
+Can I get a Chuck Norris joke?
+   </code>
+</p>
+<p>
+   This will now show a Chuck Norris joke - instead of the additional permissions. If that's not the case - you probably have missed the
+   <a href="#️-prerequisites">
+    prerequisite
+   </a>
+   that the environment needs to have the
+   <code class="code">
+    get new features early
+   </code>
+   toggle on.
+  </p>
+<p>
+<img alt="Chuck Norris joke" src="./assets/chucknorrisjoke.png"/>
+</p>
+</li>
+<li>
+<p>
+   In the
+   <code class="code">
+    Test your agent
+   </code>
+   pane send the following message:
+  </p>
+<p>
+<code class="code">
+    text
+Can I get a Dad joke?
+   </code>
+</p>
+<p>
+   This will now show a Dad joke.
+  </p>
+<p>
+<img alt="Dad joke" src="./assets/dadjoke.png"/>
+</p>
+</li>
+</ol>
+<p>
+ And that was the Jokes MCP Server working in Microsoft Copilot Studio.
+</p>
+<h2 class="heading">
+ ❌ Remove the Azure resources
+</h2>
+<p>
+ To remove the Azure resources after finishing the lab, run the following command in the terminal:
+</p>
+<pre class="pre"><code class="language-azurecli code">azd down
+</code></pre>
+<p>
+ This command will show you the resources that will be deleted and then ask you to confirm. Confirm with
+ <code class="code">
+  y
+ </code>
+ and the resources will be deleted. This can take a couple of minutes, but at the end you will see a confirmation:
+</p>
+<p>
+<img alt="resources deleted" src="./assets/azd-down-confirmation.png"/>
+</p>
+<h2 class="heading">
+ 💡 Known issues and planned improvements
+</h2>
+<p>
+ There are some known issues and planned improvements for MCP in Microsoft Copilot Studio. They are listed in
+ <a href="https://aka.ms/mcsmcpdocs#known-issues--planned-improvements">
+  this Microsoft Learn article
+ </a>
+ .
+</p>
+<h2 class="heading">
+ 🗣️ Feedback
+</h2>
+<p>
+ Hopefully you liked the lab. Please take the time to fill in our
+ <a href="https://aka.ms/mcsmcp/lab/feedback">
+  feedback form
+ </a>
+ to tell us how we can improve!
+</p>
+<h2 class="heading">
+ 🚀 Contributing
+</h2>
+<p>
+ This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+</p>
+<p>
+ When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+</p>
+<p>
+ This project has adopted the
+ <a href="https://opensource.microsoft.com/codeofconduct/">
+  Microsoft Open Source Code of Conduct
+ </a>
+ .
+For more information see the
+ <a href="https://opensource.microsoft.com/codeofconduct/faq/">
+  Code of Conduct FAQ
+ </a>
+ or
+contact
+ <a href="mailto:opencode@microsoft.com">
+  opencode@microsoft.com
+ </a>
+ with any additional questions or comments.
+</p>
+<h2 class="heading">
+ ™️ Trademarks
+</h2>
+<p>
+ This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
+trademarks or logos is subject to and must follow
+ <a href="https://www.microsoft.com/legal/intellectualproperty/trademarks/usage/general">
+  Microsoft's Trademark &amp; Brand Guidelines
+ </a>
+ .
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/microsoft-mcsmcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/microsoft-mcsmcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/microsoft-mcsmcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/microsoft-mcsmcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP Application 구현하기 - MCP Directory">
+    <meta property="og:description" content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습">
+    <meta property="og:url" content="https://llmlogs.com/mcp/kyopark2014-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP Application 구현하기 - MCP Directory">
+    <meta name="twitter:description" content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습">
+    
+    <title>MCP Application 구현하기 - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP Application 구현하기</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP Application 구현하기</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 15</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agent</span><span class="topic-tag"> aws</span><span class="topic-tag"> mcp</span>
+                        </div>
+                        <a href="https://github.com/kyopark2014/mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Application 구현하기 - MCP Directory" property="og:title"/>
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/kyopark2014-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Application 구현하기 - MCP Directory" name="twitter:title"/>
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" name="twitter:description"/>
+<title>MCP Application 구현하기 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP Application 구현하기</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP Application 구현하기</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 15</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agent</span><span class="topic-tag"> aws</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/kyopark2014/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Application 구현하기 - MCP Directory" property="og:title">
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" property="og:description">
+<meta content="https://llmlogs.com/mcp/kyopark2014-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP Application 구현하기 - MCP Directory" name="twitter:title">
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" name="twitter:description">
+<title>MCP Application 구현하기 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Application 구현하기</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 15</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agent</span><span class="topic-tag"> aws</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/kyopark2014/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Application 구현하기 - MCP Directory" property="og:title"/>
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/kyopark2014-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Application 구현하기 - MCP Directory" name="twitter:title"/>
+<meta content="MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습" name="twitter:description"/>
+<title>MCP Application 구현하기 - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Application 구현하기</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 15</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agent</span><span class="topic-tag"> aws</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/kyopark2014/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ MCP Application 구현하기
+</h1>
+<p>
+ MCP(Model Context Protocol)은 생성형 AI application이 외부 데이터를 활용하는 주요한 인터페이스로 빠르게 확산되고 있습니다. 2024년 11월에 Anthropic의 오픈소스 프로젝트로 시작되었고, 현재 Cursor뿐 아니라 OpenAI에서도 지원하고 있습니다. 여기에서는
+ <a href="https://github.com/langchain-ai/langchain-mcp-adapters">
+  MCP with LangChain
+ </a>
+ 을 이용하여 LangGraph로 만든 application이 MCP를 활용하는 방법에 대해 설명합니다. 여기서 구현한 RAG는 Amazon의 완전관리형 RAG 서비스인 Knowledge base로 구현되었으므로, 문서의 텍스트 추출, 동기화, chunking과 같은 작업을 손쉽게 수행할 수 있으며, 멀티모달을 이용해 이미지/표를 분석할 수 있습니다. 여기에서는 MCP server에서 RAG에 손쉽게 접근할 수 있도록 AWS Lambda를 이용해 API를 구성하였습니다.
+</p>
+<p>
+ 아래 architecture는 AWS 환경에서 MCP를 포함한 Agent를 구성하는것을 보여줍니다. Agent는 MCP server/client 구조를 활용하여 외부의 데이터 소스를 활용할 수 있습니다. MCP client는 MCP server와 JSON-RPC 프로토콜에 기반하여 stdio/SSE로 통신을 수행합니다. Stdio 사용시 MCP Server는 python, java와 같은 코드로 구성이 되고, client에서 요청이 오면 RAG나 인터넷등을 이용해 데이터를 수집하거나 전달하는 역할을 수행합니다. SSE로 할 경우에 MCP client와 server는 IP로 통신을 하게 됩니다. 여기서는 Streamlit을 이용해 application의 UI를 구성하고, 사용자는 ALB - CloudFront를 이용해 HTTPS 방식으로 브라우저를 통해 application을 이용합니다. 또한, 여기에서는 커스터마이징이 유리한 LangGraph를 이용해 MCP 기반의 application을 개발하는것을 설명합니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/a263f0fa-22f1-483b-8936-a59429ace173" width="750"/>
+</p>
+<h2 class="heading">
+ MCP 활용
+</h2>
+<h3 class="heading">
+ MCP Basic
+</h3>
+<p>
+ 사용자는 자신의 Computer에 설치된 Claude Desktop, Cursor와 같은 AI 도구뿐 아니라 주로 Agent형태로 개발된 어플리케이션을 통해 MCP 서버에 연결할 수 있습니다. MCP server는 MCP client의 요청에 자신이 할수 있는 기능을 capability로 제공하고 client의 요청을 수행합니다. MCP server는 local computer의 파일이나 데이터베이스를 조회할 수 있을뿐 아니라 인터넷에 있는 외부 서버의 API를 이용해 필요한 정보를 조회할 수 있습니다. MCP Client는 Server와 JSON-RPC 2.0 프로토콜을 이용해 연결되는데, stdio나 SSE (Server-Sent Events)을 선택하여, Host의 요청을 MCP에 전달할 수 있고, 응답을 받아서 활용할 수 있습니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/36d2d24c-865b-4b71-b708-5c611ab7785e" width="750"/>
+</p>
+<p>
+ MCP의 주요 요소의 정의와 동작은 아래와 같습니다.
+</p>
+<ul>
+<li>
+  MCP Hosts: MCP 프로토콜을 통해 데이터에 접근하는 프로그램/AI 도구로서 Claude Desktop, Cursor, User Agent Application이 해당됩니다.
+ </li>
+<li>
+  MCP Clients: MCP Server와 1:1로 연결을 수행하는 Client로서 MCP Server와 stdio 또는 SSE 방식으로 연결할 수 있습니다.
+ </li>
+<li>
+  MCP Servers: 표준화된 MCP를 통해 Client에 Tool의 Capability를 알려주는 경량 프로그램으로 Local Computer의 파일이나 데이터베이스를 조회할 수 있고, 외부 API를 이용해 정보를 조회할 수 있습니다.
+ </li>
+<li>
+  Local data sources: MCP 서버가 접근할 수 있는 데이터베이스와 로컬 데이터
+ </li>
+<li>
+  Remote services: API를 통해 접근 가능한 외부 시스템
+ </li>
+</ul>
+<p>
+ MCP를 사용하면 아래와 같은 장점이 있습니다.
+</p>
+<ul>
+<li>
+  표준화된 방식으로 다양한 데이터 소스에 접근 가능합니다.
+ </li>
+<li>
+  애플리케이션 코드 변경 없이 MCP 서버 업데이트를 통한 새로운 기능 추가할 수 있습니다.
+ </li>
+<li>
+  조직 전반에 걸쳐 AI 지원 및 확장이 용이합니다.
+ </li>
+</ul>
+<p>
+<a href="https://www.philschmid.de/mcp-introduction">
+  MCP Server Components
+ </a>
+ 에는 아래와 같은 항목이 있습니다.
+</p>
+<ul>
+<li>
+  Tools (Model-controlled): LLM이 특정 작업을 수행하기 위해 호출할 수 있는 기능(도구)으로서, API와 같이 특정한 action을 수행합니다.
+ </li>
+</ul>
+<pre class="pre"><code class="language-python code">tools = await session.list_tools()
+</code></pre>
+<ul>
+<li>
+  Resources (Application-controlled): 생성형 AI 어플리케이션이 접근 할 수 있는 데이터 소스입니다. 복잡한 계산(significant computation)이나 부작용(side effect)없이 데이터를 가져올 수 있습니다.
+ </li>
+</ul>
+<pre class="pre"><code class="language-python code">resources = await session.list_resources()
+</code></pre>
+<ul>
+<li>
+  Prompts (User-controlled): tool나 resource를 사용할때에 이용하는 사전 정의된 템플렛으로서 추론(inference)전에 선택할 수 있습니다.
+ </li>
+</ul>
+<pre class="pre"><code class="language-python code">prompts = await session.list_prompts()
+</code></pre>
+<h3 class="heading">
+ LangChain MCP Adapter
+</h3>
+<p>
+<a href="https://github.com/langchain-ai/langchain-mcp-adapters">
+  LangChain MCP Adapter
+ </a>
+ 는 MCP를 LangGraph agent와 함께 사용할 수 있게 해주는 경량의 랩퍼(lightweight wrapper)로서 MIT 기반의 오픈소스입니다. MCP Adapter의 주된 역할은 MCP server를 위한 tool들을 정의하고, MCP client에서 tools의 정보를 조회하고 LangGraph의 tool node로 정의하여 활용할 수 있도록 도와줍니다.
+</p>
+<h4 class="heading">
+ 사전 준비
+</h4>
+<p>
+ MCP와 LangChain MCP Adapter를 아래와 같이 설치합니다.
+</p>
+<pre class="pre"><code class="language-text code">pip install mcp langchain-mcp-adapters
+</code></pre>
+<h4 class="heading">
+ MCP Server
+</h4>
+<p>
+ RAG 검색을 위한 MCP server는 아래와 같이 정의할 수 있습니다. Server의 transport를 "stdio"로 지정하면 server를 지속 실행시키지 않더라도, client가 server의 python code를 직접 실행할 수 있어서 편리합니다.
+</p>
+<pre class="pre"><code class="language-python code">from mcp.server.fastmcp import FastMCP 
+
+mcp = FastMCP(
+    name = "Search",
+    instructions=(
+        "You are a helpful assistant. "
+        "You can search the documentation for the user's question and provide the answer."
+    ),
+) 
+
+@mcp.tool()
+def search(keyword: str) -&gt; str:
+    "search keyword"
+
+    return retrieve_knowledge_base(keyword)
+
+if __name__ =="__main__":
+    print(f"###### main ######")
+    mcp.run(transport="stdio")
+</code></pre>
+<p>
+ Server는 요청이 들어오면, retrieve_knowledge_base()로 RAG 검색을 수행합니다. Server의 python code는 경량(lightweight)이어야 하므로, 아래와 같이 lambda를 trigger하는 방식으로 구성하였습니다. Lambda에서는 retrieve, grade, generation의 동작을 수행합니다. 아래와 같이 "model_name"을 지정할 수 있고, 필요에 따라서는 "grading"을 선택적으로 사용할 수 있습니다. 또한 병렬처리로 속도를 빠르게 하고 싶은 경우에은 "multi_region"을 "Enable"로 설정합니다. 상세한 코드는
+ <a href="./lambda-rag/lambda_function.py">
+  lambda-rag
+ </a>
+ 를 참조합니다.
+</p>
+<pre class="pre"><code class="language-python code">def retrieve_knowledge_base(query):
+    lambda_client = boto3.client(
+        service_name='lambda',
+        region_name=bedrock_region
+    )
+    functionName = f"lambda-rag-for-{projectName}"
+    payload = {
+        'function': 'search_rag',
+        'knowledge_base_name': knowledge_base_name,
+        'keyword': query,
+        'top_k': numberOfDocs,
+        'grading': "Enable",
+        'model_name': model_name,
+        'multi_region': multi_region
+    }
+    output = lambda_client.invoke(
+        FunctionName=functionName,
+        Payload=json.dumps(payload),
+    )
+    payload = json.load(output['Payload'])
+    return payload['response'], []
+</code></pre>
+<p>
+<a href="https://github.com/kyopark2014/mcp/blob/main/drug-discovery.md">
+  Drug discovery
+ </a>
+ 와 관련하여,
+ <a href="./application/mcp_server_arxiv.py">
+  arXiv
+ </a>
+ ,
+ <a href="./application/mcp_server_chembl.py">
+  ChEMBL
+ </a>
+ ,
+ <a href="./application/mcp_server_clinicaltrial.py">
+  ClinicalTrials.gov
+ </a>
+ ,
+ <a href="./application/mcp_server_pubmed.py">
+  PubMed
+ </a>
+ 을 지원하고 있습니다.
+</p>
+<h4 class="heading">
+ MCP Client
+</h4>
+<p>
+ MCP client이 하나의 MCP server만 볼 경우에는 아래와 같이 stdio_client와 StdioServerParameters를 이용해 구현할 수 있습니다. MCP server에 대한 정보는 config.json에서 읽어오거나 streamlit에서 사용자가 입력한 정보를 사용할 수 있습니다. load_mcp_server_parameters()에서는 mcp_json을 읽어와서
+ <a href="https://github.com/langchain-ai/langchain-mcp-adapters">
+  StdioServerParameters
+ </a>
+ 을 구성합니다. config.json의 MCP server에 대한 정보는 AWS CDK로 배포후 생성되는 output에서 가져옵니다.
+</p>
+<pre class="pre"><code class="language-python code">from mcp import ClientSession, StdioServerParameters
+
+def load_mcp_server_parameters():
+    mcp_json = json.loads(mcp_config)
+    mcpServers = mcp_json.get("mcpServers")
+
+    command = ""
+    args = []
+    if mcpServers is not None:
+        for server in mcpServers:
+            config = mcpServers.get(server)
+            if "command" in config:
+                command = config["command"]
+            if "args" in config:
+                args = config["args"]
+            break
+
+    return StdioServerParameters(
+        command=command,
+        args=args
+    )
+</code></pre>
+<p>
+ 아래와 같이 MCP server에 대한 정보로 stdio_client를 구성합니다. 이때 tools에 대한 정보를 load_mcp_tools로 가져옵니다. Agent에서는 tool 정보를 bind하고 ainvoke를 이용해 요청된 동작을 수행합니다.
+</p>
+<pre class="pre"><code class="language-python code">from mcp.client.stdio import stdio_client
+from langchain_mcp_adapters.tools import load_mcp_tools
+
+async def mcp_rag_agent_single(query, st):
+    server_params = load_mcp_server_parameters()
+
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            tools = await load_mcp_tools(session)
+            with st.status("thinking...", expanded=True, state="running") as status:       
+                agent = create_agent(tools)
+                agent_response = await agent.ainvoke({"messages": query})                
+
+                result = agent_response["messages"][-1].content
+            st.markdown(result)
+            st.session_state.messages.append({
+                "role": "assistant", 
+                "content": result
+            })            
+            return result
+</code></pre>
+<p>
+ MCP client는 아래와 같이 실행합니다. 비동기적으로 실행하기 위해서 asyncio를 이용하였습니다.  이후 사용자가 UI에서 MCP Config를 업데이트하면 정보를 업데이트 할 수 있습니다.
+</p>
+<pre class="pre"><code class="language-python code">asyncio.run(mcp_rag_agent_single(query, st))
+</code></pre>
+<p>
+ 서버 정보가 여럿인 경우에
+ <a href="https://github.com/langchain-ai/langchain-mcp-adapters">
+  langchain-mcp-adapters
+ </a>
+ 에서 제공하는 MultiServerMCPClient을 이용합니다. 먼저, 아래와 같이 서버 정보를 가져옵니다.
+</p>
+<pre class="pre"><code class="language-python code">def load_multiple_mcp_server_parameters():
+    mcp_json = json.loads(mcp_config)
+    mcpServers = mcp_json.get("mcpServers")
+
+    server_info = {}
+    if mcpServers is not None:
+        command = ""
+        args = []
+        for server in mcpServers:
+            config = mcpServers.get(server)
+            if "command" in config:
+                command = config["command"]
+            if "args" in config:
+                args = config["args"]
+
+            server_info[server] = {
+                "command": command,
+                "args": args,
+                "transport": "stdio"
+            }
+    return server_info
+</code></pre>
+<p>
+ 이후 아래와 같이 MCP server정보와 MultiServerMCPClient로 client를 정의합니다. MCP server로 부터 가져온 tool 정보는 client.get_tools()로 가져와서 agent를 생성할 때에 사용합니다. Single MCP server와 마찬가지로 ainvoke로 실행하여 결과를 얻을 수 있습니다.
+</p>
+<pre class="pre"><code class="language-python code">from langchain_mcp_adapters.client import MultiServerMCPClient
+asyncio.run(mcp_rag_agent_multiple(query, st))
+
+async def mcp_rag_agent_multiple(query, st):
+    server_params = load_multiple_mcp_server_parameters()
+    async with  MultiServerMCPClient(server_params) as client:
+        with st.status("thinking...", expanded=True, state="running") as status:                       
+            tools = client.get_tools()
+            agent = create_agent(tools)
+            response = await agent.ainvoke({"messages": query})
+            result = response["messages"][-1].content
+
+        st.markdown(result)
+        st.session_state.messages.append({
+            "role": "assistant", 
+            "content": result
+        })
+    return result
+</code></pre>
+<p>
+ 여기서는 customize가 용이하도록 agent를 정의하였습니다.
+</p>
+<pre class="pre"><code class="language-python code">def create_agent(tools):
+    tool_node = ToolNode(tools)
+
+    chatModel = get_chat(extended_thinking="Disable")
+    model = chatModel.bind_tools(tools)
+
+    class State(TypedDict):
+        messages: Annotated[list, add_messages]
+
+    def call_model(state: State, config):
+        system = (
+            "당신의 이름은 서연이고, 질문에 친근한 방식으로 대답하도록 설계된 대화형 AI입니다."
+            "상황에 맞는 구체적인 세부 정보를 충분히 제공합니다."
+            "모르는 질문을 받으면 솔직히 모른다고 말합니다."
+            "한국어로 답변하세요."
+        )
+        try:
+            prompt = ChatPromptTemplate.from_messages(
+                [
+                    ("system", system),
+                    MessagesPlaceholder(variable_name="messages"),
+                ]
+            )
+            chain = prompt | model                
+            response = chain.invoke(state["messages"])
+        return {"messages": [response]}
+
+    def should_continue(state: State) -&gt; Literal["continue", "end"]:
+        messages = state["messages"]    
+        last_message = messages[-1]
+        if isinstance(last_message, AIMessage) and last_message.tool_calls:
+            return "continue"        
+        else:
+            return "end"
+
+    def buildChatAgent():
+        workflow = StateGraph(State)
+        workflow.add_node("agent", call_model)
+        workflow.add_node("action", tool_node)
+        workflow.add_edge(START, "agent")
+        workflow.add_conditional_edges(
+            "agent",
+            should_continue,
+            {
+                "continue": "action",
+                "end": END,
+            },
+        )
+        workflow.add_edge("action", "agent")
+        return workflow.compile() 
+
+    return buildChatAgent()
+</code></pre>
+<h2 class="heading">
+ MCP Servers의 활용
+</h2>
+<p>
+<a href="https://github.com/modelcontextprotocol/servers">
+  Model Context Protocol servers
+ </a>
+ 에서도 아래와 같은 서버들에 대한 정보를 제공하고 있습니다.
+</p>
+<ul>
+<li>
+<a href="https://github.com/ppl-ai/modelcontextprotocol">
+   Perplexity Ask MCP Server
+  </a>
+</li>
+<li>
+<a href="https://github.com/riza-io/riza-mcp">
+   Riza MCP Server
+  </a>
+</li>
+<li>
+<a href="https://github.com/tavily-ai/tavily-mcp">
+   Tavily MCP Server
+  </a>
+</li>
+</ul>
+<p>
+<a href="https://smithery.ai/">
+  Smithery
+ </a>
+ 에서 MCP server를 찾아보고 필요한 서버를 찾으면 접속할 수 있는 MCP 서버 정보를 JSON 형태로 조회할 수 있습니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/62e534ee-88bd-4f9f-a4ff-129522fd834f" width="500"/>
+</p>
+<p>
+<a href="https://smithery.ai/server/@gradusnikov/google-search-mcp-server">
+  Smithery - Google Search Server
+ </a>
+ 에서 확인한 구글 검색용 MCP 서버 정보는 아래와 같습니다. 검색엔진 ID와 API Key를 필요로 합니다.
+</p>
+<pre class="pre"><code class="language-java code">{
+  "mcpServers": {
+    "google-search-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@gradusnikov/google-search-mcp-server",
+        "--config",
+        "{\"googleCseId\":\"b5cd8c527fbd64b72\",\"googleApiKey\":\"AIzbSyDQlYpck8-9TbBSuxoew1luOGVB6unRPNk\"}"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ 아래와 같이 json 형식의 서버정보를 업데이트 할 수 있습니다. 아래에서는
+ <a href="./application/mcp-server.py">
+  mcp-server.py
+ </a>
+ 에서 정의한 search를 이용하고 있습니다.
+</p>
+<pre class="pre"><code class="language-java code">{
+  "mcpServers": {
+    "search": {
+      "command": "python",
+      "args": [
+        "application/mcp-server.py"
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ 실행하기
+</h3>
+<p>
+ Output의 environmentformcprag의 내용을 복사하여 application/config.json을 생성합니다. "aws configure"로 credential이 설정되어 있어야합니다. 만약 visual studio code 사용자라면 config.json 파일은 아래 명령어를 사용합니다.
+</p>
+<pre class="pre"><code class="language-text code">code application/config.json
+</code></pre>
+<p>
+ venv로 환경을 구성하면 편리합니다. 아래와 같이 환경을 설정합니다.
+</p>
+<pre class="pre"><code class="language-text code">python -m venv venv
+source venv/bin/activate
+</code></pre>
+<p>
+ 이후 다운로드 받은 github 폴더로 이동한 후에 아래와 같이 필요한 패키지를 추가로 설치 합니다.
+</p>
+<pre class="pre"><code class="language-text code">pip install -r requirements.txt
+</code></pre>
+<p>
+<a href="./deployment.md">
+  deployment.md
+ </a>
+ 에 따라 AWS CDK로 Lambda, Knowledge base, Opensearch Serverless와 보안에 필요한 IAM Role을 설치합니다. 이후 아래와 같은 명령어로 streamlit을 실행합니다.
+</p>
+<pre class="pre"><code class="language-text code">streamlit run application/app.py
+</code></pre>
+<h3 class="heading">
+ EC2에 배포하기
+</h3>
+<p>
+ EC2가 private subnet에 있으므로 Session Manger로 접속합니다. 이때 설치는 ec2-user로 진행되었으므로 아래와 같이 code를 업데이트합니다.
+</p>
+<pre class="pre"><code class="language-text code">sudo runuser -l ec2-user -c 'cd /home/ec2-user/mcp &amp;&amp; git pull'
+</code></pre>
+<p>
+ 이제 아래와 같이 docker를 빌드합니다.
+</p>
+<pre class="pre"><code class="language-text code">sudo runuser -l ec2-user -c "cd mcp &amp;&amp; docker build -t streamlit-app ."
+</code></pre>
+<p>
+ 빌드가 완료되면 "sudo docker ps"로 docker id를 확인후에 "sudo docker kill" 명령어로 종료합니다.
+</p>
+<p>
+<img alt="noname" src="https://github.com/user-attachments/assets/4afb2af8-d092-4aaa-813a-65975375f7d4"/>
+</p>
+<p>
+ 이후 아래와 같이 다시 실행합니다.
+</p>
+<pre class="pre"><code class="language-text code">sudo runuser -l ec2-user -c 'docker run -d -p 8501:8501 streamlit-app'
+</code></pre>
+<p>
+ 만약 console에서 debugging할 경우에는 -d 옵션없이 아래와 같이 실행합니다.
+</p>
+<pre class="pre"><code class="language-text code">sudo runuser -l ec2-user -c 'docker run -p 8501:8501 streamlit-app'
+</code></pre>
+<h3 class="heading">
+ MCP Inspector
+</h3>
+<p>
+ Development Mode에서 mcp server를 테스트 하기 위해 MCP inspector를 이용할 수 있습니다. 아래와 같이 cli를 설치합니다.
+</p>
+<pre class="pre"><code class="language-text code">pip install 'mcp[cli]'
+</code></pre>
+<p>
+ 이후 아래와 같이 실행하면 쉽게 mcp-server.py의 동작을 테스트 할 수 있습니다. 실행시 http://localhost:5173 와 같은 URL을 제공합니다.
+</p>
+<pre class="pre"><code class="language-text code">mcp dev mcp-server.py
+</code></pre>
+<h3 class="heading">
+ AWS Cost Analysis
+</h3>
+<p>
+ MCP tool로서 아래와 같이 AWS cost 정보를 가져와서 분석할 수 있습니다.
+</p>
+<pre class="pre"><code class="language-python code">from datetime import datetime, timedelta
+import pandas as pd
+
+def get_cost_analysis(days: str=30):
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=days)    
+    ce = boto3.client('ce')
+    service_response = ce.get_cost_and_usage(
+        TimePeriod={
+            'Start': start_date.strftime('%Y-%m-%d'),
+            'End': end_date.strftime('%Y-%m-%d')
+        },
+        Granularity='MONTHLY',
+        Metrics=['UnblendedCost'],
+        GroupBy=[{'Type': 'DIMENSION', 'Key': 'SERVICE'}]
+    )        
+    service_costs = pd.DataFrame([
+        {
+            'SERVICE': group['Keys'][0],
+            'cost': float(group['Metrics']['UnblendedCost']['Amount'])
+        }
+        for group in service_response['ResultsByTime'][0]['Groups']
+    ])
+
+    # region cost
+    region_response = ce.get_cost_and_usage(
+        TimePeriod={
+            'Start': start_date.strftime('%Y-%m-%d'),
+            'End': end_date.strftime('%Y-%m-%d')
+        },
+        Granularity='MONTHLY',
+        Metrics=['UnblendedCost'],
+        GroupBy=[{'Type': 'DIMENSION', 'Key': 'REGION'}]
+    )
+    region_costs = pd.DataFrame([
+        {
+            'REGION': group['Keys'][0],
+            'cost': float(group['Metrics']['UnblendedCost']['Amount'])
+        }
+        for group in region_response['ResultsByTime'][0]['Groups']
+    ])
+
+    # Daily Cost
+    daily_response = ce.get_cost_and_usage(
+        TimePeriod={
+            'Start': start_date.strftime('%Y-%m-%d'),
+            'End': end_date.strftime('%Y-%m-%d')
+        },
+        Granularity='DAILY',
+        Metrics=['UnblendedCost'],
+        GroupBy=[{'Type': 'DIMENSION', 'Key': 'SERVICE'}]
+    )    
+    daily_costs = []
+    for time_period in daily_response['ResultsByTime']:
+        date = time_period['TimePeriod']['Start']
+        for group in time_period['Groups']:
+            daily_costs.append({
+                'date': date,
+                'SERVICE': group['Keys'][0],
+                'cost': float(group['Metrics']['UnblendedCost']['Amount'])
+            })    
+    daily_costs_df = pd.DataFrame(daily_costs)
+
+    return {
+        'service_costs': service_costs,
+        'region_costs': region_costs,
+        'daily_costs': daily_costs_df
+    }
+</code></pre>
+<p>
+ cost의 상기 3가지 결과를 그래프로 사용하기 위해서는 아래 패키지 설치가 필요합니다.
+</p>
+<pre class="pre"><code class="language-text code">pip install -U kaleido
+</code></pre>
+<h3 class="heading">
+ MCP Image Generation
+</h3>
+<p>
+<a href="./application/mcp_server_image_generation.py">
+  mcp_server_image_generation.py
+ </a>
+ 과 같이 mcp_generate_image와 mcp_generate_image_with_colors을 tool로 등록합니다.
+</p>
+<p>
+ MCP config는 아래와 같이 설정합니다.
+ <a href="./application/mcp_config.py">
+  mcp_config.py
+ </a>
+ 을 참조합니다.
+</p>
+<pre class="pre"><code class="language-java code">{
+    "mcpServers": {
+        "imageGeneration": {
+            "command": "python",
+            "args": [
+                "application/mcp_server_image_generation.py"
+            ]
+        }
+    }
+}
+</code></pre>
+<p>
+ 이후
+ <a href="./application/mcp_nova_canvas.py">
+  mcp_nova_canvas.py
+ </a>
+ 와 같이 이미지를 생성합니다.
+</p>
+<pre class="pre"><code class="language-python code">async def mcp_generate_image(ctx, prompt, negative_prompt, filename, width, height, quality, cfg_scale, seed, number_of_images):
+    """Generate an image using Amazon Nova Canvas with text prompt."""
+
+    response = await generate_image_with_text(
+        prompt=prompt,
+        negative_prompt=negative_prompt,
+        filename=filename,
+        width=width,
+        height=height,
+        quality=quality,
+        cfg_scale=cfg_scale,
+        seed=seed,
+        number_of_images=number_of_images
+    )
+
+    return {
+        "url": [f'{path}' for path in response.paths]
+    } 
+</code></pre>
+<p>
+ MCP의 image_generation로 부터 얻은 결과는 아래와 같이 표시합니다. 상세한 내용은
+ <a href="./application/chat.py">
+  chat.py
+ </a>
+ 을 참고하세요.
+</p>
+<pre class="pre"><code class="language-python code">def show_status_message(response, st):
+    image_url = []
+    for i, re in enumerate(response):
+        logger.info(f"message[{i}]: {re}")
+        if i==len(response)-1:
+            break
+        if isinstance(re, ToolMessage):
+          tool_result = json.loads(re.content)
+          logger.info(f"tool_result: {tool_result}")
+
+          if "url" in tool_result:
+              st.info(f"URL: {tool_result['url']}")
+
+              urls = tool_result['url']
+              for url in urls:
+                  image_url.append(url)
+                  st.image(url)
+    return image_url
+</code></pre>
+<h3 class="heading">
+ MCP AWS Diagram
+</h3>
+<p>
+<a href="https://awslabs.github.io/mcp/servers/aws-diagram-mcp-server/">
+  AWS Diagram MCP Server
+ </a>
+ 을 이용하면 AWS Diagram을 그릴 수 있습니다. 상세한 내용은
+ <a href="./application/mcp_config.py">
+  mcp_config.py
+ </a>
+ 을 참조합니다.
+</p>
+<p>
+ 이때 사용하는 MCP Config는 아래와 같습니다.
+</p>
+<pre class="pre"><code class="language-python code">{
+    "mcpServers": {
+        "awslabs.aws-diagram-mcp-server": {
+            "command": "uvx",
+            "args": ["awslabs.aws-diagram-mcp-server"],
+            "env": {
+                "FASTMCP_LOG_LEVEL": "ERROR"
+            },
+        }
+    }
+}
+</code></pre>
+<p>
+ Diagram을 그리기 위해서는
+ <a href="https://www.graphviz.org/download/">
+  Graphviz
+ </a>
+ 를 따라서 graphviz를 설치합니다. Mac에서는 아래 명령어를 사용합니다.
+</p>
+<pre class="pre"><code class="language-text code">brew install graphviz
+</code></pre>
+<h3 class="heading">
+ MCP AWS Documentation
+</h3>
+<p>
+<a href="https://awslabs.github.io/mcp/servers/aws-documentation-mcp-server/">
+  AWS Documentation MCP Server
+ </a>
+ 을 이용하여 AWS 문서들을 조회할 수 있습니다. 이때 사용하는 MCP config는 아래와 같습니다. 상세한 내용은
+ <a href="./application/mcp_config.py">
+  mcp_config.py
+ </a>
+ 을 참조합니다.
+</p>
+<pre class="pre"><code class="language-java code">{
+    "mcpServers": {
+        "awslabs.aws-documentation-mcp-server": {
+            "command": "uvx",
+            "args": ["awslabs.aws-documentation-mcp-server@latest"],
+            "env": {
+                "FASTMCP_LOG_LEVEL": "ERROR"
+            }
+        }
+    }
+}
+</code></pre>
+<h2 class="heading">
+ 실행 결과
+</h2>
+<h3 class="heading">
+ MCP로 RAG를 조회하여 활용하기
+</h3>
+<p>
+<a href="./contents/error_code.pdf">
+  error_code.pdf
+ </a>
+ 을 다운로드 한 후에 파일을 업로드합니다. 이후 아래와 같이 "보일러 에러중 수압과 관련된 에러 코드를 검색해주세요."와 같이 입력하면 mcp를 이용해 tool의 정보를 가져오고, search tool로 얻어진 정보를 이용해 아래와 같은 정보를 보여줄 수 있습니다. 이때 search tool은 lambda를 실행하는데 lambda에서는 완전 관리형 RAG 서비스인 knowledge base를 이용하여 검색어를 조회하고 관련성을 평가한 후에 관련된 문서만을 전달합니다. Agent는 RAG를 조회하여 얻어진 정보로 답변을 아래와 같이 구합니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/01b5e47f-ada1-405e-8455-3d3ce260cb41" width="650"/>
+</p>
+<h3 class="heading">
+ MCP로 인터넷 검색을 하여 활용하기
+</h3>
+<p>
+<a href="https://smithery.ai/server/mcp-tavily">
+  smithery-Tavily
+ </a>
+ 에 접속하여 환경에 맞는 설정값을 얻어옵니다. 아래는 Mac/Linux의 JSON format의 접속 정보입니다.
+</p>
+<pre class="pre"><code class="language-java code">{
+  "mcpServers": {
+    "mcp-tavily": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "mcp-tavily",
+        "--key",
+        "132c5abd-6f2e-4e42-89a1-d0b1fcb75613"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ 아래는 기본 설정된 RAG를 위한 정보입니다.
+</p>
+<pre class="pre"><code class="language-java code">{
+  "mcpServers": {
+    "search": {
+      "command": "python",
+      "args": [
+        "application/mcp-server.py"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>
+ 아래는 multiple mcp server를 설정시 config 입니다.
+</p>
+<pre class="pre"><code class="language-python code">{
+   "mcpServers":{
+      "RAG":{
+         "command":"python",
+         "args":[
+            "application/mcp-server.py"
+         ]
+      },
+      "mcp-tavily":{
+         "command":"npx",
+         "args":[
+            "-y",
+            "@smithery/cli@latest",
+            "run",
+            "mcp-tavily",
+            "--key",
+            "132c5abd-6f2e-4e42-89a1-d0b1fcb75613"
+         ]
+      }
+   }
+}
+</code></pre>
+<p>
+ 이 정보를 아래와 같이 왼쪽 메뉴의 MCP Config에 복사합니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/0e054f8e-4356-42e0-a70e-636af8d377c8" width="300"/>
+</p>
+<p>
+ 이후 메뉴에서 "Agent"를 선택후에 아래와 같이 "강남역 맛집은?"라고 입력후 결과를 확인합니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/8275bf94-2f46-475d-9eea-02568e70199b" width="650"/>
+</p>
+<h3 class="heading">
+ AWS Cost Analysis
+</h3>
+<p>
+ "지난 한달간의 AWS 비용을 요약해주세요." 입력후에 결과를 확인합니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/5794def3-47fd-498f-8074-0d970bee1c99" width="650"/>
+</p>
+<h3 class="heading">
+ 이미지 생성
+</h3>
+<p>
+ 왼쪽 메뉴에서 Agent를 선택하고, MCP config로 "image generation"을 선택한 후에 "노을이 지는 아름다운 강변을 달리기하는 사람을 그려주세요."라고 입력 후에 결과를 확인합니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/a4147b0f-86d2-4042-83bb-9c9b61e51a2f" width="650"/>
+</p>
+<h3 class="heading">
+ AWS Architecture 그리기
+</h3>
+<p>
+ 메뉴에서 "Agent(Chat)"를 선택하고 MCP로 "aws diagram"를 고른 후, "Amazon S3로 web hosting을 하기 위한 architecture를 추천해주세요."와 "Cognito를 이용해 인증할수 있도록 해주세요."으로 순차적으로 명령을 하면 아래와 같은 결과를 얻을 수 있습니다.
+</p>
+<p>
+<img alt="noname" src="https://github.com/user-attachments/assets/04191a61-746f-4852-ad2a-e77b6af7cedc"/>
+</p>
+<h3 class="heading">
+ Code Interpreter의 활용
+</h3>
+<p>
+ "strawberry의 r의 갯수는?"로 질문하면 아래와 같이 Tools 리스트에서 "repl_coder"가 선택되어 활용됩니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/2575d4b1-8871-4677-a982-82d60ec6036a" width="650"/>
+</p>
+<h3 class="heading">
+ Storage
+</h3>
+<p>
+ Tool에서 "aws storage"를 선택하고, "내 s3 전체 사용량은?"이라고 질문합니다. 이때의 결과는 아래와 같습니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/a9e41d68-6a2a-4cda-a264-58cc3124f51d" width="650"/>
+</p>
+<p>
+ "내 aws strorage 사용량은?"이라고 질문하면, S3, EFS, EBS의 용량을 확인하여 아래와 같이 답변할 수 있습니다.
+</p>
+<p>
+<img src="https://github.com/user-attachments/assets/4c390cee-fd91-487e-ba0d-8b99fd7389ae" width="650"/>
+</p>
+<h2 class="heading">
+ Reference
+</h2>
+<p>
+<a href="https://github.com/modelcontextprotocol/python-sdk">
+  MCP Python SDK
+ </a>
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=OX89LkTvNKQ">
+  Using MCP with LangGraph agents
+ </a>
+</p>
+<p>
+<a href="https://mirror-feeling-d80.notion.site/MCP-From-Scratch-1b9808527b178040b5baf83a991ed3b2">
+  MCP From Scratch
+ </a>
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=CDjjaTALI68">
+  Understanding MCP From Scratch
+ </a>
+</p>
+<p>
+<a href="https://github.com/langchain-ai/langchain-mcp-adapters">
+  LangChain MCP Adapters
+ </a>
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=fk2WEVZfheI">
+  "Vibe Coding" LangGraph apps with llms.txt and MCP
+ </a>
+</p>
+<p>
+<a href="https://github.com/langchain-ai/mcpdoc">
+  MCP LLMS-TXT Documentation Server
+ </a>
+</p>
+<p>
+<a href="https://modelcontextprotocol.io/quickstart/server">
+  MCP - For Server Developers
+ </a>
+</p>
+<p>
+<a href="https://community.aws/content/2uFvyCPQt7KcMxD9ldsJyjZM1Wp/model-context-protocol-mcp-and-amazon-bedrock">
+  Model Context Protocol (MCP) and Amazon Bedrock
+ </a>
+</p>
+<p>
+<a href="https://github.com/modelcontextprotocol/servers">
+  Model Context Protocol servers
+ </a>
+</p>
+<p>
+<a href="https://www.linkedin.com/posts/langchain_mcp-adapters-released-introducing-our-activity-7308925375160467457-_BPL/?utm_source=share&amp;utm_medium=member_android&amp;rcm=ACoAAA5jTp0BX-JuOkof3Ak56U3VlXjQVT43NzQ">
+  Langchain.js MCP Adapter
+ </a>
+</p>
+<p>
+<a href="https://cobusgreyling.medium.com/using-langchain-with-model-context-protocol-mcp-e89b87ee3c4c">
+  Using LangChain With Model Context Protocol (MCP)
+ </a>
+</p>
+<p>
+<a href="https://github.com/wonderwhy-er/DesktopCommanderMCP">
+  Desktop Commander MCP
+ </a>
+</p>
+<p>
+<a href="https://smithery.ai/">
+  Smithery
+ </a>
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=ISrYHGg2C2c">
+  Cursor AI 말고, 나만의 #MCP 에이전트 앱 만들어 보기!
+ </a>
+</p>
+<p>
+<a href="https://medium.com/@amosgyamfi/the-top-7-mcp-supported-ai-frameworks-a8e5030c87ab">
+  The Top 7 MCP-Supported AI Frameworks
+ </a>
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/kyopark2014-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/kyopark2014-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/kyopark2014-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/kyopark2014-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

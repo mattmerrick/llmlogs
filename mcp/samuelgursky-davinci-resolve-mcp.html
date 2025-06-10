@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="DaVinci Resolve MCP Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DaVinci Resolve MCP Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>DaVinci Resolve MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">DaVinci Resolve MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">DaVinci Resolve MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 204</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">blackmagic</span><span class="topic-tag"> blackmagic-design</span><span class="topic-tag"> blackmagicdesign</span><span class="topic-tag"> davinci-resolve</span><span class="topic-tag"> davinciresolve</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+                        </div>
+                        <a href="https://github.com/samuelgursky/davinci-resolve-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="DaVinci Resolve MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="DaVinci Resolve MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>DaVinci Resolve MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">DaVinci Resolve MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">DaVinci Resolve MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 204</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">blackmagic</span><span class="topic-tag"> blackmagic-design</span><span class="topic-tag"> blackmagicdesign</span><span class="topic-tag"> davinci-resolve</span><span class="topic-tag"> davinciresolve</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/samuelgursky/davinci-resolve-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="DaVinci Resolve MCP Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="DaVinci Resolve MCP Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>DaVinci Resolve MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>DaVinci Resolve MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 204</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">blackmagic</span><span class="topic-tag"> blackmagic-design</span><span class="topic-tag"> blackmagicdesign</span><span class="topic-tag"> davinci-resolve</span><span class="topic-tag"> davinciresolve</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/samuelgursky/davinci-resolve-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="DaVinci Resolve MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="DaVinci Resolve MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>DaVinci Resolve MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>DaVinci Resolve MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 204</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">blackmagic</span><span class="topic-tag"> blackmagic-design</span><span class="topic-tag"> blackmagicdesign</span><span class="topic-tag"> davinci-resolve</span><span class="topic-tag"> davinciresolve</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-server</span>
+</div>
+<a class="github-link" href="https://github.com/samuelgursky/davinci-resolve-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ DaVinci Resolve MCP Server
+</h1>
+<p>
+<a href="https://github.com/samuelgursky/davinci-resolve-mcp/releases">
+<img alt="Version" src="https://img.shields.io/badge/version-1.3.8-blue.svg"/>
+</a>
+<a href="https://www.blackmagicdesign.com/products/davinciresolve">
+<img alt="DaVinci Resolve" src="https://img.shields.io/badge/DaVinci%20Resolve-18.5+-darkred.svg"/>
+</a>
+<a href="https://www.python.org/downloads/">
+<img alt="Python" src="https://img.shields.io/badge/python-3.6+-green.svg"/>
+</a>
+<a href="https://www.apple.com/macos/">
+<img alt="macOS" src="https://img.shields.io/badge/macOS-stable-brightgreen.svg"/>
+</a>
+<a href="https://www.microsoft.com/windows">
+<img alt="Windows" src="https://img.shields.io/badge/Windows-stable-brightgreen.svg"/>
+</a>
+<a href="https://opensource.org/licenses/MIT">
+<img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg"/>
+</a>
+</p>
+<p>
+ A Model Context Protocol (MCP) server that connects AI coding assistants (Cursor, Claude Desktop) to DaVinci Resolve, enabling them to query and control DaVinci Resolve through natural language.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<p>
+ For a comprehensive list of implemented and planned features, see
+ <a href="docs/FEATURES.md">
+  docs/FEATURES.md
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+<strong>
+   macOS
+  </strong>
+  or
+  <strong>
+   Windows
+  </strong>
+  with DaVinci Resolve installed
+ </li>
+<li>
+<strong>
+   Python 3.6+
+  </strong>
+</li>
+<li>
+  DaVinci Resolve running in the background
+ </li>
+<li>
+  (Optional) Node.js/npm for some features
+ </li>
+</ul>
+<h2 class="heading">
+ Installation Guide
+</h2>
+<p>
+ For detailed installation instructions, please see
+ <a href="INSTALL.md">
+  INSTALL.md
+ </a>
+ . This guide covers:
+- Prerequisites and system requirements
+- Step-by-step installation process
+- Configuration details
+- Common troubleshooting steps
+</p>
+<h2 class="heading">
+ Platform Support
+</h2>
+<table>
+<thead>
+<tr>
+<th>
+    Platform
+   </th>
+<th>
+    Status
+   </th>
+<th>
+    One-Step Install
+   </th>
+<th>
+    Quick Start
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    macOS
+   </td>
+<td>
+    ✅ Stable
+   </td>
+<td>
+<code class="code">
+     ./install.sh
+    </code>
+</td>
+<td>
+<code class="code">
+     ./run-now.sh
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Windows
+   </td>
+<td>
+    ✅ Stable
+   </td>
+<td>
+<code class="code">
+     install.bat
+    </code>
+</td>
+<td>
+<code class="code">
+     run-now.bat
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Linux
+   </td>
+<td>
+    ❌ Not supported
+   </td>
+<td>
+    N/A
+   </td>
+<td>
+    N/A
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Quick Start Guide
+</h2>
+<h3 class="heading">
+ New One-Step Installation (Recommended)
+</h3>
+<p>
+ The easiest way to get started is with our new unified installation script. This script does everything automatically:
+</p>
+<ul>
+<li>
+<p>
+   Clone the repository:
+   <code class="code">
+    bash
+   git clone https://github.com/samuelgursky/davinci-resolve-mcp.git
+   cd davinci-resolve-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Make sure DaVinci Resolve Studio is installed and running
+  </p>
+</li>
+<li>
+<p>
+   Run the installation script:
+   <strong>
+    macOS/Linux:
+   </strong>
+<code class="code">
+    bash
+   ./install.sh
+   </code>
+</p>
+</li>
+</ul>
+<p>
+<strong>
+  Windows:
+ </strong>
+<code class="code">
+  batch
+   install.bat
+ </code>
+</p>
+<p>
+ This will:
+1. Automatically detect the correct paths on your system
+2. Create a Python virtual environment
+3. Install the MCP SDK from the official repository
+4. Set up environment variables
+5. Configure Cursor/Claude integration 
+6. Verify the installation is correct
+7. Optionally start the MCP server
+</p>
+<h3 class="heading">
+ Alternative Quick Start
+</h3>
+<p>
+ You can also use the original quick start scripts:
+</p>
+<p>
+<strong>
+  Windows Users:
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code">run-now.bat
+</code></pre>
+<p>
+<strong>
+  macOS Users:
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code">chmod +x run-now.sh
+./run-now.sh
+</code></pre>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ For configuration of DaVinci Resolve MCP with different AI assistant clients like Cursor or Claude, see the
+ <a href="config-templates">
+  config-templates
+ </a>
+ directory.
+</p>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<p>
+ For detailed troubleshooting guidance, refer to the
+ <a href="INSTALL.md#troubleshooting">
+  INSTALL.md
+ </a>
+ file which contains solutions to common issues.
+</p>
+<h3 class="heading">
+ Common Issues
+</h3>
+<h4 class="heading">
+ Path Resolution
+</h4>
+<ul>
+<li>
+  The installation scripts now use more robust path resolution, fixing issues with
+  <code class="code">
+   run-now.sh
+  </code>
+  looking for files in the wrong locations
+ </li>
+<li>
+  Always let the scripts determine the correct paths based on their location
+ </li>
+</ul>
+<h4 class="heading">
+ DaVinci Resolve Detection
+</h4>
+<ul>
+<li>
+  We've improved the process detection to reliably find DaVinci Resolve regardless of how it appears in the process list
+ </li>
+<li>
+  Make sure DaVinci Resolve is running before starting the MCP server
+ </li>
+</ul>
+<h4 class="heading">
+ Environment Variables
+</h4>
+<ul>
+<li>
+  Make sure all required environment variables are set correctly
+ </li>
+<li>
+  Review the log file at
+  <code class="code">
+   scripts/cursor_resolve_server.log
+  </code>
+  for troubleshooting
+ </li>
+</ul>
+<h3 class="heading">
+ Windows
+</h3>
+<ul>
+<li>
+  Make sure to use forward slashes (/) in configuration files
+ </li>
+<li>
+  Python must be installed and paths configured in configs
+ </li>
+<li>
+  DaVinci Resolve must be running before starting the server
+ </li>
+</ul>
+<h3 class="heading">
+ macOS
+</h3>
+<ul>
+<li>
+  Make sure scripts have execute permissions
+ </li>
+<li>
+  Check Console.app for any Python-related errors
+ </li>
+<li>
+  Verify environment variables are set correctly
+ </li>
+<li>
+  DaVinci Resolve must be running before starting the server
+ </li>
+</ul>
+<h2 class="heading">
+ Support
+</h2>
+<p>
+ For issues and feature requests, please use the GitHub issue tracker.
+</p>
+<h2 class="heading">
+ Launch Options
+</h2>
+<p>
+ After installation, you have several ways to start the server:
+</p>
+<h3 class="heading">
+ Client-Specific Launch Scripts
+</h3>
+<p>
+ The repository includes dedicated scripts for launching with specific clients:
+</p>
+<pre class="pre"><code class="language-bash code"># For Cursor integration (macOS)
+chmod +x scripts/mcp_resolve-cursor_start
+./scripts/mcp_resolve-cursor_start
+
+# For Claude Desktop integration (macOS)
+chmod +x scripts/mcp_resolve-claude_start
+./scripts/mcp_resolve-claude_start
+</code></pre>
+<p>
+ These specialized scripts:
+- Set up the proper environment for each client
+- Verify DaVinci Resolve is running
+- Configure client-specific settings
+- Start the MCP server with appropriate parameters
+</p>
+<h3 class="heading">
+ Pre-Launch Check
+</h3>
+<p>
+ Before connecting AI assistants, verify your environment is properly configured:
+</p>
+<pre class="pre"><code class="language-bash code"># On macOS
+./scripts/check-resolve-ready.sh
+
+# On Windows
+./scripts/check-resolve-ready.bat
+</code></pre>
+<p>
+ These scripts will:
+- Verify DaVinci Resolve is running (and offer to start it)
+- Check environment variables are properly set
+- Ensure the Python environment is configured correctly
+- Validate Cursor/Claude configuration
+- Optionally launch Cursor
+</p>
+<h3 class="heading">
+ Universal Launcher
+</h3>
+<p>
+ For advanced users, our unified launcher provides full control over both Cursor and Claude Desktop servers:
+</p>
+<pre class="pre"><code class="language-bash code"># Make the script executable (macOS only)
+chmod +x scripts/mcp_resolve_launcher.sh
+
+# Run in interactive mode
+./scripts/mcp_resolve_launcher.sh
+
+# Or use command line options
+./scripts/mcp_resolve_launcher.sh --start-cursor    # Start Cursor server (uses mcp_resolve-cursor_start)
+./scripts/mcp_resolve_launcher.sh --start-claude    # Start Claude Desktop server (uses mcp_resolve-claude_start)
+./scripts/mcp_resolve_launcher.sh --start-both      # Start both servers
+./scripts/mcp_resolve_launcher.sh --stop-all        # Stop all running servers
+./scripts/mcp_resolve_launcher.sh --status          # Show server status
+</code></pre>
+<p>
+ Additional options:
+- Force mode (skip Resolve running check):
+ <code class="code">
+  --force
+ </code>
+ - Project selection:
+ <code class="code">
+  --project "Project Name"
+ </code>
+</p>
+<h2 class="heading">
+ Full Installation
+</h2>
+<p>
+ For a complete manual installation:
+</p>
+<ol>
+<li>
+<p>
+   Clone this repository:
+   <code class="code">
+    bash
+   git clone https://github.com/samuelgursky/davinci-resolve-mcp.git
+   cd davinci-resolve-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Create a Python virtual environment:
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+  </p>
+</li>
+</ol>
+<p>
+ # Activate it
+   # On macOS/Linux:
+   source venv/bin/activate
+   # On Windows:
+   venv\Scripts\activate
+</p>
+<p>
+ # Install dependencies from requirements.txt
+   pip install -r requirements.txt
+</p>
+<p>
+ # Alternatively, install MCP SDK directly
+   pip install git+https://github.com/modelcontextprotocol/python-sdk.git
+   ```
+</p>
+<ol>
+<li>
+  Set up DaVinci Resolve scripting environment variables:
+ </li>
+</ol>
+<p>
+<strong>
+  For macOS
+ </strong>
+ :
+ <code class="code">
+  bash
+   export RESOLVE_SCRIPT_API="/Library/Application Support/Blackmagic Design/DaVinci Resolve/Developer/Scripting"
+   export RESOLVE_SCRIPT_LIB="/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
+   export PYTHONPATH="$PYTHONPATH:$RESOLVE_SCRIPT_API/Modules/"
+ </code>
+</p>
+<p>
+<strong>
+  For Windows
+ </strong>
+ :
+ <code class="code">
+  cmd
+   set RESOLVE_SCRIPT_API=C:\ProgramData\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting
+   set RESOLVE_SCRIPT_LIB=C:\Program Files\Blackmagic Design\DaVinci Resolve\fusionscript.dll
+   set PYTHONPATH=%PYTHONPATH%;%RESOLVE_SCRIPT_API%\Modules
+ </code>
+</p>
+<p>
+ Alternatively, run the pre-launch check script which will set these for you:
+   ```
+   # On macOS
+   ./scripts/check-resolve-ready.sh
+</p>
+<p>
+ # On Windows
+   ./scripts/check-resolve-ready.bat
+   ```
+</p>
+<ol>
+<li>
+  Configure Cursor to use the server by creating a configuration file:
+ </li>
+</ol>
+<p>
+<strong>
+  For macOS
+ </strong>
+ (
+ <code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ ):
+ <code class="code">
+  json
+   {
+     "mcpServers": {
+       "davinci-resolve": {
+         "name": "DaVinci Resolve MCP",
+         "command": "/path/to/your/venv/bin/python",
+         "args": [
+           "/path/to/your/davinci-resolve-mcp/src/main.py"
+         ]
+       }
+     }
+   }
+ </code>
+</p>
+<p>
+<strong>
+  For Windows
+ </strong>
+ (
+ <code class="code">
+  %APPDATA%\Cursor\mcp.json
+ </code>
+ ):
+ <code class="code">
+  json
+   {
+     "mcpServers": {
+       "davinci-resolve": {
+         "name": "DaVinci Resolve MCP",
+         "command": "C:\\path\\to\\venv\\Scripts\\python.exe",
+         "args": ["C:\\path\\to\\davinci-resolve-mcp\\src\\main.py"]
+       }
+     }
+   }
+ </code>
+</p>
+<ol>
+<li>
+  Start the server using one of the client-specific scripts:
+   ```bash
+   # For Cursor
+   ./scripts/mcp_resolve-cursor_start
+ </li>
+</ol>
+<p>
+ # For Claude Desktop
+   ./scripts/mcp_resolve-claude_start
+   ```
+</p>
+<h2 class="heading">
+ Usage with AI Assistants
+</h2>
+<h3 class="heading">
+ Using with Cursor
+</h3>
+<ol>
+<li>
+<p>
+   Start the Cursor server using the dedicated script:
+   <code class="code">
+    bash
+   ./scripts/mcp_resolve-cursor_start
+   </code>
+   Or use the universal launcher:
+   <code class="code">
+    bash
+   ./scripts/mcp_resolve_launcher.sh --start-cursor
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Start Cursor and open a project.
+  </p>
+</li>
+<li>
+<p>
+   In Cursor's AI chat, you can now interact with DaVinci Resolve. Try commands like:
+  </p>
+</li>
+<li>
+  "What version of DaVinci Resolve is running?"
+ </li>
+<li>
+  "List all projects in DaVinci Resolve"
+ </li>
+<li>
+  "Create a new timeline called 'My Sequence'"
+ </li>
+<li>
+  "Add a marker at the current position"
+ </li>
+</ol>
+<h3 class="heading">
+ Using with Claude Desktop
+</h3>
+<ol>
+<li>
+<p>
+   Create a
+   <code class="code">
+    claude_desktop_config.json
+   </code>
+   file in your Claude Desktop configuration directory using the template in the
+   <code class="code">
+    config-templates
+   </code>
+   directory.
+  </p>
+</li>
+<li>
+<p>
+   Run the Claude Desktop server using the dedicated script:
+   <code class="code">
+    bash
+   ./scripts/mcp_resolve-claude_start
+   </code>
+   Or use the universal launcher:
+   <code class="code">
+    bash
+   ./scripts/mcp_resolve_launcher.sh --start-claude
+   </code>
+</p>
+</li>
+<li>
+<p>
+   In Claude Desktop, you can now interact with DaVinci Resolve using the same commands as with Cursor.
+  </p>
+</li>
+</ol>
+<h2 class="heading">
+ Available Features
+</h2>
+<h3 class="heading">
+ General
+</h3>
+<ul>
+<li>
+  Get DaVinci Resolve version
+ </li>
+<li>
+  Get/switch current page (Edit, Color, Fusion, etc.)
+ </li>
+</ul>
+<h3 class="heading">
+ Project Management
+</h3>
+<ul>
+<li>
+  List available projects
+ </li>
+<li>
+  Get current project name
+ </li>
+<li>
+  Open project by name
+ </li>
+<li>
+  Create new project
+ </li>
+<li>
+  Save current project
+ </li>
+</ul>
+<h3 class="heading">
+ Timeline Operations
+</h3>
+<ul>
+<li>
+  List all timelines
+ </li>
+<li>
+  Get current timeline info
+ </li>
+<li>
+  Create new timeline
+ </li>
+<li>
+  Switch to timeline by name
+ </li>
+<li>
+  Add marker to timeline
+ </li>
+</ul>
+<h3 class="heading">
+ Media Pool Operations
+</h3>
+<ul>
+<li>
+  List media pool clips
+ </li>
+<li>
+  Import media file
+ </li>
+<li>
+  Create media bin
+ </li>
+<li>
+  Add clip to timeline
+ </li>
+</ul>
+<h2 class="heading">
+ Windows Support Notes
+</h2>
+<p>
+ Windows support is stable in v1.3.3 and should not require additional troubleshooting:
+- Ensure DaVinci Resolve is installed in the default location
+- Environment variables are properly set as described above
+- Windows paths may require adjustment based on your installation
+- For issues, please check the logs in the
+ <code class="code">
+  logs/
+ </code>
+ directory
+</p>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ DaVinci Resolve Connection
+</h3>
+<p>
+ Make sure DaVinci Resolve is running before starting the server. If the server can't connect to Resolve, check that:
+</p>
+<ol>
+<li>
+  Your environment variables are set correctly
+ </li>
+<li>
+  You have the correct paths for your DaVinci Resolve installation
+ </li>
+<li>
+  You have restarted your terminal after setting environment variables
+ </li>
+</ol>
+<h2 class="heading">
+ Project Structure
+</h2>
+<pre class="pre"><code class="code">davinci-resolve-mcp/
+├── README.md               # This file
+├── docs/                   # Documentation
+│   ├── FEATURES.md         # Feature list and status
+│   ├── CHANGELOG.md        # Version history
+│   ├── VERSION.md          # Version information
+│   ├── TOOLS_README.md     # Tools documentation
+│   ├── PROJECT_MCP_SETUP.md # Project setup guide
+│   └── COMMIT_MESSAGE.txt  # Latest commit information
+├── config-templates/       # Configuration templates
+│   ├── sample_config.json  # Example configuration
+│   ├── cursor-mcp-example.json # Cursor config example
+│   └── mcp-project-template.json # MCP project template
+├── scripts/                # Utility scripts
+│   ├── tests/              # Test scripts
+│   │   ├── benchmark_server.py # Performance tests
+│   │   ├── test_improvements.py # Test scripts
+│   │   ├── test_custom_timeline.py # Timeline tests
+│   │   ├── create_test_timeline.py # Create test timeline
+│   │   ├── test-after-restart.sh # Test after restart (Unix)
+│   │   └── test-after-restart.bat # Test after restart (Windows)
+│   ├── batch_automation.py # Batch automation script
+│   ├── restart-server.sh   # Server restart script (Unix)
+│   ├── restart-server.bat  # Server restart script (Windows)
+│   ├── run-now.sh          # Quick start script (Unix)
+│   └── run-now.bat         # Quick start script (Windows)
+├── resolve_mcp_server.py   # Main server implementation
+├── src/                    # Source code
+│   ├── api/                # API implementation
+│   ├── features/           # Feature modules
+│   └── utils/              # Utility functions
+├── logs/                   # Log files
+├── tools/                  # Development tools
+├── assets/                 # Project assets
+└── examples/               # Example code
+</code></pre>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT
+</p>
+<h2 class="heading">
+ Acknowledgments
+</h2>
+<ul>
+<li>
+  Blackmagic Design for DaVinci Resolve and its API
+ </li>
+<li>
+  The MCP protocol team for enabling AI assistant integration
+ </li>
+</ul>
+<h2 class="heading">
+ Author
+</h2>
+<p>
+ Samuel Gursky (samgursky@gmail.com)
+- GitHub:
+ <a href="https://github.com/samuelgursky">
+  github.com/samuelgursky
+ </a>
+</p>
+<h2 class="heading">
+ Future Plans
+</h2>
+<ul>
+<li>
+  Windows and Linux support
+ </li>
+<li>
+  Additional DaVinci Resolve features
+ </li>
+<li>
+  Support for Claude Desktop
+ </li>
+</ul>
+<h2 class="heading">
+ Development
+</h2>
+<p>
+ If you'd like to contribute, please check the feature checklist in the repo and pick an unimplemented feature to work on. The code is structured with clear sections for different areas of functionality.
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT
+</p>
+<h2 class="heading">
+ Acknowledgments
+</h2>
+<ul>
+<li>
+  Blackmagic Design for DaVinci Resolve and its API
+ </li>
+<li>
+  The MCP protocol team for enabling AI assistant integration
+ </li>
+</ul>
+<h2 class="heading">
+ Project Structure
+</h2>
+<p>
+ After cleanup, the project has the following structure:
+</p>
+<ul>
+<li>
+<code class="code">
+   resolve_mcp_server.py
+  </code>
+  - The main MCP server implementation
+ </li>
+<li>
+<code class="code">
+   run-now.sh
+  </code>
+  - Quick start script that handles setup and runs the server
+ </li>
+<li>
+<code class="code">
+   setup.sh
+  </code>
+  - Complete setup script for installation
+ </li>
+<li>
+<code class="code">
+   check-resolve-ready.sh
+  </code>
+  - Pre-launch check to verify DaVinci Resolve is ready
+ </li>
+<li>
+<code class="code">
+   start-server.sh
+  </code>
+  - Script to start the server
+ </li>
+<li>
+<code class="code">
+   run-server.sh
+  </code>
+  - Simplified script to run the server directly
+ </li>
+</ul>
+<p>
+<strong>
+  Key Directories:
+ </strong>
+ -
+ <code class="code">
+  src/
+ </code>
+ - Source code and modules
+-
+ <code class="code">
+  assets/
+ </code>
+ - Project assets and resources
+-
+ <code class="code">
+  logs/
+ </code>
+ - Log files directory
+-
+ <code class="code">
+  scripts/
+ </code>
+ - Helper scripts
+</p>
+<p>
+ When developing, it's recommended to use
+ <code class="code">
+  ./run-now.sh
+ </code>
+ which sets up the environment and launches the server in one step.
+</p>
+<h2 class="heading">
+ Changelog
+</h2>
+<p>
+ See
+ <a href="docs/CHANGELOG.md">
+  docs/CHANGELOG.md
+ </a>
+ for a detailed history of changes.
+</p>
+<h3 class="heading">
+ Cursor-Specific Setup
+</h3>
+<p>
+ When integrating with Cursor, follow these specific steps:
+</p>
+<ol>
+<li>
+<p>
+   Make sure DaVinci Resolve is running before starting Cursor
+  </p>
+</li>
+<li>
+<p>
+   Install required dependencies:
+   <code class="code">
+    bash
+   # From the davinci-resolve-mcp directory:
+   pip install -r requirements.txt
+   </code>
+   Note: This will install the MCP package and other dependencies automatically.
+  </p>
+</li>
+<li>
+<p>
+   Set up the MCP server configuration in Cursor:
+  </p>
+</li>
+</ol>
+<p>
+ Create or edit
+ <code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ on macOS (or
+ <code class="code">
+  %USERPROFILE%\.cursor\mcp.json
+ </code>
+ on Windows):
+</p>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "davinci-resolve": {
+         "name": "DaVinci Resolve MCP",
+         "command": "/path/to/your/venv/bin/python",
+         "args": [
+           "/path/to/your/davinci-resolve-mcp/src/main.py"
+         ]
+       }
+     }
+   }
+ </code>
+</p>
+<p>
+<strong>
+  Important Notes:
+ </strong>
+ - Use
+ <code class="code">
+  main.py
+ </code>
+ as the entry point (not
+ <code class="code">
+  resolve_mcp_server.py
+ </code>
+ )
+   - Use absolute paths in the configuration
+</p>
+<ol>
+<li>
+  Common issues:
+ </li>
+<li>
+  "Client closed" error: Check that paths are correct in mcp.json and dependencies are installed
+ </li>
+<li>
+  Connection problems: Make sure DaVinci Resolve is running before starting Cursor
+ </li>
+<li>
+  Environment variables: The main.py script will handle setting environment variables
+ </li>
+</ol>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/samuelgursky-davinci-resolve-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

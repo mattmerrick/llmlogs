@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="mcp: Regression with Multiple Change Points - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/lindeloev-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mcp: Regression with Multiple Change Points - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>mcp: Regression with Multiple Change Points - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">mcp: Regression with Multiple Change Points</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">mcp: Regression with Multiple Change Points</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 108</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: R</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/lindeloev/mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp: Regression with Multiple Change Points - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/lindeloev-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp: Regression with Multiple Change Points - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>mcp: Regression with Multiple Change Points - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">mcp: Regression with Multiple Change Points</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">mcp: Regression with Multiple Change Points</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 108</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: R</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/lindeloev/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="mcp: Regression with Multiple Change Points - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/lindeloev-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="mcp: Regression with Multiple Change Points - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>mcp: Regression with Multiple Change Points - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp: Regression with Multiple Change Points</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 108</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: R</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/lindeloev/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="mcp: Regression with Multiple Change Points - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/lindeloev-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="mcp: Regression with Multiple Change Points - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>mcp: Regression with Multiple Change Points - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>mcp: Regression with Multiple Change Points</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 108</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: R</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/lindeloev/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ mcp: Regression with Multiple Change Points
+ <img align="right" src="https://github.com/lindeloev/mcp/raw/docs/man/figures/logo_200px.png" style="padding: 20px; padding-right: 0px;"/>
+</h1>
+<p>
+<a href="https://github.com/lindeloev/mcp/actions/workflows/check-standard.yaml">
+<img alt="mcp Github Actions status" src="https://github.com/lindeloev/mcp/actions/workflows/check-standard.yaml/badge.svg"/>
+</a>
+<a href="https://coveralls.io/github/lindeloev/mcp/">
+<img alt="mcp Coveralls status" src="https://codecov.io/gh/lindeloev/mcp/branch/main/graph/badge.svg"/>
+</a>
+<a href="https://CRAN.R-project.org/package=mcp">
+<img alt="mcp CRAN status" src="https://www.r-pkg.org/badges/version/mcp"/>
+</a>
+<a href="https://cranlogs.r-pkg.org/badges/mcp">
+<img alt="mcp CRAN downloads" src="https://cranlogs.r-pkg.org/badges/mcp"/>
+</a>
+</p>
+<p>
+<code class="code">
+  mcp
+ </code>
+ does regression with one or Multiple Change Points (MCP) between Generalized and hierarchical Linear Segments using Bayesian inference.
+ <code class="code">
+  mcp
+ </code>
+ aims to provide maximum flexibility for analyses with a priori knowledge about the number of change points and the form of the segments in between.
+</p>
+<p>
+ Change points are also called
+ <strong>
+  switch points
+ </strong>
+ ,
+ <strong>
+  break points
+ </strong>
+ ,
+ <strong>
+  broken line
+ </strong>
+ regression,
+ <strong>
+  broken stick
+ </strong>
+ regression,
+ <strong>
+  bilinear
+ </strong>
+ regression,
+ <strong>
+  piecewise linear
+ </strong>
+ regression,
+ <strong>
+  local linear
+ </strong>
+ regression,
+ <strong>
+  segmented
+ </strong>
+ regression, and (performance)
+ <strong>
+  discontinuity
+ </strong>
+ models.
+ <code class="code">
+  mcp
+ </code>
+ aims to be be useful for all of them. See how
+ <code class="code">
+  mcp
+ </code>
+ compares to
+ <a href="https://lindeloev.github.io/mcp/articles/packages.html">
+  other R packages
+ </a>
+ .
+</p>
+<p>
+ Under the hood,
+ <code class="code">
+  mcp
+ </code>
+ takes a formula-representation of linear segments and turns it into
+ <a href="https://sourceforge.net/projects/mcmc-jags/">
+  JAGS
+ </a>
+ code.
+ <code class="code">
+  mcp
+ </code>
+ leverages the power of
+ <code class="code">
+  tidybayes
+ </code>
+ ,
+ <code class="code">
+  bayesplot
+ </code>
+ ,
+ <code class="code">
+  coda
+ </code>
+ , and
+ <code class="code">
+  loo
+ </code>
+ to make change point analysis easy and powerful.
+</p>
+<h1 class="heading">
+ Install
+</h1>
+<ol>
+<li>
+<p>
+<a href="https://sourceforge.net/projects/mcmc-jags/" target="_blank">
+    Install the latest version of JAGS
+   </a>
+   . Linux users can fetch binaries
+   <a href="https://mcmc-jags.sourceforge.io/" target="_blank">
+    here
+   </a>
+   .
+  </p>
+</li>
+<li>
+<p>
+   Install from CRAN:
+  </p>
+<p>
+<code class="code">
+    r
+install.packages("mcp")
+   </code>
+</p>
+<p>
+   or install the development version from GitHub:
+  </p>
+<p>
+<code class="code">
+    r
+if (!requireNamespace("remotes")) install.packages("remotes")
+remotes::install_github("lindeloev/mcp")
+   </code>
+</p>
+</li>
+</ol>
+<h1 class="heading">
+ At a glance
+</h1>
+<p>
+ Here are some example
+ <code class="code">
+  mcp
+ </code>
+ models.
+ <code class="code">
+  mcp
+ </code>
+ takes a list of formulas - one for each segment. The change point(s) are the
+ <code class="code">
+  x
+ </code>
+ at which data changes from being better predicted by one formula to the next. The first formula is just
+ <code class="code">
+  response ~ predictors
+ </code>
+ and the most common formula for segment 2+ would be
+ <code class="code">
+  ~ predictors
+ </code>
+ (more details
+ <a href="https://lindeloev.github.io/mcp/articles/formulas.html">
+  here
+ </a>
+ ).
+</p>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp-paper/raw/master/all_plots_small.png"/>
+</p>
+<p>
+ Scroll down to see brief introductions to each of these, or browse the website articles for more thorough worked examples and discussions.
+</p>
+<h1 class="heading">
+ Brief worked example
+</h1>
+<h2 class="heading">
+ Fit a model
+</h2>
+<p>
+ The following model infers the two change points between three segments.
+</p>
+<pre class="pre"><code class="language-r code">library(mcp)
+
+# Define the model
+model = list(
+  response ~ 1,  # plateau (int_1)
+  ~ 0 + time,    # joined slope (time_2) at cp_1
+  ~ 1 + time     # disjoined slope (int_3, time_3) at cp_2
+)
+
+# Get example data and fit it
+ex = mcp_example("demo")
+fit = mcp(model, data = ex$data)
+</code></pre>
+<h2 class="heading">
+ Plot and summary
+</h2>
+<p>
+ The default plot includes data, fitted lines drawn randomly from the posterior, and change point(s) posterior density for each chain:
+</p>
+<pre class="pre"><code class="language-r code">plot(fit)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_demo.png"/>
+</p>
+<p>
+ Use
+ <code class="code">
+  summary()
+ </code>
+ to summarise the posterior distribution as well as sampling diagnostics. They were simulated using
+ <code class="code">
+  mcp
+ </code>
+ (see
+ <code class="code">
+  mcp_example("demo")$call
+ </code>
+ ) so the summary include the "true" values in the column
+ <code class="code">
+  sim
+ </code>
+ and the column
+ <code class="code">
+  match
+ </code>
+ show whether this true value is within the interval:
+</p>
+<pre class="pre"><code class="language-r code">summary(fit)
+</code></pre>
+<pre class="pre"><code class="language-r code">Family: gaussian(link = 'identity')
+Iterations: 9000 from 3 chains.
+Segments:
+  1: response ~ 1
+  2: response ~ 1 ~ 0 + time
+  3: response ~ 1 ~ 1 + time
+
+Population-level parameters:
+    name match  sim  mean lower  upper Rhat n.eff
+    cp_1    OK 30.0 30.27 23.19 38.760    1   384
+    cp_2    OK 70.0 69.78 69.27 70.238    1  5792
+   int_1    OK 10.0 10.26  8.82 11.768    1  1480
+   int_3    OK  0.0  0.44 -2.49  3.428    1   810
+ sigma_1    OK  4.0  4.01  3.43  4.591    1  3852
+  time_2    OK  0.5  0.53  0.40  0.662    1   437
+  time_3    OK -0.2 -0.22 -0.38 -0.035    1   834
+</code></pre>
+<p>
+<code class="code">
+  rhat
+ </code>
+ is the
+ <a href="https://www.rdocumentation.org/packages/coda/versions/0.19-3/topics/gelman.diag">
+  Gelman-Rubin convergence diagnostic
+ </a>
+ ,
+ <code class="code">
+  eff
+ </code>
+ is the
+ <a href="https://mc-stan.org/docs/2_18/reference-manual/effective-sample-size-section.html">
+  effective sample size
+ </a>
+ . You may also want to do a posterior predictive check using
+ <code class="code">
+  pp_check(fit)
+ </code>
+ .
+</p>
+<p>
+<code class="code">
+  plot_pars(fit)
+ </code>
+ can be used to inspect the posteriors and convergence of all parameters. See the documentation of
+ <code class="code">
+  plot_pars()
+ </code>
+ for many other plotting options. Here, we plot just the (population-level) change points. They often have "strange" posterior distributions, highlighting the need for a computational approach:
+</p>
+<pre class="pre"><code class="language-r code">plot_pars(fit, regex_pars = "cp_")
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_demo_combo.png"/>
+</p>
+<p>
+ Use
+ <code class="code">
+  fitted(fit)
+ </code>
+ and
+ <code class="code">
+  predict(fit)
+ </code>
+ to get fits and predictions for in-sample and out-of-sample data.
+</p>
+<h2 class="heading">
+ Tests and model comparison
+</h2>
+<p>
+ We can test (joint) probabilities in the model using
+ <code class="code">
+  hypothesis()
+ </code>
+ (
+ <a href="https://lindeloev.github.io/mcp/articles/comparison.html">
+  see more here
+ </a>
+ ). For example, what is the evidence (given priors) that the first change point is later than 25 against it being less than 25?
+</p>
+<pre class="pre"><code class="language-r code">hypothesis(fit, "cp_1 &gt; 25")
+</code></pre>
+<pre class="pre"><code class="language-r code">     hypothesis mean lower upper     p   BF
+1 cp_1 - 25 &gt; 0 5.27 -1.81 13.76 0.917 11.1
+</code></pre>
+<p>
+ For model comparisons, we can fit a null model and compare the predictive performance of the two models using (approximate) leave-one-out cross-validation (
+ <a href="https://lindeloev.github.io/mcp/articles/comparison.html">
+  see more here
+ </a>
+ ). Our null model omits the first plateau and change point, essentially testing the credence of that change point:
+</p>
+<pre class="pre"><code class="language-r code"># Define the model
+model_null = list(
+  response ~ 1 + time,  # intercept (int_1) and slope (time_1)
+  ~ 1 + time            # disjoined slope (int_2, time_1)
+)
+
+# Fit it
+fit_null = mcp(model_null, ex$data)
+</code></pre>
+<p>
+ Leveraging the power of
+ <code class="code">
+  loo::loo
+ </code>
+ , we see that the two-change-points model is preferred (it is on top), but the
+ <code class="code">
+  elpd_diff / se_diff
+ </code>
+ ratio ratio indicate that this preference is not very strong.
+</p>
+<pre class="pre"><code class="language-r code">fit$loo = loo(fit)
+fit_null$loo = loo(fit_null)
+
+loo::loo_compare(fit$loo, fit_null$loo)
+</code></pre>
+<pre class="pre"><code class="code">       elpd_diff se_diff
+model1  0.0       0.0
+model2 -7.6       4.6
+</code></pre>
+<h1 class="heading">
+ Highlights from in-depth guides
+</h1>
+<p>
+ The articles on the
+ <a href="https://lindeloev.github.io/mcp/">
+  mcp website
+ </a>
+ go in-depth with the functionality of
+ <code class="code">
+  mcp
+ </code>
+ . Here is an executive summary, to give you a quick sense of what mcp can do.
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/formulas.html">
+  About mcp models and simulating data
+ </a>
+ :
+ * Parameter names are
+ <code class="code">
+  int_i
+ </code>
+ (intercepts),
+ <code class="code">
+  cp_i
+ </code>
+ (change points),
+ <code class="code">
+  x_i
+ </code>
+ (slopes),
+ <code class="code">
+  phi_i
+ </code>
+ (autocorrelation), and
+ <code class="code">
+  sigma_*
+ </code>
+ (variance).
+ * The change point model is basically an
+ <code class="code">
+  ifelse
+ </code>
+ model.
+ * Use
+ <code class="code">
+  rel()
+ </code>
+ to specify that parameters are relative to those corresponding in the previous segments.
+ * Generate data for all supported models using
+ <code class="code">
+  fit$simulate()
+ </code>
+ . See examples in, e.g.,
+ <code class="code">
+  mcp_examples("demo")$call
+ </code>
+ .
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/priors.html">
+  Using priors
+ </a>
+ :
+ * See priors in
+ <code class="code">
+  fit$prior
+ </code>
+ .
+ * Set priors using
+ <code class="code">
+  mcp(..., prior = list(cp_1 = "dnorm(0, 1)", cp_1 = "dunif(0, 45)")
+ </code>
+ .
+ * The default prior for change points is fast for estimation but is mathematically "messy". The Dirichlet prior (
+ <code class="code">
+  cp_i = "dirichlet(1)"
+ </code>
+ ) is slow but beautiful.
+ * Fix parameters to specific values using
+ <code class="code">
+  cp_1 = 45
+ </code>
+ .
+ * Share parameters between segments using
+ <code class="code">
+  slope_1 = "slope_2"
+ </code>
+ .
+ * Truncate priors using
+ <code class="code">
+  T(lower, upper)
+ </code>
+ , e.g.,
+ <code class="code">
+  int_1 = "dnorm(0, 1) T(0, )"
+ </code>
+ .
+ <code class="code">
+  mcp
+ </code>
+ applies this automatically to change point priors to enforce order restriction. This is true for
+ <a href="https://lindeloev.github.io/mcp/articles/varying.html">
+  varying change points
+ </a>
+ too.
+ * Do prior predictive checks using
+ <code class="code">
+  mcp(model, data, sample = "prior")
+ </code>
+ .
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/varying.html">
+  Varying change points
+ </a>
+ :
+ * Get posteriors using
+ <code class="code">
+  ranef(fit)
+ </code>
+ .
+ * Plot using
+ <code class="code">
+  plot(fit, facet_by = "my_group")
+ </code>
+ and
+ <code class="code">
+  plot_pars(fit, pars = "varying", type = "dens_overlay", ncol = 3)
+ </code>
+ .
+ * The default priors restrict varying change points to lie between the two adjacent change points.
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/families.html">
+  Supported families and link functions
+ </a>
+ : 
+ *
+ <code class="code">
+  mcp
+ </code>
+ currently supports specific combinations of families (
+ <code class="code">
+  gaussian()
+ </code>
+ ,
+ <code class="code">
+  binomial()
+ </code>
+ ,
+ <code class="code">
+  bernoulli()
+ </code>
+ , and
+ <code class="code">
+  poisson()
+ </code>
+ ) and link functions (
+ <code class="code">
+  identity
+ </code>
+ ,
+ <code class="code">
+  logit
+ </code>
+ ,
+ <code class="code">
+  probit
+ </code>
+ , and
+ <code class="code">
+  log
+ </code>
+ ).
+ * Use informative priors to avoid issues when using non-default priors.
+ * Use
+ <code class="code">
+  binomial(link = "logit")
+ </code>
+ for
+ <a href="https://lindeloev.github.io/mcp/articles/binomial.html">
+  binomial change points in mcp
+ </a>
+ . Also relevant for
+ <code class="code">
+  bernoulli(link = "logit")
+ </code>
+ .
+ * Use
+ <code class="code">
+  poisson(link = "log")
+ </code>
+ for
+ <a href="https://lindeloev.github.io/mcp/articles/poisson.html">
+  Poisson change points in mcp
+ </a>
+ .
+ * Get results on the parameter scale rather than the observed scale using
+ <code class="code">
+  plot(fit, scale = "linear")
+ </code>
+ or
+ <code class="code">
+  predict(fit, scale = "linear")
+ </code>
+ .
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/comparison.html">
+  Model comparison and hypothesis testing
+ </a>
+ :
+ * Do Leave-One-Out Cross-Validation using
+ <code class="code">
+  loo(fit)
+ </code>
+ and
+ <code class="code">
+  loo::loo_compare(fit1$loo, fit2$loo)
+ </code>
+ .
+ * Compute Savage-Dickey density rations using
+ <code class="code">
+  hypothesis(fit, "cp_1 = 40")
+ </code>
+ .
+ * Leverage directional and conditional tests to assess interval hypotheses (
+ <code class="code">
+  hypothesis(fit, "cp_1 &gt; 30 &amp; cp_1 &lt; 50")
+ </code>
+ ), combined other hypotheses (
+ <code class="code">
+  hypothesis(fit, "cp_1 &gt; 30 &amp; int_1 &gt; int_2")
+ </code>
+ ), etc.
+</p>
+<p>
+ Modeling
+ <a href="https://lindeloev.github.io/mcp/articles/variance.html">
+  variance
+ </a>
+ and
+ <a href="https://lindeloev.github.io/mcp/articles/arma.html">
+  autoregression
+ </a>
+ :
+ *
+ <code class="code">
+  ~ sigma(1)
+ </code>
+ models an intercept change in variance.
+ <code class="code">
+  ~ sigma(0 + x)
+ </code>
+ models increasing/decreasing variance.
+ *
+ <code class="code">
+  ~ ar(N)
+ </code>
+ models Nth order autoregression on residuals.
+ <code class="code">
+  ~ar(N, 0 + x)
+ </code>
+ models increasing/decreasing autocorrelation.
+ * You can model anything for
+ <code class="code">
+  sigma()
+ </code>
+ and
+ <code class="code">
+  ar()
+ </code>
+ . For example,
+ <code class="code">
+  ~ x + sigma(1 + x + I(x^2))
+ </code>
+ models polynomial change in variance with
+ <code class="code">
+  x
+ </code>
+ on top of a slope on the mean.
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/predict.html">
+  Get fitted and predicted values and intervals
+ </a>
+ :
+ *
+ <code class="code">
+  fitted(fit)
+ </code>
+ and
+ <code class="code">
+  predict(fit)
+ </code>
+ take many arguments to predict in-sample and out-of-sample values and intervals.
+ * Forecasting with prior knowledge about future change points.
+</p>
+<p>
+<a href="https://lindeloev.github.io/mcp/articles/tips.html">
+  Tips, tricks, and debugging
+ </a>
+ * Speed up fitting using
+ <code class="code">
+  mcp(..., cores = 3)
+ </code>
+ /
+ <code class="code">
+  options(mcp_cores = 3)
+ </code>
+ , and/or fewer iterations,
+ <code class="code">
+  mcp(..., adapt = 500)
+ </code>
+ .
+ * Help convergence along using
+ <code class="code">
+  mcp(..., inits = list(cp_1 = 20, int_2 = -3))
+ </code>
+ .
+ * Most errors will be caused by circularly defined priors.
+</p>
+<h1 class="heading">
+ Some examples
+</h1>
+<p>
+<code class="code">
+  mcp
+ </code>
+ aims to support a wide variety of models. Here are some example models for inspiration.
+</p>
+<h2 class="heading">
+ Means
+</h2>
+<p>
+ Find the single change point between two plateaus (simulated using
+ <code class="code">
+  mcp_example("intercepts")$call
+ </code>
+ ).
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+    y ~ 1,  # plateau (int_1)
+    ~ 1     # plateau (int_2)
+)
+ex = mcp_example("intercepts")
+fit = mcp(model, ex$data, par_x = "x")
+plot(fit)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_plateaus.png"/>
+</p>
+<h2 class="heading">
+ Varying change points
+</h2>
+<p>
+ Here, we find the single change point between two joined slopes. While the slopes are shared by all participants, the change point varies by
+ <code class="code">
+  id
+ </code>
+ . Read more about
+ <a href="https://lindeloev.github.io/mcp/articles/varying.html">
+  varying change points in mcp
+ </a>
+ .
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  y ~ 1 + x,          # intercept + slope
+  1 + (1|id) ~ 0 + x  # joined slope, varying by id
+)
+ex = mcp_example("varying")
+fit = mcp(model, ex$data)
+plot(fit, facet_by = "id")
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_varying.png"/>
+</p>
+<p>
+ Summarise the varying change points using
+ <code class="code">
+  ranef()
+ </code>
+ or plot them using
+ <code class="code">
+  plot_pars(fit, "varying")
+ </code>
+ . Again, this data was simulated using
+ <code class="code">
+  mcp
+ </code>
+ (see
+ <code class="code">
+  mcp_example("varying")$call
+ </code>
+ ) so the columns
+ <code class="code">
+  match
+ </code>
+ and
+ <code class="code">
+  sim
+ </code>
+ are added to show simulation values and whether they are inside the interval. Set the
+ <code class="code">
+  width
+ </code>
+ wider for a more lenient criterion.
+</p>
+<pre class="pre"><code class="language-r code">ranef(fit, width = 0.98)
+</code></pre>
+<pre class="pre"><code class="language-r code">           name match   sim  mean   lower   upper Rhat n.eff
+ cp_1_id[Benny]    OK -17.5 -18.1 -21.970 -14.877    1   895
+  cp_1_id[Bill]    OK -10.5  -7.6 -10.658  -4.451    1   420
+  cp_1_id[Cath]    OK  -3.5  -2.8  -5.634   0.027    1   888
+  cp_1_id[Erin]    OK   3.5   3.1   0.041   5.952    1  3622
+  cp_1_id[John]    OK  10.5  11.3   7.577  14.989    1  2321
+  cp_1_id[Rose]    OK  17.5  14.1  10.485  18.079    1  5150
+</code></pre>
+<h2 class="heading">
+ Generalized linear models
+</h2>
+<p>
+<code class="code">
+  mcp
+ </code>
+ supports Generalized Linear Modeling. See extended examples using
+ <a href="https://lindeloev.github.io/mcp/articles/binomial.html">
+<code class="code">
+   binomial()
+  </code>
+</a>
+ and
+ <a href="https://lindeloev.github.io/mcp/articles/poisson.html">
+<code class="code">
+   poisson()
+  </code>
+</a>
+ .
+</p>
+<p>
+ Here is a binomial change point model with three segments (see simulation code:
+ <code class="code">
+  mcp_example("binomial")$call
+ </code>
+ ). We plot the 95% HDI too:
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  y | trials(N) ~ 1,  # constant rate
+  ~ 0 + x,            # joined changing rate
+  ~ 1 + x             # disjoined changing rate
+)
+ex = mcp_example("binomial")
+fit = mcp(model, ex$data, family = binomial())
+plot(fit, q_fit = TRUE)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_binomial.png"/>
+</p>
+<p>
+ Use
+ <code class="code">
+  plot(fit, rate = FALSE)
+ </code>
+ if you want the points and fit lines on the original scale of
+ <code class="code">
+  y
+ </code>
+ rather than divided by
+ <code class="code">
+  N
+ </code>
+ .
+</p>
+<h2 class="heading">
+ Time series
+</h2>
+<p>
+<code class="code">
+  mcp
+ </code>
+ allows for flexible time series analysis with autoregressive residuals of arbitrary order. Below, we model a change from a plateau with strong positive AR(2) residuals to a slope with medium AR(1) residuals. These data were simulated with
+ <code class="code">
+  mcp
+ </code>
+ (see simulation code:
+ <code class="code">
+  mcp_example("ar")$call
+ </code>
+ ) and the generating values are in the
+ <code class="code">
+  sim
+ </code>
+ column. You can also do regression on the AR coefficients themselves using e.g.,
+ <code class="code">
+  ar(1, 1 + x)
+ </code>
+ .
+ <a href="https://lindeloev.github.io/mcp/articles/arma.html">
+  Read more here
+ </a>
+ .
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  price ~ 1 + ar(2),
+  ~ 0 + time + ar(1)
+)
+ex = mcp_example("ar")
+fit = mcp(model, ex$data)
+summary(fit)
+</code></pre>
+<p>
+ The AR(N) parameters on intercepts are named
+ <code class="code">
+  ar[order]_[segment]
+ </code>
+ . All parameters, including the change point, are well recovered:
+</p>
+<pre class="pre"><code class="language-r code">Population-level parameters:
+    name match   sim    mean     lower   upper Rhat n.eff
+   ar1_1    OK   0.7   0.741  5.86e-01   0.892 1.01   713
+   ar1_2    OK  -0.4  -0.478 -6.88e-01  -0.255 1.00  2151
+   ar2_1    OK   0.2   0.145 -6.56e-04   0.284 1.01   798
+    cp_1       120.0 117.313  1.14e+02 118.963 1.05   241
+   int_1        20.0  17.558  1.51e+01  19.831 1.02   293
+ sigma_1    OK   5.0   4.829  4.39e+00   5.334 1.00  3750
+  time_2    OK   0.5   0.517  4.85e-01   0.553 1.00   661
+</code></pre>
+<p>
+ The fit plot shows the inferred autocorrelated nature:
+</p>
+<pre class="pre"><code class="language-r code">plot(fit_ar)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_ar.png"/>
+</p>
+<h2 class="heading">
+ Variance change and prediction intervals
+</h2>
+<p>
+ You can model variance by adding a
+ <code class="code">
+  sigma()
+ </code>
+ term to the formula. The inside
+ <code class="code">
+  sigma()
+ </code>
+ can take everything that the formulas outside do. Read more in
+ <a href="https://lindeloev.github.io/mcp/articles/variance.html">
+  the article on variance
+ </a>
+ . The example below models two change points. The first is variance-only: variance abruptly increases and then declines linearly with
+ <code class="code">
+  x
+ </code>
+ . The second change point is the stop of the variance-decline and the onset of a slope on the mean.
+</p>
+<p>
+ Effects on variance is best visualized using
+ <em>
+  prediction intervals
+ </em>
+ . See more in the documentation for
+ <code class="code">
+  plot.mcpfit()
+ </code>
+ .
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  y ~ 1,
+  ~ 0 + sigma(1 + x),
+  ~ 0 + x
+)
+ex = mcp_example("variance")
+fit = mcp(model, ex$data, cores = 3, adapt = 5000, iter = 5000)
+plot(fit, q_predict = TRUE)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_variance.png"/>
+</p>
+<h2 class="heading">
+ Quadratic and other exponentiations
+</h2>
+<p>
+ Write exponents as
+ <code class="code">
+  I(x^N)
+ </code>
+ . E.g., quadratic
+ <code class="code">
+  I(x^2)
+ </code>
+ , cubic
+ <code class="code">
+  I(x^3)
+ </code>
+ , or some other power function
+ <code class="code">
+  I(x^1.5)
+ </code>
+ . The example below detects the onset of linear + quadratic growth. This is often called the BLQ model (Broken Line Quadratic) in nutrition research.
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  y ~ 1,
+  ~ 0 + x + I(x^2)
+)
+ex = mcp_example("quadratic")
+fit = mcp(model, ex$data)
+plot(fit)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_quadratic.png"/>
+</p>
+<h2 class="heading">
+ Trigonometric and others
+</h2>
+<p>
+ You can use
+ <code class="code">
+  sin(x)
+ </code>
+ ,
+ <code class="code">
+  cos(x)
+ </code>
+ , and
+ <code class="code">
+  tan(x)
+ </code>
+ to do trigonometry. This can be useful for seasonal trends and other periodic data. You can also do
+ <code class="code">
+  exp(x)
+ </code>
+ ,
+ <code class="code">
+  abs(x)
+ </code>
+ ,
+ <code class="code">
+  log(x)
+ </code>
+ , and
+ <code class="code">
+  sqrt(x)
+ </code>
+ , but beware that the two latter will currently fail in segment 2+. Raise an issue if you need this.
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  y ~ 1 + sin(x),
+  ~ 1 + cos(x) + x
+)
+ex = mcp_example("trigonometric")
+fit = mcp(model, ex$data)
+plot(fit)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_trig.png"/>
+</p>
+<h2 class="heading">
+ Using
+ <code class="code">
+  rel()
+ </code>
+ and priors
+</h2>
+<p>
+ Read more about
+ <a href="https://lindeloev.github.io/mcp/articles/formulas.html">
+  formula options
+ </a>
+ and
+ <a href="https://lindeloev.github.io/mcp/articles/priors.html">
+  priors
+ </a>
+ .
+</p>
+<p>
+ Here we find the two change points between three segments. The slope and intercept of segment 2 are parameterized relative to segment 1, i.e., modeling the
+ <em>
+  change
+ </em>
+ in intercept and slope since segment 1. So too with the second change point (
+ <code class="code">
+  cp_2
+ </code>
+ ) which is now the
+ <em>
+  distance
+ </em>
+ from
+ <code class="code">
+  cp_1
+ </code>
+ .
+</p>
+<p>
+ Some of the default priors are overwritten. The first intercept (
+ <code class="code">
+  int_1
+ </code>
+ ) is forced to be 10, the slopes are in segment 1 and 3 is shared. It is easy to see these effects in the (simulated) data because they violate it somewhat. The first change point has to be at
+ <code class="code">
+  x = 20
+ </code>
+ or later.
+</p>
+<pre class="pre"><code class="language-r code">model = list(
+  y ~ 1 + x,
+  ~ rel(1) + rel(x),
+  rel(1) ~ 0 + x
+)
+
+prior = list(
+  int_1 = 10,  # Constant, not estimated
+  x_3 = "x_1",  # shared slope in segment 1 and 3
+  int_2 = "dnorm(0, 20)",
+  cp_1 = "dunif(20, 50)"  # has to occur in this interval
+)
+ex = mcp_example("rel_prior")
+fit = mcp(model, ex$data, prior, iter = 10000)
+plot(fit)
+</code></pre>
+<p>
+<img alt="" src="https://github.com/lindeloev/mcp/raw/docs/vignettes/_figures/ex_fix_rel.png"/>
+</p>
+<p>
+ Comparing the summary to the fitted lines in the plot, we can see that
+ <code class="code">
+  int_2
+ </code>
+ and
+ <code class="code">
+  x_2
+ </code>
+ are relative values. We also see that the "wrong" priors made it harder to recover the parameters used to simulate this code (see
+ <code class="code">
+  mcp_example("rel_prior")$simulated
+ </code>
+ which is represented in the
+ <code class="code">
+  match
+ </code>
+ and
+ <code class="code">
+  sim
+ </code>
+ columns):
+</p>
+<pre class="pre"><code class="language-r code">summary(fit)
+</code></pre>
+<pre class="pre"><code class="language-r code">Population-level parameters:
+    name match   sim  mean  lower upper Rhat n.eff
+    cp_1    OK  25.0 23.15  20.00 25.81 1.00   297
+    cp_2        40.0 51.85  47.06 56.36 1.02   428
+   int_1        25.0 10.00  10.00 10.00  NaN     0
+   int_2    OK -10.0 -6.86 -21.57 11.89 1.03   190
+ sigma_1         7.0  9.70   8.32 11.18 1.00  7516
+     x_1         1.0  1.58   1.24  1.91 1.07   120
+     x_2    OK  -3.0 -3.28  -3.61 -2.96 1.04   293
+     x_3         0.5  1.58   1.24  1.91 1.07   120
+</code></pre>
+<h1 class="heading">
+ Do much more with the MCMC samples
+</h1>
+<p>
+ Don't be constrained by these simple
+ <code class="code">
+  mcp
+ </code>
+ functions.
+ <code class="code">
+  fit$samples
+ </code>
+ is a regular
+ <code class="code">
+  mcmc.list
+ </code>
+ object and all methods apply. You can work with the MCMC samples just as you would with
+ <code class="code">
+  brms
+ </code>
+ ,
+ <code class="code">
+  rstanarm
+ </code>
+ ,
+ <code class="code">
+  jags
+ </code>
+ , or other samplers using the always excellent
+ <code class="code">
+  tidybayes
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-r code">library(tidybayes)
+
+# Extract all parameters:
+tidy_draws(fit$samples) %&gt;%
+  # tidybayes stuff here
+
+# Extract some parameters:
+fit$pars$model  # check out which parameters are inferred.
+spread_draws(fit$samples, cp_1, cp_2, int_1, year_1) %&gt;%
+ # tidybayes stuff here
+</code></pre>
+<p>
+ It may be convenient to use
+ <code class="code">
+  fitted(fit, summary = FALSE)
+ </code>
+ or
+ <code class="code">
+  predict(fit, summary = FALSE)
+ </code>
+ which return draws in
+ <code class="code">
+  tidybayes
+ </code>
+ format, extended with additional columns for fits and predictions. For example:
+</p>
+<pre class="pre"><code class="language-r code">head(fitted(fit, summary = FALSE))
+</code></pre>
+<h1 class="heading">
+ Citation
+</h1>
+<p>
+<a href="https://osf.io/fzqxv">
+  This preprint
+ </a>
+ formally introduces
+ <code class="code">
+  mcp
+ </code>
+ . Find citation info at the link, call
+ <code class="code">
+  citation("mcp")
+ </code>
+ or copy-paste this into your reference manager:
+</p>
+<pre class="pre"><code class="code">  @Article{,
+    title = {mcp: An R Package for Regression With Multiple Change Points},
+    author = {Jonas Kristoffer Lindeløv},
+    journal = {OSF Preprints},
+    year = {2020},
+    doi = {10.31219/osf.io/fzqxv},
+    encoding = {UTF-8},
+  }
+</code></pre>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/lindeloev-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/lindeloev-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/lindeloev-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/lindeloev-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

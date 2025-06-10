@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="crystaldba/postgres-mcp - MCP Directory">
+    <meta property="og:description" content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init">
+    <meta property="og:url" content="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="crystaldba/postgres-mcp - MCP Directory">
+    <meta name="twitter:description" content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init">
+    
+    <title>crystaldba/postgres-mcp - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">crystaldba/postgres-mcp</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">crystaldba/postgres-mcp</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 343</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/crystaldba/postgres-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="crystaldba/postgres-mcp - MCP Directory" property="og:title"/>
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="crystaldba/postgres-mcp - MCP Directory" name="twitter:title"/>
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" name="twitter:description"/>
+<title>crystaldba/postgres-mcp - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">crystaldba/postgres-mcp</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">crystaldba/postgres-mcp</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 343</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/crystaldba/postgres-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="crystaldba/postgres-mcp - MCP Directory" property="og:title">
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" property="og:description">
+<meta content="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="crystaldba/postgres-mcp - MCP Directory" name="twitter:title">
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" name="twitter:description">
+<title>crystaldba/postgres-mcp - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>crystaldba/postgres-mcp</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 343</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/crystaldba/postgres-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="crystaldba/postgres-mcp - MCP Directory" property="og:title"/>
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="crystaldba/postgres-mcp - MCP Directory" name="twitter:title"/>
+<meta content="Postgres MCP Prois an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout theentire development process—from init" name="twitter:description"/>
+<title>crystaldba/postgres-mcp - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>crystaldba/postgres-mcp</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 343</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/crystaldba/postgres-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<div align="center">
+<img alt="Postgres MCP Pro Logo" src="assets/postgres-mcp-pro.png" width="600"/>
+ [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PyPI - Version](https://img.shields.io/pypi/v/postgres-mcp)](https://pypi.org/project/postgres-mcp/)
+[![Discord](https://img.shields.io/discord/1336769798603931789?label=Discord)](https://discord.gg/4BEHC7ZM)
+[![Twitter Follow](https://img.shields.io/twitter/follow/auto_dba?style=flat)](https://x.com/auto_dba)
+[![Contributors](https://img.shields.io/github/contributors/crystaldba/postgres-mcp)](https://github.com/crystaldba/postgres-mcp/graphs/contributors)
+ <h3 class="heading">
+  A Postgres MCP server with index tuning, explain plans, health checks, and safe sql execution.
+ </h3>
+<div class="toc">
+<a href="#overview">
+   Overview
+  </a>
+  •
+  <a href="#demo">
+   Demo
+  </a>
+  •
+  <a href="#quick-start">
+   Quick Start
+  </a>
+  •
+  <a href="#technical-notes">
+   Technical Notes
+  </a>
+  •
+  <a href="#mcp-server-api">
+   MCP API
+  </a>
+  •
+  <a href="#related-projects">
+   Related Projects
+  </a>
+  •
+  <a href="#frequently-asked-questions">
+   FAQ
+  </a>
+</div>
+</div>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+<strong>
+  Postgres MCP Pro
+ </strong>
+ is an open source Model Context Protocol (MCP) server built to support you and your AI agents throughout the
+ <strong>
+  entire development process
+ </strong>
+ —from initial coding, through testing and deployment, and to production tuning and maintenance.
+</p>
+<p>
+ Postgres MCP Pro does much more than wrap a database connection.
+</p>
+<p>
+ Features include:
+</p>
+<ul>
+<li>
+<strong>
+   🔍 Database Health
+  </strong>
+  - analyze index health, connection utilization, buffer cache, vacuum health, sequence limits, replication lag, and more.
+ </li>
+<li>
+<strong>
+   ⚡ Index Tuning
+  </strong>
+  - explore thousands of possible indexes to find the best solution for your workload, using industrial-strength algorithms.
+ </li>
+<li>
+<strong>
+   📈 Query Plans
+  </strong>
+  - validate and optimize performance by reviewing EXPLAIN plans and simulating the impact of hypothetical indexes.
+ </li>
+<li>
+<strong>
+   🧠 Schema Intelligence
+  </strong>
+  - context-aware SQL generation based on detailed understanding of the database schema.
+ </li>
+<li>
+<strong>
+   🛡️ Safe SQL Execution
+  </strong>
+  - configurable access control, including support for read-only mode and safe SQL parsing, making it usable for both development and production.
+ </li>
+</ul>
+<p>
+ Postgres MCP Pro supports both the
+ <a href="https://modelcontextprotocol.io/docs/concepts/transports#standard-input%2Foutput-stdio">
+  Standard Input/Output (stdio)
+ </a>
+ and
+ <a href="https://modelcontextprotocol.io/docs/concepts/transports#server-sent-events-sse">
+  Server-Sent Events (SSE)
+ </a>
+ transports, for flexibility in different environments.
+</p>
+<p>
+ For additional background on why we built Postgres MCP Pro, see
+ <a href="https://www.crystaldba.ai/blog/post/announcing-postgres-mcp-server-pro">
+  our launch blog post
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Demo
+</h2>
+<p>
+<em>
+  From Unusable to Lightning Fast
+ </em>
+ -
+ <strong>
+  Challenge:
+ </strong>
+ We generated a movie app using an AI assistant, but the SQLAlchemy ORM code ran painfully slow.
+-
+ <strong>
+  Solution:
+ </strong>
+ Using Postgres MCP Pro with Cursor, we fixed the performance issues in minutes.
+</p>
+<p>
+ What we did:
+- 🚀 Fixed performance - including ORM queries, indexing, and caching
+- 🛠️ Fixed a broken page - by prompting the agent to explore the data, fix queries, and add related content.
+- 🧠 Improved the top movies - by exploring the data and fixing the ORM query to surface more relevant results.
+</p>
+<p>
+ See the video below or read the
+ <a href="examples/movie-app.md">
+  play-by-play
+ </a>
+ .
+</p>
+<p>
+ https://github.com/user-attachments/assets/24e05745-65e9-4998-b877-a368f1eadc13
+</p>
+<h2 class="heading">
+ Quick Start
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<p>
+ Before getting started, ensure you have:
+1. Access credentials for your database.
+2. Docker
+ <em>
+  or
+ </em>
+ Python 3.12 or higher.
+</p>
+<h4 class="heading">
+ Access Credentials
+</h4>
+<p>
+ You can confirm your access credentials are valid by using
+ <code class="code">
+  psql
+ </code>
+ or a GUI tool such as
+ <a href="https://www.pgadmin.org/">
+  pgAdmin
+ </a>
+ .
+</p>
+<h4 class="heading">
+ Docker or Python
+</h4>
+<p>
+ The choice to use Docker or Python is yours.
+We generally recommend Docker because Python users can encounter more environment-specific issues.
+However, it often makes sense to use whichever method you are most familiar with.
+</p>
+<h3 class="heading">
+ Installation
+</h3>
+<p>
+ Choose one of the following methods to install Postgres MCP Pro:
+</p>
+<h4 class="heading">
+ Option 1: Using Docker
+</h4>
+<p>
+ Pull the Postgres MCP Pro MCP server Docker image.
+This image contains all necessary dependencies, providing a reliable way to run Postgres MCP Pro in a variety of environments.
+</p>
+<pre class="pre"><code class="language-bash code">docker pull crystaldba/postgres-mcp
+</code></pre>
+<h4 class="heading">
+ Option 2: Using Python
+</h4>
+<p>
+ If you have
+ <code class="code">
+  pipx
+ </code>
+ installed you can install Postgres MCP Pro with:
+</p>
+<pre class="pre"><code class="language-bash code">pipx install postgres-mcp
+</code></pre>
+<p>
+ Otherwise, install Postgres MCP Pro with
+ <code class="code">
+  uv
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-bash code">uv pip install postgres-mcp
+</code></pre>
+<p>
+ If you need to install
+ <code class="code">
+  uv
+ </code>
+ , see the
+ <a href="https://docs.astral.sh/uv/getting-started/installation/">
+  uv installation instructions
+ </a>
+ .
+</p>
+<h3 class="heading">
+ Configure Your AI Assistant
+</h3>
+<p>
+ We provide full instructions for configuring Postgres MCP Pro with Claude Desktop.
+Many MCP clients have similar configuration files, you can adapt these steps to work with the client of your choice.
+</p>
+<h4 class="heading">
+ Claude Desktop Configuration
+</h4>
+<p>
+ You will need to edit the Claude Desktop configuration file to add Postgres MCP Pro.
+The location of this file depends on your operating system:
+- MacOS:
+ <code class="code">
+  ~/Library/Application Support/Claude/claude_desktop_config.json
+ </code>
+ - Windows:
+ <code class="code">
+  %APPDATA%/Claude/claude_desktop_config.json
+ </code>
+</p>
+<p>
+ You can also use
+ <code class="code">
+  Settings
+ </code>
+ menu item in Claude Desktop to locate the configuration file.
+</p>
+<p>
+ You will now edit the
+ <code class="code">
+  mcpServers
+ </code>
+ section of the configuration file.
+</p>
+<h5 class="heading">
+ If you are using Docker
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "postgres": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DATABASE_URI",
+        "crystaldba/postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "env": {
+        "DATABASE_URI": "postgresql://username:password@localhost:5432/dbname"
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ The Postgres MCP Pro Docker image will automatically remap the hostname
+ <code class="code">
+  localhost
+ </code>
+ to work from inside of the container.
+</p>
+<ul>
+<li>
+  MacOS/Windows: Uses
+  <code class="code">
+   host.docker.internal
+  </code>
+  automatically
+ </li>
+<li>
+  Linux: Uses
+  <code class="code">
+   172.17.0.1
+  </code>
+  or the appropriate host address automatically
+ </li>
+</ul>
+<h5 class="heading">
+ If you are using
+ <code class="code">
+  pipx
+ </code>
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "postgres": {
+      "command": "postgres-mcp",
+      "args": [
+        "--access-mode=unrestricted"
+      ],
+      "env": {
+        "DATABASE_URI": "postgresql://username:password@localhost:5432/dbname"
+      }
+    }
+  }
+}
+</code></pre>
+<h5 class="heading">
+ If you are using
+ <code class="code">
+  uv
+ </code>
+</h5>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "postgres": {
+      "command": "uv",
+      "args": [
+        "run",
+        "postgres-mcp",
+        "--access-mode=unrestricted"
+      ],
+      "env": {
+        "DATABASE_URI": "postgresql://username:password@localhost:5432/dbname"
+      }
+    }
+  }
+}
+</code></pre>
+<h5 class="heading">
+ Connection URI
+</h5>
+<p>
+ Replace
+ <code class="code">
+  postgresql://...
+ </code>
+ with your
+ <a href="https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS">
+  Postgres database connection URI
+ </a>
+ .
+</p>
+<h5 class="heading">
+ Access Mode
+</h5>
+<p>
+ Postgres MCP Pro supports multiple
+ <em>
+  access modes
+ </em>
+ to give you control over the operations that the AI agent can perform on the database:
+-
+ <strong>
+  Unrestricted Mode
+ </strong>
+ : Allows full read/write access to modify data and schema. It is suitable for development environments.
+-
+ <strong>
+  Restricted Mode
+ </strong>
+ : Limits operations to read-only transactions and imposes constraints on resource utilization (presently only execution time). It is suitable for production environments.
+</p>
+<p>
+ To use restricted mode, replace
+ <code class="code">
+  --access-mode=unrestricted
+ </code>
+ with
+ <code class="code">
+  --access-mode=restricted
+ </code>
+ in the configuration examples above.
+</p>
+<h4 class="heading">
+ Other MCP Clients
+</h4>
+<p>
+ Many MCP clients have similar configuration files to Claude Desktop, and you can adapt the examples above to work with the client of your choice.
+</p>
+<ul>
+<li>
+  If you are using Cursor, you can use navigate from the
+  <code class="code">
+   Command Palette
+  </code>
+  to
+  <code class="code">
+   Cursor Settings
+  </code>
+  , then open the
+  <code class="code">
+   MCP
+  </code>
+  tab to access the configuration file.
+ </li>
+<li>
+  If you are using Windsurf, you can navigate to from the
+  <code class="code">
+   Command Palette
+  </code>
+  to
+  <code class="code">
+   Open Windsurf Settings Page
+  </code>
+  to access the configuration file.
+ </li>
+<li>
+  If you are using Goose run
+  <code class="code">
+   goose configure
+  </code>
+  , then select
+  <code class="code">
+   Add Extension
+  </code>
+  .
+ </li>
+</ul>
+<h2 class="heading">
+ SSE Transport
+</h2>
+<p>
+ Postgres MCP Pro supports the
+ <a href="https://modelcontextprotocol.io/docs/concepts/transports#server-sent-events-sse">
+  SSE transport
+ </a>
+ , which allows multiple MCP clients to share one server, possibly a remote server.
+To use the SSE transport, you need to start the server with the
+ <code class="code">
+  --transport=sse
+ </code>
+ option.
+</p>
+<p>
+ For example, with Docker run:
+</p>
+<pre class="pre"><code class="language-bash code">docker run -p 8000:8000 \
+  -e DATABASE_URI=postgresql://username:password@localhost:5432/dbname \
+  crystaldba/postgres-mcp --access-mode=unrestricted --transport=sse
+</code></pre>
+<p>
+ Then update your MCP client configuration to call the the MCP server.
+For example, in Cursor's
+ <code class="code">
+  mcp.json
+ </code>
+ or Cline's
+ <code class="code">
+  cline_mcp_settings.json
+ </code>
+ you can put:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "postgres": {
+            "type": "sse",
+            "url": "http://localhost:8000/sse"
+        }
+    }
+}
+</code></pre>
+<p>
+ For Windsurf, the format in
+ <code class="code">
+  mcp_config.json
+ </code>
+ is slightly different:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "postgres": {
+            "type": "sse",
+            "serverUrl": "http://localhost:8000/sse"
+        }
+    }
+}
+</code></pre>
+<h2 class="heading">
+ Postgres Extension Installation (Optional)
+</h2>
+<p>
+ To enable index tuning and comprehensive performance analysis you need to load the
+ <code class="code">
+  pg_statements
+ </code>
+ and
+ <code class="code">
+  hypopg
+ </code>
+ extensions on your database.
+</p>
+<ul>
+<li>
+  The
+  <code class="code">
+   pg_statements
+  </code>
+  extension allows Postgres MCP Pro to analyze query execution statistics.
+For example, this allows it to understand which queries are running slow or consuming significant resources.
+ </li>
+<li>
+  The
+  <code class="code">
+   hypopg
+  </code>
+  extension allows Postgres MCP Pro to simulate the behavior of the Postgres query planner after adding indexes.
+ </li>
+</ul>
+<h3 class="heading">
+ Installing extensions on AWS RDS, Azure SQL, or Google Cloud SQL
+</h3>
+<p>
+ If your Postgres database is running on a cloud provider managed service, the
+ <code class="code">
+  pg_statements
+ </code>
+ and
+ <code class="code">
+  hypopg
+ </code>
+ extensions should already be available on the system.
+In this case, you can just run
+ <code class="code">
+  CREATE EXTENSION
+ </code>
+ commands using a role with sufficient privileges:
+</p>
+<pre class="pre"><code class="language-sql code">CREATE EXTENSION IF NOT EXISTS pg_statements;
+CREATE EXTENSION IF NOT EXISTS hypopg;
+</code></pre>
+<h3 class="heading">
+ Installing extensions on self-managed Postgres
+</h3>
+<p>
+ If you are managing your own Postgres installation, you may need to do additional work.
+Before loading the
+ <code class="code">
+  pg_statements
+ </code>
+ extension you must ensure that it is listed in the
+ <code class="code">
+  shared_preload_libraries
+ </code>
+ in the Postgres configuration file.
+The
+ <code class="code">
+  hypopg
+ </code>
+ extension may also require additional system-level installation (e.g., via your package manager) because it does not always ship with Postgres.
+</p>
+<h2 class="heading">
+ Usage Examples
+</h2>
+<h3 class="heading">
+ Get Database Health Overview
+</h3>
+<p>
+ Ask:
+</p>
+<blockquote>
+<p>
+  Check the health of my database and identify any issues.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Analyze Slow Queries
+</h3>
+<p>
+ Ask:
+</p>
+<blockquote>
+<p>
+  What are the slowest queries in my database? And how can I speed them up?
+ </p>
+</blockquote>
+<h3 class="heading">
+ Get Recommendations On How To Speed Things Up
+</h3>
+<p>
+ Ask:
+</p>
+<blockquote>
+<p>
+  My app is slow. How can I make it faster?
+ </p>
+</blockquote>
+<h3 class="heading">
+ Generate Index Recommendations
+</h3>
+<p>
+ Ask:
+</p>
+<blockquote>
+<p>
+  Analyze my database workload and suggest indexes to improve performance.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Optimize a Specific Query
+</h3>
+<p>
+ Ask:
+</p>
+<blockquote>
+<p>
+  Help me optimize this query: SELECT * FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.created_at &gt; '2023-01-01';
+ </p>
+</blockquote>
+<h2 class="heading">
+ MCP Server API
+</h2>
+<p>
+ The
+ <a href="https://modelcontextprotocol.io/">
+  MCP standard
+ </a>
+ defines various types of endpoints: Tools, Resources, Prompts, and others.
+</p>
+<p>
+ Postgres MCP Pro provides functionality via
+ <a href="https://modelcontextprotocol.io/docs/concepts/tools">
+  MCP tools
+ </a>
+ alone.
+We chose this approach because the
+ <a href="https://modelcontextprotocol.io/clients">
+  MCP client ecosystem
+ </a>
+ has widespread support for MCP tools.
+This contrasts with the approach of other Postgres MCP servers, including the
+ <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres">
+  Reference Postgres MCP Server
+ </a>
+ , which use
+ <a href="https://modelcontextprotocol.io/docs/concepts/resources">
+  MCP resources
+ </a>
+ to expose schema information.
+</p>
+<p>
+ Postgres MCP Pro Tools:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Tool Name
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     list_schemas
+    </code>
+</td>
+<td>
+    Lists all database schemas available in the PostgreSQL instance.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_objects
+    </code>
+</td>
+<td>
+    Lists database objects (tables, views, sequences, extensions) within a specified schema.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_object_details
+    </code>
+</td>
+<td>
+    Provides information about a specific database object, for example, a table's columns, constraints, and indexes.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     execute_sql
+    </code>
+</td>
+<td>
+    Executes SQL statements on the database, with read-only limitations when connected in restricted mode.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     explain_query
+    </code>
+</td>
+<td>
+    Gets the execution plan for a SQL query describing how PostgreSQL will process it and exposing the query planner's cost model. Can be invoked with hypothetical indexes to simulate the behavior after adding indexes.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_top_queries
+    </code>
+</td>
+<td>
+    Reports the slowest SQL queries based on total execution time using
+    <code class="code">
+     pg_stat_statements
+    </code>
+    data.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     analyze_workload_indexes
+    </code>
+</td>
+<td>
+    Analyzes the database workload to identify resource-intensive queries, then recommends optimal indexes for them.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     analyze_query_indexes
+    </code>
+</td>
+<td>
+    Analyzes a list of specific SQL queries (up to 10) and recommends optimal indexes for them.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     analyze_db_health
+    </code>
+</td>
+<td>
+    Performs comprehensive health checks including: buffer cache hit rates, connection health, constraint validation, index health (duplicate/unused/invalid), sequence limits, and vacuum health.
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Related Projects
+</h2>
+<p>
+<strong>
+  Postgres MCP Servers
+ </strong>
+ -
+ <a href="https://github.com/alexander-zuev/supabase-mcp-server">
+  Query MCP
+ </a>
+ . An MCP server for Supabase Postgres with a three-tier safety architecture and Supabase management API support.
+-
+ <a href="https://github.com/stuzero/pg-mcp-server">
+  PG-MCP
+ </a>
+ . An MCP server for PostgreSQL with flexible connection options, explain plans, extension context, and more.
+-
+ <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres">
+  Reference PostgreSQL MCP Server
+ </a>
+ . A simple MCP Server implementation exposing schema information as MCP resources and executing read-only queries.
+-
+ <a href="https://github.com/supabase-community/supabase-mcp">
+  Supabase Postgres MCP Server
+ </a>
+ . This MCP Server provides Supabase management features and is actively maintained by the Supabase community.
+-
+ <a href="https://github.com/niledatabase/nile-mcp-server">
+  Nile MCP Server
+ </a>
+ . An MCP server providing access to the management API for the Nile's multi-tenant Postgres service.
+-
+ <a href="https://github.com/neondatabase-labs/mcp-server-neon">
+  Neon MCP Server
+ </a>
+ . An MCP server providing access to the management API for Neon's serverless Postgres service.
+-
+ <a href="https://github.com/Canner/wren-engine">
+  Wren MCP Server
+ </a>
+ . Provides a semantic engine powering business intelligence for Postgres and other databases.
+</p>
+<p>
+<strong>
+  DBA Tools (including commercial offerings)
+ </strong>
+ -
+ <a href="https://aiven.io/solutions/aiven-ai-database-optimizer">
+  Aiven Database Optimizer
+ </a>
+ . A tool that provides holistic database workload analysis, query optimizations, and other performance improvements.
+-
+ <a href="https://www.dba.ai/">
+  dba.ai
+ </a>
+ . An AI-powered database administration assistant that integrates with GitHub to resolve code issues.
+-
+ <a href="https://pganalyze.com/">
+  pgAnalyze
+ </a>
+ . A comprehensive monitoring and analytics platform for identifying performance bottlenecks, optimizing queries, and real-time alerting.
+-
+ <a href="https://postgres.ai/">
+  Postgres.ai
+ </a>
+ . An interactive chat experience combining an extensive Postgres knowledge base and GPT-4.
+-
+ <a href="https://github.com/xataio/agent">
+  Xata Agent
+ </a>
+ . An open-source AI agent that automatically monitors database health, diagnoses issues, and provides recommendations using LLM-powered reasoning and playbooks.
+</p>
+<p>
+<strong>
+  Postgres Utilities
+ </strong>
+ -
+ <a href="https://github.com/DexterDB/dexter">
+  Dexter
+ </a>
+ . A tool for generating and testing hypothetical indexes on PostgreSQL.
+-
+ <a href="https://github.com/ankane/pghero">
+  PgHero
+ </a>
+ . A performance dashboard for Postgres, with recommendations.
+Postgres MCP Pro incorporates health checks from PgHero.
+-
+ <a href="https://github.com/le0pard/pgtune?tab=readme-ov-file">
+  PgTune
+ </a>
+ . Heuristics for tuning Postgres configuration.
+</p>
+<h2 class="heading">
+ Frequently Asked Questions
+</h2>
+<p>
+<em>
+  How is Postgres MCP Pro different from other Postgres MCP servers?
+ </em>
+ There are many MCP servers allow an AI agent to run queries against a Postgres database.
+Postgres MCP Pro does that too, but also adds tools for understanding and improving the performance of your Postgres database.
+For example, it implements a version of the
+ <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2020/06/Anytime-Algorithm-of-Database-Tuning-Advisor-for-Microsoft-SQL-Server.pdf">
+  Anytime Algorithm of Database Tuning Advisor for Microsoft SQL Server
+ </a>
+ , a modern industrial-strength algorithm for automatic index tuning.
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Postgres MCP Pro
+   </th>
+<th>
+    Other Postgres MCP Servers
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    ✅ Deterministic database health checks
+   </td>
+<td>
+    ❌ Unrepeatable LLM-generated health queries
+   </td>
+</tr>
+<tr>
+<td>
+    ✅ Principled indexing search strategies
+   </td>
+<td>
+    ❌ Gen-AI guesses at indexing improvements
+   </td>
+</tr>
+<tr>
+<td>
+    ✅ Workload analysis to find top problems
+   </td>
+<td>
+    ❌ Inconsistent problem analysis
+   </td>
+</tr>
+<tr>
+<td>
+    ✅ Simulates performance improvements
+   </td>
+<td>
+    ❌ Try it yourself and see if it works
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ Postgres MCP Pro complements generative AI by adding deterministic tools and classical optimization algorithms
+The combination is both reliable and flexible.
+</p>
+<p>
+<em>
+  Why are MCP tools needed when the LLM can reason, generate SQL, etc?
+ </em>
+ LLMs are invaluable for tasks that involve ambiguity, reasoning, or natural language.
+When compared to procedural code, however, they can be slow, expensive, non-deterministic, and sometimes produce unreliable results.
+In the case of database tuning, we have well established algorithms, developed over decades, that are proven to work.
+Postgres MCP Pro lets you combine the best of both worlds by pairing LLMs with classical optimization algorithms and other procedural tools.
+</p>
+<p>
+<em>
+  How do you test Postgres MCP Pro?
+ </em>
+ Testing is critical to ensuring that Postgres MCP Pro is reliable and accurate.
+We are building out a suite of AI-generated adversarial workloads designed to challenge Postgres MCP Pro and ensure it performs under a broad variety of scenarios.
+</p>
+<p>
+<em>
+  What Postgres versions are supported?
+ </em>
+ Our testing presently focuses on Postgres 15, 16, and 17.
+We plan to support Postgres versions 13 through 17.
+</p>
+<p>
+<em>
+  Who created this project?
+ </em>
+ This project is created and maintained by
+ <a href="https://www.crystaldba.ai">
+  Crystal DBA
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Roadmap
+</h2>
+<p>
+<em>
+  TBD
+ </em>
+</p>
+<p>
+ You and your needs are a critical driver for what we build.
+Tell us what you want to see by opening an
+ <a href="https://github.com/crystaldba/postgres-mcp/issues">
+  issue
+ </a>
+ or a
+ <a href="https://github.com/crystaldba/postgres-mcp/pulls">
+  pull request
+ </a>
+ .
+You can also contact us on
+ <a href="https://discord.gg/4BEHC7ZM">
+  Discord
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Technical Notes
+</h2>
+<p>
+ This section includes a high-level overview technical considerations that influenced the design of Postgres MCP Pro.
+</p>
+<h3 class="heading">
+ Index Tuning
+</h3>
+<p>
+ Developers know that missing indexes are one of the most common causes of database performance issues.
+Indexes provide access methods that allow Postgres to quickly locate data that is required to execute a query.
+When tables are small, indexes make little difference, but as the size of the data grows, the difference in algorithmic complexity between a table scan and an index lookup becomes significant (typically
+ <em>
+  O
+ </em>
+ (
+ <em>
+  n
+ </em>
+ ) vs
+ <em>
+  O
+ </em>
+ (
+ <em>
+  log
+ </em>
+<em>
+  n
+ </em>
+ ), potentially more if joins on multiple tables are involved).
+</p>
+<p>
+ Generating suggested indexes in Postgres MCP Pro proceeds in several stages:
+</p>
+<ol>
+<li>
+<p>
+<em>
+    Identify SQL queries in need of tuning
+   </em>
+   .
+    If you know you are having a problem with a specific SQL query you can provide it.
+    Postgres MCP Pro can also analyze the workload to identify index tuning targets.
+    To do this, it relies on the
+   <code class="code">
+    pg_stat_statements
+   </code>
+   extension, which records the runtime and resource consumption of each query.
+  </p>
+<p>
+   A query is a candidate for index tuning if it is a top resource consumer, either on a per-execution basis or in aggregate.
+At present, we use execution time as a proxy for cumulative resource consumption, but it may also make sense to look at specifics resources, e.g., the number of blocks accessed or the number of blocks read from disk.
+The
+   <code class="code">
+    analyze_query_workload
+   </code>
+   tool focuses on slow queries, using the mean time per execution with thresholds for execution count and mean execution time.
+Agents may also call
+   <code class="code">
+    get_top_queries
+   </code>
+   , which accepts a parameter for mean vs. total execution time, then pass these queries
+   <code class="code">
+    analyze_query_indexes
+   </code>
+   to get index recommendations.
+  </p>
+<p>
+   Sophisticated index tuning systems use "workload compression" to produce a representative subset of queries that reflects the characteristics of the workload as a whole, reducing the problem for downstream algorithms.
+Postgres MCP Pro performs a limited form of workload compression by normalizing queries so that those generated from the same template appear as one.
+It weights each query equally, a simplification that works when the benefits to indexing are large.
+  </p>
+</li>
+<li>
+<p>
+<em>
+    Generate candidate indexes
+   </em>
+   Once we have a list of SQL queries that we want to improve through indexing, we generate a list of indexes that we might want to add.
+    To do this, we parse the SQL and identify any columns used in filters, joins, grouping, or sorting.
+  </p>
+<p>
+   To generate all possible indexes we need to consider combinations of these columns, because Postgres supports
+   <a href="https://www.postgresql.org/docs/current/indexes-multicolumn.html">
+    multicolumn indexes
+   </a>
+   .
+In the present implementation, we include only one permutation of each possible multicolumn index, which is selected at random.
+We make this simplification to reduce the search space because permutations often have equivalent performance.
+However, we hope to improve in this area.
+  </p>
+</li>
+<li>
+<p>
+<em>
+    Search for the optimal index configuration
+   </em>
+   .
+    Our objective is to find the combination of indexes that optimally balances the performance benefits against the costs of storing and maintaining those indexes.
+    We estimate the performance improvement by using the "what if?" capabilities provided by the
+   <code class="code">
+    hypopg
+   </code>
+   extension.
+    This simulates how the Postgres query optimizer will execute a query after the addition of indexes, and reports changes based on the actual Postgres cost model.
+  </p>
+<p>
+   One challenge is that generating query plans generally requires knowledge of the specific parameter values used in the query.
+Query normalization, which is necessary to reduce the queries under consideration, removes parameter constants.
+Parameter values provided via bind variables are similarly not available to us.
+  </p>
+<p>
+   To address this problem, we produce realistic constants that we can provide as parameters by sampling from the table statistics.
+In version 16, Postgres added
+   <a href="https://www.postgresql.org/docs/current/sql-explain.html">
+    generic explain plan functionality
+   </a>
+   , but it has limitations, for example around
+   <code class="code">
+    LIKE
+   </code>
+   clauses, which our implementation does not have.
+  </p>
+<p>
+   Search strategy is critical because evaluating all possible index combinations feasible only in simple situations.
+This is what most sets apart various indexing approaches.
+Adapting the approach of Microsoft's Anytime algorithm, we employ a greedy search strategy, i.e., find the best one-index solution, then find the best index to add to that to produce a two-index solution.
+Our search terminates when the time budget is exhausted or when a round of exploration fails to produce any gains above the minimum improvement threshold of 10%.
+  </p>
+</li>
+<li>
+<p>
+<em>
+    Cost-benefit analysis
+   </em>
+   .
+    When posed with two indexing alternatives, one which produces better performance and one which requires more space, how do we decide which to choose?
+    Traditionally, index advisors ask for a storage budget and optimize performance with respect to that storage budget.
+    We also take a storage budget, but perform a cost-benefit analysis throughout the optimization.
+  </p>
+<p>
+   We frame this as the problem of selecting a point along the
+   <a href="https://en.wikipedia.org/wiki/Pareto_front">
+    Pareto front
+   </a>
+   —the set of choices for which improving one quality metric necessarily worsens another.
+In an ideal world, we might want to assess the cost of the storage and the benefit of improved performance in monetary terms.
+However, there is a simpler and more practical approach: to look at the changes in relative terms.
+Most people would agree that a 100x performance improvement is worth it, even if the storage cost is 2x.
+In our implementation, we use a configurable parameter to set this threshold.
+By default, we require the change in the log (base 10) of the performance improvement to be 2x the difference in the log of the space cost.
+This works out to allowing a maximum 10x increase in space for a 100x performance improvement.
+  </p>
+</li>
+</ol>
+<p>
+ Our implementation is most closely related to the
+ <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2020/06/Anytime-Algorithm-of-Database-Tuning-Advisor-for-Microsoft-SQL-Server.pdf">
+  Anytime Algorithm
+ </a>
+ found in Microsoft SQL Server.
+Compared to
+ <a href="https://github.com/ankane/dexter/">
+  Dexter
+ </a>
+ , an automatic indexing tool for Postgres, we search a larger space and use different heuristics.
+This allows us to generate better solutions at the cost of longer runtime.
+</p>
+<p>
+ We also show the work done in each round of the search, including a comparison of the query plans before and after the addition of each index.
+This give the LLM additional context that it can use when responding to the indexing recommendations.
+</p>
+<h3 class="heading">
+ Experimental: Index Tuning by LLM
+</h3>
+<p>
+ Postgres MCP Pro includes an experimental index tuning feature based on
+ <a href="https://arxiv.org/abs/2309.03409">
+  Optimization by LLM
+ </a>
+ .
+Instead of using heuristics to explore possible index configurations, we provide the database schema and query plans to an LLM and ask it to propose index configurations.
+We then use
+ <code class="code">
+  hypopg
+ </code>
+ to predict performance with the proposed indexes, then feed those results back into the LLM to produce a new set of suggestions.
+We repeat this process until multiple rounds of iteration produce no further improvements.
+</p>
+<p>
+ Index optimization by LLM is has advantages when the index search space is large, or when indexes with many columns need to be considered.
+Like traditional search-based approaches, it relies on the accuracy of the
+ <code class="code">
+  hypopg
+ </code>
+ performance predictions.
+</p>
+<p>
+ In order to perform index optimization by LLM, you must provide an OpenAI API key by setting the
+ <code class="code">
+  OPENAI_API_KEY
+ </code>
+ environment variable.
+</p>
+<h3 class="heading">
+ Database Health
+</h3>
+<p>
+ Database health checks identify tuning opportunities and maintenance needs before they lead to critical issues.
+In the present release, Postgres MCP Pro adapts the database health checks directly from
+ <a href="https://github.com/ankane/pghero">
+  PgHero
+ </a>
+ .
+We are working to fully validate these checks and may extend them in the future.
+</p>
+<ul>
+<li>
+<em>
+   Index Health
+  </em>
+  . Looks for unused indexes, duplicate indexes, and indexes that are bloated. Bloated indexes make inefficient use of database pages.
+  Postgres autovacuum cleans up index entries pointing to dead tuples, and marks the entries as reusable. However, it does not compact the index pages and, eventually, index pages may contain few live tuple references.
+ </li>
+<li>
+<em>
+   Buffer Cache Hit Rate
+  </em>
+  . Measures the proportion of database reads that are served from the buffer cache instead of disk.
+  A low buffer cache hit rate must be investigated as it is often not cost-optimal and leads to degraded application performance.
+ </li>
+<li>
+<em>
+   Connection Health
+  </em>
+  . Checks the number of connections to the database and reports on their utilization.
+  The biggest risk is running out of connections, but a high number of idle or blocked connections can also indicate issues.
+ </li>
+<li>
+<em>
+   Vacuum Health
+  </em>
+  . Vacuum is important for many reasons.
+  A critical one is preventing transaction id wraparound, which can cause the database to stop accepting writes.
+  The Postgres multi-version concurrency control (MVCC) mechanism requires a unique transaction id for each transaction.
+  However, because Postgres uses a 32-bit signed integer for transaction ids, it needs to reuse transaction ids after after a maximum of 2 billion transactions.
+  To do this it "freezes" the transaction ids of historical transactions, setting them all to a special value that indicates distant past.
+  When records first go to disk, they are written visibility for a range of transaction ids.
+  Before re-using these transaction ids, Postgres must update any on-disk records, "freezing" them to remove the references to the transaction ids to be reused.
+  This check looks for tables that require vacuuming to prevent transaction id wraparound.
+ </li>
+<li>
+<em>
+   Replication Health
+  </em>
+  . Checks replication health by monitoring lag between primary and replicas, verifying replication status, and tracking usage of replication slots.
+ </li>
+<li>
+<em>
+   Constraint Health
+  </em>
+  . During normal operation, Postgres rejects any transactions that would cause a constraint violation.
+  However, invalid constraints may occur after loading data or in recovery scenarios. This check looks for any invalid constraints.
+ </li>
+<li>
+<em>
+   Sequence Health
+  </em>
+  . Looks for sequences that are at risk of exceeding their maximum value.
+ </li>
+</ul>
+<h3 class="heading">
+ Postgres Client Library
+</h3>
+<p>
+ Postgres MCP Pro uses
+ <a href="https://www.psycopg.org/">
+  psycopg3
+ </a>
+ to connect to Postgres using asynchronous I/O.
+Under the hood, psycopg3 uses the
+ <a href="https://www.postgresql.org/docs/current/libpq.html">
+  libpq
+ </a>
+ library to connect to Postgres, providing access to the full Postgres feature set and an underlying implementation fully supported by the Postgres community.
+</p>
+<p>
+ Some other Python-based MCP servers use
+ <a href="https://github.com/MagicStack/asyncpg">
+  asyncpg
+ </a>
+ , which may simplify installation by eliminating the
+ <code class="code">
+  libpq
+ </code>
+ dependency.
+Asyncpg is also probably
+ <a href="https://fernandoarteaga.dev/blog/psycopg-vs-asyncpg/">
+  faster
+ </a>
+ than psycopg3, but we have not validated this ourselves.
+ <a href="https://gistpreview.github.io/?0ed296e93523831ea0918d42dd1258c2">
+  Older benchmarks
+ </a>
+ report a larger performance gap, suggesting that the newer psycopg3 has closed the gap as it matures.
+</p>
+<p>
+ Balancing these considerations, we selected
+ <code class="code">
+  psycopg3
+ </code>
+ over
+ <code class="code">
+  asyncpg
+ </code>
+ .
+We remain open to revising this decision in the future.
+</p>
+<h3 class="heading">
+ Connection Configuration
+</h3>
+<p>
+ Like the
+ <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres">
+  Reference PostgreSQL MCP Server
+ </a>
+ , Postgres MCP Pro takes Postgres connection information at startup.
+This is convenient for users who always connect to the same database but can be cumbersome when users switch databases.
+</p>
+<p>
+ An alternative approach, taken by
+ <a href="https://github.com/stuzero/pg-mcp-server">
+  PG-MCP
+ </a>
+ , is provide connection details via MCP tool calls at the time of use.
+This is more convenient for users who switch databases, and allows a single MCP server to simultaneously support multiple end-users.
+</p>
+<p>
+ There must be a better approach than either of these.
+Both have security weaknesses—few MCP clients store the MCP server configuration securely (an exception is Goose), and credentials provided via MCP tools are passed through the LLM and stored in the chat history.
+Both also have usability issues in some scenarios.
+</p>
+<h3 class="heading">
+ Schema Information
+</h3>
+<p>
+ The purpose of the schema information tool is to provide the calling AI agent with the information it needs to generate correct and performant SQL.
+For example, suppose a user asks, "How many flights took off from San Francisco and landed in Paris during the past year?"
+The AI agent needs to find the table that stores the flights, the columns that store the origin and destinations, and perhaps a table that maps between airport codes and airport locations.
+</p>
+<p>
+<em>
+  Why provide schema information tools when LLMs are generally capable of generating the SQL to retrieve this information from Postgres directly?
+ </em>
+</p>
+<p>
+ Our experience using Claude indicates that the calling LLM is very good at generating SQL to explore the Postgres schema by querying the
+ <a href="https://www.postgresql.org/docs/current/catalogs.html">
+  Postgres system catalog
+ </a>
+ and the
+ <a href="https://www.postgresql.org/docs/current/information-schema.html">
+  information schema
+ </a>
+ (an ANSI-standardized database metadata view).
+However, we do not know whether other LLMs do so as reliably and capably.
+</p>
+<p>
+<em>
+  Would it be better to provide schema information using
+  <a href="https://modelcontextprotocol.io/docs/concepts/resources">
+   MCP resources
+  </a>
+  rather than
+  <a href="https://modelcontextprotocol.io/docs/concepts/tools">
+   MCP tools
+  </a>
+  ?
+ </em>
+</p>
+<p>
+ The
+ <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres">
+  Reference PostgreSQL MCP Server
+ </a>
+ uses resources to expose schema information rather than tools.
+Navigating resources is similar to navigating a file system, so this approach is natural in many ways.
+However, resource support is less widespread than tool support in the MCP client ecosystem (see
+ <a href="https://modelcontextprotocol.io/clients">
+  example clients
+ </a>
+ ).
+In addition, while the MCP standard says that resources can be accessed by either AI agents or end-user humans, some clients only support human navigation of the resource tree.
+</p>
+<h3 class="heading">
+ Protected SQL Execution
+</h3>
+<p>
+ AI amplifies longstanding challenges of protecting databases from a range of threats, ranging from simple mistakes to sophisticated attacks by malicious actors.
+Whether the threat is accidental or malicious, a similar security framework applies, with aims that fall into three categories: confidentiality, integrity, and availability.
+The familiar tension between convenience and safety is also evident and pronounced.
+</p>
+<p>
+ Postgres MCP Pro's protected SQL execution mode focuses on integrity.
+In the context of MCP, we are most concerned with LLM-generated SQL causing damage—for example, unintended data modification or deletion, or other changes that might circumvent an organization's change management process.
+</p>
+<p>
+ The simplest way to provide integrity is to ensure that all SQL executed against the database is read-only.
+One way to do this is by creating a database user with read-only access permissions.
+While this is a good approach, many find this cumbersome in practice.
+Postgres does not provide a way to place a connection or session into read-only mode, so Postgres MCP Pro uses a more complex approach to ensure read-only SQL execution on top of a read-write connection.
+</p>
+<p>
+ Postgres MCP Provides a read-only transaction mode that prevents data and schema modifications.
+Like the
+ <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres">
+  Reference PostgreSQL MCP Server
+ </a>
+ , we use read-only transactions to provide protected SQL execution.
+</p>
+<p>
+ To make this mechanism robust, we need to ensure that the SQL does not somehow circumvent the read-only transaction mode, say by issuing a
+ <code class="code">
+  COMMIT
+ </code>
+ or
+ <code class="code">
+  ROLLBACK
+ </code>
+ statement and then beginning a new transaction.
+</p>
+<p>
+ For example, the LLM can circumvent the read-only transaction mode by issuing a
+ <code class="code">
+  ROLLBACK
+ </code>
+ statement and then beginning a new transaction.
+For example:
+</p>
+<pre class="pre"><code class="language-sql code">ROLLBACK; DROP TABLE users;
+</code></pre>
+<p>
+ To prevent cases like this, we parse the SQL before execution using the
+ <a href="https://pglast.readthedocs.io/">
+  pglast
+ </a>
+ library.
+We reject any SQL that contains
+ <code class="code">
+  commit
+ </code>
+ or
+ <code class="code">
+  rollback
+ </code>
+ statements.
+Helpfully, the popular Postgres stored procedure languages, including PL/pgSQL and PL/Python, do not allow for
+ <code class="code">
+  COMMIT
+ </code>
+ or
+ <code class="code">
+  ROLLBACK
+ </code>
+ statements.
+If you have unsafe stored procedure languages enabled on your database, then our read-only protections could be circumvented.
+</p>
+<p>
+ At present, Postgres MCP Pro provides two levels of protection for the database, one at either extreme of the convenience/safety spectrum.
+- "Unrestricted" provides maximum flexibility.
+It is suitable for development environments where speed and flexibility are paramount, and where there is no need to protect valuable or sensitive data.
+- "Restricted" provides a balance between flexibility and safety.
+It is suitable for production environments where the database is exposed to untrusted users, and where it is important to protect valuable or sensitive data.
+</p>
+<p>
+ Unrestricted mode aligns with the approach of
+ <a href="https://docs.cursor.com/chat/tools#auto-run">
+  Cursor's auto-run mode
+ </a>
+ , where the AI agent operates with limited human oversight or approvals.
+We expect auto-run to be deployed in development environments where the consequences of mistakes are low, where databases do not contain valuable or sensitive data, and where they can be recreated or restored from backups when needed.
+</p>
+<p>
+ We designed restricted mode to be conservative, erring on the side of safety even though it may be inconvenient.
+Restricted mode is limited to read-only operations, and we limit query execution time to prevent long-running queries from impacting system performance.
+We may add measures in the future to make sure that restricted mode is safe to use with production databases.
+</p>
+<h2 class="heading">
+ Postgres MCP Pro Development
+</h2>
+<p>
+ The instructions below are for developers who want to work on Postgres MCP Pro, or users who prefer to install Postgres MCP Pro from source.
+</p>
+<h3 class="heading">
+ Local Development Setup
+</h3>
+<ol>
+<li>
+<strong>
+   Install uv
+  </strong>
+  :
+ </li>
+</ol>
+<p>
+<code class="code">
+  bash
+   curl -sSL https://astral.sh/uv/install.sh | sh
+ </code>
+</p>
+<ol>
+<li>
+<strong>
+   Clone the repository
+  </strong>
+  :
+ </li>
+</ol>
+<p>
+<code class="code">
+  bash
+   git clone https://github.com/crystaldba/postgres-mcp.git
+   cd postgres-mcp
+ </code>
+</p>
+<ol>
+<li>
+<strong>
+   Install dependencies
+  </strong>
+  :
+ </li>
+</ol>
+<p>
+<code class="code">
+  bash
+   uv pip install -e .
+   uv sync
+ </code>
+</p>
+<ol>
+<li>
+<strong>
+   Run the server
+  </strong>
+  :
+  <code class="code">
+   bash
+   uv run postgres-mcp "postgres://user:password@localhost:5432/dbname"
+  </code>
+</li>
+</ol>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/crystaldba-postgres-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

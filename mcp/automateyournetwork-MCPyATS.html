@@ -1,0 +1,2837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory">
+    <meta property="og:description" content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura">
+    <meta property="og:url" content="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory">
+    <meta name="twitter:description" content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura">
+    
+    <title>🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 38</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/automateyournetwork/MCPyATS" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory" property="og:title"/>
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory" name="twitter:title"/>
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" name="twitter:description"/>
+<title>🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 38</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/automateyournetwork/MCPyATS" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory" property="og:title">
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" property="og:description">
+<meta content="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory" name="twitter:title">
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" name="twitter:description">
+<title>🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 38</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/automateyournetwork/MCPyATS" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory" property="og:title"/>
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory" name="twitter:title"/>
+<meta content="MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natura" name="twitter:description"/>
+<title>🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 38</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/automateyournetwork/MCPyATS" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ 🧠 MCPyATS: AI-Powered Network Automation with MCP + Cisco pyATS
+</h1>
+<h2 class="heading">
+ 🚀 Overview
+</h2>
+<p>
+ MCPyATS brings together the Model Context Protocol (MCP) and Cisco pyATS to build intelligent, distributed agents capable of automating network tasks via natural language.
+</p>
+<p>
+ It includes multiple tool-integrated MCP servers, a LangGraph agent backend, a Streamlit UI frontend, and support for A2A (Agent-to-Agent) communication.
+</p>
+<h2 class="heading">
+ 🌐 What is MCP?
+</h2>
+<p>
+ The Model Context Protocol (MCP) from Anthropic is a protocol that offers USB-C like interoperability between MCP Servers, where tools are exposed, and MCP Clients, where the agent is running. It allows for a standardized way to communicate between different agents and tools, enabling them to work together seamlessly.
+</p>
+<h2 class="heading">
+ What is Agent-to-Agent (A2A)?
+</h2>
+<p>
+ The Agent-to-Agent (A2A) protocol from Google is a standardized method for agents to communicate and collaborate with each other. It allows agents to share tasks, delegate responsibilities, and exchange information in a structured manner.
+</p>
+<h2 class="heading">
+ What is LangGraph?
+</h2>
+<p>
+ LangGraph is a framework for building and deploying AI agents that can reason, plan, and execute tasks using natural language. It provides a set of tools and libraries for creating agents that can interact with various services and APIs, making it easier to build complex automation workflows.
+</p>
+<h2 class="heading">
+ What is pyATS?
+</h2>
+<p>
+ Cisco pyATS (Python Automated Test Systems) is a framework for automating network testing and validation. It provides a set of tools and libraries for creating and executing tests on network devices, making it easier to validate configurations, performance, and functionality.
+</p>
+<h2 class="heading">
+ What is Streamlit?
+</h2>
+<p>
+ Streamlit is an open-source app framework for Machine Learning and Data Science projects. It allows you to create beautiful web applications for your data science projects with minimal effort. You can use Streamlit to build interactive dashboards, visualizations, and user interfaces for your AI agents.
+</p>
+<h2 class="heading">
+ What is MCPyATS?
+</h2>
+<p>
+ MCPyATS is a framework that combines the Model Context Protocol (MCP), Agent-to-Agent (A2A) communication, LangGraph, and Cisco pyATS to create intelligent, distributed agents capable of automating network tasks via natural language. It includes multiple tool-integrated MCP servers, a LangGraph agent backend, a Streamlit UI frontend, and support for A2A (Agent-to-Agent) communication.
+</p>
+<p>
+ MCPyATS is designed to be modular and extensible, allowing you to easily add new tools and services as needed. It provides a standardized way to communicate between different agents and tools, enabling them to work together seamlessly.
+</p>
+<p>
+ MCPyATS is built on top of Docker, making it easy to deploy and run in any environment. It includes a set of pre-built Docker images for all the MCP servers and the LangGraph agent, making it easy to get started with minimal setup.
+</p>
+<h2 class="heading">
+ 📚 Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#-overview">
+   Overview
+  </a>
+</li>
+<li>
+<a href="#-repository-structure">
+   Repository Structure
+  </a>
+</li>
+<li>
+<a href="#-quick-start">
+   Quick Start
+  </a>
+</li>
+<li>
+<a href="#-env-variables">
+   Environment Variables
+  </a>
+</li>
+<li>
+<a href="#-langgraph-agent">
+   LangGraph Agent
+  </a>
+</li>
+<li>
+<a href="#-mcp-servers">
+   MCP Servers
+  </a>
+</li>
+<li>
+<a href="#-a2a-adapter--agent-to-agent-interface-for-mcpyats">
+   A2A Adapter
+  </a>
+</li>
+<li>
+<a href="#-docker_startupsh">
+   docker_startup.sh
+  </a>
+</li>
+<li>
+<a href="#-streamlit-ui">
+   Streamlit UI
+  </a>
+</li>
+<li>
+<a href="#-post-startup-what-to-expect">
+   Post-Startup Services
+  </a>
+</li>
+</ul>
+<h3 class="heading">
+ Considerations
+</h3>
+<p>
+ Out of the box the LLM is openAI chatGPT4o but you can change it to Gemini or any other LLM that is compatible with LangGraph. Find the llm=statement in the mcpyats.py file and change it to the LLM you want to use.
+</p>
+<h3 class="heading">
+ Ready to use with the Cisco DevNet Sandbox for Cisco Modeling Lab (CML)
+</h3>
+<p>
+ The testbed is ready to use with the Cisco DevNet Sandbox for CML. You can use the following link to access the sandbox and get started with the testbed.
+</p>
+<p>
+<a href="https://devnetsandbox.cisco.com/DevNet/catalog/cml-sandbox_cml">
+  Cisco DevNet Sandbox - CML
+ </a>
+</p>
+<h3 class="heading">
+ Your own topology
+</h3>
+<p>
+ You can use your own topology by changing the testbed.yaml file in the mcpyats directory. You can also use the testbed.yaml file in the shared_output directory to save the testbed file generated by the agent. If you have a CML of your own (v2) you can use the REST API to generate the testbed file.
+</p>
+<h2 class="heading">
+ Repository Structure
+</h2>
+<p>
+ The repository is organized into several components, each serving a specific purpose in the MCPyATS ecosystem. Below is a high-level overview of the structure:
+</p>
+<p>
+ 📁 Repository Structure
+</p>
+<pre class="pre"><code class="language-bash code">MCPyATS/
+├── a2a/              # Agent-to-Agent Adapter implementation
+├── drawio/           # Custom local Draw.io instance with MCP integration
+├── mcp_servers/      # All MCP tool servers (Slack, GitHub, ServiceNow, etc.)
+├── mcpyats/          # LangGraph-based MCP agent using pyATS and tools
+├── streamlit/        # Streamlit web frontend on port :8501
+├── shared_output/    # Volume-mounted folder for shared artifact storage
+├── .env.example      # Sample environment file (copy to .env and update)
+└── docker_startup.sh # Startup script to launch 
+</code></pre>
+<h2 class="heading">
+ 🛠️ Quick Start
+</h2>
+<p>
+ 🛠️ Quick Start
+Clone the repo
+</p>
+<pre class="pre"><code class="language-bash code">git clone https://github.com/automateyournetwork/MCPyATS
+
+cd MCPyATS
+</code></pre>
+<p>
+ Prepare your environment
+</p>
+<p>
+ Create your .env file based on the sample provided:
+</p>
+<pre class="pre"><code class="language-bash code">cp .env.example .env
+</code></pre>
+<p>
+ Update all the required API keys, tokens, and paths inside .env.
+</p>
+<p>
+ Launch the system
+</p>
+<pre class="pre"><code class="language-bash code">./docker_startup.sh
+</code></pre>
+<p>
+ This will bring up:
+- All MCP servers
+- The LangGraph MCPyATS agent
+- The Draw.io integration
+- The Streamlit frontend
+- The A2A adapter
+</p>
+<p>
+ 🔍 Component Breakdown
+</p>
+<p>
+ 🔁 a2a/ – Agent-to-Agent Adapter
+- Implements the A2A protocol allowing agents to collaborate over the web. Enables decentralized automation via peer-discovered agents.
+</p>
+<p>
+ 🧩 mcp_servers/ – Tool Servers
+- Collection of Dockerized MCP servers. Each server exposes a set of structured tools using JSON-RPC or HTTP.
+- ➡️ See individual folders inside mcp_servers/ for tool-specific README files.
+</p>
+<p>
+ 🖊 drawio/ – Local Draw.io Instance
+- Customized Draw.io instance that:
+- Sends/receives shapes and diagrams via WebSockets
+- Converts network diagrams into configs
+- Supports AI-assisted topology generation
+</p>
+<p>
+ 🧠 mcpyats/ – MCPyATS Agent
+- Main LangGraph-based AI agent
+- Integrates with Cisco pyATS
+- Dynamically discovers tools via MCP
+- LLM bound to tools used to help reason and act on network tasks
+</p>
+<p>
+ 🗃️ shared_output/ – Shared Volume
+- Common storage directory used across MCP servers and the agent for:
+- Artifacts
+- JSON outputs
+- Diagrams and reports
+</p>
+<p>
+ 🌐 streamlit/ – Frontend UI
+- Streamlit-based web interface at http://localhost:8501 to:
+- Interact with the MCPyATS agent
+- Submit prompts
+- View structured responses and artifacts
+</p>
+<p>
+ 🔐 Environment Variables
+- A full .env.example file is included. You must rename it to .env and provide your secrets.
+- (See .env.example for the complete list.)
+</p>
+<h2 class="heading">
+ .ENV Variables
+</h2>
+<p>
+ 🔐 .env Variables
+</p>
+<p>
+ 🧠 Core Agent Configuration
+</p>
+<pre class="pre"><code class="language-env code">PYATS_TESTBED_PATH=          # Path to your pyATS testbed YAML file
+</code></pre>
+<p>
+ 🌐 LLM &amp; LangSmith
+</p>
+<pre class="pre"><code class="language-env code">OPENAI_API_KEY=              # OpenAI API Key for GPT-3.5 or GPT-4
+GOOGLE_API_KEY=              # Google API Key for Gemini LLM
+
+LANGSMITH_TRACING=           # LangSmith tracing enabled (true/false)
+LANGSMITH_API_KEY=           # LangSmith API key
+LANGSMITH_ENDPOINT=          # LangSmith endpoint
+LANGSMITH_PROJECT=           # LangSmith project name
+</code></pre>
+<p>
+ 🌍 Enrichment APIs
+</p>
+<pre class="pre"><code class="language-env code">WEATHER_API_KEY=             # OpenWeatherMap API Key
+ABUSEIPDB_API_KEY=           # AbuseIPDB API Key
+</code></pre>
+<p>
+ 🧰 GitHub MCP
+</p>
+<pre class="pre"><code class="language-env code">GITHUB_USERNAME=             # GitHub username
+GITHUB_TOKEN=                # GitHub token
+</code></pre>
+<p>
+ 🗺️ Google Maps MCP
+</p>
+<pre class="pre"><code class="language-env code">GOOGLE_MAPS_API_KEY=         # Google Maps API key
+</code></pre>
+<p>
+ 💬 Slack MCP
+</p>
+<pre class="pre"><code class="language-env code">SLACK_BOT_TOKEN=             # Slack bot token
+SLACK_TEAM_ID=               # Slack team ID
+SLACK_CHANNEL_ID=            # Slack channel ID
+</code></pre>
+<p>
+ 📊 Selector MCP
+</p>
+<pre class="pre"><code class="language-env code">SELECTOR_AI_API_KEY=         # Selector AI API key
+SELECTOR_URL=                # Selector API URL
+</code></pre>
+<p>
+ 💾 FileSystem MCP
+</p>
+<pre class="pre"><code class="language-env code">FILESYSTEM_PATH=             # Local path mounted into the FileSystem 
+</code></pre>
+<p>
+ 🧠 NetBox MCP
+</p>
+<pre class="pre"><code class="language-env code">NETBOX_URL=                  # NetBox API URL
+NETBOX_TOKEN=                # NetBox API token
+</code></pre>
+<p>
+ 🛠️ ServiceNow MCP
+</p>
+<pre class="pre"><code class="language-env code">SERVICENOW_URL=              # ServiceNow instance URL
+SERVICENOW_USERNAME=         # ServiceNow username
+SERVICENOW_PASSWORD=         # ServiceNow password
+</code></pre>
+<p>
+ ✉️ Email MCP
+</p>
+<pre class="pre"><code class="language-env code">EMAIL_HOST=                  # SMTP server host (e.g., smtp.gmail.com)
+EMAIL_PORT=                  # SMTP server port (e.g., 587 for TLS)
+EMAIL_SSL=                   # Enable SSL (true/false)
+EMAIL_ACCOUNT=               # Email address to send from
+EMAIL_PASSWORD=              # Password for the email account
+</code></pre>
+<p>
+ 🛡️ NIST MCP
+</p>
+<pre class="pre"><code class="language-env code">ISE_BASE=https://devnetsandboxise.cisco.com
+USERNAME=readonly
+PASSWORD=ISEisC00L
+</code></pre>
+<p>
+ 🛡️ ISE MCP
+</p>
+<pre class="pre"><code class="language-env code">NVD_API_KEY=                 # NIST NVD API key
+</code></pre>
+<p>
+ 🔗 A2A Adapter
+</p>
+<pre class="pre"><code class="language-env code">AGENT_CARD_OUTPUT_DIR=       # Path to save .well-known/agent.json
+A2A_PEER_AGENTS=             # Comma-separated list of peer agent URLs
+</code></pre>
+<h2 class="heading">
+ LangGraph Agent
+</h2>
+<p>
+ 🧠 LangGraph Agent (mcpyats/)
+- The LangGraph Agent is the heart of MCPyATS. It is an AI-powered orchestrator that dynamically discovers and invokes tools across local and remote MCP servers using Cisco pyATS, LangGraph, and structured agent patterns.
+</p>
+<p>
+ 🔧 What It Does
+- Dynamically discovers tools from:
+- Dockerized MCP containers (via STDIO or HTTP)
+- A2A peer agents (via .well-known/agent.json)
+- Local tools inside the tools/ folder
+- Binds all discovered tools to an LLM (OpenAI or Gemini)
+- Interprets natural language and chooses the most relevant tools
+- Generates an A2A-compliant agent.json file with all skills
+- Handles tool output, context memory, fallback, retries, and delegation
+</p>
+<p>
+ 📜 Key Files
+- mcpyats.py    The main LangGraph agent implementation
+- startup.sh    Script used in Dockerfile to launch the LangGraph dev server
+- tools/    Folder with custom tools for CLI, filesystem, network
+- langgraph.json    Entry point for LangGraph CLI-based execution
+- .well-known/agent.json    Auto-generated A2A agent card with all available tools
+</p>
+<p>
+ 🧱 Architecture
+</p>
+<p>
+<img alt="LangGraph Studio Screenshot" src="./langgraph_studio.png" title="LangGraph Graph View"/>
+</p>
+<pre class="pre"><code class="language-csharp code">
+START
+
+  ↓
+
+[select_tools]  ←─ Vector + LLM-assisted tool filtering
+
+  ↓
+
+[assistant]     ←─ LLM bound to selected tools and context
+
+  ↓
+
+[tools]         ←─ Executes structured tool 
+
+calls via MCP or delegation
+
+  ↓
+
+[handle_tool_results] ←─ Updates state, context, 
+
+summaries
+
+  ↓
+
+[assistant]     ←─ Final reply or new tool 
+
+request
+
+  ↓
+
+END or tools again
+</code></pre>
+<p>
+ ⚙️ Tool Discovery Logic
+- To add a new MCP server:
+- Edit this section in mcpyats.py:
+</p>
+<pre class="pre"><code class="language-python code">
+tool_services = [
+    ("pyats-mcp", ["python3", "pyats_mcp_server.py", "--oneshot"], "tools/discover", "tools/call"),
+    ("drawio-mcp", "http://host.docker.internal:11434/rpc", "tools/list", "tools/call"),
+    ...
+]
+
+</code></pre>
+<p>
+ Supported types:
+- STDIO-based containers using docker exec
+- HTTP JSON-RPC endpoints with tools/list and tools/call
+</p>
+<p>
+ 🧬 A2A Agent Card
+- A .well-known/agent.json is auto-generated and published by the agent:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "name": "pyATS Agent",
+  "description": "Cisco pyATS Agent with access to many MCP tools",
+  "url": "https://your-agent-url",
+  "methods": {
+    "send": "https://your-agent-url/"
+  },
+  "capabilities": {
+    "a2a": true,
+    "tool-use": true,
+    "chat": true,
+    "push-notifications": true
+  },
+  "skills": [
+    {
+      "id": "pyATS_run_show_command",
+      "description": "Runs a show command on a device"
+    },
+    ...
+  ]
+}
+</code></pre>
+<p>
+ This allows other A2A agents to discover and delegate tasks to your MCPyATS instance.
+</p>
+<p>
+ 🧪 Local Development
+- To run the agent locally:
+</p>
+<pre class="pre"><code class="language-bash code">
+cd mcpyats/
+
+langgraph dev --host 0.0.0.0 --port 2024
+</code></pre>
+<p>
+ LangGraph will use the langgraph.json file:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "entrypoints": {
+    "MCpyATS": "mcpyats:compiled_graph"
+  },
+  ...
+}
+</code></pre>
+<p>
+ 🧠 LangGraph Agent: How It Works
+</p>
+<p>
+ 🧩 Agent Flow Diagram (from Studio UI)
+</p>
+<p>
+ Here's the LangGraph pipeline you uploaded (langgraph_studio.png), annotated:
+</p>
+<p>
+<img alt="LangGraph Studio Screenshot" src="./langgraph_studio.png" title="LangGraph Graph View"/>
+</p>
+<pre class="pre"><code class="language-pgsql code">START
+
+  ↓
+
+select_tools       ← Vector search + LLM filtering
+
+  ↓
+
+assistant          ← LLM + tool binding (uses selected tools)
+
+  ↘         ↙
+
+   tools → handle_tool_results
+
+      ↖───────────↩
+
+        |
+
+        ↓
+
+      END          ← if no tool call is required
+</code></pre>
+<p>
+ 🔍 Breakdown of Each Node
+</p>
+<ol>
+<li>
+  select_tools (🔎 Tool Selector using RAG)
+ </li>
+<li>
+  Function: Selects the most relevant tools for the user’s prompt.
+ </li>
+</ol>
+<p>
+ How:
+- Vector search over descriptions using InMemoryVectorStore.
+- Applies a similarity threshold (0.50), falls back to top K if needed.
+- Then sends the shortlisted tools to the LLM for final selection.
+</p>
+<p>
+ Why:
+- Avoids overcalling all tools, keeps only top matches active for this run.
+</p>
+<ol>
+<li>
+  assistant (🤖 LLM Execution)
+ </li>
+<li>
+  Function: Acts as the LLM agent core.
+ </li>
+</ol>
+<p>
+ How:
+- Starts with a system prompt tailored for tool reasoning (tool usage rules).
+- Uses .bind_tools() with selected tools.
+- Interprets user messages + memory + file content and decides:
+- Make a tool call → → tools
+- Or finish → → END
+- Tool Mode: If the agent emits tool_calls, LangGraph routes to tools.
+</p>
+<ol>
+<li>
+  tools (🛠 Context-Aware Tool Executor)
+ </li>
+<li>
+  Function: Executes all tool calls selected by the assistant.
+ </li>
+</ol>
+<p>
+ How:
+- Each tool is a wrapper over an MCP container (via HTTP or STDIO).
+- Results are converted to ToolMessage objects and added to memory.
+- Special patch: handles read_file path fix, tool errors, JSON outputs.
+- Output: Raw results + parsed outputs are saved to context.
+</p>
+<ol>
+<li>
+  handle_tool_results (🪄 Post-processing)
+ </li>
+<li>
+  Function: Normalizes the tool responses.
+ </li>
+</ol>
+<p>
+ How:
+- Rewrites any messages with improper roles (model → agent).
+- Ensures context gets updated.
+- Then loops back to assistant to continue the flow.
+</p>
+<p>
+ 🛜 Hosted Interface Links (update IP for local use)
+- 🚀 API (LangGraph) http://127.0.0.1:2024
+- 🎨 Studio UI   LangGraph Studio
+- 📚 API Docs    http://127.0.0.1:2024/docs
+</p>
+<p>
+ 🔄 Summary of Technologies
+- 🧠 LLM ChatOpenAI or ChatGoogleGenerativeAI (Gemini)
+- 🧮 Embeddings  GoogleGenerativeAIEmbeddings
+- 🗂️ RAG Store  InMemoryVectorStore
+- 🛠️ Tools  Tool / StructuredTool from MCPs (Docker or HTTP)
+- 🔗 Delegation  A2A-compatible agents via delegate_task_to_peer_agent
+- 🧱 Graph Engine    LangGraph with StateGraph and dynamic routing
+</p>
+<h2 class="heading">
+ MCP Servers
+</h2>
+<p>
+ The
+ <code class="code">
+  mcp_servers/
+ </code>
+ directory houses all modular MCP-compliant tool servers. Each folder represents an individual service that exposes structured tools over STDIO or HTTP, and can be independently containerized.
+</p>
+<p>
+ 📦 Included MCP Servers:
+</p>
+<ul>
+<li>
+<p>
+<code class="code">
+    chatgpt
+   </code>
+   – Interface with OpenAI models via structured tool calls
+   <br/>
+   →
+   <a href="./mcp_servers/chatgpt/README.md">
+    ./mcp_servers/chatgpt/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    drawio_mcp
+   </code>
+   – Communicate with a browser-based Draw.io instance using WebSockets or HTTP
+   <br/>
+   →
+   <a href="./mcp_servers/drawio_mcp/README.md">
+    ./mcp_servers/drawio_mcp/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    email
+   </code>
+   – Send email using SMTP
+   <br/>
+   →
+   <a href="./mcp_servers/email/README.md">
+    ./mcp_servers/email/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    excalidraw
+   </code>
+   – Generate freeform drawings and diagrams
+   <br/>
+   →
+   <a href="./mcp_servers/excalidraw/README.md">
+    ./mcp_servers/excalidraw/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    filesystem
+   </code>
+   – Read, write, edit, and manage files on the host system
+   <br/>
+   →
+   <a href="./mcp_servers/filesystem/README.md">
+    ./mcp_servers/filesystem/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    github
+   </code>
+   – Perform GitHub repo actions like push, commit, or create issues
+   <br/>
+   →
+   <a href="./mcp_servers/github/README.md">
+    ./mcp_servers/github/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    google_maps
+   </code>
+   – Geocoding and location data tools
+   <br/>
+   →
+   <a href="./mcp_servers/google_maps/README.md">
+    ./mcp_servers/google_maps/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    google_search
+   </code>
+   – Perform Google search queries
+   <br/>
+   →
+   <a href="./mcp_servers/google_search/README.md">
+    ./mcp_servers/google_search/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    mermaid
+   </code>
+   – Generate diagrams from Mermaid syntax
+   <br/>
+   →
+   <a href="./mcp_servers/mermaid/README.md">
+    ./mcp_servers/mermaid/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    vegalite
+   </code>
+   – Create charts and plots from VegaLite specs
+   <br/>
+   →
+   <a href="./mcp_servers/vegalite/README.md">
+    ./mcp_servers/vegalite/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    quickchart
+   </code>
+   – Generate standard charts via QuickChart
+   <br/>
+   →
+   <a href="./mcp_servers/quickchart/README.md">
+    ./mcp_servers/quickchart/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    netbox
+   </code>
+   – Query and manipulate NetBox resources
+   <br/>
+   →
+   <a href="./mcp_servers/netbox/README.md">
+    ./mcp_servers/netbox/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    nist
+   </code>
+   – Look up CVEs and vulnerabilities from the NIST NVD
+   <br/>
+   →
+   <a href="./mcp_servers/nist/README.md">
+    ./mcp_servers/nist/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    pyats_mcp_server
+   </code>
+   – Run pyATS commands, parse configs, test connectivity
+   <br/>
+   →
+   <a href="./mcp_servers/pyats_mcp_server/README.md">
+    ./mcp_servers/pyats_mcp_server/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    rfc
+   </code>
+   – Search and retrieve IETF RFC documents
+   <br/>
+   →
+   <a href="./mcp_servers/rfc/README.md">
+    ./mcp_servers/rfc/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    sequentialthinking
+   </code>
+   – Logical task planning and chaining
+   <br/>
+   →
+   <a href="./mcp_servers/sequentialthinking/README.md">
+    ./mcp_servers/sequentialthinking/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    servicenow
+   </code>
+   – Create and manage ServiceNow tickets
+   <br/>
+   →
+   <a href="./mcp_servers/servicenow/README.md">
+    ./mcp_servers/servicenow/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    slack
+   </code>
+   – Post messages or react to threads in Slack
+   <br/>
+   →
+   <a href="./mcp_servers/slack/README.md">
+    ./mcp_servers/slack/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    subnet-calculator
+   </code>
+   – Calculate subnets from a CIDR notation IP 
+  →
+   <a href="./mcp_servers/subnet_calculator/README.md">
+    ./mcp_servers/slack/README.md
+   </a>
+</p>
+</li>
+<li>
+<p>
+<code class="code">
+    ise
+   </code>
+   – Cisco Identity Services Engine (ISE) integration for network access control 
+  →
+   <a href="./mcp_servers/ise_mcp/README.md">
+    ./mcp_servers/slack/README.md
+   </a>
+</p>
+</li>
+</ul>
+<p>
+ Each server folder includes a
+ <code class="code">
+  Dockerfile
+ </code>
+ and a
+ <code class="code">
+  server.py
+ </code>
+ or
+ <code class="code">
+  index.ts
+ </code>
+ (depending on language/runtime) that defines the available tools and communication logic.
+</p>
+<h2 class="heading">
+ 🔄 A2A Adapter – Agent-to-Agent Interface for MCPyATS
+</h2>
+<p>
+ This component exposes your LangGraph-based MCP agent to the public web using the
+ <strong>
+  Agent-to-Agent (A2A)
+ </strong>
+ protocol. It enables
+ <strong>
+  cross-agent collaboration
+ </strong>
+ by accepting and delegating structured tasks via standard JSON-RPC.
+</p>
+<p>
+ It also supports
+ <strong>
+  push notifications
+ </strong>
+ ,
+ <strong>
+  Slack integration
+ </strong>
+ , and
+ <strong>
+  public discovery
+ </strong>
+ using
+ <code class="code">
+  .well-known/agent.json
+ </code>
+ .
+</p>
+<hr/>
+<h3 class="heading">
+ 🌐 Features
+</h3>
+<ul>
+<li>
+  Accept tasks over HTTP via standard A2A
+  <code class="code">
+   send
+  </code>
+  method
+ </li>
+<li>
+  Serve
+  <code class="code">
+   .well-known/agent.json
+  </code>
+  for agent discovery
+ </li>
+<li>
+  Auto-discover and wrap peer agents and their tools
+ </li>
+<li>
+  Optionally broadcast results via Slack
+ </li>
+<li>
+  Push results to external A2A UIs
+ </li>
+</ul>
+<hr/>
+<h3 class="heading">
+ 📦 Folder Structure
+</h3>
+<p>
+ a2a/
+├── a2a_adapter.py # Main FastAPI application (the adapter)
+├── Dockerfile # Container for exposing the A2A adapter
+├── requirements.txt # Required Python packages
+├── .well-known/
+│ └── agent.json # This agent's public card for peer discovery
+</p>
+<h3 class="heading">
+ 🛠 Requirements
+</h3>
+<ul>
+<li>
+  Python 3.11
+ </li>
+<li>
+  LangGraph-compatible MCP agent (running on port
+  <code class="code">
+   :2024
+  </code>
+  )
+ </li>
+<li>
+  Optional: Slack Bot Token and Channel ID for notifications
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 📄 agent.json
+</h2>
+<p>
+ Your
+ <code class="code">
+  .well-known/agent.json
+ </code>
+ file exposes your agent’s identity, capabilities, and tools:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "name": "pyATS Agent",
+  "description": "Cisco pyATS Agent with access to many MCP tools",
+  "url": "https://your-ngrok-or-public-url",
+  "methods": {
+    "send": "https://your-ngrok-or-public-url/"
+  },
+  "capabilities": {
+    "a2a": true,
+    "tool-use": true,
+    "chat": true,
+    "push-notifications": true
+  },
+  "skills": [
+    {
+      "id": "pyATS_run_show_command",
+      "description": "Runs a show command on a device"
+    }
+    ...
+  ]
+}
+</code></pre>
+<p>
+ ✨ Features
+</p>
+<p>
+ ✅ Peer Discovery
+- Automatically fetches peer agent.json files from the A2A_PEER_AGENTS list and dynamically wraps their tools for use inside LangGraph.
+</p>
+<p>
+ 🧠 Delegation
+- Uses delegate_task_to_peer_agent(...) to send subtasks to other A2A agents over the web, enabling multi-agent cooperation.
+</p>
+<p>
+ 📎 Artifact Hosting
+- Any .png or .svg dropped into /output/ will be served publicly. URLs are included in artifacts.uri in responses.
+</p>
+<p>
+ 📣 Push Notifications
+- Sends proactive responses to a remote system via A2A_PUSH_TARGET_URL.
+</p>
+<p>
+ 🔐 Security Notes
+- You can expose the adapter using ngrok, a reverse proxy, or directly from a public DMZ.
+- No authentication is enabled by default—consider reverse proxies or middleware for auth in production.
+</p>
+<p>
+ 🧱 Based On
+- FastAPI for serving HTTP API
+- httpx for async networking
+- LangGraph for AI coordination
+- slack_sdk for notifications
+- uvicorn as ASGI server
+</p>
+<p>
+ ✅ Next Steps
+- Connect this agent to a public registry
+- Add your A2A endpoint to A2A_PEER_AGENTS in other agents
+- Use LangGraph memory + tools to build collaborative tasks
+</p>
+<h2 class="heading">
+ docker_startup.sh
+</h2>
+<p>
+ 🚀 docker_startup.sh – One-Command Launcher for MCPyATS
+- This script automates the full build and launch of all Dockerized components in the
+ <strong>
+  MCPyATS
+ </strong>
+ system, including:
+- ✅ All
+ <code class="code">
+  mcp_servers/
+ </code>
+ (tool containers)
+- ✅ The LangGraph-based
+ <code class="code">
+  mcpyats
+ </code>
+ agent
+- ✅ The Streamlit frontend
+- ✅ The Draw.io + WebSocket integration
+- ✅ The A2A (Agent-to-Agent) Adapter
+</p>
+<hr/>
+<h2 class="heading">
+ 🧩 What It Does
+</h2>
+<h3 class="heading">
+ 🔨 1. Builds all MCP server images:
+</h3>
+<p>
+ For each directory in
+ <code class="code">
+  ./mcp_servers/
+ </code>
+ , this script:
+- Builds the Docker image using
+ <code class="code">
+  docker build
+ </code>
+ - Tags it appropriately (e.g.,
+ <code class="code">
+  github-mcp
+ </code>
+ ,
+ <code class="code">
+  servicenow-mcp
+ </code>
+ )
+</p>
+<p>
+ Includes servers for:
+- GitHub, Google Maps, ServiceNow, Slack, NetBox
+- Filesystem, Email, NIST, QuickChart, RFC, Mermaid, etc.
+</p>
+<h3 class="heading">
+ 🧱 2. Builds infrastructure containers:
+</h3>
+<ul>
+<li>
+<code class="code">
+   mcpyats
+  </code>
+  – The LangGraph agent
+ </li>
+<li>
+<code class="code">
+   a2a-adapter
+  </code>
+  – A2A FastAPI adapter
+ </li>
+<li>
+<code class="code">
+   drawio
+  </code>
+  and
+  <code class="code">
+   drawio-mcp
+  </code>
+  – for visual topology editing
+ </li>
+<li>
+<code class="code">
+   streamlit-app
+  </code>
+  – web UI on
+  <code class="code">
+   http://localhost:8501
+  </code>
+</li>
+</ul>
+<h3 class="heading">
+ 🧪 3. Launches each container with proper environment configuration:
+</h3>
+<ul>
+<li>
+  Reads
+  <code class="code">
+   .env
+  </code>
+  for tokens and keys
+ </li>
+<li>
+  Mounts local paths (e.g.,
+  <code class="code">
+   shared_output/
+  </code>
+  )
+ </li>
+<li>
+  Uses
+  <code class="code">
+   --env-file .env
+  </code>
+  where applicable
+ </li>
+<li>
+  Ensures persistent volumes for artifacts and testbed files
+ </li>
+<li>
+  Opens required ports (e.g.,
+  <code class="code">
+   10000
+  </code>
+  ,
+  <code class="code">
+   2024
+  </code>
+  ,
+  <code class="code">
+   8501
+  </code>
+  ,
+  <code class="code">
+   8080
+  </code>
+  ,
+  <code class="code">
+   3000
+  </code>
+  ,
+  <code class="code">
+   11434
+  </code>
+  )
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ ✅ Usage
+</h2>
+<p>
+ Ensure you have a valid
+ <code class="code">
+  .env
+ </code>
+ file configured (copy from
+ <code class="code">
+  .env.example
+ </code>
+ ):
+</p>
+<pre class="pre"><code class="language-bash code">cp .env.example .env
+nano .env  # fill in tokens and secrets
+</code></pre>
+<p>
+ Then run:
+</p>
+<pre class="pre"><code class="language-bash code">./docker_startup.sh
+</code></pre>
+<h2 class="heading">
+ Streamlit UI
+</h2>
+<p>
+ 🌐 Streamlit UI – Frontend for MCpyATS
+</p>
+<p>
+ This directory provides a lightweight Streamlit-based web interface for interacting with the
+ <strong>
+  MCpyATS
+ </strong>
+ LangGraph AI agent.
+</p>
+<p>
+ It enables natural language chat with your network and connected MCP tools (via HTTP), and provides a visual entry point for interacting with all your infrastructure agents.
+</p>
+<hr/>
+<h2 class="heading">
+ 🚀 Features
+</h2>
+<ul>
+<li>
+  💬
+  <strong>
+   Chat Interface
+  </strong>
+  to ask network, Slack, GitHub, and AI questions
+ </li>
+<li>
+  🧠 Uses LangGraph agent on port
+  <code class="code">
+   :2024
+  </code>
+  via
+  <code class="code">
+   /threads/.../runs/stream
+  </code>
+  API
+ </li>
+<li>
+  ⚙️ Dynamically uses MCP tools like
+  <code class="code">
+   pyats_mcp_server
+  </code>
+  ,
+  <code class="code">
+   drawio
+  </code>
+  ,
+  <code class="code">
+   github
+  </code>
+  ,
+  <code class="code">
+   filesystem
+  </code>
+  , etc.
+ </li>
+<li>
+  📎 Supports artifact visualization (charts, maps, outputs, etc.)
+ </li>
+<li>
+  🖼 Includes logo and branding via
+  <code class="code">
+   logo.jpeg
+  </code>
+</li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 📁 Structure
+</h2>
+<pre class="pre"><code class="language-bash code">streamlit/
+├── Dockerfile        # Builds and runs Streamlit app
+├── streamlit.py      # Main Streamlit frontend logic
+├── logo.jpeg         # Logo displayed at the top of the app
+🐳 Docker Usage
+
+You can build and run the Streamlit app using the included Dockerfile:
+
+```bash
+docker build -t streamlit-app ./streamlit
+
+docker run -d --name streamlit-app -p 8501:8501 streamlit-app
+</code></pre>
+<p>
+ Then open:
+</p>
+<pre class="pre"><code class="language-arduino code">http://localhost:8501
+</code></pre>
+<p>
+ 🧪 Local Dev Usage
+</p>
+<p>
+ If you prefer to run locally with Python:
+</p>
+<pre class="pre"><code class="language-bash code">pip install streamlit requests
+
+cd streamlit/
+streamlit run streamlit.py
+</code></pre>
+<p>
+ ⚙️ Configuration
+</p>
+<p>
+ The frontend expects your LangGraph agent to be running at:
+</p>
+<pre class="pre"><code class="language-arduino code">http://host.docker.internal:2024
+</code></pre>
+<p>
+ This is set in the code via:
+</p>
+<pre class="pre"><code class="language-python code">API_BASE_URL = "http://host.docker.internal:2024"
+</code></pre>
+<p>
+ You can change this to http://localhost:2024 or a public agent URL if needed.
+</p>
+<p>
+ 💬 Prompting Guide
+</p>
+<p>
+ Some examples you can use in the prompt box:
+- Network config    "Show running config for R1"
+- Slack message "Send 'Hello team!' to Slack"
+- Google Maps location  "Find pizza places near New York"
+- Filesystem read   "Read the file named config_backup.txt"
+- GitHub interaction    "Create README.md in repo mynetwork"
+- Excalidraw chart  "Draw a network diagram with R1, R2, and SW1"
+- BGP / Geolocation / Whois "Show geolocation for 8.8.8.8"
+</p>
+<p>
+ 🧠 State Management
+- Stores chat thread_id in st.session_state
+- Preserves message history across user turns
+- Dynamically parses streaming responses from LangGraph including:
+- Tool output (tool_call_id)
+- Direct content (content)
+- Tool feedback (e.g., Slack success/failure)
+</p>
+<p>
+ 📦 Dependencies
+</p>
+<p>
+ Already included in the Dockerfile:
+</p>
+<pre class="pre"><code class="language-Dockerfile code">RUN pip install requests
+RUN pip install streamlit
+</code></pre>
+<p>
+ 🛠 Development Notes
+-Runs on port 8501
+-Accepts prompt input via st.chat_input
+-Supports both raw text replies and structured tool messages
+-Gracefully handles tool call responses, JSON decoding, and missing fields
+-Can be extended to support file uploads and session tagging
+</p>
+<p>
+ 🔗 Access
+</p>
+<p>
+ Once running, access the UI via:
+</p>
+<pre class="pre"><code class="language-arduino code">http://localhost:8501
+</code></pre>
+<p>
+ If deployed remotely, update your .env and reverse proxy as needed.
+</p>
+<h2 class="heading">
+ Final healthy containers view
+</h2>
+<h1 class="heading">
+ 🟢 Post-Startup: What to Expect
+</h1>
+<p>
+ Once you run the
+ <code class="code">
+  ./docker_startup.sh
+ </code>
+ script successfully, MCPyATS will:
+</p>
+<ul>
+<li>
+<p>
+   ✅
+   <strong>
+    Build and start 20+ Docker containers
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   ✅
+   <strong>
+    Expose local and web-accessible endpoints
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   ✅
+   <strong>
+    Enable real-time interaction across AI, automation, visualization, and collaboration layers
+   </strong>
+</p>
+</li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 🚀 Services and Ports
+</h2>
+<p>
+ Below is a complete list of the key containers, their roles, and exposed ports:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Service
+   </th>
+<th>
+    Container Name
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Port(s)
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    LangGraph Agent
+   </td>
+<td>
+<code class="code">
+     mcpyats
+    </code>
+</td>
+<td>
+    Core LangGraph-based AI orchestrator
+   </td>
+<td>
+<code class="code">
+     :2024
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Streamlit UI
+   </td>
+<td>
+<code class="code">
+     streamlit-app
+    </code>
+</td>
+<td>
+    Web frontend for natural language interface
+   </td>
+<td>
+<code class="code">
+     :8501
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Draw.io (MCP)
+   </td>
+<td>
+<code class="code">
+     drawio-mcp
+    </code>
+</td>
+<td>
+    MCP server with WebSocket + TCP tool bridge
+   </td>
+<td>
+<code class="code">
+     3000
+    </code>
+    ,
+    <code class="code">
+     11434
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    Draw.io (Local)
+   </td>
+<td>
+<code class="code">
+     drawio-local
+    </code>
+</td>
+<td>
+    Browser-accessible standalone Draw.io instance
+   </td>
+<td>
+<code class="code">
+     :8080
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+    A2A Adapter
+   </td>
+<td>
+<code class="code">
+     a2a-adapter
+    </code>
+</td>
+<td>
+    Agent-to-Agent communication adapter
+   </td>
+<td>
+<code class="code">
+     :10000
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 class="heading">
+ 🧰 MCP Tool Servers (Autonomous Backends)
+</h2>
+<p>
+ The following MCP containers are launched in the background and made available to the LangGraph agent:
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    MCP Server
+   </th>
+<th>
+    Container ID
+   </th>
+<th>
+    Container Name
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+    Filesystem
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     filesystem-mcp
+    </code>
+</td>
+<td>
+    Read/write local files
+   </td>
+</tr>
+<tr>
+<td>
+    NetBox
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     netbox-mcp
+    </code>
+</td>
+<td>
+    Query network source-of-truth
+   </td>
+</tr>
+<tr>
+<td>
+    Google Search
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     google-search-mcp
+    </code>
+</td>
+<td>
+    Web search interface
+   </td>
+</tr>
+<tr>
+<td>
+    ServiceNow
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     servicenow-mcp
+    </code>
+</td>
+<td>
+    Create/update problem tickets
+   </td>
+</tr>
+<tr>
+<td>
+    Email (SMTP)
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     email-mcp
+    </code>
+</td>
+<td>
+    Send outbound emails
+   </td>
+</tr>
+<tr>
+<td>
+    ChatGPT
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     chatgpt-mcp
+    </code>
+</td>
+<td>
+    Interface with OpenAI GPT models
+   </td>
+</tr>
+<tr>
+<td>
+    pyATS
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     pyats-mcp
+    </code>
+</td>
+<td>
+    Execute network commands
+   </td>
+</tr>
+<tr>
+<td>
+    QuickChart
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     quickchart-mcp
+    </code>
+</td>
+<td>
+    Generate simple charts
+   </td>
+</tr>
+<tr>
+<td>
+    VegaLite
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     vegalite-mcp
+    </code>
+</td>
+<td>
+    Create JSON-driven charts
+   </td>
+</tr>
+<tr>
+<td>
+    Mermaid
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     mermaid-mcp
+    </code>
+</td>
+<td>
+    Render Mermaid syntax diagrams
+   </td>
+</tr>
+<tr>
+<td>
+    RFC
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     rfc-mcp
+    </code>
+</td>
+<td>
+    Retrieve IETF RFCs
+   </td>
+</tr>
+<tr>
+<td>
+    NIST NVD
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     nist-mcp
+    </code>
+</td>
+<td>
+    Vulnerability and CVE data
+   </td>
+</tr>
+<tr>
+<td>
+    Subnet Calculator
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     subnet-calculator-mcp
+    </code>
+</td>
+<td>
+    Calculates subnet info from CIDR IP
+   </td>
+</tr>
+<tr>
+<td>
+    Excalidraw
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     excalidraw-mcp
+    </code>
+</td>
+<td>
+    Generate freeform drawings
+   </td>
+</tr>
+<tr>
+<td>
+    GitHub
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     github-mcp
+    </code>
+</td>
+<td>
+    Interact with GitHub repositories
+   </td>
+</tr>
+<tr>
+<td>
+    Slack
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     slack-mcp
+    </code>
+</td>
+<td>
+    Post messages to Slack
+   </td>
+</tr>
+<tr>
+<td>
+    Google Maps
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     google-maps-mcp
+    </code>
+</td>
+<td>
+    Geocoding and location data
+   </td>
+</tr>
+<tr>
+<td>
+    AbuseIPDB
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     abuseipdb-mcp
+    </code>
+</td>
+<td>
+    Query IP reputation
+   </td>
+</tr>
+<tr>
+<td>
+    Selector AI
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     selector-ai-mcp
+    </code>
+</td>
+<td>
+    AI-based selector for data
+   </td>
+</tr>
+<tr>
+<td>
+    Sequential Thinking
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     sequentialthinking-mcp
+    </code>
+</td>
+<td>
+    Logical task planning
+   </td>
+</tr>
+<tr>
+<td>
+    Cisco Identity Services Engine
+   </td>
+<td>
+</td>
+<td>
+<code class="code">
+     ise-mcp
+    </code>
+</td>
+<td>
+    ISE Operations
+   </td>
+</tr>
+<tr>
+<td>
+    ---------------------------------------------------------------------------------------------------------------
+   </td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 class="heading">
+ ✅ Final Confirmation
+</h2>
+<p>
+ When complete, you should see output like:
+</p>
+<pre class="pre"><code class="language-bash code">✅ drawio-mcp container running with both STDIO + WebSocket
+
+✅ mcpyats container started at http://localhost:2024
+
+✅ streamlit-app container started at http://localhost:8501
+
+✅ local drawio container started at http://localhost:8080
+
+✅ a2a-adapter container listening on http://localhost:10000
+</code></pre>
+<p>
+ You can also verify running containers with:
+</p>
+<pre class="pre"><code class="language-bash code">docker ps
+</code></pre>
+<p>
+ 🧪 Test the System
+</p>
+<p>
+ Visit http://localhost:8501 → Interact with MCpyATS via Streamlit
+</p>
+<p>
+ Use curl http://localhost:2024/docs to see API docs
+</p>
+<p>
+ Open http://localhost:8080 for standalone Draw.io
+</p>
+<p>
+ Post JSON to http://localhost:10000 to test A2A messaging
+</p>
+<p>
+ Watch logs with docker logs -f mcpyats
+</p>
+<p>
+ 🔄 Restarting
+</p>
+<p>
+ If you make code changes, restart individual containers with:
+</p>
+<pre class="pre"><code class="language-bash code">docker restart mcpyats
+docker restart streamlit-app
+</code></pre>
+<p>
+ Or restart all:
+</p>
+<pre class="pre"><code class="language-bash code">docker rm -f $(docker ps -aq)
+./docker_startup.sh
+</code></pre>
+<p>
+ 📁 Shared Output
+</p>
+<p>
+ Many containers mount and use this shared volume:
+</p>
+<pre class="pre"><code class="language-bash code">/home/johncapobianco/MCPyATS/shared_output → /projects or /output
+</code></pre>
+<p>
+ You should adjust this to your path
+</p>
+<p>
+ This allows tools like Filesystem MCP, Chart generators, and Draw.io to exchange files and artifacts in real time.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/automateyournetwork-MCPyATS.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

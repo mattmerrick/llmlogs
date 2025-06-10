@@ -1,0 +1,2657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A powerful Laravel package to build a Model Context Protocol Server seamlessly">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Laravel MCP Server by OP.GG - MCP Directory">
+    <meta property="og:description" content="A powerful Laravel package to build a Model Context Protocol Server seamlessly">
+    <meta property="og:url" content="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Laravel MCP Server by OP.GG - MCP Directory">
+    <meta name="twitter:description" content="A powerful Laravel package to build a Model Context Protocol Server seamlessly">
+    
+    <title>Laravel MCP Server by OP.GG - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Laravel MCP Server by OP.GG</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Laravel MCP Server by OP.GG</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 222</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: PHP</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">ai</span><span class="topic-tag"> laravel</span><span class="topic-tag"> laravel-package</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span><span class="topic-tag"> php</span><span class="topic-tag"> sse</span>
+                        </div>
+                        <a href="https://github.com/opgginc/laravel-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Laravel MCP Server by OP.GG - MCP Directory" property="og:title"/>
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Laravel MCP Server by OP.GG - MCP Directory" name="twitter:title"/>
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" name="twitter:description"/>
+<title>Laravel MCP Server by OP.GG - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Laravel MCP Server by OP.GG</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Laravel MCP Server by OP.GG</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 222</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: PHP</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> laravel</span><span class="topic-tag"> laravel-package</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span><span class="topic-tag"> php</span><span class="topic-tag"> sse</span>
+</div>
+<a class="github-link" href="https://github.com/opgginc/laravel-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Laravel MCP Server by OP.GG - MCP Directory" property="og:title">
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" property="og:description">
+<meta content="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Laravel MCP Server by OP.GG - MCP Directory" name="twitter:title">
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" name="twitter:description">
+<title>Laravel MCP Server by OP.GG - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Laravel MCP Server by OP.GG</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 222</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: PHP</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> laravel</span><span class="topic-tag"> laravel-package</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span><span class="topic-tag"> php</span><span class="topic-tag"> sse</span>
+</div>
+<a class="github-link" href="https://github.com/opgginc/laravel-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Laravel MCP Server by OP.GG - MCP Directory" property="og:title"/>
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Laravel MCP Server by OP.GG - MCP Directory" name="twitter:title"/>
+<meta content="A powerful Laravel package to build a Model Context Protocol Server seamlessly" name="twitter:description"/>
+<title>Laravel MCP Server by OP.GG - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Laravel MCP Server by OP.GG</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 222</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: PHP</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">ai</span><span class="topic-tag"> laravel</span><span class="topic-tag"> laravel-package</span><span class="topic-tag"> llm</span><span class="topic-tag"> mcp</span><span class="topic-tag"> php</span><span class="topic-tag"> sse</span>
+</div>
+<a class="github-link" href="https://github.com/opgginc/laravel-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 align="center" class="heading">
+ Laravel MCP Server by OP.GG
+</h1>
+<p align="center">
+ A powerful Laravel package to build a Model Context Protocol Server seamlessly
+</p>
+<p align="center">
+<a href="https://github.com/opgginc/laravel-mcp-server/actions">
+<img alt="Build Status" src="https://github.com/opgginc/laravel-mcp-server/actions/workflows/tests.yml/badge.svg"/>
+</a>
+<a href="https://packagist.org/packages/opgginc/laravel-mcp-server">
+<img alt="Total Downloads" src="https://img.shields.io/packagist/dt/opgginc/laravel-mcp-server"/>
+</a>
+<a href="https://packagist.org/packages/opgginc/laravel-mcp-server">
+<img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/opgginc/laravel-mcp-server"/>
+</a>
+<a href="https://packagist.org/packages/opgginc/laravel-mcp-server">
+<img alt="License" src="https://img.shields.io/packagist/l/opgginc/laravel-mcp-server"/>
+</a>
+</p>
+<p align="center">
+<a href="https://op.gg/open-source/laravel-mcp-server">
+  Official Website
+ </a>
+</p>
+<p align="center">
+<a href="README.md">
+  English
+ </a>
+ |
+ <a href="README.pt-BR.md">
+  Português do Brasil
+ </a>
+ |
+ <a href="README.ko.md">
+  한국어
+ </a>
+ |
+ <a href="README.ru.md">
+  Русский
+ </a>
+ |
+ <a href="README.zh-CN.md">
+  简体中文
+ </a>
+ |
+ <a href="README.zh-TW.md">
+  繁體中文
+ </a>
+ |
+ <a href="README.pl.md">
+  Polski
+ </a>
+ |
+ <a href="README.es.md">
+  Español
+ </a>
+</p>
+<p align="center">
+<img alt="Laravel MCP Server Demo" height="200" src="docs/watch.gif"/>
+</p>
+<h2 class="heading">
+ ⚠️ Version Information &amp; Breaking Changes
+</h2>
+<h3 class="heading">
+ v1.3.0 Changes (Current)
+</h3>
+<p>
+ Version 1.3.0 introduces improvements to the
+ <code class="code">
+  ToolInterface
+ </code>
+ for better communication control:
+</p>
+<p>
+<strong>
+  New Features:
+ </strong>
+ - Added
+ <code class="code">
+  isStreaming(): bool
+ </code>
+ method for clearer communication pattern selection
+- Improved migration tools supporting upgrades from v1.1.x, v1.2.x to v1.3.0
+- Enhanced stub files with comprehensive v1.3.0 documentation
+</p>
+<p>
+<strong>
+  Deprecated Features:
+ </strong>
+ -
+ <code class="code">
+  messageType(): ProcessMessageType
+ </code>
+ method is now deprecated (will be removed in v2.0.0)
+- Use
+ <code class="code">
+  isStreaming(): bool
+ </code>
+ instead for better clarity and simplicity
+</p>
+<h3 class="heading">
+ Breaking Changes in v1.1.0
+</h3>
+<p>
+ Version 1.1.0 introduced a significant and breaking change to the
+ <code class="code">
+  ToolInterface
+ </code>
+ . If you are upgrading from v1.0.x, you
+ <strong>
+  must
+ </strong>
+ update your tool implementations to conform to the new interface.
+</p>
+<p>
+<strong>
+  Key Changes in
+  <code class="code">
+   ToolInterface
+  </code>
+  :
+ </strong>
+</p>
+<p>
+ The
+ <code class="code">
+  OPGG\LaravelMcpServer\Services\ToolService\ToolInterface
+ </code>
+ has been updated as follows:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    New Method Added:
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     messageType(): ProcessMessageType
+    </code>
+</li>
+<li>
+    This method is crucial for the new HTTP stream support and determines the type of message being processed.
+   </li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Method Renames:
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     getName()
+    </code>
+    is now
+    <code class="code">
+     name()
+    </code>
+</li>
+<li>
+<code class="code">
+     getDescription()
+    </code>
+    is now
+    <code class="code">
+     description()
+    </code>
+</li>
+<li>
+<code class="code">
+     getInputSchema()
+    </code>
+    is now
+    <code class="code">
+     inputSchema()
+    </code>
+</li>
+<li>
+<code class="code">
+     getAnnotations()
+    </code>
+    is now
+    <code class="code">
+     annotations()
+    </code>
+</li>
+</ul>
+</li>
+</ol>
+<p>
+<strong>
+  How to Update Your Tools:
+ </strong>
+</p>
+<h3 class="heading">
+ Automated Tool Migration for v1.1.0
+</h3>
+<p>
+ To assist with the transition to the new
+ <code class="code">
+  ToolInterface
+ </code>
+ introduced in v1.1.0, we've included an Artisan command that can help automate the refactoring of your existing tools:
+</p>
+<pre class="pre"><code class="language-bash code">php artisan mcp:migrate-tools {path?}
+</code></pre>
+<p>
+<strong>
+  What it does:
+ </strong>
+</p>
+<p>
+ This command will scan PHP files in the specified directory (defaults to
+ <code class="code">
+  app/MCP/Tools/
+ </code>
+ ) and attempt to:
+</p>
+<ol>
+<li>
+<strong>
+   Identify old tools:
+  </strong>
+  It looks for classes implementing the
+  <code class="code">
+   ToolInterface
+  </code>
+  with the old method signatures.
+ </li>
+<li>
+<strong>
+   Create Backups:
+  </strong>
+  Before making any changes, it will create a backup of your original tool file with a
+  <code class="code">
+   .backup
+  </code>
+  extension (e.g.,
+  <code class="code">
+   YourTool.php.backup
+  </code>
+  ). If a backup file already exists, the original file will be skipped to prevent accidental data loss.
+ </li>
+<li>
+<strong>
+   Refactor the Tool:
+  </strong>
+<ul>
+<li>
+    Rename methods:
+   </li>
+<li>
+<code class="code">
+     getName()
+    </code>
+    to
+    <code class="code">
+     name()
+    </code>
+</li>
+<li>
+<code class="code">
+     getDescription()
+    </code>
+    to
+    <code class="code">
+     description()
+    </code>
+</li>
+<li>
+<code class="code">
+     getInputSchema()
+    </code>
+    to
+    <code class="code">
+     inputSchema()
+    </code>
+</li>
+<li>
+<code class="code">
+     getAnnotations()
+    </code>
+    to
+    <code class="code">
+     annotations()
+    </code>
+</li>
+<li>
+    Add the new
+    <code class="code">
+     messageType()
+    </code>
+    method, which will default to returning
+    <code class="code">
+     ProcessMessageType::SSE
+    </code>
+    .
+   </li>
+<li>
+    Ensure the
+    <code class="code">
+     use OPGG\LaravelMcpServer\Enums\ProcessMessageType;
+    </code>
+    statement is present.
+   </li>
+</ul>
+</li>
+</ol>
+<p>
+<strong>
+  Usage:
+ </strong>
+</p>
+<p>
+ After updating the
+ <code class="code">
+  opgginc/laravel-mcp-server
+ </code>
+ package to v1.1.0 or later, if you have existing tools written for v1.0.x, it is highly recommended to run this command:
+</p>
+<pre class="pre"><code class="language-bash code">php artisan mcp:migrate-tools
+</code></pre>
+<p>
+ If your tools are located in a directory other than
+ <code class="code">
+  app/MCP/Tools/
+ </code>
+ , you can specify the path:
+</p>
+<pre class="pre"><code class="language-bash code">php artisan mcp:migrate-tools path/to/your/tools
+</code></pre>
+<p>
+ The command will output its progress, indicating which files are being processed, backed up, and migrated. Always review the changes made by the tool. While it aims to be accurate, complex or unusually formatted tool files might require manual adjustments.
+</p>
+<p>
+ This tool should significantly ease the migration process and help you adapt to the new interface structure quickly.
+</p>
+<h3 class="heading">
+ Manual Migration
+</h3>
+<p>
+ If you prefer to migrate your tools manually, here's a comparison to help you adapt your existing tools:
+</p>
+<p>
+<strong>
+  v1.0.x
+  <code class="code">
+   ToolInterface
+  </code>
+  :
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">&lt;?php
+
+namespace OPGG\LaravelMcpServer\Services\ToolService;
+
+interface ToolInterface
+{
+    public function getName(): string;
+    public function getDescription(): string;
+    public function getInputSchema(): array;
+    public function getAnnotations(): array;
+    public function execute(array $arguments): mixed;
+}
+</code></pre>
+<p>
+<strong>
+  v1.1.0
+  <code class="code">
+   ToolInterface
+  </code>
+  (New):
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">&lt;?php
+
+namespace OPGG\LaravelMcpServer\Services\ToolService;
+
+use OPGG\LaravelMcpServer\Enums\ProcessMessageType;
+
+interface ToolInterface
+{
+    public function messageType(): ProcessMessageType; // New method
+    public function name(): string;                     // Renamed
+    public function description(): string;              // Renamed
+    public function inputSchema(): array;               // Renamed
+    public function annotations(): array;               // Renamed
+    public function execute(array $arguments): mixed;   // No change
+}
+</code></pre>
+<p>
+<strong>
+  Example of an updated tool:
+ </strong>
+</p>
+<p>
+ If your v1.0.x tool looked like this:
+</p>
+<pre class="pre"><code class="language-php code">use OPGG\LaravelMcpServer\Services\ToolService\ToolInterface;
+
+class MyOldTool implements ToolInterface
+{
+    public function getName(): string { return 'MyOldTool'; }
+    public function getDescription(): string { return 'This is my old tool.'; }
+    public function getInputSchema(): array { return []; }
+    public function getAnnotations(): array { return []; }
+    public function execute(array $arguments): mixed { /* ... */ }
+}
+</code></pre>
+<p>
+ You need to update it for v1.1.0 as follows:
+</p>
+<pre class="pre"><code class="language-php code">use OPGG\LaravelMcpServer\Services\ToolService\ToolInterface;
+use OPGG\LaravelMcpServer\Enums\ProcessMessageType; // Import the enum
+
+class MyNewTool implements ToolInterface
+{
+    /**
+     * @deprecated since v1.3.0, use isStreaming() instead. Will be removed in v2.0.0
+     */
+    public function messageType(): ProcessMessageType
+    {
+        return ProcessMessageType::HTTP;
+    }
+
+    public function isStreaming(): bool
+    {
+        return false; // Most tools should return false
+    }
+
+    public function name(): string { return 'MyNewTool'; }
+    public function description(): string { return 'This is my new tool.'; }
+    public function inputSchema(): array { return []; }
+    public function annotations(): array { return []; }
+    public function execute(array $arguments): mixed { /* ... */ }
+}
+</code></pre>
+<h2 class="heading">
+ Overview of Laravel MCP Server
+</h2>
+<p>
+ Laravel MCP Server is a powerful package designed to streamline the implementation of Model Context Protocol (MCP) servers in Laravel applications.
+ <strong>
+  Unlike most Laravel MCP packages that use Standard Input/Output (stdio) transport
+ </strong>
+ , this package focuses on
+ <strong>
+  Streamable HTTP
+ </strong>
+ transport and still includes a
+ <strong>
+  legacy SSE provider
+ </strong>
+ for backwards compatibility, providing a secure and controlled integration method.
+</p>
+<h3 class="heading">
+ Why Streamable HTTP instead of STDIO?
+</h3>
+<p>
+ While stdio is straightforward and widely used in MCP implementations, it has significant security implications for enterprise environments:
+</p>
+<ul>
+<li>
+<strong>
+   Security Risk
+  </strong>
+  : STDIO transport potentially exposes internal system details and API specifications
+ </li>
+<li>
+<strong>
+   Data Protection
+  </strong>
+  : Organizations need to protect proprietary API endpoints and internal system architecture
+ </li>
+<li>
+<strong>
+   Control
+  </strong>
+  : Streamable HTTP offers better control over the communication channel between LLM clients and your application
+ </li>
+</ul>
+<p>
+ By implementing the MCP server with Streamable HTTP transport, enterprises can:
+</p>
+<ul>
+<li>
+  Expose only the necessary tools and resources while keeping proprietary API details private
+ </li>
+<li>
+  Maintain control over authentication and authorization processes
+ </li>
+</ul>
+<p>
+ Key benefits:
+</p>
+<ul>
+<li>
+  Seamless and rapid implementation of Streamable HTTP in existing Laravel projects
+ </li>
+<li>
+  Support for the latest Laravel and PHP versions
+ </li>
+<li>
+  Efficient server communication and real-time data processing
+ </li>
+<li>
+  Enhanced security for enterprise environments
+ </li>
+</ul>
+<h2 class="heading">
+ Key Features
+</h2>
+<ul>
+<li>
+  Real-time communication support through Streamable HTTP with SSE integration
+ </li>
+<li>
+  Implementation of tools and resources compliant with Model Context Protocol specifications
+ </li>
+<li>
+  Adapter-based design architecture with Pub/Sub messaging pattern (starting with Redis, more adapters planned)
+ </li>
+<li>
+  Simple routing and middleware configuration
+ </li>
+</ul>
+<h3 class="heading">
+ Transport Providers
+</h3>
+<p>
+ The configuration option
+ <code class="code">
+  server_provider
+ </code>
+ controls which transport is used. Available providers are:
+</p>
+<ol>
+<li>
+<strong>
+   streamable_http
+  </strong>
+  – the recommended default. Uses standard HTTP requests and avoids issues with platforms that close SSE connections after about a minute (e.g. many serverless environments).
+ </li>
+<li>
+<strong>
+   sse
+  </strong>
+  – a legacy provider kept for backwards compatibility. It relies on long-lived SSE connections and may not work on platforms with short HTTP timeouts.
+ </li>
+</ol>
+<p>
+ The MCP protocol also defines a "Streamable HTTP SSE" mode, but this package does not implement it and there are no plans to do so.
+</p>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+  PHP &gt;=8.2
+ </li>
+<li>
+  Laravel &gt;=10.x
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<ol>
+<li>
+  Install the package via Composer:
+ </li>
+</ol>
+<p>
+<code class="code">
+  bash
+   composer require opgginc/laravel-mcp-server
+ </code>
+</p>
+<ol>
+<li>
+  Publish the configuration file:
+  <code class="code">
+   bash
+   php artisan vendor:publish --provider="OPGG\LaravelMcpServer\LaravelMcpServerServiceProvider"
+  </code>
+</li>
+</ol>
+<h2 class="heading">
+ Basic Usage
+</h2>
+<h3 class="heading">
+ Domain Restriction
+</h3>
+<p>
+ You can restrict MCP server routes to specific domain(s) for better security and organization:
+</p>
+<pre class="pre"><code class="language-php code">// config/mcp-server.php
+
+// Allow access from all domains (default)
+'domain' =&gt; null,
+
+// Restrict to a single domain
+'domain' =&gt; 'api.example.com',
+
+// Restrict to multiple domains
+'domain' =&gt; ['api.example.com', 'admin.example.com'],
+</code></pre>
+<p>
+<strong>
+  When to use domain restriction:
+ </strong>
+ - Running multiple applications on different subdomains
+- Separating API endpoints from your main application
+- Implementing multi-tenant architectures where each tenant has its own subdomain
+- Providing the same MCP services across multiple domains
+</p>
+<p>
+<strong>
+  Example scenarios:
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">// Single API subdomain
+'domain' =&gt; 'api.op.gg',
+
+// Multiple subdomains for different environments
+'domain' =&gt; ['api.op.gg', 'staging-api.op.gg'],
+
+// Multi-tenant architecture
+'domain' =&gt; ['tenant1.op.gg', 'tenant2.op.gg', 'tenant3.op.gg'],
+
+// Different services on different domains
+'domain' =&gt; ['api.op.gg', 'api.kargn.as'],
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  When using multiple domains, the package automatically registers separate routes for each domain to ensure proper routing across all specified domains.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Creating and Adding Custom Tools
+</h3>
+<p>
+ The package provides convenient Artisan commands to generate new tools:
+</p>
+<pre class="pre"><code class="language-bash code">php artisan make:mcp-tool MyCustomTool
+</code></pre>
+<p>
+ This command:
+</p>
+<ul>
+<li>
+  Handles various input formats (spaces, hyphens, mixed case)
+ </li>
+<li>
+  Automatically converts the name to proper case format
+ </li>
+<li>
+  Creates a properly structured tool class in
+  <code class="code">
+   app/MCP/Tools
+  </code>
+</li>
+<li>
+  Offers to automatically register the tool in your configuration
+ </li>
+</ul>
+<p>
+ You can also manually create and register tools in
+ <code class="code">
+  config/mcp-server.php
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-php code">use OPGG\LaravelMcpServer\Services\ToolService\ToolInterface;
+
+class MyCustomTool implements ToolInterface
+{
+    // Tool implementation
+}
+</code></pre>
+<h3 class="heading">
+ Understanding Your Tool's Structure (ToolInterface)
+</h3>
+<p>
+ When you create a tool by implementing
+ <code class="code">
+  OPGG\LaravelMcpServer\Services\ToolService\ToolInterface
+ </code>
+ , you'll need to define several methods. Here's a breakdown of each method and its purpose:
+</p>
+<pre class="pre"><code class="language-php code">&lt;?php
+
+namespace OPGG\LaravelMcpServer\Services\ToolService;
+
+use OPGG\LaravelMcpServer\Enums\ProcessMessageType;
+
+interface ToolInterface
+{
+    /**
+     * @deprecated since v1.3.0, use isStreaming() instead. Will be removed in v2.0.0
+     */
+    public function messageType(): ProcessMessageType;
+
+    // NEW in v1.3.0: Determines if this tool requires streaming (SSE) instead of standard HTTP.
+    public function isStreaming(): bool;
+
+    // The unique, callable name of your tool (e.g., 'get-user-details').
+    public function name(): string;
+
+    // A human-readable description of what your tool does.
+    public function description(): string;
+
+    // Defines the expected input parameters for your tool using a JSON Schema-like structure.
+    public function inputSchema(): array;
+
+    // Provides a way to add arbitrary metadata or annotations to your tool.
+    public function annotations(): array;
+
+    // The core logic of your tool. Receives validated arguments and returns the result.
+    public function execute(array $arguments): mixed;
+}
+</code></pre>
+<p>
+ Let's dive deeper into some of these methods:
+</p>
+<p>
+<strong>
+<code class="code">
+   messageType(): ProcessMessageType
+  </code>
+  (Deprecated in v1.3.0)
+ </strong>
+</p>
+<p>
+ ⚠️
+ <strong>
+  This method is deprecated since v1.3.0.
+ </strong>
+ Use
+ <code class="code">
+  isStreaming(): bool
+ </code>
+ instead for better clarity.
+</p>
+<p>
+ This method specifies the type of message processing for your tool. It returns a
+ <code class="code">
+  ProcessMessageType
+ </code>
+ enum value. The available types are:
+</p>
+<ul>
+<li>
+<code class="code">
+   ProcessMessageType::HTTP
+  </code>
+  : For tools interacting via standard HTTP request/response. Most common for new tools.
+ </li>
+<li>
+<code class="code">
+   ProcessMessageType::SSE
+  </code>
+  : For tools specifically designed to work with Server-Sent Events.
+ </li>
+</ul>
+<p>
+ For most tools, especially those designed for the primary
+ <code class="code">
+  streamable_http
+ </code>
+ provider, you'll return
+ <code class="code">
+  ProcessMessageType::HTTP
+ </code>
+ .
+</p>
+<p>
+<strong>
+<code class="code">
+   isStreaming(): bool
+  </code>
+  (New in v1.3.0)
+ </strong>
+</p>
+<p>
+ This is the new, more intuitive method for controlling communication patterns:
+</p>
+<ul>
+<li>
+<code class="code">
+   return false
+  </code>
+  : Use standard HTTP request/response (recommended for most tools)
+ </li>
+<li>
+<code class="code">
+   return true
+  </code>
+  : Use Server-Sent Events for real-time streaming
+ </li>
+</ul>
+<p>
+ Most tools should return
+ <code class="code">
+  false
+ </code>
+ unless you specifically need real-time streaming capabilities like:
+- Real-time progress updates for long-running operations
+- Live data feeds or monitoring tools
+- Interactive tools requiring bidirectional communication
+</p>
+<p>
+<strong>
+<code class="code">
+   name(): string
+  </code>
+</strong>
+</p>
+<p>
+ This is the identifier for your tool. It should be unique. Clients will use this name to request your tool. For example:
+ <code class="code">
+  get-weather
+ </code>
+ ,
+ <code class="code">
+  calculate-sum
+ </code>
+ .
+</p>
+<p>
+<strong>
+<code class="code">
+   description(): string
+  </code>
+</strong>
+</p>
+<p>
+ A clear, concise description of your tool's functionality. This is used in documentation, and MCP client UIs (like the MCP Inspector) may display it to users.
+</p>
+<p>
+<strong>
+<code class="code">
+   inputSchema(): array
+  </code>
+</strong>
+</p>
+<p>
+ This method is crucial for defining your tool's expected input parameters. It should return an array that follows a structure similar to JSON Schema. This schema is used:
+</p>
+<ul>
+<li>
+  By clients to understand what data to send.
+ </li>
+<li>
+  Potentially by the server or client for input validation.
+ </li>
+<li>
+  By tools like the MCP Inspector to generate forms for testing.
+ </li>
+</ul>
+<p>
+<strong>
+  Example
+  <code class="code">
+   inputSchema()
+  </code>
+  :
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">public function inputSchema(): array
+{
+    return [
+        'type' =&gt; 'object',
+        'properties' =&gt; [
+            'userId' =&gt; [
+                'type' =&gt; 'integer',
+                'description' =&gt; 'The unique identifier for the user.',
+            ],
+            'includeDetails' =&gt; [
+                'type' =&gt; 'boolean',
+                'description' =&gt; 'Whether to include extended details in the response.',
+                'default' =&gt; false, // You can specify default values
+            ],
+        ],
+        'required' =&gt; ['userId'], // Specifies which properties are mandatory
+    ];
+}
+</code></pre>
+<p>
+ In your
+ <code class="code">
+  execute
+ </code>
+ method, you can then validate the incoming arguments. The
+ <code class="code">
+  HelloWorldTool
+ </code>
+ example uses
+ <code class="code">
+  Illuminate\Support\Facades\Validator
+ </code>
+ for this:
+</p>
+<pre class="pre"><code class="language-php code">// Inside your execute() method:
+$validator = Validator::make($arguments, [
+    'userId' =&gt; ['required', 'integer'],
+    'includeDetails' =&gt; ['sometimes', 'boolean'],
+]);
+
+if ($validator-&gt;fails()) {
+    throw new JsonRpcErrorException(
+        message: $validator-&gt;errors()-&gt;toJson(),
+        code: JsonRpcErrorCode::INVALID_REQUEST
+    );
+}
+// Proceed with validated $arguments['userId'] and $arguments['includeDetails']
+</code></pre>
+<p>
+<strong>
+<code class="code">
+   annotations(): array
+  </code>
+</strong>
+</p>
+<p>
+ This method provides metadata about your tool's behavior and characteristics, following the official
+ <a href="https://modelcontextprotocol.io/docs/concepts/tools#tool-annotations">
+  MCP Tool Annotations specification
+ </a>
+ . Annotations help MCP clients categorize tools, make informed decisions about tool approval, and provide appropriate user interfaces.
+</p>
+<p>
+<strong>
+  Standard MCP Annotations:
+ </strong>
+</p>
+<p>
+ The Model Context Protocol defines several standard annotations that clients understand:
+</p>
+<ul>
+<li>
+<strong>
+<code class="code">
+    title
+   </code>
+</strong>
+  (string): A human-readable title for the tool, displayed in client UIs
+ </li>
+<li>
+<strong>
+<code class="code">
+    readOnlyHint
+   </code>
+</strong>
+  (boolean): Indicates if the tool only reads data without modifying the environment (default: false)
+ </li>
+<li>
+<strong>
+<code class="code">
+    destructiveHint
+   </code>
+</strong>
+  (boolean): Suggests if the tool may perform destructive operations like deleting data (default: true)
+ </li>
+<li>
+<strong>
+<code class="code">
+    idempotentHint
+   </code>
+</strong>
+  (boolean): Indicates if repeated calls with the same arguments have no additional effect (default: false)
+ </li>
+<li>
+<strong>
+<code class="code">
+    openWorldHint
+   </code>
+</strong>
+  (boolean): Signals if the tool interacts with external entities beyond the local environment (default: true)
+ </li>
+</ul>
+<p>
+<strong>
+  Important:
+ </strong>
+ These are hints, not guarantees. They help clients provide better user experiences but should not be used for security-critical decisions.
+</p>
+<p>
+<strong>
+  Example with standard MCP annotations:
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">public function annotations(): array
+{
+    return [
+        'title' =&gt; 'User Profile Fetcher',
+        'readOnlyHint' =&gt; true,        // Tool only reads user data
+        'destructiveHint' =&gt; false,    // Tool doesn't delete or modify data
+        'idempotentHint' =&gt; true,      // Safe to call multiple times
+        'openWorldHint' =&gt; false,      // Tool only accesses local database
+    ];
+}
+</code></pre>
+<p>
+<strong>
+  Real-world examples by tool type:
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">// Database query tool
+public function annotations(): array
+{
+    return [
+        'title' =&gt; 'Database Query Tool',
+        'readOnlyHint' =&gt; true,
+        'destructiveHint' =&gt; false,
+        'idempotentHint' =&gt; true,
+        'openWorldHint' =&gt; false,
+    ];
+}
+
+// Post deletion tool
+public function annotations(): array
+{
+    return [
+        'title' =&gt; 'Blog Post Deletion Tool',
+        'readOnlyHint' =&gt; false,
+        'destructiveHint' =&gt; true,     // Can delete posts
+        'idempotentHint' =&gt; false,     // Deleting twice has different effects
+        'openWorldHint' =&gt; false,
+    ];
+}
+
+// API integration tool
+public function annotations(): array
+{
+    return [
+        'title' =&gt; 'Weather API',
+        'readOnlyHint' =&gt; true,
+        'destructiveHint' =&gt; false,
+        'idempotentHint' =&gt; true,
+        'openWorldHint' =&gt; true,       // Accesses external weather API
+    ];
+}
+</code></pre>
+<p>
+<strong>
+  Custom annotations
+ </strong>
+ can also be added for your specific application needs:
+</p>
+<pre class="pre"><code class="language-php code">public function annotations(): array
+{
+    return [
+        // Standard MCP annotations
+        'title' =&gt; 'Custom Tool',
+        'readOnlyHint' =&gt; true,
+
+        // Custom annotations for your application
+        'category' =&gt; 'data-analysis',
+        'version' =&gt; '2.1.0',
+        'author' =&gt; 'Data Team',
+        'requires_permission' =&gt; 'analytics.read',
+    ];
+}
+</code></pre>
+<h3 class="heading">
+ Working with Resources
+</h3>
+<p>
+ Resources expose data from your server that can be read by MCP clients. They are
+ <strong>
+  application-controlled
+ </strong>
+ , meaning the client decides when and how to use them.
+Create concrete resources or URI templates in
+ <code class="code">
+  app/MCP/Resources
+ </code>
+ and
+ <code class="code">
+  app/MCP/ResourceTemplates
+ </code>
+ using the Artisan helpers:
+</p>
+<pre class="pre"><code class="language-bash code">php artisan make:mcp-resource SystemLogResource
+php artisan make:mcp-resource-template UserLogTemplate
+</code></pre>
+<p>
+ Register the generated classes in
+ <code class="code">
+  config/mcp-server.php
+ </code>
+ under the
+ <code class="code">
+  resources
+ </code>
+ and
+ <code class="code">
+  resource_templates
+ </code>
+ arrays. Each resource class extends the base
+ <code class="code">
+  Resource
+ </code>
+ class and implements a
+ <code class="code">
+  read()
+ </code>
+ method that returns either
+ <code class="code">
+  text
+ </code>
+ or
+ <code class="code">
+  blob
+ </code>
+ content. Templates extend
+ <code class="code">
+  ResourceTemplate
+ </code>
+ and describe dynamic URI
+patterns clients can use. A resource is identified by a URI such as
+ <code class="code">
+  file:///logs/app.log
+ </code>
+ and may optionally define metadata like
+ <code class="code">
+  mimeType
+ </code>
+ or
+ <code class="code">
+  size
+ </code>
+ .
+</p>
+<p>
+<strong>
+  Resource Templates with Dynamic Listing
+ </strong>
+ : Templates can optionally implement a
+ <code class="code">
+  list()
+ </code>
+ method to provide concrete resource instances that match the template pattern. This allows clients to discover available resources dynamically. The
+ <code class="code">
+  list()
+ </code>
+ method enables ResourceTemplate instances to generate a list of specific resources that can be read through the template's
+ <code class="code">
+  read()
+ </code>
+ method.
+</p>
+<p>
+ List available resources using the
+ <code class="code">
+  resources/list
+ </code>
+ endpoint and read their
+contents with
+ <code class="code">
+  resources/read
+ </code>
+ . The
+ <code class="code">
+  resources/list
+ </code>
+ endpoint returns an array
+of concrete resources, including both static resources and dynamically generated 
+resources from templates that implement the
+ <code class="code">
+  list()
+ </code>
+ method:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "resources": [
+    {
+      "uri": "file:///logs/app.log",
+      "name": "Application Log",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "database://users/123",
+      "name": "User: John Doe",
+      "description": "Profile data for John Doe",
+      "mimeType": "application/json"
+    }
+  ]
+}
+</code></pre>
+<p>
+<strong>
+  Dynamic Resource Reading
+ </strong>
+ : Resource templates support URI template patterns (RFC 6570) that allow clients to construct dynamic resource identifiers. When a client requests a resource URI that matches a template pattern, the template's
+ <code class="code">
+  read()
+ </code>
+ method is called with extracted parameters to generate the resource content.
+</p>
+<p>
+ Example workflow:
+1. Template defines pattern:
+ <code class="code">
+  "database://users/{userId}/profile"
+ </code>
+ 2. Client requests:
+ <code class="code">
+  "database://users/123/profile"
+ </code>
+ 3. Template extracts
+ <code class="code">
+  {userId: "123"}
+ </code>
+ and calls
+ <code class="code">
+  read()
+ </code>
+ method
+4. Template returns user profile data for user ID 123
+</p>
+<p>
+ You can also list templates separately using the
+ <code class="code">
+  resources/templates/list
+ </code>
+ endpoint:
+</p>
+<pre class="pre"><code class="language-bash code"># List only resource templates
+curl -X POST https://your-server.com/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"resources/templates/list"}'
+</code></pre>
+<p>
+ When running your Laravel MCP server remotely, the HTTP transport works with
+standard JSON-RPC requests. Here is a simple example using
+ <code class="code">
+  curl
+ </code>
+ to list and
+read resources:
+</p>
+<pre class="pre"><code class="language-bash code"># List resources
+curl -X POST https://your-server.com/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"resources/list"}'
+
+# Read a specific resource
+curl -X POST https://your-server.com/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"resources/read","params":{"uri":"file:///logs/app.log"}}'
+</code></pre>
+<p>
+ The server responds with JSON messages streamed over the HTTP connection, so
+ <code class="code">
+  curl --no-buffer
+ </code>
+ can be used if you want to see incremental output.
+</p>
+<h3 class="heading">
+ Working with Prompts
+</h3>
+<p>
+ Prompts provide reusable text snippets with argument support that your tools or users can request.
+Create prompt classes in
+ <code class="code">
+  app/MCP/Prompts
+ </code>
+ using:
+</p>
+<pre class="pre"><code class="language-bash code">php artisan make:mcp-prompt WelcomePrompt
+</code></pre>
+<p>
+ Register them in
+ <code class="code">
+  config/mcp-server.php
+ </code>
+ under
+ <code class="code">
+  prompts
+ </code>
+ . Each prompt class
+extends the
+ <code class="code">
+  Prompt
+ </code>
+ base class and defines:
+-
+ <code class="code">
+  name
+ </code>
+ : Unique identifier (e.g., "welcome-user")
+-
+ <code class="code">
+  description
+ </code>
+ : Optional human-readable description
+ <br/>
+ -
+ <code class="code">
+  arguments
+ </code>
+ : Array of argument definitions with name, description, and required fields
+-
+ <code class="code">
+  text
+ </code>
+ : The prompt template with placeholders like
+ <code class="code">
+  {username}
+ </code>
+</p>
+<p>
+ List prompts via the
+ <code class="code">
+  prompts/list
+ </code>
+ endpoint and fetch them using
+ <code class="code">
+  prompts/get
+ </code>
+ with arguments:
+</p>
+<pre class="pre"><code class="language-bash code"># Fetch a welcome prompt with arguments
+curl -X POST https://your-server.com/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"prompts/get","params":{"name":"welcome-user","arguments":{"username":"Alice","role":"admin"}}}'
+</code></pre>
+<h3 class="heading">
+ MCP Prompts
+</h3>
+<p>
+ When crafting prompts that reference your tools or resources, consult the
+ <a href="https://modelcontextprotocol.io/docs/concepts/prompts">
+  official prompt guidelines
+ </a>
+ . Prompts are reusable templates that can accept arguments, include resource context and even describe multi-step workflows.
+</p>
+<p>
+<strong>
+  Prompt structure
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "name": "string",
+  "description": "string",
+  "arguments": [
+    {
+      "name": "string",
+      "description": "string",
+      "required": true
+    }
+  ]
+}
+</code></pre>
+<p>
+ Clients discover prompts via
+ <code class="code">
+  prompts/list
+ </code>
+ and request specific ones with
+ <code class="code">
+  prompts/get
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-json code">{
+  "method": "prompts/get",
+  "params": {
+    "name": "analyze-code",
+    "arguments": {
+      "language": "php"
+    }
+  }
+}
+</code></pre>
+<p>
+<strong>
+  Example Prompt Class
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">use OPGG\LaravelMcpServer\Services\PromptService\Prompt;
+
+class WelcomePrompt extends Prompt
+{
+    public string $name = 'welcome-user';
+
+    public ?string $description = 'A customizable welcome message for users';
+
+    public array $arguments = [
+        [
+            'name' =&gt; 'username',
+            'description' =&gt; 'The name of the user to welcome',
+            'required' =&gt; true,
+        ],
+        [
+            'name' =&gt; 'role',
+            'description' =&gt; 'The role of the user (optional)',
+            'required' =&gt; false,
+        ],
+    ];
+
+    public string $text = 'Welcome, {username}! You are logged in as {role}.';
+}
+</code></pre>
+<p>
+ Prompts can embed resources and return sequences of messages to guide an LLM. See the official documentation for advanced examples and best practices.
+</p>
+<h3 class="heading">
+ Testing MCP Tools
+</h3>
+<p>
+ The package includes a special command for testing your MCP tools without needing a real MCP client:
+</p>
+<pre class="pre"><code class="language-bash code"># Test a specific tool interactively
+php artisan mcp:test-tool MyCustomTool
+
+# List all available tools
+php artisan mcp:test-tool --list
+
+# Test with specific JSON input
+php artisan mcp:test-tool MyCustomTool --input='{"param":"value"}'
+</code></pre>
+<p>
+ This helps you rapidly develop and debug tools by:
+</p>
+<ul>
+<li>
+  Showing the tool's input schema and validating inputs
+ </li>
+<li>
+  Executing the tool with your provided input
+ </li>
+<li>
+  Displaying formatted results or detailed error information
+ </li>
+<li>
+  Supporting complex input types including objects and arrays
+ </li>
+</ul>
+<h3 class="heading">
+ Visualizing MCP Tools with Inspector
+</h3>
+<p>
+ You can also use the Model Context Protocol Inspector to visualize and test your MCP tools:
+</p>
+<pre class="pre"><code class="language-bash code"># Run the MCP Inspector without installation
+npx @modelcontextprotocol/inspector node build/index.js
+</code></pre>
+<p>
+ This will typically open a web interface at
+ <code class="code">
+  localhost:6274
+ </code>
+ . To test your MCP server:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Warning
+   </strong>
+   :
+   <code class="code">
+    php artisan serve
+   </code>
+   CANNOT be used with this package because it cannot handle multiple PHP connections simultaneously. Since MCP SSE requires processing multiple connections concurrently, you must use one of these alternatives:
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Laravel Octane
+   </strong>
+   (Easiest option):
+  </p>
+<p>
+   ```bash
+ # Install and set up Laravel Octane with FrankenPHP (recommended)
+ composer require laravel/octane
+ php artisan octane:install --server=frankenphp
+  </p>
+<p>
+   # Start the Octane server
+ php artisan octane:start
+ ```
+  </p>
+<blockquote>
+<p>
+<strong>
+     Important
+    </strong>
+    : When installing Laravel Octane, make sure to use FrankenPHP as the server. The package may not work properly with RoadRunner due to compatibility issues with SSE connections. If you can help fix this RoadRunner compatibility issue, please submit a Pull Request - your contribution would be greatly appreciated!
+   </p>
+</blockquote>
+<p>
+   For details, see the
+   <a href="https://laravel.com/docs/12.x/octane">
+    Laravel Octane documentation
+   </a>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Production-grade options
+   </strong>
+   :
+  </p>
+<ul>
+<li>
+    Nginx + PHP-FPM
+   </li>
+<li>
+    Apache + PHP-FPM
+   </li>
+<li>
+    Custom Docker setup
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   Any web server that properly supports SSE streaming (required only for the legacy SSE provider)
+  </p>
+</li>
+<li>
+<p>
+   In the Inspector interface, enter your Laravel server's MCP endpoint URL (e.g.,
+   <code class="code">
+    http://localhost:8000/mcp
+   </code>
+   ). If you are using the legacy SSE provider, use the SSE URL instead (
+   <code class="code">
+    http://localhost:8000/mcp/sse
+   </code>
+   ).
+  </p>
+</li>
+<li>
+  Connect and explore available tools visually
+ </li>
+</ol>
+<p>
+ The MCP endpoint follows the pattern:
+ <code class="code">
+  http://[your-laravel-server]/[default_path]
+ </code>
+ where
+ <code class="code">
+  default_path
+ </code>
+ is defined in your
+ <code class="code">
+  config/mcp-server.php
+ </code>
+ file.
+</p>
+<h2 class="heading">
+ Advanced Features
+</h2>
+<h3 class="heading">
+ Pub/Sub Architecture with SSE Adapters (legacy provider)
+</h3>
+<p>
+ The package implements a publish/subscribe (pub/sub) messaging pattern through its adapter system:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Publisher (Server)
+   </strong>
+   : When clients send requests to the
+   <code class="code">
+    /message
+   </code>
+   endpoint, the server processes these requests and publishes responses through the configured adapter.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Message Broker (Adapter)
+   </strong>
+   : The adapter (e.g., Redis) maintains message queues for each client, identified by unique client IDs. This provides a reliable asynchronous communication layer.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Subscriber (SSE connection)
+   </strong>
+   : Long-lived SSE connections subscribe to messages for their respective clients and deliver them in real-time. This applies only when using the legacy SSE provider.
+  </p>
+</li>
+</ol>
+<p>
+ This architecture enables:
+</p>
+<ul>
+<li>
+  Scalable real-time communication
+ </li>
+<li>
+  Reliable message delivery even during temporary disconnections
+ </li>
+<li>
+  Efficient handling of multiple concurrent client connections
+ </li>
+<li>
+  Potential for distributed server deployments
+ </li>
+</ul>
+<h3 class="heading">
+ Redis Adapter Configuration
+</h3>
+<p>
+ The default Redis adapter can be configured as follows:
+</p>
+<pre class="pre"><code class="language-php code">'sse_adapter' =&gt; 'redis',
+'adapters' =&gt; [
+    'redis' =&gt; [
+        'prefix' =&gt; 'mcp_sse_',    // Prefix for Redis keys
+        'connection' =&gt; 'default', // Redis connection from database.php
+        'ttl' =&gt; 100,              // Message TTL in seconds
+    ],
+],
+</code></pre>
+<h2 class="heading">
+ Translation README.md
+</h2>
+<p>
+ To translate this README to other languages using Claude API (Parallel processing):
+</p>
+<pre class="pre"><code class="language-bash code">pip install -r scripts/requirements.txt
+export ANTHROPIC_API_KEY='your-api-key'
+python scripts/translate_readme.py
+</code></pre>
+<p>
+ You can also translate specific languages:
+</p>
+<pre class="pre"><code class="language-bash code">python scripts/translate_readme.py es ko
+</code></pre>
+<h2 class="heading">
+ Deprecated Features for v2.0.0
+</h2>
+<p>
+ The following features are deprecated and will be removed in v2.0.0. Please update your code accordingly:
+</p>
+<h3 class="heading">
+ ToolInterface Changes
+</h3>
+<p>
+<strong>
+  Deprecated since v1.3.0:
+ </strong>
+ -
+ <code class="code">
+  messageType(): ProcessMessageType
+ </code>
+ method
+-
+ <strong>
+  Replacement:
+ </strong>
+ Use
+ <code class="code">
+  isStreaming(): bool
+ </code>
+ instead
+-
+ <strong>
+  Migration Guide:
+ </strong>
+ Return
+ <code class="code">
+  false
+ </code>
+ for HTTP tools,
+ <code class="code">
+  true
+ </code>
+ for streaming tools
+-
+ <strong>
+  Automatic Migration:
+ </strong>
+ Run
+ <code class="code">
+  php artisan mcp:migrate-tools
+ </code>
+ to update your tools
+</p>
+<p>
+<strong>
+  Example Migration:
+ </strong>
+</p>
+<pre class="pre"><code class="language-php code">// Old approach (deprecated)
+public function messageType(): ProcessMessageType
+{
+    return ProcessMessageType::HTTP;
+}
+
+// New approach (v1.3.0+)
+public function isStreaming(): bool
+{
+    return false; // Use false for HTTP, true for streaming
+}
+</code></pre>
+<h3 class="heading">
+ Removed Features
+</h3>
+<p>
+<strong>
+  Removed in v1.3.0:
+ </strong>
+ -
+ <code class="code">
+  ProcessMessageType::PROTOCOL
+ </code>
+ enum case (consolidated into
+ <code class="code">
+  ProcessMessageType::HTTP
+ </code>
+ )
+</p>
+<p>
+<strong>
+  Planning for v2.0.0:
+ </strong>
+ - Complete removal of
+ <code class="code">
+  messageType()
+ </code>
+ method from
+ <code class="code">
+  ToolInterface
+ </code>
+ - All tools will be required to implement
+ <code class="code">
+  isStreaming()
+ </code>
+ method only
+- Simplified tool configuration and reduced complexity
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is distributed under the MIT license.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/opgginc-laravel-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

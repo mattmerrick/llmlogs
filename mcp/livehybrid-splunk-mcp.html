@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, ">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Splunk MCP (Model Context Protocol) Tool - MCP Directory">
+    <meta property="og:description" content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, ">
+    <meta property="og:url" content="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Splunk MCP (Model Context Protocol) Tool - MCP Directory">
+    <meta name="twitter:description" content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, ">
+    
+    <title>Splunk MCP (Model Context Protocol) Tool - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Splunk MCP (Model Context Protocol) Tool</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Splunk MCP (Model Context Protocol) Tool</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 39</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/livehybrid/splunk-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Splunk MCP (Model Context Protocol) Tool - MCP Directory" property="og:title"/>
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " property="og:description"/>
+<meta content="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Splunk MCP (Model Context Protocol) Tool - MCP Directory" name="twitter:title"/>
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " name="twitter:description"/>
+<title>Splunk MCP (Model Context Protocol) Tool - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Splunk MCP (Model Context Protocol) Tool</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Splunk MCP (Model Context Protocol) Tool</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 39</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/livehybrid/splunk-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Splunk MCP (Model Context Protocol) Tool - MCP Directory" property="og:title">
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " property="og:description">
+<meta content="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Splunk MCP (Model Context Protocol) Tool - MCP Directory" name="twitter:title">
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " name="twitter:description">
+<title>Splunk MCP (Model Context Protocol) Tool - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Splunk MCP (Model Context Protocol) Tool</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 39</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/livehybrid/splunk-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Splunk MCP (Model Context Protocol) Tool - MCP Directory" property="og:title"/>
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " property="og:description"/>
+<meta content="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Splunk MCP (Model Context Protocol) Tool - MCP Directory" name="twitter:title"/>
+<meta content="A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, " name="twitter:description"/>
+<title>Splunk MCP (Model Context Protocol) Tool - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Splunk MCP (Model Context Protocol) Tool</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 39</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/livehybrid/splunk-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Splunk MCP (Model Context Protocol) Tool
+</h1>
+<p>
+ A FastMCP-based tool for interacting with Splunk Enterprise/Cloud through natural language. This tool provides a set of capabilities for searching Splunk data, managing KV stores, and accessing Splunk resources through an intuitive interface.
+</p>
+<h2 class="heading">
+ Operating Modes
+</h2>
+<p>
+ The tool operates in three modes:
+</p>
+<ol>
+<li>
+<strong>
+   SSE Mode
+  </strong>
+  (Default)
+ </li>
+<li>
+  Server-Sent Events based communication
+ </li>
+<li>
+  Real-time bidirectional interaction
+ </li>
+<li>
+  Suitable for web-based MCP clients
+ </li>
+<li>
+  Default mode when no arguments provided
+ </li>
+<li>
+<p>
+   Access via
+   <code class="code">
+    /sse
+   </code>
+   endpoint
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    API Mode
+   </strong>
+</p>
+</li>
+<li>
+  RESTful API endpoints
+ </li>
+<li>
+  Access via
+  <code class="code">
+   /api/v1
+  </code>
+  endpoint prefix
+ </li>
+<li>
+<p>
+   Start with
+   <code class="code">
+    python splunk_mcp.py api
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    STDIO Mode
+   </strong>
+</p>
+</li>
+<li>
+  Standard input/output based communication
+ </li>
+<li>
+  Compatible with Claude Desktop and other MCP clients
+ </li>
+<li>
+  Ideal for direct integration with AI assistants
+ </li>
+<li>
+  Start with
+  <code class="code">
+   python splunk_mcp.py stdio
+  </code>
+</li>
+</ol>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+<strong>
+   Splunk Search
+  </strong>
+  : Execute Splunk searches with natural language queries
+ </li>
+<li>
+<strong>
+   Index Management
+  </strong>
+  : List and inspect Splunk indexes
+ </li>
+<li>
+<strong>
+   User Management
+  </strong>
+  : View and manage Splunk users
+ </li>
+<li>
+<strong>
+   KV Store Operations
+  </strong>
+  : Create, list, and manage KV store collections
+ </li>
+<li>
+<strong>
+   Async Support
+  </strong>
+  : Built with async/await patterns for better performance
+ </li>
+<li>
+<strong>
+   Detailed Logging
+  </strong>
+  : Comprehensive logging with emoji indicators for better visibility
+ </li>
+<li>
+<strong>
+   SSL Configuration
+  </strong>
+  : Flexible SSL verification options for different security requirements
+ </li>
+<li>
+<strong>
+   Enhanced Debugging
+  </strong>
+  : Detailed connection and error logging for troubleshooting
+ </li>
+<li>
+<strong>
+   Comprehensive Testing
+  </strong>
+  : Unit tests covering all major functionality
+ </li>
+<li>
+<strong>
+   Error Handling
+  </strong>
+  : Robust error handling with appropriate status codes
+ </li>
+<li>
+<strong>
+   SSE Compliance
+  </strong>
+  : Fully compliant with MCP SSE specification
+ </li>
+</ul>
+<h2 class="heading">
+ Available MCP Tools
+</h2>
+<p>
+ The following tools are available via the MCP interface:
+</p>
+<h3 class="heading">
+ Tools Management
+</h3>
+<ul>
+<li>
+<strong>
+   list_tools
+  </strong>
+</li>
+<li>
+  Lists all available MCP tools with their descriptions and parameters
+ </li>
+</ul>
+<h3 class="heading">
+ Health Check
+</h3>
+<ul>
+<li>
+<strong>
+   health_check
+  </strong>
+</li>
+<li>
+  Returns a list of available Splunk apps to verify connectivity
+ </li>
+<li>
+<strong>
+   ping
+  </strong>
+</li>
+<li>
+  Simple ping endpoint to verify MCP server is alive
+ </li>
+</ul>
+<h3 class="heading">
+ User Management
+</h3>
+<ul>
+<li>
+<strong>
+   current_user
+  </strong>
+</li>
+<li>
+  Returns information about the currently authenticated user
+ </li>
+<li>
+<strong>
+   list_users
+  </strong>
+</li>
+<li>
+  Returns a list of all users and their roles
+ </li>
+</ul>
+<h3 class="heading">
+ Index Management
+</h3>
+<ul>
+<li>
+<strong>
+   list_indexes
+  </strong>
+</li>
+<li>
+  Returns a list of all accessible Splunk indexes
+ </li>
+<li>
+<strong>
+   get_index_info
+  </strong>
+</li>
+<li>
+  Returns detailed information about a specific index
+ </li>
+<li>
+  Parameters: index_name (string)
+ </li>
+<li>
+<strong>
+   indexes_and_sourcetypes
+  </strong>
+</li>
+<li>
+  Returns a comprehensive list of indexes and their sourcetypes
+ </li>
+</ul>
+<h3 class="heading">
+ Search
+</h3>
+<ul>
+<li>
+<strong>
+   search_splunk
+  </strong>
+</li>
+<li>
+  Executes a Splunk search query
+ </li>
+<li>
+  Parameters:
+  <ul>
+<li>
+    search_query (string): Splunk search string
+   </li>
+<li>
+    earliest_time (string, optional): Start time for search window
+   </li>
+<li>
+    latest_time (string, optional): End time for search window
+   </li>
+<li>
+    max_results (integer, optional): Maximum number of results to return
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   list_saved_searches
+  </strong>
+</li>
+<li>
+  Returns a list of saved searches in the Splunk instance
+ </li>
+</ul>
+<h3 class="heading">
+ KV Store
+</h3>
+<ul>
+<li>
+<strong>
+   list_kvstore_collections
+  </strong>
+</li>
+<li>
+  Lists all KV store collections
+ </li>
+<li>
+<strong>
+   create_kvstore_collection
+  </strong>
+</li>
+<li>
+  Creates a new KV store collection
+ </li>
+<li>
+  Parameters: collection_name (string)
+ </li>
+<li>
+<strong>
+   delete_kvstore_collection
+  </strong>
+</li>
+<li>
+  Deletes an existing KV store collection
+ </li>
+<li>
+  Parameters: collection_name (string)
+ </li>
+</ul>
+<h2 class="heading">
+ SSE Endpoints
+</h2>
+<p>
+ When running in SSE mode, the following endpoints are available:
+</p>
+<ul>
+<li>
+<strong>
+   /sse
+  </strong>
+  : Returns SSE connection information in text/event-stream format
+ </li>
+<li>
+  Provides metadata about the SSE connection
+ </li>
+<li>
+  Includes URL for the messages endpoint
+ </li>
+<li>
+<p>
+   Provides protocol and capability information
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    /sse/messages
+   </strong>
+   : The main SSE stream endpoint
+  </p>
+</li>
+<li>
+  Streams system events like heartbeats
+ </li>
+<li>
+  Maintains persistent connection
+ </li>
+<li>
+<p>
+   Sends properly formatted SSE events
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    /sse/health
+   </strong>
+   : Health check endpoint for SSE mode
+  </p>
+</li>
+<li>
+  Returns status and version information in SSE format
+ </li>
+</ul>
+<h2 class="heading">
+ Error Handling
+</h2>
+<p>
+ The MCP implementation includes consistent error handling:
+</p>
+<ul>
+<li>
+  Invalid search commands or malformed requests
+ </li>
+<li>
+  Insufficient permissions
+ </li>
+<li>
+  Resource not found
+ </li>
+<li>
+  Invalid input validation
+ </li>
+<li>
+  Unexpected server errors
+ </li>
+<li>
+  Connection issues with Splunk server
+ </li>
+</ul>
+<p>
+ All error responses include a detailed message explaining the error.
+</p>
+<h2 class="heading">
+ Prerequisites
+</h2>
+<ul>
+<li>
+  Python 3.10 or higher
+ </li>
+<li>
+  Poetry for dependency management
+ </li>
+<li>
+  Splunk Enterprise/Cloud instance
+ </li>
+<li>
+  Appropriate Splunk credentials with necessary permissions
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Option 1: Local Installation
+</h3>
+<ol>
+<li>
+  Clone the repository:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">git clone &lt;repository-url&gt;
+cd splunk-mcp
+</code></pre>
+<ol>
+<li>
+  Install dependencies using Poetry:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">poetry install
+</code></pre>
+<ol>
+<li>
+  Copy the example environment file and configure your settings:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">cp .env.example .env
+</code></pre>
+<ol>
+<li>
+  Update the
+  <code class="code">
+   .env
+  </code>
+  file with your Splunk credentials:
+ </li>
+</ol>
+<pre class="pre"><code class="language-env code">SPLUNK_HOST=your_splunk_host
+SPLUNK_PORT=8089
+SPLUNK_USERNAME=your_username
+SPLUNK_PASSWORD=your_password
+SPLUNK_SCHEME=https
+VERIFY_SSL=true
+FASTMCP_LOG_LEVEL=INFO
+</code></pre>
+<h3 class="heading">
+ Option 2: Docker Installation
+</h3>
+<ol>
+<li>
+  Pull the latest image:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">docker pull livehybrid/splunk-mcp:latest
+</code></pre>
+<ol>
+<li>
+<p>
+   Create your
+   <code class="code">
+    .env
+   </code>
+   file as above or use environment variables directly.
+  </p>
+</li>
+<li>
+<p>
+   Run using Docker Compose:
+  </p>
+</li>
+</ol>
+<pre class="pre"><code class="language-bash code">docker-compose up -d
+</code></pre>
+<p>
+ Or using Docker directly:
+</p>
+<pre class="pre"><code class="language-bash code">docker run -i \
+  --env-file .env \
+  livehybrid/splunk-mcp
+</code></pre>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Local Usage
+</h3>
+<p>
+ The tool can run in three modes:
+</p>
+<ol>
+<li>
+  SSE mode (default for MCP clients):
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># Start in SSE mode (default)
+poetry run python splunk_mcp.py
+# or explicitly:
+poetry run python splunk_mcp.py sse
+
+# Use uvicorn directly:
+SERVER_MODE=api poetry run uvicorn splunk_mcp:app --host 0.0.0.0 --port 8000 --reload
+</code></pre>
+<ol>
+<li>
+  STDIO mode:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">poetry run python splunk_mcp.py stdio
+</code></pre>
+<h3 class="heading">
+ Docker Usage
+</h3>
+<p>
+ The project supports both the new
+ <code class="code">
+  docker compose
+ </code>
+ (V2) and legacy
+ <code class="code">
+  docker-compose
+ </code>
+ (V1) commands. The examples below use V2 syntax, but both are supported.
+</p>
+<ol>
+<li>
+  SSE Mode (Default):
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">docker compose up -d mcp
+</code></pre>
+<ol>
+<li>
+  API Mode:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">docker compose run --rm mcp python splunk_mcp.py api
+</code></pre>
+<ol>
+<li>
+  STDIO Mode:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">docker compose run -i --rm mcp python splunk_mcp.py stdio
+</code></pre>
+<h3 class="heading">
+ Testing with Docker
+</h3>
+<p>
+ The project includes a dedicated test environment in Docker:
+</p>
+<ol>
+<li>
+  Run all tests:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code">./run_tests.sh --docker
+</code></pre>
+<ol>
+<li>
+  Run specific test components:
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># Run only the MCP server
+docker compose up -d mcp
+
+# Run only the test container
+docker compose up test
+
+# Run both with test results
+docker compose up --abort-on-container-exit
+</code></pre>
+<p>
+ Test results will be available in the
+ <code class="code">
+  ./test-results
+ </code>
+ directory.
+</p>
+<h3 class="heading">
+ Docker Development Tips
+</h3>
+<ol>
+<li>
+<strong>
+   Building Images
+  </strong>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># Build both images
+docker compose build
+
+# Build specific service
+docker compose build mcp
+docker compose build test
+</code></pre>
+<ol>
+<li>
+<strong>
+   Viewing Logs
+  </strong>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># View all logs
+docker compose logs
+
+# Follow specific service logs
+docker compose logs -f mcp
+</code></pre>
+<ol>
+<li>
+<strong>
+   Debugging
+  </strong>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-bash code"># Run with debug mode
+DEBUG=true docker compose up mcp
+
+# Access container shell
+docker compose exec mcp /bin/bash
+</code></pre>
+<p>
+ Note: If you're using Docker Compose V1, replace
+ <code class="code">
+  docker compose
+ </code>
+ with
+ <code class="code">
+  docker-compose
+ </code>
+ in the above commands.
+</p>
+<h3 class="heading">
+ Security Notes
+</h3>
+<ol>
+<li>
+<strong>
+   Environment Variables
+  </strong>
+  :
+ </li>
+<li>
+  Never commit
+  <code class="code">
+   .env
+  </code>
+  files
+ </li>
+<li>
+  Use
+  <code class="code">
+   .env.example
+  </code>
+  as a template
+ </li>
+<li>
+<p>
+   Consider using Docker secrets for production
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    SSL Verification
+   </strong>
+   :
+  </p>
+</li>
+<li>
+<code class="code">
+   VERIFY_SSL=true
+  </code>
+  recommended for production
+ </li>
+<li>
+  Can be disabled for development/testing
+ </li>
+<li>
+<p>
+   Configure through environment variables
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Port Exposure
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Only expose necessary ports
+ </li>
+<li>
+  Use internal Docker network when possible
+ </li>
+<li>
+  Consider network security in production
+ </li>
+</ol>
+<h2 class="heading">
+ Environment Variables
+</h2>
+<p>
+ Configure the following environment variables:
+-
+ <code class="code">
+  SPLUNK_HOST
+ </code>
+ : Your Splunk host address
+-
+ <code class="code">
+  SPLUNK_PORT
+ </code>
+ : Splunk management port (default: 8089)
+-
+ <code class="code">
+  SPLUNK_USERNAME
+ </code>
+ : Your Splunk username
+-
+ <code class="code">
+  SPLUNK_PASSWORD
+ </code>
+ : Your Splunk password
+-
+ <code class="code">
+  SPLUNK_SCHEME
+ </code>
+ : Connection scheme (default: https)
+-
+ <code class="code">
+  VERIFY_SSL
+ </code>
+ : Enable/disable SSL verification (default: true)
+-
+ <code class="code">
+  FASTMCP_LOG_LEVEL
+ </code>
+ : Logging level (default: INFO)
+-
+ <code class="code">
+  SERVER_MODE
+ </code>
+ : Server mode (sse, api, stdio) when using uvicorn
+</p>
+<h3 class="heading">
+ SSL Configuration
+</h3>
+<p>
+ The tool provides flexible SSL verification options:
+</p>
+<ol>
+<li>
+<strong>
+   Default (Secure) Mode
+  </strong>
+  :
+ </li>
+</ol>
+<pre class="pre"><code class="language-env code">VERIFY_SSL=true
+</code></pre>
+<ul>
+<li>
+  Full SSL certificate verification
+ </li>
+<li>
+  Hostname verification enabled
+ </li>
+<li>
+<p>
+   Recommended for production environments
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Relaxed Mode
+   </strong>
+   :
+  </p>
+</li>
+</ul>
+<pre class="pre"><code class="language-env code">VERIFY_SSL=false
+</code></pre>
+<ul>
+<li>
+  SSL certificate verification disabled
+ </li>
+<li>
+  Hostname verification disabled
+ </li>
+<li>
+  Useful for testing or self-signed certificates
+ </li>
+</ul>
+<h2 class="heading">
+ Testing
+</h2>
+<p>
+ The project includes comprehensive test coverage using pytest and end-to-end testing with a custom MCP client:
+</p>
+<h3 class="heading">
+ Running Tests
+</h3>
+<p>
+ Basic test execution:
+</p>
+<pre class="pre"><code class="language-bash code">poetry run pytest
+</code></pre>
+<p>
+ With coverage reporting:
+</p>
+<pre class="pre"><code class="language-bash code">poetry run pytest --cov=splunk_mcp
+</code></pre>
+<p>
+ With verbose output:
+</p>
+<pre class="pre"><code class="language-bash code">poetry run pytest -v
+</code></pre>
+<h3 class="heading">
+ End-to-End SSE Testing
+</h3>
+<p>
+ The project includes a custom MCP client test script that connects to the live SSE endpoint and tests all tools:
+</p>
+<pre class="pre"><code class="language-bash code"># Test all tools
+python test_endpoints.py
+
+# Test specific tools
+python test_endpoints.py health_check list_indexes
+
+# List all available tools
+python test_endpoints.py --list
+</code></pre>
+<p>
+ This script acts as an MCP client by:
+1. Connecting to the
+ <code class="code">
+  /sse
+ </code>
+ endpoint to get the messages URL
+2. Sending tool invocations to the messages endpoint
+3. Processing the SSE events to extract tool results
+4. Validating the results against expected formats
+</p>
+<p>
+ This provides real-world testing of the SSE interface as it would be used by an actual MCP client.
+</p>
+<h3 class="heading">
+ Test Structure
+</h3>
+<p>
+ The project uses three complementary testing approaches:
+</p>
+<ol>
+<li>
+<strong>
+   MCP Integration Tests
+  </strong>
+  (
+  <code class="code">
+   tests/test_api.py
+  </code>
+  )
+  <strong>
+   :
+  </strong>
+</li>
+<li>
+  Tests the MCP tools interface through
+  <code class="code">
+   mcp.call_tool()
+  </code>
+</li>
+<li>
+  Verifies proper tool registration with FastMCP
+ </li>
+<li>
+  Ensures correct response format and data structure
+ </li>
+<li>
+  Validates error handling at the MCP interface level
+ </li>
+<li>
+<p>
+<strong>
+    Note:
+   </strong>
+   This file should ideally be renamed to
+   <code class="code">
+    test_mcp.py
+   </code>
+   to better reflect its purpose
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Direct Function Tests
+   </strong>
+   (
+   <code class="code">
+    tests/test_endpoints_pytest.py
+   </code>
+   )
+   <strong>
+    :
+   </strong>
+</p>
+</li>
+<li>
+  Tests Splunk functions directly (bypassing the MCP layer)
+ </li>
+<li>
+  Provides more comprehensive coverage of function implementation details
+ </li>
+<li>
+  Tests edge cases, parameter variations, and error handling
+ </li>
+<li>
+  Includes tests for SSL configuration, connection parameters, and timeouts
+ </li>
+<li>
+<p>
+   Uses parameterized testing for efficient test coverage
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    End-to-End MCP Client Tests
+   </strong>
+   (
+   <code class="code">
+    test_endpoints.py
+   </code>
+   )
+   <strong>
+    :
+   </strong>
+</p>
+</li>
+<li>
+  Behaves like a real MCP client connecting to the SSE endpoint
+ </li>
+<li>
+  Tests the complete flow from connection to tool invocation to response parsing
+ </li>
+<li>
+  Validates the actual SSE protocol implementation
+ </li>
+<li>
+<p>
+   Tests tools with real parameters against the live server
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Configuration Tests
+   </strong>
+   (
+   <code class="code">
+    tests/test_config.py
+   </code>
+   )
+   <strong>
+    :
+   </strong>
+</p>
+</li>
+<li>
+  Tests for environment variable parsing
+ </li>
+<li>
+  SSL verification settings
+ </li>
+<li>
+  Connection parameter validation
+ </li>
+</ol>
+<h3 class="heading">
+ Testing Tools
+</h3>
+<p>
+ The tests support:
+- Async testing with pytest-asyncio
+- Coverage reporting with pytest-cov
+- Mocking with pytest-mock
+- Parameterized testing
+- Connection timeout testing
+</p>
+<h3 class="heading">
+ Troubleshooting
+</h3>
+<h4 class="heading">
+ Connection Issues
+</h4>
+<ol>
+<li>
+<strong>
+   Basic Connectivity
+  </strong>
+  :
+ </li>
+<li>
+  The tool now performs a basic TCP connectivity test
+ </li>
+<li>
+  Check if port 8089 is accessible
+ </li>
+<li>
+<p>
+   Verify network routing and firewalls
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    SSL Issues
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  If seeing SSL errors, try setting
+  <code class="code">
+   VERIFY_SSL=false
+  </code>
+</li>
+<li>
+  Check certificate validity and trust chain
+ </li>
+<li>
+<p>
+   Verify hostname matches certificate
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Authentication Issues
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Verify Splunk credentials
+ </li>
+<li>
+  Check user permissions
+ </li>
+<li>
+<p>
+   Ensure account is not locked
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Debugging
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Set
+  <code class="code">
+   FASTMCP_LOG_LEVEL=DEBUG
+  </code>
+  for detailed logs
+ </li>
+<li>
+  Check connection logs for specific error messages
+ </li>
+<li>
+<p>
+   Review SSL configuration messages
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    SSE Connection Issues
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Verify SSE endpoint is accessible via
+  <code class="code">
+   /sse
+  </code>
+</li>
+<li>
+  Check for proper content-type headers
+ </li>
+<li>
+  Use browser developer tools to inspect SSE connections
+ </li>
+</ol>
+<h2 class="heading">
+ Claude Integration
+</h2>
+<h3 class="heading">
+ Claude Desktop Configuration
+</h3>
+<p>
+ You can integrate Splunk MCP with Claude Desktop by configuring it to use either SSE or STDIO mode. Add the following configuration to your
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+ :
+</p>
+<h4 class="heading">
+ STDIO Mode (Recommended for Desktop)
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "splunk": {
+      "command": "poetry",
+      "env": {
+        "SPLUNK_HOST": "your_splunk_host",
+        "SPLUNK_PORT": "8089",
+        "SPLUNK_USERNAME": "your_username",
+        "SPLUNK_PASSWORD": "your_password",
+        "SPLUNK_SCHEME": "https",
+        "VERIFY_SSL": "false"
+      },
+      "args": [
+          "--directory",
+          "/path/to/splunk-mcp",
+          "run",
+          "python",
+          "splunk_mcp.py",
+          "stdio"
+      ]
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ SSE Mode
+</h4>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "splunk": {
+      "command": "poetry",
+      "env": {
+        "SPLUNK_HOST": "your_splunk_host",
+        "SPLUNK_PORT": "8089",
+        "SPLUNK_USERNAME": "your_username",
+        "SPLUNK_PASSWORD": "your_password",
+        "SPLUNK_SCHEME": "https",
+        "VERIFY_SSL": "false",
+        "FASTMCP_PORT": "8001",
+        "DEBUG": "true"
+      },
+      "args": [
+          "--directory",
+          "/path/to/splunk-mcp",
+          "run",
+          "python",
+          "splunk_mcp.py",
+          "sse"
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Usage with Claude
+</h3>
+<p>
+ Once configured, you can use natural language to interact with Splunk through Claude. Examples:
+</p>
+<ol>
+<li>
+  List available indexes:
+ </li>
+</ol>
+<pre class="pre"><code class="code">What Splunk indexes are available?
+</code></pre>
+<ol>
+<li>
+  Search Splunk data:
+ </li>
+</ol>
+<pre class="pre"><code class="code">Search Splunk for failed login attempts in the last 24 hours
+</code></pre>
+<ol>
+<li>
+  Get system health:
+ </li>
+</ol>
+<pre class="pre"><code class="code">Check the health of the Splunk system
+</code></pre>
+<ol>
+<li>
+  Manage KV stores:
+ </li>
+</ol>
+<pre class="pre"><code class="code">List all KV store collections
+</code></pre>
+<p>
+ The MCP tools will be automatically available to Claude, allowing it to execute these operations through natural language commands.
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ [Your License Here]
+</p>
+<h2 class="heading">
+ Acknowledgments
+</h2>
+<ul>
+<li>
+  FastMCP framework
+ </li>
+<li>
+  Splunk SDK for Python
+ </li>
+<li>
+  Python-decouple for configuration management
+ </li>
+<li>
+  SSE Starlette for SSE implementation
+ </li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/livehybrid-splunk-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,3427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Doris MCP Server - MCP Directory">
+    <meta property="og:description" content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug">
+    <meta property="og:url" content="https://llmlogs.com/mcp/apache-doris-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Doris MCP Server - MCP Directory">
+    <meta name="twitter:description" content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug">
+    
+    <title>Doris MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Doris MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Doris MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 51</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/apache/doris-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Doris MCP Server - MCP Directory" property="og:title"/>
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/apache-doris-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Doris MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" name="twitter:description"/>
+<title>Doris MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Doris MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Doris MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 51</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/apache/doris-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Doris MCP Server - MCP Directory" property="og:title">
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" property="og:description">
+<meta content="https://llmlogs.com/mcp/apache-doris-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Doris MCP Server - MCP Directory" name="twitter:title">
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" name="twitter:description">
+<title>Doris MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Doris MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 51</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/apache/doris-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Doris MCP Server - MCP Directory" property="og:title"/>
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/apache-doris-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Doris MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it throug" name="twitter:description"/>
+<title>Doris MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Doris MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 51</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/apache/doris-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<h1 class="heading">
+ Doris MCP Server
+</h1>
+<p>
+ Doris MCP (Model Context Protocol) Server is a backend service built with Python and FastAPI. It implements the MCP, allowing clients to interact with it through defined "Tools". It's primarily designed to connect to Apache Doris databases, potentially leveraging Large Language Models (LLMs) for tasks like converting natural language queries to SQL (NL2SQL), executing queries, and performing metadata management and analysis.
+</p>
+<h2 class="heading">
+ 🚀 What's New in v0.3.0
+</h2>
+<ul>
+<li>
+<strong>
+   🔄 Streamlined Communication
+  </strong>
+  : Completely migrated from SSE to Streamable HTTP for better performance and reliability
+ </li>
+<li>
+<strong>
+   🏗️ Unified Architecture
+  </strong>
+  : Consolidated tools management with centralized registration and routing
+ </li>
+<li>
+<strong>
+   ⚡ Enhanced Performance
+  </strong>
+  : Improved query execution with advanced caching and optimization
+ </li>
+<li>
+<strong>
+   🔒 Enterprise Security
+  </strong>
+  : Added comprehensive security management with SQL validation and data masking
+ </li>
+<li>
+<strong>
+   📊 Advanced Analytics
+  </strong>
+  : New column analysis and performance monitoring tools
+ </li>
+<li>
+<strong>
+   🛠️ Simplified Development
+  </strong>
+  : Streamlined tool development process with unified interfaces
+ </li>
+</ul>
+<blockquote>
+<p>
+<strong>
+   ⚠️ Breaking Changes
+  </strong>
+  : SSE endpoints have been removed. Please update your client configurations to use Streamable HTTP (
+  <code class="code">
+   /mcp
+  </code>
+  endpoint).
+ </p>
+</blockquote>
+<h2 class="heading">
+ Core Features
+</h2>
+<ul>
+<li>
+<strong>
+   MCP Protocol Implementation
+  </strong>
+  : Provides standard MCP interfaces, supporting tool calls, resource management, and prompt interactions.
+ </li>
+<li>
+<p>
+<strong>
+    Multiple Communication Modes
+   </strong>
+   (Updated in v0.3.0):
+  </p>
+<ul>
+<li>
+<strong>
+     Stdio
+    </strong>
+    : Standard input/output mode for direct integration with MCP clients like Cursor.
+   </li>
+<li>
+<strong>
+     Streamable HTTP
+    </strong>
+    : Unified HTTP endpoint supporting request/response and streaming (Primary mode since v0.3.0).
+   </li>
+</ul>
+<blockquote>
+<p>
+<strong>
+     ⚠️ Breaking Change in v0.3.0
+    </strong>
+    : SSE (Server-Sent Events) mode has been completely removed in favor of the more robust Streamable HTTP implementation.
+*
+    <strong>
+     Enterprise-Grade Architecture
+    </strong>
+    : Modular design with comprehensive functionality:
+*
+    <strong>
+     Tools Manager
+    </strong>
+    : Centralized tool registration and routing (
+    <code class="code">
+     doris_mcp_server/tools/tools_manager.py
+    </code>
+    )
+*
+    <strong>
+     Resources Manager
+    </strong>
+    : Resource management and metadata exposure (
+    <code class="code">
+     doris_mcp_server/tools/resources_manager.py
+    </code>
+    )
+*
+    <strong>
+     Prompts Manager
+    </strong>
+    : Intelligent prompt templates for data analysis (
+    <code class="code">
+     doris_mcp_server/tools/prompts_manager.py
+    </code>
+    )
+*
+    <strong>
+     Advanced Database Features
+    </strong>
+    :
+*
+    <strong>
+     Query Execution
+    </strong>
+    : High-performance SQL execution with caching and optimization (
+    <code class="code">
+     doris_mcp_server/utils/query_executor.py
+    </code>
+    )
+*
+    <strong>
+     Security Management
+    </strong>
+    : SQL security validation, data masking, and access control (
+    <code class="code">
+     doris_mcp_server/utils/security.py
+    </code>
+    )
+*
+    <strong>
+     Metadata Extraction
+    </strong>
+    : Comprehensive database metadata with catalog federation support (
+    <code class="code">
+     doris_mcp_server/utils/schema_extractor.py
+    </code>
+    )
+*
+    <strong>
+     Performance Analysis
+    </strong>
+    : Column statistics, performance monitoring, and data analysis tools (
+    <code class="code">
+     doris_mcp_server/utils/analysis_tools.py
+    </code>
+    )
+*
+    <strong>
+     Catalog Federation Support
+    </strong>
+    : Full support for multi-catalog environments (internal Doris tables and external data sources like Hive, MySQL, etc.)
+*
+    <strong>
+     Enterprise Security
+    </strong>
+    : Comprehensive security framework with authentication, authorization, SQL injection protection, and data masking (
+    <code class="code">
+     doris_mcp_server/utils/security.py
+    </code>
+    )
+*
+    <strong>
+     Flexible Configuration
+    </strong>
+    : Comprehensive configuration management with environment variables, file-based config, and validation (
+    <code class="code">
+     doris_mcp_server/utils/config.py
+    </code>
+    )
+   </p>
+</blockquote>
+</li>
+</ul>
+<h2 class="heading">
+ System Requirements
+</h2>
+<ul>
+<li>
+  Python 3.12+
+ </li>
+<li>
+  Database connection details (e.g., Doris Host, Port, User, Password, Database)
+ </li>
+</ul>
+<h2 class="heading">
+ 🚀 Quick Start
+</h2>
+<h3 class="heading">
+ Installation from PyPI
+</h3>
+<pre class="pre"><code class="language-bash code"># Install the latest version
+pip install mcp-doris-server
+
+# Install specific version
+pip install mcp-doris-server==0.3
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   💡 Command Compatibility
+  </strong>
+  : After installation, both
+  <code class="code">
+   doris-mcp-server
+  </code>
+  and
+  <code class="code">
+   mcp-doris-server
+  </code>
+  commands are available for backward compatibility. You can use either command interchangeably.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Start Streamable HTTP Mode (Web Service)
+</h3>
+<pre class="pre"><code class="language-bash code"># Full configuration with database connection
+doris-mcp-server \
+    --transport http \
+    --host 0.0.0.0 \
+    --port 3000 \
+    --db-host 127.0.0.1 \
+    --db-port 9030 \
+    --db-user root \
+    --db-password your_password 
+</code></pre>
+<h3 class="heading">
+ Start Stdio Mode (for Cursor and other MCP clients)
+</h3>
+<pre class="pre"><code class="language-bash code"># For direct integration with MCP clients like Cursor
+doris-mcp-server --transport stdio
+</code></pre>
+<h3 class="heading">
+ Verify Installation
+</h3>
+<pre class="pre"><code class="language-bash code"># Check installation
+doris-mcp-server --help
+
+# Test HTTP mode (in another terminal)
+curl http://localhost:3000/health
+</code></pre>
+<h3 class="heading">
+ Environment Variables (Optional)
+</h3>
+<p>
+ Instead of command-line arguments, you can use environment variables:
+</p>
+<pre class="pre"><code class="language-bash code">export DORIS_HOST="127.0.0.1"
+export DORIS_PORT="9030"
+export DORIS_USER="root"
+export DORIS_PASSWORD="your_password"
+
+# Then start with simplified command
+doris-mcp-server --transport http --host 0.0.0.0 --port 3000
+</code></pre>
+<h3 class="heading">
+ Command Line Arguments
+</h3>
+<p>
+ The
+ <code class="code">
+  doris-mcp-server
+ </code>
+ command supports the following arguments:
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">
+    Argument
+   </th>
+<th style="text-align: left;">
+    Description
+   </th>
+<th style="text-align: left;">
+    Default
+   </th>
+<th style="text-align: left;">
+    Required
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --transport
+    </code>
+</td>
+<td style="text-align: left;">
+    Transport mode:
+    <code class="code">
+     http
+    </code>
+    or
+    <code class="code">
+     stdio
+    </code>
+</td>
+<td style="text-align: left;">
+<code class="code">
+     http
+    </code>
+</td>
+<td style="text-align: left;">
+    No
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --host
+    </code>
+</td>
+<td style="text-align: left;">
+    HTTP server host (HTTP mode only)
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     0.0.0.0
+    </code>
+</td>
+<td style="text-align: left;">
+    No
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --port
+    </code>
+</td>
+<td style="text-align: left;">
+    HTTP server port (HTTP mode only)
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     3000
+    </code>
+</td>
+<td style="text-align: left;">
+    No
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --db-host
+    </code>
+</td>
+<td style="text-align: left;">
+    Doris database host
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     localhost
+    </code>
+</td>
+<td style="text-align: left;">
+    No
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --db-port
+    </code>
+</td>
+<td style="text-align: left;">
+    Doris database port
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     9030
+    </code>
+</td>
+<td style="text-align: left;">
+    No
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --db-user
+    </code>
+</td>
+<td style="text-align: left;">
+    Doris database username
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     root
+    </code>
+</td>
+<td style="text-align: left;">
+    No
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     --db-password
+    </code>
+</td>
+<td style="text-align: left;">
+    Doris database password
+   </td>
+<td style="text-align: left;">
+    -
+   </td>
+<td style="text-align: left;">
+    Yes (unless in env)
+   </td>
+</tr>
+</tbody>
+</table>
+<h2 class="heading">
+ Development Setup
+</h2>
+<p>
+ For developers who want to build from source:
+</p>
+<h3 class="heading">
+ 1. Clone the Repository
+</h3>
+<pre class="pre"><code class="language-bash code"># Replace with the actual repository URL if different
+git clone https://github.com/apache/doris-mcp-server.git
+cd doris-mcp-server
+</code></pre>
+<h3 class="heading">
+ 2. Install Dependencies
+</h3>
+<pre class="pre"><code class="language-bash code">pip install -r requirements.txt
+</code></pre>
+<h3 class="heading">
+ 3. Configure Environment Variables
+</h3>
+<p>
+ Copy the
+ <code class="code">
+  env.example
+ </code>
+ file to
+ <code class="code">
+  .env
+ </code>
+ and modify the settings according to your environment:
+</p>
+<pre class="pre"><code class="language-bash code">cp env.example .env
+</code></pre>
+<p>
+<strong>
+  Key Environment Variables:
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   Database Connection
+  </strong>
+  :
+  <ul>
+<li>
+<code class="code">
+     DORIS_HOST
+    </code>
+    : Database hostname (default: localhost)
+   </li>
+<li>
+<code class="code">
+     DORIS_PORT
+    </code>
+    : Database port (default: 9030)
+   </li>
+<li>
+<code class="code">
+     DORIS_USER
+    </code>
+    : Database username (default: root)
+   </li>
+<li>
+<code class="code">
+     DORIS_PASSWORD
+    </code>
+    : Database password
+   </li>
+<li>
+<code class="code">
+     DORIS_DATABASE
+    </code>
+    : Default database name (default: test)
+   </li>
+<li>
+<code class="code">
+     DORIS_MIN_CONNECTIONS
+    </code>
+    : Minimum connection pool size (default: 5)
+   </li>
+<li>
+<code class="code">
+     DORIS_MAX_CONNECTIONS
+    </code>
+    : Maximum connection pool size (default: 20)
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   Security Configuration
+  </strong>
+  :
+  <ul>
+<li>
+<code class="code">
+     AUTH_TYPE
+    </code>
+    : Authentication type (token/basic/oauth, default: token)
+   </li>
+<li>
+<code class="code">
+     TOKEN_SECRET
+    </code>
+    : Token secret key
+   </li>
+<li>
+<code class="code">
+     ENABLE_MASKING
+    </code>
+    : Enable data masking (default: true)
+   </li>
+<li>
+<code class="code">
+     MAX_RESULT_ROWS
+    </code>
+    : Maximum result rows (default: 10000)
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   Performance Configuration
+  </strong>
+  :
+  <ul>
+<li>
+<code class="code">
+     ENABLE_QUERY_CACHE
+    </code>
+    : Enable query caching (default: true)
+   </li>
+<li>
+<code class="code">
+     CACHE_TTL
+    </code>
+    : Cache time-to-live in seconds (default: 300)
+   </li>
+<li>
+<code class="code">
+     MAX_CONCURRENT_QUERIES
+    </code>
+    : Maximum concurrent queries (default: 50)
+   </li>
+</ul>
+</li>
+<li>
+<strong>
+   Logging Configuration
+  </strong>
+  :
+  <ul>
+<li>
+<code class="code">
+     LOG_LEVEL
+    </code>
+    : Log level (DEBUG/INFO/WARNING/ERROR, default: INFO)
+   </li>
+<li>
+<code class="code">
+     LOG_FILE_PATH
+    </code>
+    : Log file path
+   </li>
+<li>
+<code class="code">
+     ENABLE_AUDIT
+    </code>
+    : Enable audit logging (default: true)
+   </li>
+</ul>
+</li>
+</ul>
+<h3 class="heading">
+ Available MCP Tools
+</h3>
+<p>
+ The following table lists the main tools currently available for invocation via an MCP client:
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">
+    Tool Name
+   </th>
+<th style="text-align: left;">
+    Description
+   </th>
+<th style="text-align: left;">
+    Parameters
+   </th>
+<th style="text-align: left;">
+    Status
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     exec_query
+    </code>
+</td>
+<td style="text-align: left;">
+    Execute SQL query with catalog federation support.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     sql
+    </code>
+    (string, Required - MUST use three-part naming),
+    <code class="code">
+     db_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     catalog_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     max_rows
+    </code>
+    (integer, Optional, default 100),
+    <code class="code">
+     timeout
+    </code>
+    (integer, Optional, default 30)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_catalog_list
+    </code>
+</td>
+<td style="text-align: left;">
+    Get a list of all catalogs with detailed information.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     random_string
+    </code>
+    (string, Required)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_db_list
+    </code>
+</td>
+<td style="text-align: left;">
+    Get a list of all database names in the specified catalog.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     catalog_name
+    </code>
+    (string, Optional, defaults to internal catalog)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_db_table_list
+    </code>
+</td>
+<td style="text-align: left;">
+    Get a list of all table names in the specified database.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     db_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     catalog_name
+    </code>
+    (string, Optional)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_table_schema
+    </code>
+</td>
+<td style="text-align: left;">
+    Get detailed structure of the specified table.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     table_name
+    </code>
+    (string, Required),
+    <code class="code">
+     db_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     catalog_name
+    </code>
+    (string, Optional)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_table_comment
+    </code>
+</td>
+<td style="text-align: left;">
+    Get the comment for the specified table.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     table_name
+    </code>
+    (string, Required),
+    <code class="code">
+     db_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     catalog_name
+    </code>
+    (string, Optional)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_table_column_comments
+    </code>
+</td>
+<td style="text-align: left;">
+    Get comments for all columns in the specified table.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     table_name
+    </code>
+    (string, Required),
+    <code class="code">
+     db_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     catalog_name
+    </code>
+    (string, Optional)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_table_indexes
+    </code>
+</td>
+<td style="text-align: left;">
+    Get index information for the specified table.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     table_name
+    </code>
+    (string, Required),
+    <code class="code">
+     db_name
+    </code>
+    (string, Optional),
+    <code class="code">
+     catalog_name
+    </code>
+    (string, Optional)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     get_recent_audit_logs
+    </code>
+</td>
+<td style="text-align: left;">
+    Get audit log records for a recent period.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     days
+    </code>
+    (integer, Optional, default 7),
+    <code class="code">
+     limit
+    </code>
+    (integer, Optional, default 100)
+   </td>
+<td style="text-align: left;">
+    ✅ Active
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     column_analysis
+    </code>
+</td>
+<td style="text-align: left;">
+    Analyze statistical information and data distribution.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     table_name
+    </code>
+    (string, Required),
+    <code class="code">
+     column_name
+    </code>
+    (string, Required),
+    <code class="code">
+     analysis_type
+    </code>
+    (string, Optional: basic/distribution/detailed)
+   </td>
+<td style="text-align: left;">
+    ⚠️ Experimental
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     performance_stats
+    </code>
+</td>
+<td style="text-align: left;">
+    Get database performance statistics information.
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     metric_type
+    </code>
+    (string, Optional: queries/connections/tables/system),
+    <code class="code">
+     time_range
+    </code>
+    (string, Optional: 1h/6h/24h/7d)
+   </td>
+<td style="text-align: left;">
+    ⚠️ Experimental
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+<strong>
+  Note:
+ </strong>
+ All metadata tools support catalog federation for multi-catalog environments. The
+ <code class="code">
+  get_catalog_list
+ </code>
+ tool requires a
+ <code class="code">
+  random_string
+ </code>
+ parameter for compatibility reasons.
+</p>
+<h3 class="heading">
+ 4. Run the Service
+</h3>
+<p>
+ Execute the following command to start the server:
+</p>
+<pre class="pre"><code class="language-bash code">./start_server.sh
+</code></pre>
+<p>
+ This command starts the FastAPI application with Streamable HTTP MCP service.
+</p>
+<p>
+<strong>
+  Service Endpoints (v0.3.0+):
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   Streamable HTTP
+  </strong>
+  :
+  <code class="code">
+   http://&lt;host&gt;:&lt;port&gt;/mcp
+  </code>
+  (Primary MCP endpoint - supports GET, POST, DELETE, OPTIONS)
+ </li>
+<li>
+<strong>
+   Health Check
+  </strong>
+  :
+  <code class="code">
+   http://&lt;host&gt;:&lt;port&gt;/health
+  </code>
+</li>
+<li>
+<strong>
+   Status Check
+  </strong>
+  :
+  <code class="code">
+   http://&lt;host&gt;:&lt;port&gt;/status
+  </code>
+</li>
+</ul>
+<blockquote>
+<p>
+<strong>
+   Note
+  </strong>
+  : Starting from v0.3.0, only Streamable HTTP mode is supported for web-based communication. SSE endpoints have been removed.
+ </p>
+</blockquote>
+<h2 class="heading">
+ Usage
+</h2>
+<p>
+ Interaction with the Doris MCP Server requires an
+ <strong>
+  MCP Client
+ </strong>
+ . The client connects to the server's Streamable HTTP endpoint and sends requests according to the MCP specification to invoke the server's tools.
+</p>
+<p>
+<strong>
+  Main Interaction Flow (v0.3.0+):
+ </strong>
+</p>
+<ol>
+<li>
+<strong>
+   Client Initialization
+  </strong>
+  : Send an
+  <code class="code">
+   initialize
+  </code>
+  method call to
+  <code class="code">
+   /mcp
+  </code>
+  (Streamable HTTP).
+ </li>
+<li>
+<strong>
+   (Optional) Discover Tools
+  </strong>
+  : The client can call
+  <code class="code">
+   tools/list
+  </code>
+  to get the list of supported tools, their descriptions, and parameter schemas.
+ </li>
+<li>
+<strong>
+   Call Tool
+  </strong>
+  : The client sends a
+  <code class="code">
+   tools/call
+  </code>
+  request, specifying the
+  <code class="code">
+   name
+  </code>
+  and
+  <code class="code">
+   arguments
+  </code>
+  .
+  <ul>
+<li>
+<strong>
+     Example: Get Table Schema
+    </strong>
+<ul>
+<li>
+<code class="code">
+       name
+      </code>
+      :
+      <code class="code">
+       get_table_schema
+      </code>
+</li>
+<li>
+<code class="code">
+       arguments
+      </code>
+      : Include
+      <code class="code">
+       table_name
+      </code>
+      ,
+      <code class="code">
+       db_name
+      </code>
+      ,
+      <code class="code">
+       catalog_name
+      </code>
+      .
+     </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>
+   Handle Response
+  </strong>
+  :
+  <ul>
+<li>
+<strong>
+     Non-streaming
+    </strong>
+    : The client receives a response containing
+    <code class="code">
+     content
+    </code>
+    or
+    <code class="code">
+     isError
+    </code>
+    .
+   </li>
+<li>
+<strong>
+     Streaming
+    </strong>
+    : The client receives a series of progress notifications, followed by a final response.
+   </li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>
+<strong>
+   Migration Note
+  </strong>
+  : If you're upgrading from v0.2.x, note that tool names have been simplified (removed
+  <code class="code">
+   mcp_doris_
+  </code>
+  prefix) and the communication protocol has been updated to use Streamable HTTP exclusively.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Catalog Federation Support
+</h3>
+<p>
+ The Doris MCP Server supports
+ <strong>
+  catalog federation
+ </strong>
+ , enabling interaction with multiple data catalogs (internal Doris tables and external data sources like Hive, MySQL, etc.) within a unified interface.
+</p>
+<h4 class="heading">
+ Key Features:
+</h4>
+<ul>
+<li>
+<strong>
+   Multi-Catalog Metadata Access
+  </strong>
+  : All metadata tools (
+  <code class="code">
+   get_db_list
+  </code>
+  ,
+  <code class="code">
+   get_db_table_list
+  </code>
+  ,
+  <code class="code">
+   get_table_schema
+  </code>
+  , etc.) support an optional
+  <code class="code">
+   catalog_name
+  </code>
+  parameter to query specific catalogs.
+ </li>
+<li>
+<strong>
+   Cross-Catalog SQL Queries
+  </strong>
+  : Execute SQL queries that span multiple catalogs using three-part table naming.
+ </li>
+<li>
+<strong>
+   Catalog Discovery
+  </strong>
+  : Use
+  <code class="code">
+   mcp_doris_get_catalog_list
+  </code>
+  to discover available catalogs and their types.
+ </li>
+</ul>
+<h4 class="heading">
+ Three-Part Naming Requirement:
+</h4>
+<p>
+<strong>
+  All SQL queries MUST use three-part naming for table references:
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   Internal Tables
+  </strong>
+  :
+  <code class="code">
+   internal.database_name.table_name
+  </code>
+</li>
+<li>
+<strong>
+   External Tables
+  </strong>
+  :
+  <code class="code">
+   catalog_name.database_name.table_name
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+ Examples:
+</h4>
+<ol>
+<li>
+<p>
+<strong>
+    Get Available Catalogs:
+   </strong>
+<code class="code">
+    json
+    {
+      "tool_name": "mcp_doris_get_catalog_list",
+      "arguments": {"random_string": "unique_id"}
+    }
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Get Databases in Specific Catalog:
+   </strong>
+<code class="code">
+    json
+    {
+      "tool_name": "mcp_doris_get_db_list", 
+      "arguments": {"random_string": "unique_id", "catalog_name": "mysql"}
+    }
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Query Internal Catalog:
+   </strong>
+<code class="code">
+    json
+    {
+      "tool_name": "mcp_doris_exec_query",
+      "arguments": {
+        "random_string": "unique_id",
+        "sql": "SELECT COUNT(*) FROM internal.ssb.customer"
+      }
+    }
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Query External Catalog:
+   </strong>
+<code class="code">
+    json
+    {
+      "tool_name": "mcp_doris_exec_query", 
+      "arguments": {
+        "random_string": "unique_id",
+        "sql": "SELECT COUNT(*) FROM mysql.ssb.customer"
+      }
+    }
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Cross-Catalog Query:
+   </strong>
+<code class="code">
+    json
+    {
+      "tool_name": "mcp_doris_exec_query",
+      "arguments": {
+        "random_string": "unique_id", 
+        "sql": "SELECT i.c_name, m.external_data FROM internal.ssb.customer i JOIN mysql.test.user_info m ON i.c_custkey = m.customer_id"
+      }
+    }
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ Security Configuration (v0.3.0+)
+</h2>
+<p>
+ The Doris MCP Server includes a comprehensive security framework that provides enterprise-level protection through authentication, authorization, SQL security validation, and data masking capabilities.
+</p>
+<h3 class="heading">
+ Security Features
+</h3>
+<ul>
+<li>
+<strong>
+   🔐 Authentication
+  </strong>
+  : Support for token-based and basic authentication
+ </li>
+<li>
+<strong>
+   🛡️ Authorization
+  </strong>
+  : Role-based access control (RBAC) with security levels
+ </li>
+<li>
+<strong>
+   🚫 SQL Security
+  </strong>
+  : SQL injection protection and blocked operations
+ </li>
+<li>
+<strong>
+   🎭 Data Masking
+  </strong>
+  : Automatic sensitive data masking based on user permissions
+ </li>
+<li>
+<strong>
+   📊 Security Levels
+  </strong>
+  : Four-tier security classification (Public, Internal, Confidential, Secret)
+ </li>
+</ul>
+<h3 class="heading">
+ Authentication Configuration
+</h3>
+<p>
+ Configure authentication in your environment variables:
+</p>
+<pre class="pre"><code class="language-bash code"># Authentication Type (token/basic/oauth)
+AUTH_TYPE=token
+
+# Token Secret for JWT validation
+TOKEN_SECRET=your_secret_key_here
+
+# Session timeout (in seconds)
+SESSION_TIMEOUT=3600
+</code></pre>
+<h4 class="heading">
+ Token Authentication Example
+</h4>
+<pre class="pre"><code class="language-python code"># Client authentication with token
+auth_info = {
+    "type": "token",
+    "token": "your_jwt_token",
+    "session_id": "unique_session_id"
+}
+</code></pre>
+<h4 class="heading">
+ Basic Authentication Example
+</h4>
+<pre class="pre"><code class="language-python code"># Client authentication with username/password
+auth_info = {
+    "type": "basic",
+    "username": "analyst",
+    "password": "secure_password",
+    "session_id": "unique_session_id"
+}
+</code></pre>
+<h3 class="heading">
+ Authorization &amp; Security Levels
+</h3>
+<p>
+ The system supports four security levels with hierarchical access control:
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">
+    Security Level
+   </th>
+<th style="text-align: left;">
+    Access Scope
+   </th>
+<th style="text-align: left;">
+    Typical Use Cases
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Public
+    </strong>
+</td>
+<td style="text-align: left;">
+    Unrestricted access
+   </td>
+<td style="text-align: left;">
+    Public reports, general statistics
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Internal
+    </strong>
+</td>
+<td style="text-align: left;">
+    Company employees
+   </td>
+<td style="text-align: left;">
+    Internal dashboards, business metrics
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Confidential
+    </strong>
+</td>
+<td style="text-align: left;">
+    Authorized personnel
+   </td>
+<td style="text-align: left;">
+    Customer data, financial reports
+   </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<strong>
+     Secret
+    </strong>
+</td>
+<td style="text-align: left;">
+    Senior management
+   </td>
+<td style="text-align: left;">
+    Strategic data, sensitive analytics
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Role Configuration
+</h4>
+<p>
+ Configure user roles and permissions:
+</p>
+<pre class="pre"><code class="language-python code"># Example role configuration
+role_permissions = {
+    "data_analyst": {
+        "security_level": "internal",
+        "permissions": ["read_data", "execute_query"],
+        "allowed_tables": ["sales", "products", "orders"]
+    },
+    "data_admin": {
+        "security_level": "confidential", 
+        "permissions": ["read_data", "execute_query", "admin"],
+        "allowed_tables": ["*"]
+    },
+    "executive": {
+        "security_level": "secret",
+        "permissions": ["read_data", "execute_query", "admin"],
+        "allowed_tables": ["*"]
+    }
+}
+</code></pre>
+<h3 class="heading">
+ SQL Security Validation
+</h3>
+<p>
+ The system automatically validates SQL queries for security risks:
+</p>
+<h4 class="heading">
+ Blocked Operations
+</h4>
+<p>
+ Configure blocked SQL operations:
+</p>
+<pre class="pre"><code class="language-bash code"># Environment variable
+BLOCKED_SQL_OPERATIONS=DROP,DELETE,TRUNCATE,ALTER,CREATE,INSERT,UPDATE,GRANT,REVOKE
+
+# Maximum query complexity score
+MAX_QUERY_COMPLEXITY=100
+</code></pre>
+<h4 class="heading">
+ SQL Injection Protection
+</h4>
+<p>
+ The system automatically detects and blocks:
+</p>
+<ul>
+<li>
+<strong>
+   Union-based injections
+  </strong>
+  :
+  <code class="code">
+   UNION SELECT
+  </code>
+  attacks
+ </li>
+<li>
+<strong>
+   Boolean-based injections
+  </strong>
+  :
+  <code class="code">
+   OR 1=1
+  </code>
+  patterns
+ </li>
+<li>
+<strong>
+   Time-based injections
+  </strong>
+  :
+  <code class="code">
+   SLEEP()
+  </code>
+  ,
+  <code class="code">
+   WAITFOR
+  </code>
+  functions
+ </li>
+<li>
+<strong>
+   Comment injections
+  </strong>
+  :
+  <code class="code">
+   --
+  </code>
+  ,
+  <code class="code">
+   /**/
+  </code>
+  patterns
+ </li>
+<li>
+<strong>
+   Stacked queries
+  </strong>
+  : Multiple statements separated by
+  <code class="code">
+   ;
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+ Example Security Validation
+</h4>
+<pre class="pre"><code class="language-python code"># This query would be blocked
+dangerous_sql = "SELECT * FROM users WHERE id = 1; DROP TABLE users;"
+
+# This query would be allowed
+safe_sql = "SELECT name, email FROM users WHERE department = 'sales'"
+</code></pre>
+<h3 class="heading">
+ Data Masking Configuration
+</h3>
+<p>
+ Configure automatic data masking for sensitive information:
+</p>
+<h4 class="heading">
+ Built-in Masking Rules
+</h4>
+<pre class="pre"><code class="language-python code"># Default masking rules
+masking_rules = [
+    {
+        "column_pattern": r".*phone.*|.*mobile.*",
+        "algorithm": "phone_mask",
+        "parameters": {
+            "mask_char": "*",
+            "keep_prefix": 3,
+            "keep_suffix": 4
+        },
+        "security_level": "internal"
+    },
+    {
+        "column_pattern": r".*email.*", 
+        "algorithm": "email_mask",
+        "parameters": {"mask_char": "*"},
+        "security_level": "internal"
+    },
+    {
+        "column_pattern": r".*id_card.*|.*identity.*",
+        "algorithm": "id_mask", 
+        "parameters": {
+            "mask_char": "*",
+            "keep_prefix": 6,
+            "keep_suffix": 4
+        },
+        "security_level": "confidential"
+    }
+]
+</code></pre>
+<h4 class="heading">
+ Masking Algorithms
+</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">
+    Algorithm
+   </th>
+<th style="text-align: left;">
+    Description
+   </th>
+<th style="text-align: left;">
+    Example
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     phone_mask
+    </code>
+</td>
+<td style="text-align: left;">
+    Masks phone numbers
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     138****5678
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     email_mask
+    </code>
+</td>
+<td style="text-align: left;">
+    Masks email addresses
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     j***n@example.com
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     id_mask
+    </code>
+</td>
+<td style="text-align: left;">
+    Masks ID card numbers
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     110101****1234
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     name_mask
+    </code>
+</td>
+<td style="text-align: left;">
+    Masks personal names
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     张*明
+    </code>
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code class="code">
+     partial_mask
+    </code>
+</td>
+<td style="text-align: left;">
+    Partial masking with ratio
+   </td>
+<td style="text-align: left;">
+<code class="code">
+     abc***xyz
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Custom Masking Rules
+</h4>
+<p>
+ Add custom masking rules in your configuration:
+</p>
+<pre class="pre"><code class="language-python code"># Custom masking rule
+custom_rule = {
+    "column_pattern": r".*salary.*|.*income.*",
+    "algorithm": "partial_mask",
+    "parameters": {
+        "mask_char": "*",
+        "mask_ratio": 0.6
+    },
+    "security_level": "confidential"
+}
+</code></pre>
+<h3 class="heading">
+ Security Configuration Examples
+</h3>
+<h4 class="heading">
+ Environment Variables
+</h4>
+<pre class="pre"><code class="language-bash code"># .env file
+AUTH_TYPE=token
+TOKEN_SECRET=your_jwt_secret_key
+ENABLE_MASKING=true
+MAX_RESULT_ROWS=10000
+BLOCKED_SQL_OPERATIONS=DROP,DELETE,TRUNCATE,ALTER
+MAX_QUERY_COMPLEXITY=100
+ENABLE_AUDIT=true
+</code></pre>
+<h4 class="heading">
+ Sensitive Tables Configuration
+</h4>
+<pre class="pre"><code class="language-python code"># Configure sensitive tables with security levels
+sensitive_tables = {
+    "user_profiles": "confidential",
+    "payment_records": "secret", 
+    "employee_salaries": "secret",
+    "customer_data": "confidential",
+    "public_reports": "public"
+}
+</code></pre>
+<h3 class="heading">
+ Security Best Practices
+</h3>
+<ol>
+<li>
+<strong>
+   🔑 Strong Authentication
+  </strong>
+  : Use JWT tokens with proper expiration
+ </li>
+<li>
+<strong>
+   🎯 Principle of Least Privilege
+  </strong>
+  : Grant minimum required permissions
+ </li>
+<li>
+<strong>
+   🔍 Regular Auditing
+  </strong>
+  : Enable audit logging for security monitoring
+ </li>
+<li>
+<strong>
+   🛡️ Input Validation
+  </strong>
+  : All SQL queries are automatically validated
+ </li>
+<li>
+<strong>
+   🎭 Data Classification
+  </strong>
+  : Properly classify data with security levels
+ </li>
+<li>
+<strong>
+   🔄 Regular Updates
+  </strong>
+  : Keep security rules and configurations updated
+ </li>
+</ol>
+<h3 class="heading">
+ Security Monitoring
+</h3>
+<p>
+ The system provides comprehensive security monitoring:
+</p>
+<pre class="pre"><code class="language-python code"># Security audit log example
+{
+    "timestamp": "2024-01-15T10:30:00Z",
+    "user_id": "analyst_user",
+    "action": "query_execution", 
+    "resource": "customer_data",
+    "result": "blocked",
+    "reason": "insufficient_permissions",
+    "risk_level": "medium"
+}
+</code></pre>
+<blockquote>
+<p>
+<strong>
+   ⚠️ Important
+  </strong>
+  : Always test security configurations in a development environment before deploying to production. Regularly review and update security policies based on your organization's requirements.
+ </p>
+</blockquote>
+<h2 class="heading">
+ Connecting with Cursor
+</h2>
+<p>
+ You can connect Cursor to this MCP server using Stdio mode (recommended) or Streamable HTTP mode.
+</p>
+<h3 class="heading">
+ Stdio Mode
+</h3>
+<p>
+ Stdio mode allows Cursor to manage the server process directly. Configuration is done within Cursor's MCP Server settings file (typically
+ <code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ or similar).
+</p>
+<h3 class="heading">
+ Method 1: Using PyPI Installation (Recommended)
+</h3>
+<p>
+ Install the package from PyPI and configure Cursor to use it:
+</p>
+<pre class="pre"><code class="language-bash code">pip install mcp-doris-server
+</code></pre>
+<p>
+<strong>
+  Configure Cursor:
+ </strong>
+ Add an entry like the following to your Cursor MCP configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "doris-stdio": {
+      "command": "doris-mcp-server",
+      "args": ["--transport", "stdio"],
+      "env": {
+        "DORIS_HOST": "127.0.0.1",
+        "DORIS_PORT": "9030",
+        "DORIS_USER": "root",
+        "DORIS_PASSWORD": "your_db_password"
+      }
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Method 2: Using uv (Development)
+</h3>
+<p>
+ If you have
+ <code class="code">
+  uv
+ </code>
+ installed and want to run from source:
+</p>
+<pre class="pre"><code class="language-bash code">uv run --project /path/to/doris-mcp-server doris-mcp-server
+</code></pre>
+<p>
+<strong>
+  Note:
+ </strong>
+ Replace
+ <code class="code">
+  /path/to/doris-mcp-server
+ </code>
+ with the actual absolute path to your project directory.
+</p>
+<p>
+<strong>
+  Configure Cursor:
+ </strong>
+ Add an entry like the following to your Cursor MCP configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "doris-stdio": {
+      "command": "uv",
+      "args": ["run", "--project", "/path/to/your/doris-mcp-server", "doris-mcp-server"],
+      "env": {
+        "DORIS_HOST": "127.0.0.1",
+        "DORIS_PORT": "9030",
+        "DORIS_USER": "root",
+        "DORIS_PASSWORD": "your_db_password"
+      }
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Streamable HTTP Mode (v0.3.0+)
+</h3>
+<p>
+ Streamable HTTP mode requires you to run the MCP server independently first, and then configure Cursor to connect to it.
+</p>
+<ol>
+<li>
+<strong>
+   Configure
+   <code class="code">
+    .env
+   </code>
+   :
+  </strong>
+  Ensure your database credentials and any other necessary settings are correctly configured in the
+  <code class="code">
+   .env
+  </code>
+  file within the project directory.
+ </li>
+<li>
+<strong>
+   Start the Server:
+  </strong>
+  Run the server from your terminal in the project's root directory:
+  <code class="code">
+   bash
+    ./start_server.sh
+  </code>
+  This script reads the
+  <code class="code">
+   .env
+  </code>
+  file and starts the FastAPI server with Streamable HTTP support. Note the host and port the server is listening on (default is
+  <code class="code">
+   0.0.0.0:3000
+  </code>
+  ).
+ </li>
+<li>
+<p>
+<strong>
+    Configure Cursor:
+   </strong>
+   Add an entry like the following to your Cursor MCP configuration, pointing to the running server's Streamable HTTP endpoint:
+  </p>
+<p>
+<code class="code">
+    json
+{
+  "mcpServers": {
+    "doris-http": {
+       "url": "http://127.0.0.1:3000/mcp"
+    }
+  }
+}
+   </code>
+</p>
+<blockquote>
+<p>
+<strong>
+     Note
+    </strong>
+    : Adjust the host/port if your server runs on a different address. The
+    <code class="code">
+     /mcp
+    </code>
+    endpoint is the unified Streamable HTTP interface introduced in v0.3.0.
+   </p>
+</blockquote>
+</li>
+</ol>
+<p>
+ After configuring either mode in Cursor, you should be able to select the server (e.g.,
+ <code class="code">
+  doris-stdio
+ </code>
+ or
+ <code class="code">
+  doris-http
+ </code>
+ ) and use its tools.
+</p>
+<blockquote>
+<p>
+<strong>
+   ⚠️ Migration from v0.2.x
+  </strong>
+  : If you were using SSE mode (
+  <code class="code">
+   /sse
+  </code>
+  endpoint), update your configuration to use the new Streamable HTTP endpoint (
+  <code class="code">
+   /mcp
+  </code>
+  ).
+ </p>
+</blockquote>
+<h2 class="heading">
+ Directory Structure
+</h2>
+<pre class="pre"><code class="code">doris-mcp-server/
+├── doris_mcp_server/           # Main server package
+│   ├── main.py                 # Main entry point and FastAPI app
+│   ├── tools/                  # MCP tools implementation
+│   │   ├── tools_manager.py    # Centralized tools management and registration
+│   │   ├── resources_manager.py # Resource management and metadata exposure
+│   │   ├── prompts_manager.py  # Intelligent prompt templates for data analysis
+│   │   └── __init__.py
+│   ├── utils/                  # Core utility modules
+│   │   ├── config.py           # Configuration management with validation
+│   │   ├── db.py               # Database connection management with pooling
+│   │   ├── query_executor.py   # High-performance SQL execution with caching
+│   │   ├── security.py         # Security management and data masking
+│   │   ├── schema_extractor.py # Metadata extraction with catalog federation
+│   │   ├── analysis_tools.py   # Data analysis and performance monitoring
+│   │   ├── logger.py           # Logging configuration
+│   │   └── __init__.py
+│   └── __init__.py
+├── doris_mcp_client/           # MCP client implementation
+│   ├── client.py               # Unified MCP client for testing and integration
+│   ├── README.md               # Client documentation
+│   └── __init__.py
+├── logs/                       # Log files directory
+├── README.md                   # This documentation
+├── .env.example                # Environment variables template
+├── requirements.txt            # Python dependencies
+├── pyproject.toml              # Project configuration and entry points
+├── uv.lock                     # UV package manager lock file
+├── generate_requirements.py    # Requirements generation script
+├── start_server.sh             # Server startup script
+└── restart_server.sh           # Server restart script
+</code></pre>
+<h2 class="heading">
+ Developing New Tools
+</h2>
+<p>
+ This section outlines the process for adding new MCP tools to the Doris MCP Server, based on the current modular architecture.
+</p>
+<h3 class="heading">
+ 1. Leverage Existing Utility Modules
+</h3>
+<p>
+ The server provides comprehensive utility modules for common database operations:
+</p>
+<ul>
+<li>
+<strong>
+<code class="code">
+    doris_mcp_server/utils/db.py
+   </code>
+</strong>
+  : Database connection management with connection pooling and health monitoring.
+ </li>
+<li>
+<strong>
+<code class="code">
+    doris_mcp_server/utils/query_executor.py
+   </code>
+</strong>
+  : High-performance SQL execution with caching, optimization, and performance monitoring.
+ </li>
+<li>
+<strong>
+<code class="code">
+    doris_mcp_server/utils/schema_extractor.py
+   </code>
+</strong>
+  : Metadata extraction with full catalog federation support.
+ </li>
+<li>
+<strong>
+<code class="code">
+    doris_mcp_server/utils/security.py
+   </code>
+</strong>
+  : Security management, SQL validation, and data masking.
+ </li>
+<li>
+<strong>
+<code class="code">
+    doris_mcp_server/utils/analysis_tools.py
+   </code>
+</strong>
+  : Data analysis and statistical tools.
+ </li>
+<li>
+<strong>
+<code class="code">
+    doris_mcp_server/utils/config.py
+   </code>
+</strong>
+  : Configuration management with validation.
+ </li>
+</ul>
+<h3 class="heading">
+ 2. Implement Tool Logic
+</h3>
+<p>
+ Add your new tool to the
+ <code class="code">
+  DorisToolsManager
+ </code>
+ class in
+ <code class="code">
+  doris_mcp_server/tools/tools_manager.py
+ </code>
+ . The tools manager provides a centralized approach to tool registration and execution.
+</p>
+<p>
+<strong>
+  Example:
+ </strong>
+ Adding a new analysis tool:
+</p>
+<pre class="pre"><code class="language-python code"># In doris_mcp_server/tools/tools_manager.py
+
+async def your_new_analysis_tool(self, arguments: Dict[str, Any]) -&gt; List[Dict[str, Any]]:
+    """
+    Your new analysis tool implementation
+
+    Args:
+        arguments: Tool arguments from MCP client
+
+    Returns:
+        List of MCP response messages
+    """
+    try:
+        # Use existing utilities
+        result = await self.query_executor.execute_sql_for_mcp(
+            sql="SELECT COUNT(*) FROM your_table",
+            max_rows=arguments.get("max_rows", 100)
+        )
+
+        return [{
+            "type": "text",
+            "text": json.dumps(result, ensure_ascii=False, indent=2)
+        }]
+
+    except Exception as e:
+        logger.error(f"Tool execution failed: {str(e)}", exc_info=True)
+        return [{
+            "type": "text", 
+            "text": f"Error: {str(e)}"
+        }]
+</code></pre>
+<h3 class="heading">
+ 3. Register the Tool
+</h3>
+<p>
+ Add your tool to the
+ <code class="code">
+  _register_tools
+ </code>
+ method in the same class:
+</p>
+<pre class="pre"><code class="language-python code"># In the _register_tools method of DorisToolsManager
+
+@self.mcp.tool(
+    name="your_new_analysis_tool",
+    description="Description of your new analysis tool",
+    inputSchema={
+        "type": "object",
+        "properties": {
+            "parameter1": {
+                "type": "string",
+                "description": "Description of parameter1"
+            },
+            "parameter2": {
+                "type": "integer", 
+                "description": "Description of parameter2",
+                "default": 100
+            }
+        },
+        "required": ["parameter1"]
+    }
+)
+async def your_new_analysis_tool_wrapper(arguments: Dict[str, Any]) -&gt; List[Dict[str, Any]]:
+    return await self.your_new_analysis_tool(arguments)
+</code></pre>
+<h3 class="heading">
+ 4. Advanced Features
+</h3>
+<p>
+ For more complex tools, you can leverage:
+</p>
+<ul>
+<li>
+<strong>
+   Caching
+  </strong>
+  : Use the query executor's built-in caching for performance
+ </li>
+<li>
+<strong>
+   Security
+  </strong>
+  : Apply SQL validation and data masking through the security manager
+ </li>
+<li>
+<strong>
+   Prompts
+  </strong>
+  : Use the prompts manager for intelligent query generation
+ </li>
+<li>
+<strong>
+   Resources
+  </strong>
+  : Expose metadata through the resources manager
+ </li>
+</ul>
+<h3 class="heading">
+ 5. Testing
+</h3>
+<p>
+ Test your new tool using the included MCP client:
+</p>
+<pre class="pre"><code class="language-python code"># Using doris_mcp_client/client.py
+from doris_mcp_client.client import DorisUnifiedMCPClient
+
+async def test_new_tool():
+    client = DorisUnifiedMCPClient()
+    result = await client.call_tool("your_new_analysis_tool", {
+        "parameter1": "test_value",
+        "parameter2": 50
+    })
+    print(result)
+</code></pre>
+<h2 class="heading">
+ MCP Client
+</h2>
+<p>
+ The project includes a unified MCP client (
+ <code class="code">
+  doris_mcp_client/
+ </code>
+ ) for testing and integration purposes. The client supports multiple connection modes and provides a convenient interface for interacting with the MCP server.
+</p>
+<p>
+ For detailed client documentation, see
+ <a href="doris_mcp_client/README.md">
+<code class="code">
+   doris_mcp_client/README.md
+  </code>
+</a>
+ .
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Contributions are welcome via Issues or Pull Requests.
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the Apache 2.0 License. See the LICENSE file for details.
+</p>
+<h2 class="heading">
+ FAQ
+</h2>
+<h3 class="heading">
+ Q: Why do Qwen3-32b and other small parameter models always fail when calling tools?
+</h3>
+<p>
+<strong>
+  A:
+ </strong>
+ This is a common issue. The main reason is that these models need more explicit guidance to correctly use MCP tools. It's recommended to add the following instruction prompt for the model:
+</p>
+<ul>
+<li>
+  Chinese version：
+ </li>
+</ul>
+<pre class="pre"><code class="language-xml code">&lt;instruction&gt;
+尽可能使用MCP工具完成任务，仔细阅读每个工具的注解、方法名、参数说明等内容。请按照以下步骤操作：
+
+1. 仔细分析用户的问题，从已有的Tools列表中匹配最合适的工具。
+2. 确保工具名称、方法名和参数完全按照工具注释中的定义使用，不要自行创造工具名称或参数。
+3. 传入参数时，严格遵循工具注释中规定的参数格式和要求。
+4. 调用工具时，根据需要直接调用工具，但参数请求参考以下请求格式：{"mcp_sse_call_tool": {"tool_name": "$tools_name", "arguments": "{}"}}
+5. 输出结果时，不要包含任何XML标签，仅返回纯文本内容。
+
+&lt;input&gt;
+用户问题：user_query
+&lt;/input&gt;
+
+&lt;output&gt;
+返回工具调用结果或最终答案，以及对结果的分析。
+&lt;/output&gt;
+&lt;/instruction&gt;
+</code></pre>
+<ul>
+<li>
+  English version：
+ </li>
+</ul>
+<pre class="pre"><code class="language-xml code">&lt;instruction&gt;
+Use MCP tools to complete tasks as much as possible. Carefully read the annotations, method names, and parameter descriptions of each tool. Please follow these steps:
+
+1. Carefully analyze the user's question and match the most appropriate tool from the existing Tools list.
+2. Ensure tool names, method names, and parameters are used exactly as defined in the tool annotations. Do not create tool names or parameters on your own.
+3. When passing parameters, strictly follow the parameter format and requirements specified in the tool annotations.
+4. When calling tools, call them directly as needed, but refer to the following request format for parameters: {"mcp_sse_call_tool": {"tool_name": "$tools_name", "arguments": "{}"}}
+5. When outputting results, do not include any XML tags, return plain text content only.
+
+&lt;input&gt;
+User question: user_query
+&lt;/input&gt;
+
+&lt;output&gt;
+Return tool call results or final answer, along with analysis of the results.
+&lt;/output&gt;
+&lt;/instruction&gt;
+</code></pre>
+<p>
+ If you have further requirements for the returned results, you can describe the specific requirements in the
+ <code class="code">
+  &lt;output&gt;
+ </code>
+ tag.
+</p>
+<h3 class="heading">
+ Q: How to configure different database connections?
+</h3>
+<p>
+<strong>
+  A:
+ </strong>
+ You can configure database connections in several ways:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Environment Variables
+   </strong>
+   (Recommended):
+   <code class="code">
+    bash
+   export DORIS_HOST="your_doris_host"
+   export DORIS_PORT="9030"
+   export DORIS_USER="root"
+   export DORIS_PASSWORD="your_password"
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Command Line Arguments
+   </strong>
+   :
+   <code class="code">
+    bash
+   doris-mcp-server --db-host your_host --db-port 9030 --db-user root --db-password your_password
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Configuration File
+   </strong>
+   :
+   Modify the corresponding configuration items in the
+   <code class="code">
+    .env
+   </code>
+   file.
+  </p>
+</li>
+</ol>
+<h3 class="heading">
+ Q: How to enable data security and masking features?
+</h3>
+<p>
+<strong>
+  A:
+ </strong>
+ Set the following configurations in your
+ <code class="code">
+  .env
+ </code>
+ file:
+</p>
+<pre class="pre"><code class="language-bash code"># Enable data masking
+ENABLE_MASKING=true
+# Set authentication type
+AUTH_TYPE=token
+# Configure token secret
+TOKEN_SECRET=your_secret_key
+# Set maximum result rows
+MAX_RESULT_ROWS=10000
+</code></pre>
+<h3 class="heading">
+ Q: What's the difference between Stdio mode and HTTP mode?
+</h3>
+<p>
+<strong>
+  A:
+ </strong>
+</p>
+<ul>
+<li>
+<strong>
+   Stdio Mode
+  </strong>
+  : Suitable for direct integration with MCP clients (like Cursor), where the client manages the server process
+ </li>
+<li>
+<strong>
+   HTTP Mode
+  </strong>
+  : Independent web service that supports multiple client connections, suitable for production environments
+ </li>
+</ul>
+<p>
+ Recommendations:
+- Development and personal use: Stdio mode
+- Production and multi-user environments: HTTP mode
+</p>
+<h3 class="heading">
+ Q: How to resolve connection timeout issues?
+</h3>
+<p>
+<strong>
+  A:
+ </strong>
+ Try the following solutions:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Increase timeout settings
+   </strong>
+   :
+   <code class="code">
+    bash
+   # Set in .env file
+   QUERY_TIMEOUT=60
+   CONNECTION_TIMEOUT=30
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Check network connectivity
+   </strong>
+   :
+   <code class="code">
+    bash
+   # Test database connection
+   curl http://localhost:3000/health
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Optimize connection pool configuration
+   </strong>
+   :
+   <code class="code">
+    bash
+   DORIS_MIN_CONNECTIONS=5
+   DORIS_MAX_CONNECTIONS=20
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Q: How to view server logs?
+</h3>
+<p>
+<strong>
+  A:
+ </strong>
+ Log files are located in the
+ <code class="code">
+  logs/
+ </code>
+ directory. You can:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    View real-time logs
+   </strong>
+   :
+   <code class="code">
+    bash
+   tail -f logs/doris_mcp_server.log
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Adjust log level
+   </strong>
+   :
+   <code class="code">
+    bash
+   # Set in .env file
+   LOG_LEVEL=DEBUG
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Enable audit logging
+   </strong>
+   :
+   <code class="code">
+    bash
+   ENABLE_AUDIT=true
+   </code>
+</p>
+</li>
+</ol>
+<p>
+ For other issues, please check GitHub Issues or submit a new issue.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/apache-doris-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/apache-doris-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/apache-doris-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/apache-doris-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

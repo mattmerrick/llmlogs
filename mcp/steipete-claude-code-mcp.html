@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Claude Code MCP Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/steipete-claude-code-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Claude Code MCP Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Claude Code MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Claude Code MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Claude Code MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 216</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: JavaScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agent</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+                        </div>
+                        <a href="https://github.com/steipete/claude-code-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Claude Code MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/steipete-claude-code-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Claude Code MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Claude Code MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Claude Code MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Claude Code MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 216</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: JavaScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agent</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/steipete/claude-code-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Claude Code MCP Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/steipete-claude-code-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Claude Code MCP Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Claude Code MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Claude Code MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 216</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: JavaScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agent</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/steipete/claude-code-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Claude Code MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/steipete-claude-code-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Claude Code MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Claude Code MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Claude Code MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 216</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: JavaScript</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agent</span><span class="topic-tag"> claude</span><span class="topic-tag"> mcp</span>
+</div>
+<a class="github-link" href="https://github.com/steipete/claude-code-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Claude Code MCP Server
+</h1>
+<p>
+<img alt="Claude Code MCP Logo" src="assets/claude_code_mcp_logo.png"/>
+</p>
+<p>
+<a href="https://www.npmjs.com/package/@steipete/claude-code-mcp">
+<img alt="npm package" src="https://img.shields.io/npm/v/@steipete/claude-code-mcp"/>
+</a>
+<a href="/CHANGELOG.md">
+<img alt="View changelog" src="https://img.shields.io/badge/Explore%20Changelog-brightgreen"/>
+</a>
+</p>
+<p>
+ An MCP (Model Context Protocol) server that allows running Claude Code in one-shot mode with permissions bypassed automatically.
+</p>
+<p>
+ Did you notice that Cursor sometimes struggles with complex, multi-step edits or operations? This server, with its powerful unified
+ <code class="code">
+  claude_code
+ </code>
+ tool, aims to make Claude a more direct and capable agent for your coding tasks.
+</p>
+<p>
+<img alt="Screenshot" src="assets/screenshot.png" width="300"/>
+</p>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ This MCP server provides one tool that can be used by LLMs to interact with Claude Code. When integrated with Claude Desktop or other MCP clients, it allows LLMs to:
+</p>
+<ul>
+<li>
+  Run Claude Code with all permissions bypassed (using
+  <code class="code">
+   --dangerously-skip-permissions
+  </code>
+  )
+ </li>
+<li>
+  Execute Claude Code with any prompt without permission interruptions
+ </li>
+<li>
+  Access file editing capabilities directly
+ </li>
+<li>
+  Enable specific tools by default
+ </li>
+</ul>
+<h2 class="heading">
+ Benefits
+</h2>
+<ul>
+<li>
+  Claude/Windsurf often have trouble editing files. Claude Code is better and faster at it.
+ </li>
+<li>
+  Multiple commands can be queued instead of direct execution. This saves context space so more important stuff is retained longer, fewer compacts happen.
+ </li>
+<li>
+  File ops, git, or other operations don't need costy models. Claude Code is pretty cost effective if you sign up for Antropic Max. You can use Gemini or o3 in Max mode and save costs with offloading tasks to cheaper models.
+ </li>
+<li>
+  Claude has wider system access and can do things that Cursor/Windsurf can't do (or believe they can't), so whenever they are stuck just ask them "use claude code" and it will usually un-stuck them.
+ </li>
+<li>
+  Agents in Agents rules.
+ </li>
+</ul>
+<p>
+<img alt="Agents in Agents Meme" src="assets/agents_in_agents_meme.jpg"/>
+</p>
+<h2 class="heading">
+ Prerequisites
+</h2>
+<ul>
+<li>
+  Node.js v20 or later (Use fnm or nvm to install)
+ </li>
+<li>
+  Claude CLI installed locally (run it and call /doctor) and
+  <code class="code">
+   -dangerously-skip-permissions
+  </code>
+  accepted.
+ </li>
+</ul>
+<h2 class="heading">
+ Configuration
+</h2>
+<h3 class="heading">
+ Environment Variables
+</h3>
+<ul>
+<li>
+<code class="code">
+   CLAUDE_CLI_NAME
+  </code>
+  : Override the Claude CLI binary name or provide an absolute path (default:
+  <code class="code">
+   claude
+  </code>
+  ). This allows you to use a custom Claude CLI binary. This is useful for:
+ </li>
+<li>
+  Using custom Claude CLI wrappers
+ </li>
+<li>
+  Testing with mocked binaries
+ </li>
+<li>
+  Running multiple Claude CLI versions side by side
+ </li>
+</ul>
+<p>
+ Supported formats:
+  - Simple name:
+ <code class="code">
+  CLAUDE_CLI_NAME=claude-custom
+ </code>
+ or
+ <code class="code">
+  CLAUDE_CLI_NAME=claude-v2
+ </code>
+ - Absolute path:
+ <code class="code">
+  CLAUDE_CLI_NAME=/path/to/custom/claude
+ </code>
+</p>
+<p>
+ Relative paths (e.g.,
+ <code class="code">
+  ./claude
+ </code>
+ or
+ <code class="code">
+  ../claude
+ </code>
+ ) are not allowed and will throw an error.
+</p>
+<p>
+ When set to a simple name, the server will look for the specified binary in:
+  1. The system PATH (instead of the default
+ <code class="code">
+  claude
+ </code>
+ command)
+</p>
+<p>
+ Note: The local user installation path (
+ <code class="code">
+  ~/.claude/local/claude
+ </code>
+ ) will still be checked but only for the default
+ <code class="code">
+  claude
+ </code>
+ binary.
+</p>
+<ul>
+<li>
+<code class="code">
+   MCP_CLAUDE_DEBUG
+  </code>
+  : Enable debug logging (set to
+  <code class="code">
+   true
+  </code>
+  for verbose output)
+ </li>
+</ul>
+<h2 class="heading">
+ Installation &amp; Usage
+</h2>
+<p>
+ The recommended way to use this server is by installing it by using
+ <code class="code">
+  npx
+ </code>
+ .
+</p>
+<pre class="pre"><code class="language-json code">    "claude-code-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@steipete/claude-code-mcp@latest"
+      ]
+    },
+</code></pre>
+<p>
+ To use a custom Claude CLI binary name, you can specify the environment variable:
+</p>
+<pre class="pre"><code class="language-json code">    "claude-code-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@steipete/claude-code-mcp@latest"
+      ],
+      "env": {
+        "CLAUDE_CLI_NAME": "claude-custom"
+      }
+    },
+</code></pre>
+<h2 class="heading">
+ Important First-Time Setup: Accepting Permissions
+</h2>
+<p>
+<strong>
+  Before the MCP server can successfully use the
+  <code class="code">
+   claude_code
+  </code>
+  tool, you must first run the Claude CLI manually once with the
+  <code class="code">
+   --dangerously-skip-permissions
+  </code>
+  flag, login and accept the terms.
+ </strong>
+</p>
+<p>
+ This is a one-time requirement by the Claude CLI.
+</p>
+<pre class="pre"><code class="language-bash code">npm install -g @anthropic-ai/claude-code
+</code></pre>
+<pre class="pre"><code class="language-bash code">claude --dangerously-skip-permissions
+</code></pre>
+<p>
+ Follow the prompts to accept. Once this is done, the MCP server will be able to use the flag non-interactively.
+</p>
+<p>
+ macOS might ask for all kind of folder permissions the first time the tool runs and the first run then fails. Subsequent runs will work.
+</p>
+<h2 class="heading">
+ Connecting to Your MCP Client
+</h2>
+<p>
+ After setting up the server, you need to configure your MCP client (like Cursor or others that use
+ <code class="code">
+  mcp.json
+ </code>
+ or
+ <code class="code">
+  mcp_config.json
+ </code>
+ ).
+</p>
+<h3 class="heading">
+ MCP Configuration File
+</h3>
+<p>
+ The configuration is typically done in a JSON file. The name and location can vary depending on your client.
+</p>
+<h4 class="heading">
+ Cursor
+</h4>
+<p>
+ Cursor uses
+ <code class="code">
+  mcp.json
+ </code>
+ .
+-
+ <strong>
+  macOS:
+ </strong>
+<code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ -
+ <strong>
+  Windows:
+ </strong>
+<code class="code">
+  %APPDATA%\\Cursor\\mcp.json
+ </code>
+ -
+ <strong>
+  Linux:
+ </strong>
+<code class="code">
+  ~/.config/cursor/mcp.json
+ </code>
+</p>
+<h4 class="heading">
+ Windsurf
+</h4>
+<p>
+ Windsurf users use
+ <code class="code">
+  mcp_config.json
+ </code>
+ -
+ <strong>
+  macOS:
+ </strong>
+<code class="code">
+  ~/.codeium/windsurf/mcp_config.json
+ </code>
+ -
+ <strong>
+  Windows:
+ </strong>
+<code class="code">
+  %APPDATA%\\Codeium\\windsurf\\mcp_config.json
+ </code>
+ -
+ <strong>
+  Linux:
+ </strong>
+<code class="code">
+  ~/.config/.codeium/windsurf/mcp_config.json
+ </code>
+</p>
+<p>
+ (Note: In some mixed setups, if Cursor is also installed, these clients might fall back to using Cursor's
+ <code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ path. Prioritize the Codeium-specific paths if using the Codeium extension.)
+</p>
+<p>
+ Create this file if it doesn't exist. Add or update the configuration for
+ <code class="code">
+  claude_code
+ </code>
+ :
+</p>
+<h2 class="heading">
+ Tools Provided
+</h2>
+<p>
+ This server exposes one primary tool:
+</p>
+<h3 class="heading">
+<code class="code">
+  claude_code
+ </code>
+</h3>
+<p>
+ Executes a prompt directly using the Claude Code CLI with
+ <code class="code">
+  --dangerously-skip-permissions
+ </code>
+ .
+</p>
+<p>
+<strong>
+  Arguments:
+ </strong>
+ -
+ <code class="code">
+  prompt
+ </code>
+ (string, required): The prompt to send to Claude Code.
+-
+ <code class="code">
+  options
+ </code>
+ (object, optional):
+  -
+ <code class="code">
+  tools
+ </code>
+ (array of strings, optional): Specific Claude tools to enable (e.g.,
+ <code class="code">
+  Bash
+ </code>
+ ,
+ <code class="code">
+  Read
+ </code>
+ ,
+ <code class="code">
+  Write
+ </code>
+ ). Common tools are enabled by default.
+</p>
+<p>
+<strong>
+  Example MCP Request:
+ </strong>
+</p>
+<pre class="pre"><code class="language-json code">{
+  "toolName": "claude_code:claude_code",
+  "arguments": {
+    "prompt": "Refactor the function foo in main.py to be async."
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Examples
+</h3>
+<p>
+ Here are some visual examples of the server in action:
+</p>
+<p>
+<img alt="Claude Tool Git Example" src="assets/claude_tool_git_example.png" width="50%"/>
+</p>
+<p>
+<img alt="Additional Claude Screenshot" src="assets/additional_claude_screenshot.png" width="50%"/>
+</p>
+<p>
+<img alt="Cursor Screenshot" src="assets/cursor-screenshot.png" width="50%"/>
+</p>
+<h3 class="heading">
+ Fixing ESLint Setup
+</h3>
+<p>
+ Here's an example of using the Claude Code MCP tool to interactively fix an ESLint setup by deleting old configuration files and creating a new one:
+</p>
+<p>
+<img alt="ESLint file operations example" src="assets/eslint_example.png" width="50%"/>
+</p>
+<h3 class="heading">
+ Listing Files Example
+</h3>
+<p>
+ Here's an example of the Claude Code tool listing files in a directory:
+</p>
+<p>
+<img alt="File listing example" src="assets/file_list_example.png" width="50%"/>
+</p>
+<h2 class="heading">
+ Key Use Cases
+</h2>
+<p>
+ This server, through its unified
+ <code class="code">
+  claude_code
+ </code>
+ tool, unlocks a wide range of powerful capabilities by giving your AI direct access to the Claude Code CLI. Here are some examples of what you can achieve:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Code Generation, Analysis &amp; Refactoring:
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Generate a Python script to parse CSV data and output JSON."
+    </code>
+</li>
+<li>
+<code class="code">
+     "Analyze my_script.py for potential bugs and suggest improvements."
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    File System Operations (Create, Read, Edit, Manage):
+   </strong>
+</p>
+<ul>
+<li>
+<strong>
+     Creating Files:
+    </strong>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project\n\nCreate a new file named 'config.yml' in the 'app/settings' directory with the following content:\nport: 8080\ndatabase: main_db"
+    </code>
+</li>
+<li>
+<strong>
+     Editing Files:
+    </strong>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project\n\nEdit file 'public/css/style.css': Add a new CSS rule at the end to make all 'h2' elements have a 'color: navy'."
+    </code>
+</li>
+<li>
+<strong>
+     Moving/Copying/Deleting:
+    </strong>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project\n\nMove the file 'report.docx' from the 'drafts' folder to the 'final_reports' folder and rename it to 'Q1_Report_Final.docx'."
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Version Control (Git):
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project\n\n1. Stage the file 'src/main.java'.\n2. Commit the changes with the message 'feat: Implement user authentication'.\n3. Push the commit to the 'develop' branch on origin."
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Running Terminal Commands:
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project/frontend\n\nRun the command 'npm run build'."
+    </code>
+</li>
+<li>
+<code class="code">
+     "Open the URL https://developer.mozilla.org in my default web browser."
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Web Search &amp; Summarization:
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Search the web for 'benefits of server-side rendering' and provide a concise summary."
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Complex Multi-Step Workflows:
+   </strong>
+</p>
+<ul>
+<li>
+    Automate version bumps, update changelogs, and tag releases:
+    <code class="code">
+     "Your work folder is /Users/steipete/my_project\n\nFollow these steps: 1. Update the version in package.json to 2.5.0. 2. Add a new section to CHANGELOG.md for version 2.5.0 with the heading '### Added' and list 'New feature X'. 3. Stage package.json and CHANGELOG.md. 4. Commit with message 'release: version 2.5.0'. 5. Push the commit. 6. Create and push a git tag v2.5.0."
+    </code>
+</li>
+</ul>
+<p>
+<img alt="Complex multi-step operation example" src="assets/multistep_example.png" width="50%"/>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Repairing Files with Syntax Errors:
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Your work folder is /path/to/project\n\nThe file 'src/utils/parser.js' has syntax errors after a recent complex edit that broke its structure. Please analyze it, identify the syntax errors, and correct the file to make it valid JavaScript again, ensuring the original logic is preserved as much as possible."
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Interacting with GitHub (e.g., Creating a Pull Request):
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project\n\nCreate a GitHub Pull Request in the repository 'owner/repo' from the 'feature-branch' to the 'main' branch. Title: 'feat: Implement new login flow'. Body: 'This PR adds a new and improved login experience for users.'"
+    </code>
+</li>
+</ul>
+</li>
+<li>
+<p>
+<strong>
+    Interacting with GitHub (e.g., Checking PR CI Status):
+   </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+     "Your work folder is /Users/steipete/my_project\n\nCheck the status of CI checks for Pull Request #42 in the GitHub repository 'owner/repo'. Report if they have passed, failed, or are still running."
+    </code>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="heading">
+ Correcting GitHub Actions Workflow
+</h3>
+<p>
+<img alt="GitHub Actions workflow fix example" src="assets/github_actions_fix_example.png" width="50%"/>
+</p>
+<h3 class="heading">
+ Complex Multi-Step Operations
+</h3>
+<p>
+ This example illustrates
+ <code class="code">
+  claude_code
+ </code>
+ handling a more complex, multi-step task, such as preparing a release by creating a branch, updating multiple files (
+ <code class="code">
+  package.json
+ </code>
+ ,
+ <code class="code">
+  CHANGELOG.md
+ </code>
+ ), committing changes, and initiating a pull request, all within a single, coherent operation.
+</p>
+<p>
+<img alt="Claude Code multi-step example" src="assets/claude_code_multistep_example.png" width="50%"/>
+</p>
+<p>
+<strong>
+  CRITICAL: Remember to provide Current Working Directory (CWD) context in your prompts for file system or git operations (e.g.,
+  <code class="code">
+   "Your work folder is /path/to/project\n\n...your command..."
+  </code>
+  ).
+ </strong>
+</p>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<ul>
+<li>
+<strong>
+   "Command not found" (claude-code-mcp):
+  </strong>
+  If installed globally, ensure the npm global bin directory is in your system's PATH. If using
+  <code class="code">
+   npx
+  </code>
+  , ensure
+  <code class="code">
+   npx
+  </code>
+  itself is working.
+ </li>
+<li>
+<strong>
+   "Command not found" (claude or ~/.claude/local/claude):
+  </strong>
+  Ensure the Claude CLI is installed correctly. Run
+  <code class="code">
+   claude/doctor
+  </code>
+  or check its documentation.
+ </li>
+<li>
+<strong>
+   Permissions Issues:
+  </strong>
+  Make sure you've run the "Important First-Time Setup" step.
+ </li>
+<li>
+<strong>
+   JSON Errors from Server:
+  </strong>
+  If
+  <code class="code">
+   MCP_CLAUDE_DEBUG
+  </code>
+  is
+  <code class="code">
+   true
+  </code>
+  , error messages or logs might interfere with MCP's JSON parsing. Set to
+  <code class="code">
+   false
+  </code>
+  for normal operation.
+ </li>
+<li>
+<strong>
+   ESM/Import Errors:
+  </strong>
+  Ensure you are using Node.js v20 or later.
+ </li>
+</ul>
+<p>
+<strong>
+  For Developers: Local Setup &amp; Contribution
+ </strong>
+</p>
+<p>
+ If you want to develop or contribute to this server, or run it from a cloned repository for testing, please see our
+ <a href="./docs/local_install.md">
+  Local Installation &amp; Development Setup Guide
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Testing
+</h2>
+<p>
+ The project includes comprehensive test suites:
+</p>
+<pre class="pre"><code class="language-bash code"># Run all tests
+npm test
+
+# Run unit tests only
+npm run test:unit
+
+# Run e2e tests (with mocks)
+npm run test:e2e
+
+# Run e2e tests locally (requires Claude CLI)
+npm run test:e2e:local
+
+# Watch mode for development
+npm run test:watch
+
+# Coverage report
+npm run test:coverage
+</code></pre>
+<p>
+ For detailed testing documentation, see our
+ <a href="./docs/e2e-testing.md">
+  E2E Testing Guide
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Configuration via Environment Variables
+</h2>
+<p>
+ The server's behavior can be customized using these environment variables:
+</p>
+<ul>
+<li>
+<code class="code">
+   CLAUDE_CLI_PATH
+  </code>
+  : Absolute path to the Claude CLI executable.
+ </li>
+<li>
+  Default: Checks
+  <code class="code">
+   ~/.claude/local/claude
+  </code>
+  , then falls back to
+  <code class="code">
+   claude
+  </code>
+  (expecting it in PATH).
+ </li>
+<li>
+<code class="code">
+   MCP_CLAUDE_DEBUG
+  </code>
+  : Set to
+  <code class="code">
+   true
+  </code>
+  for verbose debug logging from this MCP server. Default:
+  <code class="code">
+   false
+  </code>
+  .
+ </li>
+</ul>
+<p>
+ These can be set in your shell environment or within the
+ <code class="code">
+  env
+ </code>
+ block of your
+ <code class="code">
+  mcp.json
+ </code>
+ server configuration (though the
+ <code class="code">
+  env
+ </code>
+ block in
+ <code class="code">
+  mcp.json
+ </code>
+ examples was removed for simplicity, it's still a valid way to set them for the server process if needed).
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Contributions are welcome! Please refer to the
+ <a href="./docs/local_install.md">
+  Local Installation &amp; Development Setup Guide
+ </a>
+ for details on setting up your environment.
+</p>
+<p>
+ Submit issues and pull requests to the
+ <a href="https://github.com/steipete/claude-code-mcp">
+  GitHub repository
+ </a>
+ .
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/steipete-claude-code-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/steipete-claude-code-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/steipete-claude-code-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/steipete-claude-code-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

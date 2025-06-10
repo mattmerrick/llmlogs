@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="applescript-mcp MCP Server - MCP Directory">
+    <meta property="og:description" content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a">
+    <meta property="og:url" content="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="applescript-mcp MCP Server - MCP Directory">
+    <meta name="twitter:description" content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a">
+    
+    <title>applescript-mcp MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">applescript-mcp MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">applescript-mcp MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 207</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/joshrutkowski/applescript-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="applescript-mcp MCP Server - MCP Directory" property="og:title"/>
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="applescript-mcp MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" name="twitter:description"/>
+<title>applescript-mcp MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">applescript-mcp MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">applescript-mcp MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 207</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/joshrutkowski/applescript-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="applescript-mcp MCP Server - MCP Directory" property="og:title">
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" property="og:description">
+<meta content="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="applescript-mcp MCP Server - MCP Directory" name="twitter:title">
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" name="twitter:description">
+<title>applescript-mcp MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>applescript-mcp MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 207</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/joshrutkowski/applescript-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="applescript-mcp MCP Server - MCP Directory" property="og:title"/>
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="applescript-mcp MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI a" name="twitter:description"/>
+<title>applescript-mcp MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>applescript-mcp MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 207</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/joshrutkowski/applescript-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ applescript-mcp MCP Server
+</h1>
+<p>
+ A Model Context Protocol server that enables LLM applications to interact with macOS through AppleScript.
+This server provides a standardized interface for AI applications to control system functions, manage files, handle notifications, and more.
+</p>
+<p>
+<a href="https://github.com/joshrutkowski/applescript-mcp/actions/workflows/node.js.yml">
+<img alt="Node.js CI" src="https://github.com/joshrutkowski/applescript-mcp/actions/workflows/node.js.yml/badge.svg"/>
+</a>
+</p>
+<p>
+<a href="https://glama.ai/mcp/servers/0t5gydjcqw">
+<img alt="applescript-mcp MCP server" height="200" src="https://glama.ai/mcp/servers/0t5gydjcqw/badge" width="380"/>
+</a>
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  🗓️ Calendar management (events, reminders)
+ </li>
+<li>
+  📋 Clipboard operations
+ </li>
+<li>
+  🔍 Finder integration
+ </li>
+<li>
+  🔔 System notifications
+ </li>
+<li>
+  ⚙️ System controls (volume, dark mode, apps)
+ </li>
+<li>
+  📟 iTerm terminal integration
+ </li>
+<li>
+  📬 Mail (create new email, list emails, get email)
+ </li>
+<li>
+  🔄 Shortcuts automation
+ </li>
+<li>
+  💬 Messages (list chats, get messages, search messages, send a message)
+ </li>
+<li>
+  🗒️ Notes (create formatted notes, list notes, search notes)
+ </li>
+<li>
+  📄 Pages (create documents)
+ </li>
+</ul>
+<h3 class="heading">
+ Planned Features
+</h3>
+<ul>
+<li>
+  🧭 Safari (open in Safari, save page content, get selected page/tab)
+ </li>
+<li>
+  ✅ Reminders (create, get)
+ </li>
+</ul>
+<h2 class="heading">
+ Prerequisites
+</h2>
+<ul>
+<li>
+  macOS 10.15 or later
+ </li>
+<li>
+  Node.js 18 or later
+ </li>
+</ul>
+<h2 class="heading">
+ Available Categories
+</h2>
+<h3 class="heading">
+ Calendar
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     add
+    </code>
+</td>
+<td>
+    Create calendar event
+   </td>
+<td>
+<code class="code">
+     title
+    </code>
+    ,
+    <code class="code">
+     startDate
+    </code>
+    ,
+    <code class="code">
+     endDate
+    </code>
+    ,
+    <code class="code">
+     calendar
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list
+    </code>
+</td>
+<td>
+    List today's events
+   </td>
+<td>
+    None
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Create a new calendar event
+Create a calendar event titled "Team Meeting" starting tomorrow at 2pm for 1 hour
+
+// List today's events
+What events do I have scheduled for today?
+</code></pre>
+<h3 class="heading">
+ Clipboard
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     set_clipboard
+    </code>
+</td>
+<td>
+    Copy to clipboard
+   </td>
+<td>
+<code class="code">
+     content
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_clipboard
+    </code>
+</td>
+<td>
+    Get clipboard contents
+   </td>
+<td>
+    None
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     clear_clipboard
+    </code>
+</td>
+<td>
+    Clear clipboard
+   </td>
+<td>
+    None
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Copy text to clipboard
+Copy "Remember to buy groceries" to my clipboard
+
+// Get clipboard contents
+What's currently in my clipboard?
+
+// Clear clipboard
+Clear my clipboard
+</code></pre>
+<h3 class="heading">
+ Finder
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     get_selected_files
+    </code>
+</td>
+<td>
+    Get selected files
+   </td>
+<td>
+    None
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     search_files
+    </code>
+</td>
+<td>
+    Search for files
+   </td>
+<td>
+<code class="code">
+     query
+    </code>
+    ,
+    <code class="code">
+     location
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     quick_look
+    </code>
+</td>
+<td>
+    Preview file
+   </td>
+<td>
+<code class="code">
+     path
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Get selected files in Finder
+What files do I currently have selected in Finder?
+
+// Search for files
+Find all PDF files in my Documents folder
+
+// Preview a file
+Show me a preview of ~/Documents/report.pdf
+</code></pre>
+<h3 class="heading">
+ Notifications
+</h3>
+<blockquote>
+<p>
+  Note: Sending notification requires that you enable notifications in System Settings &gt; Notifications &gt; Script Editor.
+ </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     send_notification
+    </code>
+</td>
+<td>
+    Show notification
+   </td>
+<td>
+<code class="code">
+     title
+    </code>
+    ,
+    <code class="code">
+     message
+    </code>
+    ,
+    <code class="code">
+     sound
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     toggle_do_not_disturb
+    </code>
+</td>
+<td>
+    Toggle DND mode
+   </td>
+<td>
+    None
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Send a notification
+Send me a notification with the title "Reminder" and message "Time to take a break"
+
+// Toggle Do Not Disturb
+Turn on Do Not Disturb mode
+</code></pre>
+<h3 class="heading">
+ System
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     volume
+    </code>
+</td>
+<td>
+    Set system volume
+   </td>
+<td>
+<code class="code">
+     level
+    </code>
+    (0-100)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_frontmost_app
+    </code>
+</td>
+<td>
+    Get active app
+   </td>
+<td>
+    None
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     launch_app
+    </code>
+</td>
+<td>
+    Open application
+   </td>
+<td>
+<code class="code">
+     name
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     quit_app
+    </code>
+</td>
+<td>
+    Close application
+   </td>
+<td>
+<code class="code">
+     name
+    </code>
+    ,
+    <code class="code">
+     force
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     toggle_dark_mode
+    </code>
+</td>
+<td>
+    Toggle dark mode
+   </td>
+<td>
+    None
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Set system volume
+Set my Mac's volume to 50%
+
+// Get active application
+What app am I currently using?
+
+// Launch an application
+Open Safari
+
+// Quit an application
+Close Spotify
+
+// Toggle dark mode
+Switch to dark mode
+</code></pre>
+<h3 class="heading">
+ iTerm
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     paste_clipboard
+    </code>
+</td>
+<td>
+    Paste to iTerm
+   </td>
+<td>
+    None
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     run
+    </code>
+</td>
+<td>
+    Execute command
+   </td>
+<td>
+<code class="code">
+     command
+    </code>
+    ,
+    <code class="code">
+     newWindow
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Paste clipboard to iTerm
+Paste my clipboard contents into iTerm
+
+// Run a command in iTerm
+Run "ls -la" in iTerm
+
+// Run a command in a new iTerm window
+Run "top" in a new iTerm window
+</code></pre>
+<h3 class="heading">
+ Shortcuts
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     run_shortcut
+    </code>
+</td>
+<td>
+    Run a shortcut
+   </td>
+<td>
+<code class="code">
+     name
+    </code>
+    ,
+    <code class="code">
+     input
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_shortcuts
+    </code>
+</td>
+<td>
+    List all available shortcuts
+   </td>
+<td>
+<code class="code">
+     limit
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// List available shortcuts
+List all my available shortcuts
+
+// List with limit
+Show me my top 5 shortcuts
+
+// Run a shortcut
+Run my "Daily Note in Bear" shortcut
+
+// Run a shortcut with input
+Run my "Add to-do" shortcut with input "Buy groceries"
+</code></pre>
+<h3 class="heading">
+ Mail
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     create_email
+    </code>
+</td>
+<td>
+    Create a new email in Mail.app
+   </td>
+<td>
+<code class="code">
+     recipient
+    </code>
+    ,
+    <code class="code">
+     subject
+    </code>
+    ,
+    <code class="code">
+     body
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list_emails
+    </code>
+</td>
+<td>
+    List emails from a mailbox
+   </td>
+<td>
+<code class="code">
+     mailbox
+    </code>
+    (optional),
+    <code class="code">
+     count
+    </code>
+    (optional),
+    <code class="code">
+     unreadOnly
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_email
+    </code>
+</td>
+<td>
+    Get a specific email by search
+   </td>
+<td>
+<code class="code">
+     subject
+    </code>
+    (optional),
+    <code class="code">
+     sender
+    </code>
+    (optional),
+    <code class="code">
+     dateReceived
+    </code>
+    (optional),
+    <code class="code">
+     mailbox
+    </code>
+    (optional),
+    <code class="code">
+     account
+    </code>
+    (optional),
+    <code class="code">
+     unreadOnly
+    </code>
+    (optional),
+    <code class="code">
+     includeBody
+    </code>
+    (optional)
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Create a new email
+Compose an email to john@example.com with subject "Meeting Tomorrow" and body "Hi John, Can we meet tomorrow at 2pm?"
+
+// List emails
+Show me my 10 most recent unread emails
+
+// Get a specific email
+Find the email from sarah@example.com about "Project Update"
+</code></pre>
+<h3 class="heading">
+ Messages
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     list_chats
+    </code>
+</td>
+<td>
+    List available iMessage and SMS chats
+   </td>
+<td>
+<code class="code">
+     includeParticipantDetails
+    </code>
+    (optional, default: false)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get_messages
+    </code>
+</td>
+<td>
+    Get messages from the Messages app
+   </td>
+<td>
+<code class="code">
+     limit
+    </code>
+    (optional, default: 100)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     search_messages
+    </code>
+</td>
+<td>
+    Search for messages containing specific text
+   </td>
+<td>
+<code class="code">
+     searchText
+    </code>
+    ,
+    <code class="code">
+     sender
+    </code>
+    (optional),
+    <code class="code">
+     chatId
+    </code>
+    (optional),
+    <code class="code">
+     limit
+    </code>
+    (optional, default: 50),
+    <code class="code">
+     daysBack
+    </code>
+    (optional, default: 30)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     compose_message
+    </code>
+</td>
+<td>
+    Open Messages app with pre-filled message or auto-send
+   </td>
+<td>
+<code class="code">
+     recipient
+    </code>
+    (required),
+    <code class="code">
+     body
+    </code>
+    (optional),
+    <code class="code">
+     auto
+    </code>
+    (optional, default: false)
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// List available chats
+Show me my recent message conversations
+
+// Get recent messages
+Show me my last 20 messages
+
+// Search messages
+Find messages containing "dinner plans" from John in the last week
+
+// Compose a message
+Send a message to 555-123-4567 saying "I'll be there in 10 minutes"
+</code></pre>
+<h3 class="heading">
+ Notes
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     create
+    </code>
+</td>
+<td>
+    Create a note with markdown-like formatting
+   </td>
+<td>
+<code class="code">
+     title
+    </code>
+    ,
+    <code class="code">
+     content
+    </code>
+    ,
+    <code class="code">
+     format
+    </code>
+    (optional with formatting options)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     createRawHtml
+    </code>
+</td>
+<td>
+    Create a note with direct HTML content
+   </td>
+<td>
+<code class="code">
+     title
+    </code>
+    ,
+    <code class="code">
+     html
+    </code>
+</td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     list
+    </code>
+</td>
+<td>
+    List notes, optionally from a specific folder
+   </td>
+<td>
+<code class="code">
+     folder
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     get
+    </code>
+</td>
+<td>
+    Get a specific note by title
+   </td>
+<td>
+<code class="code">
+     title
+    </code>
+    ,
+    <code class="code">
+     folder
+    </code>
+    (optional)
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     search
+    </code>
+</td>
+<td>
+    Search for notes containing specific text
+   </td>
+<td>
+<code class="code">
+     query
+    </code>
+    ,
+    <code class="code">
+     folder
+    </code>
+    (optional),
+    <code class="code">
+     limit
+    </code>
+    (optional, default: 5),
+    <code class="code">
+     includeBody
+    </code>
+    (optional, default: true)
+   </td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Create a new note with markdown formatting
+Create a note titled "Meeting Minutes" with content "# Discussion Points\n- Project timeline\n- Budget review\n- Next steps" and format headings and lists
+
+// Create a note with HTML
+Create a note titled "Formatted Report" with HTML content "&lt;h1&gt;Quarterly Report&lt;/h1&gt;&lt;p&gt;Sales increased by &lt;strong&gt;15%&lt;/strong&gt;&lt;/p&gt;"
+
+// List notes
+Show me all my notes in the "Work" folder
+
+// Get a specific note
+Show me my note titled "Shopping List"
+
+// Search notes
+Find notes containing "recipe" in my "Cooking" folder
+</code></pre>
+<h3 class="heading">
+ Pages
+</h3>
+<table>
+<thead>
+<tr>
+<th>
+    Command
+   </th>
+<th>
+    Description
+   </th>
+<th>
+    Parameters
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     create_document
+    </code>
+</td>
+<td>
+    Create a new Pages document with plain text
+   </td>
+<td>
+<code class="code">
+     content
+    </code>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 class="heading">
+ Examples
+</h4>
+<pre class="pre"><code class="code">// Create a new Pages document
+Create a Pages document with the content "Project Proposal\n\nThis document outlines the scope and timeline for the upcoming project."
+</code></pre>
+<h2 class="heading">
+ Architecture
+</h2>
+<p>
+ The applescript-mcp server is built using TypeScript and follows a modular architecture:
+</p>
+<h3 class="heading">
+ Core Components
+</h3>
+<ol>
+<li>
+<strong>
+   AppleScriptFramework
+  </strong>
+  (
+  <code class="code">
+   framework.ts
+  </code>
+  ): The main server class that:
+ </li>
+<li>
+  Manages MCP protocol communication
+ </li>
+<li>
+  Handles tool registration and execution
+ </li>
+<li>
+  Provides logging functionality
+ </li>
+<li>
+<p>
+   Executes AppleScript commands
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Categories
+   </strong>
+   (
+   <code class="code">
+    src/categories/*.ts
+   </code>
+   ): Modular script collections organized by functionality:
+  </p>
+</li>
+<li>
+  Each category contains related scripts (e.g., calendar, system, notes)
+ </li>
+<li>
+<p>
+   Categories are registered with the framework in
+   <code class="code">
+    index.ts
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Types
+   </strong>
+   (
+   <code class="code">
+    src/types/index.ts
+   </code>
+   ): TypeScript interfaces defining:
+  </p>
+</li>
+<li>
+<code class="code">
+   ScriptDefinition
+  </code>
+  : Structure for individual scripts
+ </li>
+<li>
+<code class="code">
+   ScriptCategory
+  </code>
+  : Collection of related scripts
+ </li>
+<li>
+<code class="code">
+   LogLevel
+  </code>
+  : Standard logging levels
+ </li>
+<li>
+<code class="code">
+   FrameworkOptions
+  </code>
+  : Configuration options
+ </li>
+</ol>
+<h3 class="heading">
+ Execution Flow
+</h3>
+<ol>
+<li>
+  Client sends a tool request via MCP protocol
+ </li>
+<li>
+  Server identifies the appropriate category and script
+ </li>
+<li>
+  Script content is generated (static or dynamically via function)
+ </li>
+<li>
+  AppleScript is executed via macOS
+  <code class="code">
+   osascript
+  </code>
+  command
+ </li>
+<li>
+  Results are returned to the client
+ </li>
+</ol>
+<h3 class="heading">
+ Logging System
+</h3>
+<p>
+ The framework includes a comprehensive logging system that:
+- Logs to both stderr and MCP logging protocol
+- Supports multiple severity levels (debug, info, warning, error, etc.)
+- Provides detailed execution information for troubleshooting
+</p>
+<h2 class="heading">
+ Development
+</h2>
+<h3 class="heading">
+ Setup
+</h3>
+<pre class="pre"><code class="language-bash code"># Install dependencies
+npm install
+
+# Build the server
+npm run build
+
+# Launch MCP Inspector
+# See: https://modelcontextprotocol.io/docs/tools/inspector
+npx @modelcontextprotocol/inspector node path/to/server/index.js args...
+</code></pre>
+<h3 class="heading">
+ Adding New Functionality
+</h3>
+<h4 class="heading">
+ 1. Create Category File
+</h4>
+<p>
+ Create
+ <code class="code">
+  src/categories/newcategory.ts
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-typescript code">import { ScriptCategory } from "../types/index.js";
+
+export const newCategory: ScriptCategory = {
+  name: "category_name",
+  description: "Category description",
+  scripts: [
+    // Scripts will go here
+  ],
+};
+</code></pre>
+<h4 class="heading">
+ 2. Add Scripts
+</h4>
+<pre class="pre"><code class="language-typescript code">{
+  name: "script_name",
+  description: "What the script does",
+  schema: {
+    type: "object",
+    properties: {
+      paramName: {
+        type: "string",
+        description: "Parameter description"
+      }
+    },
+    required: ["paramName"]
+  },
+  script: (args) =&gt; `
+    tell application "App"
+      // AppleScript code using ${args.paramName}
+    end tell
+  `
+}
+</code></pre>
+<h4 class="heading">
+ 3. Register Category
+</h4>
+<p>
+ Update
+ <code class="code">
+  src/index.ts
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-typescript code">import { newCategory } from "./categories/newcategory.js";
+// ...
+server.addCategory(newCategory);
+</code></pre>
+<h3 class="heading">
+ Advanced Script Development
+</h3>
+<p>
+ For more complex scripts, you can:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Use dynamic script generation
+   </strong>
+   :
+   <code class="code">
+    ``typescript
+   script: (args) =&gt; {
+     // Process arguments and build script dynamically
+     let scriptContent =
+   </code>
+   tell application "App"\n`;
+  </p>
+<p>
+   if (args.condition) {
+   scriptContent +=
+   <code class="code">
+    // Conditional logic\n
+   </code>
+   ;
+ }
+  </p>
+<p>
+   scriptContent +=
+   <code class="code">
+    end tell
+   </code>
+   ;
+ return scriptContent;
+   }
+   ```
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Process complex data
+   </strong>
+   :
+   ```typescript
+   // Example from Notes category
+   function generateNoteHtml(args: any): string {
+     // Process markdown-like syntax into HTML
+     let processedContent = content;
+  </p>
+<p>
+   if (format.headings) {
+   processedContent = processedContent.replace(/^# (.+)$/gm, '
+   <h1 class="heading">
+    $1
+   </h1>
+   ');
+   // ...
+ }
+  </p>
+<p>
+   return processedContent;
+   }
+   ```
+  </p>
+</li>
+</ol>
+<h2 class="heading">
+ Debugging
+</h2>
+<h3 class="heading">
+ Using MCP Inspector
+</h3>
+<p>
+ The MCP Inspector provides a web interface for testing and debugging your server:
+</p>
+<pre class="pre"><code class="language-bash code">npm run inspector
+</code></pre>
+<h3 class="heading">
+ Logging
+</h3>
+<p>
+ Enable debug logging by setting the environment variable:
+</p>
+<pre class="pre"><code class="language-bash code">DEBUG=applescript-mcp* npm start
+</code></pre>
+<h3 class="heading">
+ Example configuration
+</h3>
+<p>
+ After running
+ <code class="code">
+  npm run build
+ </code>
+ add the following to your
+ <code class="code">
+  mcp.json
+ </code>
+ file:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "applescript-mcp-server": {
+      "command": "node",
+      "args": ["/path/to/applescript-mcp/dist/index.js"]
+    }
+  }
+}
+</code></pre>
+<h3 class="heading">
+ Common Issues
+</h3>
+<ul>
+<li>
+<strong>
+   Permission Errors
+  </strong>
+  : Check System Preferences &gt; Security &amp; Privacy &gt; Privacy &gt; Automation
+ </li>
+<li>
+<strong>
+   Script Failures
+  </strong>
+  : Test scripts directly in Script Editor.app before integration
+ </li>
+<li>
+<strong>
+   Communication Issues
+  </strong>
+  : Check stdio streams aren't being redirected
+ </li>
+<li>
+<strong>
+   Database Access
+  </strong>
+  : Some features (like Messages) require Full Disk Access permission
+ </li>
+</ul>
+<h2 class="heading">
+ Resources
+</h2>
+<ul>
+<li>
+<a href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html">
+   AppleScript Language Guide
+  </a>
+</li>
+<li>
+<a href="https://modelcontextprotocol.io">
+   MCP Protocol Documentation
+  </a>
+</li>
+<li>
+<a href="https://github.com/joshrutkowski/applescript-mcp/issues">
+   Issue Tracker
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Contributing
+</h2>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create a feature branch
+ </li>
+<li>
+  Commit your changes
+ </li>
+<li>
+  Push to the branch
+ </li>
+<li>
+  Create a Pull Request
+ </li>
+</ol>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT License - see
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ for details
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/joshrutkowski-applescript-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

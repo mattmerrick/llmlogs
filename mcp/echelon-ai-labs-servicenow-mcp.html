@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ServiceNow MCP Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ServiceNow MCP Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>ServiceNow MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">ServiceNow MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">ServiceNow MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 74</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/echelon-ai-labs/servicenow-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="ServiceNow MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ServiceNow MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>ServiceNow MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">ServiceNow MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">ServiceNow MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 74</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/echelon-ai-labs/servicenow-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="ServiceNow MCP Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="ServiceNow MCP Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>ServiceNow MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>ServiceNow MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 74</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/echelon-ai-labs/servicenow-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="ServiceNow MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ServiceNow MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>ServiceNow MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>ServiceNow MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 74</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/echelon-ai-labs/servicenow-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<p>
+<a href="https://mseep.ai/app/osomai-servicenow-mcp">
+<img alt="MseeP.ai Security Assessment Badge" src="https://mseep.net/pr/osomai-servicenow-mcp-badge.png"/>
+</a>
+</p>
+<h1 class="heading">
+ ServiceNow MCP Server
+</h1>
+<p>
+ A Model Completion Protocol (MCP) server implementation for ServiceNow, allowing Claude to interact with ServiceNow instances.
+</p>
+<p>
+<a href="https://glama.ai/mcp/servers/@osomai/servicenow-mcp">
+<img alt="ServiceNow Server MCP server" height="200" src="https://glama.ai/mcp/servers/@osomai/servicenow-mcp/badge" width="380"/>
+</a>
+</p>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ This project implements an MCP server that enables Claude to connect to ServiceNow instances, retrieve data, and perform actions through the ServiceNow API. It serves as a bridge between Claude and ServiceNow, allowing for seamless integration.
+</p>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  Connect to ServiceNow instances using various authentication methods (Basic, OAuth, API Key)
+ </li>
+<li>
+  Query ServiceNow records and tables
+ </li>
+<li>
+  Create, update, and delete ServiceNow records
+ </li>
+<li>
+  Execute ServiceNow scripts and workflows
+ </li>
+<li>
+  Access and query the ServiceNow Service Catalog
+ </li>
+<li>
+  Analyze and optimize the ServiceNow Service Catalog
+ </li>
+<li>
+  Debug mode for troubleshooting
+ </li>
+<li>
+  Support for both stdio and Server-Sent Events (SSE) communication
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ul>
+<li>
+  Python 3.11 or higher
+ </li>
+<li>
+  A ServiceNow instance with appropriate access credentials
+ </li>
+</ul>
+<h3 class="heading">
+ Setup
+</h3>
+<ol>
+<li>
+<p>
+   Clone this repository:
+   <code class="code">
+    git clone https://github.com/yourusername/servicenow-mcp.git
+   cd servicenow-mcp
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Create a virtual environment and install the package:
+   <code class="code">
+    python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -e .
+   </code>
+</p>
+</li>
+<li>
+<p>
+   Create a
+   <code class="code">
+    .env
+   </code>
+   file with your ServiceNow credentials:
+   <code class="code">
+    SERVICENOW_INSTANCE_URL=https://your-instance.service-now.com
+   SERVICENOW_USERNAME=your-username
+   SERVICENOW_PASSWORD=your-password
+   SERVICENOW_AUTH_TYPE=basic  # or oauth, api_key
+   </code>
+</p>
+</li>
+</ol>
+<h2 class="heading">
+ Usage
+</h2>
+<h3 class="heading">
+ Standard (stdio) Mode
+</h3>
+<p>
+ To start the MCP server:
+</p>
+<pre class="pre"><code class="code">python -m servicenow_mcp.cli
+</code></pre>
+<p>
+ Or with environment variables:
+</p>
+<pre class="pre"><code class="code">SERVICENOW_INSTANCE_URL=https://your-instance.service-now.com SERVICENOW_USERNAME=your-username SERVICENOW_PASSWORD=your-password SERVICENOW_AUTH_TYPE=basic python -m servicenow_mcp.cli
+</code></pre>
+<h3 class="heading">
+ Server-Sent Events (SSE) Mode
+</h3>
+<p>
+ The ServiceNow MCP server can also run as a web server using Server-Sent Events (SSE) for communication, which allows for more flexible integration options.
+</p>
+<h4 class="heading">
+ Starting the SSE Server
+</h4>
+<p>
+ You can start the SSE server using the provided CLI:
+</p>
+<pre class="pre"><code class="code">servicenow-mcp-sse --instance-url=https://your-instance.service-now.com --username=your-username --password=your-password
+</code></pre>
+<p>
+ By default, the server will listen on
+ <code class="code">
+  0.0.0.0:8080
+ </code>
+ . You can customize the host and port:
+</p>
+<pre class="pre"><code class="code">servicenow-mcp-sse --host=127.0.0.1 --port=8000
+</code></pre>
+<h4 class="heading">
+ Connecting to the SSE Server
+</h4>
+<p>
+ The SSE server exposes two main endpoints:
+</p>
+<ul>
+<li>
+<code class="code">
+   /sse
+  </code>
+  - The SSE connection endpoint
+ </li>
+<li>
+<code class="code">
+   /messages/
+  </code>
+  - The endpoint for sending messages to the server
+ </li>
+</ul>
+<h4 class="heading">
+ Example
+</h4>
+<p>
+ See the
+ <code class="code">
+  examples/sse_server_example.py
+ </code>
+ file for a complete example of setting up and running the SSE server.
+</p>
+<pre class="pre"><code class="language-python code">from servicenow_mcp.server import ServiceNowMCP
+from servicenow_mcp.server_sse import create_starlette_app
+from servicenow_mcp.utils.config import ServerConfig, AuthConfig, AuthType, BasicAuthConfig
+import uvicorn
+
+# Create server configuration
+config = ServerConfig(
+    instance_url="https://your-instance.service-now.com",
+    auth=AuthConfig(
+        type=AuthType.BASIC,
+        config=BasicAuthConfig(
+            username="your-username",
+            password="your-password"
+        )
+    ),
+    debug=True,
+)
+
+# Create ServiceNow MCP server
+servicenow_mcp = ServiceNowMCP(config)
+
+# Create Starlette app with SSE transport
+app = create_starlette_app(servicenow_mcp, debug=True)
+
+# Start the web server
+uvicorn.run(app, host="0.0.0.0", port=8080)
+</code></pre>
+<h2 class="heading">
+ Tool Packaging (Optional)
+</h2>
+<p>
+ To manage the number of tools exposed to the language model (especially in environments with limits), the ServiceNow MCP server supports loading subsets of tools called "packages". This is controlled via the
+ <code class="code">
+  MCP_TOOL_PACKAGE
+ </code>
+ environment variable.
+</p>
+<h3 class="heading">
+ Configuration
+</h3>
+<ol>
+<li>
+<strong>
+   Environment Variable:
+  </strong>
+  Set the
+  <code class="code">
+   MCP_TOOL_PACKAGE
+  </code>
+  environment variable to the name of the desired package.
+  <code class="code">
+   bash
+    export MCP_TOOL_PACKAGE=catalog_builder
+  </code>
+</li>
+<li>
+<strong>
+   Package Definitions:
+  </strong>
+  The available packages and the tools they include are defined in
+  <code class="code">
+   config/tool_packages.yaml
+  </code>
+  . You can customize this file to create your own packages.
+ </li>
+</ol>
+<h3 class="heading">
+ Behavior
+</h3>
+<ul>
+<li>
+  If
+  <code class="code">
+   MCP_TOOL_PACKAGE
+  </code>
+  is set to a valid package name defined in
+  <code class="code">
+   config/tool_packages.yaml
+  </code>
+  , only the tools listed in that package will be loaded.
+ </li>
+<li>
+  If
+  <code class="code">
+   MCP_TOOL_PACKAGE
+  </code>
+  is
+  <strong>
+   not set
+  </strong>
+  or is empty, the
+  <code class="code">
+   full
+  </code>
+  package (containing all tools) is loaded by default.
+ </li>
+<li>
+  If
+  <code class="code">
+   MCP_TOOL_PACKAGE
+  </code>
+  is set to an invalid package name, the
+  <code class="code">
+   none
+  </code>
+  package is loaded (no tools except
+  <code class="code">
+   list_tool_packages
+  </code>
+  ), and a warning is logged.
+ </li>
+<li>
+  Setting
+  <code class="code">
+   MCP_TOOL_PACKAGE=none
+  </code>
+  explicitly loads no tools (except
+  <code class="code">
+   list_tool_packages
+  </code>
+  ).
+ </li>
+</ul>
+<h3 class="heading">
+ Available Packages (Default)
+</h3>
+<p>
+ The default
+ <code class="code">
+  config/tool_packages.yaml
+ </code>
+ includes the following role-based packages:
+</p>
+<ul>
+<li>
+<code class="code">
+   service_desk
+  </code>
+  : Tools for incident handling and basic user/knowledge lookup.
+ </li>
+<li>
+<code class="code">
+   catalog_builder
+  </code>
+  : Tools for creating and managing service catalog items, categories, variables, and related scripting (UI Policies, User Criteria).
+ </li>
+<li>
+<code class="code">
+   change_coordinator
+  </code>
+  : Tools for managing the change request lifecycle, including tasks and approvals.
+ </li>
+<li>
+<code class="code">
+   knowledge_author
+  </code>
+  : Tools for creating and managing knowledge bases, categories, and articles.
+ </li>
+<li>
+<code class="code">
+   platform_developer
+  </code>
+  : Tools for server-side scripting (Script Includes), workflow development, and deployment (Changesets).
+ </li>
+<li>
+<code class="code">
+   system_administrator
+  </code>
+  : Tools for user/group management and viewing system logs.
+ </li>
+<li>
+<code class="code">
+   full
+  </code>
+  : Includes all available tools (default).
+ </li>
+<li>
+<code class="code">
+   none
+  </code>
+  : Includes no tools (except
+  <code class="code">
+   list_tool_packages
+  </code>
+  ).
+ </li>
+</ul>
+<h3 class="heading">
+ Introspection Tool
+</h3>
+<ul>
+<li>
+<strong>
+<code class="code">
+    list_tool_packages
+   </code>
+</strong>
+  : Lists all available tool package names defined in the configuration and shows the currently loaded package. This tool is available in all packages except
+  <code class="code">
+   none
+  </code>
+  .
+ </li>
+</ul>
+<h2 class="heading">
+ Available Tools
+</h2>
+<p>
+<strong>
+  Note:
+ </strong>
+ The availability of the following tools depends on the loaded tool package (see Tool Packaging section above). By default (
+ <code class="code">
+  full
+ </code>
+ package), all tools are available.
+</p>
+<h4 class="heading">
+ Incident Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   create_incident
+  </strong>
+  - Create a new incident in ServiceNow
+ </li>
+<li>
+<strong>
+   update_incident
+  </strong>
+  - Update an existing incident in ServiceNow
+ </li>
+<li>
+<strong>
+   add_comment
+  </strong>
+  - Add a comment to an incident in ServiceNow
+ </li>
+<li>
+<strong>
+   resolve_incident
+  </strong>
+  - Resolve an incident in ServiceNow
+ </li>
+<li>
+<strong>
+   list_incidents
+  </strong>
+  - List incidents from ServiceNow
+ </li>
+</ol>
+<h4 class="heading">
+ Service Catalog Tools
+</h4>
+<ol>
+<li>
+<strong>
+   list_catalog_items
+  </strong>
+  - List service catalog items from ServiceNow
+ </li>
+<li>
+<strong>
+   get_catalog_item
+  </strong>
+  - Get a specific service catalog item from ServiceNow
+ </li>
+<li>
+<strong>
+   list_catalog_categories
+  </strong>
+  - List service catalog categories from ServiceNow
+ </li>
+<li>
+<strong>
+   create_catalog_category
+  </strong>
+  - Create a new service catalog category in ServiceNow
+ </li>
+<li>
+<strong>
+   update_catalog_category
+  </strong>
+  - Update an existing service catalog category in ServiceNow
+ </li>
+<li>
+<strong>
+   move_catalog_items
+  </strong>
+  - Move catalog items between categories in ServiceNow
+ </li>
+<li>
+<strong>
+   create_catalog_item_variable
+  </strong>
+  - Create a new variable (form field) for a catalog item
+ </li>
+<li>
+<strong>
+   list_catalog_item_variables
+  </strong>
+  - List all variables for a catalog item
+ </li>
+<li>
+<strong>
+   update_catalog_item_variable
+  </strong>
+  - Update an existing variable for a catalog item
+ </li>
+<li>
+<strong>
+   list_catalogs
+  </strong>
+  - List service catalogs from ServiceNow
+ </li>
+</ol>
+<h4 class="heading">
+ Catalog Optimization Tools
+</h4>
+<ol>
+<li>
+<strong>
+   get_optimization_recommendations
+  </strong>
+  - Get recommendations for optimizing the service catalog
+ </li>
+<li>
+<strong>
+   update_catalog_item
+  </strong>
+  - Update a service catalog item
+ </li>
+</ol>
+<h4 class="heading">
+ Change Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   create_change_request
+  </strong>
+  - Create a new change request in ServiceNow
+ </li>
+<li>
+<strong>
+   update_change_request
+  </strong>
+  - Update an existing change request
+ </li>
+<li>
+<strong>
+   list_change_requests
+  </strong>
+  - List change requests with filtering options
+ </li>
+<li>
+<strong>
+   get_change_request_details
+  </strong>
+  - Get detailed information about a specific change request
+ </li>
+<li>
+<strong>
+   add_change_task
+  </strong>
+  - Add a task to a change request
+ </li>
+<li>
+<strong>
+   submit_change_for_approval
+  </strong>
+  - Submit a change request for approval
+ </li>
+<li>
+<strong>
+   approve_change
+  </strong>
+  - Approve a change request
+ </li>
+<li>
+<strong>
+   reject_change
+  </strong>
+  - Reject a change request
+ </li>
+</ol>
+<h4 class="heading">
+ Workflow Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   list_workflows
+  </strong>
+  - List workflows from ServiceNow
+ </li>
+<li>
+<strong>
+   get_workflow
+  </strong>
+  - Get a specific workflow from ServiceNow
+ </li>
+<li>
+<strong>
+   create_workflow
+  </strong>
+  - Create a new workflow in ServiceNow
+ </li>
+<li>
+<strong>
+   update_workflow
+  </strong>
+  - Update an existing workflow in ServiceNow
+ </li>
+<li>
+<strong>
+   delete_workflow
+  </strong>
+  - Delete a workflow from ServiceNow
+ </li>
+</ol>
+<h4 class="heading">
+ Script Include Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   list_script_includes
+  </strong>
+  - List script includes from ServiceNow
+ </li>
+<li>
+<strong>
+   get_script_include
+  </strong>
+  - Get a specific script include from ServiceNow
+ </li>
+<li>
+<strong>
+   create_script_include
+  </strong>
+  - Create a new script include in ServiceNow
+ </li>
+<li>
+<strong>
+   update_script_include
+  </strong>
+  - Update an existing script include in ServiceNow
+ </li>
+<li>
+<strong>
+   delete_script_include
+  </strong>
+  - Delete a script include from ServiceNow
+ </li>
+</ol>
+<h4 class="heading">
+ Changeset Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   list_changesets
+  </strong>
+  - List changesets from ServiceNow with filtering options
+ </li>
+<li>
+<strong>
+   get_changeset_details
+  </strong>
+  - Get detailed information about a specific changeset
+ </li>
+<li>
+<strong>
+   create_changeset
+  </strong>
+  - Create a new changeset in ServiceNow
+ </li>
+<li>
+<strong>
+   update_changeset
+  </strong>
+  - Update an existing changeset
+ </li>
+<li>
+<strong>
+   commit_changeset
+  </strong>
+  - Commit a changeset
+ </li>
+<li>
+<strong>
+   publish_changeset
+  </strong>
+  - Publish a changeset
+ </li>
+<li>
+<strong>
+   add_file_to_changeset
+  </strong>
+  - Add a file to a changeset
+ </li>
+</ol>
+<h4 class="heading">
+ Knowledge Base Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   create_knowledge_base
+  </strong>
+  - Create a new knowledge base in ServiceNow
+ </li>
+<li>
+<strong>
+   list_knowledge_bases
+  </strong>
+  - List knowledge bases with filtering options
+ </li>
+<li>
+<strong>
+   create_category
+  </strong>
+  - Create a new category in a knowledge base
+ </li>
+<li>
+<strong>
+   create_article
+  </strong>
+  - Create a new knowledge article in ServiceNow
+ </li>
+<li>
+<strong>
+   update_article
+  </strong>
+  - Update an existing knowledge article in ServiceNow
+ </li>
+<li>
+<strong>
+   publish_article
+  </strong>
+  - Publish a knowledge article in ServiceNow
+ </li>
+<li>
+<strong>
+   list_articles
+  </strong>
+  - List knowledge articles with filtering options
+ </li>
+<li>
+<strong>
+   get_article
+  </strong>
+  - Get a specific knowledge article by ID
+ </li>
+</ol>
+<h4 class="heading">
+ User Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   create_user
+  </strong>
+  - Create a new user in ServiceNow
+ </li>
+<li>
+<strong>
+   update_user
+  </strong>
+  - Update an existing user in ServiceNow
+ </li>
+<li>
+<strong>
+   get_user
+  </strong>
+  - Get a specific user by ID, username, or email
+ </li>
+<li>
+<strong>
+   list_users
+  </strong>
+  - List users with filtering options
+ </li>
+<li>
+<strong>
+   create_group
+  </strong>
+  - Create a new group in ServiceNow
+ </li>
+<li>
+<strong>
+   update_group
+  </strong>
+  - Update an existing group in ServiceNow
+ </li>
+<li>
+<strong>
+   add_group_members
+  </strong>
+  - Add members to a group in ServiceNow
+ </li>
+<li>
+<strong>
+   remove_group_members
+  </strong>
+  - Remove members from a group in ServiceNow
+ </li>
+<li>
+<strong>
+   list_groups
+  </strong>
+  - List groups with filtering options
+ </li>
+</ol>
+<h4 class="heading">
+ UI Policy Tools
+</h4>
+<ol>
+<li>
+<strong>
+   create_ui_policy
+  </strong>
+  - Creates a ServiceNow UI Policy, typically for a Catalog Item.
+ </li>
+<li>
+<strong>
+   create_ui_policy_action
+  </strong>
+  - Creates an action associated with a UI Policy to control variable states (visibility, mandatory, etc.).
+ </li>
+</ol>
+<h3 class="heading">
+ Using the MCP CLI
+</h3>
+<p>
+ The ServiceNow MCP server can be installed with the MCP CLI, which provides a convenient way to register the server with Claude.
+</p>
+<pre class="pre"><code class="language-bash code"># Install the ServiceNow MCP server with environment variables from .env file
+mcp install src/servicenow_mcp/server.py -f .env
+</code></pre>
+<p>
+ This command will register the ServiceNow MCP server with Claude and configure it to use the environment variables from the .env file.
+</p>
+<h3 class="heading">
+ Integration with Claude Desktop
+</h3>
+<p>
+ To configure the ServiceNow MCP server in Claude Desktop:
+</p>
+<ol>
+<li>
+  Edit the Claude Desktop configuration file at
+  <code class="code">
+   ~/Library/Application Support/Claude/claude_desktop_config.json
+  </code>
+  (macOS) or the appropriate path for your OS:
+ </li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "ServiceNow": {
+      "command": "/Users/yourusername/dev/servicenow-mcp/.venv/bin/python",
+      "args": [
+        "-m",
+        "servicenow_mcp.cli"
+      ],
+      "env": {
+        "SERVICENOW_INSTANCE_URL": "https://your-instance.service-now.com",
+        "SERVICENOW_USERNAME": "your-username",
+        "SERVICENOW_PASSWORD": "your-password",
+        "SERVICENOW_AUTH_TYPE": "basic"
+      }
+    }
+  }
+}
+</code></pre>
+<ol>
+<li>
+  Restart Claude Desktop to apply the changes
+ </li>
+</ol>
+<h3 class="heading">
+ Example Usage with Claude
+</h3>
+<p>
+ Below are some example natural language queries you can use with Claude to interact with ServiceNow via the MCP server:
+</p>
+<h4 class="heading">
+ Incident Management Examples
+</h4>
+<ul>
+<li>
+  "Create a new incident for a network outage in the east region"
+ </li>
+<li>
+  "Update the priority of incident INC0010001 to high"
+ </li>
+<li>
+  "Add a comment to incident INC0010001 saying the issue is being investigated"
+ </li>
+<li>
+  "Resolve incident INC0010001 with a note that the server was restarted"
+ </li>
+<li>
+  "List all high priority incidents assigned to the Network team"
+ </li>
+<li>
+  "List all active P1 incidents assigned to the Network team."
+ </li>
+</ul>
+<h4 class="heading">
+ Service Catalog Examples
+</h4>
+<ul>
+<li>
+  "Show me all items in the service catalog"
+ </li>
+<li>
+  "List all service catalog categories"
+ </li>
+<li>
+  "Get details about the laptop request catalog item"
+ </li>
+<li>
+  "Show me all catalog items in the Hardware category"
+ </li>
+<li>
+  "Search for 'software' in the service catalog"
+ </li>
+<li>
+  "Create a new category called 'Cloud Services' in the service catalog"
+ </li>
+<li>
+  "Update the 'Hardware' category to rename it to 'IT Equipment'"
+ </li>
+<li>
+  "Move the 'Virtual Machine' catalog item to the 'Cloud Services' category"
+ </li>
+<li>
+  "Create a subcategory called 'Monitors' under the 'IT Equipment' category"
+ </li>
+<li>
+  "Reorganize our catalog by moving all software items to the 'Software' category"
+ </li>
+<li>
+  "Create a description field for the laptop request catalog item"
+ </li>
+<li>
+  "Add a dropdown field for selecting laptop models to catalog item"
+ </li>
+<li>
+  "List all form fields for the VPN access request catalog item"
+ </li>
+<li>
+  "Make the department field mandatory in the software request form"
+ </li>
+<li>
+  "Update the help text for the cost center field"
+ </li>
+<li>
+  "Show me all service catalogs in the system"
+ </li>
+<li>
+  "List all hardware catalog items."
+ </li>
+<li>
+  "Find the catalog item for 'New Laptop Request'."
+ </li>
+<li>
+  "Show me the variables for the 'New Laptop Request' item."
+ </li>
+<li>
+  "Create a new variable named 'department_code' for the 'New Hire Setup' catalog item. Make it a mandatory string field."
+ </li>
+</ul>
+<h4 class="heading">
+ Catalog Optimization Examples
+</h4>
+<ul>
+<li>
+  "Analyze our service catalog and identify opportunities for improvement"
+ </li>
+<li>
+  "Find catalog items with poor descriptions that need improvement"
+ </li>
+<li>
+  "Identify catalog items with low usage that we might want to retire"
+ </li>
+<li>
+  "Find catalog items with high abandonment rates"
+ </li>
+<li>
+  "Optimize our Hardware category to improve user experience"
+ </li>
+</ul>
+<h4 class="heading">
+ Change Management Examples
+</h4>
+<ul>
+<li>
+  "Create a change request for server maintenance to apply security patches tomorrow night"
+ </li>
+<li>
+  "Schedule a database upgrade for next Tuesday from 2 AM to 4 AM"
+ </li>
+<li>
+  "Add a task to the server maintenance change for pre-implementation checks"
+ </li>
+<li>
+  "Submit the server maintenance change for approval"
+ </li>
+<li>
+  "Approve the database upgrade change with comment: implementation plan looks thorough"
+ </li>
+<li>
+  "Show me all emergency changes scheduled for this week"
+ </li>
+<li>
+  "List all changes assigned to the Network team"
+ </li>
+<li>
+  "Create a normal change request to upgrade the production database server."
+ </li>
+<li>
+  "Update change CHG0012345, set the state to 'Implement'."
+ </li>
+</ul>
+<h4 class="heading">
+ Workflow Management Examples
+</h4>
+<ul>
+<li>
+  "Show me all active workflows in ServiceNow"
+ </li>
+<li>
+  "Get details about the incident approval workflow"
+ </li>
+<li>
+  "List all versions of the change request workflow"
+ </li>
+<li>
+  "Show me all activities in the service catalog request workflow"
+ </li>
+<li>
+  "Create a new workflow for handling software license requests"
+ </li>
+<li>
+  "Update the description of the incident escalation workflow"
+ </li>
+<li>
+  "Activate the new employee onboarding workflow"
+ </li>
+<li>
+  "Deactivate the old password reset workflow"
+ </li>
+<li>
+  "Add an approval activity to the software license request workflow"
+ </li>
+<li>
+  "Update the notification activity in the incident escalation workflow"
+ </li>
+<li>
+  "Delete the unnecessary activity from the change request workflow"
+ </li>
+<li>
+  "Reorder the activities in the service catalog request workflow"
+ </li>
+</ul>
+<h4 class="heading">
+ Changeset Management Examples
+</h4>
+<ul>
+<li>
+  "List all changesets in ServiceNow"
+ </li>
+<li>
+  "Show me all changesets created by developer 'john.doe'"
+ </li>
+<li>
+  "Get details about changeset 'sys_update_set_123'"
+ </li>
+<li>
+  "Create a new changeset for the 'HR Portal' application"
+ </li>
+<li>
+  "Update the description of changeset 'sys_update_set_123'"
+ </li>
+<li>
+  "Commit changeset 'sys_update_set_123' with message 'Fixed login issue'"
+ </li>
+<li>
+  "Publish changeset 'sys_update_set_123' to production"
+ </li>
+<li>
+  "Add a file to changeset 'sys_update_set_123'"
+ </li>
+<li>
+  "Show me all changes in changeset 'sys_update_set_123'"
+ </li>
+</ul>
+<h4 class="heading">
+ Knowledge Base Examples
+</h4>
+<ul>
+<li>
+  "Create a new knowledge base for the IT department"
+ </li>
+<li>
+  "List all knowledge bases in the organization"
+ </li>
+<li>
+  "Create a category called 'Network Troubleshooting' in the IT knowledge base"
+ </li>
+<li>
+  "Write an article about VPN setup in the Network Troubleshooting category"
+ </li>
+<li>
+  "Update the VPN setup article to include mobile device instructions"
+ </li>
+<li>
+  "Publish the VPN setup article so it's visible to all users"
+ </li>
+<li>
+  "List all articles in the Network Troubleshooting category"
+ </li>
+<li>
+  "Show me the details of the VPN setup article"
+ </li>
+<li>
+  "Find knowledge articles containing 'password reset' in the IT knowledge base"
+ </li>
+<li>
+  "Create a subcategory called 'Wireless Networks' under the Network Troubleshooting category"
+ </li>
+</ul>
+<h4 class="heading">
+ User Management Examples
+</h4>
+<ul>
+<li>
+  "Create a new user Dr. Alice Radiology in the Radiology department"
+ </li>
+<li>
+  "Update Bob's user record to make him the manager of Alice"
+ </li>
+<li>
+  "Assign the ITIL role to Bob so he can approve change requests"
+ </li>
+<li>
+  "List all users in the Radiology department"
+ </li>
+<li>
+  "Create a new group called 'Biomedical Engineering' for managing medical devices"
+ </li>
+<li>
+  "Add an admin user to the Biomedical Engineering group as a member"
+ </li>
+<li>
+  "Update the Biomedical Engineering group to change its manager"
+ </li>
+<li>
+  "Remove a user from the Biomedical Engineering group"
+ </li>
+<li>
+  "Find all active users in the system with 'doctor' in their title"
+ </li>
+<li>
+  "Create a user that will act as an approver for the Radiology department"
+ </li>
+<li>
+  "List all IT support groups in the system"
+ </li>
+</ul>
+<h4 class="heading">
+ UI Policy Examples
+</h4>
+<ul>
+<li>
+  "Create a UI policy for the 'Software Request' item (sys_id: abc...) named 'Show Justification' that applies when 'software_cost' is greater than 100."
+ </li>
+<li>
+  "For the UI policy 'Show Justification' (sys_id: def...), add an action to make the 'business_justification' variable visible and mandatory."
+ </li>
+<li>
+  "Create another action for policy 'Show Justification' to hide the 'alternative_software' variable."
+ </li>
+</ul>
+<h3 class="heading">
+ Example Scripts
+</h3>
+<p>
+ The repository includes example scripts that demonstrate how to use the tools:
+</p>
+<ul>
+<li>
+<strong>
+   examples/catalog_optimization_example.py
+  </strong>
+  : Demonstrates how to analyze and improve the ServiceNow Service Catalog
+ </li>
+<li>
+<strong>
+   examples/change_management_demo.py
+  </strong>
+  : Shows how to create and manage change requests in ServiceNow
+ </li>
+</ul>
+<h2 class="heading">
+ Authentication Methods
+</h2>
+<h3 class="heading">
+ Basic Authentication
+</h3>
+<pre class="pre"><code class="code">SERVICENOW_AUTH_TYPE=basic
+SERVICENOW_USERNAME=your-username
+SERVICENOW_PASSWORD=your-password
+</code></pre>
+<h3 class="heading">
+ OAuth Authentication
+</h3>
+<pre class="pre"><code class="code">SERVICENOW_AUTH_TYPE=oauth
+SERVICENOW_CLIENT_ID=your-client-id
+SERVICENOW_CLIENT_SECRET=your-client-secret
+SERVICENOW_TOKEN_URL=https://your-instance.service-now.com/oauth_token.do
+</code></pre>
+<h3 class="heading">
+ API Key Authentication
+</h3>
+<pre class="pre"><code class="code">SERVICENOW_AUTH_TYPE=api_key
+SERVICENOW_API_KEY=your-api-key
+</code></pre>
+<h2 class="heading">
+ Development
+</h2>
+<h3 class="heading">
+ Documentation
+</h3>
+<p>
+ Additional documentation is available in the
+ <code class="code">
+  docs
+ </code>
+ directory:
+</p>
+<ul>
+<li>
+<a href="docs/catalog.md">
+   Catalog Integration
+  </a>
+  - Detailed information about the Service Catalog integration
+ </li>
+<li>
+<a href="docs/catalog_optimization_plan.md">
+   Catalog Optimization
+  </a>
+  - Detailed plan for catalog optimization features
+ </li>
+<li>
+<a href="docs/change_management.md">
+   Change Management
+  </a>
+  - Detailed information about the Change Management tools
+ </li>
+<li>
+<a href="docs/workflow_management.md">
+   Workflow Management
+  </a>
+  - Detailed information about the Workflow Management tools
+ </li>
+<li>
+<a href="docs/changeset_management.md">
+   Changeset Management
+  </a>
+  - Detailed information about the Changeset Management tools
+ </li>
+</ul>
+<h3 class="heading">
+ Troubleshooting
+</h3>
+<h4 class="heading">
+ Common Errors with Change Management Tools
+</h4>
+<ol>
+<li>
+<strong>
+   Error:
+   <code class="code">
+    argument after ** must be a mapping, not CreateChangeRequestParams
+   </code>
+</strong>
+</li>
+<li>
+  This error occurs when you pass a
+  <code class="code">
+   CreateChangeRequestParams
+  </code>
+  object instead of a dictionary to the
+  <code class="code">
+   create_change_request
+  </code>
+  function.
+ </li>
+<li>
+  Solution: Make sure you're passing a dictionary with the parameters, not a Pydantic model object.
+ </li>
+<li>
+<p>
+   Note: The change management tools have been updated to handle this error automatically. The functions will now attempt to unwrap parameters if they're incorrectly wrapped or passed as a Pydantic model object.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Error:
+    <code class="code">
+     Missing required parameter 'type'
+    </code>
+</strong>
+</p>
+</li>
+<li>
+  This error occurs when you don't provide all required parameters for creating a change request.
+ </li>
+<li>
+<p>
+   Solution: Make sure to include all required parameters. For
+   <code class="code">
+    create_change_request
+   </code>
+   , both
+   <code class="code">
+    short_description
+   </code>
+   and
+   <code class="code">
+    type
+   </code>
+   are required.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Error:
+    <code class="code">
+     Invalid value for parameter 'type'
+    </code>
+</strong>
+</p>
+</li>
+<li>
+  This error occurs when you provide an invalid value for the
+  <code class="code">
+   type
+  </code>
+  parameter.
+ </li>
+<li>
+<p>
+   Solution: Use one of the valid values: "normal", "standard", or "emergency".
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Error:
+    <code class="code">
+     Cannot find get_headers method in either auth_manager or server_config
+    </code>
+</strong>
+</p>
+</li>
+<li>
+  This error occurs when the parameters are passed in the wrong order or when using objects that don't have the required methods.
+ </li>
+<li>
+  Solution: Make sure you're passing the
+  <code class="code">
+   auth_manager
+  </code>
+  and
+  <code class="code">
+   server_config
+  </code>
+  parameters in the correct order. The functions have been updated to handle parameter swapping automatically.
+ </li>
+</ol>
+<h3 class="heading">
+ Contributing
+</h3>
+<p>
+ Contributions are welcome! Please feel free to submit a Pull Request.
+</p>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create your feature branch (
+  <code class="code">
+   git checkout -b feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Commit your changes (
+  <code class="code">
+   git commit -m 'Add some amazing feature'
+  </code>
+  )
+ </li>
+<li>
+  Push to the branch (
+  <code class="code">
+   git push origin feature/amazing-feature
+  </code>
+  )
+ </li>
+<li>
+  Open a Pull Request
+ </li>
+</ol>
+<h3 class="heading">
+ License
+</h3>
+<p>
+ This project is licensed under the MIT License - see the LICENSE file for details.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/echelon-ai-labs-servicenow-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

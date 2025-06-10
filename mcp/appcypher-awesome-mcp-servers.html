@@ -1,0 +1,3178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Awesome MCP Servers - MCP Directory">
+    <meta property="og:description" content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour">
+    <meta property="og:url" content="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Awesome MCP Servers - MCP Directory">
+    <meta name="twitter:description" content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour">
+    
+    <title>Awesome MCP Servers - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Awesome MCP Servers</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Awesome MCP Servers</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 3163</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Not specified</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">anthropic-claude</span><span class="topic-tag"> context</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> tool-use</span><span class="topic-tag"> tools</span><span class="topic-tag"> awesome</span><span class="topic-tag"> servers</span><span class="topic-tag"> ai</span>
+                        </div>
+                        <a href="https://github.com/appcypher/awesome-mcp-servers" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Awesome MCP Servers - MCP Directory" property="og:title"/>
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Awesome MCP Servers - MCP Directory" name="twitter:title"/>
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" name="twitter:description"/>
+<title>Awesome MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Awesome MCP Servers</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Awesome MCP Servers</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3163</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">anthropic-claude</span><span class="topic-tag"> context</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> tool-use</span><span class="topic-tag"> tools</span><span class="topic-tag"> awesome</span><span class="topic-tag"> servers</span><span class="topic-tag"> ai</span>
+</div>
+<a class="github-link" href="https://github.com/appcypher/awesome-mcp-servers" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Awesome MCP Servers - MCP Directory" property="og:title">
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" property="og:description">
+<meta content="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Awesome MCP Servers - MCP Directory" name="twitter:title">
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" name="twitter:description">
+<title>Awesome MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Awesome MCP Servers</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3163</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">anthropic-claude</span><span class="topic-tag"> context</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> tool-use</span><span class="topic-tag"> tools</span><span class="topic-tag"> awesome</span><span class="topic-tag"> servers</span><span class="topic-tag"> ai</span>
+</div>
+<a class="github-link" href="https://github.com/appcypher/awesome-mcp-servers" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Awesome MCP Servers - MCP Directory" property="og:title"/>
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Awesome MCP Servers - MCP Directory" name="twitter:title"/>
+<meta content="A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resour" name="twitter:description"/>
+<title>Awesome MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Awesome MCP Servers</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3163</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">anthropic-claude</span><span class="topic-tag"> context</span><span class="topic-tag"> mcp</span><span class="topic-tag"> model-context-protocol</span><span class="topic-tag"> tool-use</span><span class="topic-tag"> tools</span><span class="topic-tag"> awesome</span><span class="topic-tag"> servers</span><span class="topic-tag"> ai</span>
+</div>
+<a class="github-link" href="https://github.com/appcypher/awesome-mcp-servers" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Awesome MCP Servers
+ <img alt="Awesome" src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"/>
+</h1>
+<p>
+ A curated list of awesome Model Context Protocol (MCP) servers. MCP is an open protocol that enables AI models to securely interact with local and remote resources through standardized server implementations. This list focuses on production-ready and experimental MCP servers that extend AI capabilities through file access, database connections, API integrations, and other contextual services.
+</p>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ Supported Clients
+</h2>
+<table>
+<thead>
+<tr>
+<th>
+</th>
+<th>
+    MCP Host
+   </th>
+<th>
+    Documentation
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://www.claudedesktop.com/">
+<div align="center">
+<img height="20" src="https://github.com/user-attachments/assets/b0ea1e57-df16-4b04-9276-1980e17ab6ec"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://claude.ai">
+     Claude Desktop
+    </a>
+</td>
+<td>
+<a href="https://modelcontextprotocol.io/quickstart">
+     Claude x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://zed.dev/">
+<div align="center">
+<img height="20" src="https://zed.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo_icon.d67dc948.webp&amp;w=64&amp;q=100"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://zed.dev/">
+     Zed Editor
+    </a>
+</td>
+<td>
+<a href="https://zed.dev/blog/mcp">
+     Zed x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://sourcegraph.com/cody">
+<div align="center">
+<img height="20" src="https://storage.googleapis.com/sourcegraph-assets/docs/images/cody/cody-logomark-default.svg"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://sourcegraph.com/cody">
+     Sourcegraph Cody
+    </a>
+</td>
+<td>
+<a href="https://sourcegraph.com/blog/cody-supports-anthropic-model-context-protocol">
+     Cody x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://sourcegraph.com/cody">
+<div align="center">
+<img height="20" src="https://cdn.prod.website-files.com/663e06c56841363663ffbbcf/664c918ec47bacdd3acdc167_favicon%408x.png"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://www.continue.dev/">
+     Continue
+    </a>
+</td>
+<td>
+<a href="https://blog.continue.dev/model-context-protocol">
+     Continue x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/Upsonic/gpt-computer-assistant">
+<div align="center">
+<img height="20" src="https://github.com/user-attachments/assets/211d0c2b-04de-471e-b1ed-97da94a58d82"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://github.com/Upsonic/gpt-computer-assistant">
+     GPT Computer Assistant
+    </a>
+</td>
+<td>
+<a href="https://github.com/Upsonic/gpt-computer-assistant">
+     GCA x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.librechat.ai/">
+<div align="center">
+<img height="20" src="https://raw.githubusercontent.com/danny-avila/LibreChat/0855677a36d76cafa5e064b7e346eb3f74c6af2a/client/public/assets/logo.svg"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://www.librechat.ai/">
+     LibreChat
+    </a>
+</td>
+<td>
+<a href="https://www.librechat.ai/docs/features/agents#model-context-protocol-mcp">
+     LibreChat Agents x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.cursor.com/">
+<div align="center">
+<img height="20" src="https://cursor.com/favicon.ico"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://www.cursor.com/">
+     Cursor
+    </a>
+</td>
+<td>
+<a href="https://docs.cursor.com/advanced/model-context-protocol">
+     Cursor x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.enconvo.com/">
+<div align="center">
+<img height="20" src="https://www.enconvo.com/favicon.ico"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://www.enconvo.com/">
+     Enconvo
+    </a>
+</td>
+<td>
+<a href="https://docs.enconvo.com/docs/features/model-context-protocol">
+     Enconvo x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://block.github.io/goose/">
+<div align="center">
+<img height="20" src="https://block.github.io/goose/img/logo_light.png"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://block.github.io/goose/">
+     Goose
+    </a>
+</td>
+<td>
+<a href="https://block.github.io/goose/docs/getting-started/using-extensions">
+     Goose x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/evilsocket/nerve">
+<div align="center">
+<img height="20" src="https://raw.githubusercontent.com/evilsocket/search/refs/heads/main/logo.png"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://github.com/evilsocket/nerve">
+     Nerve
+    </a>
+</td>
+<td>
+<a href="https://github.com/evilsocket/nerve/blob/main/docs/index.md#%EF%B8%8F-adding-tools">
+     Nerve x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://mcp-router.net">
+<div align="center">
+<img height="20" src="https://raw.githubusercontent.com/mcp-router/mcp-router/refs/heads/main/static/img/logo.svg"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://github.com/mcp-router/mcp-router">
+     MCP Router
+    </a>
+</td>
+<td>
+<a href="https://mcp-router.net">
+     MCP Router x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/pietrozullo/mcp-use">
+<div align="center">
+<img height="20" src="https://raw.githubusercontent.com/pietrozullo/mcp-use/refs/heads/main/docs/favicon.svg"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://github.com/pietrozullo/mcp-use">
+     mcp-use
+    </a>
+</td>
+<td>
+<a href="https://docs.mcp-use.io/introduction">
+     mcp-use x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://wassist.app/mcp/">
+<div align="center">
+<img height="20" src="https://wassist.app/whatsmcp.png"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://wassist.app/mcp/">
+     WhatsMCP
+    </a>
+</td>
+<td>
+<a href="https://wassist.app/mcp/">
+     WhatsApp x MCP
+    </a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://code.visualstudio.com/">
+<div align="center">
+<img height="20" src="https://github.com/user-attachments/assets/7d5442e5-4542-4942-afde-a55d5288a40c"/>
+</div>
+</a>
+</td>
+<td>
+<a href="https://code.visualstudio.com/">
+     Visual Studio Code
+    </a>
+</td>
+<td>
+<a href="https://code.visualstudio.com/docs/copilot/chat/mcp-servers">
+     VS Code x MCP
+    </a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ Server Implementations
+</h2>
+<ul>
+<li>
+  📂 -
+  <a href="#file-systems">
+   File Systems
+  </a>
+</li>
+<li>
+  📦 -
+  <a href="#virtualization">
+   Sandbox &amp; Virtualization
+  </a>
+</li>
+<li>
+  🔄 -
+  <a href="#version-control">
+   Version Control
+  </a>
+</li>
+<li>
+  ☁️ -
+  <a href="#cloud-storage">
+   Cloud Storage
+  </a>
+</li>
+<li>
+  🗄️ -
+  <a href="#databases">
+   Databases
+  </a>
+</li>
+<li>
+  💬 -
+  <a href="#communication">
+   Communication
+  </a>
+</li>
+<li>
+  📈 -
+  <a href="#monitoring">
+   Monitoring
+  </a>
+</li>
+<li>
+  🔍 -
+  <a href="#search-web">
+   Search &amp; Web
+  </a>
+</li>
+<li>
+  🗺️ -
+  <a href="#location-services">
+   Location Services
+  </a>
+</li>
+<li>
+  🎯 -
+  <a href="#marketing">
+   Marketing
+  </a>
+</li>
+<li>
+  📝 -
+  <a href="#note-taking">
+   Note Taking
+  </a>
+</li>
+<li>
+  ⚡ -
+  <a href="#cloud-platforms">
+   Cloud Platforms
+  </a>
+</li>
+<li>
+  ⚙️ -
+  <a href="#workflow-automation">
+   Workflow Automation
+  </a>
+</li>
+<li>
+  🤖 -
+  <a href="#system-automation">
+   System Automation
+  </a>
+</li>
+<li>
+  📱 -
+  <a href="#social-media">
+   Social Media
+  </a>
+</li>
+<li>
+  🎮 -
+  <a href="#gaming">
+   Gaming
+  </a>
+</li>
+<li>
+  💹 -
+  <a href="#finance">
+   Finance
+  </a>
+</li>
+<li>
+  🧬 -
+  <a href="#research-data">
+   Research &amp; Data
+  </a>
+</li>
+<li>
+  🤝 -
+  <a href="#ai-services">
+   AI Services
+  </a>
+</li>
+<li>
+  💻 -
+  <a href="#development-tools">
+   Development Tools
+  </a>
+</li>
+<li>
+  📊 -
+  <a href="#data-visualization">
+   Data Visualization
+  </a>
+</li>
+<li>
+  🆔 -
+  <a href="#identity">
+   Identity
+  </a>
+</li>
+<li>
+  🔗 -
+  <a href="#aggregators">
+   Aggregators
+  </a>
+</li>
+<li>
+  💬 -
+  <a href="#language">
+   Language &amp; Translation
+  </a>
+</li>
+<li>
+  🔒 -
+  <a href="#security">
+   Security
+  </a>
+</li>
+<li>
+  🔌 -
+  <a href="#iot">
+   IoT
+  </a>
+</li>
+<li>
+  🧑‍🎨 -
+  <a href="#art-literature">
+   Art &amp; Literature
+  </a>
+</li>
+</ul>
+<p>
+<sup>
+<details>
+</details>
+</sup>
+</p>
+<summary>
+ Legend
+</summary>
+<ul>
+<li>
+<sup>
+   ⭐
+  </sup>
+  Official protocol implementation
+ </li>
+<li>
+<sup>
+   1
+  </sup>
+  First implementation (when multiple implementations exist)
+ </li>
+<li>
+<sup>
+   2
+  </sup>
+  Second implementation
+ </li>
+<li>
+<sup>
+   3
+  </sup>
+  Third implementation
+ </li>
+<li>
+<sup>
+   n
+  </sup>
+  Subsequent implementations
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ Tools &amp; Utilities
+</h2>
+<p>
+ See
+ <a href="#helpful-tools-&amp;-utilities">
+  Helpful Tools &amp; Utilities
+ </a>
+ section for tools to help manage, configure, and work with MCP servers.
+</p>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 📂
+ <a name="file-systems">
+</a>
+ File Systems
+</h2>
+<blockquote>
+<p>
+  Provides direct access to local file systems with configurable permissions. Enables AI models to read, write, and manage files within specified directories.
+-
+  <img height="14" src="https://cdn.simpleicons.org/files/4CAF50"/>
+<a href="https://github.com/hexitex/MCP-Backup-Server">
+   Backup
+  </a>
+  - Provides file and folder backup and restoration capabilities for AI agents and code editing tools
+-
+  <img height="14" src="https://cdn.simpleicons.org/files/9AD1ED"/>
+<a href="https://github.com/mickael-kerjean/filestash/tree/master/server/plugin/plg_handler_mcp">
+   FileStash
+  </a>
+  - Remote Storage Access: SFTP, S3, FTP, SMB, NFS, WebDAV, GIT, FTPS, gcloud, azure blob, sharepoint, etc... 
+-
+  <img height="14" src="https://cdn.simpleicons.org/files/2196F3"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem">
+   FileSystem
+  </a>
+<sup>
+<sup>
+    1
+   </sup>
+</sup>
+  - Direct local file system access
+-
+  <img height="14" src="https://cdn.simpleicons.org/files/4A90E2"/>
+<a href="https://github.com/mark3labs/mcp-filesystem-server">
+   FileSystem
+  </a>
+<sup>
+<sup>
+    2
+   </sup>
+</sup>
+  - Golang implementation for local file system access
+-
+  <img height="14" src="https://cdn.simpleicons.org/files/4CAF50"/>
+<a href="https://github.com/mamertofabian/mcp-everything-search">
+   Everything Search
+  </a>
+  - Lightning-fast Windows file search powered by Everything SDK
+-
+  <img height="14" src="https://cdn.simpleicons.org/files/4CAF50"/>
+<a href="https://github.com/cyberchitta/llm-context.py">
+   llm-context
+  </a>
+  - Share code context with LLMs via Model Context Protocol or clipboard
+ </p>
+</blockquote>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 📦
+ <a name="virtualization">
+</a>
+ Sandbox &amp; Virtualization
+</h2>
+<blockquote>
+<p>
+  Secure sandbox environments for code execution and testing. Enables safe execution of code snippets and development workflows.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://docs.microsandbox.dev/favicon.ico"/>
+<a href="https://github.com/microsandbox/microsandbox">
+   Microsandbox
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Self-hosted platform for secure execution of AI code. Great for Code Interpreter, Data Analysis, Browser Use.
+ </li>
+<li>
+<img height="14" src="https://e2b.dev/favicon.ico"/>
+<a href="https://github.com/e2b-dev/mcp-server">
+   E2B
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Secure cloud development environments for AI agents. Enables safe code execution and testing in isolated containers.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/docker/0db7ed"/>
+<a href="https://github.com/QuantGeekDev/docker-mcp">
+   Docker
+  </a>
+  - An MCP server for Docker operations, enabling seamless container and compose stack management.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🔄
+ <a name="version-control">
+</a>
+ Version Control
+</h2>
+<blockquote>
+<p>
+  Interact with Git repositories and version control platforms. Enables repository management, code analysis, pull request handling, issue tracking, and other version control operations through standardized APIs.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/github/8A8A8A"/>
+<a href="https://github.com/github/github-mcp-server">
+   GitHub
+  </a>
+  - GitHub API integration for repository management, PRs, issues, and more
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/gitlab/FC6D26"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/gitlab">
+   GitLab
+  </a>
+  - GitLab platform integration for project management and CI/CD operations
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/git/F05032"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/git">
+   Git
+  </a>
+  - Direct Git repository operations including reading, searching, and analyzing local repositories
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/phabricator/5865F2"/>
+<a href="https://github.com/baba786/phabricator-mcp-server">
+   Phabricator
+  </a>
+  - Phabricator API integration for repository and project management
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/git/F05032"/>
+<a href="https://github.com/puravparab/Gitingest-MCP">
+   Gitingest-MCP
+  </a>
+  - Gitingest integration providing prompt friendly summmaries of Github repos
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ ☁
+ <a name="cloud-storage">
+</a>
+ Cloud Storage
+</h2>
+<blockquote>
+<p>
+  Access and manage files stored in cloud storage platforms. Enables searching, reading, and organizing cloud-stored documents and data.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/googledrive/4285F4"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive">
+   Google Drive
+  </a>
+  - Google Drive integration for file access, search, and management
+ </li>
+<li>
+<img height="14" src="https://framerusercontent.com/images/ijlYG00LOcMD6zR1XLMxHbAwZkM.png"/>
+<a href="https://github.com/video-db/agent-toolkit/tree/main/modelcontextprotocol">
+   VideoDB
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - A serverless video database to easily store, index, search, and stream videos. VideoDB uses AI to automatically tag scenes, generate accurate transcriptions, and quickly retrieve video moments with simple queries.
+ </li>
+<li>
+<img height="14" src="https://www.microsoft.com/favicon.ico"/>
+<a href="https://github.com/softeria/ms-365-mcp-server">
+   Microsoft 365
+  </a>
+  - MCP server that connects to the whole Microsoft 365 suite (Microsoft Office, Outlook, etc.) using Graph API (including mail, files, Excel, calendar)
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🗄️
+ <a name="databases">
+</a>
+ Databases
+</h2>
+<blockquote>
+<p>
+  Secure database access with schema inspection capabilities. Enables querying and analyzing data while maintaining read-only safety by default.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/postgresql/5865F2"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/postgres">
+   PostgreSQL
+  </a>
+  - PostgreSQL database integration with schema inspection and query capabilities
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/sqlite/0F80CC"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite">
+   SQLite
+  </a>
+  - SQLite database operations with built-in analysis features
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/duckdb/FDC000"/>
+<a href="https://github.com/ktanaka101/mcp-server-duckdb">
+   DuckDB
+  </a>
+  - DuckDB database integration with schema inspection and query capabilities
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/libreoffice/18A303"/>
+<a href="https://github.com/haris-musa/excel-mcp-server">
+   Excel
+  </a>
+  - Excel workbook manipulation including data reading/writing, worksheet management, formatting, charts, and pivot tables
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/googlebigquery/669DF6"/>
+<a href="https://github.com/LucasHild/mcp-server-bigquery">
+   BigQuery
+  </a>
+<sup>
+<sup>
+    1
+   </sup>
+</sup>
+  - BigQuery database integration with schema inspection and query capabilities
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/googlebigquery/669DF6"/>
+<a href="https://github.com/ergut/mcp-bigquery-server">
+   BigQuery
+  </a>
+<sup>
+<sup>
+    2
+   </sup>
+</sup>
+  - A BigQuery MCP server for read-only SQL queries and schema exploration (available on npm)
+ </li>
+<li>
+<img height="14" src="https://neon.tech/favicon.ico"/>
+<a href="https://github.com/neondatabase/mcp-server-neon">
+   Neon
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Neon MCP Server. Allows natural language interactions with Neon for database management.
+ </li>
+<li>
+<img height="14" src="https://qdrant.tech/img/brand-resources-logos/logomark.svg"/>
+<a href="https://github.com/qdrant/mcp-server-qdrant/">
+   Qdrant
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - A Qdrant MCP server for keeping and retrieving memories in the Qdrant vector search engine.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/mongodb/47A248"/>
+<a href="https://github.com/kiliczsh/mcp-mongo-server">
+   MongoDB
+  </a>
+  - A Model Context Protocol Server for querying and analyzing MongoDB collections.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/mongodb/47A248"/>
+<a href="https://github.com/furey/mongodb-lens">
+   MongoDB Lens
+  </a>
+  - Full featured MCP Server for MongoDB databases.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/mysql"/>
+<a href="https://github.com/designcomputer/mysql_mcp_server">
+   MySQL
+  </a>
+  - MySQL database integration with configurable access controls and schema inspection
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/airtable"/>
+<a href="https://github.com/domdomegg/airtable-mcp-server">
+   Airtable
+  </a>
+  - Read and write access to Airtable databases, with schema inspection.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/snowflake"/>
+<a href="https://github.com/isaacwasserman/mcp-snowflake-server">
+   Snowflake
+  </a>
+  - Snowflake database integration with read/write capabilities and insight tracking.
+ </li>
+<li>
+<img height="14" src="https://jiejue.obs.ap-southeast-1.myhuaweicloud.com/20250209205317622.webp"/>
+<a href="https://github.com/donghao1393/mcp-dbutils">
+   DBUtils
+  </a>
+  - A unified database access service for MCP that seamlessly integrates PostgreSQL and SQLite with a clean abstraction layer.
+ </li>
+<li>
+<img height="14" src="https://www.pingcap.com/favicon.ico"/>
+<a href="https://github.com/c4pt0r/mcp-server-tidb">
+   TiDB
+  </a>
+  - MCP server implementation for TiDB (serverless) database.
+ </li>
+<li>
+<img height="14" src="https://cdn.nocodb.com/marketing-site/20250120104552/images/favicon.png"/>
+<a href="https://github.com/edwinbernadus/nocodb-mcp-server">
+   NocoDB
+  </a>
+  - Read and write access to NocoDB database.
+ </li>
+<li>
+<img height="14" src="https://www.couchbase.com/wp-content/uploads/2023/10/couchbase-favicon.svg"/>
+<a href="https://github.com/Couchbase-Ecosystem/mcp-server-couchbase">
+   Couchbase
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - MCP server to interact with the data stored in Couchbase clusters including natural language querying.
+ </li>
+<li>
+<img height="14" src="https://avatars.githubusercontent.com/u/1529926?s=48&amp;v=4"/>
+<a href="https://github.com/redis/mcp-redis">
+   Redis
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - A natural language interface designed for agentic applications to efficiently manage and search data in Redis.
+ </li>
+<li>
+<img height="14" src="https://framerusercontent.com/images/ijlYG00LOcMD6zR1XLMxHbAwZkM.png"/>
+<a href="https://github.com/video-db/agent-toolkit/tree/main/modelcontextprotocol">
+   VideoDB Director
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Create AI-powered video workflows including automatic editing, content moderation, voice cloning, highlight generation, and searchable video moments—all accessible via simple APIs and intuitive chat-based interfaces.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 💬
+ <a name="communication">
+</a>
+ Communication
+</h2>
+<blockquote>
+<p>
+  Integration with communication platforms for message management and channel operations. Enables AI models to interact with team communication tools.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/slack/E01E5A"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/slack">
+   Slack
+  </a>
+  - Slack workspace integration for channel management and messaging
+ </li>
+<li>
+<img height="14" src="https://www.line.me/favicon-32x32.png"/>
+<a href="https://github.com/line/line-bot-mcp-server">
+   LINE Official Account
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Integrates the LINE Messaging API to connect an AI Agent to the LINE Official Account.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/linear/5E6AD2"/>
+<a href="https://github.com/jerhadf/linear-mcp-server">
+   Linear
+  </a>
+  - Linear MCP Server. Provides integration with Linear's issue tracking system through MCP.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/atlassian/0052CC"/>
+<a href="https://github.com/sooperset/mcp-atlassian">
+   Atlassian
+  </a>
+  - Comprehensive integration with Atlassian suite including Confluence for documentation management and Jira for issue tracking.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 📈
+ <a name="monitoring">
+</a>
+ Monitoring
+</h2>
+<blockquote>
+<p>
+  Access and analyze application monitoring data. Enables AI models to review error reports and performance metrics.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/sentry/546E7A"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/sentry">
+   Sentry
+  </a>
+  - Sentry.io integration for error tracking and performance monitoring
+ </li>
+<li>
+<img height="14" src="https://raygun.com/favicon.ico"/>
+<a href="https://github.com/MindscapeHQ/mcp-server-raygun">
+   Raygun
+  </a>
+  - Raygun API V3 integration for crash reporting and real user monitoring
+ </li>
+<li>
+<img height="14" src="https://metoro.io/static/images/logos/Metoro.svg"/>
+<strong>
+<a href="https://github.com/metoro-io/metoro-mcp-server">
+    Metoro
+   </a>
+</strong>
+  - Query and interact with kubernetes environments monitored by Metoro
+ </li>
+<li>
+<img height="14" src="https://avatars.githubusercontent.com/u/174736222?s=200&amp;v=4"/>
+<strong>
+<a href="https://github.com/VictoriaMetrics-Community/mcp-victoriametrics">
+    VictoriaMetrics
+   </a>
+</strong>
+  - Comprehensive integration with
+  <a href="https://docs.victoriametrics.com/victoriametrics/url-examples/">
+   VictoriaMetrics APIs
+  </a>
+  and
+  <a href="https://docs.victoriametrics.com/">
+   documentation
+  </a>
+  for monitoring, observability, and debugging tasks related to your VictoriaMetrics instances.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🔍
+ <a name="search-web">
+</a>
+ Search &amp; Web
+</h2>
+<blockquote>
+<p>
+  Web content access and automation capabilities. Enables searching, scraping, and processing web content in AI-friendly formats.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/puppeteer/00D8A2"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer">
+   Puppeteer
+  </a>
+  - Browser automation for web scraping and interaction
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/brave/FB542B"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search">
+   Brave Search
+  </a>
+  - Web search capabilities using Brave's Search API
+ </li>
+<li>
+<img height="14" src="https://github.com/user-attachments/assets/5d9346e8-7821-4202-80cd-25e0678d3400"/>
+<a href="https://github.com/luminati-io/brightdata-mcp">
+   Bright Data
+  </a>
+  - Discover, extract, and interact with the web - one interface powering automated access across the public internet.
+ </li>
+<li>
+<img height="14" src="https://avatars.githubusercontent.com/u/204530939?s=200&amp;v=4"/>
+<a href="https://github.com/Dumpling-AI/mcp-server-dumplingai">
+   Dumpling AI
+  </a>
+  - Access data, web scraping, and document conversion APIs by
+  <a href="https://www.dumplingai.com/">
+   Dumpling AI
+  </a>
+</li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/curl/00ADD8"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/fetch">
+   Fetch
+  </a>
+  - Efficient web content fetching and processing for AI consumption
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/kagi/4173FF"/>
+<a href="https://github.com/ac3xx/mcp-servers-kagi">
+   Kagi Search
+  </a>
+  - TypeScript-based MCP server that integrates the Kagi Search API
+ </li>
+<li>
+<img height="14" src="https://www.tryleap.ai/assets/integrations/exa.svg"/>
+<a href="https://github.com/exa-labs/exa-mcp-server">
+   Exa Search
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Integration with Exa AI Search API for real-time web information retrieval
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/newyorktimes/E34234"/>
+<a href="https://github.com/angheljf/nyt">
+   NYTimes
+  </a>
+  - Search articles using the NYTimes API
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/googlenews/4285F4"/>
+<a href="https://github.com/ChanMeng666/server-google-news">
+   Google News
+  </a>
+  - Google News search with automatic categorization, multi-language support, and comprehensive search options
+ </li>
+<li>
+<img height="14" src="https://avatars.githubusercontent.com/u/175926811?v=4"/>
+<a href="https://github.com/scrapeless-ai/scrapeless-mcp-server">
+   Scrapeless
+  </a>
+  - The Scrapeless Model Context Protocol service acts as an MCP server connector to the Google SERP API, enabling web search within the MCP ecosystem without leaving it.
+ </li>
+<li>
+<img height="14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/800px-Vector_search_icon.svg.png"/>
+<a href="https://github.com/fatwang2/search1api-mcp">
+   Search1API
+  </a>
+  - Search via search1api (requires paid API key)
+ </li>
+<li>
+<img height="14" src="https://tavily.com/favicon.ico"/>
+<a href="https://github.com/Tomatio13/mcp-server-tavily">
+   Tavily
+  </a>
+  - Tavily AI search API integration
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/arxiv/B31B1B"/>
+<a href="https://github.com/blazickjp/arxiv-mcp-server">
+   ArXiv
+  </a>
+  - Search ArXiv research papers
+ </li>
+<li>
+<img height="14" src="https://github.com/user-attachments/assets/6f9c9a70-01c8-4255-abbe-66faf146970e"/>
+<a href="https://github.com/hbg/mcp-paperswithcode">
+   PapersWithCode
+  </a>
+  - Search research papers, conferences, and codebases through PapersWithCode API
+ </li>
+<li>
+<img height="14" src="https://playwright.dev/img/playwright-logo.svg"/>
+<a href="https://github.com/executeautomation/mcp-playwright">
+   Playwright
+  </a>
+  - A Model Context Protocol server that provides browser automation capabilities using Playwright.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/searxng"/>
+<a href="https://github.com/mnhlt/WebSearch-MCP">
+   Websearch
+  </a>
+  - Self-hosted Websearch service.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/firefoxbrowser"/>
+<a href="https://github.com/eyalzh/browser-control-mcp">
+   Browser Control
+  </a>
+  - An MCP server paired with a browser extension allowing local browser control.
+ </li>
+<li>
+<img height="14" src="https://blog.apify.com/content/images/2025/02/Apify_logo.png"/>
+<a href="https://github.com/apify/actors-mcp-server">
+   Apify Actors
+  </a>
+  - Use 4,000+ pre-built cloud tools, known as Actors, to extract data from websites, e-commerce, social media, search engines, maps, and more.
+ </li>
+<li>
+<img height="14" src="https://blog.apify.com/content/images/2025/02/Apify_logo.png"/>
+<a href="https://github.com/apify/mcp-server-rag-web-browser">
+   RAG Web Browser
+  </a>
+  - An MCP server for Apify's open-source RAG Web Browser Actor to perform web searches, scrape URLs, and return content in Markdown.
+ </li>
+<li>
+<img height="14" src="https://framerusercontent.com/images/0Bw7GwbNXUBxOAp9pyM0VPOlphg.png"/>
+<a href="https://github.com/Skyvern-AI/skyvern/tree/main/integrations/mcp">
+   Skyvern
+  </a>
+  - MCP to let Claude or your own LLM control your browser
+ </li>
+<li>
+<img height="14" src="https://searx.space/favicon.png"/>
+<a href="https://github.com/ihor-sokoliuk/mcp-searxng">
+   Ihor-Sokoliuk/MCP-SearXNG
+  </a>
+  - A Model Context Protocol Server for
+  <a href="https://docs.searxng.org">
+   SearXNG
+  </a>
+</li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🗺️
+ <a name="location-services">
+</a>
+ Location Services
+</h2>
+<blockquote>
+<p>
+  Geographic and location-based services integration. Enables access to mapping data, directions, and place information.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://campertunity.com/assets/icon/favicon.ico"/>
+<a href="https://github.com/campertunity/mcp-server">
+   Campertunity
+  </a>
+  - Search campgrounds around the world on campertunity, check availability, and provide booking links
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/googlemaps/4285F4"/>
+<a href="https://github.com/modelcontextprotocol/servers/tree/main/src/google-maps">
+   Google Maps
+  </a>
+  - Google Maps integration for location services, routing, and place details
+ </li>
+<li>
+<img height="14" src="https://www.qgis.org/styleguide/visual/qgis-logo.svg"/>
+<a href="https://github.com/jjsantos01/qgis_mcp">
+   QGIS
+  </a>
+  - connects QGIS Desktop to Claude AI through the MCP. This integration enables prompt-assisted project creation, layer loading, code execution, and more.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🎯
+ <a name="marketing">
+</a>
+ Marketing
+</h2>
+<blockquote>
+<p>
+  Tools that help marketers write better content and run better campaigns.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://openstrategypartners.com/fileadmin/Bilder/logo/OSP_logo_colors_green1.png"/>
+<a href="https://github.com/open-strategy-partners/osp_marketing_tools">
+   Open Strategy Partners Marketing Tools
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - a standardized editing code system, writing guidelines, web metadata generator, and product communication framework.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/fathom/9187FF"/>
+<a href="https://github.com/mackenly/mcp-fathom-analytics">
+   Fathom Analytics
+  </a>
+  - Access Fathom Analytics data and reports about your sites
+ </li>
+<li>
+<img height="14" src="https://static.xx.fbcdn.net/rsrc.php/y9/r/tL_v571NdZ0.svg"/>
+<a href="https://github.com/gomarble-ai/facebook-ads-mcp-server">
+   Facebook Ads
+  </a>
+  - MCP server acting as an interface to the Facebook Ads, enabling programmatic access to Facebook Ads data and management features.
+  <br/>
+</li>
+</ul>
+<h2 class="heading">
+ 📝
+ <a name="note-taking">
+</a>
+ Note Taking
+</h2>
+<blockquote>
+<p>
+  Integration with note-taking applications and personal knowledge management tools. Enables access to notes, documents, and personal information stores.
+-
+  <img height="14" src="https://static.wikia.nocookie.net/logopedia/images/2/25/Apple_Books_%28iOS%29_2024_dark.svg/revision/latest?cb=20240616234654"/>
+<a href="https://github.com/vgnshiyer/apple-books-mcp">
+   Apple Books
+  </a>
+  - Transform your Apple Books to a queryable knowledge base.
+-
+  <img alt="ebook-mcp Logo" height="14" src="https://github.com/onebirdrocks/ebook-mcp/raw/refs/heads/main/favicon.png"/>
+<a href="https://github.com/onebirdrocks/ebook-mcp">
+   eBook-mcp
+  </a>
+  - A lightweight MCP server that allows LLMs to read and interact with your personal PDF and EPUB ebooks on your local machine. Ideal for building AI reading assistants or chat-based ebook interfaces.
+-
+  <img height="14" src="https://cdn.simpleicons.org/obsidian/7C3AED"/>
+<a href="https://github.com/MarkusPfundstein/mcp-obsidian">
+   Obsidian
+  </a>
+<sup>
+<sup>
+    1
+   </sup>
+</sup>
+  - Obsidian vault integration with tools for file management, search, and content manipulation
+-
+  <img height="14" src="https://cdn.simpleicons.org/obsidian/7C3AED"/>
+<a href="https://github.com/calclavia/mcp-obsidian">
+   Obsidian
+  </a>
+<sup>
+<sup>
+    2
+   </sup>
+</sup>
+  - Alternative implementation for reading and searching Markdown notes
+-
+  <img height="14" src="https://cdn.simpleicons.org/notion/787878"/>
+<a href="https://github.com/danhilse/notion_mcp">
+   Notion
+  </a>
+<sup>
+<sup>
+    1
+   </sup>
+</sup>
+  - Notion API integration for managing personal todo lists and notes
+-
+  <img height="14" src="https://cdn.simpleicons.org/notion/787878"/>
+<a href="https://github.com/suekou/mcp-notion-server">
+   Notion
+  </a>
+<sup>
+<sup>
+    2
+   </sup>
+</sup>
+  - Alternative implementation for Notion API integration
+-
+  <img height="14" src="https://cdn.simpleicons.org/apple/999999"/>
+<a href="https://github.com/sirmews/apple-notes-mcp">
+   Apple Notes
+  </a>
+  - Read from local Apple Notes database (macOS only)
+-
+  <img height="14" src="https://cdn.simpleicons.org/todoist/E44332"/>
+<a href="https://github.com/abhiz123/todoist-mcp-server">
+   Todoist
+  </a>
+  - An MCP server implementation for Todoist, enabling natural language task management.
+-
+  <img height="14" src="https://cdn.simpleicons.org/googlekeep/FFBB00"/>
+<a href="https://github.com/feuerdev/keep-mcp">
+   Google Keep
+  </a>
+  - Read, create, update and delete Google Keep notes.
+ </p>
+</blockquote>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ ⚡
+ <a name="cloud-platforms">
+</a>
+ Cloud Platforms
+</h2>
+<blockquote>
+<p>
+  Cloud platform service integration. Enables management and interaction with cloud infrastructure and services.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/cloudflare/F38020"/>
+<a href="https://github.com/cloudflare/mcp-server-cloudflare">
+   Cloudflare
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Integration with Cloudflare services including Workers, KV, R2, and D1
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/kubernetes/326CE5"/>
+<a href="https://github.com/strowk/mcp-k8s-go">
+   Kubernetes
+  </a>
+  - Kubernetes cluster operations through MCP
+ </li>
+<li>
+<img height="14" src="https://tinybird.co/favicon.ico"/>
+<a href="https://github.com/tinybirdco/mcp-tinybird">
+   Tinybird
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Interact with a Tinybird Workspace from any MCP client.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/kubernetes/326CE5"/>
+<a href="https://github.com/weibaohui/k8m">
+   Kubernetes
+  </a>
+  - Kubernetes  multi-cluster  management and operations, featuring a management ui, logging, and nearly 50 built-in tools covering common DevOps and development scenarios. Supports both standard and CRD resources.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ ⚙️
+ <a name="workflow-automation">
+</a>
+ Workflow Automation
+</h2>
+<blockquote>
+<p>
+  Integration with workflow automation platforms allows AI models to execute workflows and retrieve data back to their systems.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://www.make.com/favicon.ico"/>
+<a href="https://github.com/integromat/make-mcp-server">
+   Make
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Turn Make scenarios into callable tools for AI assistants.
+ </li>
+<li>
+<img height="14" src="https://www.taskade.com/favicon.ico"/>
+<a href="https://github.com/taskade/mcp">
+   Taskade MCP
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Official Taskade MCP server + OpenAPI → MCP codegen to build AI agent tools from any API and connect Taskade to Claude, Cursor, and more.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🤖
+ <a name="system-automation">
+</a>
+ System Automation
+</h2>
+<blockquote>
+<p>
+  Tools for shell access, system control, and task automation. Enables AI models to execute commands and interact with the operating system.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://api.iconify.design/mdi:console.svg?color=%2390EE90"/>
+<a href="https://github.com/rusiaaman/wcgw">
+   Shell
+  </a>
+  - Autonomous shell execution and computer control (Mac)
+ </li>
+<li>
+<img height="14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Windows_logo_-_2021.svg/1024px-Windows_logo_-_2021.svg.png"/>
+<a href="https://github.com/SimonB97/win-cli-mcp-server">
+   Windows CLI
+  </a>
+  - Windows CLI MCP Server for secure command-line interactions on Windows systems, enabling controlled access to PowerShell, CMD, and Git Bash shells.
+ </li>
+<li>
+<img height="14" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Windows_logo_-_2021.svg/1024px-Windows_logo_-_2021.svg.png"/>
+<a href="https://github.com/Cheffromspace/nutjs-windows-control">
+   Windows Control
+  </a>
+  - Windows automation MCP server providing mouse, keyboard, screen capture, clipboard, and window management capabilities using NutJS.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/gnometerminal/2196F3"/>
+<a href="https://github.com/phialsbasement/cmd-mcp-server">
+   Command Line
+  </a>
+  - MCP server allowing any and all command execution over CMD(BE CAREFUL).
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/apple/999999"/>
+<a href="https://github.com/recursechat/mcp-server-apple-shortcuts">
+   Apple Shortcuts
+  </a>
+  - An MCP Server Integration with Apple Shortcuts
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 📱
+ <a name="social-media">
+</a>
+ Social Media
+</h2>
+<blockquote>
+<p>
+  Integration with social media platforms and content sharing services. Enables interaction with social networks and content platforms.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/bluesky/0085FF"/>
+<a href="https://github.com/keturiosakys/bluesky-context-server">
+   BlueSky
+  </a>
+  - Bluesky API integration for querying and searching feeds and posts
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/youtube/FF0000"/>
+<a href="https://github.com/anaisbetts/mcp-youtube">
+   YouTube
+  </a>
+<sup>
+<sup>
+    1
+   </sup>
+</sup>
+  - YouTube integration using yt-dlp for subtitle downloading and video analysis
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/youtube/FF0000"/>
+<a href="https://github.com/kimtaeyoon83/mcp-server-youtube-transcript">
+   YouTube
+  </a>
+<sup>
+<sup>
+    2
+   </sup>
+</sup>
+  - Alternative implementation for fetching YouTube subtitles and transcripts
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/spotify/1DB954"/>
+<a href="https://github.com/varunneal/spotify-mcp">
+   Spotify
+  </a>
+  - Connects with Spotify for playback control and track/album/artist/playlist management.
+ </li>
+<li>
+<img height="14" src="https://cdn.worldvectorlogo.com/logos/tiktok-icon-2.svg"/>
+<a href="https://github.com/Seym0n/tiktok-mcp">
+   TikTok
+  </a>
+  - TikTok integration for getting post details and video's subtitles
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🎮
+ <a name="gaming">
+</a>
+ Gaming
+</h2>
+<blockquote>
+<p>
+  Gaming data and Game Development tools.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/unity/899499"/>
+<a href="https://github.com/IvanMurzak/Unity-MCP">
+   Unity Engine
+  </a>
+  - Tools for Unity Editor and for a game made with Unity
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/unity/899499"/>
+<a href="https://github.com/CoderGamester/mcp-unity">
+   Unity3d
+  </a>
+  - Unity3d Game Engine integration for game development
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 💹
+ <a name="finance">
+</a>
+ Finance
+</h2>
+<blockquote>
+<p>
+  Financial data and cryptocurrency information services.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img alt="Octagon Logo" height="14" src="https://docs.octagonagents.com/logo.svg"/>
+<a href="https://github.com/OctagonAI/octagon-mcp-server">
+   Octagon
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Deliver real-time market intelligence with extensive private and public market data.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/coinmarketcap/FF8C00"/>
+<a href="https://github.com/anjor/coinmarket-mcp-server">
+   CoinMarket
+  </a>
+  - Coinmarket API integration for cryptocurrency data
+ </li>
+<li>
+<img height="14" src="https://www.chargebee.com/static/resources/brand/favicon.png"/>
+<a href="https://github.com/chargebee/agentkit/tree/main/modelcontextprotocol">
+   Chargebee
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - MCP Server that connects AI agents to
+  <a href="https://www.chargebee.com">
+   Chargebee platform
+  </a>
+  .
+ </li>
+<li>
+<img height="14" src="https://dexpaprika.com/favicon.ico"/>
+<a href="https://github.com/donbagger/dexpaprika-mcp-server">
+   DexPaprika
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Comprehensive cryptocurrency and DEX data API across multiple blockchains, providing real-time token pricing, liquidity pools, and OHLCV data for market analysis
+ </li>
+<li>
+<img alt="MercadoPago Logo" height="14" src="https://www.mercadopago.com/favicon.ico"/>
+<a href="https://mcp.mercadopago.com/">
+   Mercado Pago
+  </a>
+  - Mercado Pago's official MCP server, offering tools to interact with our API, simplifing tasks and product integration.
+ </li>
+<li>
+<img height="14" src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_74x46.jpg"/>
+<a href="https://github.com/paypal/agent-toolkit/tree/main/modelcontextprotocol">
+   PayPal
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - The PayPal Agent Toolkit enables popular agent frameworks including Model Context Protocol (MCP) to integrate with PayPal APIs through function calling.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/stripe"/>
+<a href="https://github.com/stripe/agent-toolkit/tree/main">
+   Stripe
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Allows you to integrate with Stripe APIs
+ </li>
+<li>
+<img height="14" src="https://pub.pbkrs.com/files/202211/TNosrY77nCxm6rtU/logo-without-title.svg"/>
+<a href="https://github.com/longportapp/openapi/tree/main/mcp">
+   LongPort OpenAPI
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Provides real-time stock market data, provides AI access analysis and trading capabilities through MCP.
+ </li>
+<li>
+<img height="14" src="https://zbd.gg/favicon.ico"/>
+<a href="https://github.com/zebedeeio/zbd-payments-typescript-sdk/tree/main/packages/mcp-server">
+   ZBD
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Interact with ZBD's payment processing APIs for instant global payments with Bitcoin and Lightning Network
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🧬
+ <a name="research-data">
+</a>
+ Research &amp; Data
+</h2>
+<blockquote>
+<p>
+  Access to research papers, genetic data, and specialized datasets.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/arxiv/B31B1B"/>
+<a href="https://github.com/blazickjp/arxiv-mcp-server">
+   ArXiv
+  </a>
+  - Search ArXiv research papers
+ </li>
+<li>
+<img height="14" src="https://api.iconify.design/mdi:dna.svg?color=%23E34234"/>
+<a href="https://github.com/reeeeemo/ancestry-mcp">
+   Ancestry
+  </a>
+  - Read .ged files and genetic data
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🤝
+ <a name="ai-services">
+</a>
+ AI Services
+</h2>
+<blockquote>
+<p>
+  Integration with AI and machine learning services.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://agentset.ai/screenshots/logo.png"/>
+<a href="https://github.com/agentset-ai/mcp-server">
+   Agentset AI
+  </a>
+  -  RAG on your data using MCP protocol
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/openai/00A67E"/>
+<a href="https://github.com/pierrebrunelle/mcp-server-openai">
+   OpenAI
+  </a>
+  - Query OpenAI models directly from Claude using MCP protocol
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/openai/00A67E"/>
+<a href="https://github.com/pyroprompts/any-chat-completions-mcp">
+   OpenAI Compatible Chat
+  </a>
+  - Chat with models from OpenAI-compatible APIs (Perplexity, Groq, xAI, etc.)
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/perplexity"/>
+<a href="https://github.com/tanigami/mcp-server-perplexity">
+   Perplexity
+  </a>
+  Chat with Perplexity via MCP
+ </li>
+<li>
+<img height="14" src="https://cloud.llamaindex.ai/favicon.ico"/>
+<a href="https://github.com/run-llama/mcp-server-llamacloud">
+   LlamaCloud
+  </a>
+  - LlamaCloud MCP Server. A TypeScript-based MCP server connecting to a managed index on LlamaCloud.
+ </li>
+<li>
+<img height="14" src="https://huggingface.co/favicon.ico"/>
+<a href="https://github.com/evalstate/mcp-hfspace">
+   HuggingFace Spaces
+  </a>
+  - Use HuggingFace spaces from your MCP Client. Supports Images, Audio, Text and more.
+ </li>
+<li>
+<img height="14" src="https://piapi.ai/piapi_favicon.webp"/>
+<a href="https://github.com/apinetwork/piapi-mcp-server">
+   PiAPI
+  </a>
+  - PiAPI MCP server makes user able to generate media content with Midjourney/Flux/Kling/Hunyuan/Udio/Trellis directly from Claude or any other MCP-compatible apps.
+ </li>
+<li>
+<img alt="Chronulus AI Logo" height="14" src="https://www.chronulus.com/favicon/chronulus-logo-blue-on-alpha-square-128x128.ico" width="14"/>
+<a href="https://github.com/ChronulusAI/chronulus-mcp">
+   Chronulus AI
+  </a>
+  -  Predict anything with Chronulus AI multimodal forecasting and prediction agents (
+  <a href="https://youtube.com/playlist?list=PLPLu09ZbT8KKS04V6SSm2Acjv43FKq329&amp;si=n2YER2in4gOqwssY">
+   Watch Demos on Youtube
+  </a>
+  ).
+ </li>
+<li>
+<img height="14" src="https://www.creatify.ai/favicon.ico"/>
+<a href="https://github.com/TSavo/creatify-mcp">
+   Creatify
+  </a>
+  - MCP Server that exposes Creatify AI API capabilities for AI video generation, including avatar videos, URL-to-video conversion, text-to-speech, and AI-powered editing tools.
+ </li>
+<li>
+<img height="14" src="https://www.svgrepo.com/show/495208/data.svg"/>
+<a href="https://github.com/zenml-io/mcp-zenml">
+   ZenML
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Chat with your MLOps and LLMOps pipelines using the
+  <a href="https://www.zenml.io">
+   ZenML
+  </a>
+  MCP server
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 💻
+ <a name="development-tools">
+</a>
+ Development Tools
+</h2>
+<blockquote>
+<p>
+  Tools and servers that assist with software development workflows. Enables integration with development-related services and APIs.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://www.svgrepo.com/show/107853/uranus.svg"/>
+<a href="https://github.com/centralmind/gateway">
+   CentralMind/Gateway
+  </a>
+  - MCP and MCP SSE Server that automatically generate production ready API based on database schema and data. Supports PostgreSQL, Clickhouse, MySQL, Snowflake, BigQuery, Supabase
+ </li>
+<li>
+<img height="14" src="http://currents.dev/favicon.ico"/>
+<a href="https://github.com/currents-dev/currents-mcp">
+   Currents
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Enable AI Agents to fix Playwright test failures reported to
+  <a href="https://currents.dev">
+   Currents
+  </a>
+  .
+ </li>
+<li>
+<img height="14" src="https://raw.githubusercontent.com/kadykov/mcp-openapi-schema-explorer/main/assets/logo-400.png"/>
+<a href="https://github.com/kadykov/mcp-openapi-schema-explorer">
+   OpenAPI Schema Explorer
+  </a>
+  - Token-efficient access to OpenAPI/Swagger specs via MCP Resources.
+ </li>
+<li>
+<img height="14" src="https://raw.githubusercontent.com/open-rpc/design/master/icons/open-rpc-logo-noText/open-rpc-logo-noText%20(PNG)/256x256.png"/>
+<a href="https://github.com/shanejonas/openrpc-mpc-server">
+   OpenRPC
+  </a>
+  - A Model Context Protocol server that provides JSON-RPC functionality through OpenRPC.
+ </li>
+<li>
+<img height="14" src="https://cdn.simpleicons.org/postman"/>
+<a href="https://github.com/delano/postman-mcp-server">
+   Postman
+  </a>
+  - Interact with
+  <a href="https://www.postman.com/postman/postman-public-workspace/">
+   Postman API
+  </a>
+  .
+ </li>
+<li>
+<img height="14" src="https://marketing.qasphere.com/images/logo/qasphere-square-512.png"/>
+<a href="https://github.com/Hypersequent/qasphere-mcp">
+   QA Sphere
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Integration with QA Sphere test management system, enabling LLMs to discover, summarize, and interact with test cases directly from AI-powered IDEs
+ </li>
+<li>
+<img height="14" src="https://raw.githubusercontent.com/marimo-team/marimo/main/docs/_static/marimo-logotype-thick.svg"/>
+<a href="https://github.com/marimo-team/codemirror-mcp">
+   marimo
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - CodeMirror extension that implements the Model Context Protocol (MCP) for resource mentions and prompt commands.
+ </li>
+<li>
+<img height="14" src="https://static.figma.com/app/icon/1/favicon.ico"/>
+<a href="https://github.com/GLips/Figma-Context-MCP">
+   Figma
+  </a>
+  - Paste a link to your Figma design to get its data in a ready-to-implement format.
+ </li>
+<li>
+<img height="14" src="https://www.comet.com/favicon.ico"/>
+<a href="https://github.com/comet-ml/opik-mcp">
+   Comet Opik
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Query and interact with LLM observability and telemetry captured by
+  <a href="https://github.com/comet-ml/opik">
+   Opik
+  </a>
+  using natural language.
+ </li>
+<li>
+<img height="14" src="https://vscode.dev/static/stable/favicon.ico"/>
+<a href="https://github.com/biegehydra/BifrostMCP">
+   VSCode Devtools
+  </a>
+  - Connect to VSCode ide and allows using semantic tools like
+  <code class="code">
+   find_usages
+  </code>
+</li>
+<li>
+<img height="14" src="https://mastra.ai/favicon/icon.svg"/>
+<a href="https://github.com/mastra-ai/mastra/tree/main/packages/mcp">
+   Mastra/mcp
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Provides AI assistants with direct access to Mastra.ai's complete knowledge base.
+ </li>
+<li>
+<img height="14" src="https://github.com/user-attachments/assets/9d517481-c4cd-4b6c-903a-878531c9d881"/>
+<a href="https://github.com/bucketco/bucket-javascript-sdk/tree/main/packages/cli#model-context-protocol">
+   Bucket
+  </a>
+  - Flag features, manage company data, and control feature access using
+  <a href="https://bucket.co">
+   Bucket
+  </a>
+</li>
+<li>
+<img height="14" src="https://edgeone.ai/favicon.ico"/>
+<a href="https://github.com/TencentEdgeOne/edgeone-pages-mcp">
+   EdgeOne Pages
+  </a>
+  - A MCP service for deploying HTML content to EdgeOne Pages and obtaining a publicly accessible URL.
+ </li>
+<li>
+<img height="14" src="https://cdn.jsdelivr.net/gh/jsdelivr/globalping-media@refs/heads/master/icons/android-chrome-192x192.png"/>
+<a href="https://github.com/jsdelivr/globalping-mcp-server">
+   Globalping MCP
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - Access a network of thousands of probes to run network commands like ping, traceroute, mtr, http and DNS resolve.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 📊
+ <a name="data-visualization">
+</a>
+ Data Visualization
+</h2>
+<blockquote>
+<p>
+  Tools for creating and managing data visualizations. Enables generation of charts, graphs, and other visual representations of data.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://vega.github.io/favicon.ico"/>
+<a href="https://github.com/isaacwasserman/mcp-vegalite-server">
+   VegaLite
+  </a>
+  - Generate visualizations from fetched data using the VegaLite format and renderer.
+ </li>
+<li>
+<img height="14" src="https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*ZFK8SrovcqgAAAAAAAAAAAAAemJ7AQ/original"/>
+<a href="https://github.com/antvis/mcp-server-chart">
+   Chart
+  </a>
+  - A Model Context Protocol server for generating visual charts using
+  <a href="https://github.com/antvis">
+   AntV
+  </a>
+  .
+ </li>
+<li>
+<img height="14" src="https://mermaid.js.org/favicon.svg"/>
+<a href="https://github.com/hustcc/mcp-mermaid">
+   Mermaid
+  </a>
+  - Generate
+  <a href="https://mermaid.js.org/">
+   mermaid
+  </a>
+  diagram and chart with AI MCP dynamically.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🆔
+ <a name="identity">
+</a>
+ Identity
+</h2>
+<blockquote>
+<p>
+  Tools for identity and access management. Enables user authentication, authorization.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://upload.wikimedia.org/wikipedia/commons/2/29/Keycloak_Logo.png"/>
+<a href="https://github.com/ChristophEnglisch/keycloak-model-context-protocol">
+   Keycloak
+  </a>
+  - MCP server implementation for managing Keycloak users, groups, and realms using natural language queries.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🔗
+ <a name="aggregators">
+</a>
+ Aggregators
+</h2>
+<blockquote>
+<p>
+  Tools for accessing many apps and tools through a single MCP server..
+ </p>
+</blockquote>
+<ul>
+<li>
+<p>
+<img alt="Pipedream Logo" height="12" src="https://pipedream.com/favicon.ico" width="12"/>
+<a href="https://github.com/PipedreamHQ/pipedream/tree/master/modelcontextprotocol">
+    Pipedream
+   </a>
+   - Connect with 2,500 APIs with 8,000+ prebuilt tools, and manage servers for your users, in your own app.
+  </p>
+</li>
+<li>
+<p>
+<img alt="Zapier Logo" height="12" src="https://cdn.zapier.com/zapier/images/favicon.ico" width="12"/>
+<a href="https://zapier.com/mcp">
+    Zapier
+   </a>
+   - Connect your AI Agents to 8,000 apps instantly.
+  </p>
+</li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 💬
+ <a name="language">
+</a>
+ Language &amp; Translation
+</h2>
+<blockquote>
+<p>
+  Provides real-time translation of text, documents, and content between multiple languages.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://laratranslate.com/favicon.ico"/>
+<a href="https://github.com/translated/lara-mcp">
+   Lara
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - MCP Server for Lara Translate API, enabling powerful translation capabilities with support for language detection and context-aware translations
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🔒
+ <a name="security">
+</a>
+ Security
+</h2>
+<blockquote>
+<p>
+  Tools for security needs. Enables securing code, finding vulnerabilies.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://semgrep.dev/favicon.ico"/>
+<a href="https://github.com/semgrep/mcp">
+   Semgrep
+  </a>
+  - A MCP server for using
+  <a href="https://github.com/semgrep/semgrep">
+   Semgrep
+  </a>
+  to scan code for security vulnerabilities.
+ </li>
+<li>
+<img height="14" src="https://www.netwrix.com/favicon.ico"/>
+<a href="https://github.com/netwrix/mcp-server-naa">
+   Netwrix
+  </a>
+<sup>
+<sup>
+    ⭐
+   </sup>
+</sup>
+  - A FastMCP-based server for
+  <a href="https://www.netwrix.com/access-analyzer.html">
+   Netwrix Access Analyzer
+  </a>
+  data analysis, designed for enhanced data analysis capabilities.
+  <br/>
+</li>
+</ul>
+<h2 class="heading">
+ 🔌
+ <a name="iot">
+</a>
+ IoT
+</h2>
+<blockquote>
+<p>
+  Tools that integrate with Internet of Things connectivity.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://avatars.githubusercontent.com/u/66228869?s=200&amp;v=4"/>
+<a href="https://github.com/CorefluxCommunity/CorefluxMCPServer">
+   Coreflux MQTT
+  </a>
+  - MCP server for the Coreflux MQTT broker, enabling AI agents to transfom the broker into a automation hub and interact with IoT devices and messaging systems through the MQTT protocol.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h2 class="heading">
+ 🧑‍🎨
+ <a name="art-literature">
+</a>
+ Art &amp; Literature
+</h2>
+<blockquote>
+<p>
+  Art and literature services.
+ </p>
+</blockquote>
+<ul>
+<li>
+<img height="14" src="https://openlibrary.org/static/images/openlibrary-logo-tighter.svg"/>
+<a href="https://github.com/8enSmith/mcp-open-library">
+   MCP Open Library
+  </a>
+  - A Model Context Protocol (MCP) server for the Internet Archive's Open Library API that enables AI assistants to search for book and author information.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<h1 class="heading">
+ Tools &amp; Utilities
+</h1>
+<blockquote>
+<p>
+  Tools that help manage, configure, and work with MCP servers. These utilities simplify the installation process and improve the user experience.
+ </p>
+</blockquote>
+<h3 class="heading">
+ Server Managers
+</h3>
+<ul>
+<li>
+<a href="https://github.com/michaellatman/mcp-get">
+   mcp-get
+  </a>
+  - CLI tool for installing and managing MCP servers. Simplifies server installation and configuration for Claude Desktop.
+ </li>
+<li>
+  Supports NPM-based servers
+ </li>
+<li>
+  Automatic configuration generation
+ </li>
+<li>
+  Easy server management
+ </li>
+<li>
+<a href="https://github.com/ssut/Remote-MCP">
+   Remote MCP
+  </a>
+  - Solution to Remote MCP Communication, enabling effortless integration for centralized management of Model Context
+ </li>
+<li>
+<a href="https://github.com/hamidra/yamcp">
+   yamcp
+  </a>
+  - A Model Context Workspace Manager. Oraganize your MCP servers in local workspaces (coding, design, research, ...), scan, monitor, and integrate each workspace with AI apps via a unified CLI.
+ </li>
+<li>
+<a href="https://github.com/StacklokLabs/toolhive">
+   ToolHive
+  </a>
+  - A lightweight utility designed to simplify the deployment and management of MCP servers, ensuring ease of use, consistency, and security through containerization.
+ </li>
+</ul>
+<p>
+<br/>
+</p>
+<p>
+ Please read the
+ <a href="CONTRIBUTING.md">
+  contribution guidelines
+ </a>
+ if you want to contribute.
+</p>
+<hr/>
+<h3 class="heading">
+ License
+</h3>
+<p>
+<a href="https://creativecommons.org/publicdomain/zero/1.0/">
+<img alt="CC0" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"/>
+</a>
+</p>
+<p>
+ To the extent possible under law,
+ <a href="https://github.com/appcypher">
+  Stephen Akinyemi
+ </a>
+ has waived all copyright and related or neighboring rights to this work.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/appcypher-awesome-mcp-servers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

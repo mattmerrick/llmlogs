@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Everything you need to know about Model Context Protocol (MCP) security.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Awesome MCP Security - MCP Directory">
+    <meta property="og:description" content="Everything you need to know about Model Context Protocol (MCP) security.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Awesome MCP Security - MCP Directory">
+    <meta name="twitter:description" content="Everything you need to know about Model Context Protocol (MCP) security.">
+    
+    <title>Awesome MCP Security - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Awesome MCP Security</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Awesome MCP Security</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 194</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Not specified</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">awesome-list</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> security</span><span class="topic-tag"> bugbounty</span><span class="topic-tag"> bugbountytips</span><span class="topic-tag"> cybers</span><span class="topic-tag"> exploit</span><span class="topic-tag"> pentesting</span><span class="topic-tag"> poc</span><span class="topic-tag"> writeups</span><span class="topic-tag"> security-writeups</span>
+                        </div>
+                        <a href="https://github.com/Puliczek/awesome-mcp-security" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Awesome MCP Security - MCP Directory" property="og:title"/>
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Awesome MCP Security - MCP Directory" name="twitter:title"/>
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." name="twitter:description"/>
+<title>Awesome MCP Security - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Awesome MCP Security</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Awesome MCP Security</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 194</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">awesome-list</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> security</span><span class="topic-tag"> bugbounty</span><span class="topic-tag"> bugbountytips</span><span class="topic-tag"> cybers</span><span class="topic-tag"> exploit</span><span class="topic-tag"> pentesting</span><span class="topic-tag"> poc</span><span class="topic-tag"> writeups</span><span class="topic-tag"> security-writeups</span>
+</div>
+<a class="github-link" href="https://github.com/Puliczek/awesome-mcp-security" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Awesome MCP Security - MCP Directory" property="og:title">
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." property="og:description">
+<meta content="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Awesome MCP Security - MCP Directory" name="twitter:title">
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." name="twitter:description">
+<title>Awesome MCP Security - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Awesome MCP Security</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 194</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">awesome-list</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> security</span><span class="topic-tag"> bugbounty</span><span class="topic-tag"> bugbountytips</span><span class="topic-tag"> cybers</span><span class="topic-tag"> exploit</span><span class="topic-tag"> pentesting</span><span class="topic-tag"> poc</span><span class="topic-tag"> writeups</span><span class="topic-tag"> security-writeups</span>
+</div>
+<a class="github-link" href="https://github.com/Puliczek/awesome-mcp-security" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Awesome MCP Security - MCP Directory" property="og:title"/>
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Awesome MCP Security - MCP Directory" name="twitter:title"/>
+<meta content="Everything you need to know about Model Context Protocol (MCP) security." name="twitter:description"/>
+<title>Awesome MCP Security - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Awesome MCP Security</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 194</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Not specified</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">awesome-list</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> security</span><span class="topic-tag"> bugbounty</span><span class="topic-tag"> bugbountytips</span><span class="topic-tag"> cybers</span><span class="topic-tag"> exploit</span><span class="topic-tag"> pentesting</span><span class="topic-tag"> poc</span><span class="topic-tag"> writeups</span><span class="topic-tag"> security-writeups</span>
+</div>
+<a class="github-link" href="https://github.com/Puliczek/awesome-mcp-security" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<div align="center">
+ 🤝 Show your support - give a ⭐️ if you liked the content
+</div>
+<hr/>
+<h1 class="heading">
+<strong>
+  Awesome MCP Security
+  <a href="https://awesome.re">
+<img alt="Awesome" src="https://awesome.re/badge.svg"/>
+</a>
+</strong>
+</h1>
+<p>
+ Everything you need to know about Model Context Protocol (MCP) security.
+</p>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#awesome-mcp-security-">
+   Awesome MCP Security
+  </a>
+</li>
+<li>
+  📔
+  <a href="#-security-considerations">
+   Security Considerations
+  </a>
+</li>
+<li>
+  📃
+  <a href="#-papers">
+   Papers
+  </a>
+</li>
+<li>
+  📺
+  <a href="#-videos">
+   Videos
+  </a>
+</li>
+<li>
+  📕
+  <a href="#-articles-x-threads-and-blog-posts">
+   Articles, X threads and Blog Posts
+  </a>
+</li>
+<li>
+  🧑‍🚀
+  <a href="#-tools-and-code">
+   Tools and code
+  </a>
+</li>
+<li>
+  💾
+  <a href="#-mcp-security-servers">
+   MCP Security Servers
+  </a>
+</li>
+<li>
+  💻
+  <a href="#-other-useful-resources">
+   Other Useful Resources
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 📔 Security Considerations
+</h2>
+<p>
+ Official Security Considerations from the
+ <a href="https://modelcontextprotocol.io/specification/2025-03-26/server/tools">
+  Official MCP Specification Rev: 2025-03-26
+ </a>
+</p>
+<blockquote>
+<p>
+  [!NOTE] 
+15.04.2025: The current MCP
+  <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization">
+   auth specification
+  </a>
+  is in progress of being replaced by a more
+  <a href="https://github.com/modelcontextprotocol/specification/pull/284">
+   robust specification
+  </a>
+  . Please join the conversation if you have concerns around the current auth specification.
+ </p>
+</blockquote>
+<ul>
+<li>
+  Servers
+  <strong>
+   MUST
+  </strong>
+  :
+ </li>
+<li>
+  Validate all tool inputs
+ </li>
+<li>
+  Implement proper access controls
+ </li>
+<li>
+  Rate limit tool invocations
+ </li>
+<li>
+<p>
+   Sanitize tool outputs
+  </p>
+</li>
+<li>
+<p>
+   Clients
+   <strong>
+    SHOULD
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Prompt for user confirmation on sensitive operations
+ </li>
+<li>
+  Show tool inputs to the user before calling the server, to avoid malicious or accidental data exfiltration
+ </li>
+<li>
+  Validate tool results before passing to LLM
+ </li>
+<li>
+  Implement timeouts for tool calls
+ </li>
+<li>
+  Log tool usage for audit purposes
+ </li>
+</ul>
+<blockquote>
+<p>
+  [!WARNING]
+  <br/>
+  For trust &amp; safety and security, clients
+  <strong>
+   MUST
+  </strong>
+  consider tool annotations to be untrusted unless they come from trusted servers.
+ </p>
+<p>
+  [!WARNING]
+  <br/>
+  For trust &amp; safety and security, there
+  <strong>
+   SHOULD
+  </strong>
+  always be a human in the loop* with the ability to deny tool invocations.
+ </p>
+<p>
+  Applications
+  <strong>
+   SHOULD
+  </strong>
+  :
+ </p>
+<ul>
+<li>
+   Provide UI that makes clear which tools are being exposed to the AI model.
+  </li>
+<li>
+   Insert clear visual indicators when tools are invoked.
+  </li>
+<li>
+   Present confirmation prompts to the user for operations, to ensure a human is in the loop.
+  </li>
+</ul>
+<p>
+  [!NOTE]
+  <br/>
+  *Human-in-the-Loop (HITL) means that user help monitor and guide automated tasks, like deciding whether to accept tool requests in Cursor.
+ </p>
+</blockquote>
+<h2 class="heading">
+ 📃 Papers
+</h2>
+<ul>
+<li>
+  (2025-05)
+  <a href="https://arxiv.org/pdf/2504.08623">
+   Enterprise-Grade Security for the Model Context Protocol (MCP): Frameworks and Mitigation Strategies
+  </a>
+</li>
+<li>
+  (2025-04)
+  <a href="https://arxiv.org/abs/2504.19997">
+   Simplified and Secure MCP Gateways for Enterprise AI Integration by Ivo Brett
+  </a>
+</li>
+<li>
+  (2025-04)
+  <a href="https://arxiv.org/abs/2504.12757">
+   MCP Guardian: A Security-First Layer for Safeguarding MCP-Based AI System by Sonu Kumar, Anubhav Girdhar, Ritesh Patil, Divyansh Tripathi
+  </a>
+</li>
+<li>
+  (2025-04)
+  <a href="https://arxiv.org/abs/2504.03767">
+   MCP Safety Audit: LLMs with the Model Context Protocol Allow Major Security Exploits by Brandon Radosevich, John Halloran
+  </a>
+</li>
+<li>
+  (2025-03)
+  <a href="https://arxiv.org/abs/2503.23278">
+   Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions by Xinyi Hou, Yanjie Zhao, Shenao Wang, Haoyu Wang
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 📺 Videos
+</h2>
+<ul>
+<li>
+  (17.05.2025)
+  <a href="https://www.youtube.com/watch?v=h_6unQxHyb4">
+   A2A - MCP SECURITY Threats: Protect your AI Agents by Discover AI
+  </a>
+</li>
+<li>
+  (11.04.2025)
+  <a href="https://www.youtube.com/watch?v=86e49wcXst4">
+   This MCP Server Trick Can Steal Your API Keys by Prompt Engineering
+  </a>
+</li>
+<li>
+  (09.04.2025)
+  <a href="https://www.youtube.com/watch?v=CRKYNyMc4PM">
+   MCP Servers are Security Nightmares... by Better Stack
+  </a>
+</li>
+<li>
+  (03.04.2025)
+  <a href="https://www.youtube.com/watch?v=LYUDUOevtqk">
+   MCP Security: Vetting Servers to Mitigate Tool Poisoning Attacks by JeredBlue
+  </a>
+</li>
+<li>
+  (03.04.2025)
+  <a href="https://www.youtube.com/watch?v=3DEqIquWCQ4">
+   Model Context Protocol (MCP) Security Concerns by Cory Wolff
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 📕 Articles, X threads and Blog Posts
+</h2>
+<ul>
+<li>
+  (30.05.2025)
+  <a href="https://www.cyberark.com/resources/threat-research-blog/poison-everywhere-no-output-from-your-mcp-server-is-safe">
+   Poison everywhere: No output from your MCP server is safe by Simcha Kosman
+  </a>
+</li>
+<li>
+  (26.05.2025)
+  <a href="https://invariantlabs.ai/blog/mcp-github-vulnerability">
+   GitHub MCP Exploited: Accessing private repositories via MCP by invariantlabs.ai
+  </a>
+</li>
+<li>
+  (20.05.2025)
+  <a href="https://blogs.windows.com/windowsexperience/2025/05/19/securing-the-model-context-protocol-building-a-safer-agentic-future-on-windows/">
+   Securing the Model Context Protocol: Building a safer agentic future on Windows
+  </a>
+</li>
+<li>
+  (16.05.2025)
+  <a href="https://www.prompthub.us/blog/mcp-security-in-2025">
+   MCP Security in 2025
+  </a>
+</li>
+<li>
+  (02.05.2025)
+  <a href="https://modelcontextprotocol.io/specification/draft/basic/security_best_practices">
+   Security Best Practices by Model Context Protocol
+  </a>
+</li>
+<li>
+  (19.04.2025)
+  <a href="https://defensiblesystems.substack.com/p/oauths-role-in-mcp-security">
+   OAuth's Role in MCP Security by Gunnar Peterson
+  </a>
+</li>
+<li>
+  (17.04.2025)
+  <a href="https://phala.network/posts/MCP-Not-Safe-Reasons-and-Ideas">
+   MCP Not Safe - Reasons and Ideas by Phala Network
+  </a>
+</li>
+<li>
+  (15.04.2025)
+  <a href="https://www.linkedin.com/posts/rakeshgohel01_mcp-can-be-a-security-nightmare-for-building-activity-7317536567315636225-zKFp/?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAB_LYZwBepPqbIN5g8KzxPVSyzHNUgJhBew">
+   MCP can be a security nightmare for building AI Agents by Rakesh Gohel
+  </a>
+</li>
+<li>
+  (15.04.2025)
+  <a href="https://chrismartorella.ghost.io/model-context-protocol-mcp-aka-multiple-cybersecurity-perils/">
+   Model Context Protocol (MCP) aka Multiple Cybersecurity Perils by Chris Martorella
+  </a>
+</li>
+<li>
+  (14.04.2025)
+  <a href="https://evren.ninja/mcp-security.html">
+   Model Context Protocol (MCP) Security by Evren
+  </a>
+</li>
+<li>
+  (14.04.2025)
+  <a href="https://medium.com/@foraisec/security-analysis-potential-ai-agent-hijacking-via-mcp-and-a2a-protocol-insights-cd1ec5e6045f">
+   Security Analysis: Potential AI Agent Hijacking via MCP and A2A Protocol Insights by Nicky
+  </a>
+</li>
+<li>
+  (14.04.2025)
+  <a href="https://github.com/slowmist/MCP-Security-Checklist">
+   MCP Security Checklist: A Security Guide for the AI Tool Ecosystem by slowmist
+  </a>
+</li>
+<li>
+  (13.04.2025)
+  <a href="https://blog.sshh.io/p/everything-wrong-with-mcp">
+   Everything Wrong with MCP by Shrivu Shankar
+  </a>
+</li>
+<li>
+  (11.04.2025)
+  <a href="https://www.descope.com/blog/post/mcp-auth-spec">
+   Diving Into the MCP Authorization Specification by Allen Zhou
+  </a>
+</li>
+<li>
+  (11.04.2025)
+  <a href="https://x.com/jlwhoo7/status/1911056723710026120">
+   Vulnerability Discovered in Base-MCP: Hackers Can Redirect Transactions on Cursor AI and Anthropic Claude by @jlwhoo7
+  </a>
+</li>
+<li>
+  (09.04.2025)
+  <a href="https://x.com/pulik_io/status/1910053590921535992">
+   Here's an example of remote MCP malware that steals your .env secrets in @cursor_ai by Maciej Pulikowski
+  </a>
+</li>
+<li>
+  (09.04.2025)
+  <a href="https://den.dev/blog/security-rakes-mcp/">
+   Old Security Rakes In New MCP Yards by Den Delimarsky
+  </a>
+</li>
+<li>
+  (09.04.2025)
+  <a href="https://simonwillison.net/2025/Apr/9/mcp-prompt-injection/">
+   Model Context Protocol has prompt injection security problems by Simon Willisons
+  </a>
+</li>
+<li>
+  (07.04.2025)
+  <a href="https://github.com/modelcontextprotocol/modelcontextprotocol/pull/284">
+   (RFC) Update the Authorization specification for MCP servers #284 by localden
+  </a>
+</li>
+<li>
+  (07.04.2025)
+  <a href="https://den.dev/blog/model-context-protocol-oauth-rfc/">
+   Improving The Model Context Protocol Authorization Spec - One RFC At A Time by Den Delimarsky
+  </a>
+</li>
+<li>
+  (07.04.2025)
+  <a href="https://docs.mcp.run/blog/2025/04/07/mcp-run-security/">
+   Running MCP Tools Securely by mcp.run
+  </a>
+</li>
+<li>
+  (07.04.2025)
+  <a href="https://invariantlabs.ai/blog/whatsapp-mcp-exploited">
+   WhatsApp MCP Exploited: Exfiltrating your message history via MCP by invariantlabs.ai
+  </a>
+</li>
+<li>
+  (07.04.2025)
+  <a href="https://auth0.com/blog/an-introduction-to-mcp-and-authorization/">
+   An Introduction to MCP and Authorization by auth0
+  </a>
+</li>
+<li>
+  (06.04.2025)
+  <a href="https://elenacross7.medium.com/%EF%B8%8F-the-s-in-mcp-stands-for-security-91407b33ed6b">
+   The “S” in MCP Stands for Security by Elena Cross
+  </a>
+</li>
+<li>
+  (04.04.2025)
+  <a href="https://medium.com/data-science-in-your-pocket/mcp-servers-are-not-safe-bfbc2bb7aef8">
+   MCP Servers are not safe! by Mehul Gupta
+  </a>
+</li>
+<li>
+  (03.04.2025)
+  <a href="https://aaronparecki.com/2025/04/03/15/oauth-for-model-context-protocol">
+   Let's fix OAuth in MCP by Aaron Parecki
+  </a>
+</li>
+<li>
+  (03.04.2025)
+  <a href="https://www.bernardiq.com/blog/resource-poisoning/">
+   MCP Resource Poisoning Prompt Injection Attacks by Bernard IQ
+  </a>
+</li>
+<li>
+  (01.04.2025)
+  <a href="https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks">
+   MCP Security Notification: Tool Poisoning Attacks by invariantlabs.ai
+  </a>
+</li>
+<li>
+  (31.03.2025)
+  <a href="https://blog.christianposta.com/the-updated-mcp-oauth-spec-is-a-mess/">
+   The MCP Authorization Spec Is... a Mess for Enterprise by Christian Posta
+  </a>
+</li>
+<li>
+  (31.03.2025)
+  <a href="https://block.github.io/goose/blog/2025/03/31/securing-mcp/">
+   Securing the Model Context Protocol by Alex Rosenzweig
+  </a>
+</li>
+<li>
+  (29.03.2025)
+  <a href="https://equixly.com/blog/2025/03/29/mcp-server-new-security-nightmare">
+   MCP Servers: The New Security Nightmare by equixly.com
+  </a>
+</li>
+<li>
+  (23.03.2025)
+  <a href="https://community.cisco.com/t5/security-blogs/ai-model-context-protocol-mcp-and-security/ba-p/5274394">
+   AI Model Context Protocol (MCP) and Security by Cisco
+  </a>
+</li>
+<li>
+  (13.02.2025)
+  <a href="https://forum.cursor.com/t/chained-commands-bypass-yolo-mode-denylist/50775">
+   Chained commands (&amp;&amp;) bypass yolo mode “denylist” in Cursor by lukemmtt
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 🧑‍🚀 Tools and code
+</h2>
+<ul>
+<li>
+<a href="https://github.com/oidebrett/mcpauth">
+   MCPAuth: Gateway Authentication for Secure Enterprise MCP Integrations by Oide Brett
+  </a>
+</li>
+<li>
+<a href="https://mcpserverscanner.com/">
+   mcpserverscanner.com by orgor
+  </a>
+</li>
+<li>
+<a href="https://mcpscan.ai/">
+   mcpscan.ai
+  </a>
+</li>
+<li>
+<a href="https://github.com/harishsg993010/damn-vulnerable-MCP-server">
+   Damn Vulnerable MCP Server by harishsg993010
+  </a>
+</li>
+<li>
+<a href="https://github.com/StacklokLabs/toolhive">
+   ToolHive - making MCP servers easy and secure by StacklokLabs
+  </a>
+</li>
+<li>
+<a href="https://github.com/riseandignite/mcp-shield">
+   MCP-Shield – Detect security issues in MCP servers by riseandignite
+  </a>
+</li>
+<li>
+<a href="https://github.com/invariantlabs-ai/mcp-scan">
+   mcp-scan by invariantlabs-ai
+  </a>
+</li>
+<li>
+<a href="https://github.com/cmpxchg16/mcp-ethical-hacking">
+   MCP Ethical Hacking by cmpxchg16
+  </a>
+</li>
+<li>
+<a href="https://github.com/invariantlabs-ai/mcp-injection-experiments">
+   mcp-injection-experiments by invariantlabs-ai
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ 💾 MCP Security Servers
+</h2>
+<ul>
+<li>
+<a href="https://github.com/Tencent/AI-Infra-Guard">
+   AI-Infra-Guard by Tencent Zhuque Lab
+  </a>
+  - MCP Server Security Analysis Tool - a comprehensive, intelligent, easy-to-use, and lightweight AI Infrastructure Vulnerability Assessment.
+ </li>
+<li>
+<a href="https://github.com/LaurieWired/GhidraMCP">
+   GhidraMCP by LaurieWired
+  </a>
+  - MCP server for automatic reverse engineering in Ghidra, a software reverse engineering platform.
+ </li>
+<li>
+<a href="https://github.com/mrexodia/ida-pro-mcp">
+   IDA-Pro-MCP by mrexodia
+  </a>
+  - MCP server for reverse engineering in IDA Pro, a tool for analyzing software and binary files.
+ </li>
+<li>
+<a href="https://github.com/MCPPhalanx/binaryninja-mcp">
+   binaryninja-mcp by MCPPhalanx
+  </a>
+  - MCP server for Binary Ninja, a binary analysis tool.
+ </li>
+<li>
+<a href="https://github.com/PortSwigger/mcp-server">
+   Burp Suite MCP by PortSwigger
+  </a>
+  - MCP integration for web security testing in Burp Suite, a security testing tool for web applications.
+ </li>
+<li>
+<a href="https://github.com/MorDavid/BloodHound-MCP-AI">
+   BloodHound-MCP-AI by MorDavid
+  </a>
+  - MCP server integration for BloodHound, a tool for analyzing Active Directory domains.
+ </li>
+<li>
+<a href="https://github.com/atomicchonk/roadrecon_mcp_server">
+   RoadRecon MCP by atomicchonk
+  </a>
+  - MCP server for Azure AD data analysis with ROADRecon, a tool for mapping Azure Active Directory environments.
+ </li>
+<li>
+<a href="https://github.com/mobilehackinglab/jadx-mcp-plugin">
+   Jadx MCP Plugin by mobilehackinglab
+  </a>
+  - Jadx plugin for MCP server access via HTTP, used for decompiling Android apps.
+ </li>
+<li>
+<a href="https://github.com/BurtTheCoder/mcp-virustotal">
+   VirusTotal MCP Server by BurtTheCoder
+  </a>
+  - MCP server for querying the VirusTotal API, a service for analyzing files and URLs for viruses.
+ </li>
+<li>
+<a href="https://github.com/BurtTheCoder/mcp-shodan">
+   Shodan MCP Server by BurtTheCoder
+  </a>
+  - MCP server for querying the Shodan API, which provides data on Internet-connected devices.
+ </li>
+<li>
+<a href="https://github.com/BurtTheCoder/mcp-dnstwist">
+   DNStwist MCP Server by BurtTheCoder
+  </a>
+  - MCP server for DNS fuzzing with dnstwist, a tool for detecting phishing and domain takeover threats.
+ </li>
+<li>
+<a href="https://github.com/BurtTheCoder/mcp-maigret">
+   Maigret MCP Server by BurtTheCoder
+  </a>
+  - MCP server for OSINT data collection with Maigret, a tool that gathers user info from various sources.
+ </li>
+</ul>
+<h2 class="heading">
+ 💻 Other Useful Resources
+</h2>
+<ul>
+<li>
+  (31.03.2025)
+  <a href="https://www.youtube.com/watch?v=HyzlYwjoXOQ">
+   I gave Claude root access to my server... Model Context Protocol explained by Fireship
+  </a>
+</li>
+<li>
+  (17.03.2025)
+  <a href="https://www.youtube.com/watch?v=VChRPFUzJGA">
+   Model Context Protocol (MCP): The Key To Agentic AI by Jack Herrington
+  </a>
+</li>
+<li>
+<a href="https://modelcontextprotocol.io/specification/2025-03-26/server/tools">
+   Official MCP Specification
+  </a>
+</li>
+<li>
+<a href="https://modelcontextprotocol.io/">
+   Model Context Protocol - Official MCP website
+  </a>
+</li>
+</ul>
+<h1 class="heading">
+ 😎 Contributing
+</h1>
+<p>
+ 👍🎉 First off, thanks for taking the time to contribute! 🎉👍
+</p>
+<p>
+<a href="https://github.com/Puliczek/awesome-mcp-security/blob/main/CONTRIBUTING.md">
+  Please read and follow our contributing guide
+ </a>
+</p>
+<p>
+ Thanks! 🦄
+</p>
+<h1 class="heading">
+ 🤝 Show your support
+</h1>
+<div>
+ 🤝 Show your support - give a ⭐️ if you liked the content
+</div>
+<h1 class="heading">
+ ✔️ Disclaimer
+</h1>
+<p>
+ This project can only be used for educational purposes. Using this resource against target systems without prior permission is illegal, and any damages from misuse of this software will not be the responsibility of the author.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/Puliczek-awesome-mcp-security.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

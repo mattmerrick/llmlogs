@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Telegram MCP Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/chigwell-telegram-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Telegram MCP Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Telegram MCP Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Telegram MCP Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Telegram MCP Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 163</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/chigwell/telegram-mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Telegram MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/chigwell-telegram-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Telegram MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Telegram MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Telegram MCP Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Telegram MCP Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 163</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chigwell/telegram-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Telegram MCP Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/chigwell-telegram-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Telegram MCP Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Telegram MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Telegram MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 163</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chigwell/telegram-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Telegram MCP Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/chigwell-telegram-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Telegram MCP Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Telegram MCP Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Telegram MCP Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 163</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/chigwell/telegram-mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Telegram MCP Server
+</h1>
+<p>
+<img alt="MCP Badge" src="https://badge.mcpx.dev"/>
+<a href="https://opensource.org/licenses/Apache-2.0">
+<img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache%202.0-green?style=flat-square"/>
+</a>
+<a href="https://github.com/chigwell/telegram-mcp/actions/workflows/python-lint-format.yml">
+<img alt="Python Lint &amp; Format Check" src="https://github.com/chigwell/telegram-mcp/actions/workflows/python-lint-format.yml/badge.svg"/>
+</a>
+<a href="https://github.com/chigwell/telegram-mcp/actions/workflows/docker-build.yml">
+<img alt="Docker Build &amp; Compose Validation" src="https://github.com/chigwell/telegram-mcp/actions/workflows/docker-build.yml/badge.svg"/>
+</a>
+</p>
+<hr/>
+<h2 class="heading">
+ 🤖 MCP in Action
+</h2>
+<p>
+ Here's a demonstration of the Telegram MCP capabilities in
+ <a href="https://docs.anthropic.com/en/docs/agents-and-tools/mcp">
+  Claude
+ </a>
+ :
+</p>
+<p>
+<strong>
+  Basic usage example:
+ </strong>
+</p>
+<p>
+<img alt="Telegram MCP in action" src="screenshots/1.png"/>
+</p>
+<ol>
+<li>
+<strong>
+   Example: Asking Claude to analyze chat history and send a response:
+  </strong>
+</li>
+</ol>
+<p>
+<img alt="Telegram MCP Request" src="screenshots/2.png"/>
+</p>
+<ol>
+<li>
+<strong>
+   Successfully sent message to the group:
+  </strong>
+</li>
+</ol>
+<p>
+<img alt="Telegram MCP Result" src="screenshots/3.png"/>
+</p>
+<p>
+ As you can see, the AI can seamlessly interact with your Telegram account, retrieving and displaying your chats, messages, and other data in a natural way.
+</p>
+<hr/>
+<p>
+ A full-featured Telegram integration for Claude, Cursor, and any MCP-compatible client, powered by
+ <a href="https://docs.telethon.dev/">
+  Telethon
+ </a>
+ and the
+ <a href="https://modelcontextprotocol.io/">
+  Model Context Protocol (MCP)
+ </a>
+ . This project lets you interact with your Telegram account programmatically, automating everything from messaging to group management.
+</p>
+<hr/>
+<h2 class="heading">
+ 🚀 Features &amp; Tools
+</h2>
+<p>
+ This MCP server exposes a huge suite of Telegram tools.
+ <strong>
+  Every major Telegram/Telethon feature is available as a tool!
+ </strong>
+</p>
+<h3 class="heading">
+ Chat &amp; Group Management
+</h3>
+<ul>
+<li>
+<strong>
+   get_chats(page, page_size)
+  </strong>
+  : Paginated list of chats
+ </li>
+<li>
+<strong>
+   list_chats(chat_type, limit)
+  </strong>
+  : List chats with metadata and filtering
+ </li>
+<li>
+<strong>
+   get_chat(chat_id)
+  </strong>
+  : Detailed info about a chat
+ </li>
+<li>
+<strong>
+   create_group(title, user_ids)
+  </strong>
+  : Create a new group
+ </li>
+<li>
+<strong>
+   create_channel(title, about, megagroup)
+  </strong>
+  : Create a channel or supergroup
+ </li>
+<li>
+<strong>
+   edit_chat_title(chat_id, title)
+  </strong>
+  : Change chat/group/channel title
+ </li>
+<li>
+<strong>
+   delete_chat_photo(chat_id)
+  </strong>
+  : Remove chat/group/channel photo
+ </li>
+<li>
+<strong>
+   leave_chat(chat_id)
+  </strong>
+  : Leave a group or channel
+ </li>
+<li>
+<strong>
+   get_participants(chat_id)
+  </strong>
+  : List all participants
+ </li>
+<li>
+<strong>
+   get_admins(chat_id)
+  </strong>
+  : List all admins
+ </li>
+<li>
+<strong>
+   get_banned_users(chat_id)
+  </strong>
+  : List all banned users
+ </li>
+<li>
+<strong>
+   promote_admin(chat_id, user_id)
+  </strong>
+  : Promote user to admin
+ </li>
+<li>
+<strong>
+   demote_admin(chat_id, user_id)
+  </strong>
+  : Demote admin to user
+ </li>
+<li>
+<strong>
+   ban_user(chat_id, user_id)
+  </strong>
+  : Ban user
+ </li>
+<li>
+<strong>
+   unban_user(chat_id, user_id)
+  </strong>
+  : Unban user
+ </li>
+<li>
+<strong>
+   get_invite_link(chat_id)
+  </strong>
+  : Get invite link
+ </li>
+<li>
+<strong>
+   export_chat_invite(chat_id)
+  </strong>
+  : Export invite link
+ </li>
+<li>
+<strong>
+   import_chat_invite(hash)
+  </strong>
+  : Join chat by invite hash
+ </li>
+<li>
+<strong>
+   join_chat_by_link(link)
+  </strong>
+  : Join chat by invite link
+ </li>
+</ul>
+<h3 class="heading">
+ Messaging
+</h3>
+<ul>
+<li>
+<strong>
+   get_messages(chat_id, page, page_size)
+  </strong>
+  : Paginated messages
+ </li>
+<li>
+<strong>
+   list_messages(chat_id, limit, search_query, from_date, to_date)
+  </strong>
+  : Filtered messages
+ </li>
+<li>
+<strong>
+   send_message(chat_id, message)
+  </strong>
+  : Send a message
+ </li>
+<li>
+<strong>
+   reply_to_message(chat_id, message_id, text)
+  </strong>
+  : Reply to a message
+ </li>
+<li>
+<strong>
+   edit_message(chat_id, message_id, new_text)
+  </strong>
+  : Edit your message
+ </li>
+<li>
+<strong>
+   delete_message(chat_id, message_id)
+  </strong>
+  : Delete a message
+ </li>
+<li>
+<strong>
+   forward_message(from_chat_id, message_id, to_chat_id)
+  </strong>
+  : Forward a message
+ </li>
+<li>
+<strong>
+   pin_message(chat_id, message_id)
+  </strong>
+  : Pin a message
+ </li>
+<li>
+<strong>
+   unpin_message(chat_id, message_id)
+  </strong>
+  : Unpin a message
+ </li>
+<li>
+<strong>
+   mark_as_read(chat_id)
+  </strong>
+  : Mark all as read
+ </li>
+<li>
+<strong>
+   get_message_context(chat_id, message_id, context_size)
+  </strong>
+  : Context around a message
+ </li>
+<li>
+<strong>
+   get_history(chat_id, limit)
+  </strong>
+  : Full chat history
+ </li>
+<li>
+<strong>
+   get_pinned_messages(chat_id)
+  </strong>
+  : List pinned messages
+ </li>
+<li>
+<strong>
+   get_last_interaction(contact_id)
+  </strong>
+  : Most recent message with a contact
+ </li>
+</ul>
+<h3 class="heading">
+ Contact Management
+</h3>
+<ul>
+<li>
+<strong>
+   list_contacts()
+  </strong>
+  : List all contacts
+ </li>
+<li>
+<strong>
+   search_contacts(query)
+  </strong>
+  : Search contacts
+ </li>
+<li>
+<strong>
+   add_contact(phone, first_name, last_name)
+  </strong>
+  : Add a contact
+ </li>
+<li>
+<strong>
+   delete_contact(user_id)
+  </strong>
+  : Delete a contact
+ </li>
+<li>
+<strong>
+   block_user(user_id)
+  </strong>
+  : Block a user
+ </li>
+<li>
+<strong>
+   unblock_user(user_id)
+  </strong>
+  : Unblock a user
+ </li>
+<li>
+<strong>
+   import_contacts(contacts)
+  </strong>
+  : Bulk import contacts
+ </li>
+<li>
+<strong>
+   export_contacts()
+  </strong>
+  : Export all contacts as JSON
+ </li>
+<li>
+<strong>
+   get_blocked_users()
+  </strong>
+  : List blocked users
+ </li>
+<li>
+<strong>
+   get_contact_ids()
+  </strong>
+  : List all contact IDs
+ </li>
+<li>
+<strong>
+   get_direct_chat_by_contact(contact_query)
+  </strong>
+  : Find direct chat with a contact
+ </li>
+<li>
+<strong>
+   get_contact_chats(contact_id)
+  </strong>
+  : List all chats with a contact
+ </li>
+</ul>
+<h3 class="heading">
+ User &amp; Profile
+</h3>
+<ul>
+<li>
+<strong>
+   get_me()
+  </strong>
+  : Get your user info
+ </li>
+<li>
+<strong>
+   update_profile(first_name, last_name, about)
+  </strong>
+  : Update your profile
+ </li>
+<li>
+<strong>
+   delete_profile_photo()
+  </strong>
+  : Remove your profile photo
+ </li>
+<li>
+<strong>
+   get_user_photos(user_id, limit)
+  </strong>
+  : Get a user's profile photos
+ </li>
+<li>
+<strong>
+   get_user_status(user_id)
+  </strong>
+  : Get a user's online status
+ </li>
+</ul>
+<h3 class="heading">
+ Media
+</h3>
+<ul>
+<li>
+<strong>
+   get_media_info(chat_id, message_id)
+  </strong>
+  : Get info about media in a message
+ </li>
+</ul>
+<h3 class="heading">
+ Search &amp; Discovery
+</h3>
+<ul>
+<li>
+<strong>
+   search_public_chats(query)
+  </strong>
+  : Search public chats/channels/bots
+ </li>
+<li>
+<strong>
+   search_messages(chat_id, query, limit)
+  </strong>
+  : Search messages in a chat
+ </li>
+<li>
+<strong>
+   resolve_username(username)
+  </strong>
+  : Resolve a username to ID
+ </li>
+</ul>
+<h3 class="heading">
+ Stickers, GIFs, Bots
+</h3>
+<ul>
+<li>
+<strong>
+   get_sticker_sets()
+  </strong>
+  : List sticker sets
+ </li>
+<li>
+<strong>
+   get_bot_info(bot_username)
+  </strong>
+  : Get info about a bot
+ </li>
+<li>
+<strong>
+   set_bot_commands(bot_username, commands)
+  </strong>
+  : Set bot commands (bot accounts only)
+ </li>
+</ul>
+<h3 class="heading">
+ Privacy, Settings, and Misc
+</h3>
+<ul>
+<li>
+<strong>
+   get_privacy_settings()
+  </strong>
+  : Get privacy settings
+ </li>
+<li>
+<strong>
+   set_privacy_settings(key, allow_users, disallow_users)
+  </strong>
+  : Set privacy settings
+ </li>
+<li>
+<strong>
+   mute_chat(chat_id)
+  </strong>
+  : Mute notifications
+ </li>
+<li>
+<strong>
+   unmute_chat(chat_id)
+  </strong>
+  : Unmute notifications
+ </li>
+<li>
+<strong>
+   archive_chat(chat_id)
+  </strong>
+  : Archive a chat
+ </li>
+<li>
+<strong>
+   unarchive_chat(chat_id)
+  </strong>
+  : Unarchive a chat
+ </li>
+<li>
+<strong>
+   get_recent_actions(chat_id)
+  </strong>
+  : Get recent admin actions
+ </li>
+</ul>
+<h2 class="heading">
+ Removed Functionality
+</h2>
+<p>
+ Please note that tools requiring direct file path access on the server (
+ <code class="code">
+  send_file
+ </code>
+ ,
+ <code class="code">
+  download_media
+ </code>
+ ,
+ <code class="code">
+  set_profile_photo
+ </code>
+ ,
+ <code class="code">
+  edit_chat_photo
+ </code>
+ ,
+ <code class="code">
+  send_voice
+ </code>
+ ,
+ <code class="code">
+  send_sticker
+ </code>
+ ,
+ <code class="code">
+  upload_file
+ </code>
+ ) have been removed from
+ <code class="code">
+  main.py
+ </code>
+ . This is due to limitations in the current MCP environment regarding handling file attachments and local file system paths.
+</p>
+<p>
+ Additionally, GIF-related tools (
+ <code class="code">
+  get_gif_search
+ </code>
+ ,
+ <code class="code">
+  get_saved_gifs
+ </code>
+ ,
+ <code class="code">
+  send_gif
+ </code>
+ ) have been removed due to ongoing issues with reliability in the Telethon library or Telegram API interactions.
+</p>
+<hr/>
+<h2 class="heading">
+ 📋 Requirements
+</h2>
+<ul>
+<li>
+  Python 3.10+
+ </li>
+<li>
+<a href="https://docs.telethon.dev/">
+   Telethon
+  </a>
+</li>
+<li>
+<a href="https://modelcontextprotocol.io/docs/">
+   MCP Python SDK
+  </a>
+</li>
+<li>
+<a href="https://claude.ai/desktop">
+   Claude Desktop
+  </a>
+  or
+  <a href="https://cursor.so/">
+   Cursor
+  </a>
+  (or any MCP client)
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 🔧 Installation &amp; Setup
+</h2>
+<h3 class="heading">
+ 1. Fork &amp; Clone
+</h3>
+<pre class="pre"><code class="language-bash code">git clone https://github.com/chigwell/telegram-mcp.git
+cd telegram-mcp
+</code></pre>
+<h3 class="heading">
+ 2. Create a Virtual Environment
+</h3>
+<pre class="pre"><code class="language-bash code">python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+</code></pre>
+<h3 class="heading">
+ 3. Generate a Session String
+</h3>
+<pre class="pre"><code class="language-bash code">python3 session_string_generator.py
+</code></pre>
+<p>
+ Follow the prompts to authenticate and update your
+ <code class="code">
+  .env
+ </code>
+ file.
+</p>
+<h3 class="heading">
+ 4. Configure .env
+</h3>
+<p>
+ Copy
+ <code class="code">
+  .env.example
+ </code>
+ to
+ <code class="code">
+  .env
+ </code>
+ and fill in your values:
+</p>
+<pre class="pre"><code class="code">TELEGRAM_API_ID=your_api_id_here
+TELEGRAM_API_HASH=your_api_hash_here
+TELEGRAM_SESSION_NAME=anon
+TELEGRAM_SESSION_STRING=your_session_string_here
+</code></pre>
+<p>
+ Get your API credentials at
+ <a href="https://my.telegram.org/apps">
+  my.telegram.org/apps
+ </a>
+ .
+</p>
+<hr/>
+<h2 class="heading">
+ 🐳 Running with Docker
+</h2>
+<p>
+ If you have Docker and Docker Compose installed, you can build and run the server in a container, simplifying dependency management.
+</p>
+<h3 class="heading">
+ 1. Build the Image
+</h3>
+<p>
+ From the project root directory, build the Docker image:
+</p>
+<pre class="pre"><code class="language-bash code">docker build -t telegram-mcp:latest .
+</code></pre>
+<h3 class="heading">
+ 2. Running the Container
+</h3>
+<p>
+ You have two options:
+</p>
+<p>
+<strong>
+  Option A: Using Docker Compose (Recommended for Local Use)
+ </strong>
+</p>
+<p>
+ This method uses the
+ <code class="code">
+  docker-compose.yml
+ </code>
+ file and automatically reads your credentials from a
+ <code class="code">
+  .env
+ </code>
+ file.
+</p>
+<ol>
+<li>
+<strong>
+   Create
+   <code class="code">
+    .env
+   </code>
+   File:
+  </strong>
+  Ensure you have a
+  <code class="code">
+   .env
+  </code>
+  file in the project root containing your
+  <code class="code">
+   TELEGRAM_API_ID
+  </code>
+  ,
+  <code class="code">
+   TELEGRAM_API_HASH
+  </code>
+  , and
+  <code class="code">
+   TELEGRAM_SESSION_STRING
+  </code>
+  (or
+  <code class="code">
+   TELEGRAM_SESSION_NAME
+  </code>
+  ). Use
+  <code class="code">
+   .env.example
+  </code>
+  as a template.
+ </li>
+<li>
+<strong>
+   Run Compose:
+  </strong>
+<code class="code">
+   bash
+    docker compose up --build
+  </code>
+<ul>
+<li>
+    Use
+    <code class="code">
+     docker compose up -d
+    </code>
+    to run in detached mode (background).
+   </li>
+<li>
+    Press
+    <code class="code">
+     Ctrl+C
+    </code>
+    to stop the server.
+   </li>
+</ul>
+</li>
+</ol>
+<p>
+<strong>
+  Option B: Using
+  <code class="code">
+   docker run
+  </code>
+</strong>
+</p>
+<p>
+ You can run the container directly, passing credentials as environment variables.
+</p>
+<pre class="pre"><code class="language-bash code">docker run -it --rm \
+  -e TELEGRAM_API_ID="YOUR_API_ID" \
+  -e TELEGRAM_API_HASH="YOUR_API_HASH" \
+  -e TELEGRAM_SESSION_STRING="YOUR_SESSION_STRING" \
+  telegram-mcp:latest
+</code></pre>
+<ul>
+<li>
+  Replace placeholders with your actual credentials.
+ </li>
+<li>
+  Use
+  <code class="code">
+   -e TELEGRAM_SESSION_NAME=your_session_file_name
+  </code>
+  instead of
+  <code class="code">
+   TELEGRAM_SESSION_STRING
+  </code>
+  if you prefer file-based sessions (requires volume mounting, see
+  <code class="code">
+   docker-compose.yml
+  </code>
+  for an example).
+ </li>
+<li>
+  The
+  <code class="code">
+   -it
+  </code>
+  flags are crucial for interacting with the server.
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ ⚙️ Configuration for Claude &amp; Cursor
+</h2>
+<h3 class="heading">
+ MCP Configuration
+</h3>
+<p>
+ Edit your Claude desktop config (e.g.
+ <code class="code">
+  ~/Library/Application Support/Claude/claude_desktop_config.json
+ </code>
+ ) or Cursor config (
+ <code class="code">
+  ~/.cursor/mcp.json
+ </code>
+ ):
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "telegram-mcp": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/full/path/to/telegram-mcp",
+        "run",
+        "main.py"
+      ]
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ 📝 Tool Examples with Code &amp; Output
+</h2>
+<p>
+ Below are examples of the most commonly used tools with their implementation and sample output.
+</p>
+<h3 class="heading">
+ Getting Your Chats
+</h3>
+<pre class="pre"><code class="language-python code">@mcp.tool()
+async def get_chats(page: int = 1, page_size: int = 20) -&gt; str:
+    """
+    Get a paginated list of chats.
+    Args:
+        page: Page number (1-indexed).
+        page_size: Number of chats per page.
+    """
+    try:
+        dialogs = await client.get_dialogs()
+        start = (page - 1) * page_size
+        end = start + page_size
+        if start &gt;= len(dialogs):
+            return "Page out of range."
+        chats = dialogs[start:end]
+        lines = []
+        for dialog in chats:
+            entity = dialog.entity
+            chat_id = entity.id
+            title = getattr(entity, "title", None) or getattr(entity, "first_name", "Unknown")
+            lines.append(f"Chat ID: {chat_id}, Title: {title}")
+        return "\n".join(lines)
+    except Exception as e:
+        logger.exception(f"get_chats failed (page={page}, page_size={page_size})")
+        return "An error occurred (code: GETCHATS-ERR-001). Check mcp_errors.log for details."
+</code></pre>
+<p>
+ Example output:
+</p>
+<pre class="pre"><code class="code">Chat ID: 123456789, Title: John Doe
+Chat ID: -100987654321, Title: My Project Group
+Chat ID: 111223344, Title: Jane Smith
+Chat ID: -200123456789, Title: News Channel
+</code></pre>
+<h3 class="heading">
+ Sending Messages
+</h3>
+<pre class="pre"><code class="language-python code">@mcp.tool()
+async def send_message(chat_id: int, message: str) -&gt; str:
+    """
+    Send a message to a specific chat.
+    Args:
+        chat_id: The ID of the chat.
+        message: The message content to send.
+    """
+    try:
+        entity = await client.get_entity(chat_id)
+        await client.send_message(entity, message)
+        return "Message sent successfully."
+    except Exception as e:
+        logger.exception(f"send_message failed (chat_id={chat_id})")
+        return "An error occurred (code: SENDMSG-ERR-001). Check mcp_errors.log for details."
+</code></pre>
+<p>
+ Example output:
+</p>
+<pre class="pre"><code class="code">Message sent successfully.
+</code></pre>
+<h3 class="heading">
+ Getting Chat Invite Links
+</h3>
+<p>
+ The
+ <code class="code">
+  get_invite_link
+ </code>
+ function is particularly robust with multiple fallback methods:
+</p>
+<pre class="pre"><code class="language-python code">@mcp.tool()
+async def get_invite_link(chat_id: int) -&gt; str:
+    """
+    Get the invite link for a group or channel.
+    """
+    try:
+        entity = await client.get_entity(chat_id)
+
+        # Try using ExportChatInviteRequest first
+        try:
+            from telethon.tl import functions
+            result = await client(functions.messages.ExportChatInviteRequest(
+                peer=entity
+            ))
+            return result.link
+        except AttributeError:
+            # If the function doesn't exist in the current Telethon version
+            logger.warning("ExportChatInviteRequest not available, using alternative method")
+        except Exception as e1:
+            # If that fails, log and try alternative approach
+            logger.warning(f"ExportChatInviteRequest failed: {e1}")
+
+        # Alternative approach using client.export_chat_invite_link
+        try:
+            invite_link = await client.export_chat_invite_link(entity)
+            return invite_link
+        except Exception as e2:
+            logger.warning(f"export_chat_invite_link failed: {e2}")
+
+        # Last resort: Try directly fetching chat info
+        try:
+            if isinstance(entity, (Chat, Channel)):
+                full_chat = await client(functions.messages.GetFullChatRequest(
+                    chat_id=entity.id
+                ))
+                if hasattr(full_chat, 'full_chat') and hasattr(full_chat.full_chat, 'invite_link'):
+                    return full_chat.full_chat.invite_link or "No invite link available."
+        except Exception as e3:
+            logger.warning(f"GetFullChatRequest failed: {e3}")
+
+        return "Could not retrieve invite link for this chat."
+    except Exception as e:
+        logger.exception(f"get_invite_link failed (chat_id={chat_id})")
+        return f"Error getting invite link: {e}"
+</code></pre>
+<p>
+ Example output:
+</p>
+<pre class="pre"><code class="code">https://t.me/+AbCdEfGhIjKlMnOp
+</code></pre>
+<h3 class="heading">
+ Joining Chats via Invite Links
+</h3>
+<pre class="pre"><code class="language-python code">@mcp.tool()
+async def join_chat_by_link(link: str) -&gt; str:
+    """
+    Join a chat by invite link.
+    """
+    try:
+        # Extract the hash from the invite link
+        if '/' in link:
+            hash_part = link.split('/')[-1]
+            if hash_part.startswith('+'):
+                hash_part = hash_part[1:]  # Remove the '+' if present
+        else:
+            hash_part = link
+
+        # Try checking the invite before joining
+        try:
+            # Try to check invite info first (will often fail if not a member)
+            invite_info = await client(functions.messages.CheckChatInviteRequest(hash=hash_part))
+            if hasattr(invite_info, 'chat') and invite_info.chat:
+                # If we got chat info, we're already a member
+                chat_title = getattr(invite_info.chat, 'title', 'Unknown Chat')
+                return f"You are already a member of this chat: {chat_title}"
+        except Exception:
+            # This often fails if not a member - just continue
+            pass
+
+        # Join the chat using the hash
+        result = await client(functions.messages.ImportChatInviteRequest(hash=hash_part))
+        if result and hasattr(result, 'chats') and result.chats:
+            chat_title = getattr(result.chats[0], 'title', 'Unknown Chat')
+            return f"Successfully joined chat: {chat_title}"
+        return f"Joined chat via invite hash."
+    except Exception as e:
+        err_str = str(e).lower()
+        if "expired" in err_str:
+            return "The invite hash has expired and is no longer valid."
+        elif "invalid" in err_str:
+            return "The invite hash is invalid or malformed."
+        elif "already" in err_str and "participant" in err_str:
+            return "You are already a member of this chat."
+        logger.exception(f"join_chat_by_link failed (link={link})")
+        return f"Error joining chat: {e}"
+</code></pre>
+<p>
+ Example output:
+</p>
+<pre class="pre"><code class="code">Successfully joined chat: Developer Community
+</code></pre>
+<h3 class="heading">
+ Searching Public Chats
+</h3>
+<pre class="pre"><code class="language-python code">@mcp.tool()
+async def search_public_chats(query: str) -&gt; str:
+    """
+    Search for public chats, channels, or bots by username or title.
+    """
+    try:
+        result = await client(functions.contacts.SearchRequest(q=query, limit=20))
+        return json.dumps([format_entity(u) for u in result.users], indent=2)
+    except Exception as e:
+        return f"Error searching public chats: {e}"
+</code></pre>
+<p>
+ Example output:
+</p>
+<pre class="pre"><code class="language-json code">[
+  {
+    "id": 123456789,
+    "name": "TelegramBot",
+    "type": "user",
+    "username": "telegram_bot"
+  },
+  {
+    "id": 987654321,
+    "name": "Telegram News",
+    "type": "user",
+    "username": "telegram_news"
+  }
+]
+</code></pre>
+<h3 class="heading">
+ Getting Direct Chats with Contacts
+</h3>
+<pre class="pre"><code class="language-python code">@mcp.tool()
+async def get_direct_chat_by_contact(contact_query: str) -&gt; str:
+    """
+    Find a direct chat with a specific contact by name, username, or phone.
+
+    Args:
+        contact_query: Name, username, or phone number to search for.
+    """
+    try:
+        # Fetch all contacts using the correct Telethon method
+        result = await client(functions.contacts.GetContactsRequest(hash=0))
+        contacts = result.users
+        found_contacts = []
+        for contact in contacts:
+            if not contact:
+                continue
+            name = f"{getattr(contact, 'first_name', '')} {getattr(contact, 'last_name', '')}".strip()
+            username = getattr(contact, 'username', '')
+            phone = getattr(contact, 'phone', '')
+            if (contact_query.lower() in name.lower() or 
+                (username and contact_query.lower() in username.lower()) or 
+                (phone and contact_query in phone)):
+                found_contacts.append(contact)
+        if not found_contacts:
+            return f"No contacts found matching '{contact_query}'."
+        # If we found contacts, look for direct chats with them
+        results = []
+        dialogs = await client.get_dialogs()
+        for contact in found_contacts:
+            contact_name = f"{getattr(contact, 'first_name', '')} {getattr(contact, 'last_name', '')}".strip()
+            for dialog in dialogs:
+                if isinstance(dialog.entity, User) and dialog.entity.id == contact.id:
+                    chat_info = f"Chat ID: {dialog.entity.id}, Contact: {contact_name}"
+                    if getattr(contact, 'username', ''):
+                        chat_info += f", Username: @{contact.username}"
+                    if dialog.unread_count:
+                        chat_info += f", Unread: {dialog.unread_count}"
+                    results.append(chat_info)
+                    break
+
+        if not results:
+            return f"Found contacts matching '{contact_query}', but no direct chats with them."
+
+        return "\n".join(results)
+    except Exception as e:
+        return f"Error searching for direct chat: {e}"
+</code></pre>
+<p>
+ Example output:
+</p>
+<pre class="pre"><code class="code">Chat ID: 123456789, Contact: John Smith, Username: @johnsmith, Unread: 3
+</code></pre>
+<hr/>
+<h2 class="heading">
+ 🎮 Usage Examples
+</h2>
+<ul>
+<li>
+  "Show my recent chats"
+ </li>
+<li>
+  "Send 'Hello world' to chat 123456789"
+ </li>
+<li>
+  "Add contact with phone +1234567890, name John Doe"
+ </li>
+<li>
+  "Create a group 'Project Team' with users 111, 222, 333"
+ </li>
+<li>
+  "Download the media from message 42 in chat 123456789"
+ </li>
+<li>
+  "Mute notifications for chat 123456789"
+ </li>
+<li>
+  "Promote user 111 to admin in group 123456789"
+ </li>
+<li>
+  "Search for public channels about 'news'"
+ </li>
+<li>
+  "Join the Telegram group with invite link https://t.me/+AbCdEfGhIjK"
+ </li>
+<li>
+  "Send a sticker to my Saved Messages"
+ </li>
+<li>
+  "Get all my sticker sets"
+ </li>
+</ul>
+<p>
+ You can use these tools via natural language in Claude, Cursor, or any MCP-compatible client.
+</p>
+<hr/>
+<h2 class="heading">
+ 🧠 Error Handling &amp; Robustness
+</h2>
+<p>
+ This implementation includes comprehensive error handling:
+</p>
+<ul>
+<li>
+<strong>
+   Session management
+  </strong>
+  : Works with both file-based and string-based sessions
+ </li>
+<li>
+<strong>
+   Error reporting
+  </strong>
+  : Detailed errors logged to
+  <code class="code">
+   mcp_errors.log
+  </code>
+</li>
+<li>
+<strong>
+   Graceful degradation
+  </strong>
+  : Multiple fallback approaches for critical functions
+ </li>
+<li>
+<strong>
+   User-friendly messages
+  </strong>
+  : Clear, actionable error messages instead of technical errors
+ </li>
+<li>
+<strong>
+   Account type detection
+  </strong>
+  : Functions that require bot accounts detect and notify when used with user accounts
+ </li>
+<li>
+<strong>
+   Invite link processing
+  </strong>
+  : Handles various link formats and already-member cases
+ </li>
+</ul>
+<p>
+ The code is designed to be robust against common Telegram API issues and limitations.
+</p>
+<hr/>
+<h2 class="heading">
+ 🛠️ Contribution Guide
+</h2>
+<ol>
+<li>
+<strong>
+   Fork this repo:
+  </strong>
+<a href="https://github.com/chigwell/telegram-mcp">
+   chigwell/telegram-mcp
+  </a>
+</li>
+<li>
+<strong>
+   Clone your fork:
+  </strong>
+<code class="code">
+   bash
+   git clone https://github.com/&lt;your-github-username&gt;/telegram-mcp.git
+  </code>
+</li>
+<li>
+<strong>
+   Create a new branch:
+  </strong>
+<code class="code">
+   bash
+   git checkout -b my-feature
+  </code>
+</li>
+<li>
+<strong>
+   Make your changes, add tests/docs if needed.
+  </strong>
+</li>
+<li>
+<strong>
+   Push and open a Pull Request
+  </strong>
+  to
+  <a href="https://github.com/chigwell/telegram-mcp">
+   chigwell/telegram-mcp
+  </a>
+  with a clear description.
+ </li>
+<li>
+<strong>
+   Tag @chigwell or @l1v0n1
+  </strong>
+  in your PR for review.
+ </li>
+</ol>
+<hr/>
+<h2 class="heading">
+ 🔒 Security Considerations
+</h2>
+<ul>
+<li>
+<strong>
+   Never commit your
+   <code class="code">
+    .env
+   </code>
+   or session string.
+  </strong>
+</li>
+<li>
+  The session string gives full access to your Telegram account—keep it safe!
+ </li>
+<li>
+  All processing is local; no data is sent anywhere except Telegram's API.
+ </li>
+<li>
+  Use
+  <code class="code">
+   .env.example
+  </code>
+  as a template and keep your actual
+  <code class="code">
+   .env
+  </code>
+  file private.
+ </li>
+<li>
+  Test files are automatically excluded in
+  <code class="code">
+   .gitignore
+  </code>
+  .
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 🛠️ Troubleshooting
+</h2>
+<ul>
+<li>
+<strong>
+   Check logs
+  </strong>
+  in your MCP client (Claude/Cursor) and the terminal for errors.
+ </li>
+<li>
+<strong>
+   Detailed error logs
+  </strong>
+  can be found in
+  <code class="code">
+   mcp_errors.log
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   Interpreter errors?
+  </strong>
+  Make sure your
+  <code class="code">
+   .venv
+  </code>
+  is created and selected.
+ </li>
+<li>
+<strong>
+   Database lock?
+  </strong>
+  Use session string authentication, not file-based sessions.
+ </li>
+<li>
+<strong>
+   iCloud/Dropbox issues?
+  </strong>
+  Move your project to a local path without spaces if you see odd errors.
+ </li>
+<li>
+<strong>
+   Regenerate session string
+  </strong>
+  if you change your Telegram password or see auth errors.
+ </li>
+<li>
+<strong>
+   Bot-only functions
+  </strong>
+  will show clear messages when used with regular user accounts.
+ </li>
+<li>
+<strong>
+   Test script failures?
+  </strong>
+  Check test configuration in
+  <code class="code">
+   .env
+  </code>
+  for valid test accounts/groups.
+ </li>
+</ul>
+<hr/>
+<h2 class="heading">
+ 📄 License
+</h2>
+<p>
+ This project is licensed under the
+ <a href="LICENSE">
+  Apache 2.0 License
+ </a>
+ .
+</p>
+<hr/>
+<h2 class="heading">
+ 🙏 Acknowledgements
+</h2>
+<ul>
+<li>
+<a href="https://github.com/LonamiWebs/Telethon">
+   Telethon
+  </a>
+</li>
+<li>
+<a href="https://modelcontextprotocol.io/">
+   Model Context Protocol
+  </a>
+</li>
+<li>
+<a href="https://www.anthropic.com/">
+   Claude
+  </a>
+  and
+  <a href="https://cursor.so/">
+   Cursor
+  </a>
+</li>
+<li>
+<a href="https://github.com/chigwell/telegram-mcp">
+   chigwell/telegram-mcp
+  </a>
+  (upstream)
+ </li>
+</ul>
+<hr/>
+<p>
+<strong>
+  Maintained by
+  <a href="https://github.com/chigwell">
+   @chigwell
+  </a>
+  and
+  <a href="https://github.com/l1v0n1">
+   @l1v0n1
+  </a>
+  . PRs welcome!
+ </strong>
+</p>
+<h2 class="heading">
+ Star History
+</h2>
+<p>
+<a href="https://www.star-history.com/#chigwell/telegram-mcp&amp;Date">
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=chigwell/telegram-mcp&amp;type=Date"/>
+</a>
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chigwell-telegram-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chigwell-telegram-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/chigwell-telegram-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/chigwell-telegram-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

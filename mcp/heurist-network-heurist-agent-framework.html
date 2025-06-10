@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Heurist Agent Framework - MCP Directory">
+    <meta property="og:description" content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Heurist Agent Framework - MCP Directory">
+    <meta name="twitter:description" content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP.">
+    
+    <title>Heurist Agent Framework - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Heurist Agent Framework</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Heurist Agent Framework</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 564</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">agentic-framework</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> agentic-ai</span>
+                        </div>
+                        <a href="https://github.com/heurist-network/heurist-agent-framework" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Heurist Agent Framework - MCP Directory" property="og:title"/>
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Heurist Agent Framework - MCP Directory" name="twitter:title"/>
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." name="twitter:description"/>
+<title>Heurist Agent Framework - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Heurist Agent Framework</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Heurist Agent Framework</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 564</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-framework</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> agentic-ai</span>
+</div>
+<a class="github-link" href="https://github.com/heurist-network/heurist-agent-framework" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Heurist Agent Framework - MCP Directory" property="og:title">
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." property="og:description">
+<meta content="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Heurist Agent Framework - MCP Directory" name="twitter:title">
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." name="twitter:description">
+<title>Heurist Agent Framework - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Heurist Agent Framework</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 564</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-framework</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> agentic-ai</span>
+</div>
+<a class="github-link" href="https://github.com/heurist-network/heurist-agent-framework" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Heurist Agent Framework - MCP Directory" property="og:title"/>
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Heurist Agent Framework - MCP Directory" name="twitter:title"/>
+<meta content="A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP." name="twitter:description"/>
+<title>Heurist Agent Framework - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Heurist Agent Framework</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 564</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">agentic-framework</span><span class="topic-tag"> ai</span><span class="topic-tag"> mcp</span><span class="topic-tag"> agentic-ai</span>
+</div>
+<a class="github-link" href="https://github.com/heurist-network/heurist-agent-framework" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<div align="center">
+<img alt="Heurist Agent Framework Banner" src="./docs/img/agent-framework-poster.jpg" width="100%"/>
+</div>
+<h1 class="heading">
+ Heurist Agent Framework
+</h1>
+<p>
+ A flexible multi-interface AI agent framework that can interact through various platforms including Telegram, Discord, Twitter, Farcaster, REST API, and MCP.
+</p>
+<p>
+ Grab a Heurist API Key instantly for free by using the code 'agent' while submitting the form on https://heurist.ai/dev-access
+</p>
+<hr/>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ The Heurist Agent Framework is built on a modular architecture that allows an AI agent to:
+</p>
+<ul>
+<li>
+  Process text and voice messages
+ </li>
+<li>
+  Generate images and videos
+ </li>
+<li>
+  Interact across multiple platforms with consistent behavior
+ </li>
+<li>
+  Fetch and store information in a knowledge base (Postgres and SQLite supported)
+ </li>
+<li>
+  Access external APIs, tools, and a wide range of
+  <a href="./mesh/README.md">
+   Mesh Agents
+  </a>
+  to compose complex workflows
+ </li>
+</ul>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#features">
+   Features
+  </a>
+</li>
+<li>
+<a href="#heurist-mesh">
+   Heurist Mesh
+  </a>
+</li>
+<li>
+<a href="#mcp-support">
+   MCP Support
+  </a>
+</li>
+<li>
+<a href="#recommended-mesh-agents">
+   Recommended Mesh Agents
+  </a>
+</li>
+<li>
+<a href="#full-list-of-mesh-agents">
+   Full List of Mesh Agents
+  </a>
+</li>
+<li>
+<a href="#usage-and-development-guide">
+   Usage and Development Guide
+  </a>
+</li>
+<li>
+<a href="#heurist-agent-framework-architecture">
+   Heurist Agent Framework Architecture
+  </a>
+</li>
+<li>
+<a href="#agent-structure">
+   Agent Structure
+  </a>
+</li>
+<li>
+<a href="#agent-interfaces">
+   Agent Interfaces
+  </a>
+</li>
+<li>
+<a href="#heurist-core">
+   Heurist Core
+  </a>
+<ul>
+<li>
+<a href="#components">
+     Components
+    </a>
+</li>
+<li>
+<a href="#workflows">
+     Workflows
+    </a>
+</li>
+<li>
+<a href="#tool-management">
+     Tool Management
+    </a>
+</li>
+<li>
+<a href="#external-clients">
+     External Clients
+    </a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#agent-usage-and-development-guide">
+   Agent Usage and Development Guide
+  </a>
+</li>
+<li>
+<a href="#development-setup">
+   Development Setup
+  </a>
+</li>
+<li>
+<a href="#how-to-use-github-issues">
+   How to Use GitHub Issues
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+<li>
+<a href="#contributing">
+   Contributing
+  </a>
+</li>
+<li>
+<a href="#support">
+   Support
+  </a>
+</li>
+<li>
+<a href="#star-history">
+   Star History
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Features
+</h2>
+<ul>
+<li>
+  🤖
+  <strong>
+   Core Agent
+  </strong>
+  - Modular framework with advanced LLM integration
+ </li>
+<li>
+  🧩
+  <strong>
+   Component Architecture
+  </strong>
+  - Plug-and-play components for flexible agent or agentic application design
+ </li>
+<li>
+  🔄
+  <strong>
+   Workflow System
+  </strong>
+  - RAG, Chain of Thought, and Research workflows
+ </li>
+<li>
+  🖼️
+  <strong>
+   Media Generation
+  </strong>
+  - Image creation and processing capabilities
+ </li>
+<li>
+  🎤
+  <strong>
+   Voice Processing
+  </strong>
+  - Audio transcription and text-to-speech
+ </li>
+<li>
+  💾
+  <strong>
+   Vector Storage
+  </strong>
+  - Knowledge retrieval with PostgreSQL/SQLite support
+ </li>
+<li>
+  🛠️
+  <strong>
+   Tool Integration
+  </strong>
+  - Extensible tool framework with MCP support
+ </li>
+<li>
+  🌐
+  <strong>
+   Mesh Agent Access
+  </strong>
+  - Connect to community-contributed specialized agents via API or MCP
+ </li>
+<li>
+  🔌
+  <strong>
+   Multi-platform Support
+  </strong>
+  :
+ </li>
+<li>
+  Telegram bot
+ </li>
+<li>
+  Discord bot
+ </li>
+<li>
+  Twitter automation
+ </li>
+<li>
+  Farcaster integration
+ </li>
+<li>
+  REST API
+ </li>
+<li>
+  MCP integration
+ </li>
+</ul>
+<h2 class="heading">
+ Heurist Mesh
+</h2>
+<p>
+<img alt="mesh" src="https://github.com/user-attachments/assets/77a2ab3b-e35c-4313-8a5b-a0e751cac879"/>
+</p>
+<p>
+<strong>
+  Heurist Mesh
+ </strong>
+ is an open network where AI agents are contributed by the community and used modularly—similar to DeFi smart contracts. Each agent is a specialized unit that can process data, generate reports, or perform actions while collectively forming an intelligent swarm to tackle complex tasks. Each agent is accessible via a unified REST API interface, and can be used in conjunction with any agent framework or application.
+</p>
+<p>
+ Want to contribute your own agent? Check out the
+ <a href="./mesh/README.md">
+  Mesh README
+ </a>
+ for detailed guidelines, examples, and best practices.
+</p>
+<h3 class="heading">
+ MCP Support
+</h3>
+<p>
+<strong>
+  Just In:
+ </strong>
+ All Heurist Mesh agents are accessible via MCP! This means you can access them from your favorite MCP client, including
+ <a href="https://claude.ai/download">
+  Claude Desktop
+ </a>
+ ,
+ <a href="https://www.cursor.com/">
+  Cursor
+ </a>
+ , and
+ <a href="https://codeium.com/windsurf">
+  Windsurf
+ </a>
+ .
+</p>
+<p>
+ Head to
+ <a href="https://github.com/heurist-network/heurist-mesh-mcp-server">
+  heurist-mesh-mcp-server
+ </a>
+ to set up a server and give your AI assistant a powerup.
+</p>
+<h3 class="heading">
+ Recommended Mesh Agents
+</h3>
+<p>
+ •
+ <a href="./mesh/agents/bitquery_solana_token_info_agent.py">
+  BitquerySolanaTokenInfoAgent
+ </a>
+ - Provides comprehensive analysis of Solana tokens including metrics, holders, trading activity, and trending token discovery
+</p>
+<p>
+ •
+ <a href="./mesh/agents/coingecko_token_info_agent.py">
+  CoinGeckoTokenInfoAgent
+ </a>
+ - Fetches token information, market data, trending coins, and category data from CoinGecko
+</p>
+<p>
+ •
+ <a href="./mesh/agents/dexscreener_token_info_agent.py">
+  DexScreenerTokenInfoAgent
+ </a>
+ - Fetches real-time DEX trading data and token information across multiple chains
+</p>
+<p>
+ •
+ <a href="./mesh/agents/elfa_twitter_intelligence_agent.py">
+  ElfaTwitterIntelligenceAgent
+ </a>
+ - Analyzes tokens, topics or Twitter accounts using Twitter data, highlighting smart influencers
+</p>
+<p>
+ •
+ <a href="./mesh/agents/exa_search_agent.py">
+  ExaSearchAgent
+ </a>
+ - Searches the web and provides direct answers to questions
+</p>
+<p>
+ •
+ <a href="./mesh/agents/goplus_analysis_agent.py">
+  GoplusAnalysisAgent
+ </a>
+ - Fetches and analyzes security details of blockchain token contracts
+</p>
+<p>
+ •
+ <a href="./mesh/agents/metasleuth_sol_token_wallet_cluster_agent.py">
+  MetaSleuthSolTokenWalletClusterAgent
+ </a>
+ - Analyzes wallet clusters holding Solana tokens to identify holder behavior, concentration, and potential market manipulation
+</p>
+<p>
+ •
+ <a href="./mesh/agents/pumpfun_token_agent.py">
+  PumpFunTokenAgent
+ </a>
+ - Analyzes Pump.fun tokens on Solana, tracking token creation and graduation events
+</p>
+<p>
+ •
+ <a href="./mesh/agents/sol_wallet_agent.py">
+  SolWalletAgent
+ </a>
+ - Queries Solana wallet assets and recent swap transactions
+</p>
+<h3 class="heading">
+ Full List of Mesh Agents
+</h3>
+<p>
+<a href="./mesh/README.md#appendix-all-available-mesh-agents">
+  View the full list
+ </a>
+</p>
+<h3 class="heading">
+ Usage and Development Guide
+</h3>
+<p>
+<a href="./mesh/README.md">
+  Read the Mesh documentation
+ </a>
+</p>
+<h2 class="heading">
+ Heurist Agent Framework Architecture
+</h2>
+<p>
+ The framework follows a modular, component-based architecture:
+</p>
+<div align="center">
+<img alt="Heurist Agent Framework" src="./docs/img/agent_hl.png" width="75%"/>
+</div>
+<h3 class="heading">
+ Agent Structure
+</h3>
+<ol>
+<li>
+<p>
+<strong>
+    BaseAgent
+   </strong>
+   (Abstract Base Class)
+  </p>
+</li>
+<li>
+<p>
+   Defines the interface and common functionality
+  </p>
+</li>
+<li>
+  Manages component initialization and lifecycle
+ </li>
+<li>
+<p>
+   Implements core messaging patterns
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    CoreAgent
+   </strong>
+   (Concrete Implementation)
+  </p>
+</li>
+<li>
+  Implements BaseAgent functionality
+ </li>
+<li>
+  Orchestrates components and workflows
+ </li>
+<li>
+  Handles decision-making for workflow selection
+ </li>
+</ol>
+<h3 class="heading">
+ Agent Interfaces
+</h3>
+<p>
+ Each interface inherits from BaseAgent and implements platform-specific handling:
+</p>
+<ul>
+<li>
+<strong>
+   Telegram
+  </strong>
+  (
+  <code class="code">
+   interfaces/telegram_agent.py
+  </code>
+  )
+ </li>
+<li>
+<strong>
+   Discord
+  </strong>
+  (
+  <code class="code">
+   interfaces/discord_agent.py
+  </code>
+  )
+ </li>
+<li>
+<strong>
+   API
+  </strong>
+  (
+  <code class="code">
+   interfaces/flask_agent.py
+  </code>
+  )
+ </li>
+<li>
+<strong>
+   Twitter
+  </strong>
+  (
+  <code class="code">
+   interfaces/twitter_agent.py
+  </code>
+  )
+ </li>
+<li>
+<strong>
+   Farcaster
+  </strong>
+  (
+  <code class="code">
+   interfaces/farcaster_agent.py
+  </code>
+  )
+ </li>
+</ul>
+<h3 class="heading">
+ Heurist Core
+</h3>
+<p>
+ Heurist Core provides a set of core components, tools, and workflows for building LLM-powered agents or agentic applications. It can be used as a standalone package or as part of the Heurist Agent Framework.
+</p>
+<p>
+<a href="./core/README.md">
+  Read the Heurist Core documentation
+ </a>
+</p>
+<h4 class="heading">
+ Components
+</h4>
+<p>
+ The framework uses a modular component system:
+</p>
+<ul>
+<li>
+<strong>
+   PersonalityProvider
+  </strong>
+  : Manages agent personality and system prompts
+ </li>
+<li>
+<strong>
+   KnowledgeProvider
+  </strong>
+  : Handles knowledge retrieval from vector database
+ </li>
+<li>
+<strong>
+   ConversationManager
+  </strong>
+  : Manages conversation history and context
+ </li>
+<li>
+<strong>
+   ValidationManager
+  </strong>
+  : Validates inputs and outputs
+ </li>
+<li>
+<strong>
+   MediaHandler
+  </strong>
+  : Processes images, audio, and other media
+ </li>
+<li>
+<strong>
+   LLMProvider
+  </strong>
+  : Interfaces with language models
+ </li>
+<li>
+<strong>
+   MessageStore
+  </strong>
+  : Stores and retrieves messages with vector search
+ </li>
+</ul>
+<h4 class="heading">
+ Workflows
+</h4>
+<p>
+ Workflows provide higher-level reasoning patterns:
+</p>
+<ul>
+<li>
+<strong>
+   AugmentedLLMCall
+  </strong>
+  : Standard RAG + tools pattern for context-aware responses
+ </li>
+<li>
+<strong>
+   ChainOfThoughtReasoning
+  </strong>
+  : Multi-step reasoning with planning and execution phases
+ </li>
+<li>
+<strong>
+   ResearchWorkflow
+  </strong>
+  : Deep web search and analysis with hierarchical exploration
+ </li>
+</ul>
+<h4 class="heading">
+ Tool Management
+</h4>
+<ul>
+<li>
+<strong>
+   ToolBox
+  </strong>
+  : Base framework for tool definition and registration
+ </li>
+<li>
+<strong>
+   Tools
+  </strong>
+  : Tool management and execution layer
+ </li>
+<li>
+<strong>
+   ToolsMCP
+  </strong>
+  : Integration with MCP Protocol for tool execution
+ </li>
+</ul>
+<h4 class="heading">
+ External Clients
+</h4>
+<ul>
+<li>
+<strong>
+   SearchClient
+  </strong>
+  : Unified client for web search (Firecrawl/Exa)
+ </li>
+<li>
+<strong>
+   MCPClient
+  </strong>
+  : Client for MCP Protocol for local or remote servers.
+ </li>
+</ul>
+<h3 class="heading">
+ Agent Usage and Development Guide
+</h3>
+<p>
+ Read the
+ <a href="./agents/README.md">
+  Agent Usage and Development Guide
+ </a>
+</p>
+<h2 class="heading">
+ Development Setup
+</h2>
+<p>
+ To set up your development environment:
+</p>
+<ol>
+<li>
+<strong>
+   Install dependencies using uv:
+  </strong>
+</li>
+</ol>
+<pre class="pre"><code class="language-bash code">   uv sync
+</code></pre>
+<ol>
+<li>
+<strong>
+   Activate the virtual environment:
+  </strong>
+</li>
+</ol>
+<pre class="pre"><code class="language-bash code">   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+</code></pre>
+<blockquote>
+<p>
+  [!NOTE]
+To run a file, you can use either
+  <code class="code">
+   python &lt;filename&gt;.py
+  </code>
+  or
+  <code class="code">
+   uv run &lt;filename&gt;.py
+  </code>
+  .
+ </p>
+</blockquote>
+<h2 class="heading">
+ How to Use GitHub Issues
+</h2>
+<p>
+ We encourage the community to open
+ <strong>
+  GitHub issues
+ </strong>
+ whenever you have a new idea or find something that needs attention. When creating an issue, please use our
+ <a href="./.github/ISSUE_TEMPLATE/general_issue_template.md">
+  Issue Template
+ </a>
+ and select one of the following categories:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Integration Request
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   For requests to integrate with a new data source (e.g., CoinGecko, arXiv) or a new AI use case.
+  </p>
+</li>
+<li>
+<strong>
+   Most important
+  </strong>
+  for the community, as these issues help drive the direction of our framework's evolution.
+ </li>
+<li>
+<p>
+   If you have an idea but aren't sure how to implement it, open an issue under this label so others can pick it up or offer suggestions.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Bug
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   For reporting errors or unexpected behavior in the framework.
+  </p>
+</li>
+<li>
+<p>
+   Provide as much detail as possible (logs, steps to reproduce, environment, etc.).
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Question
+   </strong>
+</p>
+</li>
+<li>
+<p>
+   For inquiries about usage, best practices, or clarifications on existing features.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Bounty
+   </strong>
+</p>
+</li>
+<li>
+  For tasks with a
+  <strong>
+   reward
+  </strong>
+  (e.g., tokens, NFTs, or other benefits).
+ </li>
+<li>
+  The bounty label indicates that Heurist team or another community member are offering a reward to whoever resolves the issue.
+ </li>
+<li>
+<strong>
+   Bounty Rules
+  </strong>
+  :
+  <ul>
+<li>
+    Make sure to read the issue description carefully for scope and acceptance criteria.
+   </li>
+<li>
+    Once your Pull Request addressing the bounty is merged, we'll follow up on fulfilling the reward.
+   </li>
+<li>
+    Additional instructions (e.g., contact method) may be included in the issue itself.
+   </li>
+</ul>
+</li>
+</ol>
+<h3 class="heading">
+ Picking Up an Issue
+</h3>
+<ul>
+<li>
+  Look for
+  <strong>
+   Integration Requests
+  </strong>
+  or
+  <strong>
+   Bounty
+  </strong>
+  issues if you want to contribute new features or earn rewards.
+ </li>
+<li>
+  Feel free to discuss approaches in the comments. If you're ready to tackle it, mention "I'm working on this!" so others know it's in progress.
+ </li>
+</ul>
+<p>
+ This process helps us stay organized, encourages community involvement, and keeps development transparent.
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ MIT License - See LICENSE file for details.
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create a feature branch
+ </li>
+<li>
+  Commit your changes
+ </li>
+<li>
+  Push to the branch
+ </li>
+<li>
+  Create a Pull Request
+ </li>
+</ol>
+<p>
+ For Heurist Mesh agents or to learn about contributing specialized community agents, please refer to the
+ <a href="./mesh/README.md">
+  Mesh README
+ </a>
+</p>
+<h2 class="heading">
+ Support
+</h2>
+<p>
+ For support, please open an issue in the GitHub repository or contact the maintainers. Join the Heurist Ecosystem Builder telegram https://t.me/heuristsupport
+</p>
+<h2 class="heading">
+ Star History
+</h2>
+<p>
+<a href="https://star-history.com/#heurist-network/heurist-agent-framework&amp;Date">
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=heurist-network/heurist-agent-framework&amp;type=Date"/>
+</a>
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/heurist-network-heurist-agent-framework.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

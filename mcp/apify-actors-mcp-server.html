@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Apify Model Context Protocol (MCP) Server - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/apify-actors-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Apify Model Context Protocol (MCP) Server - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Apify Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Apify Model Context Protocol (MCP) Server</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Apify Model Context Protocol (MCP) Server</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 219</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/apify/actors-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Apify Model Context Protocol (MCP) Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/apify-actors-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Apify Model Context Protocol (MCP) Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Apify Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Apify Model Context Protocol (MCP) Server</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Apify Model Context Protocol (MCP) Server</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 219</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/apify/actors-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Apify Model Context Protocol (MCP) Server - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/apify-actors-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Apify Model Context Protocol (MCP) Server - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Apify Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Apify Model Context Protocol (MCP) Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 219</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/apify/actors-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Apify Model Context Protocol (MCP) Server - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/apify-actors-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Apify Model Context Protocol (MCP) Server - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Apify Model Context Protocol (MCP) Server - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Apify Model Context Protocol (MCP) Server</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 219</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/apify/actors-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Apify Model Context Protocol (MCP) Server
+</h1>
+<p>
+<a href="https://apify.com/apify/actors-mcp-server">
+<img alt="Actors MCP Server" src="https://apify.com/actor-badge?actor=apify/actors-mcp-server"/>
+</a>
+</p>
+<p>
+ Implementation of an MCP server for all
+ <a href="https://apify.com/store">
+  Apify Actors
+ </a>
+ .
+This server enables interaction with one or more Apify Actors that can be defined in the MCP Server configuration.
+</p>
+<p>
+ The server can be used in two ways:
+-
+ <strong>
+  🇦
+  <a href="https://apify.com/apify/actors-mcp-server">
+   MCP Server Actor
+  </a>
+</strong>
+ – HTTP server accessible via Server-Sent Events (SSE), see
+ <a href="#-mcp-server-actor">
+  guide
+ </a>
+ -
+ <strong>
+  ⾕ MCP Server Stdio
+ </strong>
+ – Local server available via standard input/output (stdio), see
+ <a href="#-mcp-server-at-a-local-host">
+  guide
+ </a>
+</p>
+<p>
+ You can also interact with the MCP server using a chat-like UI with 💬
+ <a href="https://apify.com/jiri.spilka/tester-mcp-client">
+  Tester MCP Client
+ </a>
+</p>
+<h1 class="heading">
+ 🎯 What does Apify MCP server do?
+</h1>
+<p>
+ The MCP Server Actor allows an AI assistant to use any
+ <a href="https://apify.com/store">
+  Apify Actor
+ </a>
+ as a tool to perform a specific task.
+For example, it can:
+- Use
+ <a href="https://apify.com/apify/facebook-posts-scraper">
+  Facebook Posts Scraper
+ </a>
+ to extract data from Facebook posts from multiple pages/profiles
+- Use
+ <a href="https://apify.com/lukaskrivka/google-maps-with-contact-details">
+  Google Maps Email Extractor
+ </a>
+ to extract Google Maps contact details
+- Use
+ <a href="https://apify.com/apify/google-search-scraper">
+  Google Search Results Scraper
+ </a>
+ to scrape Google Search Engine Results Pages (SERPs)
+- Use
+ <a href="https://apify.com/apify/instagram-scraper">
+  Instagram Scraper
+ </a>
+ to scrape Instagram posts, profiles, places, photos, and comments
+- Use
+ <a href="https://apify.com/apify/web-scraper">
+  RAG Web Browser
+ </a>
+ to search the web, scrape the top N URLs, and return their content
+</p>
+<h1 class="heading">
+ MCP Clients
+</h1>
+<p>
+ To interact with the Apify MCP server, you can use MCP clients such as:
+-
+ <a href="https://claude.ai/download">
+  Claude Desktop
+ </a>
+ (only Stdio support)
+-
+ <a href="https://code.visualstudio.com/">
+  Visual Studio Code
+ </a>
+ (Stdio and SSE support)
+-
+ <a href="https://www.librechat.ai/">
+  LibreChat
+ </a>
+ (Stdio and SSE support, yet without Authorization header)
+-
+ <a href="https://apify.com/jiri.spilka/tester-mcp-client">
+  Apify Tester MCP Client
+ </a>
+ (SSE support with Authorization headers)
+- Other clients at
+ <a href="https://modelcontextprotocol.io/clients">
+  https://modelcontextprotocol.io/clients
+ </a>
+ - More clients at
+ <a href="https://glama.ai/mcp/clients">
+  https://glama.ai/mcp/clients
+ </a>
+</p>
+<p>
+ When you have Actors integrated with the MCP server, you can ask:
+- "Search the web and summarize recent trends about AI Agents"
+- "Find the top 10 best Italian restaurants in San Francisco"
+- "Find and analyze the Instagram profile of The Rock"
+- "Provide a step-by-step guide on using the Model Context Protocol with source URLs"
+- "What Apify Actors can I use?"
+</p>
+<p>
+ The following image shows how the Apify MCP server interacts with the Apify platform and AI clients:
+</p>
+<p>
+<img alt="Actors-MCP-server" src="https://raw.githubusercontent.com/apify/actors-mcp-server/refs/heads/master/docs/actors-mcp-server.png"/>
+</p>
+<p>
+ With the MCP Tester client you can load Actors dynamically but this is not yet supported by other MCP clients.
+We also plan to add more features, see
+ <a href="#-roadmap-march-2025">
+  Roadmap
+ </a>
+ for more details.
+</p>
+<h1 class="heading">
+ 🔄 What is the Model Context Protocol?
+</h1>
+<p>
+ The Model Context Protocol (MCP) allows AI applications (and AI agents), such as Claude Desktop, to connect to external tools and data sources.
+MCP is an open protocol that enables secure, controlled interactions between AI applications, AI Agents, and local or remote resources.
+</p>
+<p>
+ For more information, see the
+ <a href="https://modelcontextprotocol.org/">
+  Model Context Protocol
+ </a>
+ website or the blog post
+ <a href="https://blog.apify.com/what-is-model-context-protocol/">
+  What is MCP and why does it matter?
+ </a>
+ .
+</p>
+<h1 class="heading">
+ 🤖 How is MCP Server related to AI Agents?
+</h1>
+<p>
+ The Apify MCP Server exposes Apify's Actors through the MCP protocol, allowing AI Agents or frameworks that implement the MCP protocol to access all Apify Actors as tools for data extraction, web searching, and other tasks.
+</p>
+<p>
+ To learn more about AI Agents, explore our blog post:
+ <a href="https://blog.apify.com/what-are-ai-agents/">
+  What are AI Agents?
+ </a>
+ and browse Apify's curated
+ <a href="https://apify.com/store/collections/ai_agents">
+  AI Agent collection
+ </a>
+ .
+Interested in building and monetizing your own AI agent on Apify? Check out our
+ <a href="https://blog.apify.com/how-to-build-an-ai-agent/">
+  step-by-step guide
+ </a>
+ for creating, publishing, and monetizing AI agents on the Apify platform.
+</p>
+<h1 class="heading">
+ 🧱 Components
+</h1>
+<h2 class="heading">
+ Tools
+</h2>
+<h3 class="heading">
+ Actors
+</h3>
+<p>
+ Any
+ <a href="https://apify.com/store">
+  Apify Actor
+ </a>
+ can be used as a tool.
+By default, the server is pre-configured with the Actors specified below, but this can be overridden by providing Actor input.
+</p>
+<pre class="pre"><code class="language-text code">'apify/instagram-scraper'
+'apify/rag-web-browser'
+'lukaskrivka/google-maps-with-contact-details'
+</code></pre>
+<p>
+ The MCP server loads the Actor input schema and creates MCP tools corresponding to the Actors.
+See this example of input schema for the
+ <a href="https://apify.com/apify/rag-web-browser/input-schema">
+  RAG Web Browser
+ </a>
+ .
+</p>
+<p>
+ The tool name must always be the full Actor name, such as
+ <code class="code">
+  apify/rag-web-browser
+ </code>
+ .
+The arguments for an MCP tool represent the input parameters of the Actor.
+For example, for the
+ <code class="code">
+  apify/rag-web-browser
+ </code>
+ Actor, the arguments are:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "query": "restaurants in San Francisco",
+  "maxResults": 3
+}
+</code></pre>
+<p>
+ You don't need to specify the input parameters or which Actor to call; everything is managed by an LLM.
+When a tool is called, the arguments are automatically passed to the Actor by the LLM.
+You can refer to the specific Actor's documentation for a list of available arguments.
+</p>
+<h3 class="heading">
+ Helper tools
+</h3>
+<p>
+ One of the powerful features of MCP with Apify is dynamic actor tooling – the ability for an AI agent to find new tools (Actors) as needed and incorporate them. Here are some special MCP operations and how Apify MCP Server supports them:
+</p>
+<ul>
+<li>
+  Actor discovery and management: Search for Actors (
+  <code class="code">
+   search-actors
+  </code>
+  ), view details (
+  <code class="code">
+   get-actor-details
+  </code>
+  ), and dynamically add or remove tools (
+  <code class="code">
+   add-actor
+  </code>
+  ,
+  <code class="code">
+   remove-actor
+  </code>
+  ).
+ </li>
+<li>
+  Actor execution and monitoring: Start Actor runs, fetch run results (
+  <code class="code">
+   get-actor-run
+  </code>
+  ), logs (
+  <code class="code">
+   get-actor-log
+  </code>
+  ), and abort runs (
+  <code class="code">
+   abort-actor-run
+  </code>
+  ).
+ </li>
+<li>
+  Dataset access: List datasets, retrieve dataset info and items (
+  <code class="code">
+   get-dataset
+  </code>
+  ,
+  <code class="code">
+   get-dataset-list
+  </code>
+  ,
+  <code class="code">
+   get-dataset-items
+  </code>
+  ).
+ </li>
+<li>
+  Key-value store access: List key-value stores, view keys, and retrieve records (
+  <code class="code">
+   get-key-value-store-list
+  </code>
+  ,
+  <code class="code">
+   get-key-value-store
+  </code>
+  ,
+  <code class="code">
+   get-key-value-store-keys
+  </code>
+  ,
+  <code class="code">
+   get-key-value-store-record
+  </code>
+  ).
+ </li>
+<li>
+  Built-in help tool: A static helper (
+  <code class="code">
+   apify-actor-help-tool
+  </code>
+  ) that returns usage info for the Apify MCP Server.
+ </li>
+</ul>
+<h2 class="heading">
+ Prompt &amp; Resources
+</h2>
+<p>
+ The server does not provide any resources and prompts.
+We plan to add
+ <a href="https://docs.apify.com/platform/storage/dataset">
+  Apify's dataset
+ </a>
+ and
+ <a href="https://docs.apify.com/platform/storage/key-value-store">
+  key-value store
+ </a>
+ as resources in the future.
+</p>
+<h1 class="heading">
+ ⚙️ Usage
+</h1>
+<p>
+ The Apify MCP Server can be used in two ways:
+ <strong>
+  as an Apify Actor
+ </strong>
+ running on the Apify platform
+or as a
+ <strong>
+  local server
+ </strong>
+ running on your machine.
+</p>
+<h2 class="heading">
+ 🇦 MCP Server Actor
+</h2>
+<h3 class="heading">
+ Standby web server
+</h3>
+<p>
+ The Actor runs in
+ <a href="https://docs.apify.com/platform/actors/running/standby">
+<strong>
+   Standby mode
+  </strong>
+</a>
+ with an HTTP web server that receives and processes requests.
+</p>
+<p>
+ To start the server with default Actors, send an HTTP GET request with your
+ <a href="https://console.apify.com/settings/integrations">
+  Apify API token
+ </a>
+ to the following URL:
+</p>
+<pre class="pre"><code class="code">https://actors-mcp-server.apify.actor?token=&lt;APIFY_TOKEN&gt;
+</code></pre>
+<p>
+ It is also possible to start the MCP server with a different set of Actors.
+To do this, create a
+ <a href="https://docs.apify.com/platform/actors/running/tasks">
+  task
+ </a>
+ and specify the list of Actors you want to use.
+</p>
+<p>
+ Then, run the task in Standby mode with the selected Actors:
+</p>
+<pre class="pre"><code class="language-shell code">https://USERNAME--actors-mcp-server-task.apify.actor?token=&lt;APIFY_TOKEN&gt;
+</code></pre>
+<p>
+ You can find a list of all available Actors in the
+ <a href="https://apify.com/store">
+  Apify Store
+ </a>
+ .
+</p>
+<h4 class="heading">
+ 💬 Interact with the MCP Server over SSE
+</h4>
+<p>
+ Once the server is running, you can interact with Server-Sent Events (SSE) to send messages to the server and receive responses.
+The easiest way is to use
+ <a href="https://apify.com/jiri.spilka/tester-mcp-client">
+  Tester MCP Client
+ </a>
+ on Apify.
+</p>
+<p>
+<a href="https://claude.ai/download">
+  Claude Desktop
+ </a>
+ currently lacks SSE support, but you can use it with Stdio transport; see
+ <a href="#-mcp-server-at-a-local-host">
+  MCP Server at a local host
+ </a>
+ for more details.
+Note: The free version of Claude Desktop may experience intermittent connection issues with the server.
+</p>
+<p>
+ In the client settings, you need to provide server configuration:
+</p>
+<pre class="pre"><code class="language-json code">{
+    "mcpServers": {
+        "apify": {
+            "type": "sse",
+            "url": "https://actors-mcp-server.apify.actor/sse",
+            "env": {
+                "APIFY_TOKEN": "your-apify-token"
+            }
+        }
+    }
+}
+</code></pre>
+<h2 class="heading">
+ ⾕ MCP Server at a local host
+</h2>
+<p>
+ You can run the Apify MCP Server on your local machine by configuring it with Claude Desktop or any other
+ <a href="https://modelcontextprotocol.io/clients">
+  MCP client
+ </a>
+ .
+You can also use
+ <a href="https://smithery.ai/server/@apify/actors-mcp-server">
+  Smithery
+ </a>
+ to install the server automatically.
+</p>
+<h3 class="heading">
+ Prerequisites
+</h3>
+<ul>
+<li>
+  MacOS or Windows
+ </li>
+<li>
+  The latest version of Claude Desktop must be installed (or another MCP client)
+ </li>
+<li>
+<a href="https://nodejs.org/en">
+   Node.js
+  </a>
+  (v18 or higher)
+ </li>
+<li>
+<a href="https://docs.apify.com/platform/integrations/api#api-token">
+   Apify API Token
+  </a>
+  (
+  <code class="code">
+   APIFY_TOKEN
+  </code>
+  )
+ </li>
+</ul>
+<p>
+ Make sure you have the
+ <code class="code">
+  node
+ </code>
+ and
+ <code class="code">
+  npx
+ </code>
+ installed properly:
+</p>
+<pre class="pre"><code class="language-bash code">node -v
+npx -v
+</code></pre>
+<p>
+ If not, follow this guide to install Node.js:
+ <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">
+  Downloading and installing Node.js and npm
+ </a>
+ .
+</p>
+<h4 class="heading">
+ Claude Desktop
+</h4>
+<p>
+ To configure Claude Desktop to work with the MCP server, follow these steps. For a detailed guide, refer to the
+ <a href="https://modelcontextprotocol.io/quickstart/user">
+  Claude Desktop Users Guide
+ </a>
+ or watch the
+ <a href="https://youtu.be/gf5WXeqydUU?t=440">
+  video tutorial
+ </a>
+ .
+</p>
+<ol>
+<li>
+  Download Claude for desktop
+ </li>
+<li>
+  Available for Windows and macOS.
+ </li>
+<li>
+  For Linux users, you can build a Debian package using this
+  <a href="https://github.com/aaddrick/claude-desktop-debian">
+   unofficial build script
+  </a>
+  .
+ </li>
+<li>
+  Open the Claude Desktop app and enable
+  <strong>
+   Developer Mode
+  </strong>
+  from the top-left menu bar.
+ </li>
+<li>
+  Once enabled, open
+  <strong>
+   Settings
+  </strong>
+  (also from the top-left menu bar) and navigate to the
+  <strong>
+   Developer Option
+  </strong>
+  , where you'll find the
+  <strong>
+   Edit Config
+  </strong>
+  button.
+ </li>
+<li>
+<p>
+   Open the configuration file and edit the following file:
+  </p>
+<ul>
+<li>
+    On macOS:
+    <code class="code">
+     ~/Library/Application\ Support/Claude/claude_desktop_config.json
+    </code>
+</li>
+<li>
+    On Windows:
+    <code class="code">
+     %APPDATA%/Claude/claude_desktop_config.json
+    </code>
+</li>
+<li>
+    On Linux:
+    <code class="code">
+     ~/.config/Claude/claude_desktop_config.json
+    </code>
+</li>
+</ul>
+<p>
+<code class="code">
+    json
+{
+ "mcpServers": {
+   "actors-mcp-server": {
+     "command": "npx",
+     "args": ["-y", "@apify/actors-mcp-server"],
+     "env": {
+        "APIFY_TOKEN": "your-apify-token"
+     }
+   }
+ }
+}
+   </code>
+   Alternatively, you can use the
+   <code class="code">
+    actors
+   </code>
+   argument to select one or more Apify Actors:
+   <code class="code">
+    json
+   {
+"mcpServers": {
+  "actors-mcp-server": {
+    "command": "npx",
+    "args": [
+      "-y", "@apify/actors-mcp-server",
+      "--actors", "lukaskrivka/google-maps-with-contact-details,apify/instagram-scraper"
+    ],
+    "env": {
+       "APIFY_TOKEN": "your-apify-token"
+    }
+  }
+}
+   }
+   </code>
+   5. Restart Claude Desktop
+  </p>
+<ul>
+<li>
+    Fully quit Claude Desktop (ensure it's not just minimized or closed).
+   </li>
+<li>
+    Restart Claude Desktop.
+   </li>
+<li>
+    Look for the 🔌 icon to confirm that the Actors MCP server is connected.
+   </li>
+</ul>
+</li>
+<li>
+<p>
+   Open the Claude Desktop chat and ask "What Apify Actors can I use?"
+  </p>
+</li>
+</ol>
+<p>
+<img alt="Claude-desktop-with-Actors-MCP-server" src="https://raw.githubusercontent.com/apify/actors-mcp-server/refs/heads/master/docs/claude-desktop.png"/>
+</p>
+<ol>
+<li>
+  Examples
+ </li>
+</ol>
+<p>
+ You can ask Claude to perform tasks, such as:
+ <code class="code">
+  text
+    Find and analyze recent research papers about LLMs.
+    Find the top 10 best Italian restaurants in San Francisco.
+    Find and analyze the Instagram profile of The Rock.
+ </code>
+</p>
+<h4 class="heading">
+ VS Code
+</h4>
+<p>
+ For one-click installation, click one of the install buttons below:
+</p>
+<p>
+<a href="https://insiders.vscode.dev/redirect/mcp/install?name=actors-mcp-server&amp;config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40apify%2Factors-mcp-server%22%5D%2C%22env%22%3A%7B%22APIFY_TOKEN%22%3A%22%24%7Binput%3Aapify_token%7D%22%7D%7D&amp;inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22apify_token%22%2C%22description%22%3A%22Apify+API+Token%22%2C%22password%22%3Atrue%7D%5D">
+<img alt="Install with NPX in VS Code" src="https://img.shields.io/badge/VS_Code-NPM-0098FF?style=flat-square&amp;logo=visualstudiocode&amp;logoColor=white"/>
+</a>
+<a href="https://insiders.vscode.dev/redirect/mcp/install?name=actors-mcp-server&amp;config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40apify%2Factors-mcp-server%22%5D%2C%22env%22%3A%7B%22APIFY_TOKEN%22%3A%22%24%7Binput%3Aapify_token%7D%22%7D%7D&amp;inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22apify_token%22%2C%22description%22%3A%22Apify+API+Token%22%2C%22password%22%3Atrue%7D%5D&amp;quality=insiders">
+<img alt="Install with NPX in VS Code Insiders" src="https://img.shields.io/badge/VS_Code_Insiders-NPM-24bfa5?style=flat-square&amp;logo=visualstudiocode&amp;logoColor=white"/>
+</a>
+</p>
+<h5 class="heading">
+ Manual installation
+</h5>
+<p>
+ You can manually install the Apify MCP Server in VS Code. First, click one of the install buttons at the top of this section for a one-click installation.
+</p>
+<p>
+ Alternatively, add the following JSON block to your User Settings (JSON) file in VS Code. You can do this by pressing
+ <code class="code">
+  Ctrl + Shift + P
+ </code>
+ and typing
+ <code class="code">
+  Preferences: Open User Settings (JSON)
+ </code>
+ .
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcp": {
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "apify_token",
+        "description": "Apify API Token",
+        "password": true
+      }
+    ],
+    "servers": {
+      "actors-mcp-server": {
+        "command": "npx",
+        "args": ["-y", "@apify/actors-mcp-server"],
+        "env": {
+          "APIFY_TOKEN": "${input:apify_token}"
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ Optionally, you can add it to a file called
+ <code class="code">
+  .vscode/mcp.json
+ </code>
+ in your workspace - just omit the top-level
+ <code class="code">
+  mcp {}
+ </code>
+ key. This will allow you to share the configuration with others.
+</p>
+<p>
+ If you want to specify which Actors to load, you can add the
+ <code class="code">
+  --actors
+ </code>
+ argument:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "servers": {
+    "actors-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y", "@apify/actors-mcp-server",
+        "--actors", "lukaskrivka/google-maps-with-contact-details,apify/instagram-scraper"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${input:apify_token}"
+      }
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ VS Code
+</h4>
+<p>
+ For one-click installation, click one of the install buttons below:
+</p>
+<p>
+<a href="https://insiders.vscode.dev/redirect/mcp/install?name=actors-mcp-server&amp;config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40apify%2Factors-mcp-server%22%5D%2C%22env%22%3A%7B%22APIFY_TOKEN%22%3A%22%24%7Binput%3Aapify_token%7D%22%7D%7D&amp;inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22apify_token%22%2C%22description%22%3A%22Apify+API+Token%22%2C%22password%22%3Atrue%7D%5D">
+<img alt="Install with NPX in VS Code" src="https://img.shields.io/badge/VS_Code-NPM-0098FF?style=flat-square&amp;logo=visualstudiocode&amp;logoColor=white"/>
+</a>
+<a href="https://insiders.vscode.dev/redirect/mcp/install?name=actors-mcp-server&amp;config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40apify%2Factors-mcp-server%22%5D%2C%22env%22%3A%7B%22APIFY_TOKEN%22%3A%22%24%7Binput%3Aapify_token%7D%22%7D%7D&amp;inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22apify_token%22%2C%22description%22%3A%22Apify+API+Token%22%2C%22password%22%3Atrue%7D%5D&amp;quality=insiders">
+<img alt="Install with NPX in VS Code Insiders" src="https://img.shields.io/badge/VS_Code_Insiders-NPM-24bfa5?style=flat-square&amp;logo=visualstudiocode&amp;logoColor=white"/>
+</a>
+</p>
+<h5 class="heading">
+ Manual installation
+</h5>
+<p>
+ You can manually install the Apify MCP Server in VS Code. First, click one of the install buttons at the top of this section for a one-click installation.
+</p>
+<p>
+ Alternatively, add the following JSON block to your User Settings (JSON) file in VS Code. You can do this by pressing
+ <code class="code">
+  Ctrl + Shift + P
+ </code>
+ and typing
+ <code class="code">
+  Preferences: Open User Settings (JSON)
+ </code>
+ .
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcp": {
+    "inputs": [
+      {
+        "type": "promptString",
+        "id": "apify_token",
+        "description": "Apify API Token",
+        "password": true
+      }
+    ],
+    "servers": {
+      "actors-mcp-server": {
+        "command": "npx",
+        "args": ["-y", "@apify/actors-mcp-server"],
+        "env": {
+          "APIFY_TOKEN": "${input:apify_token}"
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>
+ Optionally, you can add it to a file called
+ <code class="code">
+  .vscode/mcp.json
+ </code>
+ in your workspace - just omit the top-level
+ <code class="code">
+  mcp {}
+ </code>
+ key. This will allow you to share the configuration with others.
+</p>
+<p>
+ If you want to specify which Actors to load, you can add the
+ <code class="code">
+  --actors
+ </code>
+ argument:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "servers": {
+    "actors-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y", "@apify/actors-mcp-server",
+        "--actors", "lukaskrivka/google-maps-with-contact-details,apify/instagram-scraper"
+      ],
+      "env": {
+        "APIFY_TOKEN": "${input:apify_token}"
+      }
+    }
+  }
+}
+</code></pre>
+<h4 class="heading">
+ Debugging NPM package @apify/actors-mcp-server with @modelcontextprotocol/inspector
+</h4>
+<p>
+ To debug the server, use the
+ <a href="https://github.com/modelcontextprotocol/inspector">
+  MCP Inspector
+ </a>
+ tool:
+</p>
+<pre class="pre"><code class="language-shell code">export APIFY_TOKEN=your-apify-token
+npx @modelcontextprotocol/inspector npx -y @apify/actors-mcp-server
+</code></pre>
+<h1 class="heading">
+ 👷🏼 Development
+</h1>
+<h2 class="heading">
+ Prerequisites
+</h2>
+<ul>
+<li>
+<a href="https://nodejs.org/en">
+   Node.js
+  </a>
+  (v18 or higher)
+ </li>
+<li>
+  Python 3.9 or higher
+ </li>
+</ul>
+<p>
+ Create an environment file
+ <code class="code">
+  .env
+ </code>
+ with the following content:
+</p>
+<pre class="pre"><code class="language-text code">APIFY_TOKEN=your-apify-token
+</code></pre>
+<p>
+ Build the actor-mcp-server package:
+</p>
+<pre class="pre"><code class="language-bash code">npm run build
+</code></pre>
+<h2 class="heading">
+ Local client (SSE)
+</h2>
+<p>
+ To test the server with the SSE transport, you can use the script
+ <code class="code">
+  examples/clientSse.ts
+ </code>
+ :
+Currently, the Node.js client does not support establishing a connection to a remote server with custom headers.
+You need to change the URL to your local server URL in the script.
+</p>
+<pre class="pre"><code class="language-bash code">node dist/examples/clientSse.js
+</code></pre>
+<h2 class="heading">
+ Debugging
+</h2>
+<p>
+ Since MCP servers operate over standard input/output (stdio), debugging can be challenging.
+For the best debugging experience, use the
+ <a href="https://github.com/modelcontextprotocol/inspector">
+  MCP Inspector
+ </a>
+ .
+</p>
+<p>
+ You can launch the MCP Inspector via
+ <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">
+<code class="code">
+   npm
+  </code>
+</a>
+ with this command:
+</p>
+<pre class="pre"><code class="language-bash code">export APIFY_TOKEN=your-apify-token
+npx @modelcontextprotocol/inspector node ./dist/stdio.js
+</code></pre>
+<p>
+ Upon launching, the Inspector will display a URL that you can access in your browser to begin debugging.
+</p>
+<h2 class="heading">
+ ⓘ Limitations and feedback
+</h2>
+<p>
+ The Actor input schema is processed to be compatible with most MCP clients while adhering to
+ <a href="https://json-schema.org/">
+  JSON Schema
+ </a>
+ standards. The processing includes:
+-
+ <strong>
+  Descriptions
+ </strong>
+ are truncated to 500 characters (as defined in
+ <code class="code">
+  MAX_DESCRIPTION_LENGTH
+ </code>
+ ).
+-
+ <strong>
+  Enum fields
+ </strong>
+ are truncated to a maximum combined length of 200 characters for all elements (as defined in
+ <code class="code">
+  ACTOR_ENUM_MAX_LENGTH
+ </code>
+ ).
+-
+ <strong>
+  Required fields
+ </strong>
+ are explicitly marked with a "REQUIRED" prefix in their descriptions for compatibility with frameworks that may not handle JSON schema properly.
+-
+ <strong>
+  Nested properties
+ </strong>
+ are built for special cases like proxy configuration and request list sources to ensure correct input structure.
+-
+ <strong>
+  Array item types
+ </strong>
+ are inferred when not explicitly defined in the schema, using a priority order: explicit type in items &gt; prefill type &gt; default value type &gt; editor type.
+-
+ <strong>
+  Enum values and examples
+ </strong>
+ are added to property descriptions to ensure visibility even if the client doesn't fully support JSON schema.
+</p>
+<p>
+ Memory for each Actor is limited to 4GB.
+Free users have an 8GB limit, 128MB needs to be allocated for running
+ <code class="code">
+  Actors-MCP-Server
+ </code>
+ .
+</p>
+<p>
+ If you need other features or have any feedback,
+ <a href="https://console.apify.com/actors/1lSvMAaRcadrM1Vgv/issues">
+  submit an issue
+ </a>
+ in Apify Console to let us know.
+</p>
+<h1 class="heading">
+ 🚀 Roadmap (March 2025)
+</h1>
+<ul>
+<li>
+  Add Apify's dataset and key-value store as resources.
+ </li>
+<li>
+  Add tools such as Actor logs and Actor runs for debugging.
+ </li>
+</ul>
+<h1 class="heading">
+ 🐛 Troubleshooting
+</h1>
+<ul>
+<li>
+  Make sure you have the
+  <code class="code">
+   node
+  </code>
+  installed by running
+  <code class="code">
+   node -v
+  </code>
+</li>
+<li>
+  Make sure you have the
+  <code class="code">
+   APIFY_TOKEN
+  </code>
+  environment variable set
+ </li>
+<li>
+  Always use the latest version of the MCP server by setting
+  <code class="code">
+   @apify/actors-mcp-server@latest
+  </code>
+</li>
+</ul>
+<h1 class="heading">
+ 📚 Learn more
+</h1>
+<ul>
+<li>
+<a href="https://modelcontextprotocol.org/">
+   Model Context Protocol
+  </a>
+</li>
+<li>
+<a href="https://blog.apify.com/what-are-ai-agents/">
+   What are AI Agents?
+  </a>
+</li>
+<li>
+<a href="https://blog.apify.com/what-is-model-context-protocol/">
+   What is MCP and why does it matter?
+  </a>
+</li>
+<li>
+<a href="https://blog.apify.com/how-to-use-mcp/">
+   How to use MCP with Apify Actors
+  </a>
+</li>
+<li>
+<a href="https://apify.com/jiri.spilka/tester-mcp-client">
+   Tester MCP Client
+  </a>
+</li>
+<li>
+<a href="https://blog.apify.com/ai-agent-workflow/">
+   AI agent workflow: building an agent to query Apify datasets
+  </a>
+</li>
+<li>
+<a href="https://github.com/cyanheads/model-context-protocol-resources/blob/main/guides/mcp-client-development-guide.md">
+   MCP Client development guide
+  </a>
+</li>
+<li>
+<a href="https://blog.apify.com/how-to-build-an-ai-agent/">
+   How to build and monetize an AI agent on Apify
+  </a>
+</li>
+</ul>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/apify-actors-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/apify-actors-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/apify-actors-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/apify-actors-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

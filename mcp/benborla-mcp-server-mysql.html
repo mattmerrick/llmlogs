@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MCP Server for MySQL based on NodeJS - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MCP Server for MySQL based on NodeJS - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>MCP Server for MySQL based on NodeJS - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">MCP Server for MySQL based on NodeJS</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">MCP Server for MySQL based on NodeJS</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 467</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/benborla/mcp-server-mysql" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Server for MySQL based on NodeJS - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Server for MySQL based on NodeJS - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MCP Server for MySQL based on NodeJS - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">MCP Server for MySQL based on NodeJS</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">MCP Server for MySQL based on NodeJS</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 467</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/benborla/mcp-server-mysql" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Server for MySQL based on NodeJS - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="MCP Server for MySQL based on NodeJS - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>MCP Server for MySQL based on NodeJS - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Server for MySQL based on NodeJS</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 467</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/benborla/mcp-server-mysql" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="MCP Server for MySQL based on NodeJS - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP Server for MySQL based on NodeJS - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>MCP Server for MySQL based on NodeJS - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>MCP Server for MySQL based on NodeJS</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 467</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/benborla/mcp-server-mysql" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ MCP Server for MySQL based on NodeJS
+</h1>
+<p>
+<a href="https://smithery.ai/server/@benborla29/mcp-server-mysql">
+<img alt="smithery badge" src="https://smithery.ai/badge/@benborla29/mcp-server-mysql"/>
+</a>
+</p>
+<p>
+<img alt="Demo" src="assets/demo.gif"/>
+<a href="https://glama.ai/mcp/servers/@benborla/mcp-server-mysql">
+<img height="200" src="https://glama.ai/mcp/servers/@benborla/mcp-server-mysql/badge" width="380"/>
+</a>
+</p>
+<p>
+ A Model Context Protocol server that provides access to MySQL databases. This server enables LLMs to inspect database schemas and execute SQL queries.
+</p>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#requirements">
+   Requirements
+  </a>
+</li>
+<li>
+<a href="#installation">
+   Installation
+  </a>
+</li>
+<li>
+<a href="#using-smithery">
+   Smithery
+  </a>
+</li>
+<li>
+<a href="#running-from-local-repository">
+   Clone to Local Repository
+  </a>
+</li>
+<li>
+<a href="#components">
+   Components
+  </a>
+</li>
+<li>
+<a href="#configuration">
+   Configuration
+  </a>
+</li>
+<li>
+<a href="#environment-variables">
+   Environment Variables
+  </a>
+</li>
+<li>
+<a href="#multi-db-mode">
+   Multi-DB Mode
+  </a>
+</li>
+<li>
+<a href="#schema-specific-permissions">
+   Schema-Specific Permissions
+  </a>
+</li>
+<li>
+<a href="#testing">
+   Testing
+  </a>
+</li>
+<li>
+<a href="#troubleshooting">
+   Troubleshooting
+  </a>
+</li>
+<li>
+<a href="#contributing">
+   Contributing
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Requirements
+</h2>
+<ul>
+<li>
+  Node.js v18 or higher
+ </li>
+<li>
+  MySQL 5.7 or higher (MySQL 8.0+ recommended)
+ </li>
+<li>
+  MySQL user with appropriate permissions for the operations you need
+ </li>
+<li>
+  For write operations: MySQL user with INSERT, UPDATE, and/or DELETE privileges
+ </li>
+</ul>
+<h2 class="heading">
+ Installation
+</h2>
+<p>
+ There are several ways to install and configure the MCP server but the most common would be checking this website https://smithery.ai/server/@benborla29/mcp-server-mysql
+</p>
+<h3 class="heading">
+ Cursor
+</h3>
+<p>
+ For Cursor IDE, you can install this MCP server with the following command in your project:
+</p>
+<ol>
+<li>
+  Visit https://smithery.ai/server/@benborla29/mcp-server-mysql
+ </li>
+<li>
+  Follow the instruction for Cursor
+ </li>
+</ol>
+<p>
+ MCP Get provides a centralized registry of MCP servers and simplifies the installation process.
+</p>
+<h3 class="heading">
+ Using NPM/PNPM
+</h3>
+<p>
+ For manual installation:
+</p>
+<pre class="pre"><code class="language-bash code"># Using npm
+npm install -g @benborla29/mcp-server-mysql
+
+# Using pnpm
+pnpm add -g @benborla29/mcp-server-mysql
+</code></pre>
+<p>
+ After manual installation, you'll need to configure your LLM application to use the MCP server (see Configuration section below).
+</p>
+<h3 class="heading">
+ Running from Local Repository
+</h3>
+<p>
+ If you want to clone and run this MCP server directly from the source code, follow these steps:
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Clone the repository
+   </strong>
+<code class="code">
+    bash
+   git clone https://github.com/benborla/mcp-server-mysql.git
+   cd mcp-server-mysql
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Install dependencies
+   </strong>
+<code class="code">
+    bash
+   npm install
+   # or
+   pnpm install
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Build the project
+   </strong>
+<code class="code">
+    bash
+   npm run build
+   # or
+   pnpm run build
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Configure Claude Desktop
+   </strong>
+</p>
+</li>
+</ol>
+<p>
+ Add the following to your Claude Desktop configuration file (
+ <code class="code">
+  claude_desktop_config.json
+ </code>
+ ):
+</p>
+<p>
+<code class="code">
+  json
+   {
+     "mcpServers": {
+       "mcp_server_mysql": {
+         "command": "/path/to/node",
+         "args": [
+           "/full/path/to/mcp-server-mysql/dist/index.js"
+         ],
+         "env": {
+           "MYSQL_HOST": "127.0.0.1",
+           "MYSQL_PORT": "3306",
+           "MYSQL_USER": "root",
+           "MYSQL_PASS": "your_password",
+           "MYSQL_DB": "your_database",
+           "ALLOW_INSERT_OPERATION": "false",
+           "ALLOW_UPDATE_OPERATION": "false",
+           "ALLOW_DELETE_OPERATION": "false",
+           "PATH": "/Users/atlasborla/Library/Application Support/Herd/config/nvm/versions/node/v22.9.0/bin:/usr/bin:/bin", // &lt;--- Important to add the following, run in your terminal `echo "$(which node)/../"` to get the path
+           "NODE_PATH": "/Users/atlasborla/Library/Application Support/Herd/config/nvm/versions/node/v22.9.0/lib/node_modules" // &lt;--- Important to add the following, run in your terminal `echo "$(which node)/../../lib/node_modules"`
+         }
+       }
+     }
+   }
+ </code>
+</p>
+<p>
+ Replace:
+   -
+ <code class="code">
+  /path/to/node
+ </code>
+ with the full path to your Node.js binary (find it with
+ <code class="code">
+  which node
+ </code>
+ )
+   -
+ <code class="code">
+  /full/path/to/mcp-server-mysql
+ </code>
+ with the full path to where you cloned the repository
+   - Set the MySQL credentials to match your environment
+</p>
+<ol>
+<li>
+<strong>
+   Test the server
+  </strong>
+<code class="code">
+   bash
+   # Run the server directly to test
+   node dist/index.js
+  </code>
+</li>
+</ol>
+<p>
+ If it connects to MySQL successfully, you're ready to use it with Claude Desktop.
+</p>
+<h2 class="heading">
+ Components
+</h2>
+<h3 class="heading">
+ Tools
+</h3>
+<ul>
+<li>
+<strong>
+   mysql_query
+  </strong>
+</li>
+<li>
+  Execute SQL queries against the connected database
+ </li>
+<li>
+  Input:
+  <code class="code">
+   sql
+  </code>
+  (string): The SQL query to execute
+ </li>
+<li>
+  By default, limited to READ ONLY operations
+ </li>
+<li>
+  Optional write operations (when enabled via configuration):
+  <ul>
+<li>
+    INSERT: Add new data to tables (requires
+    <code class="code">
+     ALLOW_INSERT_OPERATION=true
+    </code>
+    )
+   </li>
+<li>
+    UPDATE: Modify existing data (requires
+    <code class="code">
+     ALLOW_UPDATE_OPERATION=true
+    </code>
+    )
+   </li>
+<li>
+    DELETE: Remove data (requires
+    <code class="code">
+     ALLOW_DELETE_OPERATION=true
+    </code>
+    )
+   </li>
+</ul>
+</li>
+<li>
+  All operations are executed within a transaction with proper commit/rollback handling
+ </li>
+<li>
+  Supports prepared statements for secure parameter handling
+ </li>
+<li>
+  Configurable query timeouts and result pagination
+ </li>
+<li>
+  Built-in query execution statistics
+ </li>
+</ul>
+<h3 class="heading">
+ Resources
+</h3>
+<p>
+ The server provides comprehensive database information:
+</p>
+<ul>
+<li>
+<strong>
+   Table Schemas
+  </strong>
+</li>
+<li>
+  JSON schema information for each table
+ </li>
+<li>
+  Column names and data types
+ </li>
+<li>
+  Index information and constraints
+ </li>
+<li>
+  Foreign key relationships
+ </li>
+<li>
+  Table statistics and metrics
+ </li>
+<li>
+  Automatically discovered from database metadata
+ </li>
+</ul>
+<h3 class="heading">
+ Security Features
+</h3>
+<ul>
+<li>
+  SQL injection prevention through prepared statements
+ </li>
+<li>
+  Query whitelisting/blacklisting capabilities
+ </li>
+<li>
+  Rate limiting for query execution
+ </li>
+<li>
+  Query complexity analysis
+ </li>
+<li>
+  Configurable connection encryption
+ </li>
+<li>
+  Read-only transaction enforcement
+ </li>
+</ul>
+<h3 class="heading">
+ Performance Optimizations
+</h3>
+<ul>
+<li>
+  Optimized connection pooling
+ </li>
+<li>
+  Query result caching
+ </li>
+<li>
+  Large result set streaming
+ </li>
+<li>
+  Query execution plan analysis
+ </li>
+<li>
+  Configurable query timeouts
+ </li>
+</ul>
+<h3 class="heading">
+ Monitoring and Debugging
+</h3>
+<ul>
+<li>
+  Comprehensive query logging
+ </li>
+<li>
+  Performance metrics collection
+ </li>
+<li>
+  Error tracking and reporting
+ </li>
+<li>
+  Health check endpoints
+ </li>
+<li>
+  Query execution statistics
+ </li>
+</ul>
+<h2 class="heading">
+ Configuration
+</h2>
+<h3 class="heading">
+ Automatic Configuration with Smithery
+</h3>
+<p>
+ If you installed using Smithery, your configuration is already set up. You can view or modify it with:
+</p>
+<pre class="pre"><code class="language-bash code">smithery configure @benborla29/mcp-server-mysql
+</code></pre>
+<p>
+ When reconfiguring, you can update any of the MySQL connection details as well as the write operation settings:
+</p>
+<ul>
+<li>
+<strong>
+   Basic connection settings
+  </strong>
+  :
+ </li>
+<li>
+  MySQL Host, Port, User, Password, Database
+ </li>
+<li>
+<p>
+   SSL/TLS configuration (if your database requires secure connections)
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Write operation permissions
+   </strong>
+   :
+  </p>
+</li>
+<li>
+  Allow INSERT Operations: Set to true if you want to allow adding new data
+ </li>
+<li>
+  Allow UPDATE Operations: Set to true if you want to allow updating existing data
+ </li>
+<li>
+  Allow DELETE Operations: Set to true if you want to allow deleting data
+ </li>
+</ul>
+<p>
+ For security reasons, all write operations are disabled by default. Only enable these settings if you specifically need Claude to modify your database data.
+</p>
+<h3 class="heading">
+ Advanced Configuration Options
+</h3>
+<p>
+ For more control over the MCP server's behavior, you can use these advanced configuration options:
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "mcp_server_mysql": {
+      "command": "/path/to/npx/binary/npx",
+      "args": [
+        "-y",
+        "@benborla29/mcp-server-mysql"
+      ],
+      "env": {
+        // Basic connection settings
+        "MYSQL_HOST": "127.0.0.1",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "root",
+        "MYSQL_PASS": "",
+        "MYSQL_DB": "db_name",
+        "PATH": "/path/to/node/bin:/usr/bin:/bin",
+
+        // Performance settings
+        "MYSQL_POOL_SIZE": "10",
+        "MYSQL_QUERY_TIMEOUT": "30000",
+        "MYSQL_CACHE_TTL": "60000",
+
+        // Security settings
+        "MYSQL_RATE_LIMIT": "100",
+        "MYSQL_MAX_QUERY_COMPLEXITY": "1000",
+        "MYSQL_SSL": "true",
+
+        // Monitoring settings
+        "ENABLE_LOGGING": "true",
+        "MYSQL_LOG_LEVEL": "info",
+        "MYSQL_METRICS_ENABLED": "true",
+
+        // Write operation flags
+        "ALLOW_INSERT_OPERATION": "false",
+        "ALLOW_UPDATE_OPERATION": "false",
+        "ALLOW_DELETE_OPERATION": "false"
+      }
+    }
+  }
+}
+</code></pre>
+<h2 class="heading">
+ Environment Variables
+</h2>
+<h3 class="heading">
+ Basic Connection
+</h3>
+<ul>
+<li>
+<code class="code">
+   MYSQL_SOCKET_PATH
+  </code>
+  : Unix socket path for local connections (e.g., "/tmp/mysql.sock")
+ </li>
+<li>
+<code class="code">
+   MYSQL_HOST
+  </code>
+  : MySQL server host (default: "127.0.0.1") - ignored if MYSQL_SOCKET_PATH is set
+ </li>
+<li>
+<code class="code">
+   MYSQL_PORT
+  </code>
+  : MySQL server port (default: "3306") - ignored if MYSQL_SOCKET_PATH is set
+ </li>
+<li>
+<code class="code">
+   MYSQL_USER
+  </code>
+  : MySQL username (default: "root")
+ </li>
+<li>
+<code class="code">
+   MYSQL_PASS
+  </code>
+  : MySQL password
+ </li>
+<li>
+<code class="code">
+   MYSQL_DB
+  </code>
+  : Target database name (leave empty for multi-DB mode)
+ </li>
+</ul>
+<h3 class="heading">
+ Performance Configuration
+</h3>
+<ul>
+<li>
+<code class="code">
+   MYSQL_POOL_SIZE
+  </code>
+  : Connection pool size (default: "10")
+ </li>
+<li>
+<code class="code">
+   MYSQL_QUERY_TIMEOUT
+  </code>
+  : Query timeout in milliseconds (default: "30000")
+ </li>
+<li>
+<code class="code">
+   MYSQL_CACHE_TTL
+  </code>
+  : Cache time-to-live in milliseconds (default: "60000")
+ </li>
+</ul>
+<h3 class="heading">
+ Security Configuration
+</h3>
+<ul>
+<li>
+<code class="code">
+   MYSQL_RATE_LIMIT
+  </code>
+  : Maximum queries per minute (default: "100")
+ </li>
+<li>
+<code class="code">
+   MYSQL_MAX_QUERY_COMPLEXITY
+  </code>
+  : Maximum query complexity score (default: "1000")
+ </li>
+<li>
+<code class="code">
+   MYSQL_SSL
+  </code>
+  : Enable SSL/TLS encryption (default: "false")
+ </li>
+<li>
+<code class="code">
+   ALLOW_INSERT_OPERATION
+  </code>
+  : Enable INSERT operations (default: "false")
+ </li>
+<li>
+<code class="code">
+   ALLOW_UPDATE_OPERATION
+  </code>
+  : Enable UPDATE operations (default: "false")
+ </li>
+<li>
+<code class="code">
+   ALLOW_DELETE_OPERATION
+  </code>
+  : Enable DELETE operations (default: "false")
+ </li>
+<li>
+<code class="code">
+   ALLOW_DDL_OPERATION
+  </code>
+  : Enable DDL operations (default: "false")
+ </li>
+<li>
+<code class="code">
+   SCHEMA_INSERT_PERMISSIONS
+  </code>
+  : Schema-specific INSERT permissions
+ </li>
+<li>
+<code class="code">
+   SCHEMA_UPDATE_PERMISSIONS
+  </code>
+  : Schema-specific UPDATE permissions
+ </li>
+<li>
+<code class="code">
+   SCHEMA_DELETE_PERMISSIONS
+  </code>
+  : Schema-specific DELETE permissions
+ </li>
+<li>
+<code class="code">
+   SCHEMA_DDL_PERMISSIONS
+  </code>
+  : Schema-specific DDL permissions
+ </li>
+<li>
+<code class="code">
+   MULTI_DB_WRITE_MODE
+  </code>
+  : Enable write operations in multi-DB mode (default: "false")
+ </li>
+</ul>
+<h3 class="heading">
+ Monitoring Configuration
+</h3>
+<ul>
+<li>
+<code class="code">
+   MYSQL_ENABLE_LOGGING
+  </code>
+  : Enable query logging (default: "false")
+ </li>
+<li>
+<code class="code">
+   MYSQL_LOG_LEVEL
+  </code>
+  : Logging level (default: "info")
+ </li>
+<li>
+<code class="code">
+   MYSQL_METRICS_ENABLED
+  </code>
+  : Enable performance metrics (default: "false")
+ </li>
+</ul>
+<h2 class="heading">
+ Multi-DB Mode
+</h2>
+<p>
+ MCP-Server-MySQL supports connecting to multiple databases when no specific database is set. This allows the LLM to query any database the MySQL user has access to. For full details, see
+ <a href="./README-MULTI-DB.md">
+  README-MULTI-DB.md
+ </a>
+ .
+</p>
+<h3 class="heading">
+ Enabling Multi-DB Mode
+</h3>
+<p>
+ To enable multi-DB mode, simply leave the
+ <code class="code">
+  MYSQL_DB
+ </code>
+ environment variable empty. In multi-DB mode, queries require schema qualification:
+</p>
+<pre class="pre"><code class="language-sql code">-- Use fully qualified table names
+SELECT * FROM database_name.table_name;
+
+-- Or use USE statements to switch between databases
+USE database_name;
+SELECT * FROM table_name;
+</code></pre>
+<h2 class="heading">
+ Schema-Specific Permissions
+</h2>
+<p>
+ For fine-grained control over database operations, MCP-Server-MySQL now supports schema-specific permissions. This allows different databases to have different levels of access (read-only, read-write, etc.).
+</p>
+<h3 class="heading">
+ Configuration Example
+</h3>
+<pre class="pre"><code class="code">SCHEMA_INSERT_PERMISSIONS=development:true,test:true,production:false
+SCHEMA_UPDATE_PERMISSIONS=development:true,test:true,production:false
+SCHEMA_DELETE_PERMISSIONS=development:false,test:true,production:false
+SCHEMA_DDL_PERMISSIONS=development:false,test:true,production:false
+</code></pre>
+<p>
+ For complete details and security recommendations, see
+ <a href="./README-MULTI-DB.md">
+  README-MULTI-DB.md
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Testing
+</h2>
+<h3 class="heading">
+ Database Setup
+</h3>
+<p>
+ Before running tests, you need to set up the test database and seed it with test data:
+</p>
+<ol>
+<li>
+<strong>
+   Create Test Database and User
+  </strong>
+  ```sql
+   -- Connect as root and create test database
+   CREATE DATABASE IF NOT EXISTS mcp_test;
+ </li>
+</ol>
+<p>
+ -- Create test user with appropriate permissions
+   CREATE USER IF NOT EXISTS 'mcp_test'@'localhost' IDENTIFIED BY 'mcp_test_password';
+   GRANT ALL PRIVILEGES ON mcp_test.* TO 'mcp_test'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+</p>
+<ol>
+<li>
+<strong>
+   Run Database Setup Script
+  </strong>
+<code class="code">
+   bash
+   # Run the database setup script
+   pnpm run setup:test:db
+  </code>
+</li>
+</ol>
+<p>
+ This will create the necessary tables and seed data. The script is located in
+ <code class="code">
+  scripts/setup-test-db.ts
+ </code>
+</p>
+<ol>
+<li>
+<p>
+<strong>
+    Configure Test Environment
+   </strong>
+   Create a
+   <code class="code">
+    .env.test
+   </code>
+   file in the project root (if not existing):
+   <code class="code">
+    env
+   MYSQL_HOST=127.0.0.1
+   MYSQL_PORT=3306
+   MYSQL_USER=mcp_test
+   MYSQL_PASS=mcp_test_password
+   MYSQL_DB=mcp_test
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Update package.json Scripts
+   </strong>
+   Add these scripts to your package.json:
+   <code class="code">
+    json
+   {
+     "scripts": {
+       "setup:test:db": "ts-node scripts/setup-test-db.ts",
+       "pretest": "pnpm run setup:test:db",
+       "test": "vitest run",
+       "test:watch": "vitest",
+       "test:coverage": "vitest run --coverage"
+     }
+   }
+   </code>
+</p>
+</li>
+</ol>
+<h3 class="heading">
+ Running Tests
+</h3>
+<p>
+ The project includes a comprehensive test suite to ensure functionality and reliability:
+</p>
+<pre class="pre"><code class="language-bash code"># First-time setup
+pnpm run setup:test:db
+
+# Run all tests
+pnpm test
+</code></pre>
+<h2 class="heading">
+ Running evals
+</h2>
+<p>
+ The evals package loads an mcp client that then runs the index.ts file, so there is no need to rebuild between tests. You can load environment variables by prefixing the npx command. Full documentation can be found
+ <a href="https://www.mcpevals.io/docs">
+  here
+ </a>
+ .
+</p>
+<pre class="pre"><code class="language-bash code">OPENAI_API_KEY=your-key  npx mcp-eval evals.ts index.ts
+</code></pre>
+<h2 class="heading">
+ Troubleshooting
+</h2>
+<h3 class="heading">
+ Common Issues
+</h3>
+<ol>
+<li>
+<strong>
+   Connection Issues
+  </strong>
+</li>
+<li>
+  Verify MySQL server is running and accessible
+ </li>
+<li>
+  Check credentials and permissions
+ </li>
+<li>
+  Ensure SSL/TLS configuration is correct if enabled
+ </li>
+<li>
+<p>
+   Try connecting with a MySQL client to confirm access
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Performance Issues
+   </strong>
+</p>
+</li>
+<li>
+  Adjust connection pool size
+ </li>
+<li>
+  Configure query timeout values
+ </li>
+<li>
+  Enable query caching if needed
+ </li>
+<li>
+  Check query complexity settings
+ </li>
+<li>
+<p>
+   Monitor server resource usage
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Security Restrictions
+   </strong>
+</p>
+</li>
+<li>
+  Review rate limiting configuration
+ </li>
+<li>
+  Check query whitelist/blacklist settings
+ </li>
+<li>
+  Verify SSL/TLS settings
+ </li>
+<li>
+<p>
+   Ensure the user has appropriate MySQL permissions
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Path Resolution
+   </strong>
+   If you encounter an error "Could not connect to MCP server mcp-server-mysql", explicitly set the path of all required binaries:
+  </p>
+</li>
+</ol>
+<pre class="pre"><code class="language-json code">{
+  "env": {
+    "PATH": "/path/to/node/bin:/usr/bin:/bin"
+  }
+}
+</code></pre>
+<p>
+<em>
+  Where can I find my
+  <code class="code">
+   node
+  </code>
+  bin path
+ </em>
+ Run the following command to get it:
+</p>
+<p>
+ For
+ <strong>
+  PATH
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code">echo "$(which node)/../"    
+</code></pre>
+<p>
+ For
+ <strong>
+  NODE_PATH
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code">echo "$(which node)/../../lib/node_modules"    
+</code></pre>
+<ol>
+<li>
+<strong>
+   Claude Desktop Specific Issues
+  </strong>
+</li>
+<li>
+  If you see "Server disconnected" logs in Claude Desktop, check the logs at
+  <code class="code">
+   ~/Library/Logs/Claude/mcp-server-mcp_server_mysql.log
+  </code>
+</li>
+<li>
+  Ensure you're using the absolute path to both the Node binary and the server script
+ </li>
+<li>
+  Check if your
+  <code class="code">
+   .env
+  </code>
+  file is being properly loaded; use explicit environment variables in the configuration
+ </li>
+<li>
+  Try running the server directly from the command line to see if there are connection issues
+ </li>
+<li>
+  If you need write operations (INSERT, UPDATE, DELETE), set the appropriate flags to "true" in your configuration:
+  <code class="code">
+   json
+     "env": {
+       "ALLOW_INSERT_OPERATION": "true",  // Enable INSERT operations
+       "ALLOW_UPDATE_OPERATION": "true",  // Enable UPDATE operations
+       "ALLOW_DELETE_OPERATION": "true"   // Enable DELETE operations
+     }
+  </code>
+</li>
+<li>
+  Ensure your MySQL user has the appropriate permissions for the operations you're enabling
+ </li>
+<li>
+<p>
+   For direct execution configuration, use:
+   <code class="code">
+    json
+     {
+       "mcpServers": {
+         "mcp_server_mysql": {
+           "command": "/full/path/to/node",
+           "args": [
+             "/full/path/to/mcp-server-mysql/dist/index.js"
+           ],
+           "env": {
+             "MYSQL_HOST": "127.0.0.1",
+             "MYSQL_PORT": "3306",
+             "MYSQL_USER": "root",
+             "MYSQL_PASS": "your_password",
+             "MYSQL_DB": "your_database"
+           }
+         }
+       }
+     }
+   </code>
+</p>
+</li>
+<li>
+<p>
+<strong>
+    Authentication Issues
+   </strong>
+</p>
+</li>
+<li>
+  For MySQL 8.0+, ensure the server supports the
+  <code class="code">
+   caching_sha2_password
+  </code>
+  authentication plugin
+ </li>
+<li>
+  Check if your MySQL user is configured with the correct authentication method
+ </li>
+<li>
+<p>
+   Try creating a user with legacy authentication if needed:
+   <code class="code">
+    sql
+     CREATE USER 'user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+   </code>
+   @lizhuangs
+  </p>
+</li>
+<li>
+<p>
+   I am encountering
+   <code class="code">
+    Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'dotenv' imported from
+   </code>
+   error
+try this workaround:
+  </p>
+</li>
+</ol>
+<pre class="pre"><code class="language-bash code">npx -y -p @benborla29/mcp-server-mysql -p dotenv mcp-server-mysql
+</code></pre>
+<p>
+ Thanks to @lizhuangs
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Contributions are welcome! Please feel free to submit a Pull Request to 
+https://github.com/benborla/mcp-server-mysql
+</p>
+<h2 class="heading">
+ Many Thanks to the following Contributors:
+</h2>
+<p>
+<a href="https://github.com/benborla/mcp-server-mysql/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=benborla/mcp-server-mysql"/>
+</a>
+</p>
+<h3 class="heading">
+ Development Setup
+</h3>
+<ol>
+<li>
+  Clone the repository
+ </li>
+<li>
+  Install dependencies:
+  <code class="code">
+   pnpm install
+  </code>
+</li>
+<li>
+  Build the project:
+  <code class="code">
+   pnpm run build
+  </code>
+</li>
+<li>
+  Run tests:
+  <code class="code">
+   pnpm test
+  </code>
+</li>
+</ol>
+<h3 class="heading">
+ Project Roadmap
+</h3>
+<p>
+ We're actively working on enhancing this MCP server. Check our
+ <a href="./CHANGELOG.md">
+  CHANGELOG.md
+ </a>
+ for details on planned features, including:
+</p>
+<ul>
+<li>
+  Enhanced query capabilities with prepared statements
+ </li>
+<li>
+  Advanced security features
+ </li>
+<li>
+  Performance optimizations
+ </li>
+<li>
+  Comprehensive monitoring
+ </li>
+<li>
+  Expanded schema information
+ </li>
+</ul>
+<p>
+ If you'd like to contribute to any of these areas, please check the issues on GitHub or open a new one to discuss your ideas.
+</p>
+<h3 class="heading">
+ Submitting Changes
+</h3>
+<ol>
+<li>
+  Fork the repository
+ </li>
+<li>
+  Create a feature branch:
+  <code class="code">
+   git checkout -b feature/your-feature-name
+  </code>
+</li>
+<li>
+  Commit your changes:
+  <code class="code">
+   git commit -am 'Add some feature'
+  </code>
+</li>
+<li>
+  Push to the branch:
+  <code class="code">
+   git push origin feature/your-feature-name
+  </code>
+</li>
+<li>
+  Submit a pull request
+ </li>
+</ol>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This MCP server is licensed under the MIT License. See the LICENSE file for details.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/benborla-mcp-server-mysql.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

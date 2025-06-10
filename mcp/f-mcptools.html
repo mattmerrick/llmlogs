@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Swiss Army Knife for MCP Servers - MCP Directory">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://llmlogs.com/mcp/f-mcptools.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Swiss Army Knife for MCP Servers - MCP Directory">
+    <meta name="twitter:description" content="">
+    
+    <title>Swiss Army Knife for MCP Servers - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Swiss Army Knife for MCP Servers</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Swiss Army Knife for MCP Servers</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 772</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Go</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+                        </div>
+                        <a href="https://github.com/f/mcptools" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Swiss Army Knife for MCP Servers - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/f-mcptools.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Swiss Army Knife for MCP Servers - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Swiss Army Knife for MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Swiss Army Knife for MCP Servers</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Swiss Army Knife for MCP Servers</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 772</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/f/mcptools" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Swiss Army Knife for MCP Servers - MCP Directory" property="og:title">
+<meta content="" property="og:description">
+<meta content="https://llmlogs.com/mcp/f-mcptools.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Swiss Army Knife for MCP Servers - MCP Directory" name="twitter:title">
+<meta content="" name="twitter:description">
+<title>Swiss Army Knife for MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Swiss Army Knife for MCP Servers</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 772</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/f/mcptools" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Swiss Army Knife for MCP Servers - MCP Directory" property="og:title"/>
+<meta content="" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/f-mcptools.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Swiss Army Knife for MCP Servers - MCP Directory" name="twitter:title"/>
+<meta content="" name="twitter:description"/>
+<title>Swiss Army Knife for MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Swiss Army Knife for MCP Servers</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 772</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Go</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">mcp</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/f/mcptools" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<p align="center">
+<img alt="MCP Tools" height="150" src="./.github/resources/logo.png"/>
+</p>
+<p align="center">
+<h1 align="center" class="heading">
+  Swiss Army Knife for MCP Servers
+ </h1>
+<p align="center">
+  A comprehensive command-line interface for interacting with MCP (Model Context Protocol) servers.
+  <br/>
+  Discover, call, and manage tools, resources, and prompts from any MCP-compatible server.
+  <br/>
+  Supports multiple transport methods, output formats, and includes powerful mock and proxy server capabilities.
+ </p>
+</p>
+<p>
+<a href="https://blog.fka.dev/blog/2025-03-27-mcp-inspector-vs-mcp-tools/">
+<img alt="Blog Post" src="https://img.shields.io/badge/Blog-Read%20about%20MCP%20Tools-blue"/>
+</a>
+</p>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#overview">
+   Overview
+  </a>
+</li>
+<li>
+<a href="https://blog.fka.dev/blog/2025-03-27-mcp-inspector-vs-mcp-tools/">
+   Difference Between the MCP Inspector and MCP Tools
+  </a>
+</li>
+<li>
+<a href="#installation">
+   Installation
+  </a>
+</li>
+<li>
+<a href="#using-homebrew">
+   Using Homebrew
+  </a>
+</li>
+<li>
+<a href="#from-source">
+   From Source
+  </a>
+</li>
+<li>
+<a href="#getting-started">
+   Getting Started
+  </a>
+</li>
+<li>
+<a href="#features">
+   Features
+  </a>
+</li>
+<li>
+<a href="#transport-options">
+   Transport Options
+  </a>
+</li>
+<li>
+<a href="#output-formats">
+   Output Formats
+  </a>
+</li>
+<li>
+<a href="#commands">
+   Commands
+  </a>
+</li>
+<li>
+<a href="#interactive-shell">
+   Interactive Shell
+  </a>
+</li>
+<li>
+<a href="#web-interface">
+   Web Interface
+  </a>
+</li>
+<li>
+<a href="#project-scaffolding">
+   Project Scaffolding
+  </a>
+</li>
+<li>
+<a href="#server-aliases">
+   Server Aliases
+  </a>
+</li>
+<li>
+<a href="#llm-apps-config-management">
+   LLM Apps Config Management
+  </a>
+</li>
+<li>
+<a href="#server-modes">
+   Server Modes
+  </a>
+</li>
+<li>
+<a href="#mock-server-mode">
+   Mock Server Mode
+  </a>
+</li>
+<li>
+<a href="#proxy-mode">
+   Proxy Mode
+  </a>
+</li>
+<li>
+<a href="#guard-mode">
+   Guard Mode
+  </a>
+</li>
+<li>
+<a href="#examples">
+   Examples
+  </a>
+</li>
+<li>
+<a href="#basic-usage">
+   Basic Usage
+  </a>
+</li>
+<li>
+<a href="#script-integration">
+   Script Integration
+  </a>
+</li>
+<li>
+<a href="#debugging">
+   Debugging
+  </a>
+</li>
+<li>
+<a href="#contributing">
+   Contributing
+  </a>
+</li>
+<li>
+<a href="#roadmap">
+   Roadmap
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Overview
+</h2>
+<p>
+ MCP Tools provides a versatile CLI for working with Model Context Protocol (MCP) servers. It enables you to:
+</p>
+<ul>
+<li>
+  Discover and call tools provided by MCP servers
+ </li>
+<li>
+  Access and utilize resources exposed by MCP servers
+ </li>
+<li>
+  Create mock servers for testing client applications
+ </li>
+<li>
+  Proxy MCP requests to shell scripts for easy extensibility
+ </li>
+<li>
+  Create interactive shells for exploring and using MCP servers
+ </li>
+<li>
+  Scaffold new MCP projects with TypeScript support
+ </li>
+<li>
+  Format output in various styles (JSON, pretty-printed, table)
+ </li>
+<li>
+  Guard and restrict access to specific tools and resources
+ </li>
+<li>
+  Support all transport methods (HTTP, stdio)
+ </li>
+</ul>
+<p align="center">
+<img alt="MCP Tools Screenshot" src=".github/resources/screenshot.png" width="700"/>
+</p>
+<h2 class="heading">
+ Installation
+</h2>
+<h3 class="heading">
+ Using Homebrew (for macOS)
+</h3>
+<pre class="pre"><code class="language-bash code">brew tap f/mcptools
+brew install mcp
+</code></pre>
+<blockquote>
+<p>
+  ❕ The binary is installed as
+  <code class="code">
+   mcp
+  </code>
+  but can also be accessed as
+  <code class="code">
+   mcpt
+  </code>
+  to avoid conflicts with other tools that might use the
+  <code class="code">
+   mcp
+  </code>
+  command name.
+ </p>
+</blockquote>
+<h3 class="heading">
+ From Source (for Windows and GNU/Linux)
+</h3>
+<pre class="pre"><code class="language-bash code">go install github.com/f/mcptools/cmd/mcptools@latest
+</code></pre>
+<blockquote>
+<p>
+  ❕ The binary will be installed as
+  <code class="code">
+   mcptools
+  </code>
+  when but can be aliased to
+  <code class="code">
+   mcpt
+  </code>
+  for convenience.
+ </p>
+<p>
+<img alt="Screenshot 2025-05-05 at 22 21 29" src="https://github.com/user-attachments/assets/eaba88c1-8833-4525-bb19-9ab0ec2ff27e" width="500"/>
+</p>
+<p>
+<sub>
+   Windows 11 Running Example
+  </sub>
+</p>
+</blockquote>
+<h2 class="heading">
+ Getting Started
+</h2>
+<p>
+ The simplest way to start using MCP Tools is to connect to an MCP server and list available tools:
+</p>
+<pre class="pre"><code class="language-bash code"># List all available tools from a filesystem server
+mcp tools npx -y @modelcontextprotocol/server-filesystem ~
+
+# Call a specific tool
+mcp call read_file --params '{"path":"README.md"}' npx -y @modelcontextprotocol/server-filesystem ~
+
+# Open an interactive shell
+mcp shell npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h2 class="heading">
+ Features
+</h2>
+<p>
+ MCP Tools supports a wide range of features for interacting with MCP servers:
+</p>
+<pre class="pre"><code class="code">Usage:
+  mcp [command]
+
+Available Commands:
+  version       Print the version information
+  tools         List available tools on the MCP server
+  resources     List available resources on the MCP server
+  prompts       List available prompts on the MCP server
+  call          Call a tool, resource, or prompt on the MCP server
+  get-prompt    Get a prompt on the MCP server
+  read-resource Read a resource on the MCP server
+  shell         Start an interactive shell for MCP commands
+  web           Start a web interface for MCP commands
+  mock          Create a mock MCP server with tools, prompts, and resources
+  proxy         Proxy MCP tool requests to shell scripts
+  alias         Manage MCP server aliases
+  configs       Manage MCP server configurations
+  new           Create a new MCP project component
+  help          Help about any command
+  completion    Generate the autocompletion script for the specified shell
+
+Flags:
+  -f, --format string   Output format (table, json, pretty) (default "table")
+  -h, --help            help for mcp
+  -p, --params string   JSON string of parameters to pass to the tool (for call command) (default "{}")
+
+Use "mcp [command] --help" for more information about a command.
+</code></pre>
+<h3 class="heading">
+ Transport Options
+</h3>
+<p>
+ MCP Tools supports multiple transport methods for communicating with MCP servers:
+</p>
+<h4 class="heading">
+ Stdio Transport
+</h4>
+<p>
+ Uses stdin/stdout to communicate with an MCP server via JSON-RPC 2.0. This is useful for command-line tools that implement the MCP protocol.
+</p>
+<pre class="pre"><code class="language-bash code">mcp tools npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h4 class="heading">
+ HTTP SSE Transport
+</h4>
+<p>
+ Uses HTTP and Server-Sent Events (SSE) to communicate with an MCP server via JSON-RPC 2.0. This is useful for connecting to remote servers that implement the MCP protocol.
+</p>
+<pre class="pre"><code class="language-bash code">mcp tools http://localhost:3001/sse
+
+# Example: Use the everything sample server
+# docker run -p 3001:3001 --rm -it tzolov/mcp-everything-server:v1
+</code></pre>
+<p>
+<em>
+  Note:
+ </em>
+ HTTP SSE currently supports only MCP protocol version 2024-11-05.
+</p>
+<h3 class="heading">
+ Output Formats
+</h3>
+<p>
+ MCP Tools supports three output formats to accommodate different needs:
+</p>
+<h4 class="heading">
+ Table Format (Default)
+</h4>
+<pre class="pre"><code class="language-bash code">mcp tools npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<p>
+ The default format now displays tools in a colorized man-page style:
+</p>
+<pre class="pre"><code class="code">read_file(path:str)
+     Read the complete contents of a file from the file system.
+read_multiple_files(paths:str[])
+     Read the contents of multiple files simultaneously.
+list_dir(path:str)
+     Lists the contents of a directory.
+write_file(path:str, content:str)
+     Writes content to a file.
+grep_search(pattern:str, [excludePatterns:str[]])
+     Search files with pattern.
+edit_file(edits:{newText:str,oldText:str}[], path:str)
+     Edit a file with multiple text replacements
+</code></pre>
+<p>
+ Key features of the format:
+- Function names are displayed in bold cyan
+- Required parameters are shown in green (e.g.,
+ <code class="code">
+  path:str
+ </code>
+ )
+- Optional parameters are shown in yellow brackets (e.g.,
+ <code class="code">
+  [limit:int]
+ </code>
+ )
+- Array types are indicated with
+ <code class="code">
+  []
+ </code>
+ suffix (e.g.,
+ <code class="code">
+  str[]
+ </code>
+ )
+- Object types show their properties in curly braces (e.g.,
+ <code class="code">
+  {prop1:type1,prop2:type2}
+ </code>
+ )
+- Nested objects are displayed recursively (e.g.,
+ <code class="code">
+  {notifications:{enabled:bool,sound:bool}}
+ </code>
+ )
+- Type names are shortened for readability (e.g.,
+ <code class="code">
+  str
+ </code>
+ instead of
+ <code class="code">
+  string
+ </code>
+ ,
+ <code class="code">
+  int
+ </code>
+ instead of
+ <code class="code">
+  integer
+ </code>
+ )
+- Descriptions are indented and displayed in gray
+- Parameter order is consistent, with required parameters listed first
+</p>
+<h4 class="heading">
+ JSON Format (Compact)
+</h4>
+<pre class="pre"><code class="language-bash code">mcp tools --format json npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h4 class="heading">
+ Pretty JSON Format (Indented)
+</h4>
+<pre class="pre"><code class="language-bash code">mcp tools --format pretty npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h3 class="heading">
+ Commands
+</h3>
+<p>
+ MCP Tools includes several core commands for interacting with MCP servers:
+</p>
+<h4 class="heading">
+ List Available Tools
+</h4>
+<pre class="pre"><code class="language-bash code">mcp tools npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h4 class="heading">
+ List Available Resources
+</h4>
+<pre class="pre"><code class="language-bash code">mcp resources npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h4 class="heading">
+ List Available Prompts
+</h4>
+<pre class="pre"><code class="language-bash code">mcp prompts npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h4 class="heading">
+ Call a Tool
+</h4>
+<pre class="pre"><code class="language-bash code">mcp call read_file --params '{"path":"/path/to/file"}' npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h4 class="heading">
+ Call a Resource
+</h4>
+<pre class="pre"><code class="language-bash code">mcp call resource:test://static/resource/1 npx -y @modelcontextprotocol/server-everything -f json | jq ".contents[0].text"
+</code></pre>
+<p>
+ or
+</p>
+<pre class="pre"><code class="language-bash code">mcp read-resource test://static/resource/1 npx -y @modelcontextprotocol/server-everything -f json | jq ".contents[0].text"
+</code></pre>
+<h4 class="heading">
+ Call a Prompt
+</h4>
+<pre class="pre"><code class="language-bash code">mcp get-prompt simple_prompt npx -y @modelcontextprotocol/server-everything -f json | jq ".messages[0].content.text"
+</code></pre>
+<h4 class="heading">
+ Viewing Server Logs
+</h4>
+<p>
+ When using client commands that make calls to the server, you can add the
+ <code class="code">
+  --server-logs
+ </code>
+ flag to see the server logs related to your request:
+</p>
+<pre class="pre"><code class="language-bash code"># View server logs when listing tools
+mcp tools --server-logs npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<p>
+ Output:
+</p>
+<pre class="pre"><code class="code">[&gt;] Secure MCP Filesystem Server running on stdio
+[&gt;] Allowed directories: [ '/Users/fka/' ]
+read_file(path:str)
+     Read the complete contents of a file from the file system.
+read_multiple_files(paths:str[])
+     Read the contents of multiple files simultaneously.
+... and the other tools available on this server
+</code></pre>
+<p>
+ This can be helpful for debugging or understanding what's happening on the server side when executing these commands.
+</p>
+<h3 class="heading">
+ Interactive Shell
+</h3>
+<p>
+ The interactive shell mode allows you to run multiple MCP commands in a single session:
+</p>
+<pre class="pre"><code class="language-bash code">mcp shell npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<p>
+ This opens an interactive shell with the following capabilities:
+</p>
+<pre class="pre"><code class="code">mcp tools shell
+connected to: npx -y @modelcontextprotocol/server-filesystem /Users/fka
+
+mcp &gt; Type '/h' for help or '/q' to quit
+mcp &gt; tools
+read_file(path:str, [limit:int], [offset:int])
+     Reads a file from the filesystem
+
+list_dir(path:str)
+     Lists directory contents
+
+grep_search(pattern:str, [excludePatterns:str[]])
+     Search files with pattern
+
+edit_file(edits:{newText:str,oldText:str}[], path:str)
+     Edit a file with multiple text replacements
+
+# Direct tool calling is supported
+mcp &gt; read_file {"path":"README.md"}
+...content of README.md...
+
+# Calling a tool with complex object parameters
+mcp &gt; edit_file {"path":"main.go","edits":[{"oldText":"foo","newText":"bar"}]}
+...result of edit operation...
+
+# Get help
+mcp &gt; /h
+MCP Shell Commands:
+  tools                      List available tools
+  resources                  List available resources
+  prompts                    List available prompts
+  call &lt;entity&gt; [--params '{...}']  Call a tool, resource, or prompt
+  format [json|pretty|table] Get or set output format
+Special Commands:
+  /h, /help                  Show this help
+  /q, /quit, exit            Exit the shell
+</code></pre>
+<h3 class="heading">
+ Web Interface
+</h3>
+<p>
+ MCP Tools provides a web interface for interacting with MCP servers through a browser-based UI:
+</p>
+<pre class="pre"><code class="language-bash code"># Start a web interface for a filesystem server on default port (41999)
+mcp web npx -y @modelcontextprotocol/server-filesystem ~
+
+# Use a custom port
+mcp web --port 8080 docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server
+
+# Use SSE
+mcp web https://ne.tools
+</code></pre>
+<p>
+ The web interface includes:
+</p>
+<ul>
+<li>
+  A sidebar listing all available tools, resources, and prompts
+ </li>
+<li>
+  Form-based and JSON-based parameter editing
+ </li>
+<li>
+  Formatted and raw JSON response views
+ </li>
+<li>
+  Interactive parameter forms automatically generated from tool schemas
+ </li>
+<li>
+  Support for complex parameter types (arrays, objects, nested structures)
+ </li>
+<li>
+  Direct API access for tool calling
+ </li>
+</ul>
+<p>
+ Once started, you can access the interface by opening
+ <code class="code">
+  http://localhost:41999
+ </code>
+ (or your custom port) in a browser.
+</p>
+<p align="center">
+<img alt="MCP Web Interface" src=".github/resources/web-interface.png" width="700"/>
+</p>
+<h3 class="heading">
+ Project Scaffolding
+</h3>
+<p>
+ MCP Tools provides a scaffolding feature to quickly create new MCP servers with TypeScript:
+</p>
+<pre class="pre"><code class="language-bash code">mkdir my-mcp-server
+cd my-mcp-server
+
+# Create a project with specific components
+mcp new tool:calculate resource:file prompt:greet
+
+# Create a project with a specific SDK (currently only TypeScript/ts supported)
+mcp new tool:calculate --sdk=ts
+
+# Create a project with a specific transport type
+mcp new tool:calculate --transport=stdio
+mcp new tool:calculate --transport=sse
+</code></pre>
+<p>
+ The scaffolding creates a complete project structure with:
+</p>
+<ul>
+<li>
+  Server setup with chosen transport (stdio or SSE)
+ </li>
+<li>
+  TypeScript configuration with modern ES modules
+ </li>
+<li>
+  Component implementations with proper MCP interfaces
+ </li>
+<li>
+  Automatic wiring of imports and initialization
+ </li>
+</ul>
+<p>
+ After scaffolding, you can build and run your MCP server:
+</p>
+<pre class="pre"><code class="language-bash code"># Install dependencies
+npm install
+
+# Build the TypeScript code
+npm run build
+
+# Test the server with MCP Tools
+mcp tools node build/index.js
+</code></pre>
+<p>
+ Project templates are stored in either:
+- Local
+ <code class="code">
+  ./templates/
+ </code>
+ directory
+- User's home directory:
+ <code class="code">
+  ~/.mcpt/templates/
+ </code>
+ - Homebrew installation path (
+ <code class="code">
+  /opt/homebrew/Cellar/mcp/v#.#.#/templates
+ </code>
+ )
+</p>
+<p>
+ When installing via Homebrew, templates are automatically installed to your home directory. But if you use source install, you need to run
+ <code class="code">
+  make install-templates
+ </code>
+ .
+</p>
+<h2 class="heading">
+ Server Aliases
+</h2>
+<p>
+ MCP Tools allows you to save and reuse server commands with friendly aliases:
+</p>
+<pre class="pre"><code class="language-bash code"># Add a new server alias
+mcp alias add myfs npx -y @modelcontextprotocol/server-filesystem ~/
+
+# List all registered server aliases
+mcp alias list
+
+# Remove a server alias
+mcp alias remove myfs
+
+# Use an alias with any MCP command
+mcp tools myfs
+mcp call read_file --params '{"path":"README.md"}' myfs
+</code></pre>
+<p>
+ Server aliases are stored in
+ <code class="code">
+  $HOME/.mcpt/aliases.json
+ </code>
+ and provide a convenient way to work with commonly used MCP servers without typing long commands repeatedly.
+</p>
+<h2 class="heading">
+ LLM Apps Config Management
+</h2>
+<p>
+ MCP Tools provides a powerful configuration management system that helps you work with MCP server configurations across multiple applications:
+</p>
+<blockquote>
+<p>
+  🚧 This works only on macOS for now.
+ </p>
+</blockquote>
+<pre class="pre"><code class="language-bash code"># Scan for MCP server configurations across all supported applications
+mcp configs scan
+
+# List all configurations (alias for configs view --all)
+mcp configs ls
+
+# View specific configuration by alias
+mcp configs view vscode
+
+# Add or update a server in a configuration
+mcp configs set vscode my-server npm run mcp-server
+mcp configs set cursor my-api https://api.example.com/mcp --headers "Authorization=Bearer token"
+
+# Add to multiple configurations at once
+mcp configs set vscode,cursor,claude-desktop my-server npm run mcp-server
+
+# Remove a server from a configuration
+mcp configs remove vscode my-server
+
+# Create an alias for a custom config file
+mcp configs alias myapp ~/myapp/config.json
+
+# Synchronize and merge configurations from multiple sources
+mcp configs sync vscode cursor --output vscode --default interactive
+
+# Convert a command line to MCP server JSON configuration format
+mcp configs as-json mcp proxy start
+# Output: {"command":"mcp","args":["proxy","start"]}
+
+# Convert a URL to MCP server JSON configuration format
+mcp configs as-json https://api.example.com/mcp --headers "Authorization=Bearer token"
+# Output: {"url":"https://api.example.com/mcp","headers":{"Authorization":"Bearer token"}}
+</code></pre>
+<p>
+ Configurations are managed through a central registry in
+ <code class="code">
+  $HOME/.mcpt/configs.json
+ </code>
+ with predefined aliases for:
+- VS Code and VS Code Insiders
+- Windsurf
+- Cursor
+- Claude Desktop and Claude Code
+</p>
+<p>
+ The system automatically displays server configurations in a colorized format grouped by source, showing command-line or URL information, headers, and environment variables.
+</p>
+<p>
+<code class="code">
+  mcp configs scan
+ </code>
+ command looks for MCP server configurations in:
+- Visual Studio Code
+- Visual Studio Code Insiders
+- Windsurf
+- Cursor
+- Claude Desktop
+</p>
+<p>
+ Example Output:
+</p>
+<pre class="pre"><code class="code">VS Code Insiders
+  GitHub (stdio):
+    docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server
+
+Claude Desktop
+  Proxy (stdio):
+    mcp proxy start
+
+  My Files (stdio):
+    npx -y @modelcontextprotocol/server-filesystem ~/
+</code></pre>
+<h3 class="heading">
+ Bonus
+</h3>
+<p>
+ Add official GitHub MCP Server to Windsurf, Cursor and VS Code at once:
+</p>
+<pre class="pre"><code class="language-bash code">mcp configs set windsurf,cursor,vscode GitHub \
+  --env "GITHUB_PERSONAL_ACCESS_TOKEN=github_pat_xxx" \
+  docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server
+</code></pre>
+<p align="center">
+<img alt="MCP Configs Screenshot" src=".github/resources/configs.png" width="700"/>
+</p>
+<h2 class="heading">
+ Server Modes
+</h2>
+<p>
+ MCP Tools can operate as both a client and a server, with two server modes available:
+</p>
+<h3 class="heading">
+ Mock Server Mode
+</h3>
+<p>
+ The mock server mode creates a simulated MCP server for testing clients without implementing a full server:
+</p>
+<pre class="pre"><code class="language-bash code"># Create a mock server with a simple tool
+mcp mock tool hello_world "A simple greeting tool"
+
+# Create a mock server with multiple entity types
+mcp mock tool hello_world "A greeting tool" \
+       prompt welcome "A welcome prompt" "Hello {{name}}, welcome to {{location}}!" \
+       resource docs://readme "Documentation" "Mock MCP Server\nThis is a mock server"
+</code></pre>
+<p>
+ Features of the mock server:
+</p>
+<ul>
+<li>
+  Full initialization handshake
+ </li>
+<li>
+  Tool listing with standardized schema
+ </li>
+<li>
+  Tool calling with simple responses
+ </li>
+<li>
+  Resource listing and reading
+ </li>
+<li>
+  Prompt listing and retrieval with argument substitution
+ </li>
+<li>
+  Detailed request/response logging to
+  <code class="code">
+   ~/.mcpt/logs/mock.log
+  </code>
+</li>
+</ul>
+<h4 class="heading">
+ Using Prompt Templates
+</h4>
+<p>
+ For prompts, any text in
+ <code class="code">
+  {{double_braces}}
+ </code>
+ is automatically detected as an argument:
+</p>
+<pre class="pre"><code class="language-bash code"># Create a prompt with name and location arguments
+mcp mock prompt greeting "Greeting template" "Hello {{name}}! Welcome to {{location}}."
+</code></pre>
+<p>
+ When a client requests the prompt, it can provide values for these arguments which will be substituted in the response.
+</p>
+<h3 class="heading">
+ Proxy Mode
+</h3>
+<p>
+ The proxy mode allows you to register shell scripts or inline commands as MCP tools, making it easy to extend MCP functionality without writing code:
+</p>
+<pre class="pre"><code class="language-bash code"># Register a shell script as an MCP tool
+mcp proxy tool add_operation "Adds a and b" "a:int,b:int" ./examples/add.sh
+
+# Register an inline command as an MCP tool
+mcp proxy tool add_operation "Adds a and b" "a:int,b:int" -e 'echo "total is $a + $b = $(($a+$b))"'
+
+# Unregister a tool
+mcp proxy tool --unregister add_operation
+
+# Start the proxy server
+mcp proxy start
+</code></pre>
+<p>
+ Running
+ <code class="code">
+  mcp tools localhost:3000
+ </code>
+ with the proxy server will show the registered tools with their parameters:
+</p>
+<pre class="pre"><code class="code">add_operation(a:int, b:int)
+     Adds a and b
+
+count_files(dir:str, [include:str[]])
+     Counts files in a directory with optional filters
+</code></pre>
+<p>
+ This new format clearly shows what parameters each tool accepts, making it easier to understand how to use them. Arrays are denoted with
+ <code class="code">
+  []
+ </code>
+ suffix (e.g.,
+ <code class="code">
+  str[]
+ </code>
+ ), and type names are shortened for better readability.
+</p>
+<h4 class="heading">
+ How It Works
+</h4>
+<ol>
+<li>
+  Register a shell script or inline command with a tool name, description, and parameter specification
+ </li>
+<li>
+  Start the proxy server, which implements the MCP protocol
+ </li>
+<li>
+  When a tool is called, parameters are passed as environment variables to the script/command
+ </li>
+<li>
+  The script/command's output is returned as the tool response
+ </li>
+</ol>
+<h4 class="heading">
+ Example Scripts and Commands
+</h4>
+<p>
+<strong>
+  Adding Numbers (add.sh):
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code">#!/bin/bash
+# Get values from environment variables
+if [ -z "$a" ] || [ -z "$b" ]; then
+  echo "Error: Missing required parameters 'a' or 'b'"
+  exit 1
+fi
+
+# Perform the addition
+result=$(($a + $b))
+echo "The sum of $a and $b is $result"
+</code></pre>
+<p>
+<strong>
+  Inline Command Example:
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code"># Simple addition
+mcp proxy tool add_op "Adds given numbers" "a:int,b:int" -e 'echo "total is $a + $b = $(($a+$b))"'
+
+# Customized greeting
+mcp proxy tool greet "Greets a user" "name:string,greeting:string,formal:bool" -e '
+if [ "$formal" = "true" ]; then
+  title="Mr./Ms."
+  echo "${greeting:-Hello}, ${title} ${name}. How may I assist you today?"
+else
+  echo "${greeting:-Hello}, ${name}! Nice to meet you!"
+fi
+'
+
+# File operations
+mcp proxy tool count_lines "Counts lines in a file" "file:string" -e "wc -l &lt; \"$file\""
+</code></pre>
+<h4 class="heading">
+ Configuration and Logging
+</h4>
+<ul>
+<li>
+  Tools are registered in
+  <code class="code">
+   ~/.mcpt/proxy_config.json
+  </code>
+</li>
+<li>
+  The proxy server logs all requests and responses to
+  <code class="code">
+   ~/.mcpt/logs/proxy.log
+  </code>
+</li>
+<li>
+  Use
+  <code class="code">
+   --unregister
+  </code>
+  to remove a tool from the configuration
+ </li>
+</ul>
+<h3 class="heading">
+ Guard Mode
+</h3>
+<p>
+ The guard mode allows you to restrict access to specific tools, prompts, and resources based on pattern matching. This is useful for security purposes when:
+</p>
+<ul>
+<li>
+  Restricting potentially dangerous operations (file writes, deletions, etc.)
+ </li>
+<li>
+  Limiting the capabilities of AI assistants or applications
+ </li>
+<li>
+  Providing read-only access to sensitive systems
+ </li>
+<li>
+  Creating sandboxed environments for testing or demonstrations
+ </li>
+</ul>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  Guard mode currently only works with STDIO transport (command execution) and not HTTP transport.
+ </p>
+</blockquote>
+<pre class="pre"><code class="language-bash code"># Allow only file reading operations, deny file modifications
+mcp guard --allow 'tools:read_* --deny tools:write_*,create_*,delete_*' npx -y @modelcontextprotocol/server-filesystem ~
+
+# Permit only a single specific tool
+mcp guard --allow 'tools:search_files' npx -y @modelcontextprotocol/server-filesystem ~
+
+# Restrict by both tool type and prompt type
+mcp guard --allow 'tools:read_*,prompts:system_*' --deny tools:execute_* npx -y @modelcontextprotocol/server-filesystem ~
+
+# Using with aliases
+mcp guard --allow 'tools:read_*' fs  # Where 'fs' is an alias for a filesystem server
+</code></pre>
+<h4 class="heading">
+ How It Works
+</h4>
+<p>
+ The guard command works by:
+1. Creating a proxy that sits between the client and the MCP server
+2. Intercepting and filtering all requests to
+ <code class="code">
+  tools/list
+ </code>
+ ,
+ <code class="code">
+  prompts/list
+ </code>
+ , and
+ <code class="code">
+  resources/list
+ </code>
+ 3. Preventing calls to tools, prompts, or resources that don't match the allowed patterns
+4. Blocking requests for filtered resources, tools and prompts
+6. Passing through all other requests and responses unchanged
+</p>
+<h4 class="heading">
+ Pattern Matching
+</h4>
+<p>
+ Patterns use simple glob syntax with
+ <code class="code">
+  *
+ </code>
+ as a wildcard:
+</p>
+<ul>
+<li>
+<code class="code">
+   tools:read_*
+  </code>
+  - Matches all tools starting with "read_"
+ </li>
+<li>
+<code class="code">
+   tools:*file*
+  </code>
+  - Matches any tool with "file" in the name
+ </li>
+<li>
+<code class="code">
+   prompts:system_*
+  </code>
+  - Matches all prompts starting with "system_"
+ </li>
+</ul>
+<p>
+ For each entity type, you can specify:
+-
+ <code class="code">
+  --allow 'pattern1,pattern2,...'
+ </code>
+ - Only allow entities matching these patterns
+-
+ <code class="code">
+  --deny 'pattern1,pattern2,...'
+ </code>
+ - Remove entities matching these patterns
+</p>
+<p>
+ If no allow patterns are specified, all entities are allowed by default (except those matching deny patterns).
+</p>
+<h4 class="heading">
+ Application Integration
+</h4>
+<p>
+ You can use the guard command to secure MCP configurations in applications. For example, to restrict a file system server to only allow read operations, change:
+</p>
+<pre class="pre"><code class="language-json code">"filesystem": {
+  "command": "npx",
+  "args": [
+    "-y",
+    "@modelcontextprotocol/server-filesystem",
+    "/Users/fka/Desktop"
+  ]
+}
+</code></pre>
+<p>
+ To:
+</p>
+<pre class="pre"><code class="language-json code">"filesystem": {
+  "command": "mcp",
+  "args": [
+    "guard", "--deny", "tools:write_*,create_*,move_*,delete_*",
+    "npx", "-y", "@modelcontextprotocol/server-filesystem",
+    "/Users/fka/Desktop"
+  ]
+}
+</code></pre>
+<p>
+ This provides a read-only view of the filesystem by preventing any modification operations.
+</p>
+<p>
+ You can also use aliases with the guard command in configurations:
+</p>
+<pre class="pre"><code class="language-json code">"filesystem": {
+  "command": "mcp",
+  "args": [
+    "guard", "--allow", "tools:read_*,list_*,search_*",
+    "fs"  // Where 'fs' is an alias for the filesystem server
+  ]
+}
+</code></pre>
+<p>
+ This makes your configurations even more concise and easier to maintain.
+</p>
+<h4 class="heading">
+ Logging
+</h4>
+<ul>
+<li>
+  Guard operations are logged to
+  <code class="code">
+   ~/.mcpt/logs/guard.log
+  </code>
+</li>
+<li>
+  The log includes all requests, responses, and filtering decisions
+ </li>
+<li>
+  Use
+  <code class="code">
+   tail -f ~/.mcpt/logs/guard.log
+  </code>
+  to monitor activity in real-time
+ </li>
+</ul>
+<h2 class="heading">
+ Examples
+</h2>
+<h3 class="heading">
+ Basic Usage
+</h3>
+<p>
+ List tools from a filesystem server:
+</p>
+<pre class="pre"><code class="language-bash code">mcp tools npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<p>
+ Call a tool with pretty JSON output:
+</p>
+<pre class="pre"><code class="language-bash code">mcp call read_file --params '{"path":"README.md"}' --format pretty npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<p>
+ Use the guard mode to filter available tools:
+</p>
+<pre class="pre"><code class="language-bash code"># Only allow file search functionality
+mcp guard --allow tools:search_files npx -y @modelcontextprotocol/server-filesystem ~
+
+# Create a read-only environment
+mcp guard --deny tools:write_*,delete_*,create_*,move_* npx -y @modelcontextprotocol/server-filesystem ~
+</code></pre>
+<h3 class="heading">
+ Script Integration
+</h3>
+<p>
+ Using the proxy mode with a simple shell script:
+</p>
+<pre class="pre"><code class="language-bash code"># 1. Create a simple shell script for addition
+cat &gt; add.sh &lt;&lt; 'EOF'
+#!/bin/bash
+# Get values from environment variables
+if [ -z "$a" ] || [ -z "$b" ]; then
+  echo "Error: Missing required parameters 'a' or 'b'"
+  exit 1
+fi
+result=$(($a + $b))
+echo "The sum of $a and $b is $result"
+EOF
+
+# 2. Make it executable
+chmod +x add.sh
+
+# 3. Register it as an MCP tool
+mcp proxy tool add_numbers "Adds two numbers" "a:int,b:int" ./add.sh
+
+# 4. In one terminal, start the proxy server
+mcp proxy start
+
+# 5. In another terminal, you can call it as an MCP tool
+mcp call add_numbers --params '{"a":5,"b":3}' --format pretty
+</code></pre>
+<h3 class="heading">
+ Debugging
+</h3>
+<p>
+ Tailing the logs to debug your proxy or mock server:
+</p>
+<pre class="pre"><code class="language-bash code"># For the mock server logs
+tail -f ~/.mcpt/logs/mock.log
+
+# For the proxy server logs
+tail -f ~/.mcpt/logs/proxy.log
+
+# To watch all logs in real-time (on macOS/Linux)
+find ~/.mcpt/logs -name "*.log" -exec tail -f {} \;
+</code></pre>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ We welcome contributions! Please see our
+ <a href="CONTRIBUTING.md">
+  Contributing Guidelines
+ </a>
+ for details on how to submit pull requests, report issues, and contribute to the project.
+</p>
+<h2 class="heading">
+ Roadmap
+</h2>
+<p>
+ The following features are planned for future releases:
+</p>
+<ul>
+<li>
+  Authentication: Support for secure authentication mechanisms
+ </li>
+</ul>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the MIT License.
+</p>
+<h2 class="heading">
+ Thanks
+</h2>
+<p>
+ Thanks to
+ <a href="https://bsky.app/profile/fatih.co">
+  Fatih Taskiran
+ </a>
+ for the logo design.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/f-mcptools.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/f-mcptools.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/f-mcptools.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/f-mcptools.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

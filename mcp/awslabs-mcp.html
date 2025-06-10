@@ -1,0 +1,3414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AWS MCP Servers - MCP Directory">
+    <meta property="og:description" content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP.">
+    <meta property="og:url" content="https://llmlogs.com/mcp/awslabs-mcp.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS MCP Servers - MCP Directory">
+    <meta name="twitter:description" content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP.">
+    
+    <title>AWS MCP Servers - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">AWS MCP Servers</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">AWS MCP Servers</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 3640</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: Python</span>
+                        </div>
+                        <div class="topic-tags">
+                            <span class="topic-tag">aws</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> mcp-host</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> modelcontextprotocol</span>
+                        </div>
+                        <a href="https://github.com/awslabs/mcp" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="AWS MCP Servers - MCP Directory" property="og:title"/>
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/awslabs-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AWS MCP Servers - MCP Directory" name="twitter:title"/>
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." name="twitter:description"/>
+<title>AWS MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">AWS MCP Servers</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">AWS MCP Servers</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3640</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">aws</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> mcp-host</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/awslabs/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="AWS MCP Servers - MCP Directory" property="og:title">
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." property="og:description">
+<meta content="https://llmlogs.com/mcp/awslabs-mcp.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="AWS MCP Servers - MCP Directory" name="twitter:title">
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." name="twitter:description">
+<title>AWS MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>AWS MCP Servers</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3640</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">aws</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> mcp-host</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/awslabs/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="AWS MCP Servers - MCP Directory" property="og:title"/>
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." property="og:description"/>
+<meta content="https://llmlogs.com/mcp/awslabs-mcp.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="AWS MCP Servers - MCP Directory" name="twitter:title"/>
+<meta content="A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP." name="twitter:description"/>
+<title>AWS MCP Servers - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>AWS MCP Servers</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 3640</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: Python</span>
+</div>
+<div class="topic-tags">
+<span class="topic-tag">aws</span><span class="topic-tag"> mcp</span><span class="topic-tag"> mcp-client</span><span class="topic-tag"> mcp-clients</span><span class="topic-tag"> mcp-host</span><span class="topic-tag"> mcp-server</span><span class="topic-tag"> mcp-servers</span><span class="topic-tag"> mcp-tools</span><span class="topic-tag"> modelcontextprotocol</span>
+</div>
+<a class="github-link" href="https://github.com/awslabs/mcp" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ AWS MCP Servers
+</h1>
+<p>
+ A suite of specialized MCP servers that help you get the most out of AWS, wherever you use MCP.
+</p>
+<p>
+<a href="https://github.com/awslabs/mcp">
+<img alt="GitHub" src="https://img.shields.io/badge/github-awslabs/mcp-blue.svg?style=flat&amp;logo=github"/>
+</a>
+<a href="LICENSE">
+<img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-brightgreen"/>
+</a>
+<a href="https://app.codecov.io/gh/awslabs/mcp">
+<img alt="Codecov" src="https://img.shields.io/codecov/c/github/awslabs/mcp"/>
+</a>
+<a href="https://scorecard.dev/viewer/?uri=github.com/awslabs/mcp">
+<img alt="OSSF-Scorecard Score" src="https://img.shields.io/ossf-scorecard/github.com/awslabs/mcp"/>
+</a>
+</p>
+<h2 class="heading">
+ Table of Contents
+</h2>
+<ul>
+<li>
+<a href="#aws-mcp-servers">
+   AWS MCP Servers
+  </a>
+</li>
+<li>
+<a href="#table-of-contents">
+   Table of Contents
+  </a>
+</li>
+<li>
+<a href="#what-is-the-model-context-protocol-mcp-and-how-does-it-work-with-aws-mcp-servers">
+   What is the Model Context Protocol (MCP) and how does it work with AWS MCP Servers?
+  </a>
+<ul>
+<li>
+<a href="#why-mcp-servers">
+     Why MCP Servers?
+    </a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#available-servers">
+   Available Servers
+  </a>
+<ul>
+<li>
+<a href="#core-mcp-server">
+     Core MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-documentation-mcp-server">
+     AWS Documentation MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-bedrock-knowledge-bases-retrieval-mcp-server">
+     Amazon Bedrock Knowledge Bases Retrieval MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-kendra-index-mcp-server">
+     AWS Kendra Index MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-cdk-mcp-server">
+     AWS CDK MCP Server
+    </a>
+</li>
+<li>
+<a href="#cost-analysis-mcp-server">
+     Cost Analysis MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-nova-canvas-mcp-server">
+     Amazon Nova Canvas MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-diagram-mcp-server">
+     AWS Diagram MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-cloudformation-mcp-server">
+     AWS CloudFormation MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-lambda-tool-mcp-server">
+     AWS Lambda MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-sns--sqs-mcp-server">
+     Amazon SNS / SQS MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-step-functions-tool-mcp-server">
+     AWS Step Functions Tool MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-terraform-mcp-server">
+     AWS Terraform MCP Server
+    </a>
+</li>
+<li>
+<a href="#frontend-mcp-server">
+     Frontend MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-elasticache--memorydb-for-valkey-mcp-server">
+     Amazon ElastiCache/MemoryDB Valkey for MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-elasticache-for-memcached-mcp-server">
+     Amazon ElastiCache Memcached for MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-location-service-mcp-server">
+     AWS Location Service MCP Server
+    </a>
+</li>
+<li>
+<a href="#git-repo-research-mcp-server">
+     Git Repo Research MCP Server
+    </a>
+</li>
+<li>
+<a href="#code-documentation-generation-mcp-server">
+     Code Documentation Generation MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-aurora-mysql-mcp-server">
+     Amazon Aurora MySql MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-aurora-postgres-mcp-server">
+     Amazon Aurora Postgres MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-mq-mcp-server">
+     Amazon MQ MCP Server
+    </a>
+</li>
+<li>
+<a href="#synthetic-data-mcp-server">
+     Synthetic Data MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-aurora-dsql-mcp-server">
+     Amazon Aurora DSQL MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-cloudwatch-logs-mcp-server">
+     Amazon Cloudwatch Logs MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-dynamodb-mcp-server">
+     Amazon DynamoDB MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-keyspaces-mcp-server">
+     Amazon Keyspaces MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-neptune-mcp-server">
+     Amazon Neptune MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-documentdb-mcp-server">
+     Amazon DocumentDB MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-eks-mcp-server">
+     Amazon EKS MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-serverless-mcp-server">
+     AWS Serverless MCP Server
+    </a>
+</li>
+<li>
+<a href="#amazon-ecs-mcp-server">
+     Amazon ECS MCP Server
+    </a>
+</li>
+<li>
+<a href="#finch-mcp-server">
+     Finch MCP Server
+    </a>
+</li>
+<li>
+<a href="#aws-bedrock-data-automation-mcp-server">
+     AWS Bedrock Data Automation MCP Server
+    </a>
+</li>
+<li>
+<a href="#use-cases-for-the-servers">
+     Use Cases for the Servers
+    </a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#installation-and-setup">
+   Installation and Setup
+  </a>
+<ul>
+<li>
+<a href="#running-mcp-servers-in-containers">
+     Running MCP servers in containers
+    </a>
+</li>
+<li>
+<a href="#getting-started-with-cline-and-amazon-bedrock">
+     Getting Started with Cline and Amazon Bedrock
+    </a>
+</li>
+<li>
+<a href="#cline_mcp_settingsjson">
+<code class="code">
+      cline_mcp_settings.json
+     </code>
+</a>
+</li>
+<li>
+<a href="#getting-started-with-cursor">
+     Getting Started with Cursor
+    </a>
+</li>
+<li>
+<a href="#cursormcpjson">
+<code class="code">
+      .cursor/mcp.json
+     </code>
+</a>
+</li>
+<li>
+<a href="#getting-started-with-windsurf">
+     Getting Started with Windsurf
+    </a>
+</li>
+<li>
+<a href="#codeiumwindsurfmcp_configjson">
+<code class="code">
+      ~/.codeium/windsurf/mcp_config.json
+     </code>
+</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#samples">
+   Samples
+  </a>
+</li>
+<li>
+<a href="#documentation">
+   Documentation
+  </a>
+</li>
+<li>
+<a href="#vibe-coding">
+   Vibe coding
+  </a>
+</li>
+<li>
+<a href="#additional-resources">
+   Additional Resources
+  </a>
+</li>
+<li>
+<a href="#security">
+   Security
+  </a>
+</li>
+<li>
+<a href="#contributing">
+   Contributing
+  </a>
+</li>
+<li>
+<a href="#developer-guide">
+   Developer guide
+  </a>
+</li>
+<li>
+<a href="#license">
+   License
+  </a>
+</li>
+<li>
+<a href="#disclaimer">
+   Disclaimer
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ What is the Model Context Protocol (MCP) and how does it work with AWS MCP Servers?
+</h2>
+<blockquote>
+<p>
+  The Model Context Protocol (MCP) is an open protocol that enables seamless integration between LLM applications and external data sources and tools. Whether you're building an AI-powered IDE, enhancing a chat interface, or creating custom AI workflows, MCP provides a standardized way to connect LLMs with the context they need.
+ </p>
+<p>
+  —
+  <a href="https://github.com/modelcontextprotocol#:~:text=The%20Model%20Context,context%20they%20need.">
+   Model Context Protocol README
+  </a>
+</p>
+</blockquote>
+<p>
+ An MCP Server is a lightweight program that exposes specific capabilities through the standardized Model Context Protocol. Host applications (such as chatbots, IDEs, and other AI tools) have MCP clients that maintain 1:1 connections with MCP servers. Common MCP clients include agentic AI coding assistants (like Q Developer, Cline, Cursor, Windsurf) as well as chatbot applications like Claude Desktop, with more clients coming soon. MCP servers can access local data sources and remote services to provide additional context that improves the generated outputs from the models.
+</p>
+<p>
+ AWS MCP Servers use this protocol to provide AI applications access to AWS documentation, contextual guidance, and best practices. Through the standardized MCP client-server architecture, AWS capabilities become an intelligent extension of your development environment or AI application.
+</p>
+<p>
+ AWS MCP servers enable enhanced cloud-native development, infrastructure management, and development workflows—making AI-assisted cloud computing more accessible and efficient.
+</p>
+<p>
+ The Model Context Protocol is an open source project run by Anthropic, PBC. and open to contributions from the entire community. For more information on MCP, you can find further documentation
+ <a href="https://modelcontextprotocol.io/introduction">
+  here
+ </a>
+</p>
+<h2 class="heading">
+ Server Sent Events Support Removal
+</h2>
+<p>
+<strong>
+  Important Notice:
+ </strong>
+ On May 26th, 2025, Server Sent Events (SSE) support was removed from all MCP servers in their latest major versions. This change aligns with the Model Context Protocol specification's
+ <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#backwards-compatibility">
+  backwards compatibility guidelines
+ </a>
+ .
+</p>
+<p>
+ We are actively working towards supporting
+ <a href="https://modelcontextprotocol.io/specification/draft/basic/transports#streamable-http">
+  Streamable HTTP
+ </a>
+ , which will provide improved transport capabilities for future versions.
+</p>
+<p>
+ For applications still requiring SSE support, please use the previous major version of the respective MCP server until you can migrate to alternative transport methods.
+</p>
+<h3 class="heading">
+ Why MCP Servers?
+</h3>
+<p>
+ MCP servers enhance the capabilities of foundation models (FMs) in several key ways:
+</p>
+<ul>
+<li>
+<p>
+<strong>
+    Improved Output Quality
+   </strong>
+   : By providing relevant information directly in the model's context, MCP servers significantly improve model responses for specialized domains like AWS services. This approach reduces hallucinations, provides more accurate technical details, enables more precise code generation, and ensures recommendations align with current AWS best practices and service capabilities.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Access to Latest Documentation
+   </strong>
+   : FMs may not have knowledge of recent releases, APIs, or SDKs. MCP servers bridge this gap by pulling in up-to-date documentation, ensuring your AI assistant always works with the latest AWS capabilities.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Workflow Automation
+   </strong>
+   : MCP servers convert common workflows into tools that foundation models can use directly. Whether it's CDK, Terraform, or other AWS-specific workflows, these tools enable AI assistants to perform complex tasks with greater accuracy and efficiency.
+  </p>
+</li>
+<li>
+<p>
+<strong>
+    Specialized Domain Knowledge
+   </strong>
+   : MCP servers provide deep, contextual knowledge about AWS services that might not be fully represented in foundation models' training data, enabling more accurate and helpful responses for cloud development tasks.
+  </p>
+</li>
+</ul>
+<h2 class="heading">
+ Available Servers
+</h2>
+<p>
+ This monorepo contains the following MCP servers:
+</p>
+<h3 class="heading">
+ Core MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.core-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.core-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for managing and coordinating other AWS Labs MCP servers.
+</p>
+<ul>
+<li>
+  Automatic MCP Server Management
+ </li>
+<li>
+  Planning and guidance to orchestrate AWS Labs MCP Servers
+ </li>
+<li>
+  UVX Installation Support
+ </li>
+<li>
+  Centralized Configuration
+ </li>
+</ul>
+<p>
+<a href="src/core-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/core-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Documentation MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.aws-documentation-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.aws-documentation-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for accessing AWS documentation and best practices.
+</p>
+<ul>
+<li>
+  Search Documentation using the official AWS search API
+ </li>
+<li>
+  Get content recommendations for AWS documentation pages
+ </li>
+<li>
+  Convert documentation to markdown format
+ </li>
+</ul>
+<p>
+<a href="src/aws-documentation-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/aws-documentation-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Kendra Index MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.amazon-kendra-index-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.amazon-kendra-index-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for listing and querying Amazon Kendra Indexes
+</p>
+<ul>
+<li>
+  List the Kendra indexes in your account.
+ </li>
+<li>
+  Query Kendra indexes with natural language to give additional RAG context to your AI tool.
+ </li>
+</ul>
+<p>
+<a href="src/amazon-kendra-index-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/kendra-index-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Bedrock Knowledge Bases Retrieval MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.bedrock-kb-retrieval-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.bedrock-kb-retrieval-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for accessing Amazon Bedrock Knowledge Bases.
+</p>
+<ul>
+<li>
+  Discover knowledge bases and their data sources
+ </li>
+<li>
+  Query knowledge bases with natural language
+ </li>
+<li>
+  Filter results by data source
+ </li>
+<li>
+  Rerank results
+ </li>
+</ul>
+<p>
+<a href="src/bedrock-kb-retrieval-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/bedrock-kb-retrieval-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS CDK MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.cdk-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.cdk-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for AWS CDK best practices.
+</p>
+<ul>
+<li>
+  AWS CDK project analysis and assistance
+ </li>
+<li>
+  CDK construct recommendations
+ </li>
+<li>
+  Infrastructure as Code best practices
+ </li>
+</ul>
+<p>
+<a href="src/cdk-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/cdk-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Cost Analysis MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.cost-analysis-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.cost-analysis-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for AWS Cost Analysis.
+</p>
+<ul>
+<li>
+  Analyze and visualize AWS costs
+ </li>
+<li>
+  Query cost data with natural language
+ </li>
+<li>
+  Generate cost reports and insights
+ </li>
+</ul>
+<p>
+<a href="src/cost-analysis-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/cost-analysis-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Nova Canvas MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.nova-canvas-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.nova-canvas-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for generating images using Amazon Nova Canvas.
+</p>
+<ul>
+<li>
+  Text-based image generation with customizable parameters
+ </li>
+<li>
+  Color-guided image generation with specific palettes
+ </li>
+<li>
+  Workspace integration for saving generated images
+ </li>
+<li>
+  AWS authentication through profiles
+ </li>
+</ul>
+<p>
+<a href="src/nova-canvas-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/nova-canvas-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Diagram MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.aws-diagram-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.aws-diagram-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for seamlessly creating diagrams using the Python diagrams package DSL.
+</p>
+<ul>
+<li>
+  Generate professional diagrams using Python code
+ </li>
+<li>
+  Support for AWS architecture, sequence diagrams, flow charts, and class diagrams
+ </li>
+<li>
+  Customize diagram appearance, layout, and styling
+ </li>
+<li>
+  Code scanning to ensure secure diagram generation
+ </li>
+</ul>
+<p>
+<a href="src/aws-diagram-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/aws-diagram-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS CloudFormation MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.cfn-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.cfn-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server to manage AWS resources via cloudcontrol. This allows you to perform CRUDL operations on any AWS resources in your AWS account
+</p>
+<ul>
+<li>
+  This server acts as a bridge between MCP clients and AWS, allowing foundation models (FMs) to read and manage resources in your AWS account.
+ </li>
+<li>
+  This can be used, for example, to create an AWS::S3::Bucket, list any AWS::Lambda::Function, etc.
+ </li>
+</ul>
+<p>
+<a href="src/cfn-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/cfn-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Lambda MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.lambda-tool-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.lambda-tool-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server to select and run AWS Lambda function as MCP tools without code changes.
+</p>
+<ul>
+<li>
+  This server acts as a bridge between MCP clients and AWS Lambda functions, allowing foundation models (FMs) to access and run Lambda functions as tools.
+ </li>
+<li>
+  This can be used, for example, to access private resources such as internal applications and databases without the need to provide public network access.
+ </li>
+<li>
+  This approach allows an MCP client to use other AWS services, private networks, and the public internet.
+ </li>
+<li>
+  The Lambda function description is used by MCP to describe the tool and should guide the FMs on when (what does the function provide?) and how (which parameters it needs? which syntax?) to use it.
+ </li>
+</ul>
+<p>
+<a href="src/lambda-tool-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/lambda-tool-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon SNS / SQS MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.amazon-sns-sqs-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.amazon-sns-sqs-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for Amazon SNS / SQS.
+</p>
+<ul>
+<li>
+  Create SNS / SQS Topics and Queues.
+ </li>
+<li>
+  Subscribe, PublishMessages to SNS Topics.
+ </li>
+<li>
+  Send and receive messages from / to Queues.
+ </li>
+<li>
+  Modify Topic / Queue Attributes
+ </li>
+</ul>
+<p>
+<a href="src/amazon-sns-sqs-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/amazon-sns-sqs-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Step Functions Tool MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.stepfunctions-tool-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.stepfunctions-tool-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server that acts as a bridge between MCP clients and AWS Step Functions state machines, allowing AI models to execute and manage complex workflows.
+</p>
+<ul>
+<li>
+  Run AWS Step Functions state machines as MCP tools without code changes
+ </li>
+<li>
+  Support for both Standard and Express workflows
+ </li>
+<li>
+  EventBridge Schema Registry integration for input validation
+ </li>
+<li>
+  IAM-based authentication and authorization
+ </li>
+<li>
+  Comprehensive workflow documentation generation
+ </li>
+</ul>
+<p>
+<a href="src/stepfunctions-tool-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/stepfunctions-tool-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Terraform MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.terraform-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.terraform-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for AWS Terraform best practices.
+</p>
+<ul>
+<li>
+  Security-First Development Workflow
+ </li>
+<li>
+  Checkov Integration
+ </li>
+<li>
+  AWS and AWSCC Provider Documentation
+ </li>
+<li>
+  AWS-IA GenAI Modules
+ </li>
+<li>
+  Terraform Workflow Execution
+ </li>
+</ul>
+<p>
+<a href="src/terraform-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/terraform-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Frontend MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.frontend-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.frontend-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server that provides specialized documentation for modern web application development with AWS.
+</p>
+<ul>
+<li>
+  Comprehensive documentation on React with AWS integrations
+ </li>
+<li>
+  Topics include AWS Amplify authentication, React Router, and shadcn/ui
+ </li>
+<li>
+  Best practices for building AWS-powered React applications
+ </li>
+</ul>
+<p>
+<a href="src/frontend-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/frontend-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon ElastiCache / MemoryDB for Valkey MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.valkey-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.valkey-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server that provides natural language interface to interact with Amazon ElastiCache
+ <a href="https://valkey.io/">
+  Valkey
+ </a>
+ datastores, enabling AI agents to efficiently manage and search data. This MCP server can be used with Amazon MemoryDB Valkey datastores.
+</p>
+<ul>
+<li>
+  Natural language interface for data operations
+ </li>
+<li>
+  Comprehensive data type support (String, Hash, List, Set, Sorted Set)
+ </li>
+<li>
+  Advanced features like Streams, JSON documents
+ </li>
+<li>
+  Secure connections with SSL/TLS and cluster mode support
+ </li>
+<li>
+  Connection pooling and efficient resource management
+ </li>
+</ul>
+<p>
+<a href="src/valkey-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/valkey-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon ElastiCache for Memcached MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.memcached-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.memcached-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server that provides natural language interface to interact with Amazon ElastiCache
+ <a href="https://memcached.org/">
+  Memcached
+ </a>
+ caches, enabling AI agents to efficiently manage and search cached data.
+</p>
+<ul>
+<li>
+  Natural language interface for cache operations
+ </li>
+<li>
+  Comprehensive command support (Get, Set, Remove, Touch, CAS, Increment, Decrement)
+ </li>
+<li>
+  Secure connections with SSL/TLS
+ </li>
+<li>
+  Connection pooling and efficient resource management
+ </li>
+</ul>
+<p>
+<a href="src/memcached-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/memcached-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Location Service MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.aws-location-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.aws-location-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for accessing AWS Location Service capabilities, focusing on place search, geographical coordinates, and route planning.
+</p>
+<ul>
+<li>
+  Search for places using geocoding
+ </li>
+<li>
+  Get details for specific places by PlaceId
+ </li>
+<li>
+  Reverse geocode coordinates to addresses
+ </li>
+<li>
+  Search for places near a location
+ </li>
+<li>
+  Search for places that are currently open
+ </li>
+<li>
+  Calculate routes between locations with turn-by-turn directions
+ </li>
+<li>
+  Optimize waypoints for efficient routing
+ </li>
+</ul>
+<p>
+<a href="src/aws-location-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/aws-location-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Git Repo Research MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.git-repo-research-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.git-repo-research-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for researching Git repositories using semantic search.
+</p>
+<ul>
+<li>
+  Repository Indexing with FAISS and Amazon Bedrock embeddings
+ </li>
+<li>
+  Semantic Search within repositories
+ </li>
+<li>
+  Repository Structure Analysis
+ </li>
+<li>
+  GitHub Repository Search in AWS organizations
+ </li>
+<li>
+  File Access with text and binary support
+ </li>
+</ul>
+<p>
+<a href="src/git-repo-research-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/git-repo-research-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Code Documentation Generation MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.code-doc-gen-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.code-doc-gen-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server that automatically generates comprehensive documentation for code repositories.
+</p>
+<ul>
+<li>
+  Automated documentation generation based on repository analysis
+ </li>
+<li>
+  AWS architecture diagram integration with AWS Diagrams MCP Server
+ </li>
+<li>
+  Multiple document types (README, API, Backend, Frontend)
+ </li>
+<li>
+  Interactive documentation creation workflow for AI assistants
+ </li>
+</ul>
+<p>
+<a href="src/code-doc-gen-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/code-doc-gen-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Aurora Postgres MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.postgres-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.postgres-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for Aurora Postgres.
+</p>
+<ul>
+<li>
+  Converting human-readable questions and commands into structured Postgres-compatible SQL queries and executing them against the configured Aurora Postgres database
+ </li>
+<li>
+  Fetch table columns and comments from Postgres using RDS Data API
+ </li>
+</ul>
+<p>
+<a href="src/postgres-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/postgres-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Keyspaces MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.amazon-keyspaces-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.amazon-keyspaces-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for interacting with Amazon Keyspaces (for Apache Cassandra).
+</p>
+<ul>
+<li>
+  Explore keyspaces and tables
+ </li>
+<li>
+  Execute CQL SELECT queries
+ </li>
+<li>
+  Analyze schema design and query performance
+ </li>
+<li>
+  Cassandra-compatible
+ </li>
+</ul>
+<p>
+<a href="src/amazon-keyspaces-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/amazon-keyspaces-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Aurora MySql MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.mysql-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.mysql-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for Aurora MySql.
+</p>
+<ul>
+<li>
+  Converting human-readable questions and commands into structured MySQL-compatible SQL queries and executing them against the configured Aurora MySQL database.
+ </li>
+<li>
+  Fetch table schema
+ </li>
+</ul>
+<p>
+<a href="src/mysql-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/mysql-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Neptune MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.amazon-neptune-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.amazon-neptune-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for interacting with Amazon Neptune graph database.
+</p>
+<ul>
+<li>
+  Run openCypher/Gremlin queries on a Neptune Database
+ </li>
+<li>
+  Run openCypher queries on Neptune Analytics
+ </li>
+<li>
+  Get the schema of the graph
+ </li>
+</ul>
+<p>
+<a href="src/amazon-neptune-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/amazon-neptune-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon DocumentDB MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.documentdb-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.documentdb-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for interacting with Amazon DocumentDB clusters, Amazon's MongoDB-compatible document database service.
+</p>
+<ul>
+<li>
+  Connect to DocumentDB clusters with SSL/TLS support
+ </li>
+<li>
+  Execute queries, aggregations, and CRUD operations
+ </li>
+<li>
+  Analyze collection schema and document structure
+ </li>
+<li>
+  Manage databases and collections
+ </li>
+<li>
+  Get database and collection statistics
+ </li>
+<li>
+  Optimize operations with query planning and execution statistics
+ </li>
+</ul>
+<p>
+<a href="src/documentdb-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/documentdb-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon EKS MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.eks-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.eks-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A Model Context Protocol (MCP) server for Amazon EKS that enables generative AI models to create and manage Kubernetes clusters on AWS through MCP tools.
+</p>
+<ul>
+<li>
+  EKS Cluster Management: Create and manage EKS clusters with dedicated VPCs, proper networking, and CloudFormation templates for reliable, repeatable deployments
+ </li>
+<li>
+  Kubernetes Resource Management: Create, read, update, delete, and list Kubernetes resources with support for applying YAML manifests
+ </li>
+<li>
+  Application Deployment: Generate and deploy Kubernetes manifests with customizable parameters for containerized applications
+ </li>
+<li>
+  Operational Support: Access pod logs, Kubernetes events, and monitor cluster resources
+ </li>
+<li>
+  CloudWatch Integration: Retrieve logs and metrics from CloudWatch for comprehensive monitoring
+ </li>
+<li>
+  Security-First Design: Configurable read-only mode, sensitive data access controls, and IAM integration for proper permissions management
+ </li>
+</ul>
+<p>
+<a href="src/eks-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/eks-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon ECS MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.ecs-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.ecs-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A Model Context Protocol (MCP) server for containerizing applications, deploying applications to Amazon Elastic Container Service (ECS), troubleshooting ECS deployments, and managing ECS resources.
+</p>
+<ul>
+<li>
+  Containerization Guidance: Generate Dockerfile and container configurations for web applications
+ </li>
+<li>
+  ECS Deployment: Create AWS infrastructure needed to deploy containerized applications
+ </li>
+<li>
+  Load Balancer Integration: Automatically configure Application Load Balancers (ALBs)
+ </li>
+<li>
+  Resource Management: List and explore ECS resources such as task definitions, services, clusters, and tasks
+ </li>
+<li>
+  Comprehensive Troubleshooting: Diagnose and resolve common ECS deployment issues
+ </li>
+<li>
+  Security Best Practices: Implement AWS security best practices for container deployments
+ </li>
+</ul>
+<p>
+<a href="src/ecs-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/ecs-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Finch MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.finch-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.finch-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A Model Context Protocol (MCP) server for Finch that enables generative AI models to build and push container images through Finch CLI leveraged MCP tools.
+</p>
+<ul>
+<li>
+  Build container images using Finch with support for various build options
+ </li>
+<li>
+  Push container images to repositories, including Amazon ECR
+ </li>
+<li>
+  Create ECR repositories if they don't exist
+ </li>
+<li>
+  Automatic management of the Finch VM on macOS and Windows
+ </li>
+<li>
+  Automatic configuration of ECR credential helpers when needed
+ </li>
+</ul>
+<p>
+<a href="src/finch-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/finch-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon MQ MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.amazon-mq-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.amazon-mq-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for Amazon MQ.
+</p>
+<ul>
+<li>
+  Analyze existing Amazon MQ for ActiveMQ and RabbitMQ brokers .
+ </li>
+<li>
+  Provision new Amazon MQ for ActiveMQ and RabbitMQ broker instances.
+ </li>
+</ul>
+<p>
+<a href="src/amazon-mq-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/amazon-mq-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Synthetic Data MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.syntheticdata-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.syntheticdata-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for generating, validating, and managing synthetic data.
+</p>
+<ul>
+<li>
+  Business-Driven Generation: Generate synthetic data instructions based on business descriptions
+ </li>
+<li>
+  Safe Pandas Code Execution: Run pandas code in a restricted environment with automatic DataFrame detection
+ </li>
+<li>
+  JSON Lines Validation: Validate and convert JSON Lines data to CSV format
+ </li>
+<li>
+  Data Validation: Validate data structure, referential integrity, and save as CSV files
+ </li>
+<li>
+  Referential Integrity Checking: Validate relationships between tables
+ </li>
+<li>
+  Data Quality Assessment: Identify potential issues in data models (3NF validation)
+ </li>
+<li>
+  Storage Integration: Load data to various storage targets (S3) with support for multiple formats and configurations
+ </li>
+</ul>
+<p>
+<a href="src/syntheticdata-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/syntheticdata-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Aurora DSQL MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.aurora-dsql-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.aurora-dsql-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ An AWS Labs Model Context Protocol (MCP) server for Aurora DSQL
+</p>
+<ul>
+<li>
+  Converting human-readable questions and commands into structured Postgres-compatible SQL queries and executing them against the configured Aurora DSQL database.
+ </li>
+</ul>
+<p>
+<a href="src/aurora-dsql-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/aurora-dsql-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon Cloudwatch Logs MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.cloudwatch-logs-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.cloudwatch-logs-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ An AWS Labs Model Context Protocol (MCP) server for CloudWatch Logs
+</p>
+<ul>
+<li>
+  Read-only operations for discovering log groups and running CloudWatch Log Insights Queries on them.
+ </li>
+</ul>
+<p>
+<a href="src/cloudwatch-logs-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/cloudwatch-logs-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ Amazon DynamoDB MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.dynamodb-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.dynamodb-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for interacting with Amazon DynamoDB
+</p>
+<ul>
+<li>
+  Control Plane operations like table creation, table update, global secondary index, streams, global table management, backup, restore, etc.
+ </li>
+<li>
+  Data Plane operations like put, get, update, query and scan.
+ </li>
+</ul>
+<p>
+<a href="src/dynamodb-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/dynamodb-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Serverless MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.aws-serverless-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.aws-serverless-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A server for interacting with AWS Serverless
+</p>
+<ul>
+<li>
+  Serverless Application Lifecycle: Intialize, build, deploy, and test Serverless Application Model (SAM) applications with SAM CLI
+ </li>
+<li>
+  Web Application Deployment &amp; Management: Deploy fullstack, frontend, and backend web applications onto AWS Serverless using Lambda Web Adapter.
+ </li>
+<li>
+  Observability: Retrieve and logs and metrics of serverless resources
+ </li>
+<li>
+  Guidance, Templates, and Deployment Help: Provides guidance on AWS Lambda use-cases, selecting an IaC framework, and deployment process onto AWS Serverless
+ </li>
+</ul>
+<p>
+<a href="src/aws-serverless-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/aws-serverless-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h3 class="heading">
+ AWS Bedrock Data Automation MCP Server
+</h3>
+<p>
+<a href="https://pypi.org/project/awslabs.aws-bedrock-data-automation-mcp-server/">
+<img alt="PyPI version" src="https://img.shields.io/pypi/v/awslabs.aws-bedrock-data-automation-mcp-server.svg"/>
+</a>
+</p>
+<p>
+ A Model Context Protocol (MCP) server for Amazon Bedrock Data Automation that enables AI assistants to analyze documents, images, videos, and audio files using Amazon Bedrock Data Automation projects.
+</p>
+<ul>
+<li>
+  Project Management: List and get details about Bedrock Data Automation projects
+ </li>
+<li>
+  Asset Analysis: Extract insights from unstructured content using Bedrock Data Automation
+ </li>
+<li>
+  Support for Multiple Content Types: Process documents, images, videos, and audio files
+ </li>
+<li>
+  Integration with Amazon S3: Seamlessly upload and download assets and results
+ </li>
+</ul>
+<p>
+<a href="src/aws-bedrock-data-automation-mcp-server/README.md">
+  Learn more
+ </a>
+ |
+ <a href="https://awslabs.github.io/mcp/servers/aws-bedrock-data-automation-mcp-server/">
+  Documentation
+ </a>
+</p>
+<h2 class="heading">
+ MCP AWS Lambda Handler Module
+</h2>
+<p>
+ A Python library for creating serverless HTTP handlers for the Model Context Protocol (MCP) using AWS Lambda. This module provides a flexible framework for building MCP HTTP endpoints with pluggable session management, including built-in DynamoDB support.
+</p>
+<p>
+<strong>
+  Features:
+ </strong>
+</p>
+<ul>
+<li>
+  Easy serverless MCP HTTP handler creation using AWS Lambda
+ </li>
+<li>
+  Pluggable session management system
+ </li>
+<li>
+  Built-in DynamoDB session backend support
+ </li>
+<li>
+  Customizable authentication and authorization
+ </li>
+<li>
+  Example implementations and tests
+ </li>
+</ul>
+<p>
+ See
+ <a href="src/mcp-lambda-handler/README.md">
+<code class="code">
+   src/mcp-lambda-handler/README.md
+  </code>
+</a>
+ for full usage, installation, and development instructions.
+</p>
+<h2 class="heading">
+ Use Cases for the Servers
+</h2>
+<p>
+ For example, you can use the
+ <strong>
+  AWS Documentation MCP Server
+ </strong>
+ to help your AI assistant research and generate up-to-date code for any AWS service, like Amazon Bedrock Inline agents. Alternatively, you could use the
+ <strong>
+  CDK MCP Server
+ </strong>
+ or the
+ <strong>
+  Terraform MCP Server
+ </strong>
+ to have your AI assistant create infrastructure-as-code implementations that use the latest APIs and follow AWS best practices. With the
+ <strong>
+  Cost Analysis MCP Server
+ </strong>
+ , you could ask "What would be the estimated monthly cost for this CDK project before I deploy it?" or "Can you help me understand the potential AWS service expenses for this infrastructure design?" and receive detailed cost estimations and budget planning insights. The
+ <strong>
+  Valkey MCP Server
+ </strong>
+ enables natural language interaction with Valkey data stores, allowing AI assistants to efficiently manage data operations through a simple conversational interface.
+</p>
+<h2 class="heading">
+ Installation and Setup
+</h2>
+<p>
+ Each server has specific installation instructions. Generally, you can:
+</p>
+<ol>
+<li>
+  Install
+  <code class="code">
+   uv
+  </code>
+  from
+  <a href="https://docs.astral.sh/uv/getting-started/installation/">
+   Astral
+  </a>
+</li>
+<li>
+  Install Python using
+  <code class="code">
+   uv python install 3.10
+  </code>
+</li>
+<li>
+  Configure AWS credentials with access to required services
+ </li>
+<li>
+  Add the server to your MCP client configuration
+ </li>
+</ol>
+<p>
+ Example configuration for Amazon Q CLI MCP (
+ <code class="code">
+  ~/.aws/amazonq/mcp.json
+ </code>
+ ):
+</p>
+<pre class="pre"><code class="language-json code">{
+  "mcpServers": {
+    "awslabs.core-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.core-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.nova-canvas-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.nova-canvas-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.bedrock-kb-retrieval-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.bedrock-kb-retrieval-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.cost-analysis-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.cost-analysis-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.cdk-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.lambda-tool-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.lambda-tool-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FUNCTION_PREFIX": "your-function-prefix",
+        "FUNCTION_LIST": "your-first-function, your-second-function",
+        "FUNCTION_TAG_KEY": "your-tag-key",
+        "FUNCTION_TAG_VALUE": "your-tag-value"
+      }
+    },
+    "awslabs.terraform-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.terraform-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.frontend-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.frontend-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.valkey-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.valkey-mcp-server@latest"
+      ],
+      "env": {
+        "VALKEY_HOST": "127.0.0.1",
+        "VALKEY_PORT": "6379",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "autoApprove": [],
+      "disabled": false
+    },
+    "awslabs.aws-location-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-location-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.memcached-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.memcached-mcp-server@latest"
+      ],
+      "env": {
+        "MEMCACHED_HOST": "127.0.0.1",
+        "MEMCACHED_PORT": "11211",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "autoApprove": [],
+      "disabled": false
+    },
+    "awslabs.git-repo-research-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "awslabs.git-repo-research-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "GITHUB_TOKEN": "your-github-token"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.cloudformation": {
+      "command": "uvx",
+      "args": [
+        "awslabs.cfn-mcp-server@latest"
+      ],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+</code></pre>
+<p>
+ See individual server READMEs for specific requirements and configuration options.
+</p>
+<p>
+<strong>
+  Note about performance when using
+  <code class="code">
+   uvx
+  </code>
+<em>
+   "@latest"
+  </em>
+  suffix:
+ </strong>
+</p>
+<p>
+ Using the
+ <em>
+  "@latest"
+ </em>
+ suffix checks and downloads the latest MCP server package from pypi every time you start your MCP clients, but it comes with a cost of increased initial load times. If you want to minimize the initial load time, remove
+ <em>
+  "@latest"
+ </em>
+ and manage your uv cache yourself using one of these approaches:
+</p>
+<ul>
+<li>
+<code class="code">
+   uv cache clean &lt;tool&gt;
+  </code>
+  : where {tool} is the mcp server you want to delete from cache and install again (e.g.: "awslabs.lambda-tool-mcp-server") (remember to remove the '&lt;&gt;').
+ </li>
+<li>
+<code class="code">
+   uvx &lt;tool&gt;@latest
+  </code>
+  : this will refresh the tool with the latest version and add it to the uv cache.
+ </li>
+</ul>
+<h3 class="heading">
+ Running MCP servers in containers
+</h3>
+<p>
+<em>
+  This example uses docker with the "awslabs.nova-canvas-mcp-server and can be repeated for each MCP server
+ </em>
+</p>
+<ul>
+<li>
+  Build and tag the image
+ </li>
+</ul>
+<p>
+<code class="code">
+  base
+  cd src/nova-canvas-mcp-server
+  docker build -t awslabs/nova-canvas-mcp-server .
+ </code>
+</p>
+<ul>
+<li>
+  Optionally save sensitive environmental variables in a file:
+ </li>
+</ul>
+<p>
+<code class="code">
+  .env
+  # contents of a .env file with fictitious AWS temporary credentials
+  AWS_ACCESS_KEY_ID=ASIAIOSFODNN7EXAMPLE
+  AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+  AWS_SESSION_TOKEN=AQoEXAMPLEH4aoAH0gNCAPy...truncated...zrkuWJOgQs8IZZaIv2BXIa2R4Olgk
+ </code>
+</p>
+<ul>
+<li>
+  Use the docker options:
+  <code class="code">
+   --env
+  </code>
+  ,
+  <code class="code">
+   --env-file
+  </code>
+  , and
+  <code class="code">
+   --volume
+  </code>
+  as needed because the
+  <code class="code">
+   "env": {}
+  </code>
+  are not available within the container.
+ </li>
+</ul>
+<p>
+<code class="code">
+  json
+  {
+    "mcpServers": {
+      "awslabs.nova-canvas-mcp-server": {
+        "command": "docker",
+        "args": [
+          "run",
+          "--rm",
+          "--interactive",
+          "--env",
+          "FASTMCP_LOG_LEVEL=ERROR",
+          "--env",
+          "AWS_REGION=us-east-1",
+          "--env-file",
+          "/full/path/to/.env",
+          "--volume",
+          "/full/path/to/.aws:/app/.aws",
+          "awslabs/nova-canvas-mcp-server:latest"
+        ],
+        "env": {}
+      }
+    }
+  }
+ </code>
+</p>
+<h3 class="heading">
+ Getting Started with Cline and Amazon Bedrock
+</h3>
+<details>
+<summary>
+  Getting Started with Cline and Amazon Bedrock
+ </summary>
+ **IMPORTANT:** Following these instructions may incur costs and are subject to the [Amazon Bedrock Pricing](https://aws.amazon.com/bedrock/pricing/). You are responsible for any associated costs. In addition to selecting the desired model in the Cline settings, ensure you have your selected model (e.g. `anthropic.claude-3-7-sonnet`) also enabled in Amazon Bedrock. For more information on this, see [these AWS docs](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) on enabling model access to Amazon Bedrock Foundation Models (FMs).
+
+1. Follow the steps above in the **Installation and Setup** section to install `uv` from [Astral](https://docs.astral.sh/uv/getting-started/installation/), install Python, and configure AWS credentials with the required services.
+
+2. If using Visual Studio Code, install the [Cline VS Code Extension](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev) (or equivalent extension for your preferred IDE). Once installed, click the extension to open it. When prompted, select the tier that you wish. In this case, we will be using Amazon Bedrock, so the free tier of Cline is fine as we will be sending requests using the Amazon Bedrock API instead of the Cline API.
+ <p align="center">
+<img height="400" src="./docs/images/root-readme/install-cline-extension.png" width="800"/>
+<p>
+   3. Select the **MCP Servers** button.
+   <p align="center">
+<img height="800" src="./docs/images/root-readme/select-mcp-servers.png" width="500"/>
+<p>
+     4. Select the **Installed** tab, then click **Configure MCP Servers** to open the `cline_mcp_settings.json` file.
+     <p align="center">
+<img height="800" src="./docs/images/root-readme/configure-mcp-servers.png" width="500"/>
+<p>
+       5. In the `cline_mcp_settings.json` file, add your desired MCP servers in the `mcpServers` object. See the following example that will use some of the current AWS MCP servers that are available in this repository. Ensure you save the file to install the MCP servers.
+
+#### `cline_mcp_settings.json`
+
+ ```json
+ {
+   "mcpServers": {
+     "awslabs.core-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.core-mcp-server@latest"],
+       "env": {
+         "FASTMCP_LOG_LEVEL": "ERROR",
+         "MCP_SETTINGS_PATH": "path to your mcp settings file"
+       }
+     },
+     "awslabs.nova-canvas-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.nova-canvas-mcp-server@latest"],
+       "env": {
+         "AWS_PROFILE": "your-aws-profile",
+         "AWS_REGION": "us-east-1",
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       }
+     },
+     "awslabs.terraform-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.terraform-mcp-server@latest"],
+       "env": {
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       },
+       "disabled": false,
+       "autoApprove": []
+     },
+    }
+  }
+ ```
+
+6. Once installed, you should see a list of your MCP Servers under the MCP Server Installed tab, and they should have a green slider to show that they are enabled. See the following for an example with two of the possible AWS MCP Servers. Click **Done** when finished. You should now see the Cline chat interface.
+       <p align="center">
+<img height="800" src="./docs/images/root-readme/mcp-servers-installed.png" width="500"/>
+<p>
+<p align="center">
+<img height="800" src="./docs/images/root-readme/cline-chat-interface.png" width="500"/>
+<p>
+           7. By default, Cline will be set as the API provider, which has limits for the free tier. Next, let's update the API provider to be AWS Bedrock, so we can use the LLMs through Bedrock, which would have billing go through your connected AWS account.
+
+8. Click the settings gear to open up the Cline settings. Then under **API Provider**, switch this from `Cline` to `AWS Bedrock` and select `AWS Profile` for the authentication type. As a note, the `AWS Credentials` option works as well, however it uses a static credentials (Access Key ID and Secret Access Key) instead of temporary credentials that are automatically redistributed when the token expires, so the temporary credentials with an AWS Profile is the more secure and recommended method.
+           <p align="center">
+<img height="800" src="./docs/images/root-readme/cline-select-bedrock.png" width="500"/>
+<p>
+             9. Fill out the configuration based on the existing AWS Profile you wish to use, select the desired AWS Region, and enable cross-region inference.
+             <p align="center">
+<img height="800" src="./docs/images/root-readme/cline-select-aws-profile.png" width="500"/>
+<p>
+<p align="center">
+<img height="800" src="./docs/images/root-readme/cline-api-provider-filled.png" width="500"/>
+<p>
+                 10. Next, scroll down on the settings page until you reach the text box that says Custom Instructions. Paste in the following snippet to ensure the `mcp-core` server is used as the starting point for every prompt:
+                 <pre class="pre"><code class="code">For every new project, always look at your MCP servers and use mcp-core as the starting point every time. Also after a task completion include the list of MCP servers used in the operation.
+</code></pre>
+<p align="center">
+<img height="800" src="./docs/images/root-readme/cline-custom-instructions.png" width="500"/>
+<p>
+                   11. Once the custom prompt is pasted in, click **Done** to return to the chat interface.
+
+12. Now you can begin asking questions and testing out the functionality of your installed AWS MCP Servers. The default option in the chat interface is is `Plan` which will provide the output for you to take manual action on (e.g. providing you a sample configuration that you copy and paste into a file). However, you can optionally toggle this to `Act` which will allow Cline to act on your behalf (e.g. searching for content using a web browser, cloning a repository, executing code, etc). You can optionally toggle on the "Auto-approve" section to avoid having to click to approve the suggestions, however we recommend leaving this off during testing, especially if you have the Act toggle selected.
+
+**Note:** For the best results, please prompt Cline to use the desired AWS MCP Server you wish to use. For example, `Using the Terraform MCP Server, do...`
+                  </p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</p>
+</details>
+<h3 class="heading">
+ Getting Started with Cursor
+</h3>
+<details>
+<summary>
+  Getting Started with Cursor
+ </summary>
+ 1. Follow the steps above in the **Installation and Setup** section to install `uv` from [Astral](https://docs.astral.sh/uv/getting-started/installation/), install Python, and configure AWS credentials with the required services.
+
+2. You can place MCP configuration in two locations, depending on your use case:
+
+  A. **Project Configuration**
+    - For tools specific to a project, create a `.cursor/mcp.json` file in your project directory.
+    - This allows you to define MCP servers that are only available within that specific project.
+
+  B. **Global Configuration**
+    - For tools that you want to use across all projects, create a `~/.cursor/mcp.json` file in your home directory.
+    - This makes MCP servers available in all your Cursor workspaces.
+
+#### `.cursor/mcp.json`
+ <pre class="pre"><code class="language-json code"> {
+  "mcpServers": {
+    "awslabs.core-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.core-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.nova-canvas-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.nova-canvas-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.bedrock-kb-retrieval-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.bedrock-kb-retrieval-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.cost-analysis-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cost-analysis-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cdk-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.lambda-tool-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.lambda-tool-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FUNCTION_PREFIX": "your-function-prefix",
+        "FUNCTION_LIST": "your-first-function, your-second-function",
+        "FUNCTION_TAG_KEY": "your-tag-key",
+        "FUNCTION_TAG_VALUE": "your-tag-value"
+      }
+    },
+    "awslabs.terraform-mcp-server": {
+  "mcpServers": {
+    "awslabs.core-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.core-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.nova-canvas-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.nova-canvas-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.bedrock-kb-retrieval-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.bedrock-kb-retrieval-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.cost-analysis-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cost-analysis-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cdk-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.lambda-tool-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.lambda-tool-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FUNCTION_PREFIX": "your-function-prefix",
+        "FUNCTION_LIST": "your-first-function, your-second-function",
+        "FUNCTION_TAG_KEY": "your-tag-key",
+        "FUNCTION_TAG_VALUE": "your-tag-value"
+      }
+    },
+    "awslabs.terraform-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.terraform-mcp-server@latest"],
+       "env": {
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       },
+       "disabled": false,
+       "autoApprove": []
+     },
+    "awslabs.frontend-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.frontend-mcp-server@latest"],
+       "env": {
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       },
+       "disabled": false,
+       "autoApprove": []
+     },
+      "awslabs.valkey-mcp-server": {
+        "command": "uvx",
+        "args": ["awslabs.valkey-mcp-server@latest"],
+        "env": {
+          "VALKEY_HOST": "127.0.0.1",
+          "VALKEY_PORT": "6379",
+          "FASTMCP_LOG_LEVEL": "ERROR"
+        },
+        "autoApprove": [],
+        "disabled": false
+      },
+    "awslabs.aws-location-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.aws-location-mcp-server@latest"],
+       "env": {
+         "AWS_PROFILE": "your-aws-profile",
+         "AWS_REGION": "us-east-1",
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       },
+       "disabled": false,
+       "autoApprove": []
+    },
+    "awslabs.memcached-mcp-server": {
+        "command": "uvx",
+        "args": ["awslabs.memcached-mcp-server@latest"],
+        "env": {
+          "MEMCACHED_HOST": "127.0.0.1",
+          "MEMCACHED_PORT": "11211",
+          "FASTMCP_LOG_LEVEL": "ERROR"
+        },
+        "autoApprove": [],
+        "disabled": false
+    },
+    "awslabs.git-repo-research-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.git-repo-research-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "GITHUB_TOKEN": "your-github-token"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.cloudformation": {
+      "command": "uvx",
+      "args": ["awslabs.cfn-mcp-server@latest"],
+      "env": {
+        "AWS_PROFILE": "your-aws-profile"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+</code></pre>
+ 3. **Using MCP in Chat** The Composer Agent will automatically use any MCP tools that are listed under Available Tools on the MCP settings page if it determines them to be relevant. To prompt tool usage intentionally, please prompt Cursor to use the desired AWS MCP Server you wish to use. For example, `Using the Terraform MCP Server, do...`
+
+4. **Tool Approval** By default, when Agent wants to use an MCP tool, it will display a message asking for your approval. You can use the arrow next to the tool name to expand the message and see what arguments the Agent is calling the tool with.
+</details>
+<h3 class="heading">
+ Getting Started with Windsurf
+</h3>
+<details>
+<summary>
+  Getting Started with Windsurf
+ </summary>
+ 1. Follow the steps above in the **Installation and Setup** section to install `uv` from [Astral](https://docs.astral.sh/uv/getting-started/installation/), install Python, and configure AWS credentials with the required services.
+
+2. **Access MCP Settings**
+   - Navigate to Windsurf - Settings &gt; Advanced Settings or use the Command Palette &gt; Open Windsurf Settings Page
+   - Look for the "Model Context Protocol (MCP) Servers" section
+
+3. **Add MCP Servers**
+   - Click "Add Server" to add a new MCP server
+   - You can choose from available templates like GitHub, Puppeteer, PostgreSQL, etc.
+   - Alternatively, click "Add custom server" to configure your own server
+
+4. **Manual Configuration**
+   - You can also manually edit the MCP configuration file located at `~/.codeium/windsurf/mcp_config.json`
+
+#### `~/.codeium/windsurf/mcp_config.json`
+
+ ```json
+ {
+   "mcpServers": {
+     "awslabs.core-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.core-mcp-server@latest"],
+       "env": {
+         "FASTMCP_LOG_LEVEL": "ERROR",
+         "MCP_SETTINGS_PATH": "path to your mcp settings file"
+       }
+     },
+     "awslabs.nova-canvas-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.nova-canvas-mcp-server@latest"],
+       "env": {
+         "AWS_PROFILE": "your-aws-profile",
+         "AWS_REGION": "us-east-1",
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       }
+     },
+     "awslabs.terraform-mcp-server": {
+       "command": "uvx",
+       "args": ["awslabs.terraform-mcp-server@latest"],
+       "env": {
+         "FASTMCP_LOG_LEVEL": "ERROR"
+       },
+       "disabled": false,
+       "autoApprove": []
+     },
+    }
+  }
+ ```
+</details>
+<h2 class="heading">
+ Samples
+</h2>
+<p>
+ Ready-to-use examples of AWS MCP Servers in action are available in the
+ <a href="samples/">
+  samples
+ </a>
+ directory. These samples provide working code and step-by-step guides to help you get started with each MCP server.
+</p>
+<h2 class="heading">
+ Documentation
+</h2>
+<p>
+ Comprehensive documentation for all servers is available on our
+ <a href="https://awslabs.github.io/mcp/">
+  documentation website
+ </a>
+ .
+</p>
+<p>
+ Documentation for each server:
+</p>
+<ul>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/core-mcp-server/">
+   Core MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/bedrock-kb-retrieval-mcp-server/">
+   Amazon Bedrock Knowledge Bases Retrieval MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/cdk-mcp-server/">
+   AWS CDK MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/cost-analysis-mcp-server/">
+   Cost Analysis MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/nova-canvas-mcp-server/">
+   Amazon Nova Canvas MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/aws-diagram-mcp-server/">
+   AWS Diagram MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/valkey-mcp-server/">
+   Amazon ElastiCache/MemoryDB Valkey MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/memcached-mcp-server/">
+   Amazon ElastiCache Memcached MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/git-repo-research-mcp-server/">
+   Git Repo Research MCP Server
+  </a>
+</li>
+<li>
+<a href="https://awslabs.github.io/mcp/servers/cfn-mcp-server/">
+   CloudFormation MCP Server
+  </a>
+</li>
+</ul>
+<p>
+ Documentation includes:
+</p>
+<ul>
+<li>
+  Detailed guides for each server
+ </li>
+<li>
+  Installation and configuration instructions
+ </li>
+<li>
+  API references
+ </li>
+<li>
+  Usage examples
+ </li>
+</ul>
+<h2 class="heading">
+ Vibe coding
+</h2>
+<p>
+ You can use these MCP servers with your AI coding assistant to
+ <a href="https://en.wikipedia.org/wiki/Vibe_coding">
+  vibe code
+ </a>
+ . For tips and tricks on how to improve your vibe coding experience, please refer to our
+ <a href="./VIBE_CODING_TIPS_TRICKS.md">
+  guide
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Additional Resources
+</h2>
+<ul>
+<li>
+<a href="https://aws.amazon.com/blogs/machine-learning/introducing-aws-mcp-servers-for-code-assistants-part-1/">
+   Introducing AWS MCP Servers for code assistants
+  </a>
+</li>
+<li>
+<a href="https://www.youtube.com/watch?v=qXGQQRMrcz0">
+   Vibe coding with AWS MCP Servers | AWS Show &amp; Tell
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Security
+</h2>
+<p>
+ See
+ <a href="CONTRIBUTING.md#security-issue-notifications">
+  CONTRIBUTING
+ </a>
+ for more information.
+</p>
+<h2 class="heading">
+ Contributing
+</h2>
+<p>
+ Big shout out to our awesome contributors! Thank you for making this project better!
+</p>
+<p>
+<a href="https://github.com/awslabs/mcp/graphs/contributors">
+<img alt="contributors" src="https://contrib.rocks/image?repo=awslabs/mcp&amp;max=2000"/>
+</a>
+</p>
+<p>
+ Contributions of all kinds are welcome! Check out our
+ <a href="CONTRIBUTING.md">
+  contributor guide
+ </a>
+ for more information.
+</p>
+<h2 class="heading">
+ Developer guide
+</h2>
+<p>
+ If you want to add a new MCP Server to the library, check out our
+ <a href="DEVELOPER_GUIDE.md">
+  development guide
+ </a>
+ and be sure to follow our
+ <a href="DESIGN_GUIDELINES.md">
+  design guidelines
+ </a>
+ .
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the Apache-2.0 License.
+</p>
+<h2 class="heading">
+ Disclaimer
+</h2>
+<p>
+ Before using an MCP Server, you should consider conducting your own independent assessment to ensure that your use would comply with your own specific security and quality control practices and standards, as well as the laws, rules, and regulations that govern you and your content.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/awslabs-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/awslabs-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/awslabs-mcp.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/awslabs-mcp.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

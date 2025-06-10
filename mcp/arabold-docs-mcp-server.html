@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory">
+    <meta property="og:description" content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle">
+    <meta property="og:url" content="https://llmlogs.com/mcp/arabold-docs-mcp-server.html">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory">
+    <meta name="twitter:description" content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle">
+    
+    <title>Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory - LLM Logs</title>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Copy button styles */
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 0.25rem;
+            background-color: var(--bs-light);
+            border: 1px solid var(--bs-gray-300);
+            color: var(--bs-gray-700);
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: var(--bs-gray-200);
+        }
+        .copy-button.copied {
+            background-color: var(--bs-success);
+            color: white;
+            border-color: var(--bs-success);
+        }
+        /* Share section styles */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bs-gray-200);
+        }
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .back-to-top:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here.html">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides/llm-optimization">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/free-tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/mcp" class="text-white">MCP Directory</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Docs MCP Server: Your AI's Up-to-Date Documentation Expert</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Docs MCP Server: Your AI's Up-to-Date Documentation Expert</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    <!-- Project Meta -->
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            <span>Stars: 171</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            <span>Language: TypeScript</span>
+                        </div>
+                        <div class="topic-tags">
+                            
+                        </div>
+                        <a href="https://github.com/arabold/docs-mcp-server" class="btn btn-primary mt-3" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+
+                    <!-- README Content -->
+                    <div class="readme-content">
+                        <!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory" property="og:title"/>
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/arabold-docs-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory" name="twitter:title"/>
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" name="twitter:description"/>
+<title>Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+        /* Project-specific styles */
+        .project-meta {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background-color: var(--bs-gray-200);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background-color: var(--bs-gray-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--bs-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background-color: var(--bs-blue-dark);
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+<button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="/start-here.html">Start Here</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/guides/llm-optimization">Guides</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/free-tools">Tools</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/blog">Blog</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="hero-section">
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb mb-4">
+<li class="breadcrumb-item"><a class="text-white" href="/">Home</a></li>
+<li class="breadcrumb-item"><a class="text-white" href="/mcp">MCP Directory</a></li>
+<li aria-current="page" class="breadcrumb-item active text-white">Docs MCP Server: Your AI's Up-to-Date Documentation Expert</li>
+</ol>
+</nav>
+<h1 class="display-4 mb-3">Docs MCP Server: Your AI's Up-to-Date Documentation Expert</h1>
+</div>
+</div>
+<!-- Main Content -->
+<main class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<article class="blog-content">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 171</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/arabold/docs-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                            View on GitHub
+                        </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" name="description">
+<!-- Open Graph Meta Tags -->
+<meta content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory" property="og:title">
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" property="og:description">
+<meta content="https://llmlogs.com/mcp/arabold-docs-mcp-server.html" property="og:url">
+<meta content="article" property="og:type">
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card">
+<meta content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory" name="twitter:title">
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" name="twitter:description">
+<title>Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Main CSS -->
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            @apply bg-gray-50 p-6 rounded-lg my-8;
+        }
+        .project-meta .meta-item {
+            @apply flex items-center mb-3;
+        }
+        .project-meta .meta-item svg {
+            @apply w-5 h-5 mr-3;
+        }
+        .topic-tags {
+            @apply flex flex-wrap gap-2 mt-4;
+        }
+        .topic-tag {
+            @apply bg-gray-100 px-3 py-1 rounded-full text-sm;
+        }
+        .readme-content {
+            @apply mt-8;
+        }
+        .readme-content pre {
+            @apply bg-gray-50 p-4 rounded-lg overflow-x-auto;
+        }
+        .readme-content img {
+            @apply max-w-full h-auto;
+        }
+        .github-link {
+            @apply inline-flex items-center px-6 py-3 bg-blue-600 text-white no-underline rounded-lg mt-4 hover:bg-blue-700;
+        }
+        .github-link svg {
+            @apply mr-3;
+        }
+        .heading {
+            @apply mt-6 mb-4 font-semibold;
+        }
+        hr {
+            @apply my-8 border-0 border-t border-gray-200;
+        }
+    </style>
+</link></link></link></link></link></meta></meta></meta></meta></meta></meta></meta></meta></meta></meta></head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Docs MCP Server: Your AI's Up-to-Date Documentation Expert</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 171</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/arabold/docs-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" name="description"/>
+<!-- Open Graph Meta Tags -->
+<meta content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory" property="og:title"/>
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" property="og:description"/>
+<meta content="https://llmlogs.com/mcp/arabold-docs-mcp-server.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<!-- Twitter Card Meta Tags -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory" name="twitter:title"/>
+<meta content="AI coding assistants often struggle with outdated documentation and hallucinations. TheDocs MCP Serversolves this by providing a personal, always-current knowle" name="twitter:description"/>
+<title>Docs MCP Server: Your AI's Up-to-Date Documentation Expert - MCP Directory - LLM Logs</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P33Z79C6');</script>
+<!-- End Google Tag Manager -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/css/style.css" rel="stylesheet"/>
+<style>
+        /* Project-specific styles */
+        .project-meta {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .project-meta .meta-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-meta .meta-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            background: #e9ecef;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        .readme-content {
+            margin-top: 2rem;
+        }
+        .readme-content pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .github-link:hover {
+            background: #0b5ed7;
+            color: white;
+        }
+        .github-link svg {
+            margin-right: 0.75rem;
+        }
+        .heading {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 2rem 0;
+            border: 0;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Standard Header -->
+<header class="site-header">
+<div class="nav-container">
+<button aria-label="Toggle navigation menu" class="mobile-menu-toggle">
+<span class="hamburger"></span>
+</button>
+<a class="site-logo" href="/">LLM Logs</a>
+<nav class="nav-links">
+<a class="start-here-link" href="/start-here.html">Start Here</a>
+<a href="/guides/llm-optimization">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</nav>
+</div>
+</header>
+<main class="content">
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+<a href="/">Home</a> » 
+            <a href="/mcp">MCP Directory</a> » 
+            <span>Docs MCP Server: Your AI's Up-to-Date Documentation Expert</span>
+</div>
+<!-- Article Content -->
+<article class="blog-post">
+<!-- Project Meta -->
+<div class="project-meta">
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span>Stars: 171</span>
+</div>
+<div class="meta-item">
+<svg fill="currentColor" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"></path>
+</svg>
+<span>Language: TypeScript</span>
+</div>
+<div class="topic-tags">
+</div>
+<a class="github-link" href="https://github.com/arabold/docs-mcp-server" rel="noopener" target="_blank">
+<svg fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+                    View on GitHub
+                </a>
+</div>
+<!-- README Content -->
+<div class="readme-content">
+<h1 class="heading">
+ Docs MCP Server: Your AI's Up-to-Date Documentation Expert
+</h1>
+<p>
+ AI coding assistants often struggle with outdated documentation and hallucinations. The
+ <strong>
+  Docs MCP Server
+ </strong>
+ solves this by providing a personal, always-current knowledge base for your AI. It
+ <strong>
+  indexes 3rd party documentation
+ </strong>
+ from various sources (websites, GitHub, npm, PyPI, local files) and offers powerful, version-aware search tools via the Model Context Protocol (MCP).
+</p>
+<p>
+ This enables your AI agent to access the
+ <strong>
+  latest official documentation
+ </strong>
+ , dramatically improving the quality and reliability of generated code and integration details. It's
+ <strong>
+  free
+ </strong>
+ ,
+ <strong>
+  open-source
+ </strong>
+ , runs
+ <strong>
+  locally
+ </strong>
+ for privacy, and integrates seamlessly into your development workflow.
+</p>
+<h2 class="heading">
+ Why Use the Docs MCP Server?
+</h2>
+<p>
+ LLM-assisted coding promises speed and efficiency, but often falls short due to:
+</p>
+<ul>
+<li>
+  🌀
+  <strong>
+   Stale Knowledge:
+  </strong>
+  LLMs train on snapshots of the internet and quickly fall behind new library releases and API changes.
+ </li>
+<li>
+  👻
+  <strong>
+   Code Hallucinations:
+  </strong>
+  AI can invent plausible-looking code that is syntactically correct but functionally wrong or uses non-existent APIs.
+ </li>
+<li>
+  ❓
+  <strong>
+   Version Ambiguity:
+  </strong>
+  Generic answers rarely account for the specific version dependencies in your project, leading to subtle bugs.
+ </li>
+<li>
+  ⏳
+  <strong>
+   Verification Overhead:
+  </strong>
+  Developers spend valuable time double-checking AI suggestions against official documentation.
+ </li>
+</ul>
+<p>
+<strong>
+  Docs MCP Server solves these problems by:
+ </strong>
+</p>
+<ul>
+<li>
+  ✅
+  <strong>
+   Providing Up-to-Date Context:
+  </strong>
+  Fetches and indexes documentation directly from official sources (websites, GitHub, npm, PyPI, local files) on demand.
+ </li>
+<li>
+  🎯
+  <strong>
+   Delivering Version-Specific Answers:
+  </strong>
+  Search queries can target exact library versions, ensuring information matches your project's dependencies.
+ </li>
+<li>
+  💡
+  <strong>
+   Reducing Hallucinations:
+  </strong>
+  Grounds the LLM in real documentation for accurate examples and integration details.
+ </li>
+<li>
+  ⚡
+  <strong>
+   Boosting Productivity:
+  </strong>
+  Get trustworthy answers faster, integrated directly into your AI assistant workflow.
+ </li>
+</ul>
+<h2 class="heading">
+ ✨ Key Features
+</h2>
+<ul>
+<li>
+<strong>
+   Accurate &amp; Version-Aware AI Responses:
+  </strong>
+  Provides up-to-date, version-specific documentation to reduce AI hallucinations and improve code accuracy.
+ </li>
+<li>
+<strong>
+   Broad Source Compatibility:
+  </strong>
+  Scrapes documentation from websites, GitHub repos, package manager sites (npm, PyPI), and local file directories.
+ </li>
+<li>
+<strong>
+   Advanced Search &amp; Processing:
+  </strong>
+  Intelligently chunks documentation semantically, generates embeddings, and combines vector similarity with full-text search.
+ </li>
+<li>
+<strong>
+   Flexible Embedding Models:
+  </strong>
+  Supports various providers including OpenAI (and compatible APIs), Google Gemini/Vertex AI, Azure OpenAI, and AWS Bedrock.
+ </li>
+<li>
+<strong>
+   Web Interface:
+  </strong>
+  Easy-to-use web interface for searching and managing documentation.
+ </li>
+<li>
+<strong>
+   Local &amp; Private:
+  </strong>
+  Runs entirely on your machine, ensuring data and queries remain private.
+ </li>
+<li>
+<strong>
+   Free &amp; Open Source:
+  </strong>
+  Community-driven and freely available.
+ </li>
+<li>
+<strong>
+   Simple Deployment:
+  </strong>
+  Easy setup via Docker or
+  <code class="code">
+   npx
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   Seamless Integration:
+  </strong>
+  Works with MCP-compatible clients (like Claude, Cline, Roo).
+ </li>
+</ul>
+<blockquote>
+<p>
+<strong>
+   What is semantic chunking?
+  </strong>
+</p>
+<p>
+  Semantic chunking splits documentation into meaningful sections based on structure—like headings, code blocks, and tables—rather than arbitrary text size. Docs MCP Server preserves logical boundaries, keeps code and tables intact, and removes navigation clutter from HTML docs. This ensures LLMs receive coherent, context-rich information for more accurate and relevant answers.
+ </p>
+</blockquote>
+<h2 class="heading">
+ How to Run the Docs MCP Server
+</h2>
+<p>
+ Get started quickly:
+</p>
+<ul>
+<li>
+<a href="#recommended-docker-desktop">
+   Recommended: Docker Desktop
+  </a>
+</li>
+<li>
+<a href="#alternative-using-docker">
+   Alternative: Using Docker
+  </a>
+</li>
+<li>
+<a href="#alternative-using-npx">
+   Alternative: Using npx
+  </a>
+</li>
+</ul>
+<h2 class="heading">
+ Recommended: Docker Desktop
+</h2>
+<p>
+ Run the server and web interface together using Docker Compose.
+</p>
+<ol>
+<li>
+<strong>
+   Install Docker and Docker Compose.
+  </strong>
+</li>
+<li>
+<strong>
+   Clone the repository:
+  </strong>
+<code class="code">
+   bash
+   git clone https://github.com/arabold/docs-mcp-server.git
+   cd docs-mcp-server
+  </code>
+</li>
+<li>
+<strong>
+   Set up your environment:
+  </strong>
+  Copy the example environment file and add your OpenAI API key:
+  <code class="code">
+   bash
+   cp .env.example .env
+   # Edit .env and set your OpenAI API key
+  </code>
+</li>
+<li>
+<strong>
+   Start the services:
+  </strong>
+<code class="code">
+   bash
+   docker compose up -d
+  </code>
+</li>
+<li>
+  Use
+  <code class="code">
+   -d
+  </code>
+  for detached mode. Omit to see logs in your terminal.
+ </li>
+<li>
+  To rebuild after updates:
+  <code class="code">
+   docker compose up -d --build
+  </code>
+  .
+ </li>
+<li>
+<strong>
+   Configure your MCP client:
+  </strong>
+  Add this to your MCP settings:
+  <code class="code">
+   json
+   {
+     "mcpServers": {
+       "docs-mcp-server": {
+         "url": "http://localhost:6280/sse",
+         "disabled": false,
+         "autoApprove": []
+       }
+     }
+   }
+  </code>
+  Restart your AI assistant after updating the config.
+ </li>
+<li>
+<strong>
+   Access the Web Interface:
+  </strong>
+  Open
+  <code class="code">
+   http://localhost:6281
+  </code>
+  in your browser.
+ </li>
+</ol>
+<p>
+<strong>
+  Benefits:
+ </strong>
+</p>
+<ul>
+<li>
+  One command runs both server and web UI
+ </li>
+<li>
+  Persistent data storage via Docker volume
+ </li>
+<li>
+  Easy config via
+  <code class="code">
+   .env
+  </code>
+</li>
+</ul>
+<p>
+ To stop, run
+ <code class="code">
+  docker compose down
+ </code>
+ .
+</p>
+<h3 class="heading">
+ Adding Library Documentation
+</h3>
+<ol>
+<li>
+  Open the Web Interface at
+  <code class="code">
+   http://localhost:6281
+  </code>
+  .
+ </li>
+<li>
+  Use the "Queue New Scrape Job" form.
+ </li>
+<li>
+  Enter the documentation URL, library name, and (optionally) version.
+ </li>
+<li>
+  Click "Queue Job". Monitor progress in the Job Queue.
+ </li>
+<li>
+  Repeat for each library you want indexed.
+ </li>
+</ol>
+<p>
+ Once a job completes, the docs are searchable via your AI assistant or the Web UI.
+</p>
+<p>
+<img alt="Docs MCP Server Web Interface" src="docs/docs-mcp-server.png"/>
+</p>
+<h2 class="heading">
+ Scraping Local Files and Folders
+</h2>
+<p>
+ You can index documentation from your local filesystem by using a
+ <code class="code">
+  file://
+ </code>
+ URL as the source. This works in both the Web UI and CLI.
+</p>
+<p>
+<strong>
+  Examples:
+ </strong>
+</p>
+<ul>
+<li>
+  Web:
+  <code class="code">
+   https://react.dev/reference/react
+  </code>
+</li>
+<li>
+  Local file:
+  <code class="code">
+   file:///Users/me/docs/index.html
+  </code>
+</li>
+<li>
+  Local folder:
+  <code class="code">
+   file:///Users/me/docs/my-library
+  </code>
+</li>
+</ul>
+<p>
+<strong>
+  Requirements:
+ </strong>
+</p>
+<ul>
+<li>
+  All files with a MIME type of
+  <code class="code">
+   text/*
+  </code>
+  are processed. This includes HTML, Markdown, plain text, and source code files such as
+  <code class="code">
+   .js
+  </code>
+  ,
+  <code class="code">
+   .ts
+  </code>
+  ,
+  <code class="code">
+   .tsx
+  </code>
+  ,
+  <code class="code">
+   .css
+  </code>
+  , etc. Binary files, PDFs, images, and other non-text formats are ignored.
+ </li>
+<li>
+  You must use the
+  <code class="code">
+   file://
+  </code>
+  prefix for local files/folders.
+ </li>
+<li>
+  The path must be accessible to the server process.
+ </li>
+<li>
+<strong>
+   If running in Docker or Docker Compose:
+  </strong>
+</li>
+<li>
+  You must mount the local folder into the container and use the container path in your
+  <code class="code">
+   file://
+  </code>
+  URL.
+ </li>
+<li>
+  Example Docker run:
+  <code class="code">
+   bash
+    docker run --rm \
+      -e OPENAI_API_KEY="your-key" \
+      -v /absolute/path/to/docs:/docs:ro \
+      -v docs-mcp-data:/data \
+      ghcr.io/arabold/docs-mcp-server:latest \
+      scrape mylib file:///docs/my-library
+  </code>
+</li>
+<li>
+  In the Web UI, enter the path as
+  <code class="code">
+   file:///docs/my-library
+  </code>
+  (matching the container path).
+ </li>
+</ul>
+<p>
+ See the tooltips in the Web UI and CLI help for more details.
+</p>
+<h2 class="heading">
+ Alternative: Using Docker
+</h2>
+<blockquote>
+<p>
+<strong>
+   Note:
+  </strong>
+  The published Docker images support both x86_64 (amd64) and Mac Silicon (arm64).
+ </p>
+</blockquote>
+<p>
+ This method is simple and doesn't require cloning the repository.
+</p>
+<ol>
+<li>
+<strong>
+   Install and start Docker.
+  </strong>
+</li>
+<li>
+<strong>
+   Configure your MCP client:
+  </strong>
+  Add this block to your MCP settings (adjust as needed):
+  <code class="code">
+   json
+   {
+     "mcpServers": {
+       "docs-mcp-server": {
+         "command": "docker",
+         "args": [
+           "run",
+           "-i",
+           "--rm",
+           "-e",
+           "OPENAI_API_KEY",
+           "-v",
+           "docs-mcp-data:/data",
+           "ghcr.io/arabold/docs-mcp-server:latest"
+         ],
+         "env": {
+           "OPENAI_API_KEY": "sk-proj-..." // Your OpenAI API key
+         },
+         "disabled": false,
+         "autoApprove": []
+       }
+     }
+   }
+  </code>
+  Replace
+  <code class="code">
+   sk-proj-...
+  </code>
+  with your OpenAI API key. Restart your application.
+ </li>
+<li>
+<strong>
+   Done!
+  </strong>
+  The server is now available to your AI assistant.
+ </li>
+</ol>
+<p>
+<strong>
+  Docker Container Settings:
+ </strong>
+</p>
+<ul>
+<li>
+<code class="code">
+   -i
+  </code>
+  : Keeps STDIN open for MCP communication.
+ </li>
+<li>
+<code class="code">
+   --rm
+  </code>
+  : Removes the container on exit.
+ </li>
+<li>
+<code class="code">
+   -e OPENAI_API_KEY
+  </code>
+  :
+  <strong>
+   Required.
+  </strong>
+</li>
+<li>
+<code class="code">
+   -v docs-mcp-data:/data
+  </code>
+  :
+  <strong>
+   Required for persistence.
+  </strong>
+</li>
+</ul>
+<p>
+ You can pass any configuration environment variable (see
+ <a href="#configuration">
+  Configuration
+ </a>
+ ) using
+ <code class="code">
+  -e
+ </code>
+ .
+</p>
+<p>
+<strong>
+  Examples:
+ </strong>
+</p>
+<pre class="pre"><code class="language-bash code"># OpenAI embeddings (default)
+docker run -i --rm \
+  -e OPENAI_API_KEY="your-key" \
+  -e DOCS_MCP_EMBEDDING_MODEL="text-embedding-3-small" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest
+
+# OpenAI-compatible API (Ollama)
+docker run -i --rm \
+  -e OPENAI_API_KEY="your-key" \
+  -e OPENAI_API_BASE="http://localhost:11434/v1" \
+  -e DOCS_MCP_EMBEDDING_MODEL="embeddings" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest
+
+# Google Vertex AI
+docker run -i --rm \
+  -e DOCS_MCP_EMBEDDING_MODEL="vertex:text-embedding-004" \
+  -e GOOGLE_APPLICATION_CREDENTIALS="/app/gcp-key.json" \
+  -v docs-mcp-data:/data \
+  -v /path/to/gcp-key.json:/app/gcp-key.json:ro \
+  ghcr.io/arabold/docs-mcp-server:latest
+
+# Google Gemini
+docker run -i --rm \
+  -e DOCS_MCP_EMBEDDING_MODEL="gemini:embedding-001" \
+  -e GOOGLE_API_KEY="your-google-api-key" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest
+
+# AWS Bedrock
+docker run -i --rm \
+  -e AWS_ACCESS_KEY_ID="your-aws-key" \
+  -e AWS_SECRET_ACCESS_KEY="your-aws-secret" \
+  -e AWS_REGION="us-east-1" \
+  -e DOCS_MCP_EMBEDDING_MODEL="aws:amazon.titan-embed-text-v1" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest
+
+# Azure OpenAI
+docker run -i --rm \
+  -e AZURE_OPENAI_API_KEY="your-azure-key" \
+  -e AZURE_OPENAI_API_INSTANCE_NAME="your-instance" \
+  -e AZURE_OPENAI_API_DEPLOYMENT_NAME="your-deployment" \
+  -e AZURE_OPENAI_API_VERSION="2024-02-01" \
+  -e DOCS_MCP_EMBEDDING_MODEL="microsoft:text-embedding-ada-002" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest
+</code></pre>
+<h3 class="heading">
+ Web Interface via Docker
+</h3>
+<p>
+ Access the web UI at
+ <code class="code">
+  http://localhost:6281
+ </code>
+ :
+</p>
+<pre class="pre"><code class="language-bash code">docker run --rm \
+  -e OPENAI_API_KEY="your-openai-api-key" \
+  -v docs-mcp-data:/data \
+  -p 6281:6281 \
+  ghcr.io/arabold/docs-mcp-server:latest \
+  web --port 6281
+</code></pre>
+<ul>
+<li>
+  Use the same volume name as your server.
+ </li>
+<li>
+  Map port 6281 with
+  <code class="code">
+   -p 6281:6281
+  </code>
+  .
+ </li>
+<li>
+  Pass config variables with
+  <code class="code">
+   -e
+  </code>
+  as needed.
+ </li>
+</ul>
+<h3 class="heading">
+ CLI via Docker
+</h3>
+<p>
+ Run CLI commands by appending them after the image name:
+</p>
+<pre class="pre"><code class="language-bash code">docker run --rm \
+  -e OPENAI_API_KEY="your-openai-api-key" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest \
+  &lt;command&gt; [options]
+</code></pre>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-bash code">docker run --rm \
+  -e OPENAI_API_KEY="your-openai-api-key" \
+  -v docs-mcp-data:/data \
+  ghcr.io/arabold/docs-mcp-server:latest \
+  list
+</code></pre>
+<p>
+ Use the same volume for data sharing. For command help, run:
+</p>
+<pre class="pre"><code class="language-bash code">docker run --rm ghcr.io/arabold/docs-mcp-server:latest --help
+</code></pre>
+<h2 class="heading">
+ Alternative: Using npx
+</h2>
+<p>
+ You can run the Docs MCP Server without installing or cloning the repo:
+</p>
+<ol>
+<li>
+<strong>
+   Run the server:
+  </strong>
+<code class="code">
+   bash
+   npx @arabold/docs-mcp-server@latest
+  </code>
+</li>
+<li>
+<strong>
+   Set your OpenAI API key:
+  </strong>
+</li>
+<li>
+  Use the
+  <code class="code">
+   OPENAI_API_KEY
+  </code>
+  environment variable.
+ </li>
+<li>
+  Example:
+  <code class="code">
+   bash
+     OPENAI_API_KEY="sk-proj-..." npx @arabold/docs-mcp-server@latest
+  </code>
+</li>
+<li>
+<strong>
+   Configure your MCP client:
+  </strong>
+</li>
+<li>
+  Use the same settings as in the Docker example, but replace the
+  <code class="code">
+   command
+  </code>
+  and
+  <code class="code">
+   args
+  </code>
+  with the
+  <code class="code">
+   npx
+  </code>
+  command above.
+ </li>
+</ol>
+<p>
+<strong>
+  Note:
+ </strong>
+ Data is stored in a temporary directory and will not persist between runs. For persistent storage, use Docker or a local install.
+</p>
+<h3 class="heading">
+ CLI via npx
+</h3>
+<p>
+ You can run CLI commands directly with npx, without installing the package globally:
+</p>
+<pre class="pre"><code class="language-bash code">npx @arabold/docs-mcp-server@latest &lt;command&gt; [options]
+</code></pre>
+<p>
+ Example:
+</p>
+<pre class="pre"><code class="language-bash code">npx @arabold/docs-mcp-server@latest list
+</code></pre>
+<p>
+ For command help, run:
+</p>
+<pre class="pre"><code class="language-bash code">npx @arabold/docs-mcp-server@latest --help
+</code></pre>
+<h2 class="heading">
+ Configuration
+</h2>
+<p>
+ The Docs MCP Server is configured via environment variables. Set these in your shell, Docker, or MCP client config.
+</p>
+<table>
+<thead>
+<tr>
+<th>
+    Variable
+   </th>
+<th>
+    Description
+   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code class="code">
+     DOCS_MCP_EMBEDDING_MODEL
+    </code>
+</td>
+<td>
+    Embedding model to use (see below for options).
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     OPENAI_API_KEY
+    </code>
+</td>
+<td>
+    OpenAI API key for embeddings.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     OPENAI_API_BASE
+    </code>
+</td>
+<td>
+    Custom OpenAI-compatible API endpoint (e.g., Ollama).
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     GOOGLE_API_KEY
+    </code>
+</td>
+<td>
+    Google API key for Gemini embeddings.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     GOOGLE_APPLICATION_CREDENTIALS
+    </code>
+</td>
+<td>
+    Path to Google service account JSON for Vertex AI.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_ACCESS_KEY_ID
+    </code>
+</td>
+<td>
+    AWS key for Bedrock embeddings.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_SECRET_ACCESS_KEY
+    </code>
+</td>
+<td>
+    AWS secret for Bedrock embeddings.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AWS_REGION
+    </code>
+</td>
+<td>
+    AWS region for Bedrock.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AZURE_OPENAI_API_KEY
+    </code>
+</td>
+<td>
+    Azure OpenAI API key.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AZURE_OPENAI_API_INSTANCE_NAME
+    </code>
+</td>
+<td>
+    Azure OpenAI instance name.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AZURE_OPENAI_API_DEPLOYMENT_NAME
+    </code>
+</td>
+<td>
+    Azure OpenAI deployment name.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     AZURE_OPENAI_API_VERSION
+    </code>
+</td>
+<td>
+    Azure OpenAI API version.
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     DOCS_MCP_DATA_DIR
+    </code>
+</td>
+<td>
+    Data directory (default:
+    <code class="code">
+     ./data
+    </code>
+    ).
+   </td>
+</tr>
+<tr>
+<td>
+<code class="code">
+     DOCS_MCP_PORT
+    </code>
+</td>
+<td>
+    Server port (default:
+    <code class="code">
+     6281
+    </code>
+    ).
+   </td>
+</tr>
+</tbody>
+</table>
+<p>
+ See
+ <a href="#alternative-using-docker">
+  examples above
+ </a>
+ for usage.
+</p>
+<h3 class="heading">
+ Embedding Model Options
+</h3>
+<p>
+ Set
+ <code class="code">
+  DOCS_MCP_EMBEDDING_MODEL
+ </code>
+ to one of:
+</p>
+<ul>
+<li>
+<code class="code">
+   text-embedding-3-small
+  </code>
+  (default, OpenAI)
+ </li>
+<li>
+<code class="code">
+   openai:llama2
+  </code>
+  (OpenAI-compatible, Ollama)
+ </li>
+<li>
+<code class="code">
+   vertex:text-embedding-004
+  </code>
+  (Google Vertex AI)
+ </li>
+<li>
+<code class="code">
+   gemini:embedding-001
+  </code>
+  (Google Gemini)
+ </li>
+<li>
+<code class="code">
+   aws:amazon.titan-embed-text-v1
+  </code>
+  (AWS Bedrock)
+ </li>
+<li>
+<code class="code">
+   microsoft:text-embedding-ada-002
+  </code>
+  (Azure OpenAI)
+ </li>
+<li>
+  Or any OpenAI-compatible model name
+ </li>
+</ul>
+<p>
+ For more, see the
+ <a href="ARCHITECTURE.md">
+  ARCHITECTURE.md
+ </a>
+ and
+ <a href="#alternative-using-docker">
+  examples above
+ </a>
+ .
+</p>
+<h2 class="heading">
+ Development
+</h2>
+<p>
+ To develop or contribute to the Docs MCP Server:
+</p>
+<ul>
+<li>
+  Fork the repository and create a feature branch.
+ </li>
+<li>
+  Follow the code conventions in
+  <a href="ARCHITECTURE.md">
+   ARCHITECTURE.md
+  </a>
+  .
+ </li>
+<li>
+  Write clear commit messages (see Git guidelines above).
+ </li>
+<li>
+  Open a pull request with a clear description of your changes.
+ </li>
+</ul>
+<p>
+ For questions or suggestions, open an issue.
+</p>
+<h3 class="heading">
+ Architecture
+</h3>
+<p>
+ For details on the project's architecture and design principles, please see
+ <a href="ARCHITECTURE.md">
+  ARCHITECTURE.md
+ </a>
+ .
+</p>
+<p>
+<em>
+  Notably, the vast majority of this project's code was generated by the AI assistant Cline, leveraging the capabilities of this very MCP server.
+ </em>
+</p>
+<h2 class="heading">
+ License
+</h2>
+<p>
+ This project is licensed under the MIT License. See
+ <a href="LICENSE">
+  LICENSE
+ </a>
+ for details.
+</p>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/arabold-docs-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/arabold-docs-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</main>
+<!-- Standard Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/guides">Guides</a>
+<a href="/free-tools">Tools</a>
+<a href="/blog">Blog</a>
+<a href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<div class="footer-bottom">
+<p>© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Required Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+</div>
+<!-- Share Section -->
+<div class="share-section">
+<h3>Share this Project</h3>
+<div class="share-buttons">
+<button class="share-button" data-url="https://llmlogs.com/mcp/arabold-docs-mcp-server.html">Copy Link</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<footer class="bg-white py-5 mt-5">
+<div class="container">
+<div class="row justify-content-center text-center">
+<div class="col-md-8">
+<div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+<a class="text-muted text-decoration-none" href="/">Home</a>
+<a class="text-muted text-decoration-none" href="/guides">Guides</a>
+<a class="text-muted text-decoration-none" href="/tools">Tools</a>
+<a class="text-muted text-decoration-none" href="/blog">Blog</a>
+<a class="text-muted text-decoration-none" href="https://github.com/mattmerrick/llmseoguide" rel="noopener" target="_blank">GitHub</a>
+</div>
+<p class="text-muted small mb-0">© 2025 LLM Logs. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h3>Share this Project</h3>
+                        <div class="share-buttons">
+                            <button class="btn btn-outline-primary share-button" data-url="https://llmlogs.com/mcp/arabold-docs-mcp-server.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg me-2" viewBox="0 0 16 16">
+                                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                </svg>
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-primary back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </button>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
