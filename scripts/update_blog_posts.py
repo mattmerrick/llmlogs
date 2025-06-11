@@ -10,22 +10,42 @@ def update_blog_post(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # Remove test controls and their content
-    content = re.sub(r'<!-- Test Controls.*?</div>\s*-->', '', content, flags=re.DOTALL)
-    content = re.sub(r'<!-- Preview container.*?</div>\s*-->', '', content, flags=re.DOTALL)
+    # More aggressive pattern matching to remove all test-related elements
+    patterns_to_remove = [
+        # Remove test controls div
+        r'\s*<div id="testControls".*?</div>\s*',
+        # Remove preview container div
+        r'\s*<div id="previewContainer".*?</div>\s*',
+        # Remove test scripts
+        r'\s*<script>\s*function testSocialImage.*?</script>\s*',
+        r'\s*<script>\s*function testMetaTags.*?</script>\s*',
+        r'\s*<script>\s*function hidePreview.*?</script>\s*',
+        # Remove debug styles
+        r'\s*<style>[^<]*#socialImagePreview[^<]*</style>\s*',
+        r'\s*<style>[^<]*#testControls[^<]*</style>\s*',
+        # Remove any leftover test-related HTML comments
+        r'\s*<!-- Test Controls.*?-->\s*',
+        r'\s*<!-- Preview container.*?-->\s*',
+        # Remove any stray buttons
+        r'\s*<button[^>]*onclick="hidePreview\(\)"[^>]*>.*?</button>\s*',
+        r'\s*<button[^>]*onclick="testSocialImage\(\)"[^>]*>.*?</button>\s*',
+        r'\s*<button[^>]*onclick="testMetaTags\(\)"[^>]*>.*?</button>\s*'
+    ]
     
-    # Remove test scripts
-    content = re.sub(r'<script>\s*function testSocialImage.*?</script>', '', content, flags=re.DOTALL)
-    
-    # Remove debug styles
-    content = re.sub(r'<style>\s*#socialImagePreview.*?</style>', '', content, flags=re.DOTALL)
+    # Apply all removal patterns
+    for pattern in patterns_to_remove:
+        content = re.sub(pattern, '', content, flags=re.DOTALL | re.IGNORECASE)
     
     # Remove development class
-    content = content.replace('class="development"', '')
+    content = re.sub(r'class="development"', '', content)
+    content = re.sub(r'class="\s*"', '', content)  # Clean up empty class attributes
     
     # Ensure social image script is present
     if 'social-image.js' not in content:
         content = content.replace('</head>', f'{SOCIAL_IMAGE_SCRIPT}\n</head>')
+    
+    # Clean up any multiple consecutive empty lines
+    content = re.sub(r'\n\s*\n\s*\n', '\n\n', content)
     
     # Write the updated content back
     with open(filepath, 'w', encoding='utf-8') as f:
