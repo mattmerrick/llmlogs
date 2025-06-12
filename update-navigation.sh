@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Update navigation links in all HTML files
-find . -name "*.html" -type f -exec sed -i 's|href="/start-here.html"|href="/start"|g' {} +
+# Update all href="/start" to href="/start-here"
+find . -type f -name "*.html" -exec sed -i 's|href="/start"|href="/start-here"|g' {} +
+
+# Also update any potential variations
+find . -type f -name "*.html" -exec sed -i 's|href="/start/"|href="/start-here"|g' {} +
+find . -type f -name "*.html" -exec sed -i 's|href="/start.html"|href="/start-here"|g' {} +
 
 # Update breadcrumb navigation for tool reviews
 find . -name "*.html" -type f -exec sed -i 's|href="/tools" class="text-white">Tools</a>|href="/tool-reviews" class="text-white">Tool Reviews</a>|g' {} +
