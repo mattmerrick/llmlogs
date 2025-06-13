@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Rewriter for LLMs - Make Your Titles AI-Friendly | LLM Logs</title>
+    <meta name="description" content="Rewrite your titles to be more answer-friendly for AI models. Improve your content's visibility in AI search results with optimized titles.">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/title-rewriter" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="content_optimizer">
+    <meta name="llm:use_case" content="title_optimization, content_improvement">
+    <meta name="llm:target_audience" content="content_creators, seo_professionals, bloggers">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .result-card {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .title-variation {
+            padding: 1rem;
+            border: 1px solid var(--bs-gray-300);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: white;
+        }
+        .title-variation:hover {
+            border-color: var(--bs-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tool-reviews">Tool Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white">Title Rewriter</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Title Rewriter for LLMs</h1>
+            <p class="lead mb-0">Optimize your titles for better visibility in AI search results. Make your content more discoverable by LLMs.</p>
+        </div>
+    </div>
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form id="titleForm">
+                            <div class="form-group">
+                                <label for="originalTitle" class="form-label">Original Title:</label>
+                                <input type="text" id="originalTitle" class="form-control" required placeholder="Enter your original title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contentType" class="form-label">Content Type:</label>
+                                <select id="contentType" class="form-select" required>
+                                    <option value="blog">Blog Post</option>
+                                    <option value="article">Article</option>
+                                    <option value="guide">Guide/Tutorial</option>
+                                    <option value="product">Product/Service</option>
+                                    <option value="news">News</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="keywords" class="form-label">Key Topics (comma-separated):</label>
+                                <input type="text" id="keywords" class="form-control" placeholder="e.g., AI, SEO, content optimization">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Generate AI-Friendly Titles</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Generated Titles</h2>
+                        <div id="titleResults">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">How to Use</h2>
+                        <ol class="mb-0">
+                            <li>Enter your original title</li>
+                            <li>Select the type of content you're creating</li>
+                            <li>Add relevant keywords or topics</li>
+                            <li>Click "Generate AI-Friendly Titles" to get optimized variations</li>
+                            <li>Choose the best title for your content</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Optimize Titles for LLMs?</h2>
+                        <p>AI-friendly titles help your content:</p>
+                        <ul class="mb-0">
+                            <li>Appear more frequently in AI-generated responses</li>
+                            <li>Get better context understanding from LLMs</li>
+                            <li>Improve citation accuracy</li>
+                            <li>Increase visibility in AI-powered search results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Blog Post Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <article class="blog-post">
+                        <h2 class="h3 mb-4">Optimizing Titles for AI Search: A Complete Guide</h2>
+                        
+                        <p class="lead mb-4">In the age of AI-powered search, your content's title is more important than ever. Learn how to craft titles that both search engines and Large Language Models can understand and recommend.</p>
+
+                        <h3 class="h4 mb-3">What Makes a Title AI-Friendly?</h3>
+                        <p>AI-friendly titles typically have these characteristics:</p>
+                        <ul class="mb-4">
+                            <li>Clear and descriptive language</li>
+                            <li>Question-based formats for how-to content</li>
+                            <li>Specific and relevant keywords</li>
+                            <li>Proper context and categorization</li>
+                        </ul>
+
+                        <h3 class="h4 mb-3">Title Optimization Strategies</h3>
+                        <ol class="mb-4">
+                            <li>Use question-based titles for tutorial content</li>
+                            <li>Include specific numbers and data points</li>
+                            <li>Add relevant context and categorization</li>
+                            <li>Incorporate target keywords naturally</li>
+                            <li>Keep titles clear and descriptive</li>
+                        </ol>
+
+                        <h3 class="h4 mb-3">Related Resources</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4 class="h5 mb-3">Content Optimization Tools</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <a href="/free-tools/content-chunking-optimizer.html" class="text-decoration-none">
+                                                    Content Chunking Optimizer
+                                                </a>
+                                            </li>
+                                            <li class="mb-2">
+                                                <a href="/free-tools/semantic-html-validator.html" class="text-decoration-none">
+                                                    Semantic HTML Validator
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/free-tools/structured-data-generator.html" class="text-decoration-none">
+                                                    Structured Data Generator
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4 class="h5 mb-3">Related Articles</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <a href="/blog/how-to-write-content-that-gets-cited-by-chatgpt.html" class="text-decoration-none">
+                                                    How to Write Content That Gets Cited by ChatGPT
+                                                </a>
+                                            </li>
+                                            <li class="mb-2">
+                                                <a href="/blog/why-most-blogs-are-invisible-to-language-models-and-how-to-fix-it.html" class="text-decoration-none">
+                                                    Why Most Blogs Are Invisible to Language Models
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/blog/llm-seo-vs-google-seo-differences.html" class="text-decoration-none">
+                                                    LLM SEO vs Google SEO: Key Differences
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2024 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.getElementById('titleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const originalTitle = document.getElementById('originalTitle').value;
+            const contentType = document.getElementById('contentType').value;
+            const keywords = document.getElementById('keywords').value.split(',').map(k => k.trim());
+            
+            // Generate title variations based on content type
+            let variations = [];
+            
+            if (contentType === 'blog' || contentType === 'article') {
+                variations = [
+                    `How to ${originalTitle}: A Complete Guide`,
+                    `The Ultimate Guide to ${originalTitle}`,
+                    `${originalTitle}: Everything You Need to Know`,
+                    `Understanding ${originalTitle}: A Comprehensive Guide`,
+                    `Master ${originalTitle}: Step-by-Step Guide`
+                ];
+            } else if (contentType === 'guide') {
+                variations = [
+                    `How to ${originalTitle}: Step-by-Step Tutorial`,
+                    `Learn ${originalTitle}: A Beginner's Guide`,
+                    `${originalTitle} Tutorial: From Basics to Advanced`,
+                    `Complete ${originalTitle} Guide for Beginners`,
+                    `Master ${originalTitle}: Expert Tips and Tricks`
+                ];
+            } else if (contentType === 'product') {
+                variations = [
+                    `${originalTitle}: Features, Benefits, and Use Cases`,
+                    `Why Choose ${originalTitle}: A Detailed Review`,
+                    `${originalTitle}: The Complete Solution Guide`,
+                    `Everything About ${originalTitle}: Features and Benefits`,
+                    `${originalTitle}: Your Ultimate Solution`
+                ];
+            } else if (contentType === 'news') {
+                variations = [
+                    `${originalTitle}: Latest Updates and Analysis`,
+                    `Breaking: ${originalTitle} - What You Need to Know`,
+                    `${originalTitle}: Current Trends and Insights`,
+                    `Latest Developments in ${originalTitle}`,
+                    `${originalTitle}: Industry Impact and Future Outlook`
+                ];
+            }
+
+            // Add keywords to variations if provided
+            if (keywords.length > 0) {
+                variations = variations.map(variation => {
+                    const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+                    return variation.replace(/([^:]+)(:|$)/, `$1: ${keyword}$2`);
+                });
+            }
+
+            // Display results
+            const resultsContainer = document.getElementById('titleResults');
+            resultsContainer.innerHTML = variations.map(variation => `
+                <div class="title-variation">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="h5 mb-0">${variation}</h3>
+                        <button class="btn btn-sm btn-outline-primary copy-btn" data-title="${variation}">Copy</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add copy functionality
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const title = this.dataset.title;
+                    navigator.clipboard.writeText(title).then(() => {
+                        this.textContent = 'Copied!';
+                        setTimeout(() => {
+                            this.textContent = 'Copy';
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

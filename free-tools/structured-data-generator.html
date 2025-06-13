@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured Data Generator - Free JSON-LD Schema Tool | LLM Logs</title>
+    <meta name="description" content="Generate JSON-LD schema markup for articles, tools, or FAQs with one click. Free structured data generator for better SEO and rich results.">
+    <link rel="canonical" href="https://llmlogs.com/free-tools/structured-data-generator" />
+    
+    <!-- LLM-Specific Meta Tags -->
+    <meta name="llm:tool_type" content="schema_generator">
+    <meta name="llm:use_case" content="seo_optimization, structured_data">
+    <meta name="llm:target_audience" content="seo_professionals, developers, content_creators">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Standard Assets -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/tools.css">
+
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .schema-output {
+            background-color: var(--bs-gray-100);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .schema-output pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P33Z79C6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tool-reviews">Tool Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/free-tools" class="text-white">Free Tools</a></li>
+                    <li class="breadcrumb-item active text-white">Structured Data Generator</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">Structured Data Generator</h1>
+            <p class="lead mb-0">Generate JSON-LD schema markup for articles, tools, or FAQs with one click. Improve your SEO and enable rich results in search engines.</p>
+        </div>
+    </div>
+
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form id="schemaForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="schemaType" class="form-label">Schema Type:</label>
+                                        <select id="schemaType" class="form-select" required>
+                                            <option value="Article">Article</option>
+                                            <option value="Tool">Tool</option>
+                                            <option value="FAQPage">FAQ Page</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="datePublished" class="form-label">Date Published:</label>
+                                        <input type="date" id="datePublished" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title" class="form-label">Title:</label>
+                                <input type="text" id="title" class="form-control" required placeholder="Enter the title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="form-label">Description:</label>
+                                <textarea id="description" class="form-control" rows="4" required placeholder="Enter the description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="url" class="form-label">URL:</label>
+                                <input type="url" id="url" class="form-control" required placeholder="https://example.com/page">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Generate Schema</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Generated Schema</h2>
+                        <div class="schema-output">
+                            <pre id="schemaOutput"><code>// Your generated schema will appear here</code></pre>
+                        </div>
+                        <button id="copyButton" class="btn btn-outline-primary">Copy to Clipboard</button>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">How to Use</h2>
+                        <ol class="mb-0">
+                            <li>Select the type of schema you want to generate (Article, Tool, or FAQ Page)</li>
+                            <li>Fill in the required fields with your content information</li>
+                            <li>Click "Generate Schema" to create your JSON-LD markup</li>
+                            <li>Copy the generated schema and add it to your webpage's &lt;head&gt; section</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Why Use Structured Data?</h2>
+                        <p>Structured data helps search engines better understand your content and can lead to rich results in search listings. Benefits include:</p>
+                        <ul class="mb-0">
+                            <li>Enhanced search result appearance</li>
+                            <li>Better content understanding by search engines</li>
+                            <li>Potential for higher click-through rates</li>
+                            <li>Improved visibility in search results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Blog Post Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <article class="blog-post">
+                        <h2 class="h3 mb-4">Understanding Structured Data for LLM and Search Engine Optimization</h2>
+                        
+                        <p class="lead mb-4">Structured data is a standardized format for providing information about a page and classifying its content. It helps both search engines and Large Language Models better understand your content, leading to improved visibility and more accurate responses.</p>
+
+                        <h3 class="h4 mb-3">Why Structured Data Matters for LLMs</h3>
+                        <p>Large Language Models rely heavily on structured data to:</p>
+                        <ul class="mb-4">
+                            <li>Understand the context and purpose of your content</li>
+                            <li>Extract key information more accurately</li>
+                            <li>Provide more relevant citations and references</li>
+                            <li>Better categorize and index your content</li>
+                        </ul>
+
+                        <h3 class="h4 mb-3">SEO Benefits of Structured Data</h3>
+                        <p>Implementing structured data can significantly improve your search engine visibility:</p>
+                        <ul class="mb-4">
+                            <li>Enhanced search result appearance with rich snippets</li>
+                            <li>Improved click-through rates from search results</li>
+                            <li>Better content understanding by search engines</li>
+                            <li>Increased chances of appearing in featured snippets</li>
+                        </ul>
+
+                        <h3 class="h4 mb-3">Best Practices for Implementation</h3>
+                        <ol class="mb-4">
+                            <li>Use the most specific schema type for your content</li>
+                            <li>Ensure all required properties are filled out</li>
+                            <li>Validate your structured data using Google's Rich Results Test</li>
+                            <li>Keep your structured data up to date with content changes</li>
+                            <li>Implement JSON-LD format for better maintainability</li>
+                        </ol>
+
+                        <h3 class="h4 mb-3">Related Resources</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4 class="h5 mb-3">LLM Optimization Guides</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <a href="/guides/llm-optimization/structured-data.html" class="text-decoration-none">
+                                                    Complete Guide to Structured Data for LLMs
+                                                </a>
+                                            </li>
+                                            <li class="mb-2">
+                                                <a href="/guides/llm-optimization/content-optimization.html" class="text-decoration-none">
+                                                    Content Optimization for AI Search
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/guides/llm-optimization/implementation.html" class="text-decoration-none">
+                                                    Implementation Best Practices
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4 class="h5 mb-3">Related Tools</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <a href="/free-tools/semantic-html-validator.html" class="text-decoration-none">
+                                                    Semantic HTML Validator
+                                                </a>
+                                            </li>
+                                            <li class="mb-2">
+                                                <a href="/free-tools/ai-robots-txt-generator.html" class="text-decoration-none">
+                                                    AI Robots.txt Generator
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/free-tools/llms-txt-generator.html" class="text-decoration-none">
+                                                    LLMs.txt Generator
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="h4 mb-3 mt-4">Further Reading</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4 class="h5 mb-3">Blog Articles</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <a href="/blog/why-most-blogs-are-invisible-to-language-models-and-how-to-fix-it.html" class="text-decoration-none">
+                                                    Why Most Blogs Are Invisible to Language Models
+                                                </a>
+                                            </li>
+                                            <li class="mb-2">
+                                                <a href="/blog/robots-txt-llm-optimization.html" class="text-decoration-none">
+                                                    Robots.txt Optimization for LLMs
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/blog/semantic-html-llm.html" class="text-decoration-none">
+                                                    Semantic HTML for Better LLM Understanding
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4 class="h5 mb-3">Implementation Guides</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <a href="/guides/llm-optimization/advanced-techniques.html" class="text-decoration-none">
+                                                    Advanced LLM Optimization Techniques
+                                                </a>
+                                            </li>
+                                            <li class="mb-2">
+                                                <a href="/guides/llm-optimization/best-practices.html" class="text-decoration-none">
+                                                    Best Practices for LLM SEO
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/guides/llm-optimization/examples.html" class="text-decoration-none">
+                                                    Real-World Implementation Examples
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2024 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Required Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.getElementById('schemaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const schemaType = document.getElementById('schemaType').value;
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const url = document.getElementById('url').value;
+            const datePublished = document.getElementById('datePublished').value;
+
+            let schema = {
+                "@context": "https://schema.org",
+                "@type": schemaType,
+                "headline": title,
+                "description": description,
+                "url": url,
+                "datePublished": datePublished
+            };
+
+            // Add type-specific properties
+            if (schemaType === 'Article') {
+                schema.author = {
+                    "@type": "Organization",
+                    "name": "LLM Logs"
+                };
+            } else if (schemaType === 'Tool') {
+                schema.applicationCategory = "WebApplication";
+                schema.operatingSystem = "Any";
+            } else if (schemaType === 'FAQPage') {
+                schema.mainEntity = [{
+                    "@type": "Question",
+                    "name": title,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": description
+                    }
+                }];
+            }
+
+            document.getElementById('schemaOutput').textContent = JSON.stringify(schema, null, 2);
+        });
+
+        document.getElementById('copyButton').addEventListener('click', function() {
+            const schemaOutput = document.getElementById('schemaOutput').textContent;
+            navigator.clipboard.writeText(schemaOutput).then(() => {
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                    this.textContent = 'Copy to Clipboard';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html> 
