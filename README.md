@@ -6,6 +6,20 @@ Master LLM SEO to increase your content visibility in AI responses. Learn how to
 
 Access our suite of tools designed to help you optimize your content for AI understanding and visibility:
 
+### Bot Crawl Tracker
+- Track and analyze bot crawls on your website in real-time
+- Monitor LLM bot activity (GPT, Claude, etc.)
+- View hourly and daily crawl statistics
+- Get insights into search engine bot behavior
+- [Try Bot Crawl Tracker](https://llmlogs.com/bot-dashboard)
+
+### Site Scanner
+- Analyze your website's LLM optimization
+- Get comprehensive ranking report
+- Check technical elements (robots.txt, sitemap.xml, llms.txt)
+- Evaluate content structure and semantic clarity
+- [Try Site Scanner](https://llmlogs.com/scan-site)
+
 ### Alt Text Checker
 - Analyze images and their alt text for AI readability
 - Get recommendations for improving alt text descriptions
@@ -29,6 +43,16 @@ Access our suite of tools designed to help you optimize your content for AI unde
 - Configure access for multiple AI bots (GPT, Claude, Cohere, Google)
 - Manage allowed and disallowed paths
 - Get instant preview and easy download options
+
+## 🎓 Free AI SEO Course
+
+Master the fundamentals of AI SEO with our comprehensive course:
+
+- Learn how to optimize for LLMs
+- Understand bot crawling and indexing
+- Master content structure for AI
+- Get hands-on with real examples
+- [Start Free AI SEO Course](https://llmlogs.com/ai-seo-course)
 
 ## 📚 Core Concepts
 

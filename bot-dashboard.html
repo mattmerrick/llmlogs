@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Crawl Analytics Dashboard | LLM Logs</title>
+    <meta name="description" content="Track and analyze bot crawls on your website with our comprehensive analytics dashboard.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bs-primary: #0366d6;
+            --bs-secondary: #24292e;
+        }
+        
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+            background-color: #f8f9fa;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2c5282 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--bs-primary);
+        }
+        
+        .stat-label {
+            color: var(--bs-gray-600);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 1rem;
+        }
+        
+        .bot-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bot-badge.gptbot { background-color: #10B981; color: white; }
+        .bot-badge.claudebot { background-color: #6366F1; color: white; }
+        .bot-badge.ccBot { background-color: #F59E0B; color: white; }
+        .bot-badge.amazonbot { background-color: #EF4444; color: white; }
+        .bot-badge.bingbot { background-color: #8B5CF6; color: white; }
+        .bot-badge.googleExtended { background-color: #EC4899; color: white; }
+        .bot-badge.googlebot { background-color: #3B82F6; color: white; }
+        .bot-badge.bytespider { background-color: #6B7280; color: white; }
+        .bot-badge.yandexbot { background-color: #F97316; color: white; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tool-reviews">Tool Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4 mb-3">Bot Crawl Analytics</h1>
+            <p class="lead mb-0">How many times LLM Logs is crawled by bots</p>
+        </div>
+    </div>
+
+    <main class="container py-5">
+        <!-- Stats Overview -->
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <div class="card stat-card">
+                    <div class="stat-value" id="totalCrawls">0</div>
+                    <div class="stat-label">Total Crawls Today</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stat-card">
+                    <div class="stat-value" id="uniqueBots">0</div>
+                    <div class="stat-label">Unique Bots</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stat-card">
+                    <div class="stat-value" id="llmBots">0</div>
+                    <div class="stat-label">LLM Bots</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mb-5">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bot Crawls Over Time</h5>
+                        <div class="chart-container">
+                            <canvas id="crawlsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bot Distribution</h5>
+                        <div class="chart-container">
+                            <canvas id="distributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bot Activity Bar Chart -->
+        <div class="card mb-5">
+            <div class="card-body">
+                <h5 class="card-title">Bot Activity by Type</h5>
+                <div class="chart-container" style="height: 400px;">
+                    <canvas id="botActivityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bot List -->
+        <div class="card mb-5">
+            <div class="card-body">
+                <h5 class="card-title">Active Bots</h5>
+                <div id="botList" class="d-flex flex-wrap">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Historical Data -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Historical Data</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Total Crawls</th>
+                                <th>LLM Bots</th>
+                                <th>Search Bots</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historicalData">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Configuration
+        const WORKER_URL = 'https://bot-crawl-tracker.mattmerrickbiz.workers.dev';
+        const BOT_CATEGORIES = {
+            llm: ['gptbot', 'claudebot'],
+            search: ['googlebot', 'bingbot', 'yandexbot'],
+            other: ['ccBot', 'amazonbot', 'bytespider', 'googleExtended']
+        };
+
+        // Chart colors
+        const CHART_COLORS = {
+            gptbot: '#10B981',
+            claudebot: '#6366F1',
+            ccBot: '#F59E0B',
+            amazonbot: '#EF4444',
+            bingbot: '#8B5CF6',
+            googleExtended: '#EC4899',
+            googlebot: '#3B82F6',
+            bytespider: '#6B7280',
+            yandexbot: '#F97316'
+        };
+
+        // Initialize charts
+        let crawlsChart, distributionChart, botActivityChart;
+
+        async function initializeDashboard() {
+            try {
+                const data = await fetchBotData();
+                updateStats(data);
+                updateCharts(data);
+                updateBotList(data);
+                updateHistoricalData(data);
+            } catch (error) {
+                console.error('Error initializing dashboard:', error);
+            }
+        }
+
+        async function fetchBotData() {
+            const response = await fetch(`${WORKER_URL}/bot-crawls.json`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch bot data');
+            }
+            return await response.json();
+        }
+
+        function updateStats(data) {
+            const totalCrawls = Object.values(data.daily).reduce((sum, count) => sum + count, 0);
+            const uniqueBots = Object.keys(data.daily).length;
+            const llmBots = Object.entries(data.daily)
+                .filter(([bot]) => BOT_CATEGORIES.llm.includes(bot))
+                .reduce((sum, [_, count]) => sum + count, 0);
+
+            document.getElementById('totalCrawls').textContent = totalCrawls;
+            document.getElementById('uniqueBots').textContent = uniqueBots;
+            document.getElementById('llmBots').textContent = llmBots;
+        }
+
+        function updateCharts(data) {
+            // Crawls over time chart (hourly)
+            const ctx1 = document.getElementById('crawlsChart').getContext('2d');
+            if (crawlsChart) {
+                crawlsChart.destroy();
+            }
+
+            // Prepare hourly data
+            const hours = Object.keys(data.hourly).sort((a, b) => parseInt(a) - parseInt(b));
+            const hourlyTotals = hours.map(hour => {
+                return Object.values(data.hourly[hour]).reduce((sum, count) => sum + count, 0);
+            });
+
+            crawlsChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: hours.map(hour => `${hour}:00 UTC`),
+                    datasets: [{
+                        label: 'Crawls per Hour',
+                        data: hourlyTotals,
+                        borderColor: '#0366d6',
+                        tension: 0.4,
+                        fill: true,
+                        backgroundColor: 'rgba(3, 102, 214, 0.1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Hourly Crawl Activity'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Distribution chart
+            const ctx2 = document.getElementById('distributionChart').getContext('2d');
+            if (distributionChart) {
+                distributionChart.destroy();
+            }
+
+            // Sort bots by count
+            const sortedBots = Object.entries(data.daily)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 10); // Show top 10 bots
+
+            distributionChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: sortedBots.map(([bot]) => bot),
+                    datasets: [{
+                        data: sortedBots.map(([,count]) => count),
+                        backgroundColor: sortedBots.map(([bot]) => 
+                            CHART_COLORS[bot] || `#${Math.floor(Math.random()*16777215).toString(16)}`
+                        )
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Top 10 Bots by Crawl Count'
+                        }
+                    }
+                }
+            });
+
+            // Bot Activity Bar Chart
+            const ctx3 = document.getElementById('botActivityChart').getContext('2d');
+            if (botActivityChart) {
+                botActivityChart.destroy();
+            }
+
+            // Categorize bots
+            const categories = {
+                'LLM Bots': Object.entries(data.daily)
+                    .filter(([bot]) => BOT_CATEGORIES.llm.includes(bot))
+                    .reduce((sum, [_, count]) => sum + count, 0),
+                'Search Bots': Object.entries(data.daily)
+                    .filter(([bot]) => BOT_CATEGORIES.search.includes(bot))
+                    .reduce((sum, [_, count]) => sum + count, 0),
+                'Other Bots': Object.entries(data.daily)
+                    .filter(([bot]) => BOT_CATEGORIES.other.includes(bot))
+                    .reduce((sum, [_, count]) => sum + count, 0)
+            };
+
+            botActivityChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        data: Object.values(categories),
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.8)',  // LLM Bots
+                            'rgba(59, 130, 246, 0.8)',  // Search Bots
+                            'rgba(156, 163, 175, 0.8)'  // Other Bots
+                        ],
+                        borderColor: [
+                            'rgb(16, 185, 129)',
+                            'rgb(59, 130, 246)',
+                            'rgb(156, 163, 175)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Bot Activity by Category'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateBotList(data) {
+            const botList = document.getElementById('botList');
+            const sortedBots = Object.entries(data.daily)
+                .sort(([,a], [,b]) => b - a);
+
+            botList.innerHTML = sortedBots
+                .map(([bot, count]) => `
+                    <div class="bot-badge ${bot}" title="${count} crawls">
+                        ${bot} (${count})
+                    </div>
+                `)
+                .join('');
+        }
+
+        function updateHistoricalData(data) {
+            const historicalData = document.getElementById('historicalData');
+            const today = new Date().toISOString().slice(0, 10);
+            
+            const llmBots = Object.entries(data.daily)
+                .filter(([bot]) => BOT_CATEGORIES.llm.includes(bot))
+                .reduce((sum, [_, count]) => sum + count, 0);
+            
+            const searchBots = Object.entries(data.daily)
+                .filter(([bot]) => BOT_CATEGORIES.search.includes(bot))
+                .reduce((sum, [_, count]) => sum + count, 0);
+
+            historicalData.innerHTML = `
+                <tr>
+                    <td>${today}</td>
+                    <td>${data.total}</td>
+                    <td>${llmBots}</td>
+                    <td>${searchBots}</td>
+                </tr>
+            `;
+        }
+
+        // Initialize dashboard on load
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+
+        // Refresh data every 5 minutes
+        setInterval(initializeDashboard, 5 * 60 * 1000);
+    </script>
+</body>
+</html> 
