@@ -44,6 +44,11 @@ Access our suite of tools designed to help you optimize your content for AI unde
 - Manage allowed and disallowed paths
 - Get instant preview and easy download options
 
+### AI Robots.txt Generator
+Generate optimized robots.txt files for AI and LLM crawlers with support for major search engines. Control which AI models can crawl your content and ensure proper indexing by search engines.
+
+[Try AI Robots.txt Generator →](/free-tools/ai-robots-txt-generator.html)
+
 ## 🎓 Free AI SEO Course
 
 Master the fundamentals of AI SEO with our comprehensive course:

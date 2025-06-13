@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Robots.txt Generator - Create LLM-Optimized robots.txt | LLM Logs</title>
+    <meta name="description" content="Generate an optimized robots.txt file for AI and LLM crawlers. Control which AI models can crawl your content with our easy-to-use generator.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bs-primary: #0366d6;
+            --bs-secondary: #24292e;
+        }
+        
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2c5282 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .bot-group {
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .bot-group h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--bs-secondary);
+        }
+        
+        .bot-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background: white;
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .bot-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .bot-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .bot-info {
+            flex-grow: 1;
+        }
+        
+        .bot-name {
+            font-weight: 600;
+            color: var(--bs-secondary);
+        }
+        
+        .bot-description {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .form-check {
+            margin-left: 1rem;
+        }
+        
+        .preview-section {
+            background: #1e1e1e;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .preview-section pre {
+            color: #d4d4d4;
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .sitemap-input {
+            margin-top: 1rem;
+        }
+        
+        .custom-paths {
+            margin-top: 1rem;
+        }
+        
+        .custom-path-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .custom-path-item input {
+            flex-grow: 1;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold fs-4" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="display-4 mb-3">AI Robots.txt Generator</h1>
+            <p class="lead mb-0">Create an optimized robots.txt file for AI and LLM crawlers</p>
+        </div>
+    </div>
+
+    <main class="content">
+        <!-- Introduction Section -->
+        <div class="content-section">
+            <h2 class="h3 mb-4">Why Optimize Your robots.txt for AI?</h2>
+            <p class="lead mb-4">As AI models increasingly crawl the web for training data, it's crucial to explicitly control which AI crawlers can access your content. Our generator helps you create a comprehensive robots.txt file that includes both standard search engine crawlers and AI-specific configurations.</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h3 class="h4 mb-3">Key Features</h3>
+                    <ul class="feature-list">
+                        <li>✓ AI-specific crawler configurations</li>
+                        <li>✓ Standard search engine support</li>
+                        <li>✓ Custom path management</li>
+                        <li>✓ Sitemap integration</li>
+                        <li>✓ Real-time preview</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="h4 mb-3">Supported AI Crawlers</h3>
+                    <ul class="feature-list">
+                        <li>✓ OpenAI (GPTBot, ChatGPT-User)</li>
+                        <li>✓ Anthropic (ClaudeBot, claude-web)</li>
+                        <li>✓ Google AI (Google-Extended)</li>
+                        <li>✓ Perplexity AI</li>
+                        <li>✓ Cohere & Mistral AI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-card">
+            <h2 class="h4 mb-4">Configure Your robots.txt</h2>
+            
+            <form id="robotsForm">
+                <!-- OpenAI Bots -->
+                <div class="bot-group">
+                    <h3>OpenAI Bots</h3>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">GPTBot</div>
+                            <div class="bot-description">OpenAI's web crawler for GPT-4</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gptbot" checked>
+                        </div>
+                    </div>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">ChatGPT-User</div>
+                            <div class="bot-description">ChatGPT's web browsing feature</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="chatgpt-user" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anthropic Bots -->
+                <div class="bot-group">
+                    <h3>Anthropic Bots</h3>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">ClaudeBot</div>
+                            <div class="bot-description">Anthropic's web crawler for Claude</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="claudebot" checked>
+                        </div>
+                    </div>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">claude-web</div>
+                            <div class="bot-description">Claude's web browsing feature</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="claude-web" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google AI -->
+                <div class="bot-group">
+                    <h3>Google AI</h3>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">Google-Extended</div>
+                            <div class="bot-description">Google's AI training crawler</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="google-extended" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other AI Bots -->
+                <div class="bot-group">
+                    <h3>Other AI Bots</h3>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">PerplexityBot</div>
+                            <div class="bot-description">Perplexity AI's web crawler</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="perplexitybot" checked>
+                        </div>
+                    </div>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">cohere-ai</div>
+                            <div class="bot-description">Cohere's web crawler</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="cohere-ai" checked>
+                        </div>
+                    </div>
+                    <div class="bot-item">
+                        <div class="bot-info">
+                            <div class="bot-name">MistralAI-User</div>
+                            <div class="bot-description">Mistral AI's web crawler</div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mistralai-user" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sitemap Configuration -->
+                <div class="mt-4">
+                    <h3 class="h5 mb-3">Sitemap Configuration</h3>
+                    <div class="input-group sitemap-input">
+                        <span class="input-group-text">Sitemap URL</span>
+                        <input type="url" class="form-control" id="sitemapUrl" placeholder="https://example.com/sitemap.xml">
+                    </div>
+                </div>
+
+                <!-- Custom Paths -->
+                <div class="mt-4">
+                    <h3 class="h5 mb-3">Custom Paths</h3>
+                    <div class="custom-paths" id="customPaths">
+                        <div class="custom-path-item">
+                            <select class="form-select" name="pathType[]">
+                                <option value="allow">Allow</option>
+                                <option value="disallow">Disallow</option>
+                            </select>
+                            <input type="text" class="form-control" name="path[]" placeholder="/path/to/page">
+                            <button type="button" class="btn btn-outline-danger remove-path">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary mt-2" id="addPath">Add Path</button>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">Generate robots.txt</button>
+                </div>
+            </form>
+
+            <!-- Preview Section -->
+            <div class="preview-section mt-4" style="display: none;">
+                <button class="copy-button" onclick="copyToClipboard()">Copy to Clipboard</button>
+                <pre id="robotsPreview"></pre>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                    </div>
+                    <p class="text-muted small">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const BOT_CONFIGS = {
+            'gptbot': {
+                name: 'GPTBot',
+                description: 'OpenAI\'s web crawler for GPT-4'
+            },
+            'chatgpt-user': {
+                name: 'ChatGPT-User',
+                description: 'ChatGPT\'s web browsing feature'
+            },
+            'claudebot': {
+                name: 'ClaudeBot',
+                description: 'Anthropic\'s web crawler for Claude'
+            },
+            'claude-web': {
+                name: 'claude-web',
+                description: 'Claude\'s web browsing feature'
+            },
+            'google-extended': {
+                name: 'Google-Extended',
+                description: 'Google\'s AI training crawler'
+            },
+            'perplexitybot': {
+                name: 'PerplexityBot',
+                description: 'Perplexity AI\'s web crawler'
+            },
+            'cohere-ai': {
+                name: 'cohere-ai',
+                description: 'Cohere\'s web crawler'
+            },
+            'mistralai-user': {
+                name: 'MistralAI-User',
+                description: 'Mistral AI\'s web crawler'
+            }
+        };
+
+        document.getElementById('robotsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateRobotsTxt();
+        });
+
+        document.getElementById('addPath').addEventListener('click', function() {
+            const pathItem = document.createElement('div');
+            pathItem.className = 'custom-path-item';
+            pathItem.innerHTML = `
+                <select class="form-select" name="pathType[]">
+                    <option value="allow">Allow</option>
+                    <option value="disallow">Disallow</option>
+                </select>
+                <input type="text" class="form-control" name="path[]" placeholder="/path/to/page">
+                <button type="button" class="btn btn-outline-danger remove-path">Remove</button>
+            `;
+            document.getElementById('customPaths').appendChild(pathItem);
+        });
+
+        document.getElementById('customPaths').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-path')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        // Add standard robots.txt configurations
+        const STANDARD_BOTS = {
+            'googlebot': {
+                name: 'Googlebot',
+                description: 'Google\'s main crawler'
+            },
+            'bingbot': {
+                name: 'Bingbot',
+                description: 'Microsoft Bing\'s crawler'
+            },
+            'yandexbot': {
+                name: 'Yandexbot',
+                description: 'Yandex\'s crawler'
+            },
+            'duckduckbot': {
+                name: 'DuckDuckBot',
+                description: 'DuckDuckGo\'s crawler'
+            },
+            'baiduspider': {
+                name: 'Baiduspider',
+                description: 'Baidu\'s crawler'
+            }
+        };
+
+        // Update generateRobotsTxt function to include standard bots
+        function generateRobotsTxt() {
+            let robotsTxt = '# AI and Standard Crawler Configuration\n# Generated by LLM Logs - https://llmlogs.com\n\n';
+            
+            // Add AI bot configurations
+            robotsTxt += '# AI Crawler Configuration\n';
+            for (const [id, config] of Object.entries(BOT_CONFIGS)) {
+                const checkbox = document.getElementById(id);
+                if (checkbox.checked) {
+                    robotsTxt += `# ${config.description}\n`;
+                    robotsTxt += `User-agent: ${config.name}\n`;
+                    robotsTxt += 'Allow: /\n\n';
+                }
+            }
+            
+            // Add standard bot configurations
+            robotsTxt += '# Standard Search Engine Configuration\n';
+            for (const [id, config] of Object.entries(STANDARD_BOTS)) {
+                robotsTxt += `# ${config.description}\n`;
+                robotsTxt += `User-agent: ${config.name}\n`;
+                robotsTxt += 'Allow: /\n\n';
+            }
+            
+            // Add default configuration
+            robotsTxt += '# Default Configuration\n';
+            robotsTxt += 'User-agent: *\n';
+            robotsTxt += 'Allow: /\n\n';
+            
+            // Add custom paths
+            const pathTypes = document.getElementsByName('pathType[]');
+            const paths = document.getElementsByName('path[]');
+            
+            if (paths.length > 0) {
+                robotsTxt += '# Custom Paths\n';
+                for (let i = 0; i < paths.length; i++) {
+                    if (paths[i].value) {
+                        robotsTxt += `${pathTypes[i].value === 'allow' ? 'Allow' : 'Disallow'}: ${paths[i].value}\n`;
+                    }
+                }
+                robotsTxt += '\n';
+            }
+            
+            // Add sitemap
+            const sitemapUrl = document.getElementById('sitemapUrl').value;
+            if (sitemapUrl) {
+                robotsTxt += '# Sitemap\n';
+                robotsTxt += `Sitemap: ${sitemapUrl}\n`;
+            }
+            
+            // Display preview
+            document.getElementById('robotsPreview').textContent = robotsTxt;
+            document.querySelector('.preview-section').style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('robotsPreview').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const button = document.querySelector('.copy-button');
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy to Clipboard';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html> 

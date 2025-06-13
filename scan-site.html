@@ -145,27 +145,97 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         .check-list li {
             display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 0.5rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
             background-color: var(--bs-gray-100);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .check-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         .status-icon {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .status-icon.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-icon.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-icon.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .check-content {
+            flex-grow: 1;
         }
         
         .check-label {
-            flex-grow: 1;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--bs-secondary);
+            margin-bottom: 0.5rem;
+            display: block;
         }
         
         .check-details {
-            color: var(--bs-gray-600);
-            font-size: 0.875rem;
+            color: var(--bs-gray-700);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .check-details ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+            padding-left: 1.25rem;
+        }
+        
+        .check-details li {
+            margin-bottom: 0.25rem;
+            padding: 0;
+            background: none;
+            border-radius: 0;
+        }
+        
+        .check-details li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .check-details strong {
+            color: var(--bs-secondary);
+            font-weight: 600;
+        }
+        
+        .check-score {
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--bs-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-shrink: 0;
         }
         
         .recommendations-list li {
@@ -511,11 +581,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 description: 'sitemap.xml for content discovery'
             },
             robotsTxt: {
-                weight: 0.15,
-                description: 'robots.txt configuration'
+                weight: 0.2,
+                description: 'robots.txt configuration for LLM bots'
             },
             schema: {
-                weight: 0.2,
+                weight: 0.15,
                 description: 'Schema.org markup'
             },
             semantic: {
@@ -524,32 +594,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         };
 
-        // Content Structure Elements
-        const CONTENT_ELEMENTS = {
-            headings: {
-                weight: 0.25,
-                description: 'Heading hierarchy'
-            },
-            paragraphs: {
-                weight: 0.2,
-                description: 'Paragraph structure'
-            },
-            codeBlocks: {
-                weight: 0.15,
-                description: 'Code examples'
-            },
-            lists: {
-                weight: 0.15,
-                description: 'List formatting'
-            },
-            links: {
-                weight: 0.15,
-                description: 'Internal linking'
-            },
-            images: {
-                weight: 0.1,
-                description: 'Image optimization'
-            }
+        // LLM Bot Patterns for robots.txt analysis
+        const LLM_BOT_PATTERNS = {
+            openai: ['GPTBot', 'ChatGPT-User', 'OAI-SearchBot'],
+            anthropic: ['ClaudeBot', 'claude-web', 'anthropic-ai'],
+            google: ['Google-Extended'],
+            perplexity: ['PerplexityBot'],
+            cohere: ['cohere-ai'],
+            mistral: ['MistralAI-User'],
+            bytedance: ['Bytespider'],
+            meta: ['FacebookBot'],
+            duckduckgo: ['DuckAssistBot'],
+            bing: ['bingbot'],
+            amazon: ['Amazonbot'],
+            apple: ['Applebot']
         };
 
         async function startAnalysis() {
@@ -637,6 +695,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     details: 'Missing sitemap.xml'
                 };
             }
+
+            // Check robots.txt
+            try {
+                const robotsTxt = await fetch(url + '/robots.txt');
+                if (robotsTxt.ok) {
+                    const robotsContent = await robotsTxt.text();
+                    const analysis = analyzeRobotsTxt(robotsContent);
+                    elements.robotsTxt = {
+                        found: true,
+                        score: analysis.score,
+                        details: analysis.details,
+                        recommendations: analysis.recommendations
+                    };
+                } else {
+                    elements.robotsTxt = {
+                        found: false,
+                        score: 0,
+                        details: 'Missing robots.txt file',
+                        recommendations: ['Create a robots.txt file with LLM bot configurations']
+                    };
+                }
+            } catch {
+                elements.robotsTxt = {
+                    found: false,
+                    score: 0,
+                    details: 'Error accessing robots.txt',
+                    recommendations: ['Ensure robots.txt is accessible and properly configured']
+                };
+            }
             
             // Calculate weighted score
             for (const [element, data] of Object.entries(elements)) {
@@ -646,6 +733,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return {
                 elements,
                 totalScore: Math.round(totalScore)
+            };
+        }
+
+        function analyzeRobotsTxt(content) {
+            const lines = content.split('\n');
+            let score = 0;
+            const details = [];
+            const recommendations = [];
+            const foundBots = new Set();
+            
+            // Check for LLM bot configurations
+            for (const [provider, bots] of Object.entries(LLM_BOT_PATTERNS)) {
+                let providerFound = false;
+                for (const bot of bots) {
+                    const botPattern = new RegExp(`User-agent:\\s*${bot}`, 'i');
+                    const allowPattern = new RegExp(`Allow:\\s*/`, 'i');
+                    const botFound = lines.some(line => botPattern.test(line));
+                    const botAllowed = lines.some(line => allowPattern.test(line));
+                    
+                    if (botFound && botAllowed) {
+                        providerFound = true;
+                        foundBots.add(bot);
+                        score += 10; // 10 points per properly configured bot
+                    } else if (botFound && !botAllowed) {
+                        recommendations.push(`Configure ${bot} to allow crawling`);
+                    }
+                }
+                
+                if (providerFound) {
+                    details.push(`${provider} bots properly configured`);
+                } else {
+                    recommendations.push(`Add configuration for ${provider} bots`);
+                }
+            }
+            
+            // Check for sitemap reference
+            const sitemapFound = lines.some(line => /Sitemap:/.test(line));
+            if (sitemapFound) {
+                score += 10;
+                details.push('Sitemap reference found');
+            } else {
+                recommendations.push('Add sitemap reference to robots.txt');
+            }
+            
+            // Check for standard configuration
+            const standardConfig = lines.some(line => /User-agent: \*/.test(line));
+            if (standardConfig) {
+                score += 10;
+                details.push('Standard bot configuration found');
+            } else {
+                recommendations.push('Add standard bot configuration (User-agent: *)');
+            }
+            
+            // Normalize score to 100
+            const maxPossibleScore = Object.keys(LLM_BOT_PATTERNS).length * 10 + 20; // 10 points per bot provider + 20 for sitemap and standard config
+            const normalizedScore = Math.min(100, Math.round((score / maxPossibleScore) * 100));
+            
+            return {
+                score: normalizedScore,
+                details: details.join(', '),
+                recommendations: recommendations,
+                foundBots: Array.from(foundBots)
             };
         }
 
@@ -765,6 +914,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             `).join('');
             
             document.getElementById('modelScores').innerHTML = modelScoresHtml;
+            
+            // Update core files section with robots.txt analysis
+            const coreFilesHtml = Object.entries(analysis.technical.elements).map(([element, data]) => {
+                let recommendationsHtml = '';
+                if (data.recommendations && data.recommendations.length > 0) {
+                    recommendationsHtml = `
+                        <div class="check-details">
+                            <strong>Recommendations:</strong>
+                            <ul>
+                                ${data.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                const statusClass = data.score >= 80 ? 'success' : data.score >= 50 ? 'warning' : 'error';
+                const statusIcon = data.score >= 80 ? '✓' : data.score >= 50 ? '!' : '✗';
+                
+                return `
+                    <li>
+                        <span class="status-icon ${statusClass}">${statusIcon}</span>
+                        <div class="check-content">
+                            <span class="check-label">${TECHNICAL_ELEMENTS[element].description}</span>
+                            <div class="check-details">
+                                ${data.details}
+                                ${recommendationsHtml}
+                            </div>
+                        </div>
+                        <div class="check-score">${data.score}</div>
+                    </li>
+                `;
+            }).join('');
+            
+            document.getElementById('coreFiles').innerHTML = coreFilesHtml;
+            
+            // Update content structure section
+            const contentStructureHtml = Object.entries(analysis.content.elements).map(([element, data]) => {
+                const statusClass = data.score >= 80 ? 'success' : data.score >= 50 ? 'warning' : 'error';
+                const statusIcon = data.score >= 80 ? '✓' : data.score >= 50 ? '!' : '✗';
+                
+                return `
+                    <li>
+                        <span class="status-icon ${statusClass}">${statusIcon}</span>
+                        <div class="check-content">
+                            <span class="check-label">${CONTENT_ELEMENTS[element].description}</span>
+                            <div class="check-details">
+                                ${data.details}
+                                ${data.score < 70 ? `<strong>Recommendation:</strong> Improve ${CONTENT_ELEMENTS[element].description.toLowerCase()}` : ''}
+                            </div>
+                        </div>
+                        <div class="check-score">${data.score}</div>
+                    </li>
+                `;
+            }).join('');
+            
+            document.getElementById('contentStructure').innerHTML = contentStructureHtml;
             
             // Update recommendations
             const recommendationsHtml = analysis.recommendations.map(rec => `
