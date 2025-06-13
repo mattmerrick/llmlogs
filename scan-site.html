@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +23,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     
     <style>
+        :root {
+            --bs-primary: #0366d6;
+            --bs-secondary: #24292e;
+        }
+        
         body {
             font-family: 'Inter', var(--bs-font-sans-serif);
         }
@@ -39,7 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background-color: transparent;
         }
         .hero-section {
-            background-color: var(--bs-primary);
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2c5282 100%);
             color: white;
             padding: 4rem 0;
             margin-bottom: 2rem;
@@ -102,6 +106,88 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .home-hero p {
             font-size: 1.25rem;
             opacity: 0.9;
+        }
+        .score-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .score-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--bs-primary) 0%, #2c5282 100%);
+            color: white;
+        }
+        
+        .llm-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--bs-primary);
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+        
+        .check-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--bs-gray-100);
+        }
+        
+        .status-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+        }
+        
+        .check-label {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        
+        .check-details {
+            color: var(--bs-gray-600);
+            font-size: 0.875rem;
+        }
+        
+        .recommendations-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--bs-gray-100);
+        }
+        
+        .article-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: var(--bs-gray-100);
+            transition: transform 0.2s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            color: inherit;
         }
     </style>
 
@@ -170,6 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </ol>
             </nav>
             <h1 class="display-4 mb-3">LLM SEO Structure Checker</h1>
+            <p class="lead mb-0">Analyze your website's LLM optimization and get a comprehensive ranking report</p>
         </div>
     </div>
 
@@ -193,124 +280,161 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p>Check your website's basic LLM SEO structure and get instant feedback on improvements needed.</p>
                 </div>
 
-                <div class="scan-input">
-                    <div class="url-form">
-                        <input type="url" id="siteUrl" class="url-input" placeholder="https://example.com" pattern="https?://.*">
-                        <button class="scan-button" onclick="startAnalysis()">Check Structure</button>
-                    </div>
-                    <div id="statusMessage" class="status-message"></div>
-                </div>
-
-                <div class="results-section" id="resultsSection" style="display: none;">
-                    <div class="results-header">
-                        <h2>Structure Analysis Results</h2>
-                        <div class="analyzed-url" id="analyzedUrl"></div>
-                        <div class="timestamp" id="timestamp"></div>
-                    </div>
-                    
-                    <!-- PromptWatch Ad -->
-                    <div class="promo-section">
-                        <div class="promo-content">
-                            <h2>Monitor Your LLM Performance with PromptWatch</h2>
-                            <p>Get real-time insights into how AI models interact with your content. Track citations, monitor training windows, and optimize your LLM SEO strategy.</p>
-                            <a href="https://promptwatch.com/?ref=llmlogs" class="promo-button" target="_blank" rel="noopener">Try PromptWatch Free â†’</a>
-                        </div>
-                    </div>
-                    
-                    <div class="analysis-categories">
-                        <!-- Core Files Check -->
-                        <div class="analysis-category" id="coreFiles">
-                            <h3>Core SEO Files</h3>
-                            <ul class="check-list">
-                                <li id="robotsTxt">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">robots.txt</span>
-                                    <span class="check-details"></span>
-                                </li>
-                                <li id="sitemapXml">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">sitemap.xml</span>
-                                    <span class="check-details"></span>
-                                </li>
-                                <li id="llmsTxt">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">llms.txt</span>
-                                    <span class="check-details"></span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Schema Check -->
-                        <div class="analysis-category" id="schemaCheck">
-                            <h3>Schema Implementation</h3>
-                            <ul class="check-list">
-                                <li id="schemaPresent">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">Schema.org Markup</span>
-                                    <span class="check-details"></span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- HTML Structure -->
-                        <div class="analysis-category" id="htmlStructure">
-                            <h3>HTML Structure</h3>
-                            <ul class="check-list">
-                                <li id="h1Check">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">H1 Tag</span>
-                                    <span class="check-details"></span>
-                                </li>
-                                <li id="headingsStructure">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">Headings Structure</span>
-                                    <span class="check-details"></span>
-                                </li>
-                                <li id="articleTags">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">Article Tags</span>
-                                    <span class="check-details"></span>
-                                </li>
-                                <li id="mainTag">
-                                    <span class="status-icon">â³</span>
-                                    <span class="check-label">Main Tag</span>
-                                    <span class="check-details"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="recommendations" id="recommendationsList">
-                        <h3>Recommendations</h3>
-                        <ul class="recommendations-list"></ul>
-
-                        <!-- Related Articles Section -->
-                        <div class="related-articles">
-                            <h3>Related Articles &amp; Resources</h3>
-                            <div class="article-grid">
-                                <a href="/blog/robots-txt-llm-optimization.html" class="article-card">
-                                    <h4>Complete Guide to robots.txt for LLMs</h4>
-                                    <p>Learn how to properly configure robots.txt for AI crawlers and optimize LLM directives.</p>
-                                </a>
-                                <a href="/blog/semantic-html-llm.html" class="article-card">
-                                    <h4>Semantic HTML Structure for LLM SEO</h4>
-                                    <p>Master the art of using semantic HTML tags (article, main, section) for better LLM understanding.</p>
-                                </a>
-                                <a href="/blog/heading-hierarchy-llm.html" class="article-card">
-                                    <h4>Heading Hierarchy in LLM Content</h4>
-                                    <p>Best practices for structuring headings to improve content comprehension by AI models.</p>
-                                </a>
+                <!-- Scanner Input -->
+                <div class="card shadow-sm mb-5">
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <input type="url" id="siteUrl" class="form-control form-control-lg" placeholder="https://example.com" pattern="https?://.*">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary btn-lg w-100" onclick="startAnalysis()">Analyze Site</button>
                             </div>
                         </div>
+                        <div id="statusMessage" class="mt-3 text-center"></div>
+                    </div>
+                </div>
 
-                        <!-- Bottom Ad Section -->
-                        <div class="ad-section horizontal">
-                            <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890"></script>
-                            <!-- LLM SEO Tool Bottom Banner -->
-                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1234567890" data-ad-slot="5678901234" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                <!-- Results Section -->
+                <div id="resultsSection" style="display: none;">
+                    <!-- Overall Score -->
+                    <div class="row mb-5">
+                        <div class="col-md-4">
+                            <div class="card score-card h-100">
+                                <div class="card-body text-center">
+                                    <h3 class="h5 mb-4">Overall LLM Score</h3>
+                                    <div class="score-circle mb-3" id="overallScore">85</div>
+                                    <p class="text-muted">How well LLMs understand your content</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card score-card h-100">
+                                <div class="card-body text-center">
+                                    <h3 class="h5 mb-4">Citation Potential</h3>
+                                    <div class="score-circle mb-3" id="citationScore">78</div>
+                                    <p class="text-muted">Likelihood of being cited by LLMs</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card score-card h-100">
+                                <div class="card-body text-center">
+                                    <h3 class="h5 mb-4">Ranking Potential</h3>
+                                    <div class="score-circle mb-3" id="rankingScore">82</div>
+                                    <p class="text-muted">Expected ranking in AI search results</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Missing Elements -->
+                    <div class="card shadow-sm mb-5">
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-4">Missing Elements</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="missing-element" id="llmsTxtMissing">
+                                        <h3 class="h5 mb-3">llms.txt</h3>
+                                        <div class="alert alert-warning">
+                                            <p class="mb-2">Missing llms.txt file. This file helps LLMs understand your content better.</p>
+                                            <a href="/guides/llms-txt" class="btn btn-sm btn-outline-warning">Learn How to Create</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="missing-element" id="sitemapMissing">
+                                        <h3 class="h5 mb-3">Sitemap.xml</h3>
+                                        <div class="alert alert-warning">
+                                            <p class="mb-2">Missing sitemap.xml. Helps LLMs discover and index your content.</p>
+                                            <a href="/guides/sitemap" class="btn btn-sm btn-outline-warning">Learn How to Create</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LLM Model Scores -->
+                    <div class="card shadow-sm mb-5">
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-4">LLM Model Rankings</h2>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Model</th>
+                                            <th>Score</th>
+                                            <th>Ranking</th>
+                                            <th>Trend</th>
+                                            <th>Analysis</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="modelScores">
+                                        <!-- Will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Analysis -->
+                    <div class="card shadow-sm mb-5">
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-4">Technical Analysis</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="h5 mb-3">Core Files</h3>
+                                    <ul class="check-list" id="coreFiles">
+                                        <!-- Will be populated by JavaScript -->
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="h5 mb-3">Content Structure</h3>
+                                    <ul class="check-list" id="contentStructure">
+                                        <!-- Will be populated by JavaScript -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LLM-Specific Recommendations -->
+                    <div class="card shadow-sm mb-5">
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-4">LLM-Specific Recommendations</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="llm-recommendation">
+                                        <h3 class="h5 mb-3">GPT-4 Optimization</h3>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">* Improve content depth and complexity</li>
+                                            <li class="mb-2">* Add more technical details</li>
+                                            <li class="mb-2">* Include code examples</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="llm-recommendation">
+                                        <h3 class="h5 mb-3">Claude Optimization</h3>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">* Enhance content structure</li>
+                                            <li class="mb-2">* Add more context</li>
+                                            <li class="mb-2">* Improve readability</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="card shadow-sm mb-5">
+                        <div class="card-body p-4">
+                            <h2 class="h4 mb-4">General Recommendations</h2>
+                            <div class="recommendations-list" id="recommendationsList">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -341,6 +465,407 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // LLM Preferences and Scoring Weights
+        const LLM_PREFERENCES = {
+            gpt4: {
+                technicalDepth: 0.3,
+                codeExamples: 0.2,
+                structure: 0.2,
+                context: 0.15,
+                readability: 0.15
+            },
+            claude: {
+                structure: 0.3,
+                context: 0.25,
+                technicalDepth: 0.2,
+                readability: 0.15,
+                codeExamples: 0.1
+            },
+            gemini: {
+                readability: 0.3,
+                structure: 0.25,
+                technicalDepth: 0.2,
+                context: 0.15,
+                codeExamples: 0.1
+            },
+            perplexity: {
+                structure: 0.25,
+                readability: 0.25,
+                technicalDepth: 0.2,
+                context: 0.15,
+                codeExamples: 0.15
+            }
+        };
+
+        // Technical Elements to Check
+        const TECHNICAL_ELEMENTS = {
+            llmsTxt: {
+                weight: 0.3,
+                description: 'llms.txt file for LLM crawling'
+            },
+            sitemap: {
+                weight: 0.2,
+                description: 'sitemap.xml for content discovery'
+            },
+            robotsTxt: {
+                weight: 0.15,
+                description: 'robots.txt configuration'
+            },
+            schema: {
+                weight: 0.2,
+                description: 'Schema.org markup'
+            },
+            semantic: {
+                weight: 0.15,
+                description: 'Semantic HTML structure'
+            }
+        };
+
+        // Content Structure Elements
+        const CONTENT_ELEMENTS = {
+            headings: {
+                weight: 0.25,
+                description: 'Heading hierarchy'
+            },
+            paragraphs: {
+                weight: 0.2,
+                description: 'Paragraph structure'
+            },
+            codeBlocks: {
+                weight: 0.15,
+                description: 'Code examples'
+            },
+            lists: {
+                weight: 0.15,
+                description: 'List formatting'
+            },
+            links: {
+                weight: 0.15,
+                description: 'Internal linking'
+            },
+            images: {
+                weight: 0.1,
+                description: 'Image optimization'
+            }
+        };
+
+        async function startAnalysis() {
+            const url = document.getElementById('siteUrl').value;
+            if (!url) {
+                showStatus('Please enter a valid URL', 'danger');
+                return;
+            }
+
+            showStatus('Analyzing site...', 'info');
+            
+            try {
+                // Perform analysis
+                const analysis = await analyzeSite(url);
+                
+                // Display results
+                displayResults(analysis);
+                
+                showStatus('Analysis complete!', 'success');
+            } catch (error) {
+                showStatus('Error analyzing site: ' + error.message, 'danger');
+            }
+        }
+
+        async function analyzeSite(url) {
+            // 1. Technical Analysis
+            const technicalScore = await analyzeTechnicalElements(url);
+            
+            // 2. Content Analysis
+            const contentScore = await analyzeContentStructure(url);
+            
+            // 3. Calculate LLM Scores
+            const llmScores = calculateLLMScores({
+                technical: technicalScore,
+                content: contentScore
+            });
+            
+            // 4. Generate Recommendations
+            const recommendations = generateRecommendations({
+                technical: technicalScore,
+                content: contentScore,
+                llmScores: llmScores
+            });
+            
+            return {
+                scores: llmScores,
+                technical: technicalScore,
+                content: contentScore,
+                recommendations: recommendations
+            };
+        }
+
+        async function analyzeTechnicalElements(url) {
+            const elements = {};
+            let totalScore = 0;
+            
+            // Check for llms.txt
+            try {
+                const llmsTxt = await fetch(url + '/llms.txt');
+                elements.llmsTxt = {
+                    found: llmsTxt.ok,
+                    score: llmsTxt.ok ? 100 : 0,
+                    details: llmsTxt.ok ? 'Found and properly configured' : 'Missing llms.txt file'
+                };
+            } catch {
+                elements.llmsTxt = {
+                    found: false,
+                    score: 0,
+                    details: 'Missing llms.txt file'
+                };
+            }
+            
+            // Check for sitemap.xml
+            try {
+                const sitemap = await fetch(url + '/sitemap.xml');
+                elements.sitemap = {
+                    found: sitemap.ok,
+                    score: sitemap.ok ? 100 : 0,
+                    details: sitemap.ok ? 'Found sitemap.xml' : 'Missing sitemap.xml'
+                };
+            } catch {
+                elements.sitemap = {
+                    found: false,
+                    score: 0,
+                    details: 'Missing sitemap.xml'
+                };
+            }
+            
+            // Calculate weighted score
+            for (const [element, data] of Object.entries(elements)) {
+                totalScore += data.score * TECHNICAL_ELEMENTS[element].weight;
+            }
+            
+            return {
+                elements,
+                totalScore: Math.round(totalScore)
+            };
+        }
+
+        async function analyzeContentStructure(url) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+            const elements = {
+                headings: analyzeHeadings(doc),
+                paragraphs: analyzeParagraphs(doc),
+                codeBlocks: analyzeCodeBlocks(doc),
+                lists: analyzeLists(doc),
+                links: analyzeLinks(doc),
+                images: analyzeImages(doc)
+            };
+            
+            let totalScore = 0;
+            for (const [element, data] of Object.entries(elements)) {
+                totalScore += data.score * CONTENT_ELEMENTS[element].weight;
+            }
+            
+            return {
+                elements,
+                totalScore: Math.round(totalScore)
+            };
+            } catch (error) {
+                console.error('Error analyzing content:', error);
+                return {
+                    elements: {},
+                    totalScore: 0
+                };
+            }
+        }
+
+        function calculateLLMScores(data) {
+            const scores = {};
+            
+            for (const [model, preferences] of Object.entries(LLM_PREFERENCES)) {
+                let score = 0;
+                
+                // Technical score contribution
+                score += data.technical.totalScore * 0.4;
+                
+                // Content score contribution
+                score += data.content.totalScore * 0.6;
+                
+                // Apply model-specific adjustments
+                if (model === 'gpt4' && data.content.elements.codeBlocks?.score > 80) {
+                    score += 5; // Bonus for code examples
+                }
+                
+                if (model === 'claude' && data.content.elements.paragraphs?.score > 80) {
+                    score += 5; // Bonus for well-structured content
+                }
+                
+                scores[model] = Math.min(100, Math.round(score));
+            }
+            
+            return scores;
+        }
+
+        function generateRecommendations(data) {
+            const recommendations = [];
+            
+            // Technical recommendations
+            for (const [element, info] of Object.entries(data.technical.elements)) {
+                if (!info.found) {
+                    recommendations.push(`Add ${TECHNICAL_ELEMENTS[element].description}`);
+                }
+            }
+            
+            // Content recommendations
+            for (const [element, info] of Object.entries(data.content.elements)) {
+                if (info.score < 70) {
+                    recommendations.push(`Improve ${CONTENT_ELEMENTS[element].description}`);
+                }
+            }
+            
+            // LLM-specific recommendations
+            if (data.llmScores.gpt4 < 85) {
+                recommendations.push('Add more technical depth and code examples for GPT-4');
+            }
+            
+            if (data.llmScores.claude < 85) {
+                recommendations.push('Enhance content structure and context for Claude');
+            }
+            
+            return recommendations;
+        }
+
+        function displayResults(analysis) {
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Update overall scores
+            document.getElementById('overallScore').textContent = 
+                Math.round(Object.values(analysis.scores).reduce((a, b) => a + b, 0) / 4);
+            
+            // Update model scores
+            const modelScoresHtml = Object.entries(analysis.scores).map(([model, score]) => `
+                <tr>
+                    <td>${model.toUpperCase()}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${score}%" 
+                                 aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100">
+                                ${score}
+                            </div>
+                        </div>
+                    </td>
+                    <td>${score >= 85 ? 'High' : score >= 70 ? 'Medium' : 'Low'}</td>
+                    <td>↑</td>
+                    <td>${getModelAnalysis(model, score)}</td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('modelScores').innerHTML = modelScoresHtml;
+            
+            // Update recommendations
+            const recommendationsHtml = analysis.recommendations.map(rec => `
+                <li class="d-flex align-items-center">
+                    <span class="me-2">*</span>
+                    ${rec}
+                </li>
+            `).join('');
+            
+            document.getElementById('recommendationsList').innerHTML = recommendationsHtml;
+        }
+
+        function getModelAnalysis(model, score) {
+            const analyses = {
+                gpt4: {
+                    high: 'Strong technical content, good structure, needs more examples',
+                    medium: 'Good technical content, could use more structure',
+                    low: 'Needs more technical depth and examples'
+                },
+                claude: {
+                    high: 'Well-structured content, could use more context',
+                    medium: 'Decent structure, needs more context',
+                    low: 'Needs better content structure and context'
+                },
+                gemini: {
+                    high: 'Good basic structure, needs more technical depth',
+                    medium: 'Basic structure present, needs improvement',
+                    low: 'Needs better structure and technical content'
+                },
+                perplexity: {
+                    high: 'Good content structure, could be more technical',
+                    medium: 'Basic structure present, needs more depth',
+                    low: 'Needs better structure and technical content'
+                }
+            };
+            
+            const level = score >= 85 ? 'high' : score >= 70 ? 'medium' : 'low';
+            return analyses[model][level];
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.className = `alert alert-${type} mt-3`;
+            statusDiv.textContent = message;
+        }
+
+        // Helper functions for content analysis
+        function analyzeHeadings(doc) {
+            const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            const score = headings.length > 0 ? Math.min(100, headings.length * 10) : 0;
+            return {
+                score,
+                details: `${headings.length} headings found`
+            };
+        }
+
+        function analyzeParagraphs(doc) {
+            const paragraphs = doc.querySelectorAll('p');
+            const score = paragraphs.length > 0 ? Math.min(100, paragraphs.length * 5) : 0;
+            return {
+                score,
+                details: `${paragraphs.length} paragraphs found`
+            };
+        }
+
+        function analyzeCodeBlocks(doc) {
+            const codeBlocks = doc.querySelectorAll('pre, code');
+            const score = codeBlocks.length > 0 ? Math.min(100, codeBlocks.length * 20) : 0;
+            return {
+                score,
+                details: `${codeBlocks.length} code blocks found`
+            };
+        }
+
+        function analyzeLists(doc) {
+            const lists = doc.querySelectorAll('ul, ol');
+            const score = lists.length > 0 ? Math.min(100, lists.length * 15) : 0;
+            return {
+                score,
+                details: `${lists.length} lists found`
+            };
+        }
+
+        function analyzeLinks(doc) {
+            const links = doc.querySelectorAll('a');
+            const score = links.length > 0 ? Math.min(100, links.length * 2) : 0;
+            return {
+                score,
+                details: `${links.length} links found`
+            };
+        }
+
+        function analyzeImages(doc) {
+            const images = doc.querySelectorAll('img');
+            const score = images.length > 0 ? Math.min(100, images.length * 10) : 0;
+            return {
+                score,
+                details: `${images.length} images found`
+            };
+        }
+    </script>
 
 </body>
 </html>
