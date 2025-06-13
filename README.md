@@ -2,6 +2,14 @@
 
 Master LLM SEO to increase your content visibility in AI responses. Learn how to optimize for Large Language Models and get more clicks with our comprehensive guide.
 
+## 📚 Resources
+
+Visit our [Resources Page](resources.html) for a complete collection of:
+- Free LLM optimization tools
+- Learning materials and guides
+- Latest blog posts
+- Community resources
+
 ## 🛠️ Free Tools
 
 Access our suite of tools designed to help you optimize your content for AI understanding and visibility:
@@ -93,6 +101,7 @@ Stay up to date with the latest developments in LLM SEO:
 
 ## Quick Links
 
+- [Resources](resources.html)
 - [Guides](https://llmlogs.com/guides/llm-optimization)
 - [Free Tools](https://llmlogs.com/free-tools)
 - [Examples](https://llmlogs.com/guides/llm-optimization/examples)
