@@ -11,12 +11,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Rules for Cursor Editor - Download .mdc Guidelines</title>
-    <meta name="description" content="Download React coding rules as .mdc files for Cursor Editor. Modern React patterns, hooks best practices, and component architecture to enhance your React development in Cursor.">
-    <meta name="keywords" content="React rules, Cursor Editor rules, .mdc files, React 18+, hooks patterns, component architecture, code snippets">
+    <meta name="description" content="Download React coding rules as .mdc files for Cursor Editor. Component patterns, hooks, and best practices to enhance your development in Cursor.">
+    <meta name="keywords" content="React rules, Cursor Editor rules, .mdc files, React hooks, React best practices, code snippets">
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="React Rules for Cursor Editor">
-    <meta property="og:description" content="Download React coding rules as .mdc files. Master modern React patterns and hooks in Cursor Editor.">
+    <meta property="og:description" content="Download React coding rules as .mdc files. Master component patterns and best practices in Cursor Editor.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://llmlogs.com/rules/react.html">
     
@@ -50,6 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 2rem;
+            margin-bottom: 2rem;
         }
         .markdown-body {
             font-family: 'Inter', var(--bs-font-sans-serif);
@@ -59,6 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             align-items: center;
             gap: 1rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
         .tech-icon {
             font-size: 2.5rem;
@@ -67,6 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .tech-stats {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
         .stat-item {
             display: flex;
@@ -77,51 +80,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-size: 1.25rem;
             color: var(--bs-gray-600);
         }
-        /* Code snippet styling */
-        pre {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: .25rem;
-            border: 1px solid #dee2e6;
-            margin: 1rem 0;
-        }
-        code {
-            color: #d63384;
-            font-size: 87.5%;
-            word-wrap: break-word;
-        }
-        pre code {
-            color: #212529;
-            font-size: .875rem;
-            word-break: normal;
-            white-space: pre;
+        .code-block {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
         }
         .code-block-header {
-            background: #f1f3f5;
-            border: 1px solid #dee2e6;
-            border-bottom: none;
-            border-top-left-radius: .25rem;
-            border-top-right-radius: .25rem;
-            padding: 0.5rem 1rem;
+            background-color: #2d2d2d;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #3d3d3d;
         }
-        .code-block-header .download-btn {
-            background: none;
-            border: none;
-            color: #0d6efd;
-            cursor: pointer;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-        }
-        .code-block-header .download-btn:hover {
-            color: #0a58ca;
+        .code-block-header span {
+            color: #e0e0e0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9rem;
         }
         pre {
-            margin-top: 0 !important;
-            border-top-left-radius: 0 !important;
-            border-top-right-radius: 0 !important;
+            margin: 0;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            border-radius: 0;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+            color: #e0e0e0;
+        }
+        .rule-section {
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .rule-section h2 {
+            color: var(--bs-primary);
+            margin-bottom: 1.5rem;
+        }
+        .rule-section h3 {
+            color: var(--bs-gray-700);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            .tech-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .tech-stats {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .content-section {
+                padding: 1rem;
+            }
+            .code-block {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
         }
     </style>
 <!-- Google tag (gtag.js) -->
@@ -194,11 +217,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="tech-stats">
                         <div class="stat-item">
                             <i class="bi bi-book stat-icon"></i>
-                            <span>1 Rule</span>
+                            <span>3 Rules</span>
                         </div>
                         <div class="stat-item">
                             <i class="bi bi-tag stat-icon"></i>
-                            <span>UI Framework</span>
+                            <span>Frontend Framework</span>
                         </div>
                         <div class="stat-item">
                             <i class="bi bi-file-earmark-text stat-icon"></i>
@@ -215,215 +238,451 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="content-section markdown-body">
             <div class="mb-5">
                 <h2>About These Rules</h2>
-                <p>These React coding rules are specifically formatted for the Cursor Editor as .mdc files, focusing on React 18+ features and modern component patterns. Each rule is designed to help you write more maintainable React applications while leveraging Cursor's AI capabilities for enhanced development.</p>
+                <p>These React coding rules are specifically formatted for the Cursor Editor as .mdc files, focusing on component patterns, hooks, and best practices. Each rule is designed to help you write more maintainable React code while leveraging Cursor's AI capabilities for enhanced development.</p>
             </div>
 
-            <article class="rule-section mb-5">
-                <h2>1. Custom Hooks and Component Composition</h2>
-                <p>Implement reusable custom hooks and component composition patterns for better code organization and maintainability. This approach demonstrates modern React patterns including hook composition, render props, and TypeScript integration.</p>
+            <article class="rule-section">
+                <h2>1. Component Patterns and Hooks</h2>
+                <p>Implement modern React component patterns and hooks for better code organization and maintainability. This approach ensures better component reusability and takes advantage of React's latest features.</p>
                 
                 <div class="code-block">
                     <div class="code-block-header">
-                        <span>react-hooks-composition.mdc</span>
-                        <button class="download-btn" onclick="downloadCode(this, 'react-hooks-composition.mdc')">
+                        <span>react-component-patterns.mdc</span>
+                        <button class="btn btn-primary btn-sm" onclick="downloadCode(this, 'react-component-patterns.mdc')">
                             <i class="bi bi-download"></i> Download
                         </button>
                     </div>
-                    <pre><code>import { useState, useEffect, useCallback, ReactNode } from 'react';
+                    <pre><code>// Custom hooks
+import { useState, useEffect, useCallback } from 'react';
 
-// Generic async state hook with TypeScript
-interface AsyncState<T> {
-    data: T | null;
-    loading: boolean;
-    error: Error | null;
-}
-
-function useAsync<T>(asyncFn: () => Promise<T>, deps: any[] = []): AsyncState<T> {
-    const [state, setState] = useState<AsyncState<T>>({
-        data: null,
-        loading: true,
-        error: null,
-    });
-
-    useEffect(() => {
-        let mounted = true;
-
-        const fetchData = async () => {
-            setState(prev => ({ ...prev, loading: true }));
-            try {
-                const result = await asyncFn();
-                if (mounted) {
-                    setState({ data: result, loading: false, error: null });
-                }
-            } catch (error) {
-                if (mounted) {
-                    setState({ data: null, loading: false, error });
-                }
-            }
-        };
-
-        fetchData();
-        return () => { mounted = false; };
-    }, deps);
-
-    return state;
-}
-
-// Composable form hook with validation
-interface FormField<T> {
-    value: T;
-    error?: string;
-    touched: boolean;
-}
-
-type FormState<T> = {
-    [K in keyof T]: FormField<T[K]>;
-};
-
-interface UseFormOptions<T> {
-    initialValues: T;
-    validate?: (values: T) => Partial<Record<keyof T, string>>;
-    onSubmit: (values: T) => Promise<void>;
-}
-
-function useForm<T extends Record<string, any>>({
-    initialValues,
-    validate,
-    onSubmit,
-}: UseFormOptions<T>) {
-    const [formState, setFormState] = useState<FormState<T>>(() => 
-        Object.keys(initialValues).reduce((acc, key) => ({
-            ...acc,
-            [key]: {
-                value: initialValues[key],
-                touched: false,
-            },
-        }), {} as FormState<T>)
-    );
-
-    const handleChange = useCallback((name: keyof T, value: T[keyof T]) => {
-        setFormState(prev => ({
-            ...prev,
-            [name]: {
-                ...prev[name],
-                value,
-                touched: true,
-            },
-        }));
-    }, []);
-
-    const handleSubmit = useCallback(async (e: React.FormEvent) => {
-        e.preventDefault();
-        
-        if (validate) {
-            const values = Object.keys(formState).reduce((acc, key) => ({
-                ...acc,
-                [key]: formState[key].value,
-            }), {} as T);
-            
-            const errors = validate(values);
-            if (Object.keys(errors).length > 0) {
-                setFormState(prev => 
-                    Object.keys(prev).reduce((acc, key) => ({
-                        ...acc,
-                        [key]: {
-                            ...prev[key],
-                            error: errors[key],
-                            touched: true,
-                        },
-                    }), {} as FormState<T>)
-                );
-                return;
-            }
-        }
-
-        await onSubmit(
-            Object.keys(formState).reduce((acc, key) => ({
-                ...acc,
-                [key]: formState[key].value,
-            }), {} as T)
-        );
-    }, [formState, validate, onSubmit]);
-
-    return { formState, handleChange, handleSubmit };
-}
-
-// Example usage with TypeScript and composition
 interface User {
+    id: string;
     name: string;
     email: string;
-    age: number;
 }
 
-interface DataProviderProps<T> {
-    children: (state: AsyncState<T>) => ReactNode;
-    fetchData: () => Promise<T>;
+interface UseUserReturn {
+    user: User | null;
+    loading: boolean;
+    error: Error | null;
+    updateUser: (data: Partial<User>) => Promise<void>;
 }
 
-function DataProvider<T>({ children, fetchData }: DataProviderProps<T>) {
-    const state = useAsync<T>(fetchData);
-    return <>{children(state)}</>;
+export function useUser(userId: string): UseUserReturn {
+    const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<Error | null>(null);
+
+    const fetchUser = useCallback(async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`/api/users/${userId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user');
+            }
+            const data = await response.json();
+            setUser(data);
+        } catch (err) {
+            setError(err instanceof Error ? err : new Error('Unknown error'));
+        } finally {
+            setLoading(false);
+        }
+    }, [userId]);
+
+    const updateUser = useCallback(async (data: Partial<User>) => {
+        try {
+            setLoading(true);
+            const response = await fetch(`/api/users/${userId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update user');
+            }
+            const updatedUser = await response.json();
+            setUser(updatedUser);
+        } catch (err) {
+            setError(err instanceof Error ? err : new Error('Unknown error'));
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    }, [userId]);
+
+    useEffect(() => {
+        fetchUser();
+    }, [fetchUser]);
+
+    return { user, loading, error, updateUser };
 }
 
-function UserForm() {
-    const { formState, handleChange, handleSubmit } = useForm<User>({
-        initialValues: {
-            name: '',
-            email: '',
-            age: 0,
-        },
-        validate: (values) => {
-            const errors: Partial<Record<keyof User, string>> = {};
-            if (!values.name) errors.name = 'Name is required';
-            if (!values.email) errors.email = 'Email is required';
-            if (values.age < 18) errors.age = 'Must be 18 or older';
-            return errors;
-        },
-        onSubmit: async (values) => {
-            // Submit logic here
-            console.log(values);
-        },
-    });
+// Component with custom hook
+interface UserProfileProps {
+    userId: string;
+}
+
+export function UserProfile({ userId }: UserProfileProps) {
+    const { user, loading, error, updateUser } = useUser(userId);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!user) {
+        return <div>User not found</div>;
+    }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input
-                    value={formState.name.value}
-                    onChange={e => handleChange('name', e.target.value)}
-                />
-                {formState.name.error && formState.name.touched && (
-                    <span>{formState.name.error}</span>
-                )}
-            </div>
-            {/* Similar fields for email and age */}
-            <button type="submit">Submit</button>
-        </form>
+        <div>
+            <h2>{user.name}</h2>
+            <p>{user.email}</p>
+            <button
+                onClick={() => updateUser({ name: 'New Name' })}
+                disabled={loading}
+            >
+                Update Name
+            </button>
+        </div>
     );
-}
-</code></pre>
+}</code></pre>
                 </div>
 
-                <div class="mt-3">
+                <div class="mt-4">
                     <h3>Why This Rule Matters</h3>
-                    <ul>
-                        <li>Promotes code reusability through custom hooks</li>
-                        <li>Ensures type safety with TypeScript integration</li>
-                        <li>Improves component organization and maintainability</li>
-                        <li>Reduces code duplication</li>
-                        <li>Makes testing easier with isolated logic</li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Enables better component reusability</li>
+                        <li class="list-group-item bg-transparent">Improves code organization and maintainability</li>
+                        <li class="list-group-item bg-transparent">Facilitates better state management</li>
+                        <li class="list-group-item bg-transparent">Reduces code duplication</li>
+                        <li class="list-group-item bg-transparent">Enables better testing</li>
                     </ul>
                 </div>
 
                 <div class="mt-4">
                     <h3>Using with Cursor</h3>
                     <p>Cursor's AI capabilities can help you:</p>
-                    <ul>
-                        <li>Generate custom hooks based on usage patterns</li>
-                        <li>Suggest component composition strategies</li>
-                        <li>Identify opportunities for hook extraction</li>
-                        <li>Debug React hooks dependencies</li>
-                        <li>Convert class components to functional components with hooks</li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Suggest component patterns</li>
+                        <li class="list-group-item bg-transparent">Generate custom hooks</li>
+                        <li class="list-group-item bg-transparent">Implement proper state management</li>
+                        <li class="list-group-item bg-transparent">Optimize component performance</li>
+                        <li class="list-group-item bg-transparent">Improve code organization</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="rule-section">
+                <h2>2. Error Boundaries and Error Handling</h2>
+                <p>Implement proper error boundaries and error handling patterns for better debugging and maintenance. This approach helps Cursor's AI better understand error contexts and provide more accurate debugging assistance.</p>
+                
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>react-error-handling.mdc</span>
+                        <button class="btn btn-primary btn-sm" onclick="downloadCode(this, 'react-error-handling.mdc')">
+                            <i class="bi bi-download"></i> Download
+                        </button>
+                    </div>
+                    <pre><code>import React, { Component, ErrorInfo, ReactNode } from 'react';
+
+interface Props {
+    children: ReactNode;
+    fallback?: ReactNode;
+}
+
+interface State {
+    hasError: boolean;
+    error: Error | null;
+}
+
+class ErrorBoundary extends Component<Props, State> {
+    public state: State = {
+        hasError: false,
+        error: null
+    };
+
+    public static getDerivedStateFromError(error: Error): State {
+        return {
+            hasError: true,
+            error
+        };
+    }
+
+    public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+        console.error('Uncaught error:', error, errorInfo);
+    }
+
+    public render() {
+        if (this.state.hasError) {
+            return this.props.fallback || (
+                <div className="error-boundary">
+                    <h2>Something went wrong</h2>
+                    <p>{this.state.error?.message}</p>
+                    <button
+                        onClick={() => this.setState({ hasError: false, error: null })}
+                    >
+                        Try again
+                    </button>
+                </div>
+            );
+        }
+
+        return this.props.children;
+    }
+}
+
+// Custom error hook
+interface UseErrorReturn {
+    error: Error | null;
+    setError: (error: Error | null) => void;
+    clearError: () => void;
+}
+
+export function useError(): UseErrorReturn {
+    const [error, setError] = React.useState<Error | null>(null);
+
+    const clearError = React.useCallback(() => {
+        setError(null);
+    }, []);
+
+    return { error, setError, clearError };
+}
+
+// Example usage
+function UserProfileWithErrorBoundary() {
+    return (
+        <ErrorBoundary
+            fallback={
+                <div className="error-fallback">
+                    <h2>Error loading user profile</h2>
+                    <p>Please try again later</p>
+                </div>
+            }
+        >
+            <UserProfile userId="123" />
+        </ErrorBoundary>
+    );
+}
+
+// Component with error handling
+function DataFetcher() {
+    const { error, setError, clearError } = useError();
+    const [data, setData] = React.useState(null);
+
+    const fetchData = async () => {
+        try {
+            clearError();
+            const response = await fetch('/api/data');
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const result = await response.json();
+            setData(result);
+        } catch (err) {
+            setError(err instanceof Error ? err : new Error('Unknown error'));
+        }
+    };
+
+    React.useEffect(() => {
+        fetchData();
+    }, []);
+
+    if (error) {
+        return (
+            <div className="error-state">
+                <p>Error: {error.message}</p>
+                <button onClick={fetchData}>Retry</button>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            {data ? (
+                <pre>{JSON.stringify(data, null, 2)}</pre>
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
+    );
+}</code></pre>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Why This Rule Matters</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Enables better error handling</li>
+                        <li class="list-group-item bg-transparent">Improves application reliability</li>
+                        <li class="list-group-item bg-transparent">Facilitates better debugging</li>
+                        <li class="list-group-item bg-transparent">Enables better error reporting</li>
+                        <li class="list-group-item bg-transparent">Improves user experience</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Using with Cursor</h3>
+                    <p>Cursor's AI capabilities can help you:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Suggest error boundary patterns</li>
+                        <li class="list-group-item bg-transparent">Generate error handling code</li>
+                        <li class="list-group-item bg-transparent">Implement error hooks</li>
+                        <li class="list-group-item bg-transparent">Improve error messages</li>
+                        <li class="list-group-item bg-transparent">Debug error scenarios</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="rule-section">
+                <h2>3. Performance Optimization</h2>
+                <p>Implement performance optimization patterns for better application performance and user experience. This approach helps Cursor's AI better understand performance considerations and provide more accurate suggestions.</p>
+                
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>react-performance.mdc</span>
+                        <button class="btn btn-primary btn-sm" onclick="downloadCode(this, 'react-performance.mdc')">
+                            <i class="bi bi-download"></i> Download
+                        </button>
+                    </div>
+                    <pre><code>import React, { memo, useCallback, useMemo, useRef } from 'react';
+
+// Memoized component
+interface UserCardProps {
+    user: {
+        id: string;
+        name: string;
+        email: string;
+    };
+    onUpdate: (id: string, data: any) => void;
+}
+
+const UserCard = memo(function UserCard({ user, onUpdate }: UserCardProps) {
+    const handleUpdate = useCallback(() => {
+        onUpdate(user.id, { name: 'New Name' });
+    }, [user.id, onUpdate]);
+
+    return (
+        <div className="user-card">
+            <h3>{user.name}</h3>
+            <p>{user.email}</p>
+            <button onClick={handleUpdate}>Update</button>
+        </div>
+    );
+});
+
+// Performance optimized list
+interface UserListProps {
+    users: Array<{
+        id: string;
+        name: string;
+        email: string;
+    }>;
+    onUpdateUser: (id: string, data: any) => void;
+}
+
+function UserList({ users, onUpdateUser }: UserListProps) {
+    const sortedUsers = useMemo(() => {
+        return [...users].sort((a, b) => a.name.localeCompare(b.name));
+    }, [users]);
+
+    const handleUpdate = useCallback((id: string, data: any) => {
+        onUpdateUser(id, data);
+    }, [onUpdateUser]);
+
+    return (
+        <div className="user-list">
+            {sortedUsers.map(user => (
+                <UserCard
+                    key={user.id}
+                    user={user}
+                    onUpdate={handleUpdate}
+                />
+            ))}
+        </div>
+    );
+}
+
+// Virtualized list for large datasets
+function VirtualizedList({ items, itemHeight, windowHeight }) {
+    const [scrollTop, setScrollTop] = React.useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const visibleItems = useMemo(() => {
+        const startIndex = Math.floor(scrollTop / itemHeight);
+        const endIndex = Math.min(
+            startIndex + Math.ceil(windowHeight / itemHeight),
+            items.length
+        );
+
+        return items.slice(startIndex, endIndex).map((item, index) => ({
+            ...item,
+            index: startIndex + index
+        }));
+    }, [items, itemHeight, windowHeight, scrollTop]);
+
+    const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+        setScrollTop(event.currentTarget.scrollTop);
+    }, []);
+
+    return (
+        <div
+            ref={containerRef}
+            style={{
+                height: windowHeight,
+                overflow: 'auto'
+            }}
+            onScroll={handleScroll}
+        >
+            <div
+                style={{
+                    height: items.length * itemHeight,
+                    position: 'relative'
+                }}
+            >
+                {visibleItems.map(item => (
+                    <div
+                        key={item.id}
+                        style={{
+                            position: 'absolute',
+                            top: item.index * itemHeight,
+                            height: itemHeight,
+                            width: '100%'
+                        }}
+                    >
+                        {item.content}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}</code></pre>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Why This Rule Matters</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Improves application performance</li>
+                        <li class="list-group-item bg-transparent">Reduces unnecessary re-renders</li>
+                        <li class="list-group-item bg-transparent">Optimizes memory usage</li>
+                        <li class="list-group-item bg-transparent">Enables better user experience</li>
+                        <li class="list-group-item bg-transparent">Facilitates better scalability</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Using with Cursor</h3>
+                    <p>Cursor's AI capabilities can help you:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Suggest performance optimizations</li>
+                        <li class="list-group-item bg-transparent">Generate memoized components</li>
+                        <li class="list-group-item bg-transparent">Implement virtualized lists</li>
+                        <li class="list-group-item bg-transparent">Optimize render cycles</li>
+                        <li class="list-group-item bg-transparent">Improve code efficiency</li>
                     </ul>
                 </div>
             </article>
@@ -453,21 +712,19 @@ function UserForm() {
     
     <!-- Markdown-it for rendering markdown -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
-    
+
+    <!-- Download functionality -->
     <script>
         function downloadCode(button, filename) {
             const codeBlock = button.closest('.code-block').querySelector('code');
-            const content = codeBlock.textContent;
-            
-            const blob = new Blob([content], { type: 'text/plain' });
+            const code = codeBlock.textContent;
+            const blob = new Blob([code], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
-            
             a.href = url;
             a.download = filename;
             document.body.appendChild(a);
             a.click();
-            
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         }

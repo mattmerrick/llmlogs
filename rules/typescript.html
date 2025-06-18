@@ -11,12 +11,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeScript Rules for Cursor Editor - Download .mdc Guidelines</title>
-    <meta name="description" content="Download TypeScript coding rules as .mdc files for Cursor Editor. Advanced type patterns, utility types, and best practices to enhance your TypeScript development in Cursor.">
-    <meta name="keywords" content="TypeScript rules, Cursor Editor rules, .mdc files, TypeScript 5.0+, utility types, type inference, code snippets">
+    <meta name="description" content="Download TypeScript coding rules as .mdc files for Cursor Editor. Type safety, interfaces, and best practices to enhance your development in Cursor.">
+    <meta name="keywords" content="TypeScript rules, Cursor Editor rules, .mdc files, type safety, TypeScript best practices, code snippets">
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="TypeScript Rules for Cursor Editor">
-    <meta property="og:description" content="Download TypeScript coding rules as .mdc files. Master advanced type patterns and utility types in Cursor Editor.">
+    <meta property="og:description" content="Download TypeScript coding rules as .mdc files. Master type safety and best practices in Cursor Editor.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://llmlogs.com/rules/typescript.html">
     
@@ -50,6 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             padding: 2rem;
+            margin-bottom: 2rem;
         }
         .markdown-body {
             font-family: 'Inter', var(--bs-font-sans-serif);
@@ -59,6 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             align-items: center;
             gap: 1rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
         .tech-icon {
             font-size: 2.5rem;
@@ -67,6 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .tech-stats {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
         }
         .stat-item {
             display: flex;
@@ -77,36 +80,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-size: 1.25rem;
             color: var(--bs-gray-600);
         }
+        .code-block {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
         .code-block-header {
-            background: #f1f3f5;
-            border: 1px solid #dee2e6;
-            border-bottom: none;
-            border-top-left-radius: .25rem;
-            border-top-right-radius: .25rem;
-            padding: 0.5rem 1rem;
+            background-color: #2d2d2d;
+            padding: 0.75rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #3d3d3d;
         }
-        .code-block-header .download-btn {
-            background: none;
-            border: none;
-            color: #0d6efd;
-            cursor: pointer;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-        }
-        .code-block-header .download-btn:hover {
-            color: #0a58ca;
+        .code-block-header span {
+            color: #e0e0e0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9rem;
         }
         pre {
-            margin-top: 0 !important;
-            border-top-left-radius: 0 !important;
-            border-top-right-radius: 0 !important;
+            margin: 0;
+            padding: 1rem;
+            background-color: #1e1e1e;
+            border-radius: 0;
+            overflow-x: auto;
         }
         code {
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
             font-size: 0.9em;
+            color: #e0e0e0;
+        }
+        .rule-section {
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .rule-section h2 {
+            color: var(--bs-primary);
+            margin-bottom: 1.5rem;
+        }
+        .rule-section h3 {
+            color: var(--bs-gray-700);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            .tech-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .tech-stats {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .content-section {
+                padding: 1rem;
+            }
+            .code-block {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
         }
     </style>
 <!-- Google tag (gtag.js) -->
@@ -179,7 +217,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="tech-stats">
                         <div class="stat-item">
                             <i class="bi bi-book stat-icon"></i>
-                            <span>1 Rule</span>
+                            <span>3 Rules</span>
                         </div>
                         <div class="stat-item">
                             <i class="bi bi-tag stat-icon"></i>
@@ -200,130 +238,590 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="content-section markdown-body">
             <div class="mb-5">
                 <h2>About These Rules</h2>
-                <p>These TypeScript coding rules are specifically formatted for the Cursor Editor as .mdc files, focusing on TypeScript 5.0+ features and advanced type patterns. Each rule is designed to help you write more type-safe code while leveraging Cursor's AI capabilities for enhanced development.</p>
+                <p>These TypeScript coding rules are specifically formatted for the Cursor Editor as .mdc files, focusing on type safety, modern TypeScript patterns, and best practices. Each rule is designed to help you write more maintainable TypeScript code while leveraging Cursor's AI capabilities for enhanced development.</p>
             </div>
 
-            <article class="rule-section mb-5">
-                <h2>1. Advanced Type Utilities and Inference</h2>
-                <p>Implement advanced type utilities and leverage TypeScript's powerful type inference system for better code maintainability and type safety. This approach demonstrates modern TypeScript patterns including conditional types, mapped types, and template literal types.</p>
+            <article class="rule-section">
+                <h2>1. Type Safety and Modern TypeScript</h2>
+                <p>Implement comprehensive type safety and modern TypeScript patterns for better code reliability and maintainability. This approach ensures better type checking and takes advantage of TypeScript's advanced type system.</p>
                 
                 <div class="code-block">
                     <div class="code-block-header">
-                        <span>typescript-advanced-types.mdc</span>
-                        <button class="download-btn" onclick="downloadCode(this, 'typescript-advanced-types.mdc')">
+                        <span>typescript-type-safety.mdc</span>
+                        <button class="btn btn-primary btn-sm" onclick="downloadCode(this, 'typescript-type-safety.mdc')">
                             <i class="bi bi-download"></i> Download
                         </button>
                     </div>
-                    <pre><code>// Type-safe API response handler with discriminated unions
-type ApiResponse<T> = 
-  | { status: 'success'; data: T; }
-  | { status: 'error'; error: { code: number; message: string; }; }
-  | { status: 'loading'; }
+                    <pre><code>// Type definitions
+type UserRole = 'admin' | 'user' | 'guest';
 
-// Template literal type for valid API endpoints
-type ApiEndpoint = `/api/v1/${string}`
-
-// Utility type for making all properties optional at any depth
-type DeepPartial<T> = {
-    [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
-};
-
-// Type-safe record validator using mapped types
-type Validator<T> = {
-    [P in keyof T]: (value: T[P]) => boolean;
-};
-
-// Example usage in a type-safe API client
-interface User {
-    id: string;
-    email: string;
-    preferences: {
-        theme: 'light' | 'dark';
-        notifications: boolean;
-    };
+interface UserPreferences {
+    theme: 'light' | 'dark';
+    notifications: boolean;
 }
 
-class ApiClient {
-    async fetchData<T>(endpoint: ApiEndpoint): Promise<ApiResponse<T>> {
+interface User {
+    id: string;
+    name: string;
+    email: string;
+    role: UserRole;
+    createdAt: Date;
+    preferences?: UserPreferences;
+}
+
+// Generic type utility
+type ApiResponse<T> = {
+    data: T;
+    status: number;
+    message: string;
+};
+
+// Type-safe service
+class UserService {
+    private apiUrl: string;
+
+    constructor(apiUrl: string) {
+        this.apiUrl = apiUrl;
+    }
+
+    async getUser(userId: string): Promise<ApiResponse<User>> {
         try {
-            const response = await fetch(endpoint);
-            const data = await response.json();
-            return { status: 'success', data };
-        } catch (error) {
-            return {
-                status: 'error',
-                error: { code: 500, message: error.message }
+            // Simulated API call
+            const userData: User = {
+                id: userId,
+                name: 'John Doe',
+                email: 'john@example.com',
+                role: 'user',
+                createdAt: new Date(),
+                preferences: {
+                    theme: 'dark',
+                    notifications: true
+                }
             };
+
+            return {
+                data: userData,
+                status: 200,
+                message: 'User retrieved successfully'
+            };
+        } catch (error) {
+            throw new Error(`Failed to fetch user: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 
-    // Type-safe partial updates
     async updateUser(
         userId: string,
-        updates: DeepPartial<User>
+        updates: Partial<User>
     ): Promise<ApiResponse<User>> {
-        return this.fetchData<User>(`/api/v1/users/${userId}`);
+        try {
+            // Simulated API call
+            const userData: User = {
+                id: userId,
+                name: updates.name ?? 'John Doe',
+                email: updates.email ?? 'john@example.com',
+                role: updates.role ?? 'user',
+                createdAt: new Date(),
+                preferences: updates.preferences ?? {
+                    theme: 'dark',
+                    notifications: true
+                }
+            };
+
+            return {
+                data: userData,
+                status: 200,
+                message: 'User updated successfully'
+            };
+        } catch (error) {
+            throw new Error(`Failed to update user: ${error instanceof Error ? error.message : String(error)}`);
+        }
     }
 }
 
-// Type-safe form validation
-const userValidator: Validator<User> = {
-    id: (value) => typeof value === 'string' && value.length > 0,
-    email: (value) => /^[^@]+@[^@]+\.[^@]+$/.test(value),
-    preferences: (value) => {
-        return (
-            typeof value.theme === 'string' &&
-            ['light', 'dark'].includes(value.theme) &&
-            typeof value.notifications === 'boolean'
-        );
+// Example usage
+async function main() {
+    const userService = new UserService('https://api.example.com');
+
+    try {
+        // Get user
+        const response = await userService.getUser('123');
+        console.log('User:', response.data);
+
+        // Update user
+        const updates = {
+            name: 'Jane Doe',
+            role: 'admin' as UserRole
+        };
+        const updateResponse = await userService.updateUser('123', updates);
+        console.log('Updated user:', updateResponse.data);
+    } catch (error) {
+        console.error('Error:', error instanceof Error ? error.message : String(error));
     }
-};
+}
 
-// Example usage with type inference
-const api = new ApiClient();
-
-async function handleUserUpdate(userId: string) {
-    // TypeScript infers all possible response types
-    const response = await api.updateUser(userId, {
-        preferences: { theme: 'dark' }
-    });
-
-    switch (response.status) {
-        case 'success':
-            // TypeScript knows response.data is User
-            console.log(response.data.preferences.theme);
-            break;
-        case 'error':
-            // TypeScript knows error structure
-            console.error(response.error.message);
-            break;
-        case 'loading':
-            // Handle loading state
-            break;
-    }
-}</code></pre>
+// Run the example
+main().catch(console.error);</code></pre>
                 </div>
 
-                <div class="mt-3">
+                <div class="mt-4">
                     <h3>Why This Rule Matters</h3>
-                    <ul>
-                        <li>Ensures complete type safety across the application</li>
-                        <li>Reduces runtime errors through compile-time checks</li>
-                        <li>Makes complex type relationships explicit and maintainable</li>
-                        <li>Enables better IDE support and code navigation</li>
-                        <li>Improves code documentation through types</li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Enables better type safety and error prevention</li>
+                        <li class="list-group-item bg-transparent">Improves code reliability and maintainability</li>
+                        <li class="list-group-item bg-transparent">Facilitates better IDE support and autocompletion</li>
+                        <li class="list-group-item bg-transparent">Reduces runtime errors</li>
+                        <li class="list-group-item bg-transparent">Enables better code documentation</li>
                     </ul>
                 </div>
 
                 <div class="mt-4">
                     <h3>Using with Cursor</h3>
                     <p>Cursor's AI capabilities can help you:</p>
-                    <ul>
-                        <li>Generate complex type utilities based on usage patterns</li>
-                        <li>Suggest appropriate type constraints and guards</li>
-                        <li>Identify opportunities for type inference optimization</li>
-                        <li>Debug type errors with intelligent suggestions</li>
-                        <li>Convert JavaScript code to type-safe TypeScript</li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Suggest type definitions</li>
+                        <li class="list-group-item bg-transparent">Generate interfaces</li>
+                        <li class="list-group-item bg-transparent">Implement generic types</li>
+                        <li class="list-group-item bg-transparent">Improve type safety</li>
+                        <li class="list-group-item bg-transparent">Fix type errors</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="rule-section">
+                <h2>2. Async Patterns and Error Handling</h2>
+                <p>Implement modern async patterns and robust error handling for better performance and maintainability. This approach helps Cursor's AI better understand async contexts and provide more accurate debugging assistance.</p>
+                
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>typescript-async-patterns.mdc</span>
+                        <button class="btn btn-primary btn-sm" onclick="downloadCode(this, 'typescript-async-patterns.mdc')">
+                            <i class="bi bi-download"></i> Download
+                        </button>
+                    </div>
+                    <pre><code>// Custom error types
+class AppError extends Error {
+    constructor(
+        message: string,
+        public code: string,
+        public details?: Record<string, unknown>
+    ) {
+        super(message);
+        this.name = 'AppError';
+    }
+}
+
+class ValidationError extends AppError {
+    constructor(message: string, details?: Record<string, unknown>) {
+        super(message, 'VALIDATION_ERROR', details);
+        this.name = 'ValidationError';
+    }
+}
+
+class APIError extends AppError {
+    constructor(message: string, code: string, details?: Record<string, unknown>) {
+        super(message, code, details);
+        this.name = 'APIError';
+    }
+}
+
+// Async retry decorator
+function asyncRetry<T>(
+    maxAttempts: number = 3,
+    delay: number = 1000,
+    backoff: number = 2,
+    exceptions: Array<new (...args: any[]) => Error> = [Error]
+) {
+    return function (
+        target: any,
+        propertyKey: string,
+        descriptor: PropertyDescriptor
+    ) {
+        const originalMethod = descriptor.value;
+
+        descriptor.value = async function (...args: any[]): Promise<T> {
+            let lastError: Error | null = null;
+
+            for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                try {
+                    return await originalMethod.apply(this, args);
+                } catch (error) {
+                    lastError = error instanceof Error ? error : new Error(String(error));
+                    
+                    if (!exceptions.some(ex => error instanceof ex) || attempt === maxAttempts - 1) {
+                        break;
+                    }
+
+                    await new Promise(resolve => 
+                        setTimeout(resolve, delay * Math.pow(backoff, attempt))
+                    );
+                }
+            }
+
+            throw lastError;
+        };
+
+        return descriptor;
+    };
+}
+
+// Async resource manager
+class AsyncResource {
+    private logger: Console;
+
+    constructor(private name: string) {
+        this.logger = console;
+    }
+
+    async acquire(): Promise<void> {
+        this.logger.info(`Acquiring ${this.name}`);
+        await new Promise(resolve => setTimeout(resolve, 100)); // Simulate resource acquisition
+    }
+
+    async release(): Promise<void> {
+        this.logger.info(`Releasing ${this.name}`);
+        await new Promise(resolve => setTimeout(resolve, 100)); // Simulate resource release
+    }
+}
+
+// Example usage
+class UserService {
+    private dbUrl: string;
+    private logger: Console;
+
+    constructor(dbUrl: string) {
+        this.dbUrl = dbUrl;
+        this.logger = console;
+    }
+
+    @asyncRetry()
+    async getUser(userId: string): Promise<Record<string, unknown>> {
+        const resource = new AsyncResource('database');
+        await resource.acquire();
+
+        try {
+            // Simulated database query
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            if (!userId) {
+                throw new ValidationError('User ID is required', { userId });
+            }
+
+            return {
+                id: userId,
+                name: 'John Doe',
+                email: 'john@example.com'
+            };
+        } catch (error) {
+            this.logger.error(`Failed to get user: ${error instanceof Error ? error.message : String(error)}`);
+            throw new APIError(
+                'Failed to get user',
+                'DATABASE_ERROR',
+                { userId, error: error instanceof Error ? error.message : String(error) }
+            );
+        } finally {
+            await resource.release();
+        }
+    }
+
+    @asyncRetry()
+    async updateUser(
+        userId: string,
+        updates: Record<string, unknown>
+    ): Promise<Record<string, unknown>> {
+        const resource = new AsyncResource('database');
+        await resource.acquire();
+
+        try {
+            // Simulated database update
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            if (!userId) {
+                throw new ValidationError('User ID is required', { userId });
+            }
+
+            return {
+                id: userId,
+                ...updates,
+                updatedAt: new Date()
+            };
+        } catch (error) {
+            this.logger.error(`Failed to update user: ${error instanceof Error ? error.message : String(error)}`);
+            throw new APIError(
+                'Failed to update user',
+                'DATABASE_ERROR',
+                { userId, updates, error: error instanceof Error ? error.message : String(error) }
+            );
+        } finally {
+            await resource.release();
+        }
+    }
+}
+
+// Example usage
+async function main() {
+    const userService = new UserService('postgresql://localhost:5432/mydb');
+
+    try {
+        // Get user
+        const user = await userService.getUser('123');
+        console.log('User:', user);
+
+        // Update user
+        const updates = {
+            name: 'Jane Doe',
+            email: 'jane@example.com'
+        };
+        const updatedUser = await userService.updateUser('123', updates);
+        console.log('Updated user:', updatedUser);
+    } catch (error) {
+        if (error instanceof AppError) {
+            console.error(`Application error: ${error.code} - ${error.message}`);
+            if (error.details) {
+                console.error('Details:', error.details);
+            }
+        } else {
+            console.error('Unexpected error:', error instanceof Error ? error.message : String(error));
+        }
+    }
+}
+
+// Run the example
+main().catch(console.error);</code></pre>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Why This Rule Matters</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Enables better async operation handling</li>
+                        <li class="list-group-item bg-transparent">Improves error handling and recovery</li>
+                        <li class="list-group-item bg-transparent">Facilitates better performance</li>
+                        <li class="list-group-item bg-transparent">Reduces code complexity</li>
+                        <li class="list-group-item bg-transparent">Enables better debugging</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Using with Cursor</h3>
+                    <p>Cursor's AI capabilities can help you:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Suggest async patterns</li>
+                        <li class="list-group-item bg-transparent">Generate error handling code</li>
+                        <li class="list-group-item bg-transparent">Implement retry mechanisms</li>
+                        <li class="list-group-item bg-transparent">Optimize async operations</li>
+                        <li class="list-group-item bg-transparent">Debug async issues</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="rule-section">
+                <h2>3. Module Organization and Testing</h2>
+                <p>Implement proper module organization and testing patterns for better code maintainability and reliability. This approach helps Cursor's AI better understand code structure and provide more accurate suggestions.</p>
+                
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>typescript-module-organization.mdc</span>
+                        <button class="btn btn-primary btn-sm" onclick="downloadCode(this, 'typescript-module-organization.mdc')">
+                            <i class="bi bi-download"></i> Download
+                        </button>
+                    </div>
+                    <pre><code>// Project structure
+/*
+my-project/
+├── src/
+│   ├── config/
+│   │   ├── index.ts
+│   │   └── types.ts
+│   ├── models/
+│   │   ├── index.ts
+│   │   └── user.ts
+│   ├── services/
+│   │   ├── index.ts
+│   │   └── user-service.ts
+│   └── utils/
+│       ├── index.ts
+│       └── validation.ts
+├── tests/
+│   ├── setup.ts
+│   └── user-service.test.ts
+└── package.json
+*/
+
+// config/types.ts
+export interface Config {
+    databaseUrl: string;
+    apiKey: string;
+    environment: 'development' | 'production';
+    logLevel: 'debug' | 'info' | 'warn' | 'error';
+}
+
+// config/index.ts
+import { Config } from './types';
+
+export function createConfig(): Config {
+    return {
+        databaseUrl: process.env.DATABASE_URL ?? 'postgresql://localhost:5432/mydb',
+        apiKey: process.env.API_KEY ?? 'your-api-key',
+        environment: (process.env.NODE_ENV as 'development' | 'production') ?? 'development',
+        logLevel: 'info'
+    };
+}
+
+// models/user.ts
+export interface User {
+    id: string;
+    name: string;
+    email: string;
+    createdAt: Date;
+}
+
+export function createUser(data: Partial<User>): User {
+    return {
+        id: data.id ?? '',
+        name: data.name ?? '',
+        email: data.email ?? '',
+        createdAt: data.createdAt ?? new Date()
+    };
+}
+
+// services/user-service.ts
+import { Config } from '../config/types';
+import { User, createUser } from '../models/user';
+import { validateEmail } from '../utils/validation';
+
+export class UserService {
+    constructor(private config: Config) {}
+
+    async getUser(userId: string): Promise<User> {
+        // Implementation
+        return createUser({ id: userId });
+    }
+
+    async updateUser(userId: string, updates: Partial<User>): Promise<User> {
+        // Implementation
+        return createUser({ id: userId, ...updates });
+    }
+}
+
+// utils/validation.ts
+export function validateEmail(email: string): boolean {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return pattern.test(email);
+}
+
+export function validateUserData(data: Partial<User>): void {
+    if (data.email && !validateEmail(data.email)) {
+        throw new Error('Invalid email format');
+    }
+}
+
+// tests/setup.ts
+import { Config } from '../src/config/types';
+
+export function createTestConfig(): Config {
+    return {
+        databaseUrl: 'postgresql://localhost:5432/test',
+        apiKey: 'test-api-key',
+        environment: 'development',
+        logLevel: 'debug'
+    };
+}
+
+// tests/user-service.test.ts
+import { UserService } from '../src/services/user-service';
+import { createTestConfig } from './setup';
+import { User } from '../src/models/user';
+
+describe('UserService', () => {
+    let userService: UserService;
+
+    beforeEach(() => {
+        userService = new UserService(createTestConfig());
+    });
+
+    it('should get user', async () => {
+        // Arrange
+        const userId = '123';
+        const expectedUser: User = {
+            id: userId,
+            name: 'John Doe',
+            email: 'john@example.com',
+            createdAt: new Date()
+        };
+
+        // Act
+        const result = await userService.getUser(userId);
+
+        // Assert
+        expect(result).toEqual(expectedUser);
+    });
+
+    it('should update user', async () => {
+        // Arrange
+        const userId = '123';
+        const updates = {
+            name: 'Jane Doe',
+            email: 'jane@example.com'
+        };
+        const expectedUser: User = {
+            id: userId,
+            ...updates,
+            createdAt: new Date()
+        };
+
+        // Act
+        const result = await userService.updateUser(userId, updates);
+
+        // Assert
+        expect(result).toEqual(expectedUser);
+    });
+});
+
+// Example usage
+async function main() {
+    const config = createConfig();
+    const userService = new UserService(config);
+
+    try {
+        // Get user
+        const user = await userService.getUser('123');
+        console.log('User:', user);
+
+        // Update user
+        const updates = {
+            name: 'Jane Doe',
+            email: 'jane@example.com'
+        };
+        const updatedUser = await userService.updateUser('123', updates);
+        console.log('Updated user:', updatedUser);
+    } catch (error) {
+        console.error('Error:', error instanceof Error ? error.message : String(error));
+    }
+}
+
+// Run the example
+main().catch(console.error);</code></pre>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Why This Rule Matters</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Improves code organization</li>
+                        <li class="list-group-item bg-transparent">Enables better testing</li>
+                        <li class="list-group-item bg-transparent">Facilitates easier maintenance</li>
+                        <li class="list-group-item bg-transparent">Improves code reusability</li>
+                        <li class="list-group-item bg-transparent">Enables better dependency management</li>
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h3>Using with Cursor</h3>
+                    <p>Cursor's AI capabilities can help you:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">Suggest module organization patterns</li>
+                        <li class="list-group-item bg-transparent">Generate test cases</li>
+                        <li class="list-group-item bg-transparent">Optimize module structure</li>
+                        <li class="list-group-item bg-transparent">Improve code organization</li>
+                        <li class="list-group-item bg-transparent">Generate module documentation</li>
                     </ul>
                 </div>
             </article>
@@ -354,21 +852,18 @@ async function handleUserUpdate(userId: string) {
     <!-- Markdown-it for rendering markdown -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
 
-    <!-- Add this before closing body tag -->
+    <!-- Download functionality -->
     <script>
         function downloadCode(button, filename) {
             const codeBlock = button.closest('.code-block').querySelector('code');
-            const content = codeBlock.textContent;
-            
-            const blob = new Blob([content], { type: 'text/plain' });
+            const code = codeBlock.textContent;
+            const blob = new Blob([code], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
-            
             a.href = url;
             a.download = filename;
             document.body.appendChild(a);
             a.click();
-            
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
         }
