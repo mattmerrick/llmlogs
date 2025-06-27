@@ -136,31 +136,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
-# LLM Logs Forum
-
-Static forum implementation using Supabase.
-
-## Quick Start
-
-1. Copy config template and add your keys:
-```bash
-cp forum/config.template.js forum/config.js
-```
-
-2. Start local server:
-```bash
-python -m http.server 3000
-```
-
-3. Open `http://localhost:3000`
-
-## Deployment
-
-1. Add environment variables in Cloudflare Pages:
-   - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY`
-   - `RESEND_API_KEY`
-
-2. Update production domain in `config.js`
-
-Note: `config.js` is gitignored - keep your keys secure!
