@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KXZQZ8N');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- DataFast Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['DataFastObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://analytics.datafast.io/analytics.js','df');
+        df('init', '7f800216-d735-4a8e-a5e5-51cbd2c7f357');
+    </script>
+    <!-- End DataFast Analytics -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Write llms.txt for Next.js: Complete Guide - LLM Logs</title>
+    <meta name="description" content="Learn how to create and implement llms.txt for Next.js applications to optimize your content for AI language models and improve visibility in AI-powered search results.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', var(--bs-font-sans-serif);
+        }
+        pre, code {
+            font-family: 'Fira Code', monospace;
+            background-color: var(--bs-gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            font-size: 0.875em;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+        }
+        .hero-section {
+            background-color: var(--bs-primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .blog-meta {
+            color: var(--bs-gray-600);
+            font-size: 0.9rem;
+        }
+        .blog-content h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content p {
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+        }
+        .blog-content ul, .blog-content ol {
+            margin-bottom: 1.25rem;
+        }
+        .blog-content blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--bs-gray-700);
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "How to Write llms.txt for Next.js: Complete Guide",
+        "author": {
+            "@type": "Person",
+            "name": "Matt Merrick"
+        },
+        "datePublished": "2025-01-27",
+        "description": "Learn how to create and implement llms.txt for Next.js applications to optimize your content for AI language models and improve visibility in AI-powered search results.",
+        "mainEntity": {
+            "@type": "Question",
+            "name": "How to Write llms.txt for Next.js?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "llms.txt is a text file that helps AI language models understand your website structure and content. For Next.js applications, you can create this file and place it in the public directory to improve AI visibility."
+            }
+        }
+    }
+    </script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CDEBMDP5PL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CDEBMDP5PL');
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- DataFa.st Analytics -->
+<script
+    defer
+    data-website-id="682d6fb7b163eb08ed813a43"
+    data-domain="llmlogs.com"
+    src="https://datafa.st/js/script.js">
+</script>
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<!-- End DataFa.st Analytics -->
+<script src="../assets/js/social-image.js"></script>
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXZQZ8N"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">LLM Logs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start-here">Start Here</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guides">Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tool-reviews">Tool Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/" class="text-white">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/blog" class="text-white">Blog</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">How to Write llms.txt for Next.js</li>
+                </ol>
+            </nav>
+            <h1 class="display-4 mb-3">How to Write llms.txt for Next.js: Complete Guide</h1>
+            <div class="blog-meta text-white-50">
+                <time datetime="2025-01-27">January 27, 2025</time>
+                <span class="mx-2">•</span>
+                <span class="category">Next.js</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <article class="blog-content">
+                    
+                <div class="hero-image">
+                    <div class="hero-content">
+                        <h1>Next.js llms.txt Guide</h1>
+                        <div class="subtitle">Optimize Your Next.js App for AI Language Models</div>
+                    </div>
+                </div>
+                <header>
+                    <h1>How to Write llms.txt for Next.js: Complete Guide</h1>
+                    <div class="post-meta">
+                        <time datetime="2025-01-27">January 27, 2025</time>
+                        <span class="category">Next.js</span>
+                    </div>
+                </header>
+                <div class="summary-box">
+                    <strong>TL;DR:</strong>
+                    Learn how to create and implement llms.txt for Next.js applications to improve AI visibility. This guide covers file creation, placement in the public directory, content optimization, and testing for maximum AI model compatibility.
+                </div>
+<div class="table-of-contents">
+                    <h2>Table of Contents</h2>
+                    <ul>
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#what-is-llms-txt">What is llms.txt?</a></li>
+                        <li><a href="#nextjs-setup">Next.js Setup for llms.txt</a>
+                            <ul>
+                                <li><a href="#file-creation">Creating the llms.txt File</a></li>
+                                <li><a href="#file-placement">File Placement in Next.js</a></li>
+                                <li><a href="#static-generation">Static Generation Considerations</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#content-structure">llms.txt Content Structure</a>
+                            <ul>
+                                <li><a href="#basic-format">Basic Format</a></li>
+                                <li><a href="#nextjs-specific">Next.js-Specific Content</a></li>
+                                <li><a href="#advanced-options">Advanced Options</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#implementation-steps">Step-by-Step Implementation</a></li>
+                        <li><a href="#testing-validation">Testing and Validation</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                        <li><a href="#faq">Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <section id="introduction">
+                    <p>Next.js has become one of the most popular React frameworks for building modern web applications. With its powerful features like server-side rendering, static generation, and API routes, Next.js applications need proper AI optimization to ensure content is discoverable by language models.</p>
+                    <p><strong>This guide will walk you through creating and implementing llms.txt specifically for Next.js applications.</strong> Whether you're using static generation, server-side rendering, or a hybrid approach, you'll learn how to optimize your content for AI visibility.</p>
+                </section>
+
+                <section id="what-is-llms-txt">
+                    <h2>What is llms.txt?</h2>
+                    <p>llms.txt is a text file that provides instructions to AI language models about your website structure and content. Similar to robots.txt for search engines, llms.txt helps AI crawlers understand:</p>
+                    <ul>
+                        <li>Which pages and content to prioritize</li>
+                        <li>How to navigate your site structure</li>
+                        <li>What content types are available</li>
+                        <li>Site metadata and context</li>
+                    </ul>
+                    <p>For Next.js applications, this file is particularly important because Next.js has unique routing patterns and rendering strategies that AI models can benefit from understanding.</p>
+                </section>
+
+                <section id="nextjs-setup">
+                    <h2>Next.js Setup for llms.txt</h2>
+                    
+                    <div class="card" id="file-creation">
+                        <h3>Creating the llms.txt File</h3>
+                        <p>You can create llms.txt using any text editor. The file should be saved with UTF-8 encoding and placed in your Next.js public directory.</p>
+                        <p>Here's a basic llms.txt template for Next.js:</p>
+                        <pre><code># llms.txt for Next.js Application
+# This file helps AI language models understand your Next.js app structure
+
+# Site Information
+Site: https://yourdomain.com
+Description: [Your app description]
+Language: en-US
+Framework: Next.js
+Content-Type: web application, blog, articles, pages
+
+# Next.js-Specific Paths
+NextJS-API: /api/
+NextJS-Static: /_next/static/
+NextJS-Images: /_next/image
+
+# Content Structure
+Pages: /[page-name]
+Blog-Posts: /blog/[post-slug]
+Dynamic-Routes: /[dynamic-param]
+API-Routes: /api/[endpoint]
+
+# Important Content
+Priority-Content:
+- /
+- /about/
+- /blog/
+- /contact/
+- /api/
+
+# Exclude from AI Indexing (Optional)
+Exclude:
+- /_next/
+- /api/ (unless relevant)
+- /admin/
+- /private/
+
+# Content Guidelines
+Content-Guidelines:
+- Focus on main content areas
+- Include meta descriptions
+- Consider dynamic routes
+- Respect Next.js routing patterns
+
+# Update Frequency
+Update-Frequency: daily</code></pre>
+                    </div>
+
+                    <div class="card" id="file-placement">
+                        <h3>File Placement in Next.js</h3>
+                        <p>For Next.js applications, place your llms.txt file in the public directory. This directory is served statically and files placed here are accessible at the root of your domain.</p>
+                        <p>Next.js directory structure:</p>
+                        <ul>
+                            <li><strong>File location:</strong> /public/llms.txt</li>
+                            <li><strong>Accessible at:</strong> https://yourdomain.com/llms.txt</li>
+                            <li><strong>Build output:</strong> Automatically included in build</li>
+                        </ul>
+                        <p>Example directory structure:</p>
+                        <pre><code>your-nextjs-app/
+├── public/
+│   ├── llms.txt
+│   ├── favicon.ico
+│   └── images/
+├── pages/
+├── components/
+├── styles/
+└── package.json</code></pre>
+                    </div>
+
+                    <div class="card" id="static-generation">
+                        <h3>Static Generation Considerations</h3>
+                        <p>Next.js offers different rendering strategies that affect how llms.txt should be configured:</p>
+                        <ul>
+                            <li><strong>Static Generation (SSG):</strong> Content is pre-rendered at build time</li>
+                            <li><strong>Server-Side Rendering (SSR):</strong> Content is rendered on each request</li>
+                            <li><strong>Incremental Static Regeneration (ISR):</strong> Static content with periodic updates</li>
+                        </ul>
+                        <p>For static generation, ensure your llms.txt reflects the actual generated routes and content structure.</p>
+                    </div>
+                </section>
+
+                <section id="content-structure">
+                    <h2>llms.txt Content Structure</h2>
+                    
+                    <div class="card" id="basic-format">
+                        <h3>Basic Format</h3>
+                        <p>The llms.txt file follows a simple key-value format. Each directive should be on its own line, and you can use comments (starting with #) to provide additional context.</p>
+                        <p>Essential elements for Next.js llms.txt:</p>
+                        <ul>
+                            <li><strong>Site information:</strong> Domain, description, framework</li>
+                            <li><strong>Content structure:</strong> Next.js routing patterns</li>
+                            <li><strong>Priority content:</strong> Important pages and sections</li>
+                            <li><strong>Exclusions:</strong> Areas to avoid or limit</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" id="nextjs-specific">
+                        <h3>Next.js-Specific Content</h3>
+                        <p>Next.js has unique characteristics that should be reflected in your llms.txt:</p>
+                        <pre><code># Next.js Routing Structure
+Routing:
+- Pages: /pages directory structure
+- Dynamic-Routes: /[param] or /[...slug]
+- API-Routes: /api/[endpoint]
+- Static-Assets: /_next/static/
+
+# Next.js Content Types
+Content-Types:
+- Static-Pages: pre-rendered at build time
+- Dynamic-Pages: rendered on request
+- API-Endpoints: /api/[endpoint]
+- Static-Assets: images, CSS, JS
+
+# Next.js Features
+Features:
+- Server-Side-Rendering: enabled/disabled
+- Static-Generation: enabled/disabled
+- Image-Optimization: /_next/image
+- Font-Optimization: /_next/font
+
+# Next.js Configuration
+Configuration:
+- Base-Path: if using basePath in next.config.js
+- Trailing-Slash: if using trailingSlash in next.config.js
+- Internationalization: if using i18n</code></pre>
+                    </div>
+
+                    <div class="card" id="advanced-options">
+                        <h3>Advanced Options</h3>
+                        <p>For more advanced Next.js applications, consider these additional directives:</p>
+                        <pre><code># E-commerce (Next.js Commerce)
+E-commerce:
+- Products: /products/[product-slug]
+- Categories: /categories/[category]
+- Cart: /cart
+- Checkout: /checkout
+
+# Blog/Content Management
+Blog:
+- Posts: /blog/[post-slug]
+- Categories: /blog/category/[category]
+- Tags: /blog/tag/[tag]
+- Authors: /blog/author/[author]
+
+# Authentication/User Areas
+User-Areas:
+- Dashboard: /dashboard
+- Profile: /profile
+- Settings: /settings
+- Login: /login
+
+# API Documentation
+API-Docs:
+- Documentation: /docs
+- API-Reference: /api/docs
+- Examples: /examples
+
+# Internationalization
+Internationalization:
+- Languages: [list supported languages]
+- Default-Language: en
+- Language-Prefix: /[lang]/</code></pre>
+                    </div>
+                </section>
+
+                <section id="implementation-steps">
+                    <h2>Step-by-Step Implementation</h2>
+                    <p>Follow these steps to implement llms.txt in your Next.js application:</p>
+                    
+                    <div class="card">
+                        <h3>Step 1: Create the File</h3>
+                        <ol>
+                            <li>Navigate to your Next.js project directory</li>
+                            <li>Go to the public folder</li>
+                            <li>Create a new file named "llms.txt"</li>
+                            <li>Add your llms.txt content</li>
+                            <li>Save the file with UTF-8 encoding</li>
+                        </ol>
+                    </div>
+
+                    <div class="card">
+                        <h3>Step 2: Build and Deploy</h3>
+                        <ol>
+                            <li>Run <code>npm run build</code> to build your application</li>
+                            <li>Verify llms.txt is included in the build output</li>
+                            <li>Deploy your application to your hosting platform</li>
+                            <li>Test that llms.txt is accessible at yourdomain.com/llms.txt</li>
+                        </ol>
+                    </div>
+
+                    <div class="card">
+                        <h3>Step 3: Test and Validate</h3>
+                        <ol>
+                            <li>Visit yourdomain.com/llms.txt in a browser</li>
+                            <li>Verify the content displays correctly</li>
+                            <li>Check for any syntax errors</li>
+                            <li>Test with AI crawler tools</li>
+                        </ol>
+                    </div>
+
+                    <div class="card">
+                        <h3>Step 4: Monitor and Update</h3>
+                        <ol>
+                            <li>Regularly review your llms.txt content</li>
+                            <li>Update when you add new routes or content</li>
+                            <li>Monitor AI visibility improvements</li>
+                            <li>Adjust based on performance data</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="testing-validation">
+                    <h2>Testing and Validation</h2>
+                    <p>After implementing llms.txt, it's important to test and validate your setup:</p>
+                    
+                    <div class="card">
+                        <h3>Manual Testing</h3>
+                        <ul>
+                            <li>Visit yourdomain.com/llms.txt directly</li>
+                            <li>Check that the file loads without errors</li>
+                            <li>Verify all URLs in the file are accessible</li>
+                            <li>Test with different browsers and devices</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>AI Crawler Testing</h3>
+                        <ul>
+                            <li>Use AI crawler simulation tools</li>
+                            <li>Test with different AI models</li>
+                            <li>Verify content discovery and indexing</li>
+                            <li>Check for any crawling errors</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Performance Monitoring</h3>
+                        <ul>
+                            <li>Monitor AI citation frequency</li>
+                            <li>Track content visibility in AI responses</li>
+                            <li>Analyze user engagement from AI sources</li>
+                            <li>Compare performance before and after implementation</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="best-practices">
+                    <h2>Best Practices</h2>
+                    <p>Follow these best practices to maximize the effectiveness of your Next.js llms.txt:</p>
+                    
+                    <div class="card">
+                        <h3>Content Organization</h3>
+                        <ul>
+                            <li>Keep the file concise and well-organized</li>
+                            <li>Use clear, descriptive comments</li>
+                            <li>Group related directives together</li>
+                            <li>Maintain consistent formatting</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Next.js-Specific Tips</h3>
+                        <ul>
+                            <li>Include your routing structure</li>
+                            <li>List all API endpoints</li>
+                            <li>Specify important static pages</li>
+                            <li>Consider dynamic routes and parameters</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Maintenance</h3>
+                        <ul>
+                            <li>Update the file when you change routing</li>
+                            <li>Remove references to deleted routes</li>
+                            <li>Add new API endpoints as they're created</li>
+                            <li>Regularly review and optimize content</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="faq">
+                    <h2>Frequently Asked Questions</h2>
+                    
+                    <div class="card">
+                        <h3>Does llms.txt work with Next.js API routes?</h3>
+                        <p>Yes, you can include API routes in your llms.txt file. However, consider whether you want AI models to access your API endpoints, as some may contain sensitive information.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Should I include _next directory in llms.txt?</h3>
+                        <p>Generally, you should exclude the _next directory from AI indexing as it contains build artifacts and is not relevant to content discovery.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>How often should I update my llms.txt file?</h3>
+                        <p>Update your llms.txt file whenever you add new routes, change your routing structure, or modify your Next.js configuration.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Can I use llms.txt with Next.js middleware?</h3>
+                        <p>Yes, Next.js middleware can help manage llms.txt content dynamically, but static files in the public directory are simpler and more reliable.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Does llms.txt affect SEO?</h3>
+                        <p>llms.txt is specifically for AI language models and doesn't directly affect traditional search engine optimization. However, improved AI visibility can lead to better overall content discovery.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>What if my llms.txt file isn't working?</h3>
+                        <p>Check that the file is in the public directory, ensure it's included in your build, verify there are no syntax errors, and test the file URL directly in your browser.</p>
+                    </div>
+                </section>
+            
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-4 mb-4">
+                        <a href="/" class="text-muted text-decoration-none">Home</a>
+                        <a href="/guides" class="text-muted text-decoration-none">Guides</a>
+                        <a href="/tools" class="text-muted text-decoration-none">Tools</a>
+                        <a href="/blog" class="text-muted text-decoration-none">Blog</a>
+                        <a href="https://github.com/mattmerrick/llmseoguide" target="_blank" rel="noopener" class="text-muted text-decoration-none">GitHub</a>
+                    </div>
+                    <p class="text-muted small mb-0">&copy; 2025 LLM Logs. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script></div>
+
+</body>
+</html> 
